@@ -12,9 +12,22 @@ However, be aware, this is a pedagogical simplification. On further projects and
 
 # Use Cases / User Stories
 
-| UC/US | Description                                   |                   
-|:------|:----------------------------------------------|
-| US001 | [Short name for US001](../../us001/Readme.md) |
-| ...   | ...                                           |
-| US006 | [Create a Task](../../us006/Readme.md)        |
-| ...   | ...                                           |
+| UC/US | Description                                                                                            |                   
+|:------|:-------------------------------------------------------------------------------------------------------|
+| US001 | [Short name for US001](../../us001/Readme.md)                                                          |
+| ...   | As a Human Resources Manager (HRM), I want to register skills that may be appointed to a collaborator. |
+| US002 | [Create a Task](../../us006/Readme.md)                                                                 |
+| ...   | As an HRM, I want to register a job.                                                                   |
+| US003 | [Create a Task](../../us006/Readme.md)                                                                 |
+| ...   | As an HRM, I want to register a collaborator with a job and fundamental characteristics;               |
+| US004 |                                                                                                        |
+| ...   | As an HRM, I want to assing one or more skills to a collaborator.                                      |
+| US005 |                                                                                                        |
+| ...   | As an HRM, I want to generate a team proposal automatically.                                           |
+| US006 |                                                                                                        |
+| ...   | As an FM, I wish to register a vehicle including all the atrubutes.                                    |
+| US007 |                                                                                                        |
+| ...   | As an FM, I wish to register a vehicle's check-up.                                                     |
+| US008 |                                                                                                        |
+| ...   | As an FM, I want to list the vehicles needing the check-up                                             |
+|       |                                                                                                        |

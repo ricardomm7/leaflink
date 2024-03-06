@@ -4,12 +4,12 @@
 
 The teams consists of students identified in the following table.
 
-| Student Number | Name              |
-|----------------|-------------------|
-| **1XXXXXX**    | Name of student 1 |
-| **1XXXXXX**    | Name of student 2 |
-| **1XXXXXX**    | Name of student 3 |
-| **1XXXXXX**    | Name of student 4 |
+| Student Number | Name             |
+|---------------|------------------|
+| **1230399**   | Joana Gama       |
+| **1230741**   | Bruno Teixeira   |
+| **1230744**   | Ricardo Meireles |
+| **1231235**   | Francisco Pinho  |
 
 # 2. Task Distribution ###
 
