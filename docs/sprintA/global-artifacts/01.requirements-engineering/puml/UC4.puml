@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC4
+
+left to right direction
+
+rectangle "System User" as actors {
+    actor HRM
+}
+
+note right of HRM
+     I want to assign one or more skills to a collaborator.
+end note
+
+rectangle "Use Cases" as usecases{
+    usecase "US04 - Assign skills to employees" as US04
+    HRM --> US04
+}
+
+@enduml

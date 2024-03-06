@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC2
+
+left to right direction
+
+rectangle "System User" as actors {
+    actor HRM
+}
+
+note right of HRM
+    I want to register a job.
+end note
+
+rectangle "Use Cases" as usecases{
+    usecase "US02 - Register a Job" as US02
+    HRM --> US02
+}
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC8
+
+left to right direction
+
+rectangle "System User" as actors {
+    actor FM
+}
+
+note right of FM
+    I want to list the vehicles needing the check-up
+end note
+
+rectangle "Use Cases" as usecases{
+    usecase "US08 - See the vehicles that need a check-up" as US08
+    FM --> US08
+}
+
+@enduml

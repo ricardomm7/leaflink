@@ -1,0 +1,24 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC1
+
+left to right direction
+
+rectangle "System User" as actors {
+    actor HRM
+}
+
+note right of HRM
+    I want to register skills that may
+    be appointed to a collaborator.
+end note
+
+rectangle "Use Cases" as usecases{
+    usecase "US01 - Register Skills for Collaborator" as US01
+    HRM --> US01
+}
+
+@enduml
