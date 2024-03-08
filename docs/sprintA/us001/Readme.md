@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US001 - Register a Skill 
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
