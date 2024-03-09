@@ -3,36 +3,41 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative Two
+title System Sequence Diagram (SSD) - 006 AAlternative Two
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "FM" as FM
 participant ":System" as System
 
-activate Employee
+activate FM
 
-    Employee -> System : asks to create a new task
+    FM -> System : requests to register a vehicle
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        System --> FM : requests vehicle data (VIN, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate System
 
-    Employee -> System : selects a task category
+    FM -> System : types vehicle data
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> FM : informs FM about existing record with that VIN
     deactivate System
 
-    Employee -> System : types requested data
+    System --> FM : offers options (update or cancel)
+        deactivate System
+
+    FM -> System : selects option
+        activate System
+
+        System --> FM : shows all data and requests confirmation
+    deactivate System
+
+    FM -> System : confirms data
     activate System
 
-        System --> Employee : shows all data and requests confirmation
+        System --> FM :  vehicle registration information
+        System --> FM : stores vehicle registration information
     deactivate System
 
-    Employee -> System : confirms data
-    activate System
-
-        System --> Employee : displays operation success
-    deactivate System
 @enduml

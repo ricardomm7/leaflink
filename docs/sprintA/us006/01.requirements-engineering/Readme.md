@@ -1,59 +1,62 @@
-# US002 - Register a Job 
+# US006 - Register a Vehicle
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
-
+As a floor manager (FM), I wish to register a vehicle including all the attributes.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
-
+>   To register a vehicle is required some attributes. The person who register the vehicles is the floor manager (FM) and the vehicle is saved by in system. 
+>  All the listed vehicle registration attributes are mandatory for successful registration. The system should not allow registration with missing information.
+>  Floor Managers can modify existing vehicle registration information.
+ 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
->
-> **Answer:** Duration is estimated in days.
+> **Question:** To register a vehicle is necessary all attributes ?
+> 
+> **Answer:** Yes. To register a vehicle in the system, is request every attribute, in other case, the system should reject.
 
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** The system must allow the Floor Manager to enter all required vehicle registration attributes.
+* **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
+* **AC3:** When registering a vehicle already register, the system must reject such operation and the floor manager (FM) must be able to modify some attribute.
+* **AC4:** The system must securely store the registered vehicle information.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a no dependency on others users stories.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * Vehicle identification number (VIN)
+    * Brand
+    * Model
+    * Type (car, truck, etc.)
+    * Tare Weight (weight of the empty vehicle)
+    * Gross weight (maximum weight of the loaded vehicle)
+    * Current Kilometer Reading
+    * Registration Date
+    * Acquisition Date
+    * Checkup Frequency (in Kilometers)
 	
 * Selected data:
-    * a task category 
+    * Brand
+    * Model
+    * Type
 
 **Output Data:**
 
-* List of existing task categories
 * (In)Success of the operation
+* List of existing vehicle registration information (for viewing or updating).
 
 ### 1.6. System Sequence Diagram (SSD)
 

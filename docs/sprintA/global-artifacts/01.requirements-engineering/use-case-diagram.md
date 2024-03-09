@@ -16,16 +16,15 @@ However, be aware, this is a pedagogical simplification. On further projects and
 |:------|:-----------------------------------------------------------------------------------------|
 | US001 | [Register a Skill](../../us001/Readme.md)                                                |
 | US002 | [Register a Job](../../us002/Readme.md)                                                  |
-| US003 | [Register a Collaborator](../../us006/Readme.md)                                         |
+| US003 | [Register a Collaborator](../../us006%20(Template)/Readme.md)                            |
 | ...   | As an HRM, I want to register a collaborator with a job and fundamental characteristics; |
-| US004 | [Assing Skils](../../us006/Readme.md)                                                    |
-| ...   | As an HRM, I want to assing one or more skills to a collaborator.                        |
-| US005 | [Generate a team automatically](../../us006/Readme.md)                                   |
+| US004 | [Assign Skills](../../us006%20(Template)/Readme.md)                                      |
+| ...   | As an HRM, I want to assign one or more skills to a collaborator.                        |
+| US005 | [Generate a team automatically](../../us006%20(Template)/Readme.md)                      |
 | ...   | As an HRM, I want to generate a team proposal automatically.                             |
-| US006 | [Register a vehicle](../../us006/Readme.md)                                              |
-| ...   | As an FM, I wish to register a vehicle including all the atrubutes.                      |
-| US007 | [Register a vehicle´s checl-up](../../us006/Readme.md)                                   |
+| US006 | [Register a Vehicle](../../us006/Readme.md)                                              |
+| US007 | [Register a vehicle´s check-up](../../us006%20(Template)/Readme.md)                      |
 | ...   | As an FM, I wish to register a vehicle's check-up.                                       |
-| US008 | [Listing vehicles needing chek-up](../../us006/Readme.md)                                |
+| US008 | [Listing vehicles needing check-up](../../us006%20(Template)/Readme.md)                  |
 | ...   | As an FM, I want to list the vehicles needing the check-up                               |
 |       |                                                                                          |
