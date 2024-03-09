@@ -15,8 +15,7 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | UC/US | Description                                                                              |                   
 |:------|:-----------------------------------------------------------------------------------------|
 | US001 | [Register a Skill](../../us001/Readme.md)                                                |
-| US002 | [Register a Job](../../us006/Readme.md)                                                  |
-| ...   | As an HRM, I want to register a job.                                                     |
+| US002 | [Register a Job](../../us002/Readme.md)                                                  |
 | US003 | [Register a Collaborator](../../us006/Readme.md)                                         |
 | ...   | As an HRM, I want to register a collaborator with a job and fundamental characteristics; |
 | US004 | [Assing Skils](../../us006/Readme.md)                                                    |
