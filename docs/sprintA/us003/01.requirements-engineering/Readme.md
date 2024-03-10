@@ -1,17 +1,17 @@
-# US007 - Register vehicle check-up
+# US003 - Register a colaborator with a job and fundamental characteristics
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a fleet manager, I wish to register a vehicle's checkup.
+As a Human Resources Manager, I want to register a collaborator with a job and fundamental characteristics.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	Each job is characterized by having a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
 
 >	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
 

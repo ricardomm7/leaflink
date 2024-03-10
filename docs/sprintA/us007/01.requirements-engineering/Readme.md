@@ -1,11 +1,11 @@
-# US002 - Register a Job 
+# US007 - Register vehicle check-up
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a fleet manager, I wish to register a vehicle's checkup.
 
 ### 1.2. Customer Specifications and Clarifications 
 
