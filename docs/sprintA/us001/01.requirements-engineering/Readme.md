@@ -38,7 +38,7 @@ be appointed to a collaborator.
 
 	
 * Selected data:
-    * the Skill 
+    * none
 
 **Output Data:**
 

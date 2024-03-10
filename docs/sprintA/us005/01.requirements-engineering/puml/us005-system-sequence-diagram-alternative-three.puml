@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US005
+
+autonumber
+
+actor "HRM" as HRM
+participant ":System" as System
+
+activate HRM
+
+    HRM -> System : asks to create a new team
+    activate System
+
+        System --> HRM : requests data (skills, jobs)
+    deactivate System
+
+    HRM -> System : selects requested data
+    activate System
+
+        System --> HRM : shows the proposal
+    deactivate System
+
+    HRM -> System : user want to modify the employees
+    activate System
+
+        System --> HRM : shows the employees to modify
+    deactivate System
+
+    HRM -> System : user changes the employees
+    activate System
+
+    System --> HRM : shows the operation error because there are not all \nthe skills selected for team creation
+    deactivate System
+
+
+@enduml
