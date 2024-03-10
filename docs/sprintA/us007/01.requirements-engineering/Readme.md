@@ -1,11 +1,11 @@
-# US007 - Register vehicle check-up
+# US002 - Register a Job 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a fleet manager, I wish to register a vehicle's checkup.
+As an organization employee, I want to create a new task in order to be further published.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -29,7 +29,7 @@ As a fleet manager, I wish to register a vehicle's checkup.
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a vehicle check-up with an existing check-up, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
 
 ### 1.4. Found out Dependencies
 
