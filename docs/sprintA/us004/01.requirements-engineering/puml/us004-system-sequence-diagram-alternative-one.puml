@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US004
+
+autonumber
+
+actor "Human resources\nManager" as HRM
+participant ":System" as System
+
+activate HRM
+
+    HRM -> System : requests to assign skills to a collaborator
+    activate System
+
+        System --> HRM : requests data (i.e. collaborator ID, skills list)
+    deactivate System
+
+    HRM -> System : provides required data (collaborator ID, selected skills)
+    activate System
+
+        System --> HRM : validates selected skills
+    deactivate System
+
+    HRM -> System : confirms assigment
+    activate System
+
+        System --> HRM : displays operation success
+    deactivate System
+
+@enduml
