@@ -64,3 +64,4 @@ As a HRM, I want to generate a team proposal automatically.
 ### 1.7 Other Relevant Remarks
 
 * Once the generated list of employees has been displayed, HRM may want to change someone. After this change, the programme must check that the competences selected initially are present in the team change.
+* The generated team is stored until it is dismantled by the human resources manager.

@@ -18,7 +18,7 @@ _(Complete according to the provided example)_
 | **GSU**                     | Acronym for _Green Spaces User_.                                                                                        |
 | **Human Resources Manager** | A person who manages human resources and defines teams.                                                                 |
 | **HRM**                     | Acronym for _Human Resources Manager_.                                                                                  |
-| **Musgo Sublime**           | Organization dedicated to the planning, construction and maintenance of green spaces.                                   |
+| **MusgoSublime**            | Organization dedicated to the planning, construction and maintenance of green spaces.                                   |
 | **MS**                      | Acronym for _MusgoSublime_.                                                                                             |
 
 

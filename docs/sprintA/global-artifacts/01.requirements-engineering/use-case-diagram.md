@@ -20,8 +20,7 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | ...   | As an HRM, I want to register a collaborator with a job and fundamental characteristics; |
 | US004 | [Assign Skills](../../us006%20(Template)/Readme.md)                                      |
 | ...   | As an HRM, I want to assign one or more skills to a collaborator.                        |
-| US005 | [Generate a team automatically](../../us006%20(Template)/Readme.md)                      |
-| ...   | As an HRM, I want to generate a team proposal automatically.                             |
+| US005 | [Generate a team](../../us005/Readme.md)                                                 |
 | US006 | [Register a Vehicle](../../us006/Readme.md)                                              |
 | US007 | [Register a vehicle´s check-up](../../us006%20(Template)/Readme.md)                      |
 | ...   | As an FM, I wish to register a vehicle's check-up.                                       |
