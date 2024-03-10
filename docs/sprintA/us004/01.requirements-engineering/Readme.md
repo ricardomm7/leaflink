@@ -1,4 +1,4 @@
-# US004 - Assign skills to a collaborator
+# US004 - Assign Skills to a Collaborator
 
 
 ## 1. Requirements Engineering
@@ -50,11 +50,11 @@ s aN Human Resources Manager (HRM), I want to assign one or more skills to a col
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us004-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative Two](svg/us004-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 

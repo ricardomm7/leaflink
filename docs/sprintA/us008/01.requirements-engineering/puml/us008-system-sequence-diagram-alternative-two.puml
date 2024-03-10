@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative Two
+
+autonumber
+
+actor "Facilities Manager" as FM
+participant ":System" as System
+
+activate FM
+
+        FM -> System : requests to list vehicles needing check-up
+        activate System
+
+            System --> FM : shows list of vehicles needing check-up
+        deactivate System
+
+@enduml
