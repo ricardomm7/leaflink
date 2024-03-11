@@ -17,12 +17,9 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | US001 | [Register a Skill](../../us001/Readme.md)                                                    |
 | US002 | [Register a Job](../../us002/Readme.md)                                                      |
 | US003 | [Register a collaborator with a job and fundamental characteristics.](../../us003/Readme.md) |
-| US004 | [Assign Skills](../../us006%20(Template)/Readme.md)                                          |
-| ...   | As an HRM, I want to assign one or more skills to a collaborator.                            |
+| US004 | [Assign Skills](../../us004/Readme.md)                                                       |
 | US005 | [Generate a team](../../us005/Readme.md)                                                     |
 | US006 | [Register a Vehicle](../../us006/Readme.md)                                                  |
 | US007 | [Register a vehicle´s check-up](../../us007/Readme.md)                                       |
-| ...   | As an FM, I wish to register a vehicle's check-up.                                           |
-| US008 | [Listing vehicles needing check-up](../../us006%20(Template)/Readme.md)                      |
-| ...   | As an FM, I want to list the vehicles needing the check-up                                   |
+| US008 | [Listing vehicles needing check-up](../../us008/Readme.md)                                   |
 |       |                                                                                              |

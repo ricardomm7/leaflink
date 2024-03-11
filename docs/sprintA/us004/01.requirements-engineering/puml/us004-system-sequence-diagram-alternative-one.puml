@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - US004
 
 autonumber
 
-actor "Human resources\nManager" as HRM
+actor "HRM" as HRM
 participant ":System" as System
 
 activate HRM

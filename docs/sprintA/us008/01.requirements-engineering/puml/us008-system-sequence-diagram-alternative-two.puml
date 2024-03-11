@@ -3,11 +3,11 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative Two
+title System Sequence Diagram (SSD) - US008
 
 autonumber
 
-actor "Facilities Manager" as FM
+actor "FM" as FM
 participant ":System" as System
 
 activate FM
