@@ -23,7 +23,7 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The system must allow the Floor Manager to enter all required vehicle registration attributes.
+* **AC1:** All atributes must be filled.
 * **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
 * **AC3:** When registering a vehicle already register, the system must reject such operation and the floor manager (FM) must be able to modify some attribute.
 * **AC4:** The system must securely store the registered vehicle information.
@@ -40,7 +40,6 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
     * Vehicle identification number (VIN)
     * Brand
     * Model
-    * Type (car, truck, etc.)
     * Tare Weight (weight of the empty vehicle)
     * Gross weight (maximum weight of the loaded vehicle)
     * Current Kilometer Reading
@@ -49,9 +48,7 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
     * Checkup Frequency (in Kilometers)
 	
 * Selected data:
-    * Brand
-    * Model
-    * Type
+    * Type (car, truck, etc.)
 
 **Output Data:**
 
@@ -72,4 +69,4 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None

@@ -42,7 +42,6 @@ As a Human Resources Manager (HRM), I want to register a job.
   * (Optional) Skills required (references existing skills in the system)
 
 **Output Data:**
-* List of existing skills required
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)

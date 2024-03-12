@@ -59,7 +59,5 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 ### 1.7 Other Relevant Remarks
 
 * Provide search or filtering options for the list of skills to expedite the selection process.
-* Implement validation mechanisms to ensure that only valid skills can be assigned to callaborators.
-* Provide clear error messages and prompts to guide the HRM in case of any issues, such as attempting to assign a non-existent skill.
 * Implement appropriate permissions and access controls to restrict the ability to assign skills to authorized HRM users only.
 * Provide feedback upon successful assigment of skills, confirming the completion of the operation.
