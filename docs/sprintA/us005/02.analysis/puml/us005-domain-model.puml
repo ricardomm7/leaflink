@@ -3,18 +3,18 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
+left to right direction
 
 skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model
 
-'class Platform {
-'  -description
-'}
+class Platform {
+  -description
+}
 
 class Organization {
     name
@@ -44,18 +44,18 @@ class Employee {
     phone
 }
 
-'class User {
-'    name
-'    email
-'    password
-'}
+class User {
+    name
+    email
+    password
+}
 
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
+Platform "1" -- "*" Organization : has registered >
+Platform "1" -- "*" Category : defines >
 Organization "1" - "0..*" Employee : has >
 Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
+Task "*" -- "1" Employee: created by >
 Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
+Employee "0..1" -- "1" User: acts as >
 Task "*" - "1" Category: cataloged as >
 @enduml
