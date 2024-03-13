@@ -15,13 +15,13 @@ activate FM
     FM -> System : requests to register a vehicle
     activate System
 
-        System --> FM : requests vehicle data (VIN, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        System --> FM : requests vehicle data (VIN, Brand, Model, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate System
 
     FM -> System : types vehicle data
     activate System
 
-        System --> FM : validates VIN (unique and not existing) and requests more data (Brand, Model, Type)
+        System --> FM : validates VIN (unique and not existing) and requests more data (Type)
     deactivate System
 
     FM -> System : selects vehicle data
