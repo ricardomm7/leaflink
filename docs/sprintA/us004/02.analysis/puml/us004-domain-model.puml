@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+left to right direction
+
+hide circle
+hide methods
+
+class skills {
+    String skillName
+}
+
+class collaborator {
+    String collaboratorName
+}
+
+collaborator "*" -- "1..*" skills : has >
+@enduml

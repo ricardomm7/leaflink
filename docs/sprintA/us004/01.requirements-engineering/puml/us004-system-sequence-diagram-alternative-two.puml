@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - Alternative Two
 
 autonumber
 
-actor "Human Resources\nManager" as HRM
+actor "HRM" as HRM
 participant ":System" as System
 
 activate HRM
