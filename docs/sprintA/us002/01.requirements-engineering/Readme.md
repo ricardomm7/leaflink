@@ -58,4 +58,4 @@ As a Human Resources Manager (HRM), I want to register a job.
 
 ### 1.7 Other Relevant Remarks
 
-* The created job stays in a "not published" state in order to distinguish from "published" tasks.
+* None.

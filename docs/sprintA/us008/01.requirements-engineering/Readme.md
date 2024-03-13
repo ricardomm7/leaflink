@@ -24,7 +24,6 @@ As a Facilities Manager (FM), I want to list the vehicles that are due for a che
 * **AC1:** The system should generate a list of vehicles that are due for a check-up based on their maintenance/checkup frequency and current kilometers.
 * **AC2:** The list should include relevant information such as vehicle ID/VIN, brand, model, and current kilometers.
 * **AC3:** The list should be easily accessible to the Facilities Manager.
-* **AC4:** The system should allow filtering or sorting options for the list based on different criteria, such as vehicle brand or check-up due date.
 
 ### 1.4. Found out Dependencies
 
@@ -59,5 +58,5 @@ As a Facilities Manager (FM), I want to list the vehicles that are due for a che
 
 * Implement appropriate logic to determine the vehicles needing check-up based on maintenance/checkup frequency and current kilometers.
 * Ensure that the generated list is accurate and up-to-date.
-* Consider providing notifications or alerts to the Facilities Manager for vehicles approaching or overdue for check-up.
 * Provide user-friendly interface with intuitive navigation and filtering options for easy access to the list of vehicles needing check-up.
+* The system should allow filtering or sorting options for the list based on different criteria, such as vehicle brand or check-up due date.

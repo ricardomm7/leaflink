@@ -19,11 +19,18 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 >
 > **Answer:** The HRM selects from a list of previously defined skills and associates them with a collaborator's profile.
 
+> **Question:** Whether there is a minimum and maximum number of skills;
+>
+> **Answer:** No.
+
+> **Question:** If there are any special characteristics that the collaborator needs to have in order to have these skills added.
+> 
+> **Answer:** No.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The HRM must be able to select and assign one or more skills to a collaborator.
-* **AC2:** The system should display an error message if the HRM tries to assign a skill that does not exist in the predefined list of skills.
-* **AC3:** Once assigned, the system should update the collaborator's profile with the assigned skills.
+* **AC2:** Once assigned, the system should update the collaborator's profile with the assigned skills.
 
 ### 1.4. Found out Dependencies
 
@@ -34,7 +41,7 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 **Input Data:**
 
 * Typed data:
-    * none
+    * Collaborator ID
 	
 * Selected data:
     * Skills to be assigned to the collaborator 

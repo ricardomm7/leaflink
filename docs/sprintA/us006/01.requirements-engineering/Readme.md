@@ -23,9 +23,9 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All atributes must be filled.
+* **AC1:** All attributes must be filled.
 * **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
-* **AC3:** When registering a vehicle already register, the system must reject such operation and the floor manager (FM) must be able to modify some attribute.
+* **AC3:** When registering a vehicle already registered, the system must reject such operation and the floor manager (FM) must be able to modify some attribute.
 * **AC4:** The system must securely store the registered vehicle information.
 
 ### 1.4. Found out Dependencies
