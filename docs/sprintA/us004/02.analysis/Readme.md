@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US004 - Assign Skills to a Collaborator
 
 ## 2. Analysis
 
@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-n/a
+This image may not be precise, so there may be minor changes.

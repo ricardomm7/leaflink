@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US008 - List Vehicles Needing Check-up
 
 ## 2. Analysis
 
@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-n/a
+This image may not be precise, so there may be minor changes.
