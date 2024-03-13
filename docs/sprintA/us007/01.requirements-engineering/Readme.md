@@ -11,48 +11,41 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	Each vehicle should have a first checkup date and a frequency associated. 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Which is the unit of measurement used to estimate the frequency of the checkups? (months, kilometers, etc...)
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** Duration is estimated in kilometers or months.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** 
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** Every vehicle should have a checkup date associated.
+* **AC3:** When creating a checkup, the vehicle should not have a checkup scheduled within the frequency time. 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US008 - Register a vehicle" as there must be a vehicle existent to associate a checkup.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * a date
 	
 * Selected data:
-    * a task category 
+    * a vehicle
 
 **Output Data:**
 
-* List of existing task categories
+* The vehicle and the date of the checkup.
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -69,4 +62,4 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None

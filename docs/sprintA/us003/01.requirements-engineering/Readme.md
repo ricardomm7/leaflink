@@ -65,4 +65,4 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 ### 1.7 Other Relevant Remarks
 
-* None
+* None 
