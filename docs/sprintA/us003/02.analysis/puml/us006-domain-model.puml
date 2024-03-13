@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
+left to right direction
 
 skinparam classAttributeIconSize 0
 
@@ -12,11 +12,7 @@ hide methods
 
 'title Domain Model
 
-'class Platform {
-'  -description
-'}
-
-class Organization {
+class HRM {
     name
     vatNumber
     website
@@ -24,38 +20,30 @@ class Organization {
     email
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
-
-class Category {
+class Job {
+    title
     description
 }
 
-class Employee {
-    name
-    email
-    position
-    phone
+class Collaborator {
+    Name
+    Date of birth
+    Admission date
+    Adress
+    Phone number
+    E-mail adress
+    Identification document
+    Number of identification document
 }
 
-'class User {
-'    name
-'    email
-'    password
-'}
+class Assigment {
+    collaboratorID
+    jobID
+}
 
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
+
+
+' Relationships
+HRM "1" -- "*" Collaborator : registers with >
+HRM "*" -- "*" Assignment : assigns to >
 @enduml
