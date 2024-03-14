@@ -14,37 +14,51 @@ title Domain Model -- US005
 
 class Skill {
   - name
-  - description (optional)
+  - description
 }
 
-class Collaborators {
+class Collaborates {
   - name
-  - date of birth
-  - date of employment
-  - address
-  - phone number
   - email
-  - id
-  - identification document
+  - dateOfBirth
+  - dateOfEmployment
+  - address
+  - phoneNumber
+  - email
+  - idNumber
   + hasSkills: Set<Skill>
 }
-class HRM{
-}
+
 class Team {
   - name
-  - members: Set<Collaborators>
+  - members: Set<Collaborates>
 }
 
-class TeamGenerator {
+class TeamProposal {
   - id
   - requiredSkills: Set<Skill>
   - numberOfCollaborators: int
   - suggestedTeam: Team (optional)
-  + generateTeam(skills: Set<Skill>, numberOfCollaborators: int): TeamGenerator
+  + generateTeam(skills: Set<Skill>, numberOfCollaborators: int): TeamProposal
+}
+class TeamModify{
+  - TeamProposal
+  - Set <collaborates>
 }
 
-Collaborators "0..*" -"*" Skill: possesses >
-Team "1" -- "*" Collaborators: consists of >
-TeamGenerator "0..1" --> "1" HRM: proposes >
-HRM"0..*"-->"1" Team: accept >
+Collaborates "0..*" -"*" Skill: possesses >
+Team "1" -- "*" Collaborates: consists of >
+HRM "0..1" --> "1" Team: confirm propose >
+
+HRM "1" <-- "0..*" TeamProposal : receives proposals <
+HRM --> TeamProposal: reject >
+HRM --> TeamModify:  modify >
+TeamModify --> Team: create a team >
+
+
+
+
+
+
+
 @enduml
