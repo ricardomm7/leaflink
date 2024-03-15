@@ -19,6 +19,10 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 >
 > **Answer:** Duration is estimated in kilometers or months.
 
+> **Question:** What information is needed when registering a vehicle for check up?
+>
+> **Answer:** Vehicle ID, Date and current kms.
+
 > **Question:** 
 >
 > **Answer:** 
