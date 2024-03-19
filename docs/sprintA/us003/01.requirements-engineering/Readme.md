@@ -18,6 +18,14 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 >
 > **Answer:** The essencial data are name, birthdate, admission date, address, contact (email or phone number), an identification document and its identification number.
 
+> **Question:** Which information is mandatory to insert a collaborator in the program (fundamental characteristics)?
+>
+> **Answer:** name, birth date, admission date, address, contact info (mobile and email), taxpayer number, ID doc type and respective number.
+
+> **Question:** Does the HRM select the job from a list that we display?
+> 
+> **Answer:**  displaying or not, It's a matter of UX, the dev team should decide about it, but the valid jobs are the ones created within the US02.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
