@@ -17,11 +17,11 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 
 > **Question:** Which is the unit of measurement used to estimate the frequency of the checkups? (months, kilometers, etc...)
 >
-> **Answer:** Duration is estimated in kilometers.
-
+> **Answer:** In real context all could be considered, in the scope of this project just Kms will be considered.
+>
 > **Question:** What information is needed when registering a vehicle for check up?
 >
-> **Answer:** Vehicle ID, Date and current kms.
+> **Answer:** Vehicle ID, Date and Kms at check-up.
 
 ### 1.3. Acceptance Criteria
 
