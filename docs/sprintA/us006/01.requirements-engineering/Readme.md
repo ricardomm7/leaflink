@@ -21,6 +21,18 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
 > 
 > **Answer:** Yes. To register a vehicle in the system, is request every attribute, in other case, the system should reject.
 
+> **Question:** Should the application identify a registered vehicle by a serial number or other attribute?
+>
+> **Answer:** By plate id
+
+> **Question:** Should the application a group the vehicles by their brand, serial number or other attribute?
+>
+> **Answer:** No requirements were set concerning groups of vehicles
+
+>  **Question:** If the Fm inserts the same vehicle by mistake, should it inform the user of the mistake and give him the option to add another vehicle?
+>
+> **Answer:** Duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates
+
 
 ### 1.3. Acceptance Criteria
 
@@ -39,6 +51,7 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
 
 * Typed data:
     * Vehicle identification number (VIN)
+    * Vehicle Plate
     * Brand
     * Model
     * Tare Weight (weight of the empty vehicle)

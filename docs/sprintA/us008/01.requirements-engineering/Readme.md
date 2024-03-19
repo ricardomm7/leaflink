@@ -19,6 +19,21 @@ As a Facilities Manager (FM), I want to list the vehicles that are due for a che
 >
 > **Answer:** The system should compare the current kilometers of each vehicle with their maintenance/checkup frequency to determine if a check-up is due.
 
+>  **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?
+>
+> **Answer:** The list of vehicles is automatically created but the creation is triggered by the FM.
+
+>  **Question:** What information will appear on the final list regarding the vehicle,besides the needing for check-up?
+>
+> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequency of checkup and the last checkup.
+
+>  **Question:** What are the requests/ input data to list the vehicles needing the check-up? Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
+>
+> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes.
+
+>  **Question:** Are there acceptance criteria when asking for the list?
+>
+> **Answer:** The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should generate a list of vehicles that are due for a check-up based on their maintenance/checkup frequency and current kilometers.
