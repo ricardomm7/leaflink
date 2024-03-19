@@ -11,27 +11,23 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 
 **From the specifications document:**
 
->	Each vehicle should have a first checkup date and a frequency associated. 
+>	Each vehicle should have a first checkup date and a frequency associated in Km. 
 
 **From the client clarifications:**
 
 > **Question:** Which is the unit of measurement used to estimate the frequency of the checkups? (months, kilometers, etc...)
 >
-> **Answer:** Duration is estimated in kilometers or months.
+> **Answer:** Duration is estimated in kilometers.
 
 > **Question:** What information is needed when registering a vehicle for check up?
 >
 > **Answer:** Vehicle ID, Date and current kms.
 
-> **Question:** 
->
-> **Answer:** 
-
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** Every vehicle should have a checkup date associated.
-* **AC3:** When creating a checkup, the vehicle should not have a checkup scheduled within the frequency time. 
+* **AC2:** Every vehicle should have a checkup frequency associated.
+* **AC3:** When creating a checkup, the vehicle should not have a checkup scheduled within the estimated frequency. 
 
 ### 1.4. Found out Dependencies
 
@@ -42,10 +38,10 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 **Input Data:**
 
 * Typed data:
-    * a date
+    * Date of the check-up
 	
 * Selected data:
-    * a vehicle
+    * Vehicle
 
 **Output Data:**
 

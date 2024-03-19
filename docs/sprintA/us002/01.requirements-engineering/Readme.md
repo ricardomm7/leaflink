@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Human Resources Manager (HRM), I want to register a job.
+As a Human Resources Manager (HRM), I want to register a job that a collaborators need to have.
 
 ### 1.2. Customer Specifications and Clarifications 
 

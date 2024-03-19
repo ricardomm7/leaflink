@@ -6,6 +6,7 @@
 ### 1.1. User Story Description
 
 As a floor manager (FM), I wish to register a vehicle including all the attributes.
+
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
