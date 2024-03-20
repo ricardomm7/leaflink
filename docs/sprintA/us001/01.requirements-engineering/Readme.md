@@ -38,7 +38,7 @@ be appointed to a collaborator.
 > **Question:** Does the HRM need to see the confirmation of the success of the operation and the skills added or just
 > the success of the operation?
 >
-> **Answer:** It will depend if you opt to insert one skil or a set of skils in a batch. Maybe some adaptation needed.
+> **Answer:** It will depend on if you opt to insert one skil or a set of skils in a batch. Maybe some adaptation needed.
 
 > **Question:** Is there any other possible outcome like if the HMR does not put the requested data, do I need to ask
 > the user to register a different competence?

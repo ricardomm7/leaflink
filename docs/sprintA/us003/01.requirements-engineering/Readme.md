@@ -1,4 +1,4 @@
-# US003 - Register a colaborator with a job and fundamental characteristics
+# US003 - Register a collaborator with a job and fundamental characteristics
 
 ## 1. Requirements Engineering
 
@@ -10,17 +10,17 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 **From the specifications document:**
 
->   Each  collaborator is charecterized by a name, a birthdate, admission date, an address, contact (email or phone number), an identification document and its identification number.
+>   Each  collaborator is characterized by a name, a birthdate, admission date, an address, contact (email or phone number), an identification document and its identification number.
 
 **From the client clarifications:**
 
 > **Question:** The term "fundamental characteristics" is mentioned in US003. What, precisely, are those characteristics?
 >
-> **Answer:** The essencial data are name, birthdate, admission date, address, contact (email or phone number), an identification document and its identification number.
+> **Answer:** The essential data are name, birthdate, admission date, address, contact (email or phone number), an identification document and its identification number.
 
 > **Question:** Which information is mandatory to insert a collaborator in the program (fundamental characteristics)?
 >
-> **Answer:** name, birth date, admission date, address, contact info (mobile and email), taxpayer number, ID doc type and respective number.
+> **Answer:** name, birthdate, admission date, address, contact info (mobile and email), taxpayer number, ID doc type and respective number.
 
 > **Question:** Does the HRM select the job from a list that we display?
 > 
@@ -30,7 +30,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** Every collaborator must have an associated job.
-* **AC3:** Name, birthdate, admission date, adress, contact info (mobile and e-mail), ID doc type, ID number.
+* **AC3:** Name, birthdate, admission date, address, contact info (mobile and e-mail), ID doc type, ID number.
 
 ### 1.4. Found out Dependencies
 
@@ -54,7 +54,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 **Output Data:**
 
-* Colaborator and it's job associated 
+* Collaborator and it's job associated 
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)

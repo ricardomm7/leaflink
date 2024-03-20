@@ -1,4 +1,4 @@
-# US003 - Register a colaborator with a job and fundamental characteristics
+# US003 - Register a collaborator with a job and fundamental characteristics
 
 ## 2. Analysis
 
