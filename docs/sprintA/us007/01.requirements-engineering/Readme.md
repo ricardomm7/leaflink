@@ -23,7 +23,7 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 >
 > **Answer:** Vehicle ID, Date and current kms.
 
-> **Question:** 
+> **Question:**   
 >
 > **Answer:** 
 
