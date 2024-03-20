@@ -19,6 +19,26 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 >
 > **Answer:** No. The human resources manager (HRM) defines it and the system will save it as an option for the future.
 
+> **Question:** What are the input data for creating a profession?
+>
+> **Answer:** Profession name.
+
+> **Question:** When are creating a job that already exit, what the system do?
+>
+> **Answer:** By definition a set can´t have duplicates. Assuring no duplicates is not a business rule is a tecnichal issue.
+
+> **Question:** Is it relevant to associate a specific area or sector with each Job? (For example, "Gardener" would be placed in the "Maintenance" sector)
+>
+> **Answer:** it is not necessary as there are no US that suggest that this might be necessary;
+
+> **Question:** Should information such as salary, type of employment (full-time or part-time), and type of work (in-person, remote or hybrid) be included in the Job? Or does this information fit better within the scope of the employee, or perhaps it is not even necessary?
+>
+> **Answer:** idem.
+
+> **Answer:** What other information do you think is necessary to associate with the Job?
+>
+> **Question:** None for now.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All job fields must be filled in.
