@@ -35,7 +35,7 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 > 
 > **Answer:** That does not make sense.
 
-> **Question:** Is there any certification/proof needed to register a skill to a colaborator?
+> **Question:** Is there any certification/proof needed to register a skill to a collaborator?
 > 
 > **Answer:** No.
 
@@ -79,4 +79,4 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 
 * Provide search or filtering options for the list of skills to expedite the selection process.
 * Implement appropriate permissions and access controls to restrict the ability to assign skills to authorized HRM users only.
-* Provide feedback upon successful assigment of skills, confirming the completion of the operation.
+* Provide feedback upon successful assignment of skills, confirming the completion of the operation.

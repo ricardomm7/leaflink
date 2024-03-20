@@ -27,7 +27,7 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 >
 > **Answer:** The system should provide information why it can't generate a team.
 
-> **Question:** How does he propose a team, for what purpose? (Is there any predefinition)?
+> **Question:** How does he propose a team, for what purpose? (Is there any predefinition )?
 > 
 > **Answer:** There is no purpose, at least in this sprint.
 
