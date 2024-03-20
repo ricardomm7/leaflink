@@ -2,13 +2,11 @@
 
 **In the scope of this project, there is a direct relationship of _1 to 1_ between Use Cases (UC) and User Stories (US).**
 
-However, be aware, this is a pedagogical simplification. On further projects and course units there may also exist _1 to N **and/or** N to 1_ relationships between UC and US.
-
-**Insert below the Use Case Diagram in a SVG format**
+This is the global Use Case Diagram and shows the main functions of the main roles in the application:
 
 ![Use Case Diagram](svg/use-case-diagram.svg)
 
-**For each UC/US, it must be provided evidences of applying main activities of the software development process (requirements, analysis, design, tests and code). Gather those evidences on a separate file for each UC/US and set up a link as suggested below.**
+**For each Use Case/User Story (UC/US), evidence is provided below of the application of the main activities of the software development process (requirements, analysis, design, testing and code).**
 
 # Use Cases / User Stories
 
@@ -22,4 +20,3 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | US006 | [Register a Vehicle](../../us006/Readme.md)                                                  |
 | US007 | [Register a vehicle´s check-up](../../us007/Readme.md)                                       |
 | US008 | [Listing vehicles needing check-up](../../us008/Readme.md)                                   |
-|       |                                                                                              |

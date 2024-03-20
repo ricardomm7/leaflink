@@ -1,8 +1,6 @@
 # Glossary
 
-**Terms, Expressions and Acronyms (TEA) must be organized alphabetically.**
-
-_(Complete according to the provided example)_
+**Terms, Expressions and Acronyms (TEA) are organized alphabetically.**
 
 | **_TEA_** (EN)              | **_Description_** (EN)                                                                                                    |                                       
 |:----------------------------|:--------------------------------------------------------------------------------------------------------------------------|
