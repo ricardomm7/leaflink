@@ -48,6 +48,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
     * Contact info (mobile and e-mail)
     * Identification document
     * Identification document number
+    * Taxpayer number
 	
 * Selected data:
     * a Job
