@@ -8,11 +8,11 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model
 
-'class Platform {
-'  -description
-'}
+class Platform {
+  -description
+}
 
 class Organization {
     name

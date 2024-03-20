@@ -14,7 +14,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-**Transaction Line Itemss**
+**Transaction Line Items**
 
 * 
 
@@ -133,8 +133,8 @@ An association is a relationship between instances of objects that indicates a r
 
 ## Domain Model
 
-**Do NOT forget to identify concept atributes too.**
+**Do NOT forget to identify concept attributes too.**
 
-**Insert below the Domain Model Diagram in a SVG format**
+**Insert below the Domain Model Diagram in an SVG format**
 
 ![Domain Model](svg/project-domain-model.svg)

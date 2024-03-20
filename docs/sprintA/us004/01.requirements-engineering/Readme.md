@@ -15,15 +15,27 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 
 **From the client clarifications:**
 
+> **Question:** Can any skill be registered to any collaborator/job? Or should they be associated in categories in association with a specific job?
+> 
+> **Answer:** There is no association, it totally depends on the CV of the collaborator.
+
 > **Question:** How are skills assigned to collaborators?
 >
 > **Answer:** The HRM selects from a list of previously defined skills and associates them with a collaborator's profile.
 
-> **Question:** Whether there is a minimum and maximum number of skills;
+> **Question:** Is there a minimum or maximum number of skills a collaborator can be added to? 
 >
 > **Answer:** No.
 
-> **Question:** If there are any special characteristics that the collaborator needs to have in order to have these skills added.
+> **Question:** Is there any special characteristics that the collaborator needs to have in order to have these skills added?
+> 
+> **Answer:** No.
+
+> **Question:** Should it be possible to add the same skill to a collaborator multiple times?
+> 
+> **Answer:** That does not make sense.
+
+> **Question:** Is there any certification/proof needed to register a skill to a colaborator?
 > 
 > **Answer:** No.
 

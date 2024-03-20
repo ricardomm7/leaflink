@@ -1,0 +1,57 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Global Use Case Diagram
+
+left to right direction
+
+rectangle "System User" as actors {
+    actor HRM
+    actor FM
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US01 - Register Skills for Collaborator" as US01
+    HRM --> US01
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US02 - Register a Job" as US02
+    HRM --> US02
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US03 - Register a collaborator and his attributes" as US03
+    HRM --> US03
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US04 - Assign skills to employees" as US04
+    HRM --> US04
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US05 - Generate a new team, based on the needs" as US05
+    HRM --> US05
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US06 - Register a vehicle with his attributes" as US06
+    FM --> US06
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US07 - Schedule a vehicle check-up" as US07
+    FM --> US07
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US08 - See the vehicles that need a check-up" as US08
+    FM --> US08
+}
+
+
+
+@enduml

@@ -12,23 +12,6 @@ hide methods
 
 title Domain Model -- US005
 
-class Skill {
-  - name
-  - description
-}
-
-class Collaborates {
-  - name
-  - email
-  - dateOfBirth
-  - dateOfEmployment
-  - address
-  - phoneNumber
-  - email
-  - idNumber
-  + hasSkills: Set<Skill>
-}
-
 class Team {
   - name
   - members: Set<Collaborates>
@@ -38,22 +21,21 @@ class TeamProposal {
   - id
   - requiredSkills: Set<Skill>
   - numberOfCollaborators: int
-  - suggestedTeam: Team (optional)
-  + generateTeam(skills: Set<Skill>, numberOfCollaborators: int): TeamProposal
 }
+
 class TeamModify{
   - TeamProposal
   - Set <collaborates>
 }
 
-Collaborates "0..*" -"*" Skill: possesses >
-Team "1" -- "*" Collaborates: consists of >
-HRM "0..1" --> "1" Team: confirm propose >
 
-HRM "1" <-- "0..*" TeamProposal : receives proposals <
+HRM "0...1" --> "1" Team: confirm propose >
+
+HRM "1" --> "0...1" TeamProposal : receives proposals <
 HRM --> TeamProposal: reject >
 HRM --> TeamModify:  modify >
 TeamModify --> Team: create a team >
+
 
 
 
