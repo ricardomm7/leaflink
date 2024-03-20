@@ -2,14 +2,15 @@
 
 # 1. Team Members
 
-The teams consists of students identified in the following table.
+The teams consist of students identified in the following table.
 
 | Student Number | Name             |
-|---------------|------------------|
-| **1230399**   | Joana Gama       |
-| **1230741**   | Bruno Teixeira   |
-| **1230744**   | Ricardo Meireles |
-| **1231235**   | Francisco Pinho  |
+|----------------|------------------|
+| **1230399**    | Joana Gama       |
+| **1230741**    | Bruno Teixeira   |
+| **1230744**    | Ricardo Meireles |
+| **1231235**    | Francisco Pinho  |
+| **1191647**    | Samuel Leite     |
 
 # 2. Task Distribution ###
 
@@ -25,6 +26,13 @@ was carried out as described in the following table.
 | Supplementary Specification | [all](sprintA/global-artifacts/01.requirements-engineering/supplementary-specification.md) | [all](sprintB/global-artifacts/01.engineering-requirements/supplementary-specification.md) | [all](sprintC/global-artifacts/01.engineering-requirements/supplementary-specification.md) |
 | Domain Model                | [all](sprintA/global-artifacts/02.analysis/analysis.md)                                    | [all](sprintB/global-artifacts/02.analysis/analysis.md)                                    | [all](sprintC/global-artifacts/02.analysis/analysis.md)                                    |
 | US001 (SDP Activities)      | [1XXXXXX](sprintA/us001/Readme.md)                                                         |                                                                                            |                                                                                            |
+| US002 (UCD)                 |                                                                                            |                                                                                            |                                                                                            |
+| US003                       |                                                                                            |                                                                                            |                                                                                            |
+| US004                       |                                                                                            |                                                                                            |                                                                                            |
+| US005                       |                                                                                            |                                                                                            |                                                                                            |
+| US006                       |                                                                                            |                                                                                            |                                                                                            |
+| US007                       |                                                                                            |                                                                                            |                                                                                            |
+| US008                       |                                                                                            |                                                                                            |                                                                                            |
 | ...                         | ...                                                                                        | ...                                                                                        | ...                                                                                        |
 | US006 (SDP Activities)      | [1XXXXXX](sprintA/us006 (Template)/Readme.md)                                                         |                                                                                            |                                                                                            |
 | ...                         | ...                                                                                        | ...                                                                                        | ...                                                                                        |
