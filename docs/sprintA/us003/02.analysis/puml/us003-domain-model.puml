@@ -27,6 +27,7 @@ class Collaborator {
     Contact
     Identification document
     Identification number
+    Taxpayer number
 }
 
 ' Relationships
