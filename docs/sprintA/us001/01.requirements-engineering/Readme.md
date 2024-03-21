@@ -56,6 +56,10 @@ be appointed to a collaborator.
 >**Answer:** By definition it is not possible to have duplicate values in a set. Checking for duplicates is not a
 > business rule, it's a technology rule.
 
+> **Question:** Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?
+>
+>**Answer:** It's not required to do so.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All skill field must be filled in.
