@@ -34,6 +34,15 @@ As a Facilities Manager (FM), I want to list the vehicles that are due for a che
 >  **Question:** Are there acceptance criteria when asking for the list?
 >
 > **Answer:** The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
+
+>  **Question:**  In this US we should only list the vehicles that need a check-up (surpass the check-up frequency in KM) or that will shortly need a check-up (5% to the check-up frequency), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
+>
+> **Answer:** No. The Maintenance/Check-up Frequency (in km) is registered in US06.
+
+>  **Question:** "The list must clearly identify the vehicles through: plate number, brand, model and the [?] that justified the checkup need."
+Did you mean the reason for the check-up need?
+>
+> **Answer:**[?] DATA. Current kms, frequency, last checkup kms, next checkup (optimal) kms
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should generate a list of vehicles that are due for a check-up based on their maintenance/checkup frequency and current kilometers.
@@ -55,7 +64,7 @@ As a Facilities Manager (FM), I want to list the vehicles that are due for a che
 
 * List of vehicles needing check-up
 * Relevant vehicle information (e.g., ID/VIN, brand, model, current kilometers)
-* (In)Success of the operation
+* (In)Success of the operation  
 
 ### 1.6. System Sequence Diagram (SSD)
 

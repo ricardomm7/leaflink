@@ -33,6 +33,10 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
 >
 > **Answer:** Duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates
 
+>  **Question:** When a vehicle is registered, are there specific requirements for accepting the brand? For example, does the system need to check if the brand is on a predetermined list? Does this also apply to the model or any other characteristics?
+>
+> **Answer:** No. One can consider a list os brands and a list of models previously inserted in the system. No need to go through validations.
+
 
 ### 1.3. Acceptance Criteria
 
