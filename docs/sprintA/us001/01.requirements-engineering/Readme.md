@@ -25,15 +25,15 @@ be appointed to a collaborator.
 
 > **Question:** Which information is mandatory for creating a new skill?
 >
->**Answer:** The skill name;
+> **Answer:** The skill name;
 
 > **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
 >
->**Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
+> **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
 
 > **Question:** Do I need to add skills by writing them or can I just give a file with all of the skills?
 >
->**Answer:** Both are acceptable since the business the same the crucial difference resides in the UX.
+> **Answer:** Both are acceptable since the business the same the crucial difference resides in the UX.
 
 > **Question:** Does the HRM need to see the confirmation of the success of the operation and the skills added or just
 > the success of the operation?
@@ -43,7 +43,7 @@ be appointed to a collaborator.
 > **Question:** Is there any other possible outcome like if the HMR does not put the requested data, do I need to ask
 > the user to register a different competence?
 >
->**Answer:** This US is quite simple, atm a skill is simply a name.
+> **Answer:** This US is quite simple, atm a skill is simply a name.
 
 > **Question:** What criteria are needed to register a skill?
 >
@@ -53,12 +53,20 @@ be appointed to a collaborator.
 
 > **Question:** When you create a skill that already exists, what should the system do?
 >
->**Answer:** By definition it is not possible to have duplicate values in a set. Checking for duplicates is not a
+> **Answer:** By definition it is not possible to have duplicate values in a set. Checking for duplicates is not a
 > business rule, it's a technology rule.
 
 > **Question:** Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?
 >
->**Answer:** It's not required to do so.
+> **Answer:** It's not required to do so.
+
+> **Question:** The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
+> 
+> **Answer:** A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence". I have no knowledge about systems IDs.
+
+> **Question:** Dear client, which is the difference between collaborator and employ? And employ could have skills? HRM, VFM, GSM and GSU are employers?
+>
+> **Answer:** Employee and collaborator are synonyms.
 
 ### 1.3. Acceptance Criteria
 
