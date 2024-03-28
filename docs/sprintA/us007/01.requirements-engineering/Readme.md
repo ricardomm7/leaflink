@@ -23,6 +23,25 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 >
 > **Answer:** Vehicle ID, Date and Kms at check-up.
 
+> **Question:** After register a job/vehicle's checkup should a message (sucess or failure) or a resume of the register appear?
+>
+> **Answer:** The UX/UI is up to the dev teams.
+
+> **Question:** Does a vehicle need to be registered in US06 before being able to go for a check-up in US007?
+> 
+> **Answer:** Yes.
+
+> **Question:** Can a vehicle not have a check-up?
+>
+> **Answer:** Yes.
+
+> **Question:**  What´s the supposed vehicle check up supposed to look like?
+>
+> **Answer:** Yes.
+
+
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
