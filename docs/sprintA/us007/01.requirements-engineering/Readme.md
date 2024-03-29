@@ -50,7 +50,7 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US008 - Register a vehicle" as there must be a vehicle existent to associate a checkup.
+* There is a dependency on "US006 - Register a vehicle" as there must be a vehicle existent to associate a checkup.
 
 ### 1.5 Input and Output Data
 
