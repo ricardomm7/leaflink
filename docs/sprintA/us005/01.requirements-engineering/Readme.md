@@ -2,7 +2,7 @@
 
 
 ## 1. Requirements Engineering
-
+  
 ### 1.1. User Story Description
 
 As a Human Resources Manager (HRM), I want to generate a team proposal automatically.
@@ -43,6 +43,21 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 >
 > **Answer:** The systems provide team proposals and HRM can accept of refuse the proposals. In the future (not in this sprint) HRM may decide to edit the team.
 
+> **Question:** Are the skills(input) typed or selected. Does the output show the team members with or without their skills?
+>
+> **Answer:** The ux/ui is up to the dev team.
+
+> **Question:** I would to know which business rules apply for the input data to generate a team proposal.
+> 
+> **Answer:** max and min team size, and a list of skills needed. For instance: min: 3, max: 4
+
+> **Question:** I would like to ask if, in this US, there should be any more information in the team generated beyond the collaborators in which it consists?
+>
+>I would also like to know if a collaborator can be in more than one team at the same time? 
+> 
+> **Answer:** The information should contain each of team members and the  its skills.
+>
+>no;
 ### 1.3. Acceptance Criteria
 
 * **AC1:** There must be at least one competence/skill.
