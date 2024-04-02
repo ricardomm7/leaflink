@@ -10,17 +10,16 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title Domain Model -- US005
 
 class Team {
   - name
-  - members: Set<Collaborates>
+  - members
 }
 
 class TeamProposal {
   - id
-  - requiredSkills: Set<Skill>
-  - numberOfCollaborators: int
+  - requiredSkills
+  - numberOfCollaborators
 }
 
 class TeamModify{

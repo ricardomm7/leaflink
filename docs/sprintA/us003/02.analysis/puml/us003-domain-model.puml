@@ -10,7 +10,6 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
 
 class HRM {
 }
@@ -21,13 +20,13 @@ class Job {
 }
 
 class Collaborator {
-    Name
-    Birthdate
-    Address
-    Contact
-    Identification document
-    Identification number
-    Taxpayer number
+    name
+    birthdate
+    address
+    contact
+    identificationDocument
+    identificationNumber
+    taxPayerNumber
 }
 
 ' Relationships

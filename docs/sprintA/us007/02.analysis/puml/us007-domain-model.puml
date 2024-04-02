@@ -10,15 +10,15 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class FleetManager {
+class FM {
 
 }
 
 class VehicleCheckup {
-    IdVehicle
-    Date
-    CurrentKms
+    date
+    currentKm
+
 }
 
-FleetManager "1" - "0..*" VehicleCheckup : registers >
+FM "1" - "0..*" VehicleCheckup : registers >
 @enduml

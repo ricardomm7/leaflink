@@ -14,9 +14,9 @@ title Domain Model
 class HRM {
 
 }
-class Skills {
+class Skill {
     designation
 }
 
-HRM "*" -- "1..*" Skills : creates >
+HRM "*" -- "1..*" Skill : creates >
 @enduml
