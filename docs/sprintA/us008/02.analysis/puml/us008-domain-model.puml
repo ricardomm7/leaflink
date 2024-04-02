@@ -9,14 +9,27 @@ left to right direction
 hide circle
 hide methods
 
+class FM {
+}
+
 class Vehicle {
-    float kmFrequency
-    float currentKm
+    vin
+    vehiclePlate
+    brand
+    model
+    tareWeight
+    grossWeight
+    currentKm
+    acquisitionDate
+    maintenanceFrequency
+    type
 }
 
-class Checkup {
-    Date lastCheckup
+class VehicleCheckup {
+    date
+    currentKm
 }
 
-Vehicle "1" -- "1..*" Checkup : needs >
+FM "1" -- "0..*" Vehicle : cataloged >
+Vehicle "1" -- "0..*" VehicleCheckup : has >
 @enduml

@@ -9,13 +9,19 @@ left to right direction
 hide circle
 hide methods
 
-class skills {
-    String skillName
+class Skill {
+    designation
 }
 
-class collaborator {
-    String collaboratorName
+class Collaborator {
+    name
+    birthdate
+    address
+    contact
+    identificationDocument
+    identificationNumber
+    taxPayerNumber
 }
 
-collaborator "*" -- "1..*" skills : has >
+Collaborator "*" -- "1..*" Skill : has >
 @enduml
