@@ -12,16 +12,16 @@ participant ":System" as System
 
 activate FM
 
-    FM -> System : asks to list the vehicles needing the check-up
+    FM -> System : asks to register a vehicle check-up
         activate System
 
-    System --> FM : types requested data
+    System --> FM : asks vehicle to check-up
         deactivate System
 
-    FM -> System : asks to register a vehicle check-up.
+    FM -> System : select  vehicle
     activate System
 
-        System --> FM : requests data (vehicle identification, date)
+    System --> FM : requests data (vehicle identification, date)
     deactivate System
 
     FM -> System : types requested data

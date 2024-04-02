@@ -101,10 +101,6 @@ be appointed to a collaborator.
 
 ![System Sequence Diagram - Alternative One](svg/us001-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us001-system-sequence-diagram-alternative-two.svg)
-
 ### 1.7 Other Relevant Remarks
 
 * The success of the operation is shown by the fact that no error is displayed on the screen and the competence is

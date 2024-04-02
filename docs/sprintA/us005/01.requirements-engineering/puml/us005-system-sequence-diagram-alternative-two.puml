@@ -15,7 +15,7 @@ activate HRM
     HRM -> System : asks to create a new team
     activate System
 
-        System --> HRM : requests data (skills, jobs)
+        System --> HRM : requests data (skills, maximum team size)
     deactivate System
 
     HRM -> System : selects requested data

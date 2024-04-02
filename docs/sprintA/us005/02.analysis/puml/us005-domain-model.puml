@@ -16,24 +16,26 @@ class Team {
   - members
 }
 
-class TeamProposal {
-  - id
-  - requiredSkills
-  - numberOfCollaborators
+
+class Person {
+    name
+    birthdate
+    address
+    contact
+
 }
 
-class TeamModify{
-  - TeamProposal
-  - Set <collaborates>
+class IdentificationDocument{
+  identificationNumber
+  taxPayerNumber
 }
 
 
-HRM "0...1" --> "1" Team: confirm propose >
-
-HRM "1" --> "0...1" TeamProposal : receives proposals <
-HRM --> TeamProposal: reject >
-HRM --> TeamModify:  modify >
-TeamModify --> Team: create a team >
+HRM "*" -- "1" Team: generate   >
+HRM  -->  Person
+Collaborator  -->  Person
+Person  -->  IdentificationDocument
+Team "*" -- "1..*" Collaborator : has >
 
 
 

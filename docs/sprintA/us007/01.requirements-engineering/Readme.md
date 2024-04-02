@@ -75,10 +75,6 @@ As a fleet manager (FM), I wish to register a vehicle's checkup.
 
 ![System Sequence Diagram - Alternative One](svg/us007-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us007-system-sequence-diagram-alternative-two.svg)
-
 ### 1.7 Other Relevant Remarks
 
 * None

@@ -20,18 +20,28 @@ class Job {
 }
 
 class Collaborator {
+
+}
+
+class Person {
     name
     birthdate
     address
     contact
-    identificationDocument
-    identificationNumber
-    taxPayerNumber
+
+}
+
+class IdentificationDocument{
+  identificationNumber
+  taxPayerNumber
 }
 
 ' Relationships
-HRM "*" -- "1..*" Collaborator : registers >
+HRM  -->  Person
+Collaborator  -->  Person
+Person  -->  IdentificationDocument
+HRM "*" -- "1" Collaborator : registers >
 HRM -- "1" Job : assigns >
-Job "*" -- "1..*" Collaborator : assigned to >
+Job "1" -- "1..*" Collaborator : to >
 
 @enduml
