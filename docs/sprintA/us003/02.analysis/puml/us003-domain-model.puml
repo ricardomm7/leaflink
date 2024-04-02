@@ -20,15 +20,19 @@ class Job {
 }
 
 class Collaborator {
-
+    admissionDate
 }
 
 class Person {
     name
     birthdate
-    address
     contact
+    idType
+}
 
+class Address{
+    zipCode
+    city
 }
 
 class IdentificationDocument{
@@ -38,6 +42,7 @@ class IdentificationDocument{
 
 ' Relationships
 HRM  -->  Person
+Person --> Address
 Collaborator  -->  Person
 Person  -->  IdentificationDocument
 HRM "*" -- "1" Collaborator : registers >

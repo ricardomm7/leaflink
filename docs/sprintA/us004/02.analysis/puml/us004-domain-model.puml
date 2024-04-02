@@ -17,20 +17,27 @@ class Skill {
 }
 
 class Collaborator {
-
+    admissionDate
 }
+
 class Person {
     name
     birthdate
-    address
     contact
+    idType
+}
 
+class Address{
+    zipCode
+    city
 }
 
 class IdentificationDocument{
   identificationNumber
   taxPayerNumber
 }
+
+Person --> Address
 HRM "1" -- "1..*" Skill : assigns >
 HRM  -->  Person
 Collaborator  -->  Person

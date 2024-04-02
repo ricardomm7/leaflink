@@ -13,15 +13,22 @@ hide methods
 
 class Team {
   name
-  members
 }
 
 class Person {
     name
     birthdate
-    address
     contact
+    idType
+}
 
+class Address{
+    zipCode
+    city
+}
+
+class Collaborator{
+    admissionDate
 }
 
 class IdentificationDocument{
@@ -31,6 +38,7 @@ class IdentificationDocument{
 
 HRM "*" -- "1" Team: generate   >
 HRM  -->  Person
+Person --> Address
 Collaborator  -->  Person
 Person  -->  IdentificationDocument
 Team "*" -- "1..*" Collaborator : has >

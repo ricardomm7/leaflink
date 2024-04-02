@@ -9,9 +9,6 @@ left to right direction
 
 title Domain Model
 
-class Employee{
-}
-
 class HRM {
 }
 
@@ -28,6 +25,7 @@ class Job {
 }
 
 class Collaborator {
+    admissionDate
 }
 
 class IdentificationDocument{
@@ -38,7 +36,6 @@ class IdentificationDocument{
 
 class Team {
     name
-    members
 }
 
 class Vehicle {
@@ -64,14 +61,16 @@ class VehicleCheckup{
 class Person {
     name
     birthdate
-    address
     contact
+    idType
+}
+
+class Address{
+    zipCode
+    city
 }
 
 Vehicle --> Brand
-
-Employee --> HRM
-Employee --> FM
 
 HRM "*" -- "1..*" Skill : creates >
 
@@ -97,5 +96,7 @@ FM "1" - "*" VehicleCheckup : registers >
 Vehicle "1" -- "*" VehicleCheckup : has >
 
 FM  -->  Person
+
+Person --> Address
 
 @enduml
