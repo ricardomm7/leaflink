@@ -21,7 +21,6 @@
 | **IDE**                        | Meaning Integrated Development Environment is a software application that helps programmers develop software code efficiently.                                        |
 | **Java**                       | Acronym for Just Another Virtual Accelerator. It is a programming language.                                                                                           |
 | **Javadoc**                    | It is a a documentation tool for the Java programming language.                                                                                                       |
-| **Intellij**                   | The leading IDE for Java and Kotlin development.                                                                                                                      |
 | **MusgoSublime**               | Organization dedicated to the planning, construction and maintenance of green spaces.                                                                                 |
 | **MS**                         | Acronym for _MusgoSublime_.                                                                                                                                           |
 
