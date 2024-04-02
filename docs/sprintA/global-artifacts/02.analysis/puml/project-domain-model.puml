@@ -5,8 +5,18 @@ skinparam shadowing false
 skinparam classAttributeIconSize 0
 hide circle
 hide methods
+left to right direction
 
 title Domain Model
+
+class Employee{
+}
+
+class HRM {
+}
+
+class FM{
+}
 
 class Skill {
     designation
@@ -18,26 +28,22 @@ class Job {
 }
 
 class Collaborator {
-    name
-    birthdate
-    address
-    contact
-    identificationDocument
+}
+
+class IdentificationDocument{
     identificationNumber
     taxPayerNumber
 }
 
-class TeamProposal {
-    id
-    requiredSkills
-    --INCOMPLETO--
+
+class Team {
+    name
+    members
 }
 
 class Vehicle {
     vin
     vehiclePlate
-    brand
-    model
     tareWeight
     grossWeight
     currentKm
@@ -46,12 +52,50 @@ class Vehicle {
     type
 }
 
+class Brand{
+    model
+}
+
 class VehicleCheckup{
     date
     currentKm
 }
 
-'Organization "1" - "0..*" Employee : has >
-'Organization "1" - "0..*" Task: owns >
+class Person {
+    name
+    birthdate
+    address
+    contact
+}
+
+Vehicle --> Brand
+
+Employee --> HRM
+Employee --> FM
+
+HRM "*" -- "1..*" Skill : creates >
+
+HRM "*" -- "1..*" Job : creates >
+
+Collaborator  -->  Person
+Person  -->  IdentificationDocument
+HRM "*" -- "1" Collaborator : registers >
+'HRM -- "1" Job : assigns >
+Job "1" -- "1..*" Collaborator : to >
+
+'HRM "1" -- "1..*" Skill : assigns >
+Skill "*" -- "1..*" Collaborator : to >
+
+HRM "*" -- "1" Team: generate   >
+HRM  -->  Person
+Team "*" -- "1..*" Collaborator : has >
+
+FM "1" - "*" Vehicle : creates  >
+
+FM "1" - "*" VehicleCheckup : registers >
+
+Vehicle "1" -- "*" VehicleCheckup : has >
+
+FM  -->  Person
 
 @enduml

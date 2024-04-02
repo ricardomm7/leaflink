@@ -20,5 +20,5 @@ class VehicleCheckup {
 
 }
 
-FM "1" - "0..*" VehicleCheckup : registers >
+FM "1" - "*" VehicleCheckup : registers >
 @enduml

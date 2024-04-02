@@ -12,10 +12,9 @@ hide methods
 
 
 class Team {
-  - name
-  - members
+  name
+  members
 }
-
 
 class Person {
     name
@@ -30,18 +29,10 @@ class IdentificationDocument{
   taxPayerNumber
 }
 
-
 HRM "*" -- "1" Team: generate   >
 HRM  -->  Person
 Collaborator  -->  Person
 Person  -->  IdentificationDocument
 Team "*" -- "1..*" Collaborator : has >
-
-
-
-
-
-
-
 
 @enduml
