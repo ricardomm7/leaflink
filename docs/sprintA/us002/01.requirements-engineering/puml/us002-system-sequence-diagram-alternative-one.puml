@@ -22,6 +22,7 @@ activate Employee
     activate System
 
         System --> Employee : requests skills for the job (references existing skills more option "add new skill")
+    deactivate System
 
     Employee -> System : selects a skill
     activate System

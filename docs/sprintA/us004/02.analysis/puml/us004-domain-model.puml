@@ -9,19 +9,32 @@ left to right direction
 hide circle
 hide methods
 
+class HRM {
+}
+
 class Skill {
     designation
 }
 
 class Collaborator {
+
+}
+class Person {
     name
     birthdate
     address
     contact
-    identificationDocument
-    identificationNumber
-    taxPayerNumber
+
 }
 
-Collaborator "*" -- "1..*" Skill : has >
+class IdentificationDocument{
+  identificationNumber
+  taxPayerNumber
+}
+HRM "1" -- "1..*" Skill : assigns >
+HRM  -->  Person
+Collaborator  -->  Person
+Person  -->  IdentificationDocument
+
+Skill "*" -- "1..*" Collaborator : to >
 @enduml

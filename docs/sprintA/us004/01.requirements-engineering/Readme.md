@@ -53,9 +53,10 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 **Input Data:**
 
 * Typed data:
-    * Collaborator ID
+    * none
 	
 * Selected data:
+    * Collaborator
     * Skills to be assigned to the collaborator 
 
 **Output Data:**
@@ -71,9 +72,6 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 
 ![System Sequence Diagram - Alternative One](svg/us004-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us004-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 

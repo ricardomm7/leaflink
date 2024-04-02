@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Human Resources Manager (HRM), I want to register a job that a collaborators need to have.
+As a Human Resources Manager (HRM), I want to register a job that a collaborator needs to have.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -71,10 +71,6 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 #### Alternative One
 
 ![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us002-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 

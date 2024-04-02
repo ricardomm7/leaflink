@@ -12,24 +12,28 @@ hide methods
 class FM {
 }
 
-class Vehicle {
-    vin
-    vehiclePlate
-    brand
-    model
-    tareWeight
-    grossWeight
-    currentKm
-    acquisitionDate
-    maintenanceFrequency
-    type
-}
-
 class VehicleCheckup {
     date
     currentKm
 }
 
+class Vehicle {
+vin
+vehiclePlate
+tareWeight
+grossWeight
+currentKm
+acquisitionDate
+maintenanceFrequency
+type
+}
+
+class Brand {
+model
+}
+
+
+Vehicle --> Brand
 FM "1" -- "0..*" Vehicle : cataloged >
 Vehicle "1" -- "0..*" VehicleCheckup : has >
 @enduml

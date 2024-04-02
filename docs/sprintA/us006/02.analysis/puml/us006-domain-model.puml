@@ -16,8 +16,6 @@ class FM {
 class Vehicle {
 vin
 vehiclePlate
-brand
-model
 tareWeight
 grossWeight
 currentKm
@@ -25,6 +23,11 @@ acquisitionDate
 maintenanceFrequency
 type
 }
-\
+
+class Brand {
+model
+}
+
 FM "1" - "0..*" Vehicle : creates  >
+Vehicle --> Brand
 @enduml
