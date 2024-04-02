@@ -2,83 +2,56 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-'skinparam linetype ortho
-'left to right direction
 skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
 title Domain Model
 
-class Platform {
-  -description
+class Skill {
+    designation
 }
 
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
-}
-
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
-
-class Category {
+class Job {
+    title
     description
 }
 
-class Employee {
+class Collaborator {
     name
-    email
-    position
-    phone
+    birthdate
+    address
+    contact
+    identificationDocument
+    identificationNumber
+    taxPayerNumber
 }
 
-class TechnicalSkill{
-    shortDescription
-    fullDescription
+class TeamProposal {
+    id
+    requiredSkills
+    --INCOMPLETO--
 }
 
-class ActivityArea{
-    shortDescription
-    fullDescription
+class Vehicle {
+    vin
+    vehiclePlate
+    brand
+    model
+    tareWeight
+    grossWeight
+    currentKm
+    acquisitionDate
+    maintenanceFrequency
+    type
 }
 
-class FeatureTS{
-    mandatory
+class VehicleCheckup{
+    date
+    currentKm
 }
 
-'class User {
-'    name
-'    email
-'    password
-'}
-class PostalAddress{
-    street
-    zipCode
-    city
-}
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
-TechnicalSkill "*" - "1" ActivityArea: regarding an >
-
-Category "*" - "*" TechnicalSkill :  : requires >
-(Category, TechnicalSkill) . FeatureTS
-
-Organization "1" -left "1" PostalAddress : located At >
+'Organization "1" - "0..*" Employee : has >
+'Organization "1" - "0..*" Task: owns >
 
 @enduml
