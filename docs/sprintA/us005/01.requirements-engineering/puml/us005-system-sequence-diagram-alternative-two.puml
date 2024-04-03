@@ -14,6 +14,7 @@ activate HRM
 
     HRM -> System : asks to create a new team
     activate System
+loop until HRM confirms data requests
 
         System --> HRM : requests data (skills, maximum team size)
     deactivate System
@@ -23,18 +24,23 @@ activate HRM
 
         System --> HRM : shows the proposal
     deactivate System
-
-    HRM -> System : user want to modify the employees
+opt if HRM wants to modify team proposal
+    HRM -> System : user want to modify the collaborator
     activate System
 
-        System --> HRM : shows the employees to modify
+        System --> HRM : shows the collaborator to modify
     deactivate System
 
-    HRM -> System : user change the employees
+    HRM -> System : user change the collaborator
     activate System
 
-    System --> HRM : system verifies and shows the operation success
+    System --> HRM : system verifies and shows new team propose
     deactivate System
-
+end
+ HRM -> System : user confirms team proposal
+     activate System
+end
+     System --> HRM : system create a new team
+     deactivate System
 
 @enduml

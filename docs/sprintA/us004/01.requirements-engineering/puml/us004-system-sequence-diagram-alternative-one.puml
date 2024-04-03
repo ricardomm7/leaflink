@@ -14,7 +14,7 @@ activate HRM
 
     HRM -> System : requests to assign skills to a collaborator
     activate System
-
+loop until HRM confirms requests data
         System --> HRM : shows list of collaborators and asks to select one
     deactivate System
 
@@ -29,7 +29,7 @@ activate HRM
 
         System --> HRM : validates selected skills
     deactivate System
-
+end
     HRM -> System : confirms assignment
     activate System
 

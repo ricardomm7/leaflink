@@ -14,7 +14,7 @@ activate HRM
 
     HRM -> System : asks to create a new collaborator with a job and fundamental characteristics
     activate System
-
+loop until HRM confirms requests data
         System --> HRM : requests data (collaborator information, job, job skill(s))
     deactivate System
 
@@ -23,7 +23,7 @@ activate HRM
 
         System --> HRM : shows all data and requests confirmation
     deactivate System
-
+end
     HRM -> System : confirms data
     activate System
 

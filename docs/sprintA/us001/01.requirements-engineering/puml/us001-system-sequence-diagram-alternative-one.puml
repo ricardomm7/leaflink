@@ -14,7 +14,7 @@ activate HRM
 
     HRM -> System : asks to create a new skill
     activate System
-
+loop until HRM confirms requests data
         System --> HRM : requests data (a description to the skill to be created)
     deactivate System
 
@@ -23,7 +23,7 @@ activate HRM
 
         System --> HRM : shows a confirmation dialog
     deactivate System
-
+end
     HRM -> System : confirms data
     activate System
 

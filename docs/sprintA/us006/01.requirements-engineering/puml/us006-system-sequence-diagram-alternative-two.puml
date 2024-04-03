@@ -14,16 +14,26 @@ activate FM
 
     FM -> System : requests to register a vehicle
     activate System
-
+loop
         System --> FM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate System
 
     FM -> System : types vehicle data
     activate System
-
+alt VIN already exists
         System --> FM : informs FM about existing record with that VIN and offers options (update or cancel)
     deactivate System
 
+alt FM chooses to update
+    FM --> System : updates the vehicle data
+        deactivate System
+
+    else FM chooses to cancel
+
+    FM --> System : cancels the registration
+            deactivate System
+            end
+end
     FM -> System : selects option
         activate System
 
@@ -36,6 +46,7 @@ activate FM
         System --> FM : update vehicles data and shows all data and requests confirmation
 
     deactivate System
+    end
 
     FM -> System : confirms data
     activate System

@@ -14,7 +14,7 @@ activate Employee
 
     Employee -> System : asks to create a new job
     activate System
-
+loop until HRM confirms requests data
         System --> Employee : requests data (job title and job description)
     deactivate System
 
@@ -29,7 +29,7 @@ activate Employee
 
         System --> Employee : shows all data (title, description, and skills) and requests confirmation
     deactivate System
-
+end
     Employee -> System : confirms data
     activate System
 
