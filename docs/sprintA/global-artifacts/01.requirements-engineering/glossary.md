@@ -22,6 +22,8 @@
 | **IDE**                     | Meaning Integrated Development Environment is a software application that helps programmers develop software code efficiently. |
 | **Java**                    | Acronym for Just Another Virtual Accelerator. It is a programming language.                                                    |
 | **Javadoc**                 | It is a a documentation tool for the Java programming language.                                                                |
+| **MusgoSublime**            | Organization dedicated to the planning, construction and maintenance of green spaces for collective use.                       |
+| **MS**                      | Acronym for _MusgoSublime_.                                                                                                    |
 | **VIN**                     | Acronym for _Vehicle Identification Number_.                                                                                   |
 
 

@@ -10,103 +10,120 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-* 
+* Employees
+* Vehicles/Equipments
 
 ---
 
 **Transaction Line Items**
 
-* 
+* Checkup
+* Tasks/Workforce
+* Maintenance Activities
 
 ---
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-* 
+* Plant Materials
+* Furniture
+* Equipment
+* Machines/Vehicles
 
 ---
 
 **Transaction Records**
 
-* 
+* Agenda
+* Work Logs
+* Checkup Register/Mileage Update
 
 ---  
 
 **Roles of People or Organizations**
 
-* 
+* HRM - Human Resources Manager
+* FM - Fleet Manager
+* CLB - Collaborator
 
 ---
 
 **Places**
 
-* 
+* Green Spaces
+* Garages
 
 ---
 
 **Noteworthy Events**
 
-* 
+* Checkup
+* Team formation
 
 ---
 
 **Physical Objects**
 
-* 
+* Vehicles
+* Machines
+* Equipment
 
 ---
 
 **Descriptions of Things**
 
-* 
+* Job Descriptions
+* Skill sets
 
 ---
 
 **Catalogs**
 
-* 
+* Skills Catalog
+* Vehicle brand and model Catalog
 
 ---
 
 **Containers**
 
-* 
+* Teams
 
 ---
 
 **Elements of Containers**
 
-* 
+* Team Members
 
 ---
 
 **Organizations**
 
-* 
+* MS - MusgoSublime
 
 ---
 
 **Other External/Collaborating Systems**
 
-* 
+* User Portal
 
 ---
 
 **Records of finance, work, contracts, legal matters**
 
-* 
+* Admission date
 
 ---
 
 **Financial Instruments**
 
-* 
+* None -------------
 
 ---
 
 **Documents mentioned/used to perform some work/**
 
-* 
+* Reports
+* Comments
 
 ---
 
@@ -124,10 +141,13 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		|    Association   	    |  Concept (B) |
-|----------	   	|:---------------------:|------:       |
-| C1  	| verb1    		 	         | C2  |
-| ...  	|      ...    		 	      | ...  |
+| Concept (A) 		 |  Association   	  | Concept (B) |
+|----------------|:-----------------:|------------:|
+| Task  	        | assign to    		 	 |        Team |
+| Vehicles  	    |      used by      |        Task |
+| Collaborator   |        has        |       Skill |
+| Vehicle        |       needs       |     Checkup |
+| Collaborator   |    assigned to    |        Team |
 
 
 
