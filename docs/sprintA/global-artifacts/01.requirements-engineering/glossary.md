@@ -17,11 +17,12 @@
 | **GSU**                     | Acronym for _Green Spaces User_.                                                                                               |
 | **Human Resources Manager** | A person who manages human resources and defines teams.                                                                        |
 | **HRM**                     | Acronym for _Human Resources Manager_.                                                                                         |
+| **ID**                      | Acronym for _Identification Document_.                                                                                         |
 | **Intellij**                | The leading IDE for Java and Kotlin development.                                                                               |
 | **IDE**                     | Meaning Integrated Development Environment is a software application that helps programmers develop software code efficiently. |
 | **Java**                    | Acronym for Just Another Virtual Accelerator. It is a programming language.                                                    |
 | **Javadoc**                 | It is a a documentation tool for the Java programming language.                                                                |
-| **VIN**                     | Acronum for _Vehicle Identification Number_.                                                                                   |
+| **VIN**                     | Acronym for _Vehicle Identification Number_.                                                                                   |
 
 
 

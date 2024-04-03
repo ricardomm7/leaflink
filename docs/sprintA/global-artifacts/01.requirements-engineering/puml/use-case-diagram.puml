@@ -13,43 +13,43 @@ rectangle "System User" as actors {
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US01 - Register Skills for Collaborator" as US01
-    HRM --> US01
+    usecase "US001 - Register Skills for Collaborator" as US001
+    HRM --> US001
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US02 - Register a Job" as US02
-    HRM --> US02
+    usecase "US002 - Register a Job" as US002
+    HRM --> US002
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US03 - Register a collaborator and his attributes" as US03
-    HRM --> US03
+    usecase "US003 - Register a collaborator and his attributes" as US003
+    HRM --> US003
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US04 - Assign skills to employees" as US04
-    HRM --> US04
+    usecase "US004 - Assign skills to employees" as US004
+    HRM --> US004
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US05 - Generate a new team, based on the needs" as US05
-    HRM --> US05
+    usecase "US005 - Generate a new team, based on the needs" as US005
+    HRM --> US005
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US06 - Register a vehicle with his attributes" as US06
-    FM --> US06
+    usecase "US006 - Register a vehicle with his attributes" as US006
+    FM --> US006
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US07 - Schedule a vehicle check-up" as US07
-    FM --> US07
+    usecase "US007 - Schedule a vehicle check-up" as US007
+    FM --> US007
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US08 - See the vehicles that need a check-up" as US08
-    FM --> US08
+    usecase "US008 - See the vehicles that need a check-up" as US008
+    FM --> US008
 }
 
 
