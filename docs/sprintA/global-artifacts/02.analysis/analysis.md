@@ -43,7 +43,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 **Roles of People or Organizations**
 
 * HRM - Human Resources Manager
-* FM - Fleet Manager
+* VFM - Fleet Manager
 * CLB - Collaborator
 
 ---

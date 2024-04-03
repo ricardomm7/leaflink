@@ -7,33 +7,33 @@ title System Sequence Diagram (SSD) - US006
 
 autonumber
 
-actor "FM" as FM
+actor "VFM" as VFM
 participant ":System" as System
 
-activate FM
+activate VFM
 
-    FM -> System : requests to register a vehicle
+    VFM -> System : requests to register a vehicle
     activate System
 
-        System --> FM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        System --> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate System
 
-    FM -> System : types vehicle data
+    VFM -> System : types vehicle data
     activate System
 
-        System --> FM : validates VIN (unique and not existing) and requests more data
+        System --> VFM : validates VIN (unique and not existing) and requests more data
     deactivate System
 
-    FM -> System : selects vehicle data (Brand, Model)
+    VFM -> System : selects vehicle data (Brand, Model)
         activate System
 
-        System --> FM : shows all data and requests confirmation
+        System --> VFM : shows all data and requests confirmation
     deactivate System
 
-    FM -> System : confirms data
+    VFM -> System : confirms data
     activate System
 
-        System --> FM :  shows vehicle registration information
+        System --> VFM :  shows vehicle registration information
     deactivate System
 
 @enduml

@@ -5,13 +5,13 @@
 
 ### 1.1. User Story Description
 
-As a floor manager (FM), I wish to register a vehicle including all the attributes.
+As a fleet manager (VFM), I wish to register a vehicle including all the attributes.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->   To register a vehicle is required some attributes. The person who register the vehicles is the floor manager (FM) and the vehicle is saved by in system. 
+>   To register a vehicle is required some attributes. The person who register the vehicles is the fleet manager (VFM) and the vehicle is saved by in system. 
 >  All the listed vehicle registration attributes are mandatory for successful registration. The system should not allow registration with missing information.
 >  Floor Managers can modify existing vehicle registration information.
  
@@ -42,7 +42,7 @@ As a floor manager (FM), I wish to register a vehicle including all the attribut
 
 * **AC1:** All attributes must be filled.
 * **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
-* **AC3:** When registering a vehicle already registered, the system must reject such operation and the floor manager (FM) must be able to modify some attribute.
+* **AC3:** When registering a vehicle already registered, the system must reject such operation and the fleet manager (VFM) must be able to modify some attribute.
 * **AC4:** The system must securely store the registered vehicle information.
 
 ### 1.4. Found out Dependencies

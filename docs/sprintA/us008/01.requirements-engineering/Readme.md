@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Facilities Manager (FM), I want to list the vehicles that are due for a check-up.
+As a Facilities Manager (VFM), I want to list the vehicles that are due for a check-up.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -19,9 +19,9 @@ As a Facilities Manager (FM), I want to list the vehicles that are due for a che
 >
 > **Answer:** The system should compare the current kilometers of each vehicle with their maintenance/checkup frequency to determine if a check-up is due.
 
->  **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?
+>  **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the VFM?
 >
-> **Answer:** The list of vehicles is automatically created but the creation is triggered by the FM.
+> **Answer:** The list of vehicles is automatically created but the creation is triggered by the VFM.
 
 >  **Question:** What information will appear on the final list regarding the vehicle,besides the needing for check-up?
 >

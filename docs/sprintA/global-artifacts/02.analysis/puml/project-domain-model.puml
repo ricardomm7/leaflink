@@ -12,7 +12,7 @@ title Domain Model
 class HRM {
 }
 
-class FM{
+class VFM{
 }
 
 class Skill {
@@ -86,9 +86,9 @@ Skill "*" -- "1..*" Collaborator : to >
 HRM "1..*" -- "1..*" Team: generate   >
 Team "1..*" -- "1..*" Collaborator : has >
 
-FM "1..*" -- "1..*" Vehicle : creates  >
+VFM "1..*" -- "1..*" Vehicle : creates  >
 
-FM "1..*" -- "*" VehicleCheckup : registers >
+VFM "1..*" -- "*" VehicleCheckup : registers >
 
 Vehicle "1" -- "*" VehicleCheckup : has >
 

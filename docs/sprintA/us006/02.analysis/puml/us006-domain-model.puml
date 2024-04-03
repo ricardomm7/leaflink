@@ -10,7 +10,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class FM {
+class VFM {
 }
 
 class Vehicle {
@@ -28,6 +28,6 @@ class Brand {
 model
 }
 
-FM "1..*" - "1..*" Vehicle : creates  >
+VFM "1..*" - "1..*" Vehicle : creates  >
 Vehicle "1" - "1..*" Brand : has >
 @enduml

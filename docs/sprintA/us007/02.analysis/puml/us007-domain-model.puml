@@ -10,7 +10,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class FM {
+class VFM {
 
 }
 
@@ -20,5 +20,5 @@ class VehicleCheckup {
 
 }
 
-FM "1..*" - "*" VehicleCheckup : registers >
+VFM "1..*" - "*" VehicleCheckup : registers >
 @enduml

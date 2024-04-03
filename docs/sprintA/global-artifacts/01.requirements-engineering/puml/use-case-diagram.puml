@@ -9,7 +9,7 @@ left to right direction
 
 rectangle "System User" as actors {
     actor HRM
-    actor FM
+    actor VFM
 }
 
 rectangle "Use Cases" as usecases{
@@ -39,17 +39,17 @@ rectangle "Use Cases" as usecases{
 
 rectangle "Use Cases" as usecases{
     usecase "US006 - Register a vehicle with his attributes" as US006
-    FM --> US006
+    VFM --> US006
 }
 
 rectangle "Use Cases" as usecases{
     usecase "US007 - Schedule a vehicle check-up" as US007
-    FM --> US007
+    VFM --> US007
 }
 
 rectangle "Use Cases" as usecases{
     usecase "US008 - See the vehicles that need a check-up" as US008
-    FM --> US008
+    VFM --> US008
 }
 
 
