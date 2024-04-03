@@ -68,7 +68,7 @@ class Address{
     city
 }
 
-Vehicle "1" -- "1" Brand : has >
+Vehicle "1" -- "1..*" Brand : has >
 
 HRM "*" -- "1..*" Skill : creates >
 

@@ -33,7 +33,7 @@ model
 }
 
 
-Vehicle --> Brand
+Vehicle "1"-- "1..*" Brand: has an >
 FM "1" -- "*" Vehicle : cataloged >
 Vehicle "1" -- "*" VehicleCheckup : has >
 @enduml

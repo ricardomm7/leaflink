@@ -17,7 +17,6 @@ activate FM
 
     System --> FM : asks vehicle to check-up
         deactivate System
-loop until FM confirms vehicle data
     FM -> System : select  vehicle
     activate System
 
@@ -29,7 +28,7 @@ loop until FM confirms vehicle data
 
         System --> FM : shows all data and requests confirmation
     deactivate System
-end
+
     FM -> System : confirms data
     activate System
 

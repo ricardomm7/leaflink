@@ -27,7 +27,7 @@ class Person {
     name
     birthdate
     contact
-    idType
+
 }
 
 class Address{
@@ -35,16 +35,14 @@ class Address{
     city
 }
 
-class IdentificationDocument{
-  identificationNumber
-  taxPayerNumber
+class DocumentType{
+  identificationCode
 }
 
 ' Relationships
-HRM  -->  Person
-Person --> Address
-Collaborator  -->  Person
-Person  -->  IdentificationDocument
+Person "1"--"1" Address: has a >
+Collaborator "1" -- "1" Person: is a >
+Person  "1"--"1"  DocumentType : has an >
 HRM "*" -- "1" Collaborator : registers >
 HRM -- "1" Job : assigns >
 Job "1" -- "1..*" Collaborator : to >

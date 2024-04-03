@@ -24,7 +24,6 @@ class Person {
     name
     birthdate
     contact
-    idType
 }
 
 class Address{
@@ -32,16 +31,14 @@ class Address{
     city
 }
 
-class IdentificationDocument{
-  identificationNumber
-  taxPayerNumber
+class DocumentType{
+  identificationCode
 }
 
-Person --> Address
+Person "1"--"1" Address: has an >
 HRM "1" -- "1..*" Skill : assigns >
-HRM  -->  Person
-Collaborator  -->  Person
-Person  -->  IdentificationDocument
+Collaborator  "1"--"1"  Person: is a >
+Person  "1"--"1"  DocumentType: has a >
 
 Skill "*" -- "1..*" Collaborator : to >
 @enduml

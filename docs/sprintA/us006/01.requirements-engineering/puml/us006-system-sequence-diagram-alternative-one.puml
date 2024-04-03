@@ -14,7 +14,7 @@ activate FM
 
     FM -> System : requests to register a vehicle
     activate System
-loop
+
         System --> FM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate System
 
@@ -29,7 +29,7 @@ loop
 
         System --> FM : shows all data and requests confirmation
     deactivate System
-end
+
     FM -> System : confirms data
     activate System
 
