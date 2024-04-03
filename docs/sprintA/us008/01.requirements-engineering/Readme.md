@@ -74,10 +74,6 @@ Did you mean the reason for the check-up need?
 
 ![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us008-system-sequence-diagram-alternative-two.svg)
-
 ### 1.7 Other Relevant Remarks
 
 * Implement appropriate logic to determine the vehicles needing check-up based on maintenance/checkup frequency and current kilometers.

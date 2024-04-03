@@ -28,6 +28,6 @@ class Brand {
 model
 }
 
-FM "1" - "*" Vehicle : creates  >
-Vehicle --> Brand
+FM "1..*" - "1..*" Vehicle : creates  >
+Vehicle "1" - "1..*" Brand : has >
 @enduml

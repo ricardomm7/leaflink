@@ -17,5 +17,5 @@ class Skill {
     designation
 }
 
-HRM "*" -- "1..*" Skill : creates >
+HRM "1..*" -- "1..*" Skill : creates >
 @enduml

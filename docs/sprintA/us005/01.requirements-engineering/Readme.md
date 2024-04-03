@@ -94,10 +94,6 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 
 ![System Sequence Diagram - Alternative One](svg/us005-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us005-system-sequence-diagram-alternative-two.svg)
-
 ### 1.7 Other Relevant Remarks
 
 * Once the generated list of employees has been displayed, HRM may want to change someone. After this change, the programme must check that the competences selected initially are present in the team change.

@@ -18,6 +18,6 @@ class Job {
     description
 }
 
-HRM "*" -- "1..*" Job : creates >
+HRM "1..*" -- "1..*" Job : creates >
 
 @enduml
