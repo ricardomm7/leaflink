@@ -25,7 +25,7 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 > **Question:** When are creating a job that already exit, what the system do?
 >
-> **Answer:** By definition a set can´t have duplicates. Assuring no duplicates is not a business rule is a tecnichal issue.
+> **Answer:** By definition a set can´t have duplicates. Assuring no duplicates is not a business rule is a technical issue.
 
 > **Question:** Is it relevant to associate a specific area or sector with each Job? (For example, "Gardener" would be placed in the "Maintenance" sector)
 >

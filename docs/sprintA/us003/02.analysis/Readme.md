@@ -8,4 +8,8 @@
 
 ### 2.2. Other Remarks
 
-n/a
+All the dates used (date of admission and date of birth) are in European format (day/month/year).
+
+The zip code should only be filled in with numbers and must be followed by the respective city.
+
+The identification code can be filled in by numbers or letters, depending on the document type.

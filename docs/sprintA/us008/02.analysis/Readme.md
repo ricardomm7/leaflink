@@ -8,4 +8,8 @@
 
 ### 2.2. Other Remarks
 
-This image may not be precise, so there may be minor changes.
+All dates used (acquisition date and date of check-up) are in the European format (day/month/year).
+
+The measure of recorded weight is the kilogram.
+
+Vin should be filled in with 17 letters and numbers.

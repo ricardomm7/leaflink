@@ -55,7 +55,7 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 >
 >I would also like to know if a collaborator can be in more than one team at the same time? 
 > 
-> **Answer:** The information should contain each of team members and the  its skills.
+> **Answer:** The information should contain each of team members and the skills.
 >
 >no;
 ### 1.3. Acceptance Criteria
