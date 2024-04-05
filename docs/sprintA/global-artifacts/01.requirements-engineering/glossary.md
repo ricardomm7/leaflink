@@ -9,7 +9,7 @@
 | **Competency**                          | Skill, knowledge and ability that individuals possess, defining their proficiency in performing specific tasks.                                           |
 | **Collaborator**                        | Person performing tasks related to the panning, construction and maintenance of green spaces with specific competencies.                                  |
 | **CLB**                                 | Acronym for _Collaborator_.                                                                                                                               |
-| **Fleet Manager**                       | Person responsible for managing vehicles and equipment.                                                                                                   |
+| **Fleet Manager**                       | Person responsible for managing vehicles and equipment (aka: VFM).                                                                                        |
 | **FM**                                  | Acronym for _Fleet Manager_.                                                                                                                              |
 | **Green Space Manager**                 | Person responsible for managing green spaces, overseeing organization.                                                                                    |
 | **GSM**                                 | Acronym for _Green Space Manager_.                                                                                                                        |
@@ -22,10 +22,13 @@
 | **IDE**                                 | Meaning Integrated Development Environment is a software application that helps programmers develop software code efficiently.                            |
 | **Java**                                | Acronym for Just Another Virtual Accelerator. It is a programming language.                                                                               |
 | **Javadoc**                             | It is a a documentation tool for the Java programming language.                                                                                           |
+| **Job**                                 | A task or piece of work.                                                                                                                                  |
 | **MusgoSublime**                        | Organization dedicated to the planning, construction and maintenance of green spaces for collective use.                                                  |
 | **MS**                                  | Acronym for _MusgoSublime_.                                                                                                                               |
+| **Skill**                               | A particular ability that is  developed through training and experience and that is useful in a job.                                                      |
 | **VFM**                                 | Acronym for _Vehicle and Equipment Fleet Manager_                                                                                                         |
-| **Vehicle and Equipment Fleet Manager** | person who manages the fleet park, the machines, equipment and vehicles, ensuring their good condition and assigning them to the tasks to be carried out. |
+| **Vehicle and Equipment Fleet Manager** | Person who manages the fleet park, the machines, equipment and vehicles, ensuring their good condition and assigning them to the tasks to be carried out. |
+| **Vehicle Identification Number**       | Unique code used by the automotive industry to identify individual vehicles.                                                                              |
 | **VIN**                                 | Acronym for _Vehicle Identification Number_.                                                                                                              |
 
 
