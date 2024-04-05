@@ -11,7 +11,7 @@ As a fleet manager (VFM), I wish to register a vehicle including all the attribu
 
 **From the specifications document:**
 
->   To register a vehicle is required some attributes. The person who register the vehicles is the fleet manager (VFM) and the vehicle is saved by in system. 
+>  To register a vehicle is required some attributes. The person who register the vehicles is the fleet manager (VFM) and the vehicle is saved by in system. 
 >  All the listed vehicle registration attributes are mandatory for successful registration. The system should not allow registration with missing information.
 >  Floor Managers can modify existing vehicle registration information.
  
