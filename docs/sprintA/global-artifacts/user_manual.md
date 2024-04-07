@@ -26,3 +26,62 @@ required competencies
 - #### Vehicle registration and management
 Registering and managing the vehicles used in the management of green spaces, organizing maintenance checks and managing
 vehicle-related tasks.
+
+## Features/Functions
+### 1. Register Skills for Collaborator | Human Resources Manager
+
+This feature allows the Human Resources Manager (HRM) to add skills to a collaborator's profile.
+
+#### Step by step 
+1. Open the HRM system.
+2. Navigate to the section for creating new skills.
+3. Click on the option to create a new skill.
+4. Enter the requested data describing the skill, as prompted by the system.
+5. After entering the description, the system will display a confirmation dialog. Review the information provided for accuracy.
+6. Confirm the provided data by selecting the appropriate option on the confirmation dialog.
+7. Upon confirmation, the system will display a message indicating the successful creation of the new skill.
+
+### 2. Register Job for Collaborator | Human Resources Manager
+
+This feature allows HRM to assign a job to a collaborator.
+
+#### Step by step:
+1. Open the HRM system.
+2. Navigate to the section designated for job creation.
+3. Click on the option to create a new job within the system.
+4. Enter the requested data for the job, including the job title and job description, as prompted by the system.
+5. Choose the skills needed for the job from the list of existing skills or opt to add a new skill if necessary.
+6. After selecting the skills, the system will display all entered data. Review the information provided for accuracy.
+7. Confirm the provided data by selecting the appropriate option on the confirmation dialog.
+8. Upon confirmation, the system will display a success message confirming the creation of the new job.
+
+### 3. Register Collaborator with a Job and Characteristics | Human Resources Manager
+
+This feature allows the HRM to register a collaborator with information related to the job title and key characteristics.
+
+#### Step by step:
+1. Open the HRM system.
+2. Navigate to the section designated for creating a new collaborator.
+3. Click on the option to create a new collaborator.
+4. Enter the requested data for the new collaborator, including their personal information, assigned job, and any fundamental characteristics required.
+5. After entering the data, the system will display all entered information for review. Review the information provided for accuracy.
+6. Confirm the provided data by selecting the appropriate option on the confirmation dialog.
+7. Upon confirmation, the system will display a success message confirming the creation of the new collaborator.
+
+### 4. Assign Skills to an Employee | Human Resources Manager
+
+This feature allows HRM to assign one or more skills to an employee.
+
+#### Step by step:
+1. Open the HRM system.
+2. Navigate to the section designated for assigning skills to collaborators.
+3. Click on the option to assign skills to a collaborator.
+4. The system will display a list of collaborators. Select the collaborator to whom you want to assign skills.
+5. After selecting the collaborator, the system will prompt you to provide the required data. Enter or select the skills from the available options as needed.
+6. Upon providing the skills data, the system display all selected skills assigend to the collaborator. Review the information provided for accuracy.
+7. Confirm the assigned skills by selecting the appropriate option on the confirmation dialog. 
+8. Upon confirmation, the system will display a success message confirming the assignment of skills to the collaborator.
+
+
+
+
