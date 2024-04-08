@@ -78,7 +78,7 @@ This feature allows HRM to assign one or more skills to an employee.
 3. Click on the option to assign skills to a collaborator.
 4. The system will display a list of collaborators. Select the collaborator to whom you want to assign skills.
 5. After selecting the collaborator, the system will prompt you to provide the required data. Enter or select the skills from the available options as needed.
-6. Upon providing the skills data, the system display all selected skills assigend to the collaborator. Review the information provided for accuracy.
+6. Upon providing the skills data, the system display all selected skills assigned to the collaborator. Review the information provided for accuracy.
 7. Confirm the assigned skills by selecting the appropriate option on the confirmation dialog. 
 8. Upon confirmation, the system will display a success message confirming the assignment of skills to the collaborator.
 
