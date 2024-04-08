@@ -82,6 +82,55 @@ This feature allows HRM to assign one or more skills to an employee.
 7. Confirm the assigned skills by selecting the appropriate option on the confirmation dialog. 
 8. Upon confirmation, the system will display a success message confirming the assignment of skills to the collaborator.
 
+### 5. Generate a team proposal automatically | Human Resources Manager
 
+This feature allows HRM to generate a team proposal automatically
 
+### Step by step:
+1. Open the HRM system.
+2. Navigate to the section designated for generating a team proposal automatically.
+3. Click on the option to generate a team proposal automatically.
+4. The system will display a list of skills that the team will have.
+5. After choosing the skills, the system will also request for the maximum number of members on the team.
+6. Upon setting the maximum number of skills, the system will display the team proposal. 
+7. Confirm the generated team by selecting the appropriate option on the confirmation dialog.
+8. Upon confirmation, the system will display a success message confirming the team generated and their skills.
 
+### 6. Register a vehicle | Fleet Manager 
+
+This feature allows FM to register a vehicle with various characteristics.
+
+### Step by step:
+1. Open the FM system.
+2. Navigate to the section designated for registering a vehicle.
+3. Click on the option to register a vehicle.
+4. The system will request the vehicle data such as VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date and Maintenance Frequency.
+5. Now the FM will type the requested data.
+6. After that, the system will validate if the VIN is unique and none existent.
+7. If the system validates, it will request new data such as Brand and Model.
+8. After typing the remaining data, the system will show all the data and request a confirmation.
+9. Upon confirmation, the system will display the vehicle registration information.
+
+### 7. Register a vehicle's check-up | Fleet Manager 
+
+This feature allows FM to register a vehicle's check-up
+
+### Step by step:
+1. Open the FM system.
+2. Navigate to the section designated for registering a vehicle's check-up.
+3. Click on the option to register a vehicle's check-up.
+4. The system will display a list of the vehicles registered and ask witch vehicle will have a check-up.
+5. Now the FM will choose the vehicle that he wants to register a check-up.
+6. After that, the system will request the date of the check-up.
+7. After typing the date, the system will show all the data and request a confirmation.
+8. Upon confirmation, the system will display an operation success message.
+
+### 8. List the vehicles needing the check-up | Fleet Manager
+
+This feature allows FM to list the vehicles needing the check-up.
+
+### Step by step:
+1. Open the FM system.
+2. Navigate to the section designated for listing the vehicles needing the check-up.
+3. Click on the option to list the vehicles needing a check-up.
+4. The system will display a list of the vehicles needing a check-up, their information and an operation message.

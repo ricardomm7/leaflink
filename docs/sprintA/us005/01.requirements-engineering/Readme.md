@@ -20,10 +20,6 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 > **Answer:** The programme makes suggestions for teams and the manager can modify or reject them. The programme should warn of the lack of skills in its changes (or in the modification it simply doesn't show the employees who don't have the skills of the person being changed).
 
 > **Question:** How does it generate the team if there are not enough employees?
-> 
-> **Answer:** The system should provide information why it can't generate a team.
-
-> **Question:** How does it generate the team if there are not enough employees?
 >
 > **Answer:** The system should provide information why it can't generate a team.
 
