@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":ListMaintenanceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
+
+autonumber 12
+-> CTRL : createMaintenanceReport(vehiclesList)
+
+autonumber 12.1
+
+activate CTRL
+    group Create Maintenance Report
+
+        CTRL -> CTRL : createMaintenanceReport(vehiclesList)
+        activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getMaintenanceRepository()
+        activate PLAT
+
+        PLAT --> CTRL: MaintenanceRepository
+        deactivate PLAT
+
+        CTRL -> MaintenanceReport : createMaintenanceReport(vehiclesList)
+        activate MaintenanceReport
+
+        MaintenanceReport --> CTRL : maintenanceReport
+        deactivate MaintenanceReport
+
+    end group
+
+    autonumber 13
+    <-- CTRL : taskCategory
+
+deactivate CTRL
+
+
+@enduml

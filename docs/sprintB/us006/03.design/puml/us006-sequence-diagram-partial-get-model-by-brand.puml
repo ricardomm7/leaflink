@@ -1,0 +1,50 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterVehicleController" as CTRL
+participant "vehicle\n:Vehicle" as VEI
+
+autonumber 19
+-> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+
+autonumber 19.1
+activate CTRL
+    group Get Model by Brand
+
+        CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+
+                    CTRL -> CTRL : getModelByBrand(brand)
+                                activate CTRL
+
+                                    CTRL -> RepositorySingleton : getInstance()
+                                                    activate RepositorySingleton
+
+                                                        RepositorySingleton --> CTRL: repositories
+                                                    deactivate RepositorySingleton
+
+                                                    CTRL -> PLAT : getBrandRepository()
+                                                    activate PLAT
+
+                                                        PLAT -> CTRL : BrandRepository
+                                                    deactivate PLAT
+
+                                                    CTRL -> SkillRepository : getModelByBrand(brand))
+                                                    activate SkillRepository
+
+                                                        SkillRepository --> CTRL : brand
+                                                    deactivate SkillRepository
+                                                        CTRL --> CTRL : (brand)
+                                    deactivate CTRL
+
+
+    end
+    deactivate CTRL
+
+    autonumber 20
+    <-- CTRL : task
+deactivate CTRL
+
+
+@enduml

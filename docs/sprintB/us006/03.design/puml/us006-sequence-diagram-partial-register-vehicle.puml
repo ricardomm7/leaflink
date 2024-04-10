@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterVehicleController" as CTRL
+participant "vehicle\n:Vehicle" as VEI
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+
+autonumber 28
+-> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+
+autonumber 28.1
+activate CTRL
+    group Register Vehicle
+
+        CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+
+                    CTRL -> CTRL: addVehicle (vehicle)
+                    activate CTRL
+
+                        CTRL -> VehicleRepository : saveVehicle(vehicle)
+
+                        activate VehicleRepository
+
+                            VehicleRepository --> CTRL : vehicle
+                        deactivate VehicleRepository
+
+                        CTRL -> CTRL: validateVehicle(vehicle))
+                        activate CTRL
+                            CTRL --> CTRL
+                        deactivate CTRL
+                        CTRL --> CTRL
+                    deactivate CTRL
+
+                deactivate CTRL
+    end
+
+    autonumber 29
+    <-- CTRL : task
+deactivate CTRL
+
+
+@enduml

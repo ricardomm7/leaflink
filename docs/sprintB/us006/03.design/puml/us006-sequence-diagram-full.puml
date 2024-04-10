@@ -13,20 +13,14 @@ participant ":RegisterVehicleUI" as UI
 participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
+participant "brandRepository:\nBrandRepository" as BrandRepository
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
-participant "vehicle\n:Vehicle" as VEICULO
+participant "vehicle\n:Vehicle" as VEI
 
 activate VFM
 
     VFM -> UI : requests to register a vehicle
     activate UI
-
-                UI -> CTRL** : create
 
         UI -> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate UI
@@ -34,34 +28,98 @@ activate VFM
     VFM -> UI : types vehicle data
     activate UI
 
-
-        UI -> CTRL : submitVehicleDetails(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        UI -> CTRL : submitVehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         activate CTRL
 
+            CTRL -> CTRL : validateVehicleData(VIN)
 
+            |||
+            CTRL -> CTRL : validateVehicleData(VIN)
+            activate CTRL
+                CTRL --> CTRL
+            deactivate CTRL
 
-            CTRL -> CTRL : validateVehicleData(Vin)
+        CTRL -> UI : keep vehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        deactivate CTRL
+
+        UI -> CTRL : getBrand()
+        activate CTRL
+
+            CTRL -> PLAT : getBrandRepository()
+            activate PLAT
+
+                PLAT --> CTRL: BrandRepository
+            deactivate PLAT
+
+            CTRL -> BrandRepository : getBrands()
+            activate BrandRepository
+
+                BrandRepository --> CTRL : brandList
+            deactivate BrandRepository
+
+            CTRL --> UI : brandList
+        deactivate CTRL
+
+    UI -> VFM : show brand list and request to select more vehicleData(Brand, Model)
+    deactivate UI
+
+    VFM -> UI : select vehicle data
+    activate UI
+
+        UI -> VFM : shows all data and requests confirmation
+    deactivate UI
+
+    VFM -> UI : submit data
+    activate UI
+
+        UI -> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        activate CTRL
+
+            CTRL -> CTRL : getModelByBrand(brand)
+            activate CTRL
+
                 CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
+                                activate RepositorySingleton
 
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
+                                    RepositorySingleton --> CTRL: repositories
+                                deactivate RepositorySingleton
 
-                CTRL -> PLAT : getVehicleRepository()
-                activate PLAT
+                                CTRL -> PLAT : getBrandRepository()
+                                activate PLAT
 
-                    PLAT --> CTRL: vehicleRepository
-                deactivate PLAT
+                                    PLAT -> CTRL : BrandRepository
+                                deactivate PLAT
 
-                CTRL -> VehicleRepository : saveVehicle(vehicleData)
+                                CTRL -> SkillRepository : getModelByBrand(brand))
+                                activate SkillRepository
+
+                                    SkillRepository --> CTRL : brand
+                                deactivate SkillRepository
+                                    CTRL --> CTRL : (brand)
+                            deactivate CTRL
+
+
+            |||
+            CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+
+            CTRL -> CTRL: addVehicle (vehicle)
+            activate CTRL
+
+                CTRL -> VehicleRepository : saveVehicle(vehicle)
+
                 activate VehicleRepository
 
-                    VehicleRepository --> CTRL : vehicleInfo
+                    VehicleRepository --> CTRL : vehicle
                 deactivate VehicleRepository
 
-                CTRL -> UI: displaySuccessMessage(vehicleInfo)
-                CTRL --> UI: displayErrorMessage(validationErrors)
+                CTRL -> CTRL: validateVehicle(vehicle))
+                activate CTRL
+                    CTRL --> CTRL
+                deactivate CTRL
+                CTRL --> CTRL
+            deactivate CTRL
 
+            CTRL -> UI: vehicle
         deactivate CTRL
 
         UI --> VFM : shows success/error message

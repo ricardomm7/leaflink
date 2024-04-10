@@ -7,52 +7,95 @@ title System Sequence Diagram (SSD) - Register Vehicle (US006)
 
 autonumber
 
-actor "VFM" as VFM
+'hide footbox
+actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
 participant ":RegisterVehicleUI" as UI
 participant ":RegisterVehicleController" as CTRL
-participant "organization\n:Organization" as ORG
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "brandRepository:\nBrandRepository" as BrandRepository
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "vehicle\n:Vehicle" as VEI
 
 activate VFM
 
     VFM -> UI : requests to register a vehicle
     activate UI
 
-        UI -> CTRL** : create
-        UI -> CTRL : getVehicleData()
-        ref over CTRL
-            Get Vehicle Data
-
-        end ref
-
-        activate CTRL
-
-            CTRL --> UI : vehicleData (Brand, Model, Type, Tare Weight, Gross Weight, Current Km, Register Date, Acquisition Date, and Maintenance/Check-up Frequency (in km))
-        deactivate CTRL
-
-        UI --> VFM : displays vehicle data form
+        UI -> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate UI
 
-    VFM -> UI : provides vehicle data
+    VFM -> UI : types vehicle data
     activate UI
 
-        UI --> VFM : confirms data
+        UI -> CTRL : submitVehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        activate CTRL
+
+            CTRL -> CTRL : validateVehicleData(VIN)
+
+            |||
+            CTRL -> CTRL : validateVehicleData(VIN)
+            activate CTRL
+                CTRL --> CTRL
+            deactivate CTRL
+
+        CTRL -> UI : keep vehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        deactivate CTRL
+
+        UI -> CTRL : getBrand()
+        activate CTRL
+
+         ref over CTRL
+                    Get Brand List
+
+                end ref
+
+
+
+            CTRL --> UI : brandList
+        deactivate CTRL
+
+    UI -> VFM : show brand list and request to select more vehicleData(Brand, Model)
     deactivate UI
 
-    VFM -> CTRL : confirms data
-    activate CTRL
+    VFM -> UI : select vehicle data
+    activate UI
 
-        CTRL -> ORG: createVehicle(vehicleData)
-        activate ORG
+        UI -> VFM : shows all data and requests confirmation
+    deactivate UI
 
-            ref over ORG
-                Create Vehicle
+    VFM -> UI : submit data
+    activate UI
 
-            end
+        UI -> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        activate CTRL
 
-            ORG --> CTRL : vehicleInfo
-        deactivate ORG
+         ref over CTRL
+                    Get Model By Brand
 
-        CTRL --> VFM : shows vehicle registration information
-    deactivate CTRL
+                end ref
+
+            deactivate SkillRepository
+
+         CTRL --> CTRL : (brand)
+
+
+            |||
+
+            ref over CTRL
+                                Get Register Vehicle
+
+                            end ref
+
+                        deactivate SkillRepository
+
+
+            CTRL -> UI: vehicle
+        deactivate CTRL
+
+        UI --> VFM : shows success/error message
+    deactivate UI
+
+deactivate VFM
 
 @enduml

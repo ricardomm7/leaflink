@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - List Vehicles Needing Maintenance (US008)
+
+autonumber
+
+'hide footbox
+actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
+participant ":ListMaintenanceUI" as UI
+participant ":ListMaintenanceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
+
+activate VFM
+
+    VFM -> UI : requests to list vehicles needing maintenance
+    activate UI
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : getVehiclesList()
+        activate CTRL
+
+        ref over CTRL
+                        Get Vehicle List
+
+        end ref
+
+
+
+            CTRL --> UI : vehicleList
+        deactivate CTRL
+
+        UI --> UI : keep vehicleList
+
+        UI -> CTRL : generateMaintenanceReport(vehiclesList)
+        activate CTRL
+
+        ref over CTRL
+                    Create Maintenance Report
+
+        end ref
+
+        CTRL --> CTRL : maintenanceReport
+
+            CTRL --> UI : maintenanceReport
+        deactivate CTRL
+
+        UI --> VFM : shows maintenance report
+    deactivate UI
+
+deactivate VFM
+
+@enduml

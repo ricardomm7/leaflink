@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":RegisterVehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "brandRepository:\nBrandRepository" as BrandRepository
+autonumber 9
+
+ -> CTRL : getBrand()
+autonumber 9.1
+activate CTRL
+    group Get Brand List
+
+
+            CTRL -> PLAT : getBrandRepository()
+                        activate PLAT
+
+                            PLAT --> CTRL: BrandRepository
+                        deactivate PLAT
+
+                        CTRL -> BrandRepository : getBrands()
+                        activate BrandRepository
+
+                            BrandRepository --> CTRL : brandList
+                        deactivate BrandRepository
+
+
+    end
+    autonumber 10
+    <-- CTRL  : brandList
+deactivate CTRL
+
+
+@enduml
