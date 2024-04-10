@@ -12,9 +12,7 @@ participant ":CreateTeamController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "SkillRepository:\nSkillRepository" as SkillRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
+participant "TeamRepository:\nTeamRepository" as TeamRepository
 participant "team\n:Team" as Team
 
 activate ADM
@@ -24,8 +22,10 @@ activate ADM
 
                 UI -> CTRL** : create
 
-                UI -> CTRL : getSkills()
                 activate CTRL
+
+                    CTRL -> CTRL : getSkills()
+                    activate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
                     activate RepositorySingleton
@@ -48,7 +48,7 @@ activate ADM
                     CTRL --> UI : skillsList
                 deactivate CTRL
 
-                UI --> ADM : shows skills list\n and asks to select one
+                UI --> ADM : shows skills list and asks to select one
             deactivate UI
 
         ADM --> UI : selects skills
@@ -60,7 +60,7 @@ activate ADM
     ADM -> UI : types requested data (maximum team size)
     activate UI
 
-        UI --> ADM : shows
+        UI --> ADM : shows data and asks for verification
     deactivate UI
 
     ADM -> UI : submits data
@@ -84,30 +84,35 @@ activate ADM
                     PLAT -> CTRL : SkillRepository
                 deactivate PLAT
 
-                CTRL -> SkillRepository : getSkillByDescription(SkillDescription)
+                CTRL -> SkillRepository : getSkillByDescription(skillDescription)
                 activate SkillRepository
 
-                    SkillRepository --> CTRL : Skill
+                    SkillRepository --> CTRL : skill
                 deactivate SkillRepository
                     CTRL --> CTRL : skill
             deactivate CTRL
 
 
             |||
-                CTRL -> Team**: create(skills, maxTeamSize)
-                CTRL -> ORG: addTeam (team)
+                CTRL -> TeamRepository: createTeam(skills, maxTeamSize)
+                activate TeamRepository
 
+                TeamRepository -> Team**: addTeam (team)
 
-                activate ORG
-                    CTRL -> CTRL: validateTeam(team)
-                    activate CTRL
-                        CTRL --> CTRL
-                    deactivate CTRL
+                    TeamRepository -> TeamRepository: addTeam(team)
+                    activate TeamRepository
+                        TeamRepository -> TeamRepository: validateTeam(team)
+                        activate TeamRepository
+                            TeamRepository --> TeamRepository
+                            deactivate TeamRepository
 
-                    CTRL --> CTRL
-                deactivate CTRL
+                    TeamRepository --> TeamRepository
+                deactivate TeamRepository
 
-            CTRL --> UI: team
+            TeamRepository --> CTRL: team
+            deactivate TeamRepository
+
+            CTRL --> UI : success
             deactivate CTRL
             UI --> ADM: displays operation success
     deactivate UI

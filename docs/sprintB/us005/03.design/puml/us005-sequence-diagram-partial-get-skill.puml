@@ -24,10 +24,10 @@ activate CTRL
         CTRL -> PLAT : getSkillRepository()
         activate PLAT
 
-            PLAT -> CTRL : skillRepository
+            PLAT -> CTRL : SkillRepository
         deactivate PLAT
 
-        CTRL -> skillRepository : getSkillByDescription(skillDescription)
+        CTRL -> SkillRepository : getSkillByDescription(skillDescription)
         activate SkillRepository
 
             SkillRepository --> CTRL : skill

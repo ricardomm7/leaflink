@@ -14,7 +14,7 @@ participant "skillRepository:\nSkillRepository" as SkillRepository
 
 autonumber 3
 
- -> CTRL : getSkills()
+ -> CTRL : getSkillsList()
 autonumber 3.1
 activate CTRL
     group Get Skills List
@@ -33,7 +33,7 @@ activate CTRL
             deactivate PLAT
 
             CTRL -> SkillRepository : getSkills()
-            activate TaskCategoryRepository
+            activate SkillRepository
 
                 SkillRepository --> CTRL : skillList
             deactivate SkillRepository
@@ -41,7 +41,7 @@ activate CTRL
 
     end
     autonumber 4
-    <-- CTRL  : taskCategoryList
+    <-- CTRL  : SkillsList
 deactivate CTRL
 
 
