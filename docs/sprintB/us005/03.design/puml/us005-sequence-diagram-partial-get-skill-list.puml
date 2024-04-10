@@ -10,14 +10,14 @@ autonumber
 participant ":CreateTaskController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
+participant "skillRepository:\nSkillRepository" as SkillRepository
 
 autonumber 3
 
- -> CTRL : getTaskCategories()
+ -> CTRL : getSkills()
 autonumber 3.1
 activate CTRL
-    group Get Task Category List
+    group Get Skills List
 
 
             CTRL -> RepositorySingleton : getInstance()
@@ -26,17 +26,17 @@ activate CTRL
                 RepositorySingleton --> CTRL: repositories
             deactivate RepositorySingleton
 
-            CTRL -> PLAT : getTaskCategoryRepository()
+            CTRL -> PLAT : getSkillRepository()
             activate PLAT
 
-                PLAT --> CTRL: taskCategoryRepository
+                PLAT --> CTRL: skillRepository
             deactivate PLAT
 
-            CTRL -> TaskCategoryRepository : getTaskCategories()
+            CTRL -> SkillRepository : getSkills()
             activate TaskCategoryRepository
 
-                TaskCategoryRepository --> CTRL : taskCategoryList
-            deactivate TaskCategoryRepository
+                SkillRepository --> CTRL : skillList
+            deactivate SkillRepository
 
 
     end
