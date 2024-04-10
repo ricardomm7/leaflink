@@ -3,24 +3,32 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 
+class HRM {
+}
 
 class CreateJobUI {
-    + askForInfo() : void
-    + provideInfo(title: String, description: String) : void
-    + confirmData() : void
+
 }
 
 class CreateJobController {
-    + createJob(title: String, description: String) : Job
-    + showVerificationDialog() : void
+    +createJob(title: String, description: String) : void
+    +getInstance() : Repositories
+}
+
+class Repositories {
+    +getJobRepository() : JobRepository
+}
+
+class JobRepository {
+    +createJob(title: String, description: String) : Job
+    +verifyFilled(job: Job) : void
+    +verifySpecialCharacters(job: Job) : void
 }
 
 class Job {
     - title: String
     - description: String
-    + Job(title, description)
+    + Job(title: String, description: String)
 }
 
-CreateJobUI --> CreateJobController : sends job title and description
-CreateJobController --> Job : creates a new job object with provided attributes (title, description)
 @enduml

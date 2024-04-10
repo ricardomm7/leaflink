@@ -22,11 +22,10 @@ UI --> Employee : asks for the info needed (title and description)
 Employee -> UI : provides job title and description
 UI --> Employee : shows a verification dialog
 Employee -> UI : confirms job creation
-deactivate UI
 
 activate CTRL
 UI -> CTRL : createJob(title, description)
-
+deactivate UI
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
 GlobRepo --> CTRL : repositories
