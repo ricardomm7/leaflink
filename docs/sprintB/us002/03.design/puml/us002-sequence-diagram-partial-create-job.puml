@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber 12
 
 'hide footbox
-participant "JobRepository:\nJobRepository" as JobRepository
+participant "jobRepository:\nJobRepository" as JobRepository
 participant ":Job" as Job
 -> JobRepository : createJob(title, description)
 activate JobRepository

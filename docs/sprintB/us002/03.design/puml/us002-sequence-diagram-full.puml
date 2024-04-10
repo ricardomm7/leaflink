@@ -11,7 +11,7 @@ participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
-participant "JobRepository:\nJobRepository" as JobRepository
+participant "jobRepository:\nJobRepository" as jobRepository
 participant ":Job" as Job
 
 activate Employee
@@ -37,24 +37,24 @@ activate PLAT
 PLAT -->  CTRL: jobRepository
 deactivate PLAT
 
-CTRL -> JobRepository : createJob(title, description)
-activate JobRepository
+CTRL -> jobRepository : createJob(title, description)
+activate jobRepository
 
-    JobRepository -> Job : create(title, description)
+    jobRepository -> Job : create(title, description)
         activate Job
-        Job --> JobRepository : job
+        Job --> jobRepository : job
         deactivate Job
 
-    JobRepository -> JobRepository : verifyFilled(job)
-        activate JobRepository
-        JobRepository -> JobRepository : verifySpecialCharacters(job)
-        activate JobRepository
-        JobRepository --> JobRepository
-        deactivate JobRepository
-    JobRepository --> JobRepository
-    deactivate JobRepository
-JobRepository --> CTRL : job
-deactivate JobRepository
+    jobRepository -> jobRepository : verifyFilled(job)
+        activate jobRepository
+        jobRepository -> jobRepository : verifySpecialCharacters(job)
+        activate jobRepository
+        jobRepository --> jobRepository
+        deactivate jobRepository
+    jobRepository --> jobRepository
+    deactivate jobRepository
+jobRepository --> CTRL : job
+deactivate jobRepository
 
 CTRL --> UI : success
 deactivate CTRL
