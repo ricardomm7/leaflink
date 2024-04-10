@@ -23,9 +23,10 @@ Employee -> UI : provides job title and description
 UI --> Employee : shows a verification dialog
 Employee -> UI : confirms job creation
 
-activate CTRL
+
 UI -> CTRL : createJob(title, description)
 deactivate UI
+activate CTRL
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
 GlobRepo --> CTRL : repositories
@@ -54,11 +55,12 @@ activate JobRepository
     deactivate JobRepository
 JobRepository --> CTRL : job
 deactivate JobRepository
-deactivate CTRL
 
 CTRL --> UI : success
 deactivate CTRL
-
+activate UI
 UI --> Employee : displays operation success
+
+deactivate UI
 
 @enduml
