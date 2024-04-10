@@ -1,0 +1,34 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class HRM {
+}
+
+class CreateJobUI {
+
+}
+
+class CreateJobController {
+    +createJob(title: String, description: String) : void
+    +getInstance() : Repositories
+}
+
+class Repositories {
+    +getJobRepository() : JobRepository
+}
+
+class JobRepository {
+    +createJob(title: String, description: String) : Job
+    +verifyFilled(job: Job) : void
+    +verifySpecialCharacters(job: Job) : void
+}
+
+class Job {
+    - title: String
+    - description: String
+    + Job(title: String, description: String)
+}
+
+@enduml

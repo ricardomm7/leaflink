@@ -3,32 +3,37 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "organization\n:Organization" as ORG
-participant "team\n:Team" as TEAM
+participant ":CreateTeamController" as CTRL
 
 autonumber 16
--> ORG: createTeam(skills, maxTeamSize )
+-> CTRL: createTeam(skills, maxTeamSize )
 
 autonumber 16.1
-activate ORG
+activate CTRL
     group Create Team
 
-        ORG -> TEAM**: create(skills, maxTeamSize)
-        ORG -> ORG: addTeam (team)
+        CTRL -> TeamRepository: createTeam(skills, maxTeamSize)
+                        activate TeamRepository
 
-        activate ORG
-            ORG -> ORG: validateTeam(team)
-            activate ORG
-                ORG --> ORG
-            deactivate ORG
+                        TeamRepository -> Team**: createTeam (skills, maxTeamSize)
 
-            ORG --> ORG
-        deactivate ORG
+                            TeamRepository -> TeamRepository: addTeam(team)
+                            activate TeamRepository
+                                TeamRepository -> TeamRepository: validateTeam()
+                                activate TeamRepository
+                                    TeamRepository --> TeamRepository
+                                    deactivate TeamRepository
+
+                            TeamRepository --> TeamRepository
+                        deactivate TeamRepository
+
+                    TeamRepository --> CTRL: team
+                    deactivate TeamRepository
     end
 
     autonumber 17
-    <-- ORG : team
-deactivate ORG
+    <-- CTRL : success
+deactivate CTRL
 
 
 @enduml

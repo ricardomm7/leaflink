@@ -1,0 +1,64 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "HRM" as Employee
+participant ":CreateJobUI" as UI
+participant ":CreateJobController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "JobRepository:\nJobRepository" as JobRepository
+participant ":Job" as Job
+
+activate Employee
+Employee -> UI : wants to create a new job
+activate UI
+UI -> CTRL** : create
+UI --> Employee : asks for the info needed (title and description)
+Employee -> UI : provides job title and description
+UI --> Employee : shows a verification dialog
+Employee -> UI : confirms job creation
+
+activate CTRL
+UI -> CTRL : createJob(title, description)
+deactivate UI
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+
+CTRL -> PLAT : getJobRepository()
+activate PLAT
+PLAT -->  CTRL: jobRepository
+deactivate PLAT
+
+CTRL -> JobRepository : createJob(title, description)
+activate JobRepository
+
+    JobRepository -> Job : create(title, description)
+        activate Job
+        Job --> JobRepository : job
+        deactivate Job
+
+    JobRepository -> JobRepository : verifyFilled(job)
+        activate JobRepository
+        JobRepository -> JobRepository : verifySpecialCharacters(job)
+        activate JobRepository
+        JobRepository --> JobRepository
+        deactivate JobRepository
+    JobRepository --> JobRepository
+    deactivate JobRepository
+JobRepository --> CTRL : job
+deactivate JobRepository
+deactivate CTRL
+
+CTRL --> UI : success
+deactivate CTRL
+
+UI --> Employee : displays operation success
+
+@enduml
