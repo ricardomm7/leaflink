@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+left to right direction
+
+hide circle
+hide methods
+
+class HRM {
+}
+
+class Skill {
+    designation
+}
+
+class Collaborator {
+    admissionDate
+}
+
+class Person {
+    name
+    birthdate
+    contact
+}
+
+class Address{
+    zipCode
+    city
+}
+
+class DocumentType{
+  identificationCode
+}
+
+Person "1"--"1" Address: has an >
+HRM "1" -- "1..*" Skill : assigns >
+Collaborator  "1"--"1"  Person: is a >
+Person  "1"--"1"  DocumentType: has a >
+
+Skill "*" -- "1..*" Collaborator : to >
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+
+class Team {
+  name
+}
+
+class Person {
+    name
+    birthdate
+    contact
+}
+
+class Address{
+    zipCode
+    city
+}
+
+class Collaborator{
+    admissionDate
+}
+
+class DocumentType{
+  identificationCode
+
+}
+
+HRM "1..*" -- "1..*" Team: generate   >
+Person "1" -- "1" Address: has an >
+Collaborator "1" -- "1"  Person: is a >
+Person "1" -- "1"  DocumentType: has a >
+Team "1..*" -- "1..*" Collaborator : has >
+
+@enduml

@@ -2,7 +2,7 @@
 ###### LeafLink is currently not registered under our ownership, and our group is solely utilizing it for educational purposes and not for any commercial endeavors. It's essential to emphasize that the name LeafLink is still under consideration and not yet finalized. We are committed to ensuring that all aspects of our project, including branding elements, align with ethical and legal standards.
 
 ## Glossary
-[CLICK HERE TO BE REDIRECTED](01.requirements-engineering/glossary.md)
+[CLICK HERE TO BE REDIRECTED](sprintA/global-artifacts/01.requirements-engineering/glossary.md)
 
 ## Introduction
 This document serves to offer comprehensive guidance on the LeafLink Software, encompassing a broad spectrum of topics ranging from the product's general overview to its specific functionalities tailored for users. It caters to various user demographics, providing guidance suitable for their respective interactions with the application.
