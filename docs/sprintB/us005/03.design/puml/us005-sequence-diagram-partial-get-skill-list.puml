@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":CreateTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository:\nSkillRepository" as SkillRepository
+
+autonumber 3
+
+ -> CTRL : getSkills()
+autonumber 3.1
+activate CTRL
+    group Get Skills List
+
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
+
+                PLAT --> CTRL: skillRepository
+            deactivate PLAT
+
+            CTRL -> SkillRepository : getSkills()
+            activate TaskCategoryRepository
+
+                SkillRepository --> CTRL : skillList
+            deactivate SkillRepository
+
+
+    end
+    autonumber 4
+    <-- CTRL  : taskCategoryList
+deactivate CTRL
+
+
+@enduml
