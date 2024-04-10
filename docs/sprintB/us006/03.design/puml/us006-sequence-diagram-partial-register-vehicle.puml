@@ -16,24 +16,24 @@ activate CTRL
 
         CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
 
-                    CTRL -> CTRL: addVehicle (vehicle)
-                    activate CTRL
+            CTRL -> VehicleRepository : saveVehicle(vehicle)
+            activate VehicleRepository
 
-                        CTRL -> VehicleRepository : saveVehicle(vehicle)
+                VehicleRepository -> VehicleRepository: addVehicle (vehicle)
+                activate VehicleRepository
 
-                        activate VehicleRepository
+                VehicleRepository -> VehicleRepository: validateVehicle(vehicle))
+                activate VehicleRepository
 
-                            VehicleRepository --> CTRL : vehicle
-                        deactivate VehicleRepository
+                VehicleRepository --> VehicleRepository
+                deactivate VehicleRepository
 
-                        CTRL -> CTRL: validateVehicle(vehicle))
-                        activate CTRL
-                            CTRL --> CTRL
-                        deactivate CTRL
-                        CTRL --> CTRL
-                    deactivate CTRL
+                VehicleRepository --> VehicleRepository
+                deactivate VehicleRepository
 
-                deactivate CTRL
+            VehicleRepository -> CTRL: vehicle
+            deactivate VehicleRepository
+
     end
 
     autonumber 29

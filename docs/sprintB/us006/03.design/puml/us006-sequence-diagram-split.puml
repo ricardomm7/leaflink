@@ -50,8 +50,6 @@ activate VFM
 
                 end ref
 
-
-
             CTRL --> UI : brandList
         deactivate CTRL
 
@@ -79,7 +77,6 @@ activate VFM
 
          CTRL --> CTRL : (brand)
 
-
             |||
 
             ref over CTRL
@@ -88,7 +85,6 @@ activate VFM
                             end ref
 
                         deactivate SkillRepository
-
 
             CTRL -> UI: vehicle
         deactivate CTRL

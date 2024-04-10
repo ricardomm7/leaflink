@@ -15,22 +15,22 @@ autonumber 9
 
  -> CTRL : getBrand()
 autonumber 9.1
+
 activate CTRL
+
     group Get Brand List
 
-
             CTRL -> PLAT : getBrandRepository()
-                        activate PLAT
+            activate PLAT
 
-                            PLAT --> CTRL: BrandRepository
-                        deactivate PLAT
+            PLAT --> CTRL: BrandRepository
+            deactivate PLAT
 
-                        CTRL -> BrandRepository : getBrands()
-                        activate BrandRepository
+            CTRL -> BrandRepository : getBrands()
+            activate BrandRepository
 
-                            BrandRepository --> CTRL : brandList
-                        deactivate BrandRepository
-
+            BrandRepository --> CTRL : brandList
+            deactivate BrandRepository
 
     end
     autonumber 10

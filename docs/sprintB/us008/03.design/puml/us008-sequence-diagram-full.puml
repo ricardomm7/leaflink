@@ -73,8 +73,6 @@ activate VFM
                     MaintenanceReport --> CTRL : maintenanceReport
                 deactivate MaintenanceReport
 
-
-
                     CTRL --> CTRL : maintenanceReport
                 deactivate CTRL
 

@@ -26,12 +26,10 @@ activate VFM
         UI -> CTRL : getVehiclesList()
         activate CTRL
 
-        ref over CTRL
+            ref over CTRL
                         Get Vehicle List
 
-        end ref
-
-
+            end ref
 
             CTRL --> UI : vehicleList
         deactivate CTRL
@@ -41,10 +39,10 @@ activate VFM
         UI -> CTRL : generateMaintenanceReport(vehiclesList)
         activate CTRL
 
-        ref over CTRL
+            ref over CTRL
                     Create Maintenance Report
 
-        end ref
+            end ref
 
         CTRL --> CTRL : maintenanceReport
 

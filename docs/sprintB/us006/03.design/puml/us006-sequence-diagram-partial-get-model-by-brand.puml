@@ -15,28 +15,29 @@ activate CTRL
 
         CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
 
-                    CTRL -> CTRL : getModelByBrand(brand)
-                                activate CTRL
+            CTRL -> CTRL : getModelByBrand(brand)
+            activate CTRL
 
-                                    CTRL -> RepositorySingleton : getInstance()
-                                                    activate RepositorySingleton
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                                                        RepositorySingleton --> CTRL: repositories
-                                                    deactivate RepositorySingleton
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
-                                                    CTRL -> PLAT : getBrandRepository()
-                                                    activate PLAT
+            CTRL -> PLAT : getBrandRepository()
+            activate PLAT
 
-                                                        PLAT -> CTRL : BrandRepository
-                                                    deactivate PLAT
+            PLAT -> CTRL : BrandRepository
+             deactivate PLAT
 
-                                                    CTRL -> SkillRepository : getModelByBrand(brand))
-                                                    activate SkillRepository
+             CTRL -> SkillRepository : getModelByBrand(brand))
+             activate SkillRepository
 
-                                                        SkillRepository --> CTRL : brand
-                                                    deactivate SkillRepository
-                                                        CTRL --> CTRL : (brand)
-                                    deactivate CTRL
+             SkillRepository --> CTRL : brand
+             deactivate SkillRepository
+
+        CTRL --> CTRL : (brand)
+        deactivate CTRL
 
 
     end
