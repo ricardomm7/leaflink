@@ -42,12 +42,11 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All job fields must be filled in.
-* **AC2:** To register a determinate job, sometimes the system have to require some skill.
-* **AC3:** When creating a job with a required skill that doesn't exist, the system should prevent submission and ask the user to either create the skill (link to US001) or choose an existing skill.
+* **AC2:** A job name can’t have special characters or digits.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US001 - Register a Skill" as there a job must have at least one associated skill.
+* None.
 
 ### 1.5 Input and Output Data
 
@@ -59,7 +58,6 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
    
 	
 * Selected data:
-  * (Optional) Skills required (references existing skills in the system)
 
 **Output Data:**
 * (In)Success of the operation

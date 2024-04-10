@@ -1,0 +1,26 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+
+class CreateJobUI {
+    + askForInfo() : void
+    + provideInfo(title: String, description: String) : void
+    + confirmData() : void
+}
+
+class CreateJobController {
+    + createJob(title: String, description: String) : Job
+    + showVerificationDialog() : void
+}
+
+class Job {
+    - title: String
+    - description: String
+    + Job(title, description)
+}
+
+CreateJobUI --> CreateJobController : sends job title and description
+CreateJobController --> Job : creates a new job object with provided attributes (title, description)
+@enduml

@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a fleet manager (VFM), I wish to register a vehicle including all the attributes.
+As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle including Brand, Model, Type, Tare Weight, Gross Weight, Current Km, Register Date, Acquisition Date, and Maintenance/Check-up Frequency (in km).
 
 ### 1.2. Customer Specifications and Clarifications 
 

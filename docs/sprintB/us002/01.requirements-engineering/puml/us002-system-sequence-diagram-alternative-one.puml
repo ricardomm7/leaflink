@@ -19,14 +19,7 @@ activate Employee
 
     Employee -> System : types requested data
     activate System
-
-        System --> Employee : requests skills for the job (references existing skills more option "add new skill")
-    deactivate System
-
-    Employee -> System : selects a skill
-    activate System
-
-        System --> Employee : shows all data (title, description, and skills) and requests confirmation
+        System --> Employee : shows all data (title, description) and requests confirmation
     deactivate System
 
     Employee -> System : confirms data

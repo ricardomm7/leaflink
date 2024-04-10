@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber 7
+
+'hide footbox
+participant ":CreateJobController" as CTRL
+participant ":Job" as Job
+activate CTRL
+-> CTRL: createJob (title, description)
+
+group Create Job
+    'CTRL -> Job : calls the constructor to create a new job with provided attributes (title, description)
+    CTRL -> Job** : create (title, description)
+
+        CTRL -> CTRL : verifyFilled (job)
+            activate CTRL
+            CTRL -> CTRL : verifySpecialCharacters (job)
+            activate CTRL
+        CTRL --> CTRL
+        deactivate CTRL
+    CTRL --> CTRL
+    deactivate CTRL
+
+end
+<-- CTRL : job
+deactivate CTRL
+
+@enduml
+
