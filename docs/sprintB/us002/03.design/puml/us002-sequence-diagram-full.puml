@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "HRM" as Employee
+participant ":CreateJobUI" as UI
+participant ":CreateJobController" as CTRL
+participant ":Job" as Job
+
+activate Employee
+
+    Employee -> UI : wants to create a new job
+    activate UI
+    UI -> CTRL** : create
+    UI -> Employee : asks for the info needed (title and description)
+    Employee -> UI : provides job title and description
+    UI -> CTRL : sends job title and description
+        deactivate UI
+    CTRL -> Job : creates a new job object with provided attributes (title, description)
+        activate Job
+    deactivate Job
+
+@enduml
