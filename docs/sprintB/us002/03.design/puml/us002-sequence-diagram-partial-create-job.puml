@@ -3,27 +3,15 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber
+autonumber 7
 
 'hide footbox
-actor "HRM" as Employee
-participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Job" as Job
-
-activate Employee
-Employee -> UI : wants to create a new job
-activate UI
-UI -> CTRL** : create
-UI --> Employee : asks for the info needed (title and description)
-Employee -> UI : provides job title and description
-UI --> Employee : shows a verification dialog
-Employee -> UI : confirms job creation
 activate CTRL
-UI -> CTRL : createJob (title, description)
-deactivate Employee
-deactivate UI
+-> CTRL: createJob (title, description)
 
+group Create Job
     'CTRL -> Job : calls the constructor to create a new job with provided attributes (title, description)
     CTRL -> Job** : create (title, description)
 
@@ -35,9 +23,10 @@ deactivate UI
         deactivate CTRL
     CTRL --> CTRL
     deactivate CTRL
-CTRL --> UI : job
-deactivate CTRL
-UI --> Employee : displays operation success
 
+end
+<-- CTRL : job
+deactivate CTRL
 
 @enduml
+
