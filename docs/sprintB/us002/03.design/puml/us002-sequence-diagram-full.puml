@@ -9,6 +9,9 @@ autonumber
 actor "HRM" as Employee
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "JobRepository:\nJobRepository" as JobRepository
 participant ":Job" as Job
 
 activate Employee
@@ -19,25 +22,44 @@ UI --> Employee : asks for the info needed (title and description)
 Employee -> UI : provides job title and description
 UI --> Employee : shows a verification dialog
 Employee -> UI : confirms job creation
-activate CTRL
-UI -> CTRL : createJob (title, description)
-deactivate Employee
 deactivate UI
 
-    'CTRL -> Job : calls the constructor to create a new job with provided attributes (title, description)
-    CTRL -> Job** : create (title, description)
+activate CTRL
+UI -> CTRL : createJob(title, description)
 
-        CTRL -> CTRL : verifyFilled (job)
-            activate CTRL
-            CTRL -> CTRL : verifySpecialCharacters (job)
-            activate CTRL
-        CTRL --> CTRL
-        deactivate CTRL
-    CTRL --> CTRL
-    deactivate CTRL
-CTRL --> UI : job
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+
+CTRL -> PLAT : getJobRepository()
+activate PLAT
+PLAT -->  CTRL: jobRepository
+deactivate PLAT
+
+CTRL -> JobRepository : createJob(title, description)
+activate JobRepository
+
+    JobRepository -> Job : create(title, description)
+        activate Job
+        Job --> JobRepository : job
+        deactivate Job
+
+    JobRepository -> JobRepository : verifyFilled(job)
+        activate JobRepository
+        JobRepository -> JobRepository : verifySpecialCharacters(job)
+        activate JobRepository
+        JobRepository --> JobRepository
+        deactivate JobRepository
+    JobRepository --> JobRepository
+    deactivate JobRepository
+JobRepository --> CTRL : job
+deactivate JobRepository
 deactivate CTRL
-UI --> Employee : displays operation success
 
+CTRL --> UI : success
+deactivate CTRL
+
+UI --> Employee : displays operation success
 
 @enduml

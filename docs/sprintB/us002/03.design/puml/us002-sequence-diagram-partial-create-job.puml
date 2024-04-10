@@ -3,30 +3,35 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber 7
+autonumber 12
 
 'hide footbox
-participant ":CreateJobController" as CTRL
+participant "JobRepository:\nJobRepository" as JobRepository
 participant ":Job" as Job
-activate CTRL
--> CTRL: createJob (title, description)
+-> JobRepository : createJob(title, description)
+activate JobRepository
 
 group Create Job
-    'CTRL -> Job : calls the constructor to create a new job with provided attributes (title, description)
-    CTRL -> Job** : create (title, description)
+activate JobRepository
 
-        CTRL -> CTRL : verifyFilled (job)
-            activate CTRL
-            CTRL -> CTRL : verifySpecialCharacters (job)
-            activate CTRL
-        CTRL --> CTRL
-        deactivate CTRL
-    CTRL --> CTRL
-    deactivate CTRL
+    JobRepository -> Job : create(title, description)
+        activate Job
+        Job --> JobRepository : job
+        deactivate Job
 
+    JobRepository -> JobRepository : verifyFilled(job)
+        activate JobRepository
+        JobRepository -> JobRepository : verifySpecialCharacters(job)
+        activate JobRepository
+        JobRepository --> JobRepository
+        deactivate JobRepository
+    JobRepository --> JobRepository
+    deactivate JobRepository
+
+deactivate JobRepository
 end
-<-- CTRL : job
-deactivate CTRL
+<-- JobRepository : job
+deactivate JobRepository
 
 @enduml
 
