@@ -40,20 +40,27 @@ deactivate PLAT
 CTRL -> jobRepository : createJob(title, description)
 activate jobRepository
 
-    jobRepository -> Job : create(title, description)
+    jobRepository -> Job** : create(title, description)
         activate Job
-        Job --> jobRepository : job
-        deactivate Job
 
-    jobRepository -> jobRepository : verifyFilled(job)
-        activate jobRepository
-        jobRepository -> jobRepository : verifySpecialCharacters(job)
-        activate jobRepository
-        jobRepository --> jobRepository
-        deactivate jobRepository
+    Job -> Job : verifyFilled(job)
+        activate Job
+        Job -> Job : verifySpecialCharacters(job)
+        activate Job
+        Job --> Job
+        deactivate Job
+    Job --> Job
+    deactivate Job
+    'Job -> Job : addJob(job)
+    Job --> jobRepository : job
+    deactivate Job
+    jobRepository -> jobRepository : check for duplicates
+    activate jobRepository
     jobRepository --> jobRepository
     deactivate jobRepository
+    deactivate Job
 jobRepository --> CTRL : job
+deactivate jobRepository
 deactivate jobRepository
 
 CTRL --> UI : success
@@ -62,5 +69,6 @@ activate UI
 UI --> Employee : displays operation success
 
 deactivate UI
+deactivate Employee
 
 @enduml

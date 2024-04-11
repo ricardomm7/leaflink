@@ -52,6 +52,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 	
 * Selected data:
     * a Job
+    * skills from the registered list
 
 **Output Data:**
 

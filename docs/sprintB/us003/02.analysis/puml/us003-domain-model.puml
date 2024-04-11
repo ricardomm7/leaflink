@@ -26,8 +26,8 @@ class Collaborator {
 class Person {
     name
     birthdate
-    contact
-
+    contactMobile
+    email
 }
 
 class Address{
@@ -37,6 +37,7 @@ class Address{
 
 class DocumentType{
   identificationCode
+  taxPayerNumber
 }
 
 ' Relationships

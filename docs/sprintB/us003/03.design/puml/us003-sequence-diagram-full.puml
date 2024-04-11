@@ -1,0 +1,89 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+participant "HRM" as HRM
+participant ":RegisterCollaboratorUI" as UI
+participant ":RegisterCollaboratorController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant ":Collaborator" as CLB
+participant ":AssignJobUI" as JOBUI
+participant ":AssignJobController" as JOBCTRL
+participant "jobRepository:\nJobRepository" as JobRepository
+participant "skillsRepository:\nSkillsRepository" as SkillsRepository
+
+
+activate HRM
+HRM -> UI : wants to register a new collaborator
+activate UI
+UI -> CTRL** : create
+UI --> HRM : asks for the info needed (name, birthdate, contactMobile, email, address,\n zipCode, city, documentType, documentCode, admissionDate, taxPayerNumber)
+HRM -> UI : provides the needed info
+'UI --> HRM : shows a verification dialog
+'HRM -> UI : confirms collaborator creation
+UI -> CTRL : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, documentCode, admissionDate, taxPayerNumber)
+deactivate UI
+activate CTRL
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+
+CTRL -> PLAT : getCollaboratorRepository()
+activate PLAT
+PLAT -->  CTRL: collaboratorRepository
+deactivate PLAT
+
+CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, documentCode, admissionDate, taxPayerNumber)
+deactivate CTRL
+activate CLBREP
+CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, documentCode, admissionDate, taxPayerNumber)
+activate CLB
+CLB -> CLB : verifyFilled(collaborator)
+activate CLB
+CLB -> CLB : verifyMobile(collaborator)
+activate CLB
+CLB -> CLB : verifyEmail(collaborator)
+activate CLB
+CLB -> CLB : verifyZipCode(collaborator)
+activate CLB
+CLB -> CLB : verifyBirth(collaborator)
+activate CLB
+CLB -> CLB : verifyTaxPayerNumber(collaborator)
+activate CLB
+CLB -> CLB : verifyCitizenCardNumber(collaborator)
+activate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+
+CLB -->CLBREP : collaborator
+deactivate CLB
+
+CLBREP -> CLBREP : check for duplicates (taxPayerNumber)
+activate CLBREP
+CLBREP --> CLBREP
+deactivate CLBREP
+CLBREP --> CTRL : collaborator
+activate CTRL
+
+deactivate CTRL
+
+deactivate HRM
+@enduml

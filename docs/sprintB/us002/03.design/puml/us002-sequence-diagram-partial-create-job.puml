@@ -14,23 +14,28 @@ activate JobRepository
 group Create Job
 activate JobRepository
 
-    JobRepository -> Job : create(title, description)
+    JobRepository -> Job** : create(title, description)
         activate Job
-        Job --> JobRepository : job
+
+    Job -> Job : verifyFilled(job)
+        activate Job
+        Job -> Job : verifySpecialCharacters(job)
+        activate Job
+        Job --> Job
         deactivate Job
-
-    JobRepository -> JobRepository : verifyFilled(job)
-        activate JobRepository
-        JobRepository -> JobRepository : verifySpecialCharacters(job)
-        activate JobRepository
-        JobRepository --> JobRepository
-        deactivate JobRepository
+    Job --> Job
+    deactivate Job
+    'Job -> Job : addJob(job)
+    Job --> JobRepository : job
+    deactivate Job
+    JobRepository -> JobRepository : check for duplicates
+    activate JobRepository
     JobRepository --> JobRepository
-    deactivate JobRepository
-
 deactivate JobRepository
+    deactivate Job
 end
 <-- JobRepository : job
+deactivate JobRepository
 deactivate JobRepository
 
 @enduml
