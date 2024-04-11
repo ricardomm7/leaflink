@@ -30,7 +30,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** Every collaborator must have an associated job.
-* **AC3:** Name, birthdate, admission date, address, contact info (mobile and e-mail), ID doc type, ID number.
+* **AC3:** Name, birth date, admission date, address, contact info (mobile and email), taxpayer number, ID doc type, and respective number should be provided by the HRM. The taxpayer identification number and the citizen card number should be valid.
 
 ### 1.4. Found out Dependencies
 

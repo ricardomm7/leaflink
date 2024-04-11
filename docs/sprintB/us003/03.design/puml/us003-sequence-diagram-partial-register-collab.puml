@@ -3,32 +3,60 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "organization\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant "Collaborator" as CLB
 
-autonumber 16
--> ORG: createTask(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee )
+autonumber 10
+--> CLBREP: createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+    group Register collaborator
+    CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
 
-autonumber 16.1
-activate ORG
-    group Create Task
 
-        ORG -> TAREFA**: create(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
-        ORG -> ORG: addTask (task)
 
-        activate ORG
-            ORG -> ORG: validateTask(task)
-            activate ORG
-                ORG --> ORG
-            deactivate ORG
 
-            ORG --> ORG
-        deactivate ORG
-    end
+        activate CLB
+        CLB -> CLB : verifyFilled(collaborator)
+        activate CLB
+        CLB -> CLB : verifyMobile(collaborator)
+        activate CLB
+        CLB -> CLB : verifyEmail(collaborator)
+        activate CLB
+        CLB -> CLB : verifyZipCode(collaborator)
+        activate CLB
+        CLB -> CLB : verifyBirth(collaborator)
+        activate CLB
 
-    autonumber 17
-    <-- ORG : task
-deactivate ORG
+        loop for all documentType objects
+        CLB -> CLB : verifyDocumentCode(collaborator)
+        activate CLB
+        CLB --> CLB
+        deactivate CLB
+        end loop
+
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+
+
+        CLB --> CLBREP : collaborator
+        deactivate CLB
+        activate CLBREP
+
+CLBREP -> CLBREP : check for duplicates (documentCode[])
+activate CLBREP
+CLBREP --> CLBREP
+deactivate CLBREP
+end
+<--CLBREP : collaborator
+deactivate CLBREP
+        deactivate CLB
 
 
 @enduml

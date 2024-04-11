@@ -38,9 +38,12 @@ PLAT -->  CTRL: jobRepository
 deactivate PLAT
 
 CTRL -> jobRepository : createJob(title, description)
+deactivate CTRL
 activate jobRepository
 
     jobRepository -> Job** : create(title, description)
+    deactivate jobRepository
+
         activate Job
 
     Job -> Job : verifyFilled(job)
@@ -53,6 +56,7 @@ activate jobRepository
     deactivate Job
     'Job -> Job : addJob(job)
     Job --> jobRepository : job
+    activate jobRepository
     deactivate Job
     jobRepository -> jobRepository : check for duplicates
     activate jobRepository
@@ -61,6 +65,7 @@ activate jobRepository
     deactivate Job
 jobRepository --> CTRL : job
 deactivate jobRepository
+activate CTRL
 deactivate jobRepository
 
 CTRL --> UI : success

@@ -37,7 +37,6 @@ class Address{
 
 class DocumentType{
   identificationCode
-  taxPayerNumber
 }
 
 ' Relationships

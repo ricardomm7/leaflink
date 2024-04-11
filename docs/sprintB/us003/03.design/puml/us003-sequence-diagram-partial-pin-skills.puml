@@ -1,0 +1,65 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "HRM" as HRM
+participant ":RegisterCollaboratorUI" as UI
+participant ":RegisterCollaboratorController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant "skillsRepository:\nSkillsRepository" as skillsRepository
+
+participant ":Collaborator" as CLB
+
+autonumber 42
+activate CLBREP
+
+CLBREP --> CTRL : collaborator
+deactivate CLBREP
+activate CTRL
+
+group Pin Skills
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+CTRL -> PLAT : getSkillsRepository()
+activate PLAT
+PLAT -->  CTRL: skillsRepository
+deactivate PLAT
+CTRL -> skillsRepository : getSkills()
+activate skillsRepository
+skillsRepository --> CTRL : skillsList
+deactivate skillsRepository
+CTRL --> UI : skillsList
+deactivate CTRL
+activate UI
+UI --> HRM : shows the list of skills and asks to select one or more
+activate HRM
+HRM -> UI : select the desired skills
+deactivate HRM
+UI -> CTRL : selectedSkillsList
+deactivate UI
+activate CTRL
+
+
+CTRL -> CLBREP : assignSkills(skills[])
+deactivate CTRL
+activate CLBREP
+CLBREP -> CLB : assignSkills(skills[])
+activate CLB
+CLB -> CLB : setSkills(skills[])
+activate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLBREP : collaborator
+
+end
+deactivate CLB
+   CLBREP --> CTRL : collaborator
+   deactivate CLBREP
+
+
+@enduml
