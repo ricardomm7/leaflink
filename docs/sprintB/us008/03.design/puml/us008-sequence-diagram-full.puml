@@ -3,8 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - List Vehicles Needing Maintenance (US008)
-
 autonumber
 
 'hide footbox

@@ -22,6 +22,9 @@ activate VFM
     VFM -> UI : requests to register a vehicle
     activate UI
 
+                UI -> CTRL** : create
+
+
         UI -> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate UI
 
@@ -29,15 +32,23 @@ activate VFM
     activate UI
 
         UI -> CTRL : submitVehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-        activate CTRL
+                activate CTRL
 
-            CTRL -> CTRL : validateVehicleData(VIN)
+                    CTRL -> VEI : validateVehicleData(VIN)
+                    activate VEI
 
-            |||
-            CTRL -> CTRL : validateVehicleData(VIN)
-            activate CTRL
-                CTRL --> CTRL
-            deactivate CTRL
+                        VEI -> VEI : validateVehicleData(VIN)
+
+                        |||
+
+                        VEI -> VEI : validateVehicleData(VIN)
+                        activate VEI
+
+                        VEI --> VEI
+                        deactivate VEI
+
+                    VEI -> CTRL : vehicleData
+                    deactivate VEI
 
         CTRL -> UI : keep vehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         deactivate CTRL
@@ -73,23 +84,23 @@ activate VFM
 
                 end ref
 
-            deactivate SkillRepository
+            deactivate BrandRepository
 
          CTRL --> CTRL : (brand)
 
             |||
 
             ref over CTRL
-                                Get Register Vehicle
+                                Register Vehicle
 
                             end ref
 
-                        deactivate SkillRepository
+                        deactivate BrandRepository
 
             CTRL -> UI: vehicle
         deactivate CTRL
 
-        UI --> VFM : shows success/error message
+        UI --> VFM : shows success message
     deactivate UI
 
 deactivate VFM

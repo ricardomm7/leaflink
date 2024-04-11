@@ -4,8 +4,8 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant ":RegisterVehicleController" as CTRL
-participant "vehicle\n:Vehicle" as VEI
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "vehicle\n:Vehicle" as VEI
 
 autonumber 28
 -> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
@@ -14,25 +14,29 @@ autonumber 28.1
 activate CTRL
     group Register Vehicle
 
-        CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+          CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+          activate VEI
+
+            VEI -> VEI: addVehicle (vehicle)
+            activate VEI
+
+                VEI -> VEI: validateVehicle(vehicle))
+                activate VEI
+
+                VEI --> VEI
+                deactivate VEI
+
+                VEI --> VEI
+                deactivate VEI
+
+            VEI -> CTRL: vehicle
+            deactivate VEI
 
             CTRL -> VehicleRepository : saveVehicle(vehicle)
             activate VehicleRepository
 
-                VehicleRepository -> VehicleRepository: addVehicle (vehicle)
-                activate VehicleRepository
-
-                VehicleRepository -> VehicleRepository: validateVehicle(vehicle))
-                activate VehicleRepository
-
-                VehicleRepository --> VehicleRepository
-                deactivate VehicleRepository
-
-                VehicleRepository --> VehicleRepository
-                deactivate VehicleRepository
-
-            VehicleRepository -> CTRL: vehicle
-            deactivate VehicleRepository
+          VehicleRepository -> CTRL: vehicle
+          deactivate VehicleRepository
 
     end
 

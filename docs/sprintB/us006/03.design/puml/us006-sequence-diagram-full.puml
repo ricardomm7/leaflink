@@ -3,7 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Register Vehicle (US006)
 
 autonumber
 
@@ -22,6 +21,8 @@ activate VFM
     VFM -> UI : requests to register a vehicle
     activate UI
 
+        UI -> CTRL** : create
+
         UI -> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate UI
 
@@ -31,16 +32,24 @@ activate VFM
         UI -> CTRL : submitVehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         activate CTRL
 
-            CTRL -> CTRL : validateVehicleData(VIN)
+            CTRL -> VEI : validateVehicleData(VIN)
+            activate VEI
 
-            |||
-            CTRL -> CTRL : validateVehicleData(VIN)
-            activate CTRL
-                CTRL --> CTRL
-            deactivate CTRL
+                VEI -> VEI : validateVehicleData(VIN)
+
+                |||
+
+                VEI -> VEI : validateVehicleData(VIN)
+                activate VEI
+
+                VEI --> VEI
+                deactivate VEI
+
+            VEI -> CTRL : vehicleData
+            deactivate VEI
 
         CTRL -> UI : keep vehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-        deactivate CTRL
+        deactivate VEI
 
         UI -> CTRL : getBrand()
         activate CTRL
@@ -90,40 +99,46 @@ activate VFM
                 PLAT -> CTRL : BrandRepository
                 deactivate PLAT
 
-                CTRL -> SkillRepository : getModelByBrand(brand))
-                activate SkillRepository
+                CTRL -> BrandRepository : getModelByBrand(brand))
+                activate BrandRepository
 
-                SkillRepository --> CTRL : brand
-                deactivate SkillRepository
+                BrandRepository --> CTRL : brand
+                deactivate BrandRepository
 
             CTRL --> CTRL : (brand)
             deactivate CTRL
 
+        deactivate CTRL
+
             |||
-            CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+            CTRL -> VEI: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+            activate VEI
+
+                VEI -> VEI: addVehicle (vehicle)
+                activate VEI
+
+                VEI -> VEI: validateVehicle(vehicle))
+                activate VEI
+
+                VEI --> VEI
+                deactivate VEI
+
+                VEI --> VEI
+                deactivate VEI
+
+            VEI -> CTRL: vehicle
+            deactivate VEI
 
             CTRL -> VehicleRepository : saveVehicle(vehicle)
             activate VehicleRepository
-
-                VehicleRepository -> VehicleRepository: addVehicle (vehicle)
-                activate VehicleRepository
-
-                VehicleRepository -> VehicleRepository: validateVehicle(vehicle))
-                activate VehicleRepository
-
-                    VehicleRepository --> VehicleRepository
-                deactivate VehicleRepository
-
-                VehicleRepository --> VehicleRepository
-                deactivate VehicleRepository
 
             VehicleRepository -> CTRL: vehicle
             deactivate VehicleRepository
 
             CTRL -> UI: vehicle
-        deactivate CTRL
 
-        UI --> VFM : shows success/error message
+
+        UI --> VFM : shows success message
     deactivate UI
 
 deactivate VFM

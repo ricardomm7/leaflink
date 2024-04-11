@@ -4,6 +4,8 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant ":RegisterVehicleController" as CTRL
+participant "repositories\n:Repositories" as PLAT
+participant "brandRepository:\nBrandRepository" as BrandRepository
 participant "vehicle\n:Vehicle" as VEI
 
 autonumber 19
@@ -30,11 +32,11 @@ activate CTRL
             PLAT -> CTRL : BrandRepository
              deactivate PLAT
 
-             CTRL -> SkillRepository : getModelByBrand(brand))
-             activate SkillRepository
+             CTRL -> BrandRepository : getModelByBrand(brand))
+             activate BrandRepository
 
-             SkillRepository --> CTRL : brand
-             deactivate SkillRepository
+             BrandRepository --> CTRL : brand
+             deactivate BrandRepository
 
         CTRL --> CTRL : (brand)
         deactivate CTRL
