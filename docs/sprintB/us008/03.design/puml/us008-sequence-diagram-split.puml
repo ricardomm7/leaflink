@@ -13,6 +13,7 @@ participant ":ListMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
 activate VFM
@@ -35,15 +36,21 @@ activate VFM
 
         UI --> UI : keep vehicleList
 
-        UI -> CTRL : generateMaintenanceReport(vehiclesList)
+        UI -> CTRL : createMaintenanceReport(vehiclesList)
         activate CTRL
 
-            ref over CTRL
+        CTRL -> MaintenanceRepository: createMaintenanceReport(vehicleList)
+        activate MaintenanceRepository
+
+            ref over MaintenanceRepository
                     Create Maintenance Report
 
             end ref
+        MaintenanceRepository --> CTRL: maintenanceReport
+        deactivate MaintenanceRepository
 
         CTRL --> CTRL : maintenanceReport
+
 
             CTRL --> UI : maintenanceReport
         deactivate CTRL

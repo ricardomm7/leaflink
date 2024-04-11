@@ -6,6 +6,7 @@ skinparam shadowing false
 participant ":ListMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
+participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
 autonumber 12
@@ -17,25 +18,34 @@ activate CTRL
     group Create Maintenance Report
 
         CTRL -> CTRL : createMaintenanceReport(vehiclesList)
-        activate CTRL
+                    activate CTRL
 
-        CTRL -> RepositorySingleton : getInstance()
-        activate RepositorySingleton
+                        CTRL -> RepositorySingleton : getInstance()
+                        activate RepositorySingleton
 
-        RepositorySingleton --> CTRL: repositories
-        deactivate RepositorySingleton
+                            RepositorySingleton --> CTRL: repositories
+                        deactivate RepositorySingleton
 
-        CTRL -> PLAT : getMaintenanceRepository()
-        activate PLAT
+                        CTRL -> PLAT : getMaintenanceRepository()
+                        activate PLAT
 
-        PLAT --> CTRL: MaintenanceRepository
-        deactivate PLAT
+                            PLAT --> CTRL: MaintenanceRepository
+                        deactivate PLAT
 
-        CTRL -> MaintenanceReport : createMaintenanceReport(vehiclesList)
-        activate MaintenanceReport
+                        CTRL -> MaintenanceRepository : createMaintenanceReport(vehiclesList)
+                        activate MaintenanceRepository
 
-        MaintenanceReport --> CTRL : maintenanceReport
-        deactivate MaintenanceReport
+                            MaintenanceRepository -> MaintenanceReport : createMaintenanceReport(vehiclesList)
+                            activate MaintenanceReport
+
+                            MaintenanceReport --> MaintenanceRepository : maintenanceReport
+                            deactivate MaintenanceReport
+
+                        MaintenanceRepository --> CTRL : maintenanceReport
+                        deactivate MaintenanceRepository
+
+                    CTRL --> CTRL : maintenanceReport
+                    deactivate CTRL
 
     end group
 

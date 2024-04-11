@@ -88,14 +88,19 @@ activate VFM
 
          CTRL --> CTRL : (brand)
 
+         CTRL -> VehicleRepository: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+         activate VehicleRepository
+
             |||
 
-            ref over CTRL
+                ref over VehicleRepository
                                 Register Vehicle
 
-                            end ref
+                end ref
+         VehicleRepository --> CTRL: vehicle
+         deactivate VehicleRepository
 
-                        deactivate BrandRepository
+         deactivate BrandRepository
 
             CTRL -> UI: vehicle
         deactivate CTRL

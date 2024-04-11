@@ -14,29 +14,28 @@ autonumber 28.1
 activate CTRL
     group Register Vehicle
 
-          CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-          activate VEI
+          CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+                      activate VehicleRepository
 
-            VEI -> VEI: addVehicle (vehicle)
-            activate VEI
+                          VehicleRepository -> VEI: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+                          activate VEI
 
-                VEI -> VEI: validateVehicle(vehicle))
-                activate VEI
+                              VEI -> VEI: addVehicle (vehicle)
+                              activate VEI
 
-                VEI --> VEI
-                deactivate VEI
+                              VEI -> VEI: validateVehicle(vehicle))
+                              activate VEI
 
-                VEI --> VEI
-                deactivate VEI
+                              VEI --> VEI
+                              deactivate VEI
 
-            VEI -> CTRL: vehicle
-            deactivate VEI
+                              VEI --> VEI
+                              deactivate VEI
 
-            CTRL -> VehicleRepository : saveVehicle(vehicle)
-            activate VehicleRepository
+                          VEI -> VehicleRepository: vehicle
+                          deactivate VEI
 
-          VehicleRepository -> CTRL: vehicle
-          deactivate VehicleRepository
+                      VehicleRepository -> CTRL: vehicle
 
     end
 
