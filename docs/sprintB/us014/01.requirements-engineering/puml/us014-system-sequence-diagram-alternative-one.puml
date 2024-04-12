@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US014
+
+autonumber
+
+actor "QAM" as QAM
+participant ":System" as System
+
+activate QAM
+
+    QAM -> System : asks to run the tests
+    activate System
+
+        System --> QAM : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+    deactivate System
+
+    QAM -> System : types requested data
+    activate System
+
+        System --> QAM : shows task category list and asks to select one
+    deactivate System
+
+    QAM -> System : selects a task category
+    activate System
+
+        System --> QAM : shows all data and requests confirmation
+    deactivate System
+
+    QAM -> System : confirms data
+    activate System
+
+        System --> QAM : displays operation success
+    deactivate System
+
+@enduml
