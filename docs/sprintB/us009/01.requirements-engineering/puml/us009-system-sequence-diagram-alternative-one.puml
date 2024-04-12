@@ -7,33 +7,27 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "GSM\n(Green Space Manager)" as GSM
 participant ":System" as System
 
-activate Employee
+activate GSM
 
-    Employee -> System : asks to create a new task
+    GSM -> System : requests statistical analysis of water consumption costs
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> GSM : requests input data (e.g., time period, park identification)
     deactivate System
 
-    Employee -> System : types requested data
+    GSM -> System : provides input data
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        System --> GSM : validates input data and initiates analysis process
     deactivate System
 
-    Employee -> System : selects a task category
+    GSM -> System : receives analysis results
     activate System
 
-        System --> Employee : shows all data and requests confirmation
-    deactivate System
-
-    Employee -> System : confirms data
-    activate System
-
-        System --> Employee : displays operation success
+        System --> GSM : presents analysis outcomes (e.g., bar plot, average costs, statistical indicators)
     deactivate System
 
 @enduml
