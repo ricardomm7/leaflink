@@ -39,6 +39,11 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 >
 > **Answer:** Yes.
 
+> **Question:** What information is needed when registering a vehicle for check up?
+> 
+> **Answer:** Vehicle ID, Date, current kms
+
+
 
 
 
