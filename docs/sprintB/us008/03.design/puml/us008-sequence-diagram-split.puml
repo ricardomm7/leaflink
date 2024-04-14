@@ -15,7 +15,6 @@ participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
-
 activate VFM
 
     VFM -> UI : requests to list vehicles needing maintenance
@@ -26,7 +25,7 @@ activate VFM
         UI -> CTRL : getVehiclesList()
         activate CTRL
 
-            ref over CTRL
+            ref over CTRL, VehicleRepository,PLAT, RepositorySingleton
                         Get Vehicle List
 
             end ref
@@ -42,7 +41,7 @@ activate VFM
         CTRL -> MaintenanceRepository: createMaintenanceReport(vehicleList)
         activate MaintenanceRepository
 
-            ref over MaintenanceRepository
+            ref over MaintenanceRepository, MaintenanceReport
                     Create Maintenance Report
 
             end ref

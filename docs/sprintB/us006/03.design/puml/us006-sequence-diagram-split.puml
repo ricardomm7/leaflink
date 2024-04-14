@@ -56,7 +56,7 @@ activate VFM
         UI -> CTRL : getBrand()
         activate CTRL
 
-         ref over CTRL
+         ref over CTRL, RepositorySingleton, PLAT, BrandRepository
                     Get Brand List
 
                 end ref
@@ -79,7 +79,7 @@ activate VFM
         UI -> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         activate CTRL
 
-         ref over CTRL
+         ref over CTRL, RepositorySingleton, PLAT, BrandRepository
                     Get Model By Brand
 
                 end ref
@@ -93,7 +93,7 @@ activate VFM
 
             |||
 
-                ref over VehicleRepository
+                ref over VehicleRepository, VEI
                                 Register Vehicle
 
                 end ref

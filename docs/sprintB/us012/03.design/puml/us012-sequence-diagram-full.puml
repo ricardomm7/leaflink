@@ -20,13 +20,18 @@ activate UI
 UI -> CTR : importRoutes(filePath)
 activate CTR
 
-
-    ref over CTR, Repository, Importer
-                        Import Routes from .csv File
-
-                    end
+CTR -> Importer : importRoutesFromCSV(filePath)
+activate Importer
 
 
+Importer --> CTR : routes
+deactivate Importer
+
+CTR -> Repository : saveRoutes(routes)
+activate Repository
+
+Repository --> CTR : success
+deactivate Repository
 
 CTR --> UI : displayConfirmation(success)
 deactivate CTR
