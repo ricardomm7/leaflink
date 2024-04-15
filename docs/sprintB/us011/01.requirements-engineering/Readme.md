@@ -1,59 +1,50 @@
-# US002 - Register a Job 
+# US011 - Collect data from the user portal
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
-
+As a GSM, I want to be able to collect data from the user portal about the use of the park, so that I may understand the use of the park by different age groups.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+> To analyse the use of the park by age groups, a three-question survey was inserted in the user portal:
+> Age range (1 - Child (up to 15 years old); 2 - Adult (between 16 and 65 years old; 3 - Senior (over 65 years old))
+> // Would you recommend the park to others? (Y/N)
+> // How many times do you visit the park per month? (Numeric)
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** 
 >
-> **Answer:** Duration is estimated in days.
-
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** Indicate the type of each of the three variables.
+* **AC2:** Indicate the proportion of users from each age group who would recommend the park to others.
+* **AC3:** Create a boxplot for each age group, regarding the monthly frequency of use of the park, and draw the main conclusions obtained from this type of graph.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* The file ”Inquiry.csv".
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * none
 	
 * Selected data:
-    * a task category 
+    * File
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* A boxplot image.
+* Data related to the proportion of users from each age group.
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -61,12 +52,8 @@ As an organization employee, I want to create a new task in order to be further 
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us011-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* none

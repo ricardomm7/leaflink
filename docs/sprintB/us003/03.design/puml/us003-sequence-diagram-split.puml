@@ -5,88 +5,97 @@ skinparam shadowing false
 
 autonumber
 
-'hide footbox
-actor "Organization Employee" as ADM
-participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
-participant "organization\n:Organization" as ORG
+participant "HRM" as HRM
+participant ":RegisterCollaboratorUI" as UI
+participant ":RegisterCollaboratorController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 
-activate ADM
 
-    ADM -> UI : asks to create a new task
-
-    activate UI
-
-        UI -> CTRL** : create
-        UI -> CTRL : getTaskCategories()
+activate HRM
+HRM -> UI : wants to register a new collaborator
+activate UI
+UI -> CTRL** : create
+UI --> HRM : asks for the info needed (name, birthdate, contactMobile, email, address,\n zipCode, city, documentType[], documentCode, admissionDate)
+HRM -> UI : provides the needed info
+'UI --> HRM : shows a verification dialog
+'HRM -> UI : confirms collaborator creation
+UI -> CTRL : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+deactivate UI
+activate CTRL
         ref over CTRL
-            Get Task Category List
-
+            Get Collaborator Repository
         end ref
 
-        activate CTRL
+CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+deactivate CTRL
+activate CLBREP
+        ref over CLBREP
+            Create Collaborator
+        end ref
 
-            CTRL --> UI : taskCategoryList
-        deactivate CTRL
+activate CLBREP
 
-        UI --> ADM : shows task category list and asks to sleect one
-    deactivate UI
+CLBREP -> CLBREP : check for duplicates (documentCode[])
+activate CLBREP
+CLBREP --> CLBREP
+deactivate CLBREP
+CLBREP --> CTRL : collaborator
+deactivate CLBREP
+deactivate CLBREP
 
-    ADM -> UI : selects a task category
-    activate UI
+activate CTRL
+ref over CTRL
+                         Get Job List
+                     end ref
+CTRL -->UI : jobsList
+deactivate CTRL
+activate UI
+UI --> HRM : shows the list of jobs and asks to select one
+HRM -> UI : select the desired job
+UI -> CTRL : job
+deactivate UI
+activate CTRL
 
-        UI --> ADM : requests data
-    deactivate UI
 
-    ADM -> UI : types requested data (reference, description,\ninformal description, technical description,\nduration, cost)
-    activate UI
+CTRL ->CLBREP : assignJob(job)
+deactivate CTRL
+activate CLBREP
 
-        UI --> ADM : shows selected category and requested data
-    deactivate UI
+        ref over CLBREP
+            Assign the chosen job
+        end ref
+CLBREP --> CTRL : collaborator
+deactivate CLBREP
+activate CTRL
 
-    ADM -> UI : submits data
-    activate UI
+        ref over CTRL
+            Get Skills List
+        end ref
+CTRL --> UI : skillsList
+deactivate CTRL
+activate UI
+UI --> HRM : shows the list of skills and asks to select one or more
+HRM -> UI : select the desired skills
+UI -> CTRL : selectedSkillsList
+deactivate UI
 
-        UI -> CTRL : createTask(reference, description, informalDescription,\ntechnicalDescription,duration, cost, taskCategoryDescription)
-        activate CTRL
+activate CTRL
 
-            CTRL -> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
-            activate CTRL
-
-                ref over CTRL
-                    Get Task Category Object
-
-                end ref
-
-                CTRL --> CTRL : taskCategory
-            deactivate CTRL
-
-            CTRL -> CTRL : getEmployeeFromSession()
-            activate CTRL
-
-                ref over CTRL
-                    Get Employee
-
-                end ref
-                CTRL -> CTRL : employee
-            deactivate CTRL
-
-            CTRL -> ORG: createTask(reference, description, informalDescription,\ntechnicalDescription, duration, cost, taskCategory, employee)
-            activate ORG
-
-                ref over ORG
-                    Create Task
-
-                end
-
-                ORG --> CTRL : task
-            deactivate ORG
-
-            CTRL --> UI: task
-            deactivate CTRL
-            UI --> ADM: displays operation success
-    deactivate UI
-
-deactivate ADM
-
+CTRL -> CLBREP : assignSkills(skills[])
+deactivate CTRL
+activate CLBREP
+        ref over CLBREP
+            Assign the chosen skills.
+        end ref
+CLBREP --> CTRL : collaborator
+deactivate CLBREP
+activate CTRL
+CTRL -> UI : success
+deactivate CTRL
+activate UI
+UI --> HRM : displays operation success
+deactivate UI
+deactivate HRM
 @enduml
