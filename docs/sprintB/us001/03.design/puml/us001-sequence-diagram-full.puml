@@ -5,7 +5,6 @@ skinparam shadowing false
 
 autonumber
 
-'hide footbox
 actor "HRM" as Employee
 participant ":CreateSkillUI" as UI
 participant ":CreateSkillController" as CTRL
