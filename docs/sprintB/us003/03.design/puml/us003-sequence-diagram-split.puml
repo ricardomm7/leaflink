@@ -69,29 +69,6 @@ activate CLBREP
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
 activate CTRL
-
-        ref over CTRL
-            Get Skills List
-        end ref
-CTRL --> UI : skillsList
-deactivate CTRL
-activate UI
-UI --> HRM : shows the list of skills and asks to select one or more
-HRM -> UI : select the desired skills
-UI -> CTRL : selectedSkillsList
-deactivate UI
-
-activate CTRL
-
-CTRL -> CLBREP : assignSkills(skills[])
-deactivate CTRL
-activate CLBREP
-        ref over CLBREP
-            Assign the chosen skills.
-        end ref
-CLBREP --> CTRL : collaborator
-deactivate CLBREP
-activate CTRL
 CTRL -> UI : success
 deactivate CTRL
 activate UI
