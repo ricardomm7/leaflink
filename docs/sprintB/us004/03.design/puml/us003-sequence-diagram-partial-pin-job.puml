@@ -1,0 +1,58 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "HRM" as HRM
+participant ":RegisterCollaboratorUI" as UI
+participant ":RegisterCollaboratorController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant "jobRepository:\nJobRepository" as jobRepository
+participant ":Collaborator" as CLB
+
+autonumber 28
+
+group Pin Job
+CTRL -> GlobRepo : getInstance()
+activate CTRL
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+CTRL -> PLAT : getJobRepository()
+activate PLAT
+PLAT -->  CTRL: jobRepository
+deactivate PLAT
+CTRL -> jobRepository : getJobs()
+activate jobRepository
+jobRepository --> CTRL : jobsList
+deactivate jobRepository
+CTRL -->UI : jobsList
+deactivate CTRL
+activate UI
+UI --> HRM : shows the list of jobs and asks to select one
+activate HRM
+HRM -> UI : select the desired job
+deactivate HRM
+UI -> CTRL : job
+deactivate UI
+activate CTRL
+
+CTRL ->CLBREP : assignJob(job)
+deactivate CTRL
+activate CLBREP
+
+CLBREP -> CLB : assignJob(job)
+deactivate CLBREP
+activate CLB
+CLB -> CLB : setJob(job)
+activate CLB
+CLB --> CLB
+deactivate CLB
+end
+CLB --> CLBREP : collaborator
+deactivate CLB
+activate CLBREP
+
+@enduml

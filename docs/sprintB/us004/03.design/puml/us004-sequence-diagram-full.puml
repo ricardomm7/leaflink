@@ -1,0 +1,87 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+participant "HRM" as HRM
+participant ":AssignSkillsUI" as UI
+participant ":AssignSkillsController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant ":Collaborator" as CLB
+participant "skillsRepository:\nSkillsRepository" as skillsRepository
+
+
+activate HRM
+HRM -> UI : wants to assign skills to a collaborator
+activate UI
+UI -> CTRL** : create
+
+deactivate UI
+
+CTRL -> GlobRepo : getInstance()
+activate CTRL
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+CTRL -> PLAT : getCollaboratorRepository()
+activate PLAT
+PLAT -->  CTRL: collaboratorRepository
+deactivate PLAT
+
+CTRL -> CLBREP : getCollaboratorList()
+activate CLBREP
+CLBREP --> CTRL : collaboratorList
+deactivate CLBREP
+CTRL --> UI : collaboratorList
+deactivate CTRL
+activate UI
+UI --> HRM : asks to select a collaborator
+HRM -> UI : selects a collaborator
+UI -> CTRL : collaborator
+deactivate UI
+activate CTRL
+
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+CTRL -> PLAT : getSkillsRepository()
+activate PLAT
+PLAT -->  CTRL: skillsRepository
+deactivate PLAT
+CTRL -> skillsRepository : getSkills()
+activate skillsRepository
+skillsRepository --> CTRL : skillsList
+deactivate skillsRepository
+CTRL --> UI : skillsList
+deactivate CTRL
+activate UI
+UI --> HRM : displays available skills and asks to select one or more
+HRM -> UI : select the desired skills
+UI -> CTRL : selectedSkillsList
+deactivate UI
+activate CTRL
+
+
+CTRL -> CLBREP : assignSkills(collaboratorID, selectedSkills[])
+deactivate CTRL
+activate CLBREP
+CLBREP -> CLB : assignSkills(selectedSkills[])
+activate CLB
+CLB -> CLB : setSkills(selectedSkills[])
+CLB --> CLBREP : collaborator
+deactivate CLB
+CLBREP --> CTRL : collaborator
+deactivate CLBREP
+activate CTRL
+CTRL -> UI : success
+deactivate CTRL
+activate UI
+UI --> HRM : displays operation success
+deactivate UI
+deactivate HRM
+@enduml

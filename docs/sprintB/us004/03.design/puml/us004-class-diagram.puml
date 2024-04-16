@@ -1,0 +1,34 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class HRM {
+}
+
+class AssignSkillsUI {
+
+}
+
+class AssignSkillsController {
+    +assignSkills(collaboratorId: String, skills: List<String>) : void
+    +getInstance() : Repositories
+}
+
+class Repositories {
+    +getSkillRepository() : SkillRepository
+}
+
+class SkillRepository {
+    +assignSkills(collaboratorId: String, skills: List<String>) : void
+}
+
+class Collaborator {
+    - id: String
+    - skills: List<String>
+    + Collaborator(id: String)
+    + assignSkills(skills: List<String>) : void
+    + verifySkills(skills: List<String>) : void
+}
+
+@enduml

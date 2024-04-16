@@ -1,0 +1,52 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "HRM" as Employee
+participant ":AssignSkillsUI" as UI
+participant ":AssignSkillsController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository:\nSkillRepository" as skillRepository
+
+activate Employee
+Employee -> UI : wants to assign skills to a collaborator
+activate UI
+UI -> CTRL** : assign
+UI --> Employee : asks for the collaborator ID and skills
+Employee -> UI : provides collaborator ID and skills
+UI --> Employee : shows a verification dialog
+Employee -> UI : confirms skill assignment
+
+UI -> CTRL : assignSkills(collaboratorId, skills)
+deactivate UI
+activate CTRL
+        ref over CTRL, GlobRepo, skillRepository
+            Get Skill Repository
+        end ref
+
+CTRL -> skillRepository : assignSkills(collaboratorId, skills)
+deactivate CTRL
+activate skillRepository
+
+        ref over skillRepository
+            Assign Skills to Collaborator
+        end ref
+
+    activate skillRepository
+    skillRepository --> CTRL : success
+    deactivate skillRepository
+
+CTRL --> UI : success
+deactivate CTRL
+activate UI
+UI --> Employee : displays operation success
+
+deactivate UI
+deactivate Employee
+
+@enduml
