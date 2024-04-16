@@ -8,33 +8,20 @@ autonumber
 actor "HRM" as Employee
 participant ":CreateSkillUI" as UI
 participant ":CreateSkillController" as CTRL
-participant ":Repositories" as GlobRepo
-participant "repositories\n:Repositories" as PLAT
 participant "skillRepository:\nJobRepository" as skillRepository
 participant ":Skill" as Skill
 
 activate Employee
 Employee -> UI : wants to create a new skill
 activate UI
+
 UI -> CTRL** : create
-UI --> Employee : asks for the info needed (designation)
-Employee -> UI : provides skill title and description
-UI --> Employee : shows a verification dialog
-Employee -> UI : confirms skill creation
-
-
+CTRL -> UI: requests (designation)
+UI -> Employee : requests (designation)
+Employee -> UI: designation
 UI -> CTRL : createSkill(designation)
 deactivate UI
 activate CTRL
-CTRL -> GlobRepo : getInstance()
-activate GlobRepo
-GlobRepo --> CTRL : repositories
-deactivate GlobRepo
-
-CTRL -> PLAT : getSkillRepository()
-activate PLAT
-PLAT -->  CTRL: skillRepository
-deactivate PLAT
 
 CTRL -> skillRepository : createSkill(designation)
 deactivate CTRL
@@ -48,19 +35,13 @@ activate skillRepository
     Skill -> Skill : verifyFilled(skill)
         activate Skill
         Skill -> Skill : verifySpecialCharacters(skill)
-        activate Skill
-        Skill --> Skill
-        deactivate Skill
-    Skill --> Skill
     deactivate Skill
-    'Job -> Job : addJob(job)
+
     Skill --> skillRepository : skill
+     deactivate Skill
     activate skillRepository
-    deactivate Skill
+
     skillRepository -> skillRepository : check for duplicates
-    activate skillRepository
-    skillRepository --> skillRepository
-    deactivate skillRepository
     deactivate Skill
 skillRepository --> CTRL : skill
 deactivate skillRepository
