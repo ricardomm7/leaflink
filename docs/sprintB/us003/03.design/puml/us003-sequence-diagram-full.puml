@@ -13,7 +13,6 @@ participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 participant ":Collaborator" as CLB
 participant "jobRepository:\nJobRepository" as jobRepository
-participant "skillsRepository:\nSkillsRepository" as skillsRepository
 
 
 activate HRM
@@ -101,8 +100,9 @@ activate UI
 UI --> HRM : shows the list of jobs and asks to select one
 HRM -> UI : select the desired job
 UI -> CTRL : job
-activate CTRL
 deactivate UI
+activate CTRL
+
 
 CTRL ->CLBREP : assignJob(job)
 deactivate CTRL
@@ -120,42 +120,8 @@ CLBREP --> CTRL : collaborator
 deactivate CLBREP
 activate CTRL
 
-CTRL -> GlobRepo : getInstance()
-activate GlobRepo
-GlobRepo --> CTRL : repositories
-deactivate GlobRepo
-CTRL -> PLAT : getSkillsRepository()
-activate PLAT
-PLAT -->  CTRL: skillsRepository
-deactivate PLAT
-CTRL -> skillsRepository : getSkills()
-activate skillsRepository
-skillsRepository --> CTRL : skillsList
-deactivate skillsRepository
-CTRL --> UI : skillsList
-deactivate CTRL
-activate UI
-UI --> HRM : shows the list of skills and asks to select one or more
-HRM -> UI : select the desired skills
-UI -> CTRL : selectedSkillsList
-activate CTRL
-deactivate UI
 
-CTRL -> CLBREP : assignSkills(skills[])
-deactivate CTRL
-activate CLBREP
-CLBREP -> CLB : assignSkills(skills[])
-activate CLB
-CLB -> CLB : setSkills(skills[])
-activate CLB
-CLB --> CLB
-deactivate CLB
-CLB --> CLBREP : collaborator
-deactivate CLB
-CLBREP --> CTRL : collaborator
-deactivate CLBREP
-activate CTRL
-CTRL -> UI : success
+CTRL --> UI : success
 deactivate CTRL
 activate UI
 UI --> HRM : displays operation success
