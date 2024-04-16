@@ -15,10 +15,7 @@ activate QAM
     QAM -> System : asks to run the tests
     activate System
 
-    QAM -> System : shows test results
-    activate System
-
-        System --> QAM : displays operation success
+        System --> QAM : shows test results
     deactivate System
 
 @enduml
