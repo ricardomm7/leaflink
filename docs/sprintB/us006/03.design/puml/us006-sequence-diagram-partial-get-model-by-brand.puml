@@ -6,47 +6,44 @@ skinparam shadowing false
 participant ":RegisterVehicleController" as CTRL
 participant "repositories\n:Repositories" as PLAT
 participant "brandRepository:\nBrandRepository" as BrandRepository
-participant "vehicle\n:Vehicle" as VEI
 
-autonumber 19
+autonumber 18
 -> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
 
-autonumber 19.1
+autonumber 18.1
 activate CTRL
     group Get Model by Brand
 
-        CTRL -> VEI**: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-
+CTRL -> PLAT : getModel()
             CTRL -> CTRL : getModelByBrand(brand)
-            activate CTRL
+                                activate CTRL
 
-            CTRL -> RepositorySingleton : getInstance()
-            activate RepositorySingleton
+                                    CTRL -> PLAT : getInstance()
+                                    activate PLAT
 
-            RepositorySingleton --> CTRL: repositories
-            deactivate RepositorySingleton
+                                    PLAT --> CTRL: repositories
+                                    deactivate PLAT
 
-            CTRL -> PLAT : getBrandRepository()
-            activate PLAT
+                                    CTRL -> PLAT : getBrandRepository()
+                                    activate PLAT
 
-            PLAT -> CTRL : BrandRepository
-             deactivate PLAT
+                                    PLAT -> CTRL : BrandRepository
+                                    deactivate PLAT
 
-             CTRL -> BrandRepository : getModelByBrand(brand))
-             activate BrandRepository
+                                    CTRL -> BrandRepository : getModelByBrand(brand))
+                                    activate BrandRepository
 
-             BrandRepository --> CTRL : brand
-             deactivate BrandRepository
+                                    BrandRepository --> CTRL : model
+                                    deactivate BrandRepository
 
-        CTRL --> CTRL : (brand)
-        deactivate CTRL
-
+                                CTRL --> CTRL : model
+                                deactivate CTRL
 
     end
     deactivate CTRL
 
-    autonumber 20
-    <-- CTRL : task
+    autonumber 19
+    <-- CTRL : model list
 deactivate CTRL
 
 

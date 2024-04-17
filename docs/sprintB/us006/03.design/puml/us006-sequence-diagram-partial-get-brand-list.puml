@@ -11,10 +11,10 @@ participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "brandRepository:\nBrandRepository" as BrandRepository
-autonumber 9
+autonumber 14
 
  -> CTRL : getBrand()
-autonumber 9.1
+autonumber 14.1
 
 activate CTRL
 
@@ -33,7 +33,7 @@ activate CTRL
             deactivate BrandRepository
 
     end
-    autonumber 10
+    autonumber 15
     <-- CTRL  : brandList
 deactivate CTRL
 

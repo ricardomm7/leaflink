@@ -3,23 +3,15 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":RegisterVehicleController" as CTRL
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "vehicle\n:Vehicle" as VEI
 
-autonumber 28
--> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+autonumber 24
+VehicleRepository -> VEI: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
 
-autonumber 28.1
-activate CTRL
+autonumber 24.1
+activate VEI
     group Register Vehicle
-
-          CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-                      activate VehicleRepository
-
-                          VehicleRepository -> VEI: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-                          activate VEI
-
                               VEI -> VEI: addVehicle (vehicle)
                               activate VEI
 
@@ -32,16 +24,11 @@ activate CTRL
                               VEI --> VEI
                               deactivate VEI
 
-                          VEI -> VehicleRepository: vehicle
-                          deactivate VEI
-
-                      VehicleRepository -> CTRL: vehicle
-
     end
 
-    autonumber 29
-    <-- CTRL : task
-deactivate CTRL
+    autonumber 25
+    VEI -> VehicleRepository: vehicle
+deactivate VEI
 
 
 @enduml

@@ -25,7 +25,7 @@ activate VFM
         UI -> CTRL : getVehiclesList()
         activate CTRL
 
-            ref over CTRL, VehicleRepository,PLAT, RepositorySingleton
+            ref over CTRL
                         Get Vehicle List
 
             end ref
@@ -41,7 +41,7 @@ activate VFM
         CTRL -> MaintenanceRepository: createMaintenanceReport(vehicleList)
         activate MaintenanceRepository
 
-            ref over MaintenanceRepository, MaintenanceReport
+            ref over MaintenanceRepository
                     Create Maintenance Report
 
             end ref

@@ -3,7 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Register Vehicle (US006)
 
 autonumber
 
@@ -22,8 +21,7 @@ activate VFM
     VFM -> UI : requests to register a vehicle
     activate UI
 
-                UI -> CTRL** : create
-
+        UI -> CTRL** : create
 
         UI -> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     deactivate UI
@@ -32,23 +30,29 @@ activate VFM
     activate UI
 
         UI -> CTRL : submitVehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-                activate CTRL
+        activate CTRL
 
-                    CTRL -> VEI : validateVehicleData(VIN)
+            CTRL -> VehicleRepository : validateVehicleData(VIN)
+            activate VehicleRepository
+
+                VehicleRepository -> VEI : validateVehicle(VIN)
+                activate VEI
+
+                    VEI -> VEI : validateVehicleData(VIN)
+
+                    |||
+
+                    VEI -> VEI : validateVehicleData(VIN)
                     activate VEI
 
-                        VEI -> VEI : validateVehicleData(VIN)
-
-                        |||
-
-                        VEI -> VEI : validateVehicleData(VIN)
-                        activate VEI
-
-                        VEI --> VEI
-                        deactivate VEI
-
-                    VEI -> CTRL : vehicleData
+                    VEI --> VEI
                     deactivate VEI
+
+                VEI -> VehicleRepository : vehicleData
+                deactivate VEI
+
+            VehicleRepository -> CTRL : vehicleData
+            deactivate VehicleRepository
 
         CTRL -> UI : keep vehicleData(VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         deactivate CTRL
@@ -56,54 +60,64 @@ activate VFM
         UI -> CTRL : getBrand()
         activate CTRL
 
-         ref over CTRL, RepositorySingleton, PLAT, BrandRepository
-                    Get Brand List
+             ref over CTRL
+                                Get Brand List
 
-                end ref
+                            end ref
 
             CTRL --> UI : brandList
         deactivate CTRL
 
-    UI -> VFM : show brand list and request to select more vehicleData(Brand, Model)
+    UI -> VFM : show brand list and request to select brand
     deactivate UI
 
-    VFM -> UI : select vehicle data
+    VFM -> UI : select vehicle brand
     activate UI
 
-        UI -> VFM : shows all data and requests confirmation
+    UI -> CTRL : getModel()
+    activate CTRL
+
+        ref over CTRL
+                                        Get Model List
+
+                                    end ref
+
+        CTRL -> UI: modelList
+        deactivate CTRL
+
+
+        UI -> VFM : shows vehicle model
     deactivate UI
 
-    VFM -> UI : submit data
+    VFM -> UI : select vehicle brand
     activate UI
 
         UI -> CTRL : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         activate CTRL
 
-         ref over CTRL, RepositorySingleton, PLAT, BrandRepository
-                    Get Model By Brand
-
-                end ref
-
-            deactivate BrandRepository
-
-         CTRL --> CTRL : (brand)
-
-         CTRL -> VehicleRepository: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-         activate VehicleRepository
 
             |||
+            CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+            activate VehicleRepository
 
-                ref over VehicleRepository, VEI
-                                Register Vehicle
+                VehicleRepository -> VEI: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+                activate VEI
 
-                end ref
-         VehicleRepository --> CTRL: vehicle
-         deactivate VehicleRepository
+                    ref over VEI
+                                                    Register a Vehicle
 
-         deactivate BrandRepository
+                                                end ref
+
+                VEI -> VehicleRepository: vehicle
+                deactivate VEI
+
+            VehicleRepository -> CTRL: vehicle
+            deactivate VehicleRepository
+
+
 
             CTRL -> UI: vehicle
-        deactivate CTRL
+
 
         UI --> VFM : shows success message
     deactivate UI
