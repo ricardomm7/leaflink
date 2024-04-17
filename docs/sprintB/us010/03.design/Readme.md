@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US010 - See in a pie chart which piece(s) of equipment is/are used in each day
 
 ## 3. Design - User Story Realization 
 

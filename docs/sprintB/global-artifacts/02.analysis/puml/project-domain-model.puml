@@ -68,14 +68,14 @@ class Address{
     city
 }
 
-Vehicle "1" -- "1..*" Brand : has >
+Vehicle "1" -- "1" Brand : has >
 
 HRM "1..*" -- "1..*" Skill : creates >
 
 HRM "1..*" -- "1..*" Job : creates >
 
 Collaborator  "1" -- "1"  Person : is >
-Person "1" -- "1" DocumentType : has an >
+Person "1" -- "1..*" DocumentType : has >
 HRM "1..*" -- "1..*" Collaborator : registers >
 'HRM -- "1" Job : assigns >
 Job "1" -- "1..*" Collaborator : to >

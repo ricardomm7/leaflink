@@ -1,4 +1,4 @@
-# US014 - Run tests 
+# US014 - Run tests for inputs of variable size, to observe the asymptotic behavior of the execution time of the US13
 
 
 ## 1. Requirements Engineering

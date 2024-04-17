@@ -10,6 +10,8 @@ left to right direction
 rectangle "System User" as actors {
     actor HRM
     actor VFM
+    actor GSM
+    actor QAM
 }
 
 rectangle "Use Cases" as usecases{
@@ -52,6 +54,29 @@ rectangle "Use Cases" as usecases{
     VFM --> US008
 }
 
+rectangle "Use Cases" as usecases{
+    usecase "US009 - See the exact costs referring to water consumption of specific green spaces" as US009
+    GSM --> US009
+}
 
-
+rectangle "Use Cases" as usecases{
+    usecase "US010 - See in a pie chart which piece(s) of equipment is/are used in each day" as US010
+    GSM --> US010
+}
+rectangle "Use Cases" as usecases{
+    usecase "US011 - Collect data from the user portal" as US011
+    GSM --> US011
+}
+rectangle "Use Cases" as usecases{
+    usecase "US012 - I want to import a .csv file containing routes." as US012
+    GSM --> US012
+}
+rectangle "Use Cases" as usecases{
+    usecase "US013 - Apply an algorithm that returns the routes to be opened, with minimum cost." as US013
+    GSM --> US013
+}
+rectangle "Use Cases" as usecases{
+    usecase "US014 - Run tests for inputs of variable size, to observe the asymptotic behavior of the execution time of the US13" as US014
+    QAM --> US014
+}
 @enduml
