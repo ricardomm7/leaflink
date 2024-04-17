@@ -6,6 +6,57 @@ skinparam linetype polyline
 class HRM {
 }
 
+
+class AssignSkillsUI {
+}
+
+class Repositories {
+    + getInstance()
+}
+
+class CollaboratorRepository {
+    + getCollaborator
+}
+
+class SkillsRepository {
+    + getSkills()
+}
+
+class AssignSkillsController {
+    +assignSkills(collaboratorId: String, skills: List<String>) : void
+    +getInstance() : Repositories
+}
+
+class Collaborator {
+    - name: String
+    - birthdate: Date
+    - contactMobile: String
+    - email: String
+    - address: String
+    - zipCode: String
+    - city: String
+    - documentTypes: List<DocumentType>
+    - admissionDate: Date
+    - job: Job
+    - skills: List<Skill>
+}
+
+
+class Skill {
+    - name: String
+}
+
+@enduml
+
+
+\*
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class HRM {
+}
+
 class AssignSkillsUI {
 
 }
@@ -31,4 +82,4 @@ class Collaborator {
     + verifySkills(skills: List<String>) : void
 }
 
-@enduml
+@enduml*/
