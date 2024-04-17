@@ -22,4 +22,6 @@ activate GSM
 
         System --> GSM : show the statistics
     deactivate System
+
+deactivate GSM
 @enduml
