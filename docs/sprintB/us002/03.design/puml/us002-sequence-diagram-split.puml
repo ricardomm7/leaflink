@@ -9,8 +9,6 @@ autonumber
 actor "HRM" as Employee
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
-participant ":Repositories" as GlobRepo
-participant "repositories\n:Repositories" as PLAT
 participant "jobRepository:\nJobRepository" as jobRepository
 
 activate Employee
@@ -26,7 +24,7 @@ Employee -> UI : confirms job creation
 UI -> CTRL : createJob(title, description)
 deactivate UI
 activate CTRL
-        ref over CTRL, GlobRepo, jobRepository
+        ref over CTRL
             Get Job Repository
         end ref
 
