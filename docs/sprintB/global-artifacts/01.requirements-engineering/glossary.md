@@ -90,13 +90,3 @@
 | **WC**                                       | Acronym for _Water Closet_.                                                                                                                                                                                                                                                                |
 | **Wooded Area**                              | Land covered with trees or forest shrubs.                                                                                                                                                                                                                                                  |
 | **XML**                                      | Acronym for _Extensible Markup Language_.                                                                                                                                                                                                                                                  |
-
-
-
-
-
-
-
-
-
-

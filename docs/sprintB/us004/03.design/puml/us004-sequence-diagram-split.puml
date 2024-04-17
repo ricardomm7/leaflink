@@ -12,7 +12,7 @@ participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 participant ":Collaborator" as CLB
-participant "skillsRepository:\nSkillsRepository" as skillsRepository
+
 
 
 activate HRM

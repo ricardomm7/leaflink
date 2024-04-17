@@ -5,14 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a GSM, I want to conduct a statistical analysis of water consumption costs in parks to efficiently manage expenses. The analysis will utilize data from the "WaterUsed.csv" file, which records daily water consumption (in m³) since each park's opening. The cost of water is $0.7 per m³, up to a consumption of 50 m³, with a 15% fee added for higher consumption levels. The analysis aims to:
-
-* Generate a bar plot illustrating monthly water consumption for a specified time period and park.
-* Calculate the average monthly costs of water consumption for a specified number of parks and park identification.
-* Analyze statistical indicators, including mean, median, standard deviation, and coefficient of skewness, for parks with the highest and lowest water consumption.
-* Create relative and absolute frequency tables (classified data) considering 5 classes.
-* Identify outliers in the data.
-* Visualize data through histograms with 10 classes.
+As a GSM, I want to know the exact costs referring to water consumption of specific green spaces so that I may manage these expenses efficiently. Therefore, within this user story, the aim is to carry out a statistical analysis concerning the water consumption costs in all parks. The "WaterUsed.csv" file provides the necessary data to carry out the study. This file records daily water consumption (in m³) since the day each park opened. The amount paid for water is $0.7 per m³, up to a consumption of 50 m³, with a fee of 15% added for higher consumption levels. The data file contains records of the following information: "Park Identification," "Year," "Month," "Day," "Consumption."
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -75,12 +68,7 @@ As a GSM, I want to conduct a statistical analysis of water consumption costs in
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us009-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.

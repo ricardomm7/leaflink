@@ -3,11 +3,11 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US009
 
 autonumber
 
-actor "GSM\n(Green Space Manager)" as GSM
+actor "GSM" as GSM
 participant ":System" as System
 
 activate GSM
