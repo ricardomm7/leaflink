@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+participant ":RoutesUI" as UI
+participant ":RouteController" as CTR
+participant ":RouteRepository" as Repository
+participant ":RouteCSVImporter" as Importer
+autonumber 2
+
+
+UI -> CTR : importRoutes(filePath)
+autonumber 2.1
+
+activate CTR
+
+  Group Import Routes from .csv File
+
+    CTR -> Importer : importRoutesFromCSV(filePath)
+    activate Importer
+
+
+    Importer --> CTR : routes
+    deactivate Importer
+
+    CTR -> Repository : saveRoutes(routes)
+    activate Repository
+
+    Repository --> CTR : success
+    deactivate Repository
+    end
+    autonumber 3
+
+
+CTR --> UI : displayConfirmation(success)
+deactivate CTR
+
+
+@enduml

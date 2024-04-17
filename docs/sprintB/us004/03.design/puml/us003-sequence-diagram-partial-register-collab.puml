@@ -1,0 +1,62 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant "Collaborator" as CLB
+
+autonumber 10
+--> CLBREP: createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+    group Register collaborator
+    CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+
+
+
+
+        activate CLB
+        CLB -> CLB : verifyFilled(collaborator)
+        activate CLB
+        CLB -> CLB : verifyMobile(collaborator)
+        activate CLB
+        CLB -> CLB : verifyEmail(collaborator)
+        activate CLB
+        CLB -> CLB : verifyZipCode(collaborator)
+        activate CLB
+        CLB -> CLB : verifyBirth(collaborator)
+        activate CLB
+
+        loop for all documentType objects
+        CLB -> CLB : verifyDocumentCode(collaborator)
+        activate CLB
+        CLB --> CLB
+        deactivate CLB
+        end loop
+
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+
+
+        CLB --> CLBREP : collaborator
+        deactivate CLB
+        activate CLBREP
+
+CLBREP -> CLBREP : check for duplicates (documentCode[])
+activate CLBREP
+CLBREP --> CLBREP
+deactivate CLBREP
+end
+<--CLBREP : collaborator
+deactivate CLBREP
+        deactivate CLB
+
+
+@enduml

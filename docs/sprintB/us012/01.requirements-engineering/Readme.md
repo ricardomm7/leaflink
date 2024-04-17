@@ -1,59 +1,48 @@
-# US002 - Register a Job 
+# US012 - Register a Job 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
-
+As a Green Spaces Manager (GSM), I want to import a .csv file containing lines
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>   The .csv file containing lines with Water Point X, Water Point Y, and Distance should follow a specific format.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** 
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** 
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** 
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** The .csv file must contain columns for Water Point X, Water Point Y, and Distance.
+* **AC2:** The data imported from the .csv file must be structured into a unique data structure in the system.
+* **AC3:** The system must handle errors gracefully and provide informative messages to the user in case of issues during the import process.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* None
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+* Imported data:
+    * a .csv file
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
++ confirmation message
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -61,12 +50,10 @@ As an organization employee, I want to create a new task in order to be further 
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us012-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* The imported data should be validated to ensure that it meets the required format and structure before being processed by the system
+* Error handling mechanisms should be implemented to handle cases where the .csv file is missing or contains invalid data.

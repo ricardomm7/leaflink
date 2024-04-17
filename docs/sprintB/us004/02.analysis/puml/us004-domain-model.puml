@@ -38,7 +38,7 @@ class DocumentType{
 Person "1"--"1" Address: has an >
 HRM "1" -- "1..*" Skill : assigns >
 Collaborator  "1"--"1"  Person: is a >
-Person  "1"--"1"  DocumentType: has a >
+Person  "1"--"1..*"  DocumentType: has >
 
 Skill "*" -- "1..*" Collaborator : to >
 @enduml

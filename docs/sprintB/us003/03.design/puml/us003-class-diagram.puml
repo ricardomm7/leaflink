@@ -28,10 +28,6 @@ class JobRepository {
     + getJobs()
 }
 
-class SkillsRepository {
-    + getSkills()
-}
-
 class Collaborator {
     - name: String
     - birthdate: Date
@@ -49,10 +45,6 @@ class Collaborator {
 class Job {
     - title: String
     - description: String
-}
-
-class Skill {
-    - name: String
 }
 
 class DocumentType {

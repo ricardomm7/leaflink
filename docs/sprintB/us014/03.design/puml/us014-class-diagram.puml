@@ -1,0 +1,23 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+
+class RunTestsUI{
+}
+
+class RunTestsController{
+}
+
+class RunGraphWaterPoint {
+    + runCalculus()
+}
+
+class GraphTest {
+    arrayList<Route>
+    + compareResults()
+}
+
+
+@enduml

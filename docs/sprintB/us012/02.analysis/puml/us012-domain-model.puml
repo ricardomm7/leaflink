@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US012
+
+class WaterPoint {
+    - name
+
+}
+
+class Route {
+
+    - distance:
+}
+
+class RouteCSVImporter {
+    filePath
+}
+
+Route "1" -- "2" WaterPoint: has  >
+RouteCSVImporter "1" -- "*" Route: imports >
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Green Spaces Manager (GSM)" as GSM
+participant ":RoutesUI" as UI
+participant ":RouteController" as CTR
+participant ":RouteRepository" as Repository
+participant ":RouteCSVImporter" as Importer
+
+activate GSM
+
+GSM -> UI : requests to import a .csv file
+activate UI
+
+UI -> CTR : importRoutes(filePath)
+activate CTR
+
+CTR -> Importer : importRoutesFromCSV(filePath)
+activate Importer
+
+
+Importer --> CTR : routes
+deactivate Importer
+
+CTR -> Repository : saveRoutes(routes)
+activate Repository
+
+Repository --> CTR : success
+deactivate Repository
+
+CTR --> UI : displayConfirmation(success)
+deactivate CTR
+
+UI --> GSM : displays confirmation message
+deactivate UI
+
+@enduml

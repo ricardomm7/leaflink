@@ -68,6 +68,7 @@ be appointed to a collaborator.
 >
 > **Answer:** Employee and collaborator are synonyms.
 
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All skill field must be filled in.

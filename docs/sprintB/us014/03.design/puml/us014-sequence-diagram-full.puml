@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "QAM" as QAM
+participant ":RunTestsUI" as UI
+participant ":RunTestsController" as CTRL
+participant ":GraphTest" as Test
+participant ":RunGraphWaterPoint" as RunGraphWP
+activate QAM
+
+        QAM -> UI : asks to run a test
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+            activate CTRL
+
+                CTRL -> Test : runs
+                activate Test
+
+                    Test -> RunGraphWP: send inicial values
+                activate RunGraphWP
+
+                    RunGraphWP -> RunGraphWP: runCalculus()
+                RunGraphWP --> Test : results
+                deactivate RunGraphWP
+                    Test -> Test : compareResults()
+
+                Test --> CTRL : test results
+            deactivate Test
+
+            CTRL --> UI : test results
+        deactivate CTRL
+
+    UI --> QAM : Displays passed or failed tests
+deactivate QAM
+
+@enduml

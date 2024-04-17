@@ -15,7 +15,7 @@ activate HRM
     HRM -> System : asks to create a new collaborator with a job and fundamental characteristics
     activate System
 
-        System --> HRM : requests data (collaborator information, job, job skill(s))
+        System --> HRM : requests data (collaborator information, job)
     deactivate System
 
     HRM -> System : types requested data
