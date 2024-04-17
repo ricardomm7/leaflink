@@ -13,7 +13,7 @@ from scipy import stats
 # Função para calcular o custo da água para um determinado consumo
 def calcular_custo_agua(consumo):
     taxa = 0.15
-    limite_consumo = 50
+    limite_consumo = 1000
     price = 0.7
 
     if consumo <= limite_consumo:
@@ -23,10 +23,13 @@ def calcular_custo_agua(consumo):
 
 
 # Função para imprimir o gráfico de barras representando o consumo mensal de água
-def imprimir_consumo_mensal_agua(dados, mes_inicio, mes_fim, identificacao_parque):
-    # Filtra os dados com base no período de tempo e na identificação do parque
-    dados_filtrados = dados[(dados['Month'] >= mes_inicio) & (dados['Month'] <= mes_fim) & (
-            dados['Park'] == identificacao_parque)]
+# Função para imprimir o gráfico de barras representando o consumo mensal de água
+def imprimir_consumo_mensal_agua(dados, ano, mes_inicio, mes_fim, identificacao_parque):
+    # Filtra os dados com base no ano, período de tempo e identificação do parque
+    dados_filtrados = dados[(dados['Year'] == ano) &
+                            (dados['Month'] >= mes_inicio) &
+                            (dados['Month'] <= mes_fim) &
+                            (dados['Park'] == identificacao_parque)]
 
     consumo_mensal = {}
 
@@ -46,8 +49,7 @@ def imprimir_consumo_mensal_agua(dados, mes_inicio, mes_fim, identificacao_parqu
     plt.bar(meses, consumos, color='blue')
     plt.xlabel('Mês')
     plt.ylabel('Consumo de Água (m3)')
-    plt.title('Consumo Mensal de Água para o Parque {}'.format(
-        identificacao_parque))
+    plt.title(f'Consumo Mensal de Água para o Parque {identificacao_parque} - Ano {ano}')
     plt.show()
 
 
@@ -58,11 +60,12 @@ caminho_arquivo = "water_consumption.csv"
 dados = pd.read_csv(caminho_arquivo, sep=';', decimal=',')
 
 # Input das especificações (Período de tempo e nome do Parque)
+ano = int(input("Digite o ano a analisar(2023-2024): "))
 mes_inicio = int(input("Digite o mês inicial (1-12): "))
 mes_fim = int(input("Digite o mês final (1-12): "))
 identificacao_parque = input("Digite a identificação do parque: ")
 
-imprimir_consumo_mensal_agua(dados, mes_inicio, mes_fim, identificacao_parque)
+imprimir_consumo_mensal_agua(dados,ano, mes_inicio, mes_fim, identificacao_parque)
 
 
 ####################################################################
@@ -224,21 +227,33 @@ print(
 print(tabela_frequencia_menor[[
     'Intervalos de Consumo', 'Freq. abs.', 'Freq. rel.']].to_string(index=False))
 
-# Histograma do parque com maior consumo
-plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
-plt.hist(dados_parque_maior_consumo['Consumption'],
-         bins=10, color='blue', alpha=0.7)
-plt.title(f'Histograma do parque com maior consumo - {parque_maior_consumo}')
-plt.xlabel('Consumo de Água (m3)')
-plt.ylabel('Frequência (Número de Registos)')
-plt.subplot(1, 2, 2)
+# Histograma do parque com maior consumo com 10 classes e do parque com menor consumo com 10 classes
+plt.figure(figsize=(14, 7))
 
-# Histograma do parque com menor consumo
-plt.hist(dados_parque_menor_consumo['Consumption'],
-         bins=10, color='red', alpha=0.7)
-plt.title(f'Histograma do parque com menor consumo- {parque_menor_consumo}')
+plt.subplot(2, 2, 1)
+plt.hist(dados_parque_maior_consumo['Consumption'], bins=10, color='blue', alpha=0.7)
+plt.title(f'Histograma do parque com maior consumo (10 classes) - {parque_maior_consumo}')
 plt.xlabel('Consumo de Água (m3)')
 plt.ylabel('Frequência (Número de Registos)')
+
+plt.subplot(2, 2, 2)
+plt.hist(dados_parque_menor_consumo['Consumption'], bins=10, color='red', alpha=0.7)
+plt.title(f'Histograma do parque com menor consumo (10 classes)- {parque_menor_consumo}')
+plt.xlabel('Consumo de Água (m3)')
+plt.ylabel('Frequência (Número de Registos)')
+
+# Histograma do parque com maior consumo com 100 classes e do parque com menor consumo com 100 classes
+plt.subplot(2, 2, 3)
+plt.hist(dados_parque_maior_consumo['Consumption'], bins=100, color='blue', alpha=0.7)
+plt.title(f'Histograma do parque com maior consumo (100 classes) - {parque_maior_consumo}')
+plt.xlabel('Consumo de Água (m3)')
+plt.ylabel('Frequência (Número de Registos)')
+
+plt.subplot(2, 2, 4)
+plt.hist(dados_parque_menor_consumo['Consumption'], bins=100, color='red', alpha=0.7)
+plt.title(f'Histograma do parque com menor consumo (100 classes)- {parque_menor_consumo}')
+plt.xlabel('Consumo de Água (m3)')
+plt.ylabel('Frequência (Número de Registos)')
+
 plt.tight_layout()
 plt.show()
