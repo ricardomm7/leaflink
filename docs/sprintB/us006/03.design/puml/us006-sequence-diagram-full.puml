@@ -35,21 +35,13 @@ activate VFM
             CTRL -> VehicleRepository : validateVehicleData(VIN)
             activate VehicleRepository
 
-                VehicleRepository -> VEI : validateVehicle(VIN)
-                activate VEI
+            VehicleRepository -> VehicleRepository: validateVehicleData(VIN)
+            activate VehicleRepository
 
-                    VEI -> VEI : validateVehicleData(VIN)
+            VehicleRepository -> VehicleRepository
+            deactivate VehicleRepository
 
-                    |||
 
-                    VEI -> VEI : validateVehicleData(VIN)
-                    activate VEI
-
-                    VEI --> VEI
-                    deactivate VEI
-
-                VEI -> VehicleRepository : vehicleData
-                deactivate VEI
 
             VehicleRepository -> CTRL : vehicleData
             deactivate VehicleRepository
@@ -126,7 +118,7 @@ activate VFM
             CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
             activate VehicleRepository
 
-                VehicleRepository -> VEI: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+                VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
                 activate VEI
 
                     VEI -> VEI: addVehicle (vehicle)

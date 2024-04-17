@@ -9,7 +9,7 @@ _**Note that SSD - Alternative One is adopted.**_
 | Interaction ID | Question: Which class is responsible for...      | Answer                    | Justification (with patterns)                                                                                 |
 |:---------------|:-------------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------|
 | Step 1  		     | 	... interacting with the actor?                 | RegisterVehicleUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        | 	... coordinating the US?                        | RegisterVehicleController | Controller                                                                                                    |
+| 			  		        | 	... coordinating the US?                        | RegisterVehicleController | Controller: responsible for coordinating and controlling the flow of interaction.                             |
 | 			  		        | 	... instantiating a new Vehicle?                | Vehicle                   | Creator : in the DM, a Vehicle is created during the registration process.                                    |
 | 			  		        | ... knowing the user using the system?           | UserSession               | IE: cf. Authentication & Authorization component documentation.                                               |
 | 			  		        | ... knowing the brand of the vehicle							      | BrandRepository           | IE: The BrandRepository retrieves brand information from the data source.                                     |
@@ -26,20 +26,20 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... handling persistence of vehicle data ?       | VehicleRepository         | Creator (Rule 1): The VehicleRepository manages the persistence of vehicle data.                              |
 | Step 7  		     | 	... validating all data (local validation)?     | Vehicle                   | IE: The Vehicle object performs local validation on its attributes.                                           | 
 | 			  		        | 	... validating all data (global validation)?    | VehicleRepository         | Repository (Rule 2): global validation often involves querying data from multiple sources.                    | 
-| 			  		        | 	... saving the vehicle registed?                | Vehicle                   | IE: The Vehicle object encapsulates its data and handles persistence.                                         | 
+| 			  		        | 	... saving the vehicle register?                | Vehicle                   | IE: The Vehicle object encapsulates its data and handles persistence.                                         | 
 | Step 8  		     | 	... informing operation success?                | RegisterVehicleUI         | IE: The RegisterVehicleUI class handles user interaction and displays success/error messages.                 | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Vehicle
+
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* RegisterVehicleUI  
+* RegisterVehicleController
 
 
 ## 3.2. Sequence Diagram (SD)

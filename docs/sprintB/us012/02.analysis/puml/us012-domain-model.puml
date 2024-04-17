@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
+left to right direction
 
 skinparam classAttributeIconSize 0
 
@@ -13,13 +13,13 @@ hide methods
 title Domain Model - US012
 
 class WaterPoint {
-    - name
+    name
 
 }
 
 class Route {
 
-    - distance:
+    distance
 }
 
 class RouteCSVImporter {

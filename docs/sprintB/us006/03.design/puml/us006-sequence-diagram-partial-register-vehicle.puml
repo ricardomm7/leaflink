@@ -13,16 +13,7 @@ autonumber 24.1
 activate VEI
     group Register Vehicle
                               VEI -> VEI: addVehicle (vehicle)
-                              activate VEI
 
-                              VEI -> VEI: validateVehicle(vehicle))
-                              activate VEI
-
-                              VEI --> VEI
-                              deactivate VEI
-
-                              VEI --> VEI
-                              deactivate VEI
 
     end
 

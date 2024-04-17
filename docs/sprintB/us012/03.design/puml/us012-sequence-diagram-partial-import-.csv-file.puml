@@ -6,38 +6,38 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-participant ":RoutesUI" as UI
-participant ":RouteController" as CTR
 participant ":RouteRepository" as Repository
-participant ":RouteCSVImporter" as Importer
-autonumber 2
+participant ":Route" as Importer
+autonumber 3
 
 
-UI -> CTR : importRoutes(filePath)
-autonumber 2.1
+ -> Repository : importRoutes(filePath)
+autonumber 3.1
 
-activate CTR
+activate Repository
 
   Group Import Routes from .csv File
 
-    CTR -> Importer : importRoutesFromCSV(filePath)
-    activate Importer
+    Repository -> Importer: importRoutesFromCSV(filePath)
+        activate Importer
+
+        Importer --> Repository: routes
+        deactivate Importer
 
 
-    Importer --> CTR : routes
-    deactivate Importer
-
-    CTR -> Repository : saveRoutes(routes)
+    Repository -> Repository: validateRoutes(routes)
     activate Repository
 
-    Repository --> CTR : success
-    deactivate Repository
+        Repository --> Repository
+        deactivate Repository
+
+
     end
-    autonumber 3
+    autonumber 4
 
 
-CTR --> UI : displayConfirmation(success)
-deactivate CTR
+     <-- Repository  : routes
+deactivate Repository
 
 
 @enduml

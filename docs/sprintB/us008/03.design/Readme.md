@@ -9,7 +9,7 @@ _**Note that SSD - Alternative One is adopted.**_
 | Interaction ID | Question: Which class is responsible for...    | Answer                    | Justification (with patterns)                                                                                 |
 |:---------------|:-----------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------|
 | Step 1  		     | ... interacting with the actor?                | ListMaintenanceUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 	  		          | ... coordinating the US?                       | ListMaintenanceController | Controller                                                                                                    |
+| 	  		          | ... coordinating the US?                       | ListMaintenanceController | Controller: responsible for coordinating and controlling the flow of interaction.                             |
 | 			  		        | ... instantiating a new MaintenanceReport?     | MaintenanceReport         | Creator (Rule 1): in the DM MaintenanceReport is directly created.                                            |
 | 			  		        | ... knowing the user using the system?         | UserSession               | IE: cf. A&A component documentation.                                                                          |
 | 			  		        | 							                                        | Organization              | IE: knows/has its own Employees                                                                               |
@@ -28,13 +28,12 @@ _**Note that SSD - Alternative One is adopted.**_
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* MaintenanceReport
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* ListMaintenanceUI  
+* ListMaintenanceController
 
 
 ## 3.2. Sequence Diagram (SD)

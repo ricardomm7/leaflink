@@ -7,26 +7,28 @@ autonumber
 
 'hide footbox
 actor "Green Spaces Manager (GSM)" as GSM
-participant ":RoutesUI" as UI
+participant ":RouteUI" as UI
 participant ":RouteController" as CTR
-participant ":RouteRepository" as Repository
-participant ":RouteCSVImporter" as Importer
+participant ":Route" as Repository
 
 activate GSM
 
 GSM -> UI : requests to import a .csv file
 activate UI
 
-UI -> CTR : importRoutes(filePath)
+UI -> CTR : creates
 activate CTR
 
+CTR -> Repository : importRoutes(filePath)
+activate Repository
 
-    ref over CTR, Repository, Importer
+
+    ref over Repository
                         Import Routes from .csv File
 
                     end
-
-
+Repository --> CTR: routes
+deactivate Repository
 
 CTR --> UI : displayConfirmation(success)
 deactivate CTR

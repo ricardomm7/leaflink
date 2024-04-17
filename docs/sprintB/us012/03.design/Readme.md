@@ -6,35 +6,35 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...   | Answer          | Justification (with patterns)                                                                                 |
+|:---------------|:----------------------------------------------|:----------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?              | RouteUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		        | 	... coordinating the US?                     | RouteController | Controller: responsible for coordinating and controlling the flow of interaction.                             |
+| 			  		        | 	... instantiating a new Route?               | RouteRepository | Creator (Rule 1): the Repository creates instances of routes based on the imported data.                      |
+| 			  		        | ... knowing the user using the system?        | UserSession     | IE: cf. A&A component documentation.                                                                          |
+| 			  		        | 							                                       | RouteRepository | IE: knows/has its own Routes                                                                                  |
+| 			  		        | 							                                       | Route           | IE: knows its own data (WaterPoint, Distance)                                                                 |
+| Step 2  		     | 	... processing the imported CSV file?					   | RouteRepository | The Repository class processes the imported CSV file to extract route data.                                   |
+| Step 3  		     | 	...saving the inputted data?                 | RouteRepository | IE: The repository persists the routes data.                                                                  |
+| Step 4  		     | 	...knowing the task categories to show?      | System          | IE: Task Categories are defined by the Administrators.                                                        |
+| Step 5  		     | 	... saving the selected category?            | RouteRepository | IE: The repository associates the selected category with the imported routes.                                 |
+| Step 6  		     | 							                                       |                 |                                                                                                               |              
+| Step 7  		     | 	... validating all data (local validation)?  | Routes          | IE: owns its data.                                                                                            | 
+| 			  		        | 	... validating all data (global validation)? | RouteRepository | IE: The repository ensures the overall consistency and integrity of the imported routes data                  | 
+| 			  		        | 	... saving the imported route?               | RouteRepository | IE: The repository persists the imported routes data                                                          | 
+| Step 8  		     | 	... informing operation success?             | RouteUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
+* RouteRepository
 * Task
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* RouteUI  
+* RoteController
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -45,7 +45,7 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us012-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -53,7 +53,11 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us012-sequence-diagram-split.svg)
+
+**Import .csv File Partial SD**
+![Sequence Diagram - Partial - Import .csv File](svg/us012-sequence-diagram-partial-import-.vsc-file.svg)
+
 
 **Get Task Category List Partial SD**
 
@@ -73,4 +77,4 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us012-class-diagram.svg)
