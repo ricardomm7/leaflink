@@ -1,8 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
 from scipy import stats
+
 
 ####################################################################
 ####################################################################
@@ -11,26 +11,23 @@ from scipy import stats
 ####################################################################
 
 # Função para calcular o custo da água para um determinado consumo
-
-
 def calcular_custo_agua(consumo):
     taxa = 0.15
     limite_consumo = 50
-    preço = 0.7
+    price = 0.7
 
     if consumo <= limite_consumo:
-        return consumo * preço
+        return consumo * price
     else:
-        return (consumo * preço) + (consumo * taxa)
+        return (consumo * price) + (limite_consumo - consumo * taxa)
 
 
 # Função para imprimir o gráfico de barras representando o consumo mensal de água
 def imprimir_consumo_mensal_agua(dados, mes_inicio, mes_fim, identificacao_parque):
     # Filtra os dados com base no período de tempo e na identificação do parque
     dados_filtrados = dados[(dados['Month'] >= mes_inicio) & (dados['Month'] <= mes_fim) & (
-        dados['Park'] == identificacao_parque)]
+            dados['Park'] == identificacao_parque)]
 
-    # Agrupa os dados filtrados por mês e calcula o consumo total para cada mês
     consumo_mensal = {}
 
     # Agrupa os dados pelo mês e calcula a soma do consumo para cada mês
@@ -104,7 +101,7 @@ num_parques = int(input("\nDigite o número de parques a serem analisados: "))
 
 custos_medios_parques = calcular_custos_medios_mensais(dados, num_parques)
 for parque, custo_medio in custos_medios_parques.items():
-    print(f"Custo Médio Mensal para {parque}: {custo_medio:.2f}€")
+    print(f"\nCusto Médio Mensal para {parque}: {custo_medio:.2f}€")
 
 
 ####################################################################
@@ -115,10 +112,10 @@ for parque, custo_medio in custos_medios_parques.items():
 
 # Função para calcular as estatísticas
 def calcular_estatisticas(dados):
-    mean = np.mean(dados['Consumption'])
-    median = np.median(dados['Consumption'])
-    std_dev = np.std(dados['Consumption'])
-    skewness = stats.skew(dados['Consumption'])
+    mean = round(np.mean(dados['Consumption']), 2)
+    median = round(np.median(dados['Consumption']),2)
+    std_dev = round(np.std(dados['Consumption']),2)
+    skewness = round(stats.skew(dados['Consumption']),2)
 
     return mean, median, std_dev, skewness
 
@@ -156,9 +153,8 @@ mean_menor, median_menor, std_dev_menor, skewness_menor = calcular_estatisticas(
 outliers_maior = verificar_outliers(dados_parque_maior_consumo)
 outliers_menor = verificar_outliers(dados_parque_menor_consumo)
 
+
 # Função para construir tabela de frequência
-
-
 def construir_tabela_frequencia(dados, num_classes):
     intervalos = pd.cut(dados, bins=num_classes, include_lowest=True)
     frequencia_absoluta = intervalos.value_counts().sort_index()
@@ -172,36 +168,39 @@ def construir_tabela_frequencia(dados, num_classes):
 
 
 # Função para construir tabela com informações sobre os parques
-def construir_tabelas_informacoes(dados_parque):
-    media, mediana, desvio_padrao, assimetria = calcular_estatisticas(
-        dados_parque)
-    existe_outliers = verificar_outliers(dados_parque)
+def construir_tabela_informacoes(parque_menor, dados_parque_menor, parque_maior, dados_parque_maior):
+    media_menor, mediana_menor, desvio_padrao_menor, assimetria_menor = calcular_estatisticas(dados_parque_menor)
+    media_maior, mediana_maior, desvio_padrao_maior, assimetria_maior = calcular_estatisticas(dados_parque_maior)
 
-    if existe_outliers.empty:
-        outliers = "Não"
+    outliers_menor = verificar_outliers(dados_parque_menor)
+    outliers_maior = verificar_outliers(dados_parque_maior)
+
+    if outliers_menor.empty:
+        outliers_menor = "Não"
     else:
-        outliers = "Sim"
+        outliers_menor = "Sim"
 
-    tabela_info = pd.DataFrame({'Média': [media], 'Mediana': [mediana], 'Desvio Padrão': [desvio_padrao],
-                                'Assimetria': [assimetria], 'Existência de Outliers': [outliers]})
+    if outliers_maior.empty:
+        outliers_maior = "Não"
+    else:
+        outliers_maior = "Sim"
+
+    tabela_info = pd.DataFrame({
+        'Parque': [parque_menor, parque_maior],
+        'Descrição': ['Menor Consumo', 'Maior Consumo'],
+        'Média': [media_menor, media_maior],
+        'Mediana': [mediana_menor, mediana_maior],
+        'Desvio Padrão': [desvio_padrao_menor, desvio_padrao_maior],
+        'Coeficiente de Assimetria': [assimetria_menor, assimetria_maior],
+        'Existência de Outliers': [outliers_menor, outliers_maior]
+    })
+
     return tabela_info
 
 
-tabela_info_menor_consumo = construir_tabelas_informacoes(
-    dados_parque_menor_consumo)
-tabela_info_maior_consumo = construir_tabelas_informacoes(
-    dados_parque_maior_consumo)
-
-print(f"Tabela de dados - Parque com Maior Consumo: {parque_maior_consumo}")
-print(tabela_info_maior_consumo[[
-    'Média', 'Mediana', 'Desvio Padrão', 'Assimetria', 'Existência de Outliers']])
-print(verificar_outliers(dados_parque_maior_consumo))
-
-
-print(f"\nTabela de dados - Parque com Menor Consumo: {parque_menor_consumo}")
-print(tabela_info_menor_consumo[[
-    'Média', 'Mediana', 'Desvio Padrão', 'Assimetria', 'Existência de Outliers']])
-print(verificar_outliers(dados_parque_menor_consumo))
+# Construir tabela de dados para os parques com maior e menor consumo
+tabela_info = construir_tabela_informacoes(parque_menor_consumo, dados_parque_menor_consumo, parque_maior_consumo,
+                                           dados_parque_maior_consumo)
 
 
 # Construir tabelas de frequências para os parques com maior e menor consumo
@@ -210,16 +209,20 @@ tabela_frequencia_maior = construir_tabela_frequencia(dados_parque_maior_consumo
 tabela_frequencia_menor = construir_tabela_frequencia(dados_parque_menor_consumo['Consumption'],
                                                       num_classes=5).reset_index(drop=True)
 
+# Exibir a tabela de informações
+print("\nTabela de Dados dos Parques:")
+print(tabela_info.to_string(index=False))
+
+# Exibir as tabelas de frequencias
 print(
     f"\nTabela de Frequência - Parque com Maior Consumo: {parque_maior_consumo}")
 print(tabela_frequencia_maior[[
-    'Intervalos de Consumo', 'Freq. abs.', 'Freq. rel.']])
-
+    'Intervalos de Consumo', 'Freq. abs.', 'Freq. rel.']].to_string(index=False))
 
 print(
     f"\nTabela de Frequência - Parque com Menor Consumo: {parque_menor_consumo}")
 print(tabela_frequencia_menor[[
-    'Intervalos de Consumo', 'Freq. abs.', 'Freq. rel.']])
+    'Intervalos de Consumo', 'Freq. abs.', 'Freq. rel.']].to_string(index=False))
 
 # Histograma do parque com maior consumo
 plt.figure(figsize=(10, 5))
