@@ -30,13 +30,13 @@ CTRL -> PLAT : getModel()
                                     PLAT -> CTRL : BrandRepository
                                     deactivate PLAT
 
-                                    CTRL -> BrandRepository : getModelByBrand(brand))
+                                    CTRL -> BrandRepository : getModelByBrand(brand)
                                     activate BrandRepository
 
-                                    BrandRepository --> CTRL : model
+                                    BrandRepository --> CTRL : modelList
                                     deactivate BrandRepository
 
-                                CTRL --> CTRL : model
+                                CTRL --> CTRL : modelList
                                 deactivate CTRL
 
     end

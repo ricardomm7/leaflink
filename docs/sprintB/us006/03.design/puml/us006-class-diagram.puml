@@ -23,7 +23,6 @@ class Vehicle {
 
 class Brand {
     - model
-
     + Brand(model)
 }
 
@@ -34,7 +33,7 @@ class VehicleRepository {
 
 class BrandRepository {
     + getBrands()
-    + getModelByBrand(brand)
+    + getModelByBrand()
 }
 
 class Repositories {
@@ -51,6 +50,11 @@ class RegisterVehicleController {
 }
 
 class RegisterVehicleUI {
+    - brandList
+    - modelList
+    + getBrand()
+    + getModel(
+    + registerVehicle()
 }
 
 VFM -> RegisterVehicleUI

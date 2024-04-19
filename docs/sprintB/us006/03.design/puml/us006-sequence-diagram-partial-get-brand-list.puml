@@ -20,17 +20,26 @@ activate CTRL
 
     group Get Brand List
 
-            CTRL -> PLAT : getBrandRepository()
-            activate PLAT
+            CTRL -> RepositorySingleton : getInstance()
+                            activate RepositorySingleton
 
-            PLAT --> CTRL: BrandRepository
-            deactivate PLAT
+                            RepositorySingleton --> CTRL: repositories
+                            deactivate RepositorySingleton
 
-            CTRL -> BrandRepository : getBrands()
-            activate BrandRepository
+                            CTRL -> PLAT : getBrandRepository()
+                            activate PLAT
 
-            BrandRepository --> CTRL : brandList
-            deactivate BrandRepository
+                            PLAT -> CTRL : BrandRepository
+                            deactivate PLAT
+
+                            CTRL -> BrandRepository : getBrandList(brand))
+                            activate BrandRepository
+
+                            BrandRepository --> CTRL : brandList
+                            deactivate BrandRepository
+
+                            CTRL --> CTRL : brandList
+                            deactivate CTRL
 
     end
     autonumber 15
