@@ -91,18 +91,17 @@ while ano not in anos_unicos:
 mes_inicio = int(input("Digite o mês inicial (1-12): "))
 mes_fim = int(input("Digite o mês final (1-12): "))
 # Verificação dos meses
-while mes_inicio > mes_fim or mes_inicio <= 0 or mes_fim<=0 or mes_inicio>12 or mes_fim>12:
+while mes_inicio > mes_fim or mes_inicio <= 0 or mes_fim <= 0 or mes_inicio > 12 or mes_fim > 12:
     print('\nOs dados relativos aos meses de análise estão inválidos, por favor insira de novo. \n')
     mes_inicio = int(input("Digite o mês inicial (1-12): "))
     mes_fim = int(input("Digite o mês final (1-12): "))
-
 
 identificacao_parque = input("Digite a identificação do parque para o gráfico de consumo de água: ")
 while identificacao_parque not in parques_unicos:
     print('\nO parque fornecido não se encontra na lista de parques do ficheiro csv dado.\n')
     identificacao_parque = input("Digite a identificação do parque para o gráfico de consumo de água: ")
 
-imprimir_consumo_mensal_agua(dados,ano, mes_inicio, mes_fim, identificacao_parque)
+imprimir_consumo_mensal_agua(dados, ano, mes_inicio, mes_fim, identificacao_parque)
 
 
 ####################################################################
@@ -120,7 +119,7 @@ def calcular_custos_medios_mensais(dados, num_parques, parq_unic):
         while identificacao_parque not in parq_unic:
             print('\nO parque fornecido não se encontra na lista de parques do ficheiro csv dado.\n')
             identificacao_parque = input("Digite a identificação do parque: ")
-            
+
         # Filtra os dados com base na identificação do parque especificada
         dados_filtrados = dados[dados['Park']
                                 == identificacao_parque]
@@ -142,7 +141,7 @@ def calcular_custos_medios_mensais(dados, num_parques, parq_unic):
 # Input do número de parques a serem analisados
 num_parques = int(input("\nDigite o número de parques a serem analisados: "))
 # Verificação número de parques inseridos
-while num_parques > numero_de_parques or num_parques <= 0 :
+while num_parques > numero_de_parques or num_parques <= 0:
     num_parques = int(input("\nO valor inserido é inválido.\n\n Digite o número de parques a serem analisados: "))
 
 custos_medios_parques = calcular_custos_medios_mensais(dados, num_parques, parques_unicos)
@@ -159,9 +158,9 @@ for parque, custo_medio in custos_medios_parques.items():
 # Função para calcular as estatísticas
 def calcular_estatisticas(dados):
     mean = round(np.mean(dados['Consumption']), 2)
-    median = round(np.median(dados['Consumption']),2)
-    std_dev = round(np.std(dados['Consumption']),2)
-    skewness = round(stats.skew(dados['Consumption']),2)
+    median = round(np.median(dados['Consumption']), 2)
+    std_dev = round(np.std(dados['Consumption']), 2)
+    skewness = round(stats.skew(dados['Consumption']), 2)
 
     return mean, median, std_dev, skewness
 
@@ -244,10 +243,26 @@ def construir_tabela_informacoes(parque_menor, dados_parque_menor, parque_maior,
     return tabela_info
 
 
+def imprimir_tabela_formatada(tabela):
+    # Imprime o cabeçalho da tabela
+    header = tabela.columns.tolist()
+    print('{:<25}'.format(header[0]), end='')
+    for coluna in header[1:]:
+        print('|{:^25}'.format(coluna), end='')
+    print('\n' + '-' * (25 * len(header) + len(header) - 1))
+
+    # Imprime o conteúdo da tabela
+    for i in range(len(tabela)):
+        linha = tabela.iloc[i].tolist()
+        print('{:<25}'.format(linha[0]), end='')
+        for valor in linha[1:]:
+            print('|{:^25}'.format(valor), end='')
+        print()
+
+
 # Construir tabela de dados para os parques com maior e menor consumo
 tabela_info = construir_tabela_informacoes(parque_menor_consumo, dados_parque_menor_consumo, parque_maior_consumo,
                                            dados_parque_maior_consumo)
-
 
 # Construir tabelas de frequências para os parques com maior e menor consumo
 tabela_frequencia_maior = construir_tabela_frequencia(dados_parque_maior_consumo['Consumption'],
@@ -257,18 +272,16 @@ tabela_frequencia_menor = construir_tabela_frequencia(dados_parque_menor_consumo
 
 # Exibir a tabela de informações
 print("\nTabela de Dados dos Parques:")
-print(tabela_info.to_string(index=False))
+imprimir_tabela_formatada(tabela_info)
 
 # Exibir as tabelas de frequencias
 print(
     f"\nTabela de Frequência - Parque com Maior Consumo: {parque_maior_consumo}")
-print(tabela_frequencia_maior[[
-    'Intervalos de Consumo', 'Freq. abs.', 'Freq. rel.']].to_string(index=False))
+imprimir_tabela_formatada(tabela_frequencia_maior)
 
 print(
     f"\nTabela de Frequência - Parque com Menor Consumo: {parque_menor_consumo}")
-print(tabela_frequencia_menor[[
-    'Intervalos de Consumo', 'Freq. abs.', 'Freq. rel.']].to_string(index=False))
+imprimir_tabela_formatada(tabela_frequencia_menor)
 
 # Histograma do parque com maior consumo com 10 classes e do parque com menor consumo com 10 classes
 plt.figure(figsize=(14, 7))
