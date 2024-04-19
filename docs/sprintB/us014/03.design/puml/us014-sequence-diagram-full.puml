@@ -5,7 +5,7 @@ skinparam shadowing false
 
 autonumber
 
-'hide footbox
+
 actor "QAM" as QAM
 participant ":RunTestsUI" as UI
 participant ":RunTestsController" as CTRL
@@ -17,8 +17,7 @@ activate QAM
 
         activate UI
 
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
+
             UI -> CTRL** : create
             activate CTRL
 
