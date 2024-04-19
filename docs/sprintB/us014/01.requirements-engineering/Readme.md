@@ -29,24 +29,23 @@ algorithm
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** The graphic referring to the asymptotic behavior of the
+  execution running time tests should be presented in a time unit
+  that allows to distinguish the running times of all tested examples.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US013 - ALTERAÇÃO FUTURA" as there must be at least one algorithm applied to run the tests.
+* There is a dependency on US013 as there must be at least one algorithm applied to run the tests.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * ALTERAÇÃO FUTURA
+    * none
 	
 * Selected data:
-    * ALTERAÇÃO FUTURA
-
+    * none
 **Output Data:**
 
 * Test results
@@ -61,4 +60,4 @@ algorithm
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* none
