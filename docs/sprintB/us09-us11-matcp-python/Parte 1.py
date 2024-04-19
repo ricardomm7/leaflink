@@ -296,7 +296,7 @@ plt.subplot(2, 2, 4)
 plt.hist(dados_parque_menor_consumo['Consumption'], bins=100, color='red', alpha=0.7)
 plt.title(f'Histograma do parque com menor consumo (100 classes)- {parque_menor_consumo}')
 plt.xlabel('Consumo de Água (m3)')
-plt.ylabel('Frequência (Número de Registos)')
+plt.ylabel('Frequência  (Número de Registos)')
 
 plt.tight_layout()
 plt.show()
