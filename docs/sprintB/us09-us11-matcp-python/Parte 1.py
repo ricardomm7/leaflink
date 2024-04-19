@@ -19,7 +19,10 @@ def calcular_custo_agua(consumo):
     if consumo <= limite_consumo:
         return consumo * price
     else:
-        return (consumo * price) + (limite_consumo - consumo * taxa)
+        custo_ate_limite = limite_consumo * price
+        consumo_excedente = consumo - limite_consumo
+        custo_excedente = consumo_excedente * (price + (price * taxa))
+    return custo_ate_limite + custo_excedente
 
 
 # Função para imprimir o gráfico de barras representando o consumo mensal de água
@@ -59,11 +62,45 @@ caminho_arquivo = "water_consumption.csv"
 # Lê o arquivo CSV em um DataFrame, substituindo vírgulas por pontos nos valores da coluna 'Consumption'
 dados = pd.read_csv(caminho_arquivo, sep=';', decimal=',')
 
+# Verificar quantos parques tem no ficheiro
+# Crie um conjunto vazio para armazenar os nomes únicos dos parques
+parques_unicos = set()
+# Percorra todas as linhas do DataFrame
+for nome_park in dados['Park']:
+    # Adicione o nome do parque ao conjunto de parques únicos
+    parques_unicos.add(nome_park)
+# Agora, o tamanho do conjunto parques_unicos representa o número de parques únicos
+numero_de_parques = len(parques_unicos)
+print("No ficheiro dado, existem", numero_de_parques, "parques.")
+
+# Verificar os anos que existem no ficheiro
+# Crie um conjunto vazio para armazenar os anos
+anos_unicos = set()
+# Percorra todas as linhas do DataFrame
+for anos in dados['Year']:
+    # Adicione ano ao conjunto
+    anos_unicos.add(anos)
+
 # Input das especificações (Período de tempo e nome do Parque)
 ano = int(input("Digite o ano a analisar(2023-2024): "))
+# Verificação dos anos
+while ano not in anos_unicos:
+    print('\nO ano inserido não está no ficheiro dado.\n')
+    ano = int(input("Digite o ano a analisar(2023-2024): "))
+
 mes_inicio = int(input("Digite o mês inicial (1-12): "))
 mes_fim = int(input("Digite o mês final (1-12): "))
-identificacao_parque = input("Digite a identificação do parque: ")
+# Verificação dos meses
+while mes_inicio > mes_fim or mes_inicio <= 0 or mes_fim<=0 or mes_inicio>12 or mes_fim>12:
+    print('\nOs dados relativos aos meses de análise estão inválidos, por favor insira de novo. \n')
+    mes_inicio = int(input("Digite o mês inicial (1-12): "))
+    mes_fim = int(input("Digite o mês final (1-12): "))
+
+
+identificacao_parque = input("Digite a identificação do parque para o gráfico de consumo de água: ")
+while identificacao_parque not in parques_unicos:
+    print('\nO parque fornecido não se encontra na lista de parques do ficheiro csv dado.\n')
+    identificacao_parque = input("Digite a identificação do parque para o gráfico de consumo de água: ")
 
 imprimir_consumo_mensal_agua(dados,ano, mes_inicio, mes_fim, identificacao_parque)
 
@@ -75,12 +112,15 @@ imprimir_consumo_mensal_agua(dados,ano, mes_inicio, mes_fim, identificacao_parqu
 ####################################################################
 
 # Função para calcular os custos médios mensais relacionados ao consumo de água
-def calcular_custos_medios_mensais(dados, num_parques):
+def calcular_custos_medios_mensais(dados, num_parques, parq_unic):
     custos_medios_parques = {}
 
     for _ in range(num_parques):
         identificacao_parque = input("Digite a identificação do parque: ")
-
+        while identificacao_parque not in parq_unic:
+            print('\nO parque fornecido não se encontra na lista de parques do ficheiro csv dado.\n')
+            identificacao_parque = input("Digite a identificação do parque: ")
+            
         # Filtra os dados com base na identificação do parque especificada
         dados_filtrados = dados[dados['Park']
                                 == identificacao_parque]
@@ -101,8 +141,11 @@ def calcular_custos_medios_mensais(dados, num_parques):
 
 # Input do número de parques a serem analisados
 num_parques = int(input("\nDigite o número de parques a serem analisados: "))
+# Verificação número de parques inseridos
+while num_parques > numero_de_parques or num_parques <= 0 :
+    num_parques = int(input("\nO valor inserido é inválido.\n\n Digite o número de parques a serem analisados: "))
 
-custos_medios_parques = calcular_custos_medios_mensais(dados, num_parques)
+custos_medios_parques = calcular_custos_medios_mensais(dados, num_parques, parques_unicos)
 for parque, custo_medio in custos_medios_parques.items():
     print(f"\nCusto Médio Mensal para {parque}: {custo_medio:.2f}€")
 
