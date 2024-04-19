@@ -21,7 +21,7 @@ activate CTRL
 
 CTRL -> skillRepository : createSkill(designation)
 activate skillRepository
-    group Create skill
+
     skillRepository -> Skill** : create(designation)
     deactivate skillRepository
 
@@ -38,7 +38,7 @@ activate skillRepository
 
     skillRepository -> skillRepository : check for duplicates
     deactivate Skill
-    end
+
     CTRL <-- skillRepository : skill
     deactivate CTRL
 
