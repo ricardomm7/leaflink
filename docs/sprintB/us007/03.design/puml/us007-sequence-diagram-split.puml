@@ -7,7 +7,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
+actor "VFM" as VFM
 participant ":RegisterMaintenanceUI" as UI
 participant ":RegisterMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -37,7 +37,7 @@ activate VFM
             UI --> VFM : displays vehicle List
             deactivate UI
 
-            VFM -> UI : Chooses vehicle
+            VFM -> UI : chooses vehicle
             activate UI
 
             UI -> CTRL : vehicle
@@ -49,7 +49,7 @@ activate VFM
             UI --> VFM : requests data (date, current Km)
             deactivate
 
-            VFM -> UI : Types data (date, current Km)
+            VFM -> UI : types data (date, current Km)
             activate UI
 
             UI -> CTRL : data (date, current Km)
@@ -71,7 +71,7 @@ activate VFM
                deactivate
                CTRL --> UI : maintenance
                deactivate
-               UI --> VFM : Displays maintenance data
+               UI --> VFM : displays maintenance data
                UI --> VFM : requests confirmation
                deactivate
                VFM -> UI : confirms data

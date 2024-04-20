@@ -4,7 +4,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber
+autonumber 3
 
 
 participant ":RegisterMaintenanceController" as CTRL
