@@ -3,7 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-
 autonumber
 
 'hide footbox
@@ -13,7 +12,8 @@ participant ":ListMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
+participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
+
 activate VFM
 
     VFM -> UI : requests to list vehicles needing maintenance
@@ -21,33 +21,53 @@ activate VFM
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesList()
+        UI -> CTRL : getVehicleList()
         activate CTRL
 
-            ref over CTRL
-                        Get Vehicle List
+        ref over CTRL
+                                        Get Vehicle List
 
-            end ref
+                                    end ref
+
+
 
             CTRL --> UI : vehicleList
         deactivate CTRL
 
 
-        UI -> CTRL : createMaintenanceReport(vehiclesList)
+        UI -> CTRL : generateMaintenanceReport(vehiclesList)
         activate CTRL
 
-        CTRL -> MaintenanceRepository: createMaintenanceReport(vehicleList)
-        activate MaintenanceRepository
+            CTRL -> CTRL : createMaintenanceReport(vehiclesList)
+            activate CTRL
 
-            ref over MaintenanceRepository
-                    Create Maintenance Report
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
 
-            end ref
-        MaintenanceRepository --> CTRL: maintenanceReport
-        deactivate MaintenanceRepository
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
 
-        CTRL --> CTRL : maintenanceReport
+                CTRL -> PLAT : getVehicleRepository()
+                activate PLAT
 
+                    PLAT --> CTRL: VehicleRepository
+                deactivate PLAT
+
+                CTRL -> VehicleRepository : createMaintenanceReport(vehiclesList)
+                activate VehicleRepository
+
+                ref over VehicleRepository
+                                                Create maintenance Report
+
+                                            end ref
+
+
+
+                VehicleRepository --> CTRL : maintenanceReport
+                deactivate VehicleRepository
+
+            CTRL --> CTRL : maintenanceReport
+            deactivate CTRL
 
             CTRL --> UI : maintenanceReport
         deactivate CTRL

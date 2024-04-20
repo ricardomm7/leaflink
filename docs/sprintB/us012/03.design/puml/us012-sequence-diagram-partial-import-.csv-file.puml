@@ -18,19 +18,17 @@ activate Repository
 
   Group Import Routes from .csv File
 
-    Repository -> Importer: importRoutesFromCSV(filePath)
+  Repository -> Repository: validateRoutes(routes)
+      activate Repository
+
+          Repository --> Repository
+          deactivate Repository
+
+    Repository -> Importer**: importRoutesFromCSV(filePath)
         activate Importer
 
         Importer --> Repository: routes
         deactivate Importer
-
-
-    Repository -> Repository: validateRoutes(routes)
-    activate Repository
-
-        Repository --> Repository
-        deactivate Repository
-
 
     end
     autonumber 4

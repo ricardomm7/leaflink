@@ -3,54 +3,33 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":ListMaintenanceController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
 autonumber 11
--> CTRL : createMaintenanceReport(vehiclesList)
+-> VehicleRepository : createMaintenanceReport(vehiclesList)
 
-activate CTRL
+activate VehicleRepository
     group Create Maintenance Report
 
-        CTRL -> CTRL : createMaintenanceReport(vehiclesList)
-                    activate CTRL
 
-                        CTRL -> RepositorySingleton : getInstance()
-                        activate RepositorySingleton
+                        VehicleRepository -> VehicleRepository: verifyExistedVehicles(vehicleList)
+                        activate VehicleRepository
 
-                            RepositorySingleton --> CTRL: repositories
-                        deactivate RepositorySingleton
-
-                        CTRL -> PLAT : getMaintenanceRepository()
-                        activate PLAT
-
-                            PLAT --> CTRL: MaintenanceRepository
-                        deactivate PLAT
-
-                        CTRL -> MaintenanceRepository : createMaintenanceReport(vehiclesList)
-                        activate MaintenanceRepository
-
-                            MaintenanceRepository -> MaintenanceReport : createMaintenanceReport(vehiclesList)
+                            VehicleRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
                             activate MaintenanceReport
 
-                            MaintenanceReport --> MaintenanceRepository : maintenanceReport
-                            deactivate MaintenanceReport
+                            MaintenanceReport --> VehicleRepository : maintenanceReport
+                            deactivate
 
-                        MaintenanceRepository --> CTRL : maintenanceReport
-                        deactivate MaintenanceRepository
-
-                    CTRL --> CTRL : maintenanceReport
-                    deactivate CTRL
-
+                        VehicleRepository --> VehicleRepository
+                        deactivate VehicleRepository
     end group
 
     autonumber 13
-    <-- CTRL : taskCategory
+    <-- VehicleRepository : maintenanceReport
 
-deactivate CTRL
+deactivate VehicleRepository
 
 
 @enduml

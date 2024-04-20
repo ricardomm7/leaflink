@@ -30,6 +30,18 @@ activate VFM
         UI -> CTRL : submit vehicle data
         activate CTRL
 
+            CTRL -> RepositorySingleton: getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT: getVehicleRepository
+            activate PLAT
+
+            PLAT --> CTRL: VehicleRepository
+            deactivate PLAT
+
             CTRL -> VehicleRepository : validateVehicleData(VIN)
             activate VehicleRepository
 
@@ -41,7 +53,7 @@ activate VFM
 
 
 
-            VehicleRepository -> CTRL : vehicleData
+            VehicleRepository --> CTRL : vehicleData
             deactivate VehicleRepository
 
         CTRL -> UI : keep vehicle data

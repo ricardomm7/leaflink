@@ -3,34 +3,32 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber
-
-'hide footbox
 actor "GSM" as GSM
 participant ":RouteUI" as UI
 participant ":RouteController" as CTR
-participant ":Route" as Repository
+participant ":RouteRepository" as Repository
+participant ":Route" as Importer
 
 activate GSM
 
 GSM -> UI : requests to import a .csv file
 activate UI
 
-UI -> CTR : creates
+UI -> CTR : sendFilePath(filePath)
 activate CTR
 
-CTR -> Repository : importRoutes(filePath)
+CTR -> Repository : importRoutesFromCSV(filePath)
 activate Repository
 
+ref over Repository
+                                Import a .csv File
 
-    ref over Repository
-                        Import Routes from .csv File
+                            end ref
 
-                    end
 Repository --> CTR: routes
 deactivate Repository
 
-CTR --> UI : displayConfirmation(success)
+CTR -> UI : displayConfirmation(success)
 deactivate CTR
 
 UI --> GSM : displays confirmation message
