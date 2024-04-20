@@ -14,34 +14,31 @@ autonumber 18.1
 activate CTRL
     group Get Model by Brand
 
-CTRL -> PLAT : getModel()
-            CTRL -> CTRL : getModelByBrand(brand)
-                                activate CTRL
+        CTRL -> CTRL : getModelByBrand(brand)
+        activate CTRL
 
-                                    CTRL -> PLAT : getInstance()
-                                    activate PLAT
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
 
-                                    PLAT --> CTRL: repositories
-                                    deactivate PLAT
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
 
-                                    CTRL -> PLAT : getBrandRepository()
-                                    activate PLAT
+        CTRL -> PLAT : getBrandRepository()
+        activate PLAT
 
-                                    PLAT -> CTRL : BrandRepository
-                                    deactivate PLAT
+        PLAT --> CTRL : BrandRepository
+        deactivate PLAT
 
-                                    CTRL -> BrandRepository : getModelByBrand(brand)
-                                    activate BrandRepository
+        CTRL -> BrandRepository : getModelByBrand(brand)
+        activate BrandRepository
 
-                                    BrandRepository --> CTRL : modelList
-                                    deactivate BrandRepository
+        BrandRepository --> CTRL : modelList
+        deactivate BrandRepository
 
-                                CTRL --> CTRL : modelList
-                                deactivate CTRL
+        CTRL --> CTRL : modelList
+        deactivate CTRL
 
     end
-    deactivate CTRL
-
     autonumber 19
     <-- CTRL : model list
 deactivate CTRL

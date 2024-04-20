@@ -20,6 +20,9 @@ activate CTRL
 
     group Get Brand List
 
+        CTRL -> CTRL: getBrand()
+        activate CTRL
+
             CTRL -> RepositorySingleton : getInstance()
                             activate RepositorySingleton
 
