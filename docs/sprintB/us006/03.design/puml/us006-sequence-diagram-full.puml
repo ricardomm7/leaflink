@@ -7,7 +7,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
+actor "VFM" as VFM
 participant ":RegisterVehicleUI" as UI
 participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -23,11 +23,9 @@ activate VFM
 
         UI -> CTRL** : create
 
-        UI -> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
-    deactivate UI
+        UI --> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight,\n Current Km, Acquisition Date, Maintenance Frequency)
 
     VFM -> UI : types vehicle data
-    activate UI
 
         UI -> CTRL : submit vehicle data
         activate CTRL

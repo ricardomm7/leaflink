@@ -29,5 +29,5 @@ model
 }
 
 VFM "1..*" - "1..*" Vehicle : creates  >
-Vehicle "1" - "1..*" Brand : has >
+Vehicle "1" - "1" Brand : has >
 @enduml

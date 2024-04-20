@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization HRM" as ADM
+actor "HRM" as ADM
 participant ":CreateTeamUI" as UI
 participant ":CreateTeamController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -25,7 +25,6 @@ activate ADM
                 activate CTRL
 
                     CTRL -> CTRL : getSkills()
-                    activate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
                     activate RepositorySingleton
@@ -46,31 +45,23 @@ activate ADM
                     deactivate SkillRepository
 
                     CTRL --> UI : skillsList
-                deactivate CTRL
 
                 UI --> ADM : shows skills list and asks to select one
-            deactivate UI
 
         ADM --> UI : selects skills
-        activate UI
 
         UI --> ADM : requests maximum team size
-    deactivate UI
 
-    ADM -> UI : types requested data (maximum team size)
-    activate UI
+    ADM -> UI : types requested data (maximum&min team size)
 
         UI --> ADM : shows data and asks for verification
-    deactivate UI
 
     ADM -> UI : submits data
-    activate UI
 
-        UI -> CTRL : createTeam(skills, maxTeamSize)
-        activate CTRL
+        UI -> CTRL : createTeam(skills[], maxTeamSize, minTeamSize)
+        deactivate UI
 
-            CTRL -> CTRL : getSkillByDescription(skillDescription)
-            activate CTRL
+            CTRL -> CTRL : getSkillByDescription(skillDescription[])
 
                 CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
@@ -84,17 +75,16 @@ activate ADM
                     PLAT -> CTRL : SkillRepository
                 deactivate PLAT
 
-                CTRL -> SkillRepository : getSkillByDescription(skillDescription)
+                CTRL -> SkillRepository : getSkillsByDescription(skillDescription[])
                 activate SkillRepository
 
-                    SkillRepository --> CTRL : skill
+                    SkillRepository --> CTRL : skills[]
                 deactivate SkillRepository
-                    CTRL --> CTRL : skill
-            deactivate CTRL
+
 
 
             |||
-                CTRL -> TeamRepository: createTeam(skills, maxTeamSize)
+                CTRL -> TeamRepository: createTeam(skills[], maxTeamSize, minTeamSize)
                 activate TeamRepository
 
                 TeamRepository -> Team**: addTeam (team)

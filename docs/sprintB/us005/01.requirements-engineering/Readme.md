@@ -58,7 +58,7 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 
 * **AC1:** There must be at least one competence/skill.
 * **AC2:** A team name must be assigned.
-* **AC3:** The maximum team size and the set of skills need to be supplied by the HRM.
+* **AC3:** The maximum&minimum team size and the set of skills need to be supplied by the HRM.
 
 ### 1.4. Found out Dependencies
 
@@ -74,7 +74,7 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 
 * Selected data:
     * the skills needed
-    * number of collaborators
+    * number of collaborators (max and min)
 
 **Output Data:**
 

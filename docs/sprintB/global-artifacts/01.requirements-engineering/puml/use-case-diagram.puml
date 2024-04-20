@@ -15,7 +15,7 @@ rectangle "System User" as actors {
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US001 - Register Skills for Collaborator" as US001
+    usecase "US001 - Register a Skill" as US001
     HRM --> US001
 }
 
@@ -25,42 +25,42 @@ rectangle "Use Cases" as usecases{
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US003 - Register a collaborator and his attributes" as US003
+    usecase "US003 - Register a collaborator with a job\n and fundamental characteristics." as US003
     HRM --> US003
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US004 - Assign skills to employees" as US004
+    usecase "US004 - Assign skills to a collaborator" as US004
     HRM --> US004
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US005 - Generate a new team, based on the needs" as US005
+    usecase "US005 - Generate a team" as US005
     HRM --> US005
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US006 - Register a vehicle with his attributes" as US006
+    usecase "US006 - Register a vehicle" as US006
     VFM --> US006
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US007 - Schedule a vehicle check-up" as US007
+    usecase "US007 - Register a Vehicle check-up" as US007
     VFM --> US007
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US008 - See the vehicles that need a check-up" as US008
+    usecase "US008 - List Vehicles Needing Check-up" as US008
     VFM --> US008
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US009 - See the exact costs referring to water consumption of specific green spaces" as US009
+    usecase "US009 - See the exact costs referring to \nwater consumption of specific green spaces" as US009
     GSM --> US009
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US010 - See in a pie chart which piece(s) of equipment is/are used in each day" as US010
+    usecase "US010 - See in a pie chart which piece(s) \nof equipment is/are used in each day" as US010
     GSM --> US010
 }
 rectangle "Use Cases" as usecases{
@@ -68,15 +68,15 @@ rectangle "Use Cases" as usecases{
     GSM --> US011
 }
 rectangle "Use Cases" as usecases{
-    usecase "US012 - I want to import a .csv file containing routes." as US012
+    usecase "US012 - I want to import a .csv file containing routes" as US012
     GSM --> US012
 }
 rectangle "Use Cases" as usecases{
-    usecase "US013 - Apply an algorithm that returns the routes to be opened, with minimum cost." as US013
+    usecase "US013 - Apply an algorithm that returns the \nroutes to be opened, with minimum cost" as US013
     GSM --> US013
 }
 rectangle "Use Cases" as usecases{
-    usecase "US014 - Run tests for inputs of variable size, to observe the asymptotic behavior of the execution time of the US13" as US014
+    usecase "US014 - Run tests for inputs of variable size, to observe \nthe asymptotic behavior of the execution time of the US13" as US014
     QAM --> US014
 }
 @enduml

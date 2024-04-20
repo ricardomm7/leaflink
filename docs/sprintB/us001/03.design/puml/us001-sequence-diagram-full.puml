@@ -8,7 +8,9 @@ autonumber
 actor "HRM" as HRM
 participant ":CreateSkillUI" as UI
 participant ":CreateSkillController" as CTRL
-participant ":skillRepository" as skillRepository
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository:\nskillRepository" as skillRepository
 participant ":Skill" as Skill
 
 activate HRM
@@ -17,9 +19,28 @@ HRM ->UI : asks to create a skill
 activate UI
 
 UI -> CTRL** : create
+
+UI --> HRM : asks for a skill designation
+HRM -> UI : enters a skill designation
+
+UI->CTRL : createSkill(designation)
+deactivate UI
 activate CTRL
 
+activate CTRL
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+
+CTRL -> PLAT : getSkillRepository()
+activate PLAT
+PLAT -->  CTRL: skillRepository
+deactivate PLAT
+
 CTRL -> skillRepository : createSkill(designation)
+deactivate CTRL
+deactivate CTRL
 activate skillRepository
 
     skillRepository -> Skill** : create(designation)
@@ -30,6 +51,10 @@ activate skillRepository
     Skill -> Skill : verifyFilled(skill)
         activate Skill
         Skill -> Skill : verifySpecialCharacters(skill)
+        activate Skill
+        Skill --> Skill
+    deactivate Skill
+    Skill --> Skill
     deactivate Skill
 
     Skill --> skillRepository : skill
@@ -37,16 +62,23 @@ activate skillRepository
     activate skillRepository
 
     skillRepository -> skillRepository : check for duplicates
+    activate skillRepository
+    skillRepository -->skillRepository
+    deactivate skillRepository
     deactivate Skill
 
     CTRL <-- skillRepository : skill
-    deactivate CTRL
+    deactivate skillRepository
+    activate CTRL
+
+
 
     CTRL --> UI : skill
+    deactivate CTRL
+    activate UI
 
+
+    UI --> HRM : displays successful or unsuccessful operation
     deactivate UI
-
-    UI --> HRM : Displays successful or unsuccessful operation
-
 deactivate HRM
 @enduml

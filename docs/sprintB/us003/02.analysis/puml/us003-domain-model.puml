@@ -42,7 +42,7 @@ class DocumentType{
 ' Relationships
 Person "1" -- "1" Address: has a >
 Collaborator "1" -- "1" Person: is a >
-Person  "1" -- "1"  DocumentType : has an >
+Person  "1" -- "1..*"  DocumentType : has >
 HRM "1..*" -- "1..*" Collaborator : registers >
 HRM "1" -- "1" Job : assigns >
 Job "1" -- "1..*" Collaborator : to >

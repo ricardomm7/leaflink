@@ -58,6 +58,7 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
    
 	
 * Selected data:
+  * none
 
 **Output Data:**
 * (In)Success of the operation

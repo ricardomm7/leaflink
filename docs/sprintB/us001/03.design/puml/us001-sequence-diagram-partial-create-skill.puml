@@ -3,33 +3,30 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber 7
+autonumber 10
 
-
-participant ":skillRepository" as skillRepository
+participant "skillRepository:\nskillRepository" as skillRepository
 participant ":Skill" as Skill
-
 
 -> skillRepository : createSkill(designation)
 activate skillRepository
-    group Create skill
-    skillRepository -> Skill** : create(designation)
+group Create Skill
+    skillRepository-> Skill** : create(designation)
     deactivate skillRepository
-
         activate Skill
 
     Skill -> Skill : verifyFilled(skill)
         activate Skill
         Skill -> Skill : verifySpecialCharacters(skill)
+        activate Skill
+        Skill --> Skill
     deactivate Skill
-
+    Skill --> Skill
+    deactivate Skill
+end
     Skill --> skillRepository : skill
-     deactivate Skill
+    deactivate Skill
     activate skillRepository
 
-    skillRepository -> skillRepository : check for duplicates
-    deactivate Skill
-    end
-    <-- skillRepository : skill
 
 @enduml

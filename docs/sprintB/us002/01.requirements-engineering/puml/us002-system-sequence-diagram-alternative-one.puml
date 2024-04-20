@@ -25,7 +25,7 @@ activate Employee
     Employee -> System : confirms data
     activate System
 
-        System --> Employee : displays success message (job creation successful) and saves the job description linking it to the required skills
+        System --> Employee : displays success message (job creation successful)
     deactivate System
 
 @enduml

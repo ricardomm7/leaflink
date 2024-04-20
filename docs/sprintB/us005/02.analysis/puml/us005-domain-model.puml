@@ -38,7 +38,7 @@ class DocumentType{
 HRM "1..*" -- "1..*" Team: generate   >
 Person "1" -- "1" Address: has an >
 Collaborator "1" -- "1"  Person: is a >
-Person "1" -- "1"  DocumentType: has a >
+Person "1" -- "1..*"  DocumentType: has >
 Team "1..*" -- "1..*" Collaborator : has >
 
 @enduml

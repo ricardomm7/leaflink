@@ -59,10 +59,6 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get Task Category Object](svg/us003-sequence-diagram-partial-pin-job.svg)
 
-**Pin Skills to a collaborator**
-
-![Sequence Diagram - Partial - Get Employee](svg/us003-sequence-diagram-partial-pin-skills.svg)
-
 **Register a collaborator**
 
 ![Sequence Diagram - Partial - Create Task](svg/us003-sequence-diagram-partial-register-collab.svg)

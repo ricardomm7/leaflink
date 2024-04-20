@@ -1,4 +1,4 @@
-# US012 - I want to import a .csv file containing routes.
+# US012 - I want to import a .csv file containing routes
 
 ## 3. Design - User Story Realization 
 

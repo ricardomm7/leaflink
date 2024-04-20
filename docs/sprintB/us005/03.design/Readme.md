@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US005 - Generate a team
 
 ## 3. Design - User Story Realization 
 
@@ -43,7 +43,7 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us005-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -51,24 +51,21 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us005-sequence-diagram-split.svg)
 
-**Get Task Category List Partial SD**
+**Create Team**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![Sequence Diagram - Partial - Create Team](svg/us005-sequence-diagram-partial-create-team.svg)
 
-**Get Task Category Object**
+**Get Skill**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
+![Sequence Diagram - Partial - Get Skill](svg/us005-sequence-diagram-partial-get-skill.svg)
 
-**Get Employee**
+**Get Skill List**
 
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
+![Sequence Diagram - Partial - Get Employee](svg/us005-sequence-diagram-partial-get-skill-list.svg)
 
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us005-class-diagram.svg)

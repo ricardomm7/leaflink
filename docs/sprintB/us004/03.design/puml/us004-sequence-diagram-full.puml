@@ -20,7 +20,6 @@ HRM -> UI : wants to assign skills to a collaborator
 activate UI
 UI -> CTRL** : create
 
-deactivate UI
 
 CTRL -> GlobRepo : getInstance()
 activate CTRL
@@ -38,11 +37,9 @@ CLBREP --> CTRL : collaboratorList
 deactivate CLBREP
 CTRL --> UI : collaboratorList
 deactivate CTRL
-activate UI
 UI --> HRM : asks to select a collaborator
 HRM -> UI : selects a collaborator
 UI -> CTRL : collaborator
-deactivate UI
 activate CTRL
 
 CTRL -> GlobRepo : getInstance()
@@ -59,7 +56,6 @@ skillsRepository --> CTRL : skillsList
 deactivate skillsRepository
 CTRL --> UI : skillsList
 deactivate CTRL
-activate UI
 UI --> HRM : displays available skills and asks to select one or more
 HRM -> UI : select the desired skills
 UI -> CTRL : selectedSkillsList
@@ -67,7 +63,7 @@ deactivate UI
 activate CTRL
 
 
-CTRL -> CLBREP : assignSkills(collaboratorID, selectedSkills[])
+CTRL -> CLBREP : assignSkills(collaborator, selectedSkills[])
 deactivate CTRL
 activate CLBREP
 CLBREP -> CLB : assignSkills(selectedSkills[])

@@ -15,7 +15,7 @@ activate VFM
     VFM -> System : requests to register a vehicle
     activate System
 
-        System --> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        System --> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight,\n Current Km, Acquisition Date, Maintenance Frequency)
     deactivate System
 
     VFM -> System : types vehicle data

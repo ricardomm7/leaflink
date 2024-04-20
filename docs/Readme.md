@@ -19,18 +19,24 @@ was carried out as described in the following table.
 
 **Keep this table always up-to-date.**
 
-| Task                        | [Sprint A](sprintA/Readme.md)                                                     | [Sprint B](sprintB/Readme.md) | [Sprint C](sprintC/Readme.md) |
-|-----------------------------|-----------------------------------------------------------------------------------|-------------------------------|-------------------------------|
-| Glossary                    | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| Use Case Diagram (UCD)      | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| Supplementary Specification | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| Domain Model                | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US001                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US002                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US003                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US004                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US005                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US006                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US007                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| US008                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |                               |
-| ...                         | ...                                                                               | ...                           | ...                           |
+| Task                        | [Sprint A](sprintA/Readme.md)                                                     | [Sprint B](sprintB/Readme.md)                                                     | [Sprint C](sprintC/Readme.md) |
+|-----------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------|
+| Glossary                    | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| Use Case Diagram (UCD)      | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| Supplementary Specification | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| Domain Model                | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US001                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US002                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US003                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US004                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US005                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US006                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US007                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US008                       | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US009                       | ---                                                                               | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US010                       | ---                                                                               | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US011                       | ---                                                                               | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US012                       | ---                                                                               | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US013                       | ---                                                                               | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| US014                       | ---                                                                               | [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2) |                               |
+| ...                         | ...                                                                               | ...                                                                               | ...                           |
