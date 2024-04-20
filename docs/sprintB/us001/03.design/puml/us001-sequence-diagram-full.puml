@@ -49,23 +49,14 @@ activate skillRepository
         activate Skill
 
     Skill -> Skill : verifyFilled(skill)
-        activate Skill
-        Skill -> Skill : verifySpecialCharacters(skill)
-        activate Skill
-        Skill --> Skill
-    deactivate Skill
-    Skill --> Skill
-    deactivate Skill
+    Skill -> Skill : verifySpecialCharacters(skill)
 
     Skill --> skillRepository : skill
-     deactivate Skill
+    deactivate
     activate skillRepository
 
     skillRepository -> skillRepository : check for duplicates
-    activate skillRepository
-    skillRepository -->skillRepository
-    deactivate skillRepository
-    deactivate Skill
+
 
     CTRL <-- skillRepository : skill
     deactivate skillRepository
