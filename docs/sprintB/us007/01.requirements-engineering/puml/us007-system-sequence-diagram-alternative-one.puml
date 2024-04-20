@@ -20,7 +20,7 @@ activate VFM
     VFM -> System : select  vehicle
     activate System
 
-    System --> VFM : requests data (vehicle identification, date)
+    System --> VFM : requests data (date, currentKm)
     deactivate System
 
     VFM -> System : types requested data
