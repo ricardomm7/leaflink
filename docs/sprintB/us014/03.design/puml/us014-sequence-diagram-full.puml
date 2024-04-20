@@ -36,9 +36,11 @@ activate QAM
             deactivate Test
 
             CTRL --> UI : test results
+
         deactivate CTRL
 
     UI --> QAM : Displays passed or failed tests
+    deactivate UI
 deactivate QAM
 
 @enduml

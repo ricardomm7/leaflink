@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
+actor "VFM" as VFM
 participant ":ListMaintenanceUI" as UI
 participant ":ListMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -46,7 +46,6 @@ activate VFM
             CTRL --> UI : vehicleList
         deactivate CTRL
 
-        UI --> UI : keep vehicleList
 
         UI -> CTRL : generateMaintenanceReport(vehiclesList)
         activate CTRL

@@ -14,7 +14,6 @@ participant "repositories\n:Repositories" as PLAT
 autonumber 3
 
  -> CTRL : getVehiclesList()
-autonumber 3.1
 activate CTRL
     group Get Vehicle List
 

@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Green Spaces Manager (GSM)" as GSM
+actor "GSM" as GSM
 participant ":RouteUI" as UI
 participant ":RouteController" as CTR
 participant ":Route" as Repository

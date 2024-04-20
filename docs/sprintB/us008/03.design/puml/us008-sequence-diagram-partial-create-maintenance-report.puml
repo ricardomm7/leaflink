@@ -9,10 +9,8 @@ participant "repositories\n:Repositories" as PLAT
 participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
-autonumber 12
+autonumber 11
 -> CTRL : createMaintenanceReport(vehiclesList)
-
-autonumber 12.1
 
 activate CTRL
     group Create Maintenance Report

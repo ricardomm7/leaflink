@@ -72,3 +72,4 @@ As a GSM, I want to know the exact costs referring to water consumption of speci
 
 
 ### 1.7 Other Relevant Remarks
+* none

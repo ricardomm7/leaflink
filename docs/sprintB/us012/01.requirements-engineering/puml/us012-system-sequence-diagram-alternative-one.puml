@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - US012
 
 autonumber
 
-actor "Green Spaces Manager (GSM)" as GSM
+actor "GSM" as GSM
 participant ":System" as System
 
 activate GSM
