@@ -19,9 +19,13 @@ As a Green Spaces Manager (GSM), I want to import a .csv file containing lines
 >
 > **Answer:** The data contained in the .csv file is previously validated; despite that a message would be preferable.
 
-> **Question:** 
+> **Question:** Good afternoon. I would like to confirm if, in the csv file, "waterPointX" and "waterPointY" are always whole numbers or can they be letters? Thanks.
 >
-> **Answer:** 
+> **Answer:** They can be letters or words (strings). They are any name that identifies the irrigation point.
+
+> **Question:** Hello customer. Will we be given the distance and/or costs between the different water points? In US12 when we only receive the distance will this value be used as a cost in the minimum accumulated cost algorithm developed in US13? Thank you very much.
+>
+> **Answer:** Perhaps you already clarified your doubt, but here you have: you only have one value assigned between different water points, called the "cost", that could mean a distance or something else.
 
 ### 1.3. Acceptance Criteria
 
