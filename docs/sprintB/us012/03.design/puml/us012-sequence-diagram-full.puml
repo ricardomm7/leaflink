@@ -3,6 +3,8 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
+autonumber
+
 actor "GSM" as GSM
 participant ":RouteUI" as UI
 participant ":RouteController" as CTR
@@ -35,7 +37,7 @@ deactivate Importer
 Repository --> CTR: routes
 deactivate Repository
 
-CTR -> UI : displayConfirmation(success)
+CTR --> UI : displayConfirmation(success)
 deactivate CTR
 
 UI --> GSM : displays confirmation message

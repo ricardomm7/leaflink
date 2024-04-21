@@ -28,7 +28,7 @@ activate VEI
     end
 
     autonumber 25
-    VEI -> VehicleRepository: vehicle
+    VEI --> VehicleRepository: vehicle
 deactivate VEI
 
 

@@ -48,7 +48,7 @@ activate VFM
             VehicleRepository -> VehicleRepository: validateVehicleData(VIN)
             activate VehicleRepository
 
-            VehicleRepository -> VehicleRepository
+            VehicleRepository --> VehicleRepository
             deactivate VehicleRepository
 
 
@@ -56,7 +56,7 @@ activate VFM
             VehicleRepository --> CTRL : vehicleData
             deactivate VehicleRepository
 
-        CTRL -> UI : keep vehicle data
+        CTRL --> UI : keep vehicle data
         deactivate CTRL
 
         UI -> CTRL : getBrand()
@@ -67,16 +67,14 @@ activate VFM
 
                                         end ref
 
-            CTRL -> UI: brandList
+            CTRL --> UI: brandList
             deactivate CTRL
 
 
 
-    UI -> VFM : show brand list and request to select brand
-    deactivate UI
+    UI --> VFM : show brand list and request to select brand
 
     VFM -> UI : select vehicle brand
-    activate UI
 
     UI -> CTRL : getModel()
     activate CTRL
@@ -88,15 +86,13 @@ activate VFM
 
 
 
-    CTRL -> UI: modelList
+    CTRL --> UI: modelList
     deactivate CTRL
 
 
-        UI -> VFM : shows vehicle modelList
-    deactivate UI
+        UI --> VFM : shows vehicle modelList
 
     VFM -> UI : select vehicle brand
-    activate UI
 
         UI -> CTRL : registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
         activate CTRL
@@ -116,14 +112,14 @@ activate VFM
 
 
 
-                VEI -> VehicleRepository: vehicle
+                VEI --> VehicleRepository: vehicle
                 deactivate VEI
 
-            VehicleRepository -> CTRL: vehicle
+            VehicleRepository --> CTRL: vehicle
             deactivate VehicleRepository
 
-            CTRL -> UI: vehicle
-
+            CTRL --> UI: vehicle
+deactivate CTRL
         UI --> VFM : shows success message
     deactivate UI
 
