@@ -67,14 +67,16 @@ activate VFM
                 CTRL -> VehicleRepository : createMaintenanceReport(vehiclesList)
                 activate VehicleRepository
 
-                VehicleRepository -> VehicleRepository: verifyExistedVehicles(vehicleList)
+                VehicleRepository -> VehicleRepository: getVehiclesNeedingMaintenance(vehicleList)
                 activate VehicleRepository
 
-                    VehicleRepository -> MaintenanceRepository **: createMaintenanceReport(vehiclesList)
-                    activate MaintenanceRepository
+                    VehicleRepository -> VehicleRepository:verifyExistedVehicles(vehicleList)
 
-                    MaintenanceRepository --> VehicleRepository : maintenanceReport
-                    deactivate MaintenanceRepository
+                    VehicleRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
+                    activate MaintenanceReport
+
+                    MaintenanceReport --> VehicleRepository : maintenanceReport
+                    deactivate MaintenanceReport
 
                 VehicleRepository --> VehicleRepository
                 deactivate VehicleRepository

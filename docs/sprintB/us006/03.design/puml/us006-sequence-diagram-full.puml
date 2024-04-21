@@ -143,7 +143,7 @@ activate VFM
                     VEI -> VEI: addVehicle (vehicle)
                     activate VEI
 
-                    VEI -> VEI: validateVehicle(vehicle))
+                    VEI -> VEI: validateVehicle(vehicle)
                     activate VEI
 
                     VEI --> VEI

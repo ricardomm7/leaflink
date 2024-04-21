@@ -3,61 +3,56 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam line type polyline
 
-class VFM {
+class ListMaintenanceUI{
 }
 
-class Vehicle {
-    - vin
-    - vehiclePlate
-    - tareWeight
-    - grossWeight
-    - currentKm
-    - acquisitionDate
-    - maintenanceFrequency
-    - type
+class ListMaintenanceController {
+    - vehicleList: List<>
+    - maintenanceReport: MaintenanceReport
 
-    + Vehicle(vin, vehiclePlate, tareWeight, grossWeight,currentKm, acquisitionDate, maintenanceFrequency, type)
-}
-
-class Brand {
-    - model
-
-    + Brand(model)
-}
-
-class VehicleRepository {
-    + registerVehicle(vin, brand, model, vehiclePlate, tareWeight,grossWeight, currentKm, acquisitionDate, maintenanceFrequency)
-    + validateVIN(vin)
-    + getVehiclesNeedingMaintenance()
-}
-
-class BrandRepository {
-    + getBrands()
-    + getModelByBrand(brand)
-}
-
-class MaintenanceReport {
-    - reportDetails
+    + getVehiclesList(): List<Vehicle>
+    + generateMaintenanceReport(vehiclesList: List<Vehicle>): MaintenanceReport
 }
 
 class Repositories {
     - Repositories()
-    + getInstance() : Repositories
-    + getBrandRepository()
-    + getVehicleRepository()
+    + getInstance(): Repositories
+    + getVehicleRepository(): VehicleRepository
 }
 
-class ListMaintenanceController {
-    + getVehiclesList()
-    + generateMaintenanceReport(vehiclesList)
+class VehicleRepository {
+    - vehicleList: List<>
+    - maintenanceReport: MaintenanceReport
+
+    + getVehiclesNeedingMaintenance(): List<VehicleNeedingMaintenance>
+    + verifyExistedVehicles(vehiclesList: List<Vehicle>)
+    + createMaintenanceReport(vehiclesList: List<Vehicle>)
 }
 
-class ListMaintenanceUI {
+class Vehicle {
+    - vin: String
+    - vehiclePlate: String
+    - tareWeight: double
+    - grossWeight: double
+    - currentKm: double
+    - acquisitionDate: Date
+    - maintenanceFrequency: int
+    - type: String
+
+    + Vehicle(vin: String, vehiclePlate: String, tareWeight: double, grossWeight: double, \n currentKm: double, acquisitionDate: Date, maintenanceFrequency: int, type: String)
+}
+
+class Brand {
+    - model: String
+}
+
+class MaintenanceReport {
+    - reportDetails: String
+    + MaintenanceReport(reportDetails: String)
 }
 
 
 
-VFM -> ListMaintenanceUI
 
 Repositories -> Repositories : instance
 
@@ -73,12 +68,5 @@ VehicleRepository --> "*" Vehicle
 
 Vehicle --> "1" Brand : brand
 
-Repositories -> "1" BrandRepository
-
-ListMaintenanceController ..> Brand
-ListMaintenanceController ..> BrandRepository : brandRepository
-
 MaintenanceReport --> Vehicle
-
-
 @enduml
