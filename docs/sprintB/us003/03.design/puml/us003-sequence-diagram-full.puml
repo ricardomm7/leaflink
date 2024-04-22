@@ -5,7 +5,7 @@ skinparam shadowing false
 
 autonumber
 
-participant "HRM" as HRM
+actor "HRM" as HRM
 participant ":RegisterCollaboratorUI" as UI
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as GlobRepo

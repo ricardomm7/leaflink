@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+
+actor "QAM" as QAM
+participant ":RunTestsUI" as UI
+participant ":RunTestsController" as CTRL
+participant ":GraphTest" as Test
+activate QAM
+
+        QAM -> UI : asks to run a test
+
+        activate UI
+
+
+            UI -> CTRL** : create
+            activate CTRL
+
+                CTRL -> Test : runs
+                activate Test
+
+                   ref over Test
+                        Run Tests
+                   end
+
+
+                Test --> CTRL : test results
+            deactivate Test
+
+            CTRL --> UI : test results
+
+        deactivate CTRL
+
+    UI --> QAM : Displays passed or failed tests
+    deactivate UI
+deactivate QAM
+
+@enduml
