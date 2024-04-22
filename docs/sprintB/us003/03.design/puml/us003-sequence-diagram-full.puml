@@ -11,120 +11,153 @@ participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
-participant ":Collaborator" as CLB
 participant "jobRepository:\nJobRepository" as jobRepository
+participant ":Collaborator" as CLB
 
 
 activate HRM
+
 HRM -> UI : wants to register a new collaborator
 activate UI
+
 UI -> CTRL** : create
+
 UI --> HRM : asks for the info needed (name, birthdate, contactMobile, email, address,\n zipCode, city, documentType[], documentCode, admissionDate)
+deactivate UI
+
 HRM -> UI : provides the needed info
+activate UI
 'UI --> HRM : shows a verification dialog
 'HRM -> UI : confirms collaborator creation
 UI -> CTRL : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
-deactivate UI
 activate CTRL
+
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
+
 GlobRepo --> CTRL : repositories
 deactivate GlobRepo
+
 CTRL -> PLAT : getCollaboratorRepository()
 activate PLAT
+
 PLAT -->  CTRL: collaboratorRepository
 deactivate PLAT
 
 CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
-deactivate CTRL
 activate CLBREP
+
 CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
-deactivate CLBREP
 activate CLB
+
 CLB -> CLB : verifyFilled(collaborator)
 activate CLB
+
 CLB -> CLB : verifyMobile(collaborator)
 activate CLB
+
 CLB -> CLB : verifyEmail(collaborator)
 activate CLB
+
 CLB -> CLB : verifyZipCode(collaborator)
 activate CLB
+
 CLB -> CLB : verifyBirth(collaborator)
 activate CLB
 
 loop for all documentType objects
 CLB -> CLB : verifyDocumentCode(collaborator)
 activate CLB
+
 CLB --> CLB
 deactivate CLB
+
 end loop
 
 CLB --> CLB
 deactivate CLB
+
 CLB --> CLB
 deactivate CLB
+
 CLB --> CLB
 deactivate CLB
+
 CLB --> CLB
 deactivate CLB
+
 CLB --> CLB
 deactivate CLB
 
 CLB -->CLBREP : collaborator
 deactivate CLB
+
 activate CLBREP
 
 CLBREP -> CLBREP : check for duplicates (documentCode[])
-activate CLBREP
+
 CLBREP --> CLBREP
 deactivate CLBREP
+
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
 
-activate CTRL
+deactivate CLBREP
+
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
+
 GlobRepo --> CTRL : repositories
 deactivate GlobRepo
+
 CTRL -> PLAT : getJobRepository()
 activate PLAT
+
 PLAT -->  CTRL: jobRepository
 deactivate PLAT
+
 CTRL -> jobRepository : getJobs()
 activate jobRepository
+
 jobRepository --> CTRL : jobsList
 deactivate jobRepository
+
 CTRL -->UI : jobsList
 deactivate CTRL
-activate UI
+
 UI --> HRM : shows the list of jobs and asks to select one
-HRM -> UI : select the desired job
-UI -> CTRL : job
 deactivate UI
+
+HRM -> UI : select the desired job
+activate UI
+
+UI -> CTRL : job
 activate CTRL
 
 
 CTRL ->CLBREP : assignJob(job)
-deactivate CTRL
 activate CLBREP
 
 CLBREP -> CLB : assignJob(job)
 activate CLB
+
 CLB -> CLB : setJob(job)
 activate CLB
+
 CLB --> CLB
 deactivate CLB
+
 CLB --> CLBREP : collaborator
 deactivate CLB
+
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
-activate CTRL
-
 
 CTRL --> UI : success
 deactivate CTRL
-activate UI
+
 UI --> HRM : displays operation success
 deactivate UI
+
 deactivate HRM
 @enduml

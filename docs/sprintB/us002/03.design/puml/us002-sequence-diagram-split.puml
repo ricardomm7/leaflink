@@ -12,24 +12,32 @@ participant ":CreateJobController" as CTRL
 participant "jobRepository:\nJobRepository" as jobRepository
 
 activate Employee
+
 Employee -> UI : wants to create a new job
 activate UI
-UI -> CTRL** : create
-UI --> Employee : asks for the info needed (title and description)
-Employee -> UI : provides job title and description
-UI --> Employee : shows a verification dialog
-Employee -> UI : confirms job creation
 
+UI -> CTRL** : create
+
+UI --> Employee : asks for the info needed (title and description)
+deactivate UI
+
+Employee -> UI : provides job title and description
+activate UI
+
+UI --> Employee : shows a verification dialog
+deactivate UI
+
+Employee -> UI : confirms job creation
+activate UI
 
 UI -> CTRL : createJob(title, description)
-deactivate UI
 activate CTRL
+
         ref over CTRL
             Get Job Repository
         end ref
 
 CTRL -> jobRepository : createJob(title, description)
-deactivate CTRL
 activate jobRepository
 
         ref over jobRepository
@@ -38,19 +46,21 @@ activate jobRepository
         end ref
 
     activate jobRepository
+
     jobRepository -> jobRepository : check for duplicates
     activate jobRepository
+
     jobRepository --> jobRepository
     deactivate jobRepository
 
 jobRepository --> CTRL : job
 deactivate jobRepository
-activate CTRL
+
 deactivate jobRepository
 
 CTRL --> UI : success
 deactivate CTRL
-activate UI
+
 UI --> Employee : displays operation success
 
 deactivate UI
