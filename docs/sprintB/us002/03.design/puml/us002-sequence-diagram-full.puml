@@ -15,74 +15,63 @@ participant "jobRepository:\nJobRepository" as jobRepository
 participant ":Job" as Job
 
 activate Employee
-
 Employee -> UI : wants to create a new job
 activate UI
-
 UI -> CTRL** : create
-
 UI --> Employee : asks for the info needed (title and description)
-deactivate UI
-
 Employee -> UI : provides job title and description
-activate UI
-
 UI --> Employee : shows a verification dialog
-deactivate UI
-
 Employee -> UI : confirms job creation
-activate UI
+
 
 UI -> CTRL : createJob(title, description)
+deactivate UI
 activate CTRL
-
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
-
 GlobRepo --> CTRL : repositories
 deactivate GlobRepo
 
 CTRL -> PLAT : getJobRepository()
 activate PLAT
-
 PLAT -->  CTRL: jobRepository
 deactivate PLAT
 
 CTRL -> jobRepository : createJob(title, description)
+deactivate CTRL
 activate jobRepository
 
     jobRepository -> Job** : create(title, description)
+    deactivate jobRepository
+
         activate Job
 
     Job -> Job : verifyFilled(job)
         activate Job
-
         Job -> Job : verifySpecialCharacters(job)
         activate Job
-
         Job --> Job
         deactivate Job
-
     Job --> Job
     deactivate Job
-
     'Job -> Job : addJob(job)
     Job --> jobRepository : job
     deactivate Job
-
+    activate jobRepository
 
     jobRepository -> jobRepository : check for duplicates
     activate jobRepository
-
     jobRepository --> jobRepository
     deactivate jobRepository
-
+    deactivate Job
 jobRepository --> CTRL : job
+deactivate jobRepository
+activate CTRL
 deactivate jobRepository
 
 CTRL --> UI : success
 deactivate CTRL
-
+activate UI
 UI --> Employee : displays operation success
 
 deactivate UI
