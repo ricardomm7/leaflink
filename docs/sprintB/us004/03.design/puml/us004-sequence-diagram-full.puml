@@ -38,10 +38,8 @@ deactivate CLBREP
 CTRL --> UI : collaboratorList
 deactivate CTRL
 UI --> HRM : asks to select a collaborator
-deactivate UI
 
 HRM -> UI : selects a collaborator
-activate UI
 
 UI -> CTRL : collaborator
 deactivate UI
@@ -70,10 +68,8 @@ deactivate CTRL
 activate UI
 
 UI --> HRM : displays available skills and asks to select one or more
-deactivate UI
 
 HRM -> UI : select the desired skills
-activate UI
 
 UI -> CTRL : selectedSkillsList
 deactivate UI
@@ -97,7 +93,7 @@ activate CLBREP
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
 activate CTRL
-CTRL -> UI : success
+CTRL --> UI : success
 deactivate CTRL
 activate UI
 UI --> HRM : displays operation success

@@ -15,7 +15,6 @@ participant "skillRepository:\nSkillRepository" as SkillRepository
 autonumber 3
 
  -> CTRL : getSkillsList()
-autonumber 3.1
 activate CTRL
     group Get Skills List
 

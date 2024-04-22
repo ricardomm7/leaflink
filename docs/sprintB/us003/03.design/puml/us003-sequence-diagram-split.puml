@@ -20,10 +20,8 @@ activate UI
 UI -> CTRL** : create
 
 UI --> HRM : asks for the info needed (name, birthdate, contactMobile, email, address,\n zipCode, city, documentType[], documentCode, admissionDate)
-deactivate UI
 
 HRM -> UI : provides the needed info
-activate UI
 
 'UI --> HRM : shows a verification dialog
 'HRM -> UI : confirms collaborator creation
@@ -59,10 +57,8 @@ CTRL -->UI : jobsList
 deactivate CTRL
 activate UI
 UI --> HRM : shows the list of jobs and asks to select one
-deactivate UI
 
 HRM -> UI : select the desired job
-activate UI
 
 UI -> CTRL : job
 deactivate UI

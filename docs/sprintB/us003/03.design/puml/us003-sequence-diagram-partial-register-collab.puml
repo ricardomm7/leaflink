@@ -8,11 +8,10 @@ participant "Collaborator" as CLB
 
 autonumber 10
 --> CLBREP: createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+activate CLBREP
     group Register collaborator
     CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
-
-
-
+deactivate CLBREP
 
         activate CLB
         CLB -> CLB : verifyFilled(collaborator)

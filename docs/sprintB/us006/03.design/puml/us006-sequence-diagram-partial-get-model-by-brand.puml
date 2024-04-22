@@ -38,7 +38,6 @@ activate CTRL
         deactivate CTRL
 
     end
-    autonumber 19
     <-- CTRL : model list
 deactivate CTRL
 

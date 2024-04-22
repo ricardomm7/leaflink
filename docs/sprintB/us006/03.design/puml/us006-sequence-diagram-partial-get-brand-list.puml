@@ -13,7 +13,6 @@ participant "repositories\n:Repositories" as PLAT
 participant "brandRepository:\nBrandRepository" as BrandRepository
 autonumber 14
 
- -> CTRL : getBrand()
 
 activate CTRL
 
@@ -31,7 +30,7 @@ activate CTRL
                             CTRL -> PLAT : getBrandRepository()
                             activate PLAT
 
-                            PLAT -> CTRL : BrandRepository
+                            PLAT --> CTRL : BrandRepository
                             deactivate PLAT
 
                             CTRL -> BrandRepository : getBrandList(brand))
@@ -44,7 +43,6 @@ activate CTRL
                             deactivate CTRL
 
     end
-    autonumber 15
     <-- CTRL  : brandList
 deactivate CTRL
 

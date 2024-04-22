@@ -8,7 +8,6 @@ participant ":CreateTeamController" as CTRL
 autonumber 16
 -> CTRL: createTeam(skills, maxTeamSize )
 
-autonumber 16.1
 activate CTRL
     group Create Team
 

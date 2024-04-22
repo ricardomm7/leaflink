@@ -24,10 +24,8 @@ activate VFM
         UI -> CTRL** : create
 
         UI --> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight,\n Current Km, Acquisition Date, Maintenance Frequency)
-        deactivate UI
 
     VFM -> UI : types vehicle data
-    activate UI
 
         UI -> CTRL : submit vehicle data
         deactivate UI
@@ -95,10 +93,8 @@ activate VFM
 
 
     UI --> VFM : show brand list and request to select brand
-    deactivate UI
 
     VFM -> UI : select vehicle brand
-    activate UI
 
     UI -> CTRL : getModel()
     deactivate UI
@@ -135,10 +131,8 @@ activate VFM
 
 
         UI --> VFM : shows vehicle modelList
-        deactivate UI
 
     VFM -> UI : select vehicle brand
-    activate UI
 
         UI -> CTRL : registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
         deactivate UI

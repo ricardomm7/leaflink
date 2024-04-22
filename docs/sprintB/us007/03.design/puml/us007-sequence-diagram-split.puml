@@ -23,6 +23,7 @@ activate VFM
         UI -> CTRL** : create
 
         UI -> CTRL : getVehiclesList()
+        deactivate UI
         activate CTRL
 
              ref over CTRL
@@ -31,13 +32,12 @@ activate VFM
              end ref
 
             CTRL --> UI : vehicleList
-            deactivate CTRL
+          deactivate CTRL
+           activate UI
 
             UI --> VFM : displays vehicle List
-            deactivate UI
 
             VFM -> UI : chooses vehicle
-            activate UI
 
             UI -> CTRL : vehicle
             activate CTRL
@@ -46,19 +46,19 @@ activate VFM
             deactivate CTRL
 
             UI --> VFM : requests data (date, current Km)
-            deactivate
 
             VFM -> UI : types data (date, current Km)
-            activate UI
 
             UI -> CTRL : data (date, current Km)
+            deactivate UI
             activate CTRL
 
             CTRL -> PLAT : getMaintenanceRepository()
             activate PLAT
 
             PLAT --> CTRL : MaintenanceRepository
-            deactivate
+            deactivate PLAT
+
 
             CTRL -> MaintenanceRepository : register maintenance
             activate MaintenanceRepository
@@ -67,13 +67,12 @@ activate VFM
                     Create Maintenance
                 end
                MaintenanceRepository --> CTRL : maintenance
-               deactivate
+               deactivate MaintenanceRepository
                CTRL --> UI : maintenance
-               deactivate
-               UI --> VFM : displays maintenance data and requests confirmation
-               deactivate
-               VFM -> UI : confirms data
                activate UI
+               deactivate CTRL
+               UI --> VFM : displays maintenance data and requests confirmation
+               VFM -> UI : confirms data
 
                UI -> CTRL : confirmation
                activate CTRL

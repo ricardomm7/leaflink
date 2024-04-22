@@ -49,10 +49,8 @@ activate VFM
             activate UI
 
             UI --> VFM : displays vehicle List
-            deactivate UI
 
             VFM -> UI : chooses vehicle
-            activate UI
 
             UI -> CTRL : vehicle
             activate CTRL
@@ -61,12 +59,12 @@ activate VFM
             deactivate CTRL
 
             UI --> VFM : requests data (date, current Km)
-            deactivate UI
 
             VFM -> UI : types data (date, current Km)
-            activate UI
+
 
             UI -> CTRL : data (date, current Km)
+            deactivate UI
             activate CTRL
 
 
@@ -74,7 +72,7 @@ activate VFM
             activate PLAT
 
             PLAT --> CTRL : MaintenanceRepository
-            deactivate
+            deactivate PLAT
 
             CTRL -> MaintenanceRepository : register maintenance
             activate MaintenanceRepository
@@ -92,23 +90,21 @@ activate VFM
                 deactivate Maintenance
 
                 Maintenance --> MaintenanceRepository : maintenance
-               deactivate
+               deactivate Maintenance
                MaintenanceRepository --> CTRL : maintenance
-               deactivate
+               deactivate MaintenanceRepository
                CTRL --> UI : maintenance
-               deactivate
-               UI --> VFM : displays maintenance data and requests confirmation
-               deactivate
-               VFM -> UI : confirms data
+               deactivate CTRL
                activate UI
 
+               UI --> VFM : displays maintenance data and requests confirmation
+               VFM -> UI : confirms data
+
                UI -> CTRL : confirmation
-               deactivate UI
                activate CTRL
 
                CTRL --> UI : operation success
                deactivate CTRL
-               activate UI
 
                UI --> VFM : displays operation success
                deactivate UI
