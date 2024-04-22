@@ -71,8 +71,7 @@ activate VFM
                deactivate
                CTRL --> UI : maintenance
                deactivate
-               UI --> VFM : displays maintenance data
-               UI --> VFM : requests confirmation
+               UI --> VFM : displays maintenance data and requests confirmation
                deactivate
                VFM -> UI : confirms data
                activate UI
@@ -82,7 +81,7 @@ activate VFM
 
                CTRL --> UI : operation success
                deactivate
-               UI -> VFM : displays operation success
+               UI --> VFM : displays operation success
                deactivate
 
                deactivate VFM

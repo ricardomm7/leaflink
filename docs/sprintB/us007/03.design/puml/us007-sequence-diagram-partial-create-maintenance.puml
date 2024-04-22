@@ -17,12 +17,19 @@ participant ":Maintenance" as Maintenance
             MaintenanceRepository -> Maintenance** : create(date, current Km)
             activate Maintenance
 
-                Maintenance -> Maintenance : verifyFilled(maintenance)
-                Maintenance -> Maintenance : verifySpecialCharacters(maintenance)
+                            Maintenance -> Maintenance : verifyFilled(maintenance)
+                            activate Maintenance
+                            Maintenance -> Maintenance : verifySpecialCharacters(maintenance)
+                            activate Maintenance
+                            Maintenance --> Maintenance
+                            deactivate Maintenance
+                            Maintenance --> Maintenance
+                            deactivate Maintenance
                 Maintenance --> MaintenanceRepository : maintenance
-               deactivate
+               deactivate Maintenance
+
                end
                 <-- MaintenanceRepository : maintenance
-
+deactivate MaintenanceRepository
 
 @enduml

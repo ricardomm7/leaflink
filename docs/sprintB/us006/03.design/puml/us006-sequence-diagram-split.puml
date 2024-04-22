@@ -28,6 +28,7 @@ activate VFM
     VFM -> UI : types vehicle data
 
         UI -> CTRL : submit vehicle data
+        deactivate UI
         activate CTRL
 
             CTRL -> RepositorySingleton: getInstance()
@@ -58,8 +59,10 @@ activate VFM
 
         CTRL --> UI : keep vehicle data
         deactivate CTRL
+        activate UI
 
         UI -> CTRL : getBrand()
+        deactivate UI
         activate CTRL
 
             ref over CTRL
@@ -68,6 +71,7 @@ activate VFM
                                         end ref
 
             CTRL --> UI: brandList
+            activate UI
             deactivate CTRL
 
 
@@ -77,6 +81,7 @@ activate VFM
     VFM -> UI : select vehicle brand
 
     UI -> CTRL : getModel()
+    deactivate UI
     activate CTRL
 
         ref over CTRL
@@ -88,6 +93,7 @@ activate VFM
 
     CTRL --> UI: modelList
     deactivate CTRL
+    activate UI
 
 
         UI --> VFM : shows vehicle modelList
@@ -95,6 +101,7 @@ activate VFM
     VFM -> UI : select vehicle brand
 
         UI -> CTRL : registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
+        deactivate UI
         activate CTRL
 
             |||
@@ -119,6 +126,7 @@ activate VFM
             deactivate VehicleRepository
 
             CTRL --> UI: vehicle
+activate UI
 deactivate CTRL
         UI --> VFM : shows success message
     deactivate UI
