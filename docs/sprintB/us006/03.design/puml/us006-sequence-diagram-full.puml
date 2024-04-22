@@ -86,7 +86,6 @@ activate VFM
                 deactivate BrandRepository
 
                 CTRL --> CTRL : brandList
-                deactivate CTRL
 
             CTRL --> UI: brandList
             deactivate CTRL
