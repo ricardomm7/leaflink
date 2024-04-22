@@ -58,6 +58,13 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get Task Category List](svg/us004-sequence-diagram-partial-assign-skill.svg)
 
+**Get Collaborator List**
+
+![Sequence Diagram - Partial - Get Task Category List](svg/us004-sequence-diagram-partial-get-collaborator-list.svg)
+
+**Get Skills List**
+
+![Sequence Diagram - Partial - Get Task Category List](svg/us004-sequence-diagram-partial-get-skill-list.svg)
 
 ## 3.3. Class Diagram (CD)
 

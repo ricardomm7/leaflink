@@ -34,7 +34,6 @@ activate jobRepository
 
         ref over jobRepository
             Create Job
-
         end ref
 
     activate jobRepository

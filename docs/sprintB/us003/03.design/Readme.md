@@ -63,6 +63,10 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Create Task](svg/us003-sequence-diagram-partial-register-collab.svg)
 
+**Get Job List**
+
+![Sequence Diagram - Partial - Create Task](svg/us003-sequence-diagram-partial-get-job-list.svg)
+
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us003-class-diagram.svg)

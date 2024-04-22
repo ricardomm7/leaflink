@@ -42,8 +42,9 @@ end ref
 
 
     CTRL --> UI : skill
-    activate UI
     deactivate CTRL
+    activate UI
+
 
 
     UI --> HRM : displays successful or unsuccessful operation

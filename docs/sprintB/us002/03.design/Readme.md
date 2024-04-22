@@ -48,11 +48,13 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us002-sequence-diagram-split.svg)
 
-**Get Task Category List Partial SD**
+**Create Job**
 
 ![Sequence Diagram - Partial - Create Job](svg/us002-sequence-diagram-partial-create-job.svg)
 
+**Get Job Repository**
 
+![Sequence Diagram - Partial - Create Job](svg/us002-sequence-diagram-partial-get-job-repository.svg)
 
 ## 3.3. Class Diagram (CD)
 
