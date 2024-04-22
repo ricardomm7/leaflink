@@ -12,9 +12,9 @@ participant ":Job" as Job
 activate JobRepository
 
 group Create Job
-activate JobRepository
 
     JobRepository -> Job** : create(title, description)
+    deactivate JobRepository
         activate Job
 
     Job -> Job : verifyFilled(job)
@@ -25,9 +25,9 @@ activate JobRepository
         deactivate Job
     Job --> Job
     deactivate Job
-    'Job -> Job : addJob(job)
     Job --> JobRepository : job
     deactivate Job
+    activate JobRepository
     JobRepository -> JobRepository : check for duplicates
     activate JobRepository
     JobRepository --> JobRepository
