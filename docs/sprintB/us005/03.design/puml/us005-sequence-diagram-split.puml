@@ -21,7 +21,7 @@ activate ADM
     activate UI
 
                 UI -> CTRL** : create
-
+                deactivate UI
                 activate CTRL
 
                     ref over CTRL
@@ -31,6 +31,7 @@ activate ADM
 
                     CTRL --> UI : skillsList
                 deactivate CTRL
+                activate UI
 
                 UI --> ADM : shows skills list and asks to select one
             deactivate UI
@@ -51,6 +52,7 @@ activate ADM
     activate UI
 
         UI -> CTRL : createTeam(skills, maxTeamSize)
+        deactivate UI
         activate CTRL
 
             ref over CTRL
@@ -62,6 +64,7 @@ activate ADM
 
             |||
                 CTRL -> TeamRepository: createTeam(skills, maxTeamSize)
+                deactivate CTRL
                 activate TeamRepository
 
                 ref over TeamRepository
@@ -72,9 +75,11 @@ activate ADM
 
             TeamRepository --> CTRL: team
             deactivate TeamRepository
+            activate CTRL
 
             CTRL --> UI : success
             deactivate CTRL
+            activate UI
             UI --> ADM: displays operation success
     deactivate UI
 

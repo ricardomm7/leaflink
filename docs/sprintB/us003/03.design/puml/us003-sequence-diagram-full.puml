@@ -16,11 +16,18 @@ participant "jobRepository:\nJobRepository" as jobRepository
 
 
 activate HRM
+
 HRM -> UI : wants to register a new collaborator
 activate UI
+
 UI -> CTRL** : create
+
 UI --> HRM : asks for the info needed (name, birthdate, contactMobile, email, address,\n zipCode, city, documentType[], documentCode, admissionDate)
+deactivate UI
+
 HRM -> UI : provides the needed info
+activate UI
+
 'UI --> HRM : shows a verification dialog
 'HRM -> UI : confirms collaborator creation
 UI -> CTRL : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
@@ -97,8 +104,13 @@ deactivate jobRepository
 CTRL -->UI : jobsList
 deactivate CTRL
 activate UI
+
 UI --> HRM : shows the list of jobs and asks to select one
+deactivate UI
+
 HRM -> UI : select the desired job
+activate UI
+
 UI -> CTRL : job
 deactivate UI
 activate CTRL
@@ -109,13 +121,19 @@ deactivate CTRL
 activate CLBREP
 
 CLBREP -> CLB : assignJob(job)
+deactivate CLBREP
 activate CLB
+
 CLB -> CLB : setJob(job)
 activate CLB
+
 CLB --> CLB
 deactivate CLB
+
 CLB --> CLBREP : collaborator
+activate CLBREP
 deactivate CLB
+
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
 activate CTRL

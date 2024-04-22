@@ -21,7 +21,7 @@ activate ADM
     activate UI
 
                 UI -> CTRL** : create
-
+                deactivate UI
                 activate CTRL
 
                     CTRL -> CTRL : getSkills()
@@ -45,11 +45,16 @@ activate ADM
                         SkillRepository --> CTRL : skillsList
                     deactivate SkillRepository
 
+                    CTRL --> CTRL
+                    deactivate CTRL
+
                     CTRL --> UI : skillsList
-                deactivate CTRL
+                                        deactivate CTRL
+
+                    activate UI
 
                 UI --> ADM : shows skills list and asks to select one
-            deactivate UI
+                deactivate UI
 
         ADM --> UI : selects skills
         activate UI
@@ -67,6 +72,7 @@ activate ADM
     activate UI
 
         UI -> CTRL : createTeam(skills, maxTeamSize)
+        deactivate UI
         activate CTRL
 
             CTRL -> CTRL : getSkillByDescription(skillDescription)
@@ -95,6 +101,7 @@ activate ADM
 
             |||
                 CTRL -> TeamRepository: createTeam(skills, maxTeamSize)
+                deactivate CTRL
                 activate TeamRepository
 
                 TeamRepository -> Team**: addTeam (team)
@@ -110,9 +117,11 @@ activate ADM
                 deactivate TeamRepository
 
             TeamRepository --> CTRL: team
+            activate CTRL
             deactivate TeamRepository
 
             CTRL --> UI : success
+            activate UI
             deactivate CTRL
             UI --> ADM: displays operation success
     deactivate UI

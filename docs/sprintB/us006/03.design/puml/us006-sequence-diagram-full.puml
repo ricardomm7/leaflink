@@ -24,8 +24,10 @@ activate VFM
         UI -> CTRL** : create
 
         UI --> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight,\n Current Km, Acquisition Date, Maintenance Frequency)
+        deactivate UI
 
     VFM -> UI : types vehicle data
+    activate UI
 
         UI -> CTRL : submit vehicle data
         deactivate UI
@@ -44,6 +46,8 @@ activate VFM
             deactivate PLAT
 
             CTRL -> VehicleRepository : validateVehicleData(VIN)
+            deactivate CTRL
+
             activate VehicleRepository
 
             VehicleRepository -> VehicleRepository: validateVehicleData(VIN)
@@ -53,22 +57,15 @@ activate VFM
             deactivate VehicleRepository
 
 
-
             VehicleRepository --> CTRL : vehicleData
             deactivate VehicleRepository
+            activate CTRL
 
 
-        CTRL --> UI : keep vehicle data
-        deactivate CTRL
-        activate UI
 
-
-        UI -> CTRL : getBrand()
         deactivate UI
-        activate CTRL
 
             CTRL -> CTRL : getBrand()
-            activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
@@ -92,14 +89,17 @@ activate VFM
                 deactivate CTRL
 
             CTRL --> UI: brandList
-            activate UI
             deactivate CTRL
+
+            activate UI
 
 
 
     UI --> VFM : show brand list and request to select brand
+    deactivate UI
 
     VFM -> UI : select vehicle brand
+    activate UI
 
     UI -> CTRL : getModel()
     deactivate UI
@@ -136,8 +136,10 @@ activate VFM
 
 
         UI --> VFM : shows vehicle modelList
+        deactivate UI
 
     VFM -> UI : select vehicle brand
+    activate UI
 
         UI -> CTRL : registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
         deactivate UI
@@ -145,9 +147,12 @@ activate VFM
 
             |||
             CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
+                        deactivate CTRL
+
             activate VehicleRepository
 
                 VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
+                deactivate VehicleRepository
                 activate VEI
 
                     VEI -> VEI: addVehicle (vehicle)
@@ -162,15 +167,21 @@ activate VFM
                     VEI --> VEI
                     deactivate VEI
 
+
                 VEI --> VehicleRepository: vehicle
-                deactivate VEI
+                                deactivate VEI
+
+                activate VehicleRepository
 
             VehicleRepository --> CTRL: vehicle
             deactivate VehicleRepository
+                        activate CTRL
+
 
             CTRL --> UI: vehicle
+                        deactivate CTRL
+
             activate UI
-            deactivate CTRL
 
         UI --> VFM : shows success message
     deactivate UI

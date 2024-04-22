@@ -13,39 +13,47 @@ participant "skillsRepository:\nSkillsRepository" as skillsRepository
 
 
 activate HRM
+
 HRM -> UI : wants to assign skills to a collaborator
 activate UI
+
 UI -> CTRL** : create
 
 
 activate CTRL
 ref over CTRL
-Get Collaborator Repository
+Get Collaborator List
 end ref
 
 
-CTRL -> CLBREP : getCollaboratorList()
-activate CLBREP
-CLBREP --> CTRL : collaboratorList
-deactivate CLBREP
 CTRL --> UI : collaboratorList
 deactivate CTRL
+
 UI --> HRM : asks to select a collaborator
+deactivate UI
+
+
 HRM -> UI : selects a collaborator
+activate UI
+
 UI -> CTRL : collaborator
+deactivate UI
 activate CTRL
 
+
 ref over CTRL
-Get Skills Repository
+Get Skills List
 end ref
-CTRL -> skillsRepository : getSkills()
-activate skillsRepository
-skillsRepository --> CTRL : skillsList
-deactivate skillsRepository
+
 CTRL --> UI : skillsList
 deactivate CTRL
+activate UI
+
 UI --> HRM : displays available skills and asks to select one or more
+deactivate UI
+
 HRM -> UI : select the desired skills
+activate UI
 UI -> CTRL : selectedSkillsList
 deactivate UI
 activate CTRL

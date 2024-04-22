@@ -1,5 +1,4 @@
 @startuml
-@startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
@@ -24,6 +23,7 @@ activate VFM
         UI -> CTRL** : create
 
         UI -> CTRL : getVehiclesList()
+        deactivate UI
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -46,6 +46,7 @@ activate VFM
 
             CTRL --> UI : vehicleList
             deactivate CTRL
+            activate UI
 
             UI --> VFM : displays vehicle List
             deactivate UI
@@ -60,13 +61,14 @@ activate VFM
             deactivate CTRL
 
             UI --> VFM : requests data (date, current Km)
-            deactivate
+            deactivate UI
 
             VFM -> UI : types data (date, current Km)
             activate UI
 
             UI -> CTRL : data (date, current Km)
             activate CTRL
+
 
             CTRL -> PLAT : getMaintenanceRepository()
             activate PLAT
@@ -88,6 +90,7 @@ activate VFM
                 deactivate Maintenance
                 Maintenance --> Maintenance
                 deactivate Maintenance
+
                 Maintenance --> MaintenanceRepository : maintenance
                deactivate
                MaintenanceRepository --> CTRL : maintenance
@@ -100,12 +103,15 @@ activate VFM
                activate UI
 
                UI -> CTRL : confirmation
+               deactivate UI
                activate CTRL
 
                CTRL --> UI : operation success
-               deactivate
+               deactivate CTRL
+               activate UI
+
                UI --> VFM : displays operation success
-               deactivate
+               deactivate UI
 
                deactivate VFM
 

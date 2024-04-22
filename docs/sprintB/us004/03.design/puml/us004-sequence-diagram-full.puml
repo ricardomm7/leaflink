@@ -38,26 +38,43 @@ deactivate CLBREP
 CTRL --> UI : collaboratorList
 deactivate CTRL
 UI --> HRM : asks to select a collaborator
+deactivate UI
+
 HRM -> UI : selects a collaborator
+activate UI
+
 UI -> CTRL : collaborator
+deactivate UI
 activate CTRL
 
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
+
 GlobRepo --> CTRL : repositories
 deactivate GlobRepo
+
 CTRL -> PLAT : getSkillsRepository()
 activate PLAT
+
 PLAT -->  CTRL: skillsRepository
 deactivate PLAT
+
 CTRL -> skillsRepository : getSkills()
 activate skillsRepository
+
 skillsRepository --> CTRL : skillsList
 deactivate skillsRepository
+
 CTRL --> UI : skillsList
 deactivate CTRL
+activate UI
+
 UI --> HRM : displays available skills and asks to select one or more
+deactivate UI
+
 HRM -> UI : select the desired skills
+activate UI
+
 UI -> CTRL : selectedSkillsList
 deactivate UI
 activate CTRL
@@ -65,12 +82,18 @@ activate CTRL
 
 CTRL -> CLBREP : assignSkills(collaborator, selectedSkills[])
 deactivate CTRL
+
 activate CLBREP
 CLBREP -> CLB : assignSkills(selectedSkills[])
+deactivate CLBREP
 activate CLB
+
 CLB -> CLB : setSkills(selectedSkills[])
+
 CLB --> CLBREP : collaborator
 deactivate CLB
+activate CLBREP
+
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
 activate CTRL
