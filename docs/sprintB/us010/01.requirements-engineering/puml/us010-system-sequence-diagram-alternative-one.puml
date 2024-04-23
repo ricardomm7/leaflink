@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Organization\nEmployee" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : wants to analyze equipment usage
+    activate System
+
+        System --> Employee : asks to upload the file (EquipmentUsed.csv)
+    deactivate System
+
+    Employee -> System : gives the file path (uploads the file)
+    activate System
+
+        System --> Employee : shows the pie chart
+    deactivate System
+
+@enduml

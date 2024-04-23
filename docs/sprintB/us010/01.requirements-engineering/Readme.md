@@ -5,25 +5,30 @@
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a GSM, I want to know which piece(s) of equipment is/are
+used in each day so that I can understand the users’ preferences.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	Consider that the park has the following equipment: walking paths, children’s playground, picnic area, and exercise machines (gymnastics equipment). At the park exit there is an electronic device with a list of all
+the equipment, in which the user(s) must indicate the equipment they
+used that day.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	In the file ”EquipmentUsed.csv” the choices of 1000 users are recorded.
+Make a pie chart representing, in percentage, the use of each piece of
+equipment.
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** In the US10 the client says they have an electronic device that allows the users to insert the equipment they used. How is that csv file sent to our product? Is it trough an API or is the GSM responsible for uploading the document before generating the list of equipment used in that day?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** ATM you can assume that someone will upload the file (maybe the GSM).
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** On the "EquipmentUsed.csv", are there only recorded the choices of 1000 users? Could the GSM request a different number, for example, the choices of 800 users? Is it a random selection, or is it the last responses?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** Since the data doesn't contain any data concerning the users, the file simply contains 1000 answers/choices.
 
 ### 1.3. Acceptance Criteria
 
@@ -40,19 +45,15 @@ As an organization employee, I want to create a new task in order to be further 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * none
 	
 * Selected data:
-    * a task category 
+    * equipment used 
 
 **Output Data:**
 
-* List of existing task categories
+* Pie chart representing, in percentage, the use of each piece of
+  equipment
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -61,11 +62,7 @@ As an organization employee, I want to create a new task in order to be further 
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us010-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 

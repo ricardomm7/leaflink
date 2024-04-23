@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "GSM" as GSM
+participant ":AnalyseParkEquipmentUsageUI" as UI
+participant ":AnalyseParkEquipmentUsageController" as CTRL
+
+activate GSM
+GSM -> UI : wants to analyze equipment usage
+activate UI
+UI -> CTRL** : creates
+UI --> GSM : asks to upload the file (EquipmentUsed.csv)
+GSM -> UI : gives the file path (uploads the file)
+UI -> CTRL : sends the file
+deactivate UI
+activate CTRL
+ref over CTRL
+            Create pie chart
+        end ref
+CTRL --> UI : pie chart
+deactivate CTRL
+activate UI
+UI --> GSM : shows the pie chart
+deactivate UI
+deactivate GSM
+
+@enduml
