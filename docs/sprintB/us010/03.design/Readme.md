@@ -1,4 +1,4 @@
-# US010 - See in a pie chart which piece(s) of equipment is/are used in each day
+# US010 - Known in a pie chart which piece(s) of equipment is/are used in each day
 
 ## 3. Design - User Story Realization 
 
