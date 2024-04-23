@@ -55,12 +55,12 @@ rectangle "Use Cases" as usecases{
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US009 - See the exact costs referring to \nwater consumption of specific green spaces" as US009
+    usecase "US009 - Know the exact costs referring to \nwater consumption of specific green spaces" as US009
     GSM --> US009
 }
 
 rectangle "Use Cases" as usecases{
-    usecase "US010 - See in a pie chart which piece(s) \nof equipment is/are used in each day" as US010
+    usecase "US010 - Know in a pie chart which piece(s) \nof equipment is/are used in each day" as US010
     GSM --> US010
 }
 rectangle "Use Cases" as usecases{
@@ -68,7 +68,7 @@ rectangle "Use Cases" as usecases{
     GSM --> US011
 }
 rectangle "Use Cases" as usecases{
-    usecase "US012 - I want to import a .csv file containing routes" as US012
+    usecase "US012 - Import a .csv file containing routes" as US012
     GSM --> US012
 }
 rectangle "Use Cases" as usecases{
