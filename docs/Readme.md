@@ -15,28 +15,28 @@ The teams consist of students identified in the following table.
 # 2. Task Distribution ###
 
 Throughout the project development period, the distribution of _tasks / requirements / features_ by the team members
-was carried out as described in the following table. [All on Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2)
+was carried out as described in the following table. If you want to see more description of the tasks and their division, they are available on [Jira](https://1230399.atlassian.net/jira/software/projects/LFC2/boards/2).
 
 **Keep this table always up-to-date.**
 
 | Task                        | [Sprint A](sprintA/Readme.md) | [Sprint B](sprintB/Readme.md) | [Sprint C](sprintC/Readme.md) |
-|-----------------------------|-------------------------------|------------------------------|-------------------------------|
-| Glossary                    | All                           | All                          |                               |
-| Use Case Diagram (UCD)      | All                           | All                          |                               |
-| Supplementary Specification | All                           | All                          |                               |
-| Domain Model                | All                           | All                          |                               |
-| US001                       | Francisco Pinto               | Francisco Pinto              |                               |
-| US002                       | Joana Gama                    | Ricardo Meireles             |                               |
-| US003                       | Joana Gama                    | Ricaro Meireles              |                               |
-| US004                       | Ricardo Meireles              | Joana Gama                   |                               |
-| US005                       | Bruno Teixeiro                | Samuel Leite                 |                               |
-| US006                       | Francisco Pinto               | Bruno Teixeira               |                               |
-| US007                       | Samuel Leite                  | Francisco Pinto              |                               |
-| US008                       | Ricardo Meireles              | Bruno Teixeira               |                               |
-| US009                       | ---                           | Joana Gama                   |                               |
-| US010                       | ---                           | Samuel Leite                 |                               |
-| US011                       | ---                           | Ricaro Meireles              |                               |
-| US012                       | ---                           | Bruno Teixeira               |                               |
-| US013                       | ---                           | Samuel Leite                 |                               |
-| US014                       | ---                           | Francisco Pinto              |                               |
-| ...                         | ...                           | ...                          | ...                           |
+|-----------------------------|-------------------------------|-------------------------------|-------------------------------|
+| Glossary                    | All                           | All                           |                               |
+| Use Case Diagram (UCD)      | All                           | All                           |                               |
+| Supplementary Specification | All                           | All                           |                               |
+| Domain Model                | All                           | All                           |                               |
+| US001                       | Francisco Pinto               | Francisco Pinto               |                               |
+| US002                       | Joana Gama                    | Ricardo Meireles              |                               |
+| US003                       | Joana Gama                    | Ricaro Meireles               |                               |
+| US004                       | Ricardo Meireles              | Joana Gama                    |                               |
+| US005                       | Bruno Teixeiro                | Samuel Leite                  |                               |
+| US006                       | Francisco Pinto               | Bruno Teixeira                |                               |
+| US007                       | Samuel Leite                  | Francisco Pinto               |                               |
+| US008                       | Ricardo Meireles              | Bruno Teixeira                |                               |
+| US009                       | ---                           | Joana Gama                    |                               |
+| US010                       | ---                           | Samuel Leite                  |                               |
+| US011                       | ---                           | Ricaro Meireles               |                               |
+| US012                       | ---                           | Bruno Teixeira                |                               |
+| US013                       | ---                           | Samuel Leite                  |                               |
+| US014                       | ---                           | Francisco Pinto               |                               |
+| ...                         | ...                           | ...                           | ...                           |
