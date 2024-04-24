@@ -108,13 +108,16 @@ Person "1" -- "1..*" Document : has >
 
 Job "1" -- "1..*" Collaborator : to >
 
+
 Skill "*" -- "1..*" Collaborator : to >
 Team "1..**" -- "1..*" Skill : needs >
 
 
 Team "1..*" -- "1..*" Collaborator : has >
 
+
 Vehicle "1" -- "*" VehicleCheckup : has >
+
 
 Person "1" -- "1" Address : has a >
 
