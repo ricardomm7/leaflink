@@ -7,29 +7,35 @@
 _**Note that SSD - Alternative One is adopted.**_
 
 | Interaction ID | Question: Which class is responsible for...   | Answer                 | Justification (with patterns)                                                                                 |
-|:-------------  |:----------------------------------------------|:-----------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 | 	... interacting with the actor?              | AssignSkillsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 | 	... coordinating the US?                     | AssignSkillsController | Controller                                                                                                    |
-| 			  		 | 	... selecting skills to assign?              | skillCatalog           | Creator (Rule 1): in the DM SkillCatalog manages available skills.                                            |
-| 			  		 | ... updating collaborator's profile?          | CollaboratorProfile    | IE: cf. HRM documentation.                                                                                    |
-| 			  		 | 							                                       | SkillCatalog           | IE: manages available skills.                                                                                 |
-| 			  		 | 							                                       | Employee               | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 | 							                                       |                        |                                                                                                               |
-| Step 3  		 | 	...saving the assigned skills?               | CollaboratorProfile    | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 | 	                                             |                        |                                                                                                               |
-| Step 5  		 | 	... validating the assigned skills?          | CollaboratorProfile    | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 | 							                                       |                        |                                                                                                               |              
-| Step 7  		 | 	... informing operation sucess?              | AssignSkillsUI         | IE: is responsible for user interactions.                                                                     | 
-| 			  		 | 	... validating all data (global validation)? | Organization           | IE: knows all its tasks.                                                                                      | 
-| 			  		 | 	... saving the created task?                 | Organization           | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 | 	... informing operation success?             | CreateTaskUI           | IE: is responsible for user interactions.                                                                     | 
+|----------------|:----------------------------------------------|:-----------------------|---------------------------------------------------------------------------------------------------------------|
+| Step 1 	       | ... interacting with the actor?               | AssignSkillsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | ... coordinating the US?                      |                        |                                                                                                               |
+|                | ... knowing the user using the system?        |                        |                                                                                                               |
+|                | ... showing a list of collaborators?          |                        |                                                                                                               |
+| Step 2         | ... asking to select a collaborator?          |                        |                                                                                                               |
+|                | ... selecting a collaborator?                 |                        |                                                                                                               |
+| Step 3         | ... showing list of available skills?         |                        |                                                                                                               |
+| Step 4         | ... asking to select one or more skills?      |                        |                                                                                                               |
+|                | ... selecting desired skills?                 |                        |                                                                                                               |
+|                | ... assigning skills to a collaborator?       |                        |                                                                                                               |                |                                             |                        |                                                                                                               |
+| Step 7         | ... saving the updated collaborator's skills? |                        |                                                                                                               |
+| Step 8         | ... informing of operation success?           |                        |                                                                                                               |
+|                |                                               |                        |                                                                                                               |
+|                |                                               |                        |                                                                                                               |
+|                |                                               |                        |                                                                                                               |
+|                |                                               |                        |                                                                                                               |
+|                |                                               |                        |                                                                                                               |
+|                |                                               |                        |                                                                                                               |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Collaboratorprofile
-* SkillCatalog
+* Collaborator
+* AssignSkillsUI
+* AssignSkillsController
+* CollaboratorRepository
+* SkillsRepository
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
