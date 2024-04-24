@@ -22,13 +22,16 @@ class Collaborator {
     admissionDate
 }
 
-class DocumentType{
+class Document{
+    documentType
     identificationCode
 }
 
 
 class Team {
-    name
+    teamId
+    maxNumberElements
+    minNumberElements
 }
 
 class Vehicle {
@@ -59,10 +62,13 @@ class VehicleCheckup{
 class Person {
     name
     birthdate
-    contact
+    contactMobile
+    email
+    taxpayerNumber
 }
 
 class Address{
+    street
     zipCode
     city
 }
@@ -98,12 +104,13 @@ Vehicle "1..*" -- "1" Brand : has >
 Model "1..*" -- "1" Brand : has <
 
 Collaborator  "1" -- "1"  Person : is >
-
-Person "1" -- "1..*" DocumentType : has >
+Person "1" -- "1..*" Document : has >
 
 Job "1" -- "1..*" Collaborator : to >
 
 Skill "*" -- "1..*" Collaborator : to >
+Team "1..**" -- "1..*" Skill : needs >
+
 
 Team "1..*" -- "1..*" Collaborator : has >
 
