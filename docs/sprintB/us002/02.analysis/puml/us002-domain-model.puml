@@ -13,7 +13,6 @@ hide methods
 
 class Job {
     title
-    description
 }
 
 @enduml

@@ -18,6 +18,11 @@ class Team {
 
 class Collaborator {
     admissionDate
+    name
+    birthdate
+    contactMobile
+    email
+    taxpayerNumber
 }
 
 class Skill{
@@ -25,13 +30,13 @@ class Skill{
 }
 
 
-class Person {
-    name
-    birthdate
-    contactMobile
-    email
-    taxpayerNumber
-}
+'class Person {
+'    name
+ '   birthdate
+ '   contactMobile
+ '   email
+'    taxpayerNumber
+'}
 
 class Address{
     street
@@ -41,14 +46,13 @@ class Address{
 
 class Document{
     documentType
-    identificationCode
+    identificationNumber
 }
 
-Person "1" -- "1" Address: has an >
-Collaborator "1" -- "1"  Person: is a >
-Person "1" -- "1..*"  Document: has >
+Collaborator "1..*" -- "1" Address: has an >
+Collaborator "1" -- "1..*"  Document: has >
 Team "1" -- "1..*" Collaborator : has >
-Skill "1..*" -- "1..*" Team: needs <
+Team "1..*" -- "1..*" Skill: needs >
 
 
 @enduml

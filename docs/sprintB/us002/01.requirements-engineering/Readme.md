@@ -11,13 +11,13 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 **From the specifications document:**
 
-> A Job needed is submitted by the human resources manager (HRM) and saved by the system as an option.
+> A Job needed is submitted by the Human Resources Manager (HRM) and saved by the system as an option.
 
 **From the client clarifications:**
 
 > **Question:** Will a list of jobs be provided ?
 >
-> **Answer:** No. The human resources manager (HRM) defines it and the system will save it as an option for the future.
+> **Answer:** No. The Human Resources Manager (HRM) defines it and the system will save it as an option for the future.
 
 > **Question:** What are the input data for creating a profession?
 >
@@ -41,7 +41,7 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All job fields must be filled in.
+* **AC1:** The job field must be filled in.
 * **AC2:** A job name can’t have special characters or digits.
 
 ### 1.4. Found out Dependencies
@@ -54,7 +54,6 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 * Typed data:
     * a job title
-    * a job description
    
 	
 * Selected data:

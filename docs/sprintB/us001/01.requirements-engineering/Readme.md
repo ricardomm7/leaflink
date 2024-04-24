@@ -17,7 +17,7 @@ be appointed to a collaborator.
 
 > **Question:** Will a list of competences be provided?
 >
-> **Answer:** No. The human resources manager defines it and the system saves it for later association with a profile.
+> **Answer:** No. The Human Resources Manager defines it and the system saves it for later association with a profile.
 
 > **Question:** Which information can be introduced to create a new skill?
 >

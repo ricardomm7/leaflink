@@ -20,11 +20,16 @@ class Job {
 
 class Collaborator {
     admissionDate
+    name
+    birthdate
+    contactMobile
+    email
+    taxpayerNumber
 }
 
 class Document{
     documentType
-    identificationCode
+    identificationNumber
 }
 
 
@@ -59,13 +64,13 @@ class VehicleCheckup{
     currentKm
 }
 
-class Person {
-    name
-    birthdate
-    contactMobile
-    email
-    taxpayerNumber
-}
+'class Person {
+ '   name
+ '   birthdate
+ '   contactMobile
+ '   email
+  '  taxpayerNumber
+'}
 
 class Address{
     street
@@ -103,8 +108,7 @@ Vehicle "1..*" -- "1" Brand : has >
 
 Model "1..*" -- "1" Brand : has <
 
-Collaborator  "1" -- "1"  Person : is >
-Person "1" -- "1..*" Document : has >
+Collaborator "1" -- "1..*" Document : has >
 
 Job "1" -- "1..*" Collaborator : to >
 
@@ -119,7 +123,7 @@ Team "1..*" -- "1..*" Collaborator : has >
 Vehicle "1" -- "*" VehicleCheckup : has >
 
 
-Person "1" -- "1" Address : has a >
+Collaborator "1..*" -- "1" Address : has a >
 
 GreenSpace "1" -- "1" StatisticalAnalysis : is analysed >
 

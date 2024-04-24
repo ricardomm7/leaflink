@@ -11,7 +11,7 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 
 **From the specifications document:**
 
->	At the touch of a button, HRM wants to create a team proposal that meets your needs. To do this, it will ask for the competences that this team must have, and the number of persons.
+>	At the touch of a button, HRM wants to create a team proposal that meets his needs. To do this, it will ask for the skills that this team must have, and the number of collaborators.
 
 **From the client clarifications:**
 
@@ -56,7 +56,7 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 >no;
 ### 1.3. Acceptance Criteria
 
-* **AC1:** There must be at least one competence/skill.
+* **AC1:** There must be at least one skill selected.
 * **AC2:** The maximum and minimum team size and the set of skills need to be supplied by the HRM.
 
 ### 1.4. Found out Dependencies
@@ -92,5 +92,5 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 ### 1.7 Other Relevant Remarks
 
 * Once the generated list of employees has been displayed, HRM may want to change someone. After this change, the programme must check that the competences selected initially are present in the team change.
-* The generated team is stored until it is dismantled by the human resources manager.
+* The generated team is stored until it is dismantled by the Human Resources Manager.
 * Implement appropriate permissions and access controls to restrict the ability to generate a team to authorized HRM users only.
