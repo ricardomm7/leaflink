@@ -57,12 +57,11 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 ### 1.3. Acceptance Criteria
 
 * **AC1:** There must be at least one competence/skill.
-* **AC2:** A team name must be assigned.
-* **AC3:** The maximum&minimum team size and the set of skills need to be supplied by the HRM.
+* **AC2:** The maximum and minimum team size and the set of skills need to be supplied by the HRM.
 
 ### 1.4. Found out Dependencies
 
-* US001, US002, US003, US004 are fundamental dependencies for this functionality to work correctly.
+* US001, US003, US004 are fundamental dependencies for this functionality to work correctly.
 
 ### 1.5 Input and Output Data
 
@@ -70,11 +69,11 @@ As a Human Resources Manager (HRM), I want to generate a team proposal automatic
 
 * Typed data:
     * a designation to the team
-
+    * number of collaborators (max and min)
 
 * Selected data:
     * the skills needed
-    * number of collaborators (max and min)
+    
 
 **Output Data:**
 

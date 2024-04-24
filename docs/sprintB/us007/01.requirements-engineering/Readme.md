@@ -51,7 +51,7 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** Every vehicle should have a checkup frequency associated.
-* **AC3:** When creating a checkup, the vehicle should not have a checkup scheduled within the estimated frequency. 
+* **AC3:** A vehicle should not have a check-up registered before its acquisition date. 
 
 ### 1.4. Found out Dependencies
 
@@ -63,13 +63,12 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 * Typed data:
     * Date of the check-up
-	
+	* currentKm
 * Selected data:
     * Vehicle
 
 **Output Data:**
 
-* The vehicle and the date of the checkup.
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
