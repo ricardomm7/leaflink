@@ -7,6 +7,7 @@ _Specifies functionalities that:
 &nbsp; &nbsp; (ii) are not related to US/UC, namely: Audit, Reporting and Security._
 
 - Common Functionalities: The system should include core functionalities that are shared across multiple User Stories/User Cases, such as user authentication, data validation, and error handling mechanisms, to ensure consistency and reliability throughout the application.
+- Repositories: Repositories are commonly used by the system to store a wide variety of program information or user interactions.
 
 ## Usability
 

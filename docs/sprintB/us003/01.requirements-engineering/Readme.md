@@ -70,4 +70,4 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 ### 1.7 Other Relevant Remarks
 
-* None 
+* Implement appropriate permissions and access controls to restrict the ability to register a collaborator with a job and fundamental characteristics to authorized HRM users only.

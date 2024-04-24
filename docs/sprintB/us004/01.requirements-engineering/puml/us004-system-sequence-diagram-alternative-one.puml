@@ -27,7 +27,7 @@ activate HRM
     HRM -> System : provides required data (selected skills)
     activate System
 
-        System --> HRM : validates selected skills
+        System --> HRM : comfirms selected skills
     deactivate System
 
     HRM -> System : confirms assignment

@@ -9,12 +9,6 @@ left to right direction
 
 title Domain Model
 
-class HRM {
-}
-
-class VFM{
-}
-
 class Skill {
     designation
 }
@@ -68,31 +62,61 @@ class Address{
     city
 }
 
+class StatisticalAnalysis{
+}
+
+class StatsUserPortal{
+}
+
+
+class GreenSpace{
+    name
+}
+
+class Task{
+    designation
+    date
+}
+
+class Equipment{
+    designation
+}
+
+class Agenda{
+}
+
+class Portal{
+}
+
 Vehicle "1" -- "1" Brand : has >
 
-HRM "1..*" -- "1..*" Skill : creates >
-
-HRM "1..*" -- "1..*" Job : creates >
-
 Collaborator  "1" -- "1"  Person : is >
+
 Person "1" -- "1..*" DocumentType : has >
-HRM "1..*" -- "1..*" Collaborator : registers >
-'HRM -- "1" Job : assigns >
+
 Job "1" -- "1..*" Collaborator : to >
 
-'HRM "1" -- "1..*" Skill : assigns >
 Skill "*" -- "1..*" Collaborator : to >
 
-HRM "1..*" -- "1..*" Team: generate   >
 Team "1..*" -- "1..*" Collaborator : has >
-
-VFM "1..*" -- "1..*" Vehicle : creates  >
-
-VFM "1..*" -- "*" VehicleCheckup : registers >
 
 Vehicle "1" -- "*" VehicleCheckup : has >
 
-
 Person "1" -- "1" Address : has a >
 
+GreenSpace "1" -- "1" StatisticalAnalysis : is analysed >
+
+GreenSpace "1" -- "1" Address : has an >
+
+Task "1" -- "1..*" Vehicle : needs >
+
+Task "1" -- "1" Team : is assigned >
+
+Task "1" -- "1..*" Equipment : has >
+
+GreenSpace "1" -- "1" Portal : is connected >
+
+Portal "1" -- "1" StatsUserPortal : is analysed >
+
+Agenda "1" -- "1..*" Task : has >
 @enduml
