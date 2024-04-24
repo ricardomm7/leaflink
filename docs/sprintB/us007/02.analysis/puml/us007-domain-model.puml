@@ -23,9 +23,11 @@ vehiclePlate
 tareWeight
 grossWeight
 currentKm
+registrationDate
 acquisitionDate
 maintenanceFrequency
 type
+
 }
 
 Vehicle "1" - "1..*" VehicleCheckup : needs >

@@ -52,6 +52,7 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 * **AC1:** All required fields must be filled in.
 * **AC2:** Every vehicle should have a checkup frequency associated.
 * **AC3:** A vehicle should not have a checkup registered before its acquisition date. 
+* **AC4:** The current kilometers must not be less than the old ones recorded (if it's a first checkup, the kilometers must not be less than 0).
 
 ### 1.4. Found out Dependencies
 
