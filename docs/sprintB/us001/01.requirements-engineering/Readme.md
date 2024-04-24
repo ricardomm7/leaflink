@@ -71,7 +71,7 @@ be appointed to a collaborator.
 
 * **AC1:** All skill field must be filled in.
 * **AC2:** A skill name can’t have special characters or digits.
-* **AC2:** If a skill is created with the same name as an existing skill, the system should show an information window
+* **AC2:** If a skill is created with the same designation as an existing skill, the system should show an information window
   and reject the skill.
 
 ### 1.4. Found out Dependencies
@@ -83,10 +83,10 @@ be appointed to a collaborator.
 **Input Data:**
 
 * Typed data:
-    * a designation
+    * Designation
 
 * Selected data:
-    * none
+    * None
 
 **Output Data:**
 

@@ -39,21 +39,34 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 > 
 > **Answer:** No.
 
+> **Question:** Can multiple skills be assigned to a collaborator simultaneously?
+> 
+> **Answer:** Yes
+
+> **Question:**  Is there any limit to the number of skills that can be assigned to a collaborator?
+> 
+> **Answer:** No
+
+> **Question:** Can a collaborator have no skills assigned?
+> 
+> **Answer:** Yes
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Once assigned, the system should update the collaborator's profile with the assigned skills.
+* **AC2:** Only previously registered collaborators can be assigned skills, also previously registered.
 
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US001 - Register a skill" as the skill must first be registered in the system before being possible to assign it to a collaborator.
-* There is a dependency on "US003" - Register a collaborator with a job and fundamental characteristics" as a collaborator must first be registered in the system before being possible to assign a skill. 
+* There is a dependency on "US003 - Register a collaborator" with a job and fundamental characteristics" as a collaborator must first be registered in the system before being possible to assign a skill.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * none
+    * None
 	
 * Selected data:
     * Collaborator

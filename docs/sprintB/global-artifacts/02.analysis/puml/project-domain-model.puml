@@ -15,15 +15,14 @@ class Skill {
 
 class Job {
     title
-    description
 }
 
 class Collaborator {
-    admissionDate
     name
     birthdate
-    contactMobile
-    email
+    admissionDate
+    mobileNumber
+    e-mail
     taxpayerNumber
 }
 
@@ -60,9 +59,9 @@ class Model{
 }
 
 class VehicleCheckup{
-    vehicleId
     date
     currentKm
+    vehicleID
 }
 
 'class Person {
@@ -119,7 +118,7 @@ Job "1" -- "1..*" Collaborator : to >
 Skill "*" -- "1..*" Collaborator : to >
 Team "1..**" -- "1..*" Skill : needs >
 
-Team "1..*" -- "1..*" Collaborator : has >
+Team "1" -- "1..*" Collaborator : has >
 
 Vehicle "1" -- "*" VehicleCheckup : has >
 

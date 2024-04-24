@@ -17,11 +17,11 @@ class Team {
 }
 
 class Collaborator {
-    admissionDate
     name
     birthdate
-    contactMobile
-    email
+    admissionDate
+    mobileNumber
+    e-mail
     taxpayerNumber
 }
 

@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a fleet manager (VFM), I wish to register a vehicle's checkup.
+As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle's checkup.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -23,7 +23,7 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 >
 > **Answer:** Vehicle ID, Date and Kms at checkup.
 
-> **Question:** After register a job/vehicle's checkup should a message (sucess or failure) or a resume of the register appear?
+> **Question:** After register a job/vehicle's checkup should a message (success or failure) or a resume of the register appear?
 >
 > **Answer:** The UX/UI is up to the dev teams.
 
@@ -37,13 +37,15 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 > **Question:**  What´s the supposed vehicle check up supposed to look like?
 >
-> **Answer:** while registering a checkup, the vehicle id, date and current kms, shoud be considered.
+> **Answer:** while registering a checkup, the vehicle id, date and current kms, should be considered.
 
 > **Question:** What information is needed when registering a vehicle for check up?
 > 
 > **Answer:** Vehicle ID, Date, current kms
 
-
+> **Question:** Which attributes will you need for the vehicle's check-up?
+> 
+> **Answer:** Plate number, date, kms at checkup
 
 
 

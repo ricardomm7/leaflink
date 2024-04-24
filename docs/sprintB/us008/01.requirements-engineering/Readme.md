@@ -39,8 +39,7 @@ As a Vehicle and Equipment Manager (VFM), I want to list (report) of vehicles ne
 >
 > **Answer:** No. The Maintenance/Check-up Frequency (in km) is registered in US06.
 
->  **Question:** "The list must clearly identify the vehicles through: plate number, brand, model and the [?] that justified the checkup need."
-Did you mean the reason for the checkup need?
+>  **Question:** "The list must clearly identify the vehicles through: plate number, brand, model and the [?] that justified the checkup need." Did you mean the reason for the checkup need?
 >
 > **Answer:** DATA. Current kms, frequency, last checkup kms, next checkup (optimal) kms.
 
@@ -58,7 +57,7 @@ Did you mean the reason for the checkup need?
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The report should have the data concerning the vehicle description (Plate, Brand, Model, Current kms, Freq, Last checkup, Next checkup).
+* **AC1:** The report should have the data concerning the vehicle description (Plate, Brand, Model, Current kms, Freq kms, Last checkup, Next checkup).
 
 ### 1.4. Found out Dependencies
 
@@ -86,6 +85,6 @@ Did you mean the reason for the checkup need?
 
 ### 1.7 Other Relevant Remarks
 
-* Curr.Kms, Frequency, Last check, Next check, must be in km's.
+* Curr.Kms, Frequency, Last check, Next check, must be in kilometers (km).
 * Provide user-friendly interface with intuitive navigation and filtering options for easy access to the list of vehicles needing checkup.
 * Implement appropriate permissions and access controls to restrict the ability to list vehicles needing checkup to authorized VFM users only.

@@ -22,6 +22,7 @@ vehiclePlate
 tareWeight
 grossWeight
 currentKm
+registrationDate
 acquisitionDate
 maintenanceFrequency
 type
@@ -36,7 +37,7 @@ class Model{
 }
 
 
-Vehicle "1"-- "1" Brand: has an >
+Vehicle "1..*"-- "1" Brand: has  >
 Brand "1" -- "1..*" Model: has >
 Vehicle "1" -- "*" VehicleCheckup : has >
 @enduml

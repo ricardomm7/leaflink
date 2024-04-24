@@ -30,5 +30,5 @@ type
 
 }
 
-Vehicle "1" - "1..*" VehicleCheckup : needs >
+Vehicle "1" - "*" VehicleCheckup : needs >
 @enduml

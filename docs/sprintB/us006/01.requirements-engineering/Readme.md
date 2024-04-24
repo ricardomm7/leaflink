@@ -13,7 +13,6 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 
 >  To register a vehicle is required some attributes. The person who register the vehicles is the fleet manager (VFM) and the vehicle is saved by in system. 
 >  All the listed vehicle registration attributes are mandatory for successful registration. The system should not allow registration with missing information.
->  Floor Managers can modify existing vehicle registration information.
  
 **From the client clarifications:**
 
@@ -29,14 +28,21 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 >
 > **Answer:** No requirements were set concerning groups of vehicles
 
->  **Question:** If the Fm inserts the same vehicle by mistake, should it inform the user of the mistake and give him the option to add another vehicle?
+> **Question:** If the Fm inserts the same vehicle by mistake, should it inform the user of the mistake and give him the option to add another vehicle?
 >
 > **Answer:** Duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates
 
->  **Question:** When a vehicle is registered, are there specific requirements for accepting the brand? For example, does the system need to check if the brand is on a predetermined list? Does this also apply to the model or any other characteristics?
+> **Question:** When a vehicle is registered, are there specific requirements for accepting the brand? For example, does the system need to check if the brand is on a predetermined list? Does this also apply to the model or any other characteristics?
 >
 > **Answer:** No. One can consider a list os brands and a list of models previously inserted in the system. No need to go through validations.
 
+> **Question:** Can a fm register no vehicles or does he have to register at least one?
+> 
+> **Answer:** The VFM is a role or system user profile that has the rights to perform some system actions (like the ones described by the US06, US07 and US08). In theory If there is no need to register a vehicle, no vehicles will be registered but that would be rather odd.
+
+> **Question:** When the user is registering a vehicle's check-up it's supposed to insert vehicle ID, Date and Current Kms. My question is: Is this vehicle ID the license plate? Because in ther US006 it's supposed to register the license plate of the vehicle and not an vehicle ID. If these concepts are not the same where in the process the user register the vehicle ID?
+>
+> **Answer:** The business vehicle ID is the licence plate.
 
 ### 1.3. Acceptance Criteria
 

@@ -35,9 +35,17 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 >
 > **Answer:** idem.
 
-> **Answer:** What other information do you think is necessary to associate with the Job?
+> **Question:** What other information do you think is necessary to associate with the Job?
 >
-> **Question:** None for now.
+> **Answer:** None for now.
+
+> **Question:** Can special characters and numbers be entered when registering a job?
+> 
+> **Answer:** No.
+
+> **Question:** I assume that a job name cannot be empty. Is that right?
+> 
+>  **Answer:** That's right.
 
 ### 1.3. Acceptance Criteria
 
@@ -55,10 +63,10 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 **Input Data:**
 
 * Typed data:
-    * a job title
+    * Job title
 
 * Selected data:
-  * none
+  * None
 
 **Output Data:**
 * (In)Success of the operation
