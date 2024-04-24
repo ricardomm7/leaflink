@@ -43,14 +43,16 @@ configurability, instability, scalability and more._
 
 _Specifies or constraints the system design process. Examples may include: programming languages, software process, mandatory standards/patterns, use of development tools, class library, etc._
 
-- Programming Language: The system must be implemented using Java programming language to ensure compatibility and interoperability with existing components and libraries. Development Tools: The system development must utilize IntelliJ IDE or NetBeans for Java development to maintain consistency and streamline collaboration among team members.
+- Programming Language: The system must be implemented using Java programming language to ensure compatibility and interoperability with existing components and libraries. 
+- Development Tools: The system development must utilize IntelliJ IDE or NetBeans for Java development to maintain consistency and streamline collaboration among team members.
 
 ### Implementation Constraints
 
 _Specifies or constraints the code or construction of a system such as: mandatory standards/patterns, implementation languages,
 database integrity, resource limits, operating system._
 
-- Implementation Languages: The system backend must be implemented in Java, and the graphical user interface must be developed using JavaFX 11 to meet project requirements and compatibility constraints. Database Integrity: The system must enforce data integrity constraints and utilize transaction management to maintain consistency and reliability in database operations.
+- Implementation Languages: The system backend must be implemented in Java, and the graphical user interface must be developed using JavaFX 11 to meet project requirements and compatibility constraints. 
+- Database Integrity: The system must enforce data integrity constraints and utilize transaction management to maintain consistency and reliability in database operations.
 
 ### Interface Constraints
 

@@ -10,35 +10,45 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-
 class Team {
-  name
+    teamId
+    maxNumberElements
+    minNumberElements
 }
+
+class Collaborator {
+    admissionDate
+}
+
+class Skill{
+    designation
+}
+
 
 class Person {
     name
     birthdate
-    contact
+    contactMobile
+    email
+    taxpayerNumber
 }
 
 class Address{
+    street
     zipCode
     city
 }
 
-class Collaborator{
-    admissionDate
+class Document{
+    documentType
+    identificationCode
 }
 
-class DocumentType{
-  identificationCode
-
-}
-
-HRM "1..*" -- "1..*" Team: generate   >
 Person "1" -- "1" Address: has an >
 Collaborator "1" -- "1"  Person: is a >
-Person "1" -- "1..*"  DocumentType: has >
-Team "1..*" -- "1..*" Collaborator : has >
+Person "1" -- "1..*"  Document: has >
+Team "1" -- "1..*" Collaborator : has >
+Skill "1..*" -- "1..*" Team: needs <
+
 
 @enduml

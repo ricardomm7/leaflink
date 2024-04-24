@@ -10,14 +10,10 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class HRM {
-}
 
 class Job {
     title
     description
 }
-
-HRM "1..*" -- "1..*" Job : creates >
 
 @enduml

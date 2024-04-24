@@ -10,8 +10,6 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class VFM {
-}
 
 class Vehicle {
 vin
@@ -25,9 +23,13 @@ type
 }
 
 class Brand {
-model
+    designation
 }
 
-VFM "1..*" - "1..*" Vehicle : creates  >
-Vehicle "1" - "1" Brand : has >
+class Model {
+    designation
+}
+
+Vehicle "1..*" - "1" Brand : has >
+Model "1..*" -"1" Brand: has <
 @enduml

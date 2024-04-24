@@ -11,9 +11,6 @@ hide circle
 hide methods
 
 
-class HRM {
-}
-
 class Job {
     title
     description
@@ -28,23 +25,25 @@ class Person {
     birthdate
     contactMobile
     email
+    taxpayerNumber
 }
 
 class Address{
+    street
     zipCode
     city
+
 }
 
-class DocumentType{
+class Document{
+  documentType
   identificationCode
 }
 
 ' Relationships
-Person "1" -- "1" Address: has a >
+Person "1..*" -- "1" Address: has  >
 Collaborator "1" -- "1" Person: is a >
-Person  "1" -- "1..*"  DocumentType : has >
-HRM "1..*" -- "1..*" Collaborator : registers >
-HRM "1" -- "1" Job : assigns >
+Person  "1" -- "1"  Document : has >
 Job "1" -- "1..*" Collaborator : to >
 
 @enduml
