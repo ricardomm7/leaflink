@@ -73,4 +73,4 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 ### 1.7 Other Relevant Remarks
 
-* None.
+* Implement appropriate permissions and access controls to restrict the ability to register a job to authorized HRM users only.

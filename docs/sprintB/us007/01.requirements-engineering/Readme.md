@@ -82,4 +82,4 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 ### 1.7 Other Relevant Remarks
 
-* None
+* Implement appropriate permissions and access controls to restrict the ability to register vehicle check-up to authorized VFM users only.
