@@ -1,4 +1,4 @@
-# US007 - Register vehicle check-up
+# US007 - Register vehicle checkup
 
 
 ## 1. Requirements Engineering
@@ -15,23 +15,23 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 **From the client clarifications:**
 
-> **Question:** What is the unit of measurement used to estimate the check-up frequency (Kms, months, etc.)?
+> **Question:** What is the unit of measurement used to estimate the checkup frequency (Kms, months, etc.)?
 >
 > **Answer:** In real context all could be considered, in the scope of this project just Kms will be considered.
 
 > **Question:** What information is needed when registering a vehicle for check up?
 >
-> **Answer:** Vehicle ID, Date and Kms at check-up.
+> **Answer:** Vehicle ID, Date and Kms at checkup.
 
 > **Question:** After register a job/vehicle's checkup should a message (sucess or failure) or a resume of the register appear?
 >
 > **Answer:** The UX/UI is up to the dev teams.
 
-> **Question:** Does a vehicle need to be registered in US06 before being able to go for a check-up in US007?
+> **Question:** Does a vehicle need to be registered in US06 before being able to go for a checkup in US007?
 > 
 > **Answer:** Yes.
 
-> **Question:** Can a vehicle not have a check-up?
+> **Question:** Can a vehicle not have a checkup?
 >
 > **Answer:** Yes.
 
@@ -51,7 +51,7 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** Every vehicle should have a checkup frequency associated.
-* **AC3:** A vehicle should not have a check-up registered before its acquisition date. 
+* **AC3:** A vehicle should not have a checkup registered before its acquisition date. 
 
 ### 1.4. Found out Dependencies
 
@@ -62,7 +62,7 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 **Input Data:**
 
 * Typed data:
-    * Date of the check-up
+    * Date of the checkup
 	* currentKm
 * Selected data:
     * Vehicle
@@ -81,4 +81,4 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 ### 1.7 Other Relevant Remarks
 
-* Implement appropriate permissions and access controls to restrict the ability to register vehicle check-up to authorized VFM users only.
+* Implement appropriate permissions and access controls to restrict the ability to register vehicle checkup to authorized VFM users only.

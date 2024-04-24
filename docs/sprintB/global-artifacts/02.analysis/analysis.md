@@ -19,7 +19,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 * Checkup
 * Tasks/Workforce
-* Maintenance Activities
+* Maintenance activities
 
 ---
 
@@ -43,7 +43,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 **Roles of People or Organizations**
 
 * HRM - Human Resources Manager
-* VFM - Fleet Manager
+* VFM - Vehicle and Equipment Fleet Manager
 * CLB - Collaborator
 
 ---
@@ -66,21 +66,21 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 * Vehicles
 * Machines
-* Equipment
+* Gardening Equipment
 
 ---
 
 **Descriptions of Things**
 
-* Job Descriptions
+* Job descriptions
 * Skill sets
 
 ---
 
 **Catalogs**
 
-* Skills Catalog
-* Vehicle brand and model Catalog
+* Skills catalog
+* Vehicle brand and model catalog
 
 ---
 
@@ -141,20 +141,24 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		 |  Association   	  | Concept (B) |
-|----------------|:-----------------:|------------:|
-| Task  	        | assign to    		 	 |        Team |
-| Vehicles  	    |      used by      |        Task |
-| Collaborator   |        has        |       Skill |
-| Vehicle        |       needs       |     Checkup |
-| Collaborator   |    assigned to    |        Team |
+| Concept (A) 		     | Association   	 |       Concept (B) |
+|--------------------|:---------------:|------------------:|
+| Task  	            |    assign to    |              Team |
+| Vehicles  	        |     used by     |              Task |
+| Collaborator       |       has       |             Skill |
+| Vehicle            |      needs      |           Checkup |
+| Collaborator       |   assigned to   |              Team |
+| Task               |    can need     |           Vehicle |
+| Task               |    includes     |            Skills |
+| Equipment          |    used for     |             Tasks |
+| Task               |  scheduled in   |            Agenda |
+| Green Spaces User	 | interacts with	 |       User Portal |
+| Vehicle            |    undergoes    |           Checkup |
+| Green Space        |    can have     |  Lightning system |
+| Green Space        |    can have     | Irrigation System |
 
 
 
 ## Domain Model
-
-**Do NOT forget to identify concept attributes too.**
-
-**Insert below the Domain Model Diagram in an SVG format**
 
 ![Domain Model](svg/project-domain-model.svg)

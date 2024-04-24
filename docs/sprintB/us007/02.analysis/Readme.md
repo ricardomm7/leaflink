@@ -1,4 +1,4 @@
-# US007 - Register vehicle check-up
+# US007 - Register vehicle checkup
 
 ## 2. Analysis
 
@@ -9,4 +9,4 @@
 ### 2.2. Other Remarks
 
 - All dates used are the format used is the European one (day/month/year).
-- The measurement used in the check-up is the kilometer.
+- The measurement used in the checkup is the kilometer.

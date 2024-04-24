@@ -12,10 +12,10 @@ participant ":System" as System
 
 activate VFM
 
-    VFM -> System : asks to register a vehicle check-up
+    VFM -> System : asks to register a vehicle checkup
         activate System
 
-    System --> VFM : asks vehicle to check-up
+    System --> VFM : asks vehicle to checkup
         deactivate System
     VFM -> System : select  vehicle
     activate System

@@ -11,7 +11,7 @@ be appointed to a collaborator.
 
 **From the specifications document:**
 
-> A skill created should be saved in a skills list so that it can be assigned to one or more workers in the future.
+> A skill created should be saved in a skills list so that it can be assigned to one or more collaborators in the future.
 
 **From the client clarifications:**
 
@@ -77,7 +77,7 @@ be appointed to a collaborator.
 
 ### 1.4. Found out Dependencies
 
-* None for now.
+* None.
 
 ### 1.5 Input and Output Data
 
