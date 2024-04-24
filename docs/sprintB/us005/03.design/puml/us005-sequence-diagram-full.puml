@@ -59,7 +59,7 @@ activate ADM
 
         UI --> ADM : requests maximum team size
 
-    ADM -> UI : types requested data (maximum team size)
+    ADM -> UI : types requested data (maximum and minimum  team size)
 
         UI --> ADM : shows data and asks for verification
 

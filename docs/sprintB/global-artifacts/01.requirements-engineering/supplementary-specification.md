@@ -21,7 +21,7 @@ documentation; consistency and standards._
 
 _Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
 
-(fill in here )
+- The system must securely store the registered vehicle information.
 
 ## Performance
 

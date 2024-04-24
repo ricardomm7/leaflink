@@ -82,4 +82,4 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 
 ### 1.7 Other Relevant Remarks
 
-* None
+* Implement appropriate permissions and access controls to restrict the ability to register a vehicle to authorized VFM users only.

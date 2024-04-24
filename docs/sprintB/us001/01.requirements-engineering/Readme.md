@@ -104,5 +104,4 @@ be appointed to a collaborator.
 
 ### 1.7 Other Relevant Remarks
 
-* The success of the operation is shown by the fact that no error is displayed on the screen and the competence is
-  recorded in the list.
+* Implement appropriate permissions and access controls to restrict the ability to register a skill to authorized HRM users only.

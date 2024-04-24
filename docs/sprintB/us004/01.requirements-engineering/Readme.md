@@ -42,11 +42,11 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The HRM must be able to select and assign one or more skills to a collaborator.
-* **AC2:** Once assigned, the system should update the collaborator's profile with the assigned skills.
 
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US001 - Register a skill" as the skill must first be registered in the system before being possible to assign it to a collaborator.
+* There is a dependecy on "US003" - Register a collaborator with a job and fundamental characteristics" as a collaborator must first be registered in the system before being possible to assign a skill. 
 
 ### 1.5 Input and Output Data
 
@@ -77,4 +77,3 @@ As a Human Resources Manager (HRM), I want to assign one or more skills to a col
 
 * Provide search or filtering options for the list of skills to expedite the selection process.
 * Implement appropriate permissions and access controls to restrict the ability to assign skills to authorized HRM users only.
-* Provide feedback upon successful assignment of skills, confirming the completion of the operation.

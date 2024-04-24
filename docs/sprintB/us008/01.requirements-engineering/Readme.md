@@ -94,3 +94,4 @@ Did you mean the reason for the check-up need?
 * Ensure that the generated list is accurate and up-to-date.
 * Provide user-friendly interface with intuitive navigation and filtering options for easy access to the list of vehicles needing check-up.
 * The system should allow filtering or sorting options for the list based on different criteria, such as vehicle brand or check-up due date.
+* Implement appropriate permissions and access controls to restrict the ability to list vehicles needing check-up to authorized VFM users only.

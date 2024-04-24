@@ -10,15 +10,23 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class VFM {
-
-}
 
 class VehicleCheckup {
     date
     currentKm
-
+    vehicleID
 }
 
-VFM "1..*" - "*" VehicleCheckup : registers >
+class Vehicle{
+vin
+vehiclePlate
+tareWeight
+grossWeight
+currentKm
+acquisitionDate
+maintenanceFrequency
+type
+}
+
+Vehicle "1" - "1..*" VehicleCheckup : needs >
 @enduml

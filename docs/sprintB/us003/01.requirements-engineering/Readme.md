@@ -30,7 +30,8 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** Every collaborator must have an associated job.
-* **AC3:** Name, birth date, admission date, address, contact info (mobile and email), taxpayer number, ID doc type, and respective number should be provided by the HRM. The taxpayer identification number and the citizen card number should be valid.
+* **AC3:** Name, birthdate, admission date, address, contact info (mobile and email), taxpayer number, ID doc type, and respective number should be provided by the HRM. The taxpayer identification number and the citizen card number should be valid.
+* **AC4:** There must be, at least, a difference of 18 years between the birthdate and the admission date (must be an adult).
 
 ### 1.4. Found out Dependencies
 
@@ -69,4 +70,4 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 ### 1.7 Other Relevant Remarks
 
-* None 
+* Implement appropriate permissions and access controls to restrict the ability to register a collaborator with a job and fundamental characteristics to authorized HRM users only.
