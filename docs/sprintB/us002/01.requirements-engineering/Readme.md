@@ -43,6 +43,8 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 * **AC1:** The job field must be filled in.
 * **AC2:** A job name can’t have special characters or digits.
+* **AC3:** If a job is created with the same name as an existing job, the system should show an information window
+  and reject the job.
 
 ### 1.4. Found out Dependencies
 
@@ -54,8 +56,7 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 * Typed data:
     * a job title
-   
-	
+
 * Selected data:
   * none
 

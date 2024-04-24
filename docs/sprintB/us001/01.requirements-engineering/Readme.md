@@ -31,23 +31,21 @@ be appointed to a collaborator.
 >
 > **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
 
-> **Question:** Do I need to add skills by writing them or can I just give a file with all of the skills?
+> **Question:** Do I need to add skills by writing them or can I just give a file with all the skills?
 >
 > **Answer:** Both are acceptable since the business the same the crucial difference resides in the UX.
 
 > **Question:** Does the HRM need to see the confirmation of the success of the operation and the skills added or just
 > the success of the operation?
 >
-> **Answer:** It will depend on if you opt to insert one skil or a set of skils in a batch. Maybe some adaptation needed.
+> **Answer:** It will depend on if you opt to insert one skill or a set of skills in a batch. Maybe some adaptation needed.
 
 > **Question:** Is there any other possible outcome like if the HMR does not put the requested data, do I need to ask
 > the user to register a different competence?
 >
 > **Answer:** This US is quite simple, atm a skill is simply a name.
 
-> **Question:** What criteria are needed to register a skill?
->
-> **Question:** What kind of information does a skill have?
+> **Question:** What criteria are needed to register a skill and what kind of information does a skill have ?
 >
 > **Answer:** the name of the skill, for example: pruner; lorry driver; phytopharmaceutical applicator
 
@@ -60,7 +58,7 @@ be appointed to a collaborator.
 >
 > **Answer:** It's not required to do so.
 
-> **Question:** The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
+> **Question:** The identification of the skill will be the name, or the system will generate automatically an Id when the manager insert the name?
 > 
 > **Answer:** A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence". I have no knowledge about systems IDs.
 
@@ -72,7 +70,8 @@ be appointed to a collaborator.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All skill field must be filled in.
-* **AC2:** If you create a skill with the same name as an existing skill, the system should show an information window
+* **AC2:** A skill name can’t have special characters or digits.
+* **AC2:** If a skill is created with the same name as an existing skill, the system should show an information window
   and reject the skill.
 
 ### 1.4. Found out Dependencies
@@ -85,7 +84,6 @@ be appointed to a collaborator.
 
 * Typed data:
     * a designation
-
 
 * Selected data:
     * none

@@ -79,12 +79,14 @@ class Address{
     city
 }
 
-class StatisticalAnalysis{
+class WaterStatisticalAnalysis{
 }
 
 class StatsUserPortal{
 }
 
+class ElectronicDevice{
+}
 
 class GreenSpace{
     name
@@ -117,24 +119,25 @@ Job "1" -- "1..*" Collaborator : to >
 Skill "*" -- "1..*" Collaborator : to >
 Team "1..**" -- "1..*" Skill : needs >
 
-
 Team "1..*" -- "1..*" Collaborator : has >
-
 
 Vehicle "1" -- "*" VehicleCheckup : has >
 
-
 Collaborator "1..*" -- "1" Address : has a >
 
-GreenSpace "1" -- "1" StatisticalAnalysis : is analysed >
+GreenSpace "1" -- "1" WaterStatisticalAnalysis : is analysed >
 
 GreenSpace "1" -- "1" Address : has an >
 
-Task "1" -- "1..*" Vehicle : needs >
+Task "1" -- "*" Vehicle : needs >
 
 Task "1" -- "1" Team : is assigned >
 
-Task "1" -- "1..*" Equipment : has >
+Task "1" -- "*" Equipment : has >
+
+GreenSpace "1" -- "1..*" ElectronicDevice: has >
+
+ElectronicDevice "1" -- "1" EquipmentStatisticalAnalysis: is analysed >
 
 GreenSpace "1" -- "1" Portal : is connected >
 

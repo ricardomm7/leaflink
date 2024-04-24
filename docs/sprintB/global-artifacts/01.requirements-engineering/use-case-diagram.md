@@ -20,8 +20,8 @@ This is the global Use Case Diagram and shows the main functions of the main rol
 | US004/UC004  | [Assign Skills to a collaborator](../../us004/Readme.md)                                                                                     |
 | US005/UC005  | [Generate a team](../../us005/Readme.md)                                                                                                     |
 | US006/UC006  | [Register a Vehicle](../../us006/Readme.md)                                                                                                  |
-| US007/UC007  | [Register a vehicle´s checkup](../../us007/Readme.md)                                                                                       |
-| US008/UC008  | [List vehicles needing checkup](../../us008/Readme.md)                                                                                      |
+| US007/UC007  | [Register a vehicle´s checkup](../../us007/Readme.md)                                                                                        |
+| US008/UC008  | [List vehicles needing checkup](../../us008/Readme.md)                                                                                       |
 | US009/UC009  | [Known the exact costs referring to water consumption of specific green space](../../us009/Readme.md)                                        |
 | US010/UC0010 | [Known which piece(s) of equipment is/are used in each day](../../us010/Readme.md)                                                           |
 | US011/UC011  | [Collect data from the user portal about the use of the park](../../us011/Readme.md)                                                         |
