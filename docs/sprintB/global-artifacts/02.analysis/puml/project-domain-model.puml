@@ -43,10 +43,15 @@ class Vehicle {
 }
 
 class Brand{
-    model
+    designation
+}
+
+class Model{
+    designation
 }
 
 class VehicleCheckup{
+    vehicleId
     date
     currentKm
 }
@@ -88,7 +93,9 @@ class Agenda{
 class Portal{
 }
 
-Vehicle "1" -- "1" Brand : has >
+Vehicle "1..*" -- "1" Brand : has >
+
+Model "1..*" -- "1" Brand : has <
 
 Collaborator  "1" -- "1"  Person : is >
 

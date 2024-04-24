@@ -9,10 +9,9 @@ left to right direction
 hide circle
 hide methods
 
-class VFM {
-}
 
 class VehicleCheckup {
+    vehicleId
     date
     currentKm
 }
@@ -29,11 +28,15 @@ type
 }
 
 class Brand {
-model
+    designation
+}
+
+class Model{
+    designation
 }
 
 
 Vehicle "1"-- "1" Brand: has an >
-VFM "1..*" -- "*" Vehicle : cataloged >
+Brand "1" -- "1..*" Model: has >
 Vehicle "1" -- "*" VehicleCheckup : has >
 @enduml
