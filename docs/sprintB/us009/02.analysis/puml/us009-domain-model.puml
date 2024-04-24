@@ -25,7 +25,7 @@ class WaterConsumption {
     consumption
 }
 
-class StatisticalAnalysis {
+class WaterStatisticalAnalysis {
     parkId
     startMonth
     endMonth
@@ -34,6 +34,6 @@ class StatisticalAnalysis {
 
 Park "1" - "0..*" WaterConsumption : has >
 WaterConsumption "*" -- "1" Park : belongs to >
-StatisticalAnalysis -- Park : analyses >
+WaterStatisticalAnalysis -- Park : analyses >
 
 @enduml

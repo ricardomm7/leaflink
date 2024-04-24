@@ -21,13 +21,7 @@ activate GSM
     GSM -> System : provides input data
     activate System
 
-        System --> GSM : validates input data and initiates analysis process
-    deactivate System
-
-    GSM -> System : receives analysis results
-    activate System
-
-        System --> GSM : presents analysis outcomes (e.g., bar plot, average costs, statistical indicators)
+        System --> GSM : validates input data and gives the outcome (e.g., bar plot,\n average costs, statistical indicators)
     deactivate System
 
 @enduml

@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Green Spaces Manager (GSM), I want to import a .csv file containing lines
+As a Green Spaces Manager (GSM), I want to import a .csv file containing routes.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
@@ -29,8 +29,7 @@ As a Green Spaces Manager (GSM), I want to import a .csv file containing lines
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The .csv file must contain columns for Water Point X, Water Point Y, and Distance.
-* **AC2:** The system must validate all data contained in the .csv file and provide informative messages to the user in case of issues during the import process.
+* **AC1:** The system must validate all data contained in the .csv file and provide informative messages to the user in case of issues during the import process.
 
 ### 1.4. Found out Dependencies
 
@@ -45,7 +44,7 @@ As a Green Spaces Manager (GSM), I want to import a .csv file containing lines
 
 **Output Data:**
 
-+ confirmation message
+* The graph file.
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -58,5 +57,4 @@ As a Green Spaces Manager (GSM), I want to import a .csv file containing lines
 
 ### 1.7 Other Relevant Remarks
 
-* The imported data should be validated to ensure that it meets the required format and structure before being processed by the system
-* Error handling mechanisms should be implemented to handle cases where the .csv file is contains invalid data.
+* None.

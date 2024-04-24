@@ -8,5 +8,5 @@
 
 ### 2.2. Other Remarks
 
-- All dates used are the format used is the European one (day/month/year).
+- All dates used are the format used are in day/month/year format.
 - The measurement used in the checkup is the kilometer.

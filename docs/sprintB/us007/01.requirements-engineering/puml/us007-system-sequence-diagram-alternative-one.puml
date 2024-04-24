@@ -17,7 +17,7 @@ activate VFM
 
     System --> VFM : asks vehicle to checkup
         deactivate System
-    VFM -> System : select  vehicle
+    VFM -> System : select  vehicle (by ID)
     activate System
 
     System --> VFM : requests data (date, currentKm)

@@ -58,10 +58,7 @@ Did you mean the reason for the checkup need?
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The system should generate a list of vehicles that are due for a checkup based on their maintenance/checkup frequency and current kilometers.
-* **AC2:** The list should include relevant information such as vehicle ID/VIN, brand, model, and current kilometers.
-* **AC3:** The list should be easily accessible to the Facilities Manager.
-* **AC4:** The report should have the data concerning the vehicle description (Plate, Brand, Model and Current Kms) and the Checkup related data.
+* **AC1:** The report should have the data concerning the vehicle description (Plate, Brand, Model, Current kms, Freq, Last checkup, Next checkup).
 
 ### 1.4. Found out Dependencies
 
@@ -76,8 +73,7 @@ Did you mean the reason for the checkup need?
 
 **Output Data:**
 
-* List of vehicles needing checkup
-* Relevant vehicle information (e.g., ID/VIN, brand, model, current kilometers)
+* List of vehicles needing checkup containing (Plate, Brand, Model, Curr.Kms, Frequency, Last check, Next check)
 * (In)Success of the operation  
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -90,8 +86,6 @@ Did you mean the reason for the checkup need?
 
 ### 1.7 Other Relevant Remarks
 
-* Implement appropriate logic to determine the vehicles needing checkup based on maintenance/checkup frequency and current kilometers.
-* Ensure that the generated list is accurate and up-to-date.
+* Curr.Kms, Frequency, Last check, Next check, must be in km's.
 * Provide user-friendly interface with intuitive navigation and filtering options for easy access to the list of vehicles needing checkup.
-* The system should allow filtering or sorting options for the list based on different criteria, such as vehicle brand or checkup due date.
 * Implement appropriate permissions and access controls to restrict the ability to list vehicles needing checkup to authorized VFM users only.

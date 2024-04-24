@@ -16,7 +16,7 @@ activate GSM
     activate System
 
 
-        System --> GSM : displays confirmation message
+        System --> GSM : displays the graph
     deactivate System
 
 @enduml

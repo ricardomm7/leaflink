@@ -3,11 +3,11 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US010
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "GSM" as Employee
 participant ":System" as System
 
 activate Employee

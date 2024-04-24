@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle including Brand, Model, Type, Tare Weight, Gross Weight, Current Km, Register Date, Acquisition Date, and Maintenance/Check-up Frequency (in km).
+As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle including Vin, Brand, Model, Type, Tare Weight, Gross Weight, Current Km, Register Date, Acquisition Date, and Maintenance/Check-up Frequency (in km).
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -46,7 +46,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 
 ### 1.4. Found out Dependencies
 
-* There is a no dependency on others users stories.
+* None.
 
 ### 1.5 Input and Output Data
 
@@ -70,7 +70,6 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 **Output Data:**
 
 * (In)Success of the operation
-* List of existing vehicle registration information (for viewing or updating).
 
 ### 1.6. System Sequence Diagram (SSD)
 

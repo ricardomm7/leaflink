@@ -37,7 +37,7 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 > **Question:**  What´s the supposed vehicle check up supposed to look like?
 >
-> **Answer:** Yes.
+> **Answer:** while registering a checkup, the vehicle id, date and current kms, shoud be considered.
 
 > **Question:** What information is needed when registering a vehicle for check up?
 > 
@@ -64,9 +64,9 @@ As a fleet manager (VFM), I wish to register a vehicle's checkup.
 
 * Typed data:
     * Date of the checkup
-	* currentKm
+	* Current Km
 * Selected data:
-    * Vehicle
+    * Vehicle ID
 
 **Output Data:**
 
