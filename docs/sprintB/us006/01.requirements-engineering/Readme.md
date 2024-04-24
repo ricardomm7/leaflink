@@ -43,7 +43,6 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 * **AC1:** All attributes must be filled.
 * **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
 * **AC3:** When registering a vehicle already registered, the system must reject such operation and the fleet manager (VFM) must be able to modify some attribute.
-* **AC4:** The system must securely store the registered vehicle information.
 
 ### 1.4. Found out Dependencies
 
