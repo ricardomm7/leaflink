@@ -3,16 +3,15 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
+title System Sequence Diagram (SSD) - US006
 
 autonumber
 
-'hide footbox
 actor "VFM" as VFM
 participant ":RegisterVehicleUI" as UI
 participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "brandRepository:\nBrandRepository" as BrandRepository
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "vehicle\n:Vehicle" as VEI
 
@@ -23,111 +22,62 @@ activate VFM
 
         UI -> CTRL** : create
 
-        UI --> VFM : requests vehicle data (VIN, Vehicle Platte, Tare Weight, Gross Weight,\n Current Km, Acquisition Date, Maintenance Frequency)
+        UI --> VFM : requests vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        deactivate UI
 
     VFM -> UI : types vehicle data
+    activate UI
+
+    UI --> VFM : shows all data and requests confirmation
+    deactivate UI
+
+    VFM -> UI: confirms Data
+    activate UI
 
         UI -> CTRL : submit vehicle data
         deactivate UI
         activate CTRL
 
-            CTRL -> RepositorySingleton: getInstance()
-            activate RepositorySingleton
+            ref over CTRL
+                                            Get Vehicle Repository
 
-            RepositorySingleton --> CTRL: repositories
-            deactivate RepositorySingleton
+                                        end ref
 
-            CTRL -> PLAT: getVehicleRepository
-            activate PLAT
+        CTRL -> VehicleRepository : verifyExistedVehicle(VIN, Vehicle Plate)
+        deactivate CTRL
 
-            PLAT --> CTRL: VehicleRepository
-            deactivate PLAT
-
-            CTRL -> VehicleRepository : validateVehicleData(VIN)
-            deactivate CTRL
             activate VehicleRepository
 
-            VehicleRepository -> VehicleRepository: validateVehicleData(VIN)
+            ref over VehicleRepository
+                                                        Verify Existed Vehicle
+
+                                                    end ref
+
+
+            VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        deactivate VehicleRepository
+            activate VEI
+
+            ref over VEI
+                                            Register Vehicle
+
+                                        end ref
+
+            VEI --> VehicleRepository: vehicle
+            deactivate VEI
             activate VehicleRepository
 
-            VehicleRepository --> VehicleRepository
-            deactivate VehicleRepository
+            VehicleRepository --> CTRL: vehicle
+                        deactivate VehicleRepository
 
-            VehicleRepository --> CTRL : vehicleData
-            deactivate VehicleRepository
             activate CTRL
 
 
-
-
-            ref over CTRL
-                                            Get brand List
-                                        end ref
-
-            CTRL --> UI: brandList
+            CTRL --> UI : vehicle
             deactivate CTRL
             activate UI
 
-
-
-    UI --> VFM : show brand list and request to select brand
-
-    VFM -> UI : select vehicle brand
-
-    UI -> CTRL : getModel()
-    deactivate UI
-    activate CTRL
-
-        ref over CTRL
-                                            Get model List
-                                        end ref
-
-
-
-    CTRL --> UI: modelList
-    deactivate CTRL
-    activate UI
-
-
-    UI --> VFM : shows vehicle model List
-
-
-
-    VFM -> UI : select vehicle brand
-
-        UI -> CTRL : registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
-        deactivate UI
-        activate CTRL
-
-            |||
-            CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
-            deactivate CTRL
-            activate VehicleRepository
-
-                VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, \nVehicle Platte, Tare Weight, Gross Weight, \nCurrent Km, Acquisition Date, Maintenance Frequency)
-                deactivate VehicleRepository
-                activate VEI
-
-                        ref over VEI
-                                                                    Register Vehicle
-                                                                end ref
-
-
-                 VEI --> VehicleRepository: vehicle
-                                deactivate VEI
-
-                activate VehicleRepository
-
-            VehicleRepository --> CTRL: vehicle
-            deactivate VehicleRepository
-            activate CTRL
-
-            CTRL --> UI: vehicle
-            deactivate CTRL
-
-activate UI
-
-        UI --> VFM : shows success message
+    UI --> VFM : shows vehicle registration information
     deactivate UI
 
 deactivate VFM

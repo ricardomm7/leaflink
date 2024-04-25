@@ -3,82 +3,47 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam line type polyline
 
-class RegisterVehicleUI {
+package VehicleRegistrationSystem {
+    class RegisterVehicleUI {
 
+    }
+
+    class RegisterVehicleController {
+        - vehicleRepository: VehicleRepository
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int): boolean
+    }
+
+    class Repositories {
+        - instance: Repositories
+        - vehicleRepository: VehicleRepository
+        + getInstance(): Repositories
+        + getVehicleRepository(): VehicleRepository
+    }
+
+    class VehicleRepository {
+        + verifyExistedVehicle(VIN: String, VehiclePlate: String): boolean
+        + addVehicle(vehicle: Vehicle): boolean
+    }
+
+    class Vehicle {
+        - VIN: String
+        - brand: String
+        - model: String
+        - type: String
+        - vehiclePlate: String
+        - tareWeight: double
+        - grossWeight: double
+        - currentKm: double
+        - acquisitionDate: Date
+        - maintenanceFrequency: int
+
+        + validateVehicle(vehicle: Vehicle): boolean
+    }
+
+    Repositories --> VehicleRepository: Get
+    RegisterVehicleUI --> RegisterVehicleController: Submit vehicle data
+    RegisterVehicleController --> VehicleRepository: Save vehicle data
+    VehicleRepository -> Vehicle: Register
 }
-
-class RegisterVehicleController {
-    - brandList: List<Brand>
-    - modelList: List<String>
-    + getBrands(): List<Brand>
-    + getModels(): List<String>
-    + registerVehicle(vin: String, brand: Brand, model: String, vehiclePlate: String, tareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int)
-    + getBrands(): List<Brand>
-    + getModelsByBrand(brand: Brand): List<String>
-}
-
-class Repositories {
-    - Repositories(): repositories
-    - BrandRepository: repositories
-    - VehicleRepository: repositories
-    + getInstance(): Repositories
-    + getBrandRepository(): BrandRepository
-    + getVehicleRepository(): VehicleRepository
-}
-
-class VehicleRepository {
-    + validateVIN(vin: String): boolean
-    + registerVehicle(vin: String, brand: Brand, model: String, vehiclePlate: String, tareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int)
-}
-
-class BrandRepository {
-    - brandList: List<Brand>
-    - modelList: List<String>
-    + getBrandList(): List<Brand>
-    + getModelByBrand(brand: Brand): List<String>
-}
-
-
-class Vehicle {
-    - VIN: String
-    - vehiclePlate: String
-    - tareWeight: double
-    - grossWeight: double
-    - currentKm: double
-    - acquisitionDate: int
-    - maintenanceFrequency: int
-    - type: String
-    - vehicle
-
-    + addVehicle(vehicle)
-    + validateVehicle(vehicle)
-
-}
-
-class Brand {
-    - model: String
-}
-
-Repositories -> Repositories : instance
-
-RegisterVehicleUI .> RegisterVehicleController
-
-RegisterVehicleController .> Repositories : repositories
-
-Repositories -> "1" BrandRepository
-
-RegisterVehicleController ..> Brand
-
-RegisterVehicleController ..> VehicleRepository : vehicleRepository
-
-RegisterVehicleController ..> BrandRepository : brandRepository
-
-Repositories --> "1" VehicleRepository
-
-VehicleRepository --> "*" Vehicle
-
-RegisterVehicleController ..> "1" Brand : brand
-
-Vehicle --> "1" Brand : brand
 
 @enduml

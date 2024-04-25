@@ -50,30 +50,24 @@ activate VFM
             PLAT --> CTRL: VehicleRepository
             deactivate PLAT
 
-        CTRL -> VehicleRepository : validateVehicleData(VIN)
+        CTRL -> VehicleRepository : verifyExistedVehicle(VIN, Vehicle Plate)
         deactivate CTRL
 
             activate VehicleRepository
 
-            VehicleRepository -> VehicleRepository: validateVehicleData(VIN, Vehicle Plate)
+            VehicleRepository -> VehicleRepository: verifyExistedVehicle(VIN, Vehicle Plate)
             activate VehicleRepository
 
             VehicleRepository --> VehicleRepository
             deactivate VehicleRepository
 
 
-            VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+            VehicleRepository -> VEI **: addVehicle(vehicle)
         deactivate VehicleRepository
-            activate VEI
-
-            VEI -> VEI: addVehicle(vehicle)
             activate VEI
 
             VEI -> VEI: validateVehicle(vehicle)
             activate VEI
-
-            VEI --> VEI
-            deactivate VEI
 
             VEI --> VEI
             deactivate VEI
@@ -83,8 +77,8 @@ activate VFM
             activate VehicleRepository
 
             VehicleRepository --> CTRL: vehicle
-            activate CTRL
             deactivate VehicleRepository
+            activate CTRL
 
 
             CTRL --> UI : vehicle

@@ -29,7 +29,6 @@ _**Note that SSD - Alternative One is adopted.**_
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
 * RouteRepository
-* Task
 
 Other software classes (i.e. Pure Fabrication) identified: 
 

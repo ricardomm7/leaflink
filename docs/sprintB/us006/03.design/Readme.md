@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US006 - Register a Vehicle 
 
 ## 3. Design - User Story Realization 
 
@@ -6,28 +6,23 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...      | Answer                    | Justification (with patterns)                                                                                 |
-|:---------------|:-------------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?                 | RegisterVehicleUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        | 	... coordinating the US?                        | RegisterVehicleController | Controller: responsible for coordinating and controlling the flow of interaction.                             |
-| 			  		        | 	... instantiating a new Vehicle?                | Vehicle                   | Creator : in the DM, a Vehicle is created during the registration process.                                    |
-| 			  		        | ... knowing the user using the system?           | UserSession               | IE: cf. Authentication & Authorization component documentation.                                               |
-| 			  		        | ... knowing the brand of the vehicle							      | BrandRepository           | IE: The BrandRepository retrieves brand information from the data source.                                     |
-| Step 2  		     | 	... validating the VIN?						                   | Vehicle                   | IE: The Vehicle object performs local validation on its attributes.                                           |
-|                | ... providing the list of available brands?      | BrandRepository           | Creator : The BrandRepository retrieves list of brands.                                                       |
-| Step 3  		     | 	...maintaining the vehicle data?                | Vehicle                   | IE: The Vehicle object holds the data for each registered vehicle.                                            |
-|                | ... retrieving brand information                 | BrandRepository           | Creator : The BrandRepository retrieves brand information from the data source.                               |
-|                | ... selecting a brand                            | RegisterVehicleUI         | IE: The RegisterVehicleUI class presents a list of available brands to the user and handles user selection.   |
-| Step 4  		     | 	...ensuring the registration process?           | VehicleRepository         | Creator : The VehicleRepository manages the persistence of vehicle data.                                      |
-| 		             | 	... validating the vehicle data?                | Vehicle                   | IE: The Vehicle object performs local validation on its attributes.                                           |
-| Step 5  		     | 	... providing ?                                 | Vehicle                   | IE: The Vehicle object performs local validation on its attributes.                                           |
-|                |                                                  |                           |
-| Step 6  		     | ...coordinating the vehicle registration?							 | RegisterVehicleController | Controller                                                                                                    |              
-|                | ... handling persistence of vehicle data ?       | VehicleRepository         | Creator (Rule 1): The VehicleRepository manages the persistence of vehicle data.                              |
-| Step 7  		     | 	... validating all data (local validation)?     | Vehicle                   | IE: The Vehicle object performs local validation on its attributes.                                           | 
-| 			  		        | 	... validating all data (global validation)?    | VehicleRepository         | Repository (Rule 2): global validation often involves querying data from multiple sources.                    | 
-| 			  		        | 	... saving the vehicle register?                | Vehicle                   | IE: The Vehicle object encapsulates its data and handles persistence.                                         | 
-| Step 8  		     | 	... informing operation success?                | RegisterVehicleUI         | IE: The RegisterVehicleUI class handles user interaction and displays success/error messages.                 | 
+| Interaction ID | Question: Which class is responsible for...      | Answer                    | Justification (with patterns)                                                                 |
+|:---------------|:-------------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?                 | RegisterVehicleUI         | The UI class handles user input and forwards it to the controller for further processing.     |
+|                | ... display vehicle data input fields?           | RegisterVehicleUI         | The UI class displays the input fields for vehicle data, facilitating user interaction.       |
+|                | ... confirms the user's input data?              | RegisterVehicleUI         | The UI class confirms the user's input data before proceeding with the registration process.  |
+| Step 2			  		  | 	... coordinating the US?                        | RegisterVehicleController | Controller: responsible for coordinating and controlling the flow of interaction.             |
+| 			  		        | ... knowing the user using the system?           | UserSession               | IE: cf. Authentication & Authorization component documentation.                               |
+| Step 3  		     | 	... handles the registration of the vehicle?    | RegisterVehicleController | The controller class manages the registration process.                                        |
+| 		             | 	... verify existed vehicle?						               | VehicleRepository         | IE: The Repository object performs global validation.                                         |
+| Step 4  		     | 	... ensuring the registration process?          | VehicleRepository         | The repository class creates a new instance of the vehicle in the system.                     |
+| 		             | 	... ensures data integrity during registration? | VehicleRepository         | The repository class ensures that only valid and consistent data is stored in the system.     |
+| Step 5		       | ... stores vehicle registration data?            | VehicleRepository         | The repository class is responsible for persisting and managing vehicle registration data.    |
+| Step 6  		     | 	... validating all data (local validation)?     | Vehicle                   | IE: The Vehicle object performs local validation on its attributes.                           | 
+| 			  		        | 	... validating all data (global validation)?    | VehicleRepository         | Repository (Rule 2): global validation often involves querying data from multiple sources.    | 
+| Step 7			  		  | 	... saving the vehicle register?                | Vehicle                   | IE: The Vehicle object encapsulates its data and handles persistence.                         | 
+| Step 8  		     | 	... informing operation success?                | RegisterVehicleUI         | IE: The RegisterVehicleUI class handles user interaction and displays success/error messages. | 
+
 
 ### Systematization ##
 
@@ -60,13 +55,13 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
 
-**Get Task Brand List Partial SD**
+**Get Vehicle Repository Partial SD**
 
-![Sequence Diagram - Partial - Get Brand List](svg/us006-sequence-diagram-partial-get-brand-list.svg)
+![Sequence Diagram - Partial - Get Vehicle Repository](svg/us006-sequence-diagram-partial-get-vehicle-repository.svg)
 
-**Get Model by Brand Object**
+**Verify Existed Vehicle Partial SD**
 
-![Sequence Diagram - Partial - Get Model by Brand](svg/us006-sequence-diagram-partial-get-model-by-brand.svg)
+![Sequence Diagram - Partial - Verify Existed Vehicle](svg/us006-sequence-diagram-partial-verify-existed-vehicle.svg)
 
 **Register a Vehicle**
 
