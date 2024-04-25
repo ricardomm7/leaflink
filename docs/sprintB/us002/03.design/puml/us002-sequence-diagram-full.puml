@@ -21,15 +21,15 @@ activate UI
 
 UI -> CTRL** : create
 
-UI --> Employee : asks for the info needed (title and description)
+UI --> Employee : asks for the info needed (title)
 
-Employee -> UI : provides job title and description
+Employee -> UI : provides job title
 
 UI --> Employee : shows a verification dialog
 
 Employee -> UI : confirms job creation
 
-UI -> CTRL : createJob(title, description)
+UI -> CTRL : createJob(title)
 deactivate UI
 activate CTRL
 CTRL -> GlobRepo : getInstance()
@@ -42,11 +42,11 @@ activate PLAT
 PLAT -->  CTRL: jobRepository
 deactivate PLAT
 
-CTRL -> jobRepository : createJob(title, description)
+CTRL -> jobRepository : createJob(title)
 deactivate CTRL
 activate jobRepository
 
-    jobRepository -> Job** : create(title, description)
+    jobRepository -> Job** : create(title)
     deactivate jobRepository
 
         activate Job

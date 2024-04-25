@@ -3,16 +3,14 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 
-class HRM {
-}
+left to right direction
 
 class CreateJobUI {
-
 }
 
 class CreateJobController {
-    +createJob(title: String, description: String) : void
-    +getInstance() : Repositories
+    +createJob(title : String) : void
+    +getInstance() : JobRepository
 }
 
 class Repositories {
@@ -20,15 +18,22 @@ class Repositories {
 }
 
 class JobRepository {
-    +createJob(title: String, description: String) : Job
-    +verifyFilled(job: Job) : void
-    +verifySpecialCharacters(job: Job) : void
+    +createJob(title : String) : Job
+    +checkForDuplicates() : void
 }
 
 class Job {
-    - title: String
-    - description: String
-    + Job(title: String, description: String)
+    - title : String
+    + Job(title : String)
+    +verifyFilled(job : Job) : void
+    +verifySpecialCharacters(job : Job) : void
 }
+
+CreateJobUI ..> CreateJobController
+Repositories --> "1" JobRepository : jobRepository
+Repositories --> Repositories : instance
+JobRepository --> "*" Job : jobs
+CreateJobController ..> Repositories : repositories
+CreateJobController ..> JobRepository : jobRepository
 
 @enduml

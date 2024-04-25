@@ -8,12 +8,12 @@ autonumber 12
 'hide footbox
 participant "jobRepository:\nJobRepository" as JobRepository
 participant ":Job" as Job
--> JobRepository : createJob(title, description)
+-> JobRepository : createJob(title)
 activate JobRepository
 
 group Create Job
 
-    JobRepository -> Job** : create(title, description)
+    JobRepository -> Job** : create(title)
     deactivate JobRepository
         activate Job
 

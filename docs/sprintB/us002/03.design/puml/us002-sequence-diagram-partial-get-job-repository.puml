@@ -24,7 +24,7 @@ deactivate PLAT
 
 
 end
-CTRL ->  : createJob(title, description)
+CTRL ->  : createJob(title)
 deactivate CTRL
 
 @enduml
