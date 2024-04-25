@@ -23,9 +23,9 @@ As a Vehicle and Equipment Manager (VFM), I want to list (report) of vehicles ne
 >
 > **Answer:** The list of vehicles is automatically created but the creation is triggered by the VFM.
 
->  **Question:** What information will appear on the final list regarding the vehicle,besides the needing for checkup?
+>  **Question:** What information will appear on the final list regarding the vehicle, besides the needing for checkup?
 >
-> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequency of checkup and the last checkup.
+> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert the vehicle in the list, number of kms, frequency of checkup and the last checkup.
 
 >  **Question:** What are the requests/ input data to list the vehicles needing the checkup? Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
 >
@@ -35,7 +35,7 @@ As a Vehicle and Equipment Manager (VFM), I want to list (report) of vehicles ne
 >
 > **Answer:** The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
 
->  **Question:**  In this US we should only list the vehicles that need a checkup (surpass the checkup frequency in KM) or that will shortly need a checkup (5% to the checkup frequency), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
+>  **Question:** In this US we should only list the vehicles that need a checkup (surpass the checkup frequency in KM) or that will shortly need a checkup (5% to the checkup frequency), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
 >
 > **Answer:** No. The Maintenance/Check-up Frequency (in km) is registered in US06.
 
@@ -43,7 +43,7 @@ As a Vehicle and Equipment Manager (VFM), I want to list (report) of vehicles ne
 >
 > **Answer:** DATA. Current kms, frequency, last checkup kms, next checkup (optimal) kms.
 
-> **QUESTION:**  In US 08 how should the vehicles be sorted in the list and does the user have any control over what determines what is used to sort the vehicles? For example, the vehicles licence plate, its gross weight or km driven over the checkup limit.
+> **Question:** In US 08 how should the vehicles be sorted in the list, and does the user have any control over what determines what is used to sort the vehicles? For example, the vehicles licence plate, its gross weight or km driven over the checkup limit.
 >
 > **Answer:** No specific order is required; each dev team can decide about UX aspects.
 

@@ -3,33 +3,31 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
 autonumber 11
--> VehicleRepository : createMaintenanceReport(vehiclesList)
+-> MaintenanceRepository : createMaintenanceReport(vehiclesList)
+activate MaintenanceRepository
 
-activate VehicleRepository
     group Create Maintenance Report
 
+        MaintenanceRepository -> MaintenanceRepository: getVehiclesNeedingMaintenance(vehicleList)
 
-                        VehicleRepository -> VehicleRepository: verifyExistedVehicles(vehicleList)
-                        activate VehicleRepository
+        MaintenanceRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
+        deactivate MaintenanceRepository
+        activate MaintenanceReport
 
-                            VehicleRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
-                            activate MaintenanceReport
+        MaintenanceReport --> MaintenanceRepository : maintenance Report
+        deactivate MaintenanceReport
 
-                            MaintenanceReport --> VehicleRepository : maintenanceReport
-                            deactivate
-
-                        VehicleRepository --> VehicleRepository
-                        deactivate VehicleRepository
+        activate MaintenanceRepository
     end group
 
     autonumber 13
-    <-- VehicleRepository : maintenanceReport
+    <-- MaintenanceRepository : maintenanceReport
 
-deactivate VehicleRepository
+deactivate MaintenanceRepository
 
 
 @enduml

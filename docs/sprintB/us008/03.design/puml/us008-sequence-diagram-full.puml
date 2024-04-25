@@ -12,6 +12,7 @@ participant ":ListMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
 activate VFM
@@ -21,7 +22,7 @@ activate VFM
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehicleList()
+        UI -> CTRL : get Vehicle List
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -42,15 +43,6 @@ activate VFM
                 VehicleRepository --> CTRL : vehicleList
             deactivate VehicleRepository
 
-            CTRL --> UI : vehicleList
-        deactivate CTRL
-
-
-        UI -> CTRL : generateMaintenanceReport(vehiclesList)
-        activate CTRL
-
-            CTRL -> CTRL : createMaintenanceReport(vehiclesList)
-            activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
@@ -58,39 +50,37 @@ activate VFM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getVehicleRepository()
+                CTRL -> PLAT : getMaintenanceRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: VehicleRepository
+                    PLAT --> CTRL: MaintenanceRepository
                 deactivate PLAT
 
-                CTRL -> VehicleRepository : createMaintenanceReport(vehiclesList)
-                activate VehicleRepository
 
-                VehicleRepository -> VehicleRepository: getVehiclesNeedingMaintenance(vehicleList)
-                activate VehicleRepository
+                CTRL -> MaintenanceRepository : createMaintenanceReport(vehiclesList)
+                deactivate CTRL
+                activate MaintenanceRepository
 
-                    VehicleRepository -> VehicleRepository:verifyExistedVehicles(vehicleList)
+                MaintenanceRepository -> MaintenanceRepository: getVehiclesNeedingMaintenance(vehicleList)
 
-                    VehicleRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
+                    MaintenanceRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
+                    deactivate MaintenanceRepository
                     activate MaintenanceReport
 
-                    MaintenanceReport --> VehicleRepository : maintenanceReport
+                    MaintenanceReport --> MaintenanceRepository : maintenance Report
                     deactivate MaintenanceReport
 
-                VehicleRepository --> VehicleRepository
-                deactivate VehicleRepository
+                    activate MaintenanceRepository
 
-                VehicleRepository --> CTRL : maintenanceReport
-                deactivate VehicleRepository
+                MaintenanceRepository --> CTRL : maintenance Report
+                deactivate MaintenanceRepository
 
-            CTRL --> CTRL : maintenanceReport
+            activate CTRL
+
+            CTRL --> UI : maintenance Report
             deactivate CTRL
 
-            CTRL --> UI : maintenanceReport
-        deactivate CTRL
-
-        UI --> VFM : shows maintenance report
+        UI --> VFM : shows list vehicles needing maintenance
     deactivate UI
 
 deactivate VFM

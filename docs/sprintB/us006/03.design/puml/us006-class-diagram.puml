@@ -40,9 +40,10 @@ package VehicleRegistrationSystem {
         + validateVehicle(vehicle: Vehicle): boolean
     }
 
-    Repositories --> VehicleRepository: Get
     RegisterVehicleUI --> RegisterVehicleController: Submit vehicle data
-    RegisterVehicleController --> VehicleRepository: Save vehicle data
+    RegisterVehicleController --> Repositories: get
+    RegisterVehicleController --> VehicleRepository: Verify Existed Vehicle
+    Repositories --> VehicleRepository: Get
     VehicleRepository -> Vehicle: Register
 }
 

@@ -6,29 +6,28 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...    | Answer                    | Justification (with patterns)                                                                                 |
-|:---------------|:-----------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | ... interacting with the actor?                | ListMaintenanceUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 	  		          | ... coordinating the US?                       | ListMaintenanceController | Controller: responsible for coordinating and controlling the flow of interaction.                             |
-| 			  		        | ... instantiating a new MaintenanceReport?     | MaintenanceReport         | Creator (Rule 1): in the DM MaintenanceReport is directly created.                                            |
-| 			  		        | ... knowing the user using the system?         | UserSession               | IE: cf. A&A component documentation.                                                                          |
-| 			  		        | 							                                        | Organization              | IE: knows/has its own Employees                                                                               |
-| 			  		        | 							                                        | Employee                  | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		     | ... knowing the vehicles list							           | VehicleRepository         | Repository (Rule2): responsible for storing and retrieving vehicle data.                                      |
-| Step 3  		     | 	...saving the inputted data?                  | MaintenanceReport         | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		     | 	...knowing the vehicles needing maintenance?  | System                    | IE: Vehicles needing maintenance are determined by system-wide logic.                                         |
-| Step 5  		     | 	... saving the maintenance report created?    | MaintenanceReport         | IE: object created in step 3 contains the maintenance report created.                                         |
-| Step 6  		     | 	... creating a maintenance report?						      | MaintenanceReport         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |              
-| Step 7  		     | 	... validating all data (local validation)?   | MaintenanceReport         | IE: owns its data.                                                                                            | 
-| 			  		        | 	... validating all data (global validation)?  | MaintenanceRepository     | Repository (Rule 2): global validation often involves querying data from multiple sources.                    | 
-| 			  		        | 	... saving the created maintenance report?    | MaintenanceRepository     | Repository (Rule 2): responsible for storing and retrieving maintenance reports.                              | 
-| Step 8  		     | 	... informing operation success?              | ListMaintenanceUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...   | Answer                    | Justification (with patterns)                                                                                 |
+|:---------------|:----------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | ... interacting with the actor?               | ListMaintenanceUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		        | ... instantiating a new MaintenanceReport?    | MaintenanceRepository     | Creator (Rule 1): in the DM MaintenanceReport is directly created.                                            |
+| Step 2	  		    | ... coordinating the US?                      | ListMaintenanceController | Controller: responsible for coordinating and controlling the flow of interaction.                             |
+| 			  		        | ... knowing the user using the system?        | UserSession               | IE: cf. A&A component documentation.                                                                          |
+| Step 3  		     | 	...handles the creation of the report?       | ListMaintenanceController | The controller class manages the creation process.                                                            |
+| 		             | ... knowing the vehicles list							          | VehicleRepository         | Repository (Rule2): responsible for storing and retrieving vehicle data.                                      |
+| Step 4  		     | 	...knowing the vehicles needing maintenance? | MaintenanceRepository     | IE: Vehicles needing maintenance are determined by a logic algorithm on maintenance repository.               |
+| Step 5  		     | 	... creating a maintenance report?						     | MaintenanceRepository     | Creator (Rule 1): in the DM MaintenanceReport is directly created .                                           |
+| Step 6  		     | 	... validating all data (local validation)?  | MaintenanceReport         | IE: owns its data.                                                                                            | 
+| 			  		        | 	... validating all data (global validation)? | MaintenanceRepository     | Repository (Rule 2): global validation often involves querying data from multiple sources.                    | 
+| 			  		        | 	... saving the created maintenance report?   | MaintenanceRepository     | Repository (Rule 2): responsible for storing and retrieving maintenance reports.                              | 
+| Step 7  		     | 	... informing operation success?             | ListMaintenanceUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
 * MaintenanceReport
+* MaintenanceRepository
+* VehicleRepository
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
@@ -57,6 +56,10 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 **Get Vehicle List Partial SD**
 
 ![Sequence Diagram - Partial - Get Vehicle List](svg/us008-sequence-diagram-partial-get-vehicle-list.svg)
+
+**Get Maintenance Repository Partial SD**
+
+![Sequence Diagram - Partial - Get Maintenance Repository](svg/us008-sequence-diagram-partial-get-maintenance-repository.svg)
 
 **Create Maintenance Report*
 
