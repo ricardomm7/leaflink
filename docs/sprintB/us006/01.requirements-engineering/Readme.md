@@ -63,6 +63,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
     * Vehicle Plate
     * Brand
     * Model
+    * Type (car, truck, etc.)
     * Tare Weight (weight of the empty vehicle)
     * Gross weight (maximum weight of the loaded vehicle)
     * Current Kilometer Reading
@@ -71,7 +72,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
     * Checkup Frequency (in Kilometers)
 	
 * Selected data:
-    * Type (car, truck, etc.)
+    * None
 
 **Output Data:**
 
