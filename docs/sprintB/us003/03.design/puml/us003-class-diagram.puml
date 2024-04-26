@@ -3,52 +3,73 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 
-class HRM {
-}
+'left to right direction
 
 class RegisterCollaboratorUI {
 }
 
 class RegisterCollaboratorController {
-    + createCollaborator()
-    + assignJob()
-    + assignSkills()
+    + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, documentCode : String, job : Job)
+    + assignJob(job : Job)
+    + getInstance() : JobRepository
+    + getInstance() : CollaboratorRepository
+
 }
 
 class Repositories {
-    + getInstance()
+    +getJobRepository() : JobRepository
+    +getCollaboratorRepository() : CollaboratorRepository
 }
 
 class CollaboratorRepository {
-    + createCollaborator()
+    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, documentCode : String, job : Job)
     + checkForDuplicates()
 }
 
 class JobRepository {
-    + getJobs()
+    +createJob(title : String) : Job
+    +checkForDuplicates() : void
 }
 
 class Collaborator {
-    - name: String
-    - birthdate: Date
-    - contactMobile: String
-    - email: String
-    - address: String
-    - zipCode: String
-    - city: String
-    - documentTypes: List<DocumentType>
-    - admissionDate: Date
-    - job: Job
-    - skills: List<Skill>
+    - name : String
+    - birthdate : Date
+    - contactMobile : String
+    - email : String
+    - address : String
+    - zipCode : String
+    - city : String
+    - documentTypes : List<DocumentType>
+    - admissionDate : Date
+    - job : Job
+    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, documentCode : String, job : Job)
+    + verifyFilled(collaborator)
+    + verifyMobile(collaborator)
+    + verifyEmail(collaborator)
+    + verifyZipCode(collaborator)
+    + verifyBirth(collaborator)
+    + verifyDocumentCode(collaborator)
+    - documentType : String
+    - identificationNumber : String
 }
 
 class Job {
-    - title: String
-    - description: String
+    - title : String
+    + Job(title : String)
+    +verifyFilled(job : Job) : void
+    +verifySpecialCharacters(job : Job) : void
 }
 
-class DocumentType {
-    - identificationNumber: String
-}
+
+
+RegisterCollaboratorUI ..> RegisterCollaboratorController
+RegisterCollaboratorController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> JobRepository : jobRepository
+Repositories --> "1"CollaboratorRepository : collaboratorRepository
+CollaboratorRepository --> "*" Collaborator : collaborators
+RegisterCollaboratorController ..> CollaboratorRepository : collaboratorRepository
+RegisterCollaboratorController ..> JobRepository : jobRepository
+JobRepository --> "*" Job : jobs
 
 @enduml

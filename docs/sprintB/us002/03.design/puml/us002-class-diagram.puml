@@ -3,7 +3,7 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 
-left to right direction
+'left to right direction
 
 class CreateJobUI {
 }
