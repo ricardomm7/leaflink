@@ -12,7 +12,7 @@ participant ":System" as System
 
 activate GSM
 
-    GSM -> System : requests statistical analysis of water consumption costs
+    GSM -> System : asks statistical analysis of water consumption costs
     activate System
 
         System --> GSM : requests input data (e.g., time period, park identification)
@@ -21,7 +21,7 @@ activate GSM
     GSM -> System : provides input data
     activate System
 
-        System --> GSM : validates input data and gives the outcome (e.g., bar plot,\n average costs, statistical indicators)
+        System --> GSM : validates input data and displays the outcome (e.g., bar plot,\n average costs, statistical indicators)
     deactivate System
 
 @enduml

@@ -10,13 +10,17 @@ participant ":AnalyseParkWaterConsumptionUI" as UI
 participant ":AnalyseParkWaterConsumptionController" as CTRL
 
 activate GSM
-GSM -> UI : wants to analyze water consumption costs
+
+GSM -> UI : asks statistical analysis of water consumption costs
 activate UI
+
 UI -> CTRL** : creates
 UI --> GSM : asks to upload the file (water_consumption.csv)
-GSM -> UI : gives the file path (uploads the file)
-UI -> CTRL : sends the file
 deactivate UI
+GSM -> UI : provides the file path (uploads the file)
+activate UI
+UI -> CTRL : sends the file
+
 activate CTRL
 CTRL -> CTRL : checks for formatting errors
 activate CTRL
@@ -25,8 +29,7 @@ deactivate CTRL
 CTRL -> CTRL : runs the statistical analysis
 CTRL --> UI : results
 deactivate CTRL
-activate UI
-UI --> GSM : shows the results window
+UI --> GSM : displays the outcome
 deactivate UI
 deactivate GSM
 @enduml

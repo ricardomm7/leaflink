@@ -17,7 +17,7 @@ participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
 activate VFM
 
-    VFM -> UI : requests to list vehicles needing maintenance
+    VFM -> UI : asks to list vehicles needing maintenance
     activate UI
 
         UI -> CTRL** : create
@@ -80,7 +80,7 @@ activate VFM
             CTRL --> UI : maintenance Report
             deactivate CTRL
 
-        UI --> VFM : shows list vehicles needing maintenance
+        UI --> VFM : displays list of vehicles needing checkup
     deactivate UI
 
 deactivate VFM

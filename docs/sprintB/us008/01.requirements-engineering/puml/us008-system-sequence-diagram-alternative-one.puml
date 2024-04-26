@@ -12,10 +12,10 @@ participant ":System" as System
 
 activate VFM
 
-        VFM -> System : requests to list vehicles needing checkup
+        VFM -> System : asks to list vehicles needing checkup
         activate System
 
-            System --> VFM : shows list of vehicles needing checkup
+            System --> VFM : displays list of vehicles needing checkup
         deactivate System
 
 @enduml
