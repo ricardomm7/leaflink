@@ -25,7 +25,7 @@ activate Employee
     Employee -> System : confirms data
     activate System
 
-        System --> Employee : displays success message (job creation successful)
+        System --> Employee : displays success message (job created successfully)
     deactivate System
 
 @enduml

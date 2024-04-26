@@ -11,7 +11,7 @@ participant "repositories\n:Repositories" as PLAT
 participant "skillsRepository:\nSkillsRepository" as skillsRepository
 
 
--> CTRL : collaborator
+-> CTRL : get skillsList
 activate CTRL
 group Get Skill List
 CTRL -> GlobRepo : getInstance()

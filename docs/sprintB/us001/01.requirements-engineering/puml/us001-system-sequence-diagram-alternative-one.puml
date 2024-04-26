@@ -15,18 +15,18 @@ activate HRM
     HRM -> System : asks to create a new skill
     activate System
 
-        System --> HRM : requests data (a description to the skill to be created)
+        System --> HRM : requests data (skill designation)
     deactivate System
 
     HRM -> System : types requested data
     activate System
 
-        System --> HRM : shows a confirmation dialog
+        System --> HRM : shows data (skill designation) and requests confirmation
     deactivate System
 
     HRM -> System : confirms data
     activate System
 
-        System --> HRM : displays operation success
+        System --> HRM : displays success message (skill created successfully)
     deactivate System
 @enduml

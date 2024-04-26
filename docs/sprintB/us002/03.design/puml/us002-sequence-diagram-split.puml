@@ -13,18 +13,22 @@ participant "jobRepository:\nJobRepository" as jobRepository
 
 activate Employee
 
-Employee -> UI : wants to create a new job
+Employee -> UI : asks to create a new job
 activate UI
 
 UI -> CTRL** : create
 
-UI --> Employee : asks for the info needed (title)
+UI --> Employee : requests data (job title)
+deactivate UI
 
-Employee -> UI : provides job title
+Employee -> UI : types requested data
+activate UI
 
-UI --> Employee : shows a verification dialog
+UI --> Employee : shows data (job title) and requests confirmation
+deactivate UI
 
-Employee -> UI : confirms job creation
+Employee -> UI : confirms data
+activate UI
 
 UI -> CTRL : createJob(title)
 deactivate UI
@@ -55,7 +59,7 @@ deactivate jobRepository
 CTRL --> UI : success
 deactivate CTRL
 activate UI
-UI --> Employee : displays operation success
+UI --> Employee : displays success message (job created successfully)
 
 deactivate UI
 deactivate Employee

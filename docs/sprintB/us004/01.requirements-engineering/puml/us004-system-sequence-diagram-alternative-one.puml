@@ -12,27 +12,27 @@ participant ":System" as System
 
 activate HRM
 
-    HRM -> System : requests to assign skills to a collaborator
+    HRM -> System : asks to assign skills to a collaborator
     activate System
 
-        System --> HRM : shows list of collaborators and asks to select one
+        System --> HRM : shows the list of collaborators and requests to select one
     deactivate System
 
     HRM -> System : selects a collaborator
     activate System
 
-        System --> HRM : requests data (i.e. skills list)
+        System --> HRM : shows the list of skills and requests to select one
     deactivate System
 
-    HRM -> System : provides required data (selected skills)
+    HRM -> System : selects a skill
     activate System
 
-        System --> HRM : shows selected skills
+        System --> HRM : shows all data and requests confirmation
     deactivate System
 
-    HRM -> System : confirms assignment
+    HRM -> System : confirms data
     activate System
 
-        System --> HRM : displays operation success
+        System --> HRM : shows success message (skill assigns successfully)
     deactivate System
 @enduml

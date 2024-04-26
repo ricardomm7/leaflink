@@ -54,47 +54,35 @@ activate ADM
                     activate UI
 
                 UI --> ADM : shows skills list and asks to select one
+                deactivate UI
 
         ADM -> UI : selects skills
+        activate UI
 
-        UI --> ADM : requests maximum team size
+        UI --> ADM : requests data (maximum and minimum  team size)
+        deactivate UI
 
-    ADM -> UI : types requested data (maximum and minimum  team size)
+    ADM -> UI : types requested data
+    activate UI
 
-        UI --> ADM : shows data and asks for verification
+        UI --> ADM : shows data and requests for confirmation
+        deactivate UI
 
-    ADM -> UI : submits data
+    ADM -> UI : confirms data
+    activate UI
 
-        UI -> CTRL : createTeam(skills, maxTeamSize)
+    UI --> ADM: show the proposal
+    deactivate UI
+
+    ADM -> UI: use accepts
+    activate UI
+
+        UI -> CTRL : create Team
         deactivate UI
         activate CTRL
 
-            CTRL -> CTRL : getSkillByDescription(skillDescription)
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getSkillRepository()
-                activate PLAT
-
-                    PLAT --> CTRL : SkillRepository
-                deactivate PLAT
-
-                CTRL -> SkillRepository : getSkillByDescription(skillDescription)
-                activate SkillRepository
-
-                    SkillRepository --> CTRL : skill
-                deactivate SkillRepository
-                    CTRL --> CTRL : skill
-            deactivate CTRL
-
-
             |||
-                CTRL -> TeamRepository: createTeam(skills, maxTeamSize)
+                CTRL -> TeamRepository: createTeam(skills, minTeamSize, maxTeamSize)
                 deactivate CTRL
                 activate TeamRepository
 

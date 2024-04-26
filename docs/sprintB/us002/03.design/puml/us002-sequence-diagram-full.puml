@@ -16,7 +16,7 @@ participant ":Job" as Job
 
 activate Employee
 
-Employee -> UI : wants to create a new job
+Employee -> UI : asks to create a new job
 activate UI
 
 UI -> CTRL** : create
@@ -81,7 +81,7 @@ deactivate jobRepository
 CTRL --> UI : success
 deactivate CTRL
 activate UI
-UI --> Employee : displays success message (job creation successful)
+UI --> Employee : displays success message (job created successfully)
 
 deactivate UI
 deactivate Employee

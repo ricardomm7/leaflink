@@ -11,26 +11,61 @@ participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
-participant ":Collaborator" as CLB
 participant "jobRepository:\nJobRepository" as jobRepository
+participant ":Collaborator" as CLB
 
 
 activate HRM
 
-HRM -> UI : wants to register a new collaborator
+HRM -> UI : asks to create a new collaborator
 activate UI
 
 UI -> CTRL** : create
 
-UI --> HRM : asks for the info needed (name, birthdate, contactMobile, email, address,\n zipCode, city, documentType[], documentCode, admissionDate)
+UI --> HRM : requests data (collaborator personal information)
+deactivate UI
 
-HRM -> UI : provides the needed info
+HRM -> UI : types requested data
+activate UI
 
-'UI --> HRM : shows a verification dialog
-'HRM -> UI : confirms collaborator creation
-UI -> CTRL : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+UI -> CTRL: get job List
+deactivate UI
+
+activate CTRL
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+CTRL -> PLAT : getJobRepository()
+activate PLAT
+PLAT -->  CTRL: jobRepository
+deactivate PLAT
+CTRL -> jobRepository : getJobs()
+activate jobRepository
+jobRepository --> CTRL : jobsList
+deactivate jobRepository
+CTRL -->UI : job List
+deactivate CTRL
+activate UI
+
+UI --> HRM : shows the list of jobs and requests to select one
+deactivate UI
+
+
+HRM -> UI : select the job
+activate UI
+
+UI --> HRM: shows all data and requests for confirmation
+deactivate UI
+
+HRM -> UI: confirms the data
+activate UI
+
+UI -> CTRL : create collaborator
+
 deactivate UI
 activate CTRL
+
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
 GlobRepo --> CTRL : repositories
@@ -40,10 +75,11 @@ activate PLAT
 PLAT -->  CTRL: collaboratorRepository
 deactivate PLAT
 
-CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate, job)
 deactivate CTRL
+
 activate CLBREP
-CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate, job)
 deactivate CLBREP
 activate CLB
 CLB -> CLB : verifyFilled(collaborator)
@@ -85,60 +121,14 @@ CLBREP --> CLBREP
 deactivate CLBREP
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
-
-activate CTRL
-CTRL -> GlobRepo : getInstance()
-activate GlobRepo
-GlobRepo --> CTRL : repositories
-deactivate GlobRepo
-CTRL -> PLAT : getJobRepository()
-activate PLAT
-PLAT -->  CTRL: jobRepository
-deactivate PLAT
-CTRL -> jobRepository : getJobs()
-activate jobRepository
-jobRepository --> CTRL : jobsList
-deactivate jobRepository
-CTRL -->UI : jobsList
-deactivate CTRL
-activate UI
-
-UI --> HRM : shows the list of jobs and asks to select one
-
-HRM -> UI : select the desired job
-
-UI -> CTRL : job
-deactivate UI
 activate CTRL
 
-
-CTRL ->CLBREP : assignJob(job)
-deactivate CTRL
-activate CLBREP
-
-CLBREP -> CLB : assignJob(job)
-deactivate CLBREP
-activate CLB
-
-CLB -> CLB : setJob(job)
-activate CLB
-
-CLB --> CLB
-deactivate CLB
-
-CLB --> CLBREP : collaborator
-activate CLBREP
-deactivate CLB
-
-CLBREP --> CTRL : collaborator
-deactivate CLBREP
-activate CTRL
 
 
 CTRL --> UI : success
 deactivate CTRL
 activate UI
-UI --> HRM : displays operation success
+UI --> HRM : shows success message (collaborator created successfully)
 deactivate UI
 deactivate HRM
 @enduml

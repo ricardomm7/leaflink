@@ -49,7 +49,7 @@ end ref
     deactivate CTRL
     activate UI
 
-    UI --> HRM : displays successful or unsuccessful operation
+    UI --> HRM : displays success message (skill created successfully)
     deactivate UI
 deactivate HRM
 @enduml

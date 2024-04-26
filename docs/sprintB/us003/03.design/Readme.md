@@ -55,18 +55,21 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us003-sequence-diagram-split.svg)
 
-**Pin Job to a collaborator**
+**Get Collaborator Repository**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us003-sequence-diagram-partial-pin-job.svg)
+![Sequence Diagram - Partial - Get Collaborator Repository](svg/us003-sequence-diagram-partial-get-collaborator-repository.svg)
 
-**Register a collaborator**
+**Register a Collaborator**
 
-![Sequence Diagram - Partial - Create Task](svg/us003-sequence-diagram-partial-register-collab.svg)
+![Sequence Diagram - Partial - Register a Collaborator](svg/us003-sequence-diagram-partial-register-collab.svg)
 
 **Get Job List**
 
-![Sequence Diagram - Partial - Create Task](svg/us003-sequence-diagram-partial-get-job-list.svg)
+![Sequence Diagram - Partial - Get Job List](svg/us003-sequence-diagram-partial-get-job-list.svg)
 
+**Get Job List**
+
+![Sequence Diagram - Partial - ](svg/us003-sequence-diagram-partial-get-job-list.svg)
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us003-class-diagram.svg)

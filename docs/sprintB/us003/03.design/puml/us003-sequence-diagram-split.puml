@@ -5,41 +5,77 @@ skinparam shadowing false
 
 autonumber
 
-participant "HRM" as HRM
+actor "HRM" as HRM
 participant ":RegisterCollaboratorUI" as UI
 participant ":RegisterCollaboratorController" as CTRL
-
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant "jobRepository:\nJobRepository" as jobRepository
+participant ":Collaborator" as CLB
 
 
 activate HRM
 
-HRM -> UI : wants to register a new collaborator
+HRM -> UI : asks to create a new collaborator
 activate UI
 
 UI -> CTRL** : create
 
-UI --> HRM : asks for the info needed (name, birthdate, contactMobile, email, address,\n zipCode, city, documentType[], documentCode, admissionDate)
+UI --> HRM : requests data (collaborator personal information)
+deactivate UI
 
-HRM -> UI : provides the needed info
+HRM -> UI : types requested data
+activate UI
 
-'UI --> HRM : shows a verification dialog
-'HRM -> UI : confirms collaborator creation
-UI -> CTRL : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+UI -> CTRL: get job list
+deactivate UI
+
+activate CTRL
+
+ref over CTRL
+Get job List
+end ref
+
+
+
+deactivate jobRepository
+CTRL -->UI : job list
+deactivate CTRL
+activate UI
+
+UI --> HRM : shows the list of jobs and requests to select one
+deactivate UI
+
+
+HRM -> UI : select the job
+activate UI
+
+UI --> HRM: shows all data and requests for confirmation
+deactivate UI
+
+HRM -> UI: confirms the data
+activate UI
+
+UI -> CTRL : create collaborator
 deactivate UI
 activate CTRL
-        ref over CTRL
-            Get Collaborator Repository
-        end ref
 
-CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+ref over CTRL
+Get Collaborator Repository
+end ref
+
+
+
+CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate, job)
 deactivate CTRL
-activate CLBREP
-        ref over CLBREP
-            Create Collaborator
-        end ref
 
 activate CLBREP
+
+ref over CLBREP
+Register a Collaborator
+end ref
+
 
 CLBREP -> CLBREP : check for duplicates (documentCode[])
 activate CLBREP
@@ -47,38 +83,14 @@ CLBREP --> CLBREP
 deactivate CLBREP
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
-deactivate CLBREP
-
 activate CTRL
-ref over CTRL
-                         Get Job List
-                     end ref
-CTRL -->UI : jobsList
+
+
+
+CTRL --> UI : success
 deactivate CTRL
 activate UI
-UI --> HRM : shows the list of jobs and asks to select one
-
-HRM -> UI : select the desired job
-
-UI -> CTRL : job
-deactivate UI
-activate CTRL
-
-
-CTRL ->CLBREP : assignJob(job)
-deactivate CTRL
-activate CLBREP
-
-        ref over CLBREP
-            Assign the chosen job
-        end ref
-CLBREP --> CTRL : collaborator
-deactivate CLBREP
-activate CTRL
-CTRL -> UI : success
-deactivate CTRL
-activate UI
-UI --> HRM : displays operation success
+UI --> HRM : shows success message (collaborator created successfully)
 deactivate UI
 deactivate HRM
 @enduml

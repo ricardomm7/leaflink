@@ -10,7 +10,7 @@ participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 
-
+-> CTRL: get collaboratorList
 
 activate CTRL
 group Get Collaborator List

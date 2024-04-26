@@ -81,7 +81,7 @@ activate skillRepository
     activate UI
 
 
-    UI --> HRM : displays successful
+    UI --> HRM : displays success message (skill created successfully)
     deactivate UI
 deactivate HRM
 @enduml

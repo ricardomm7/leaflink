@@ -3,30 +3,25 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
+autonumber 28
+
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
-participant "jobRepository:\nJobRepository" as jobRepository
 
-autonumber 38
+-> CTRL: create collaborator
 activate CTRL
 
--> CTRL: get job list
-group Get Job List
+group Get Collaborator Repository
 
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
 GlobRepo --> CTRL : repositories
 deactivate GlobRepo
-CTRL -> PLAT : getJobRepository()
+CTRL -> PLAT : getCollaboratorRepository()
 activate PLAT
-PLAT -->  CTRL: jobRepository
+PLAT -->  CTRL: collaboratorRepository
 deactivate PLAT
-CTRL -> jobRepository : getJobs()
-activate jobRepository
-jobRepository --> CTRL : jobsList
-deactivate jobRepository
 
 end
-<- CTRL: job list
 @enduml
