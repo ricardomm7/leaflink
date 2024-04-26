@@ -11,9 +11,9 @@ hide methods
 
 
 class VehicleCheckup {
-    vehicleId
     date
     currentKm
+    vehiclePlate
 }
 
 class Vehicle {

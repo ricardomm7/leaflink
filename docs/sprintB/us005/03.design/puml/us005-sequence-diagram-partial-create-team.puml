@@ -3,36 +3,32 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":CreateTeamController" as CTRL
+participant "TeamRepository:\nTeamRepository" as TeamRepository
 
 autonumber 16
--> CTRL: createTeam(skills, maxTeamSize )
+-> TeamRepository: createTeam(skills, minTeamSize, maxTeamSize )
 
-activate CTRL
+activate TeamRepository
     group Create Team
 
-        CTRL -> TeamRepository: createTeam(skills, maxTeamSize)
                         activate TeamRepository
 
                         TeamRepository -> Team**: createTeam (skills, maxTeamSize)
 
-                            TeamRepository -> TeamRepository: addTeam(team)
-                            activate TeamRepository
                                 TeamRepository -> TeamRepository: validateTeam()
                                 activate TeamRepository
                                     TeamRepository --> TeamRepository
                                     deactivate TeamRepository
 
-                            TeamRepository --> TeamRepository
-                        deactivate TeamRepository
+                            TeamRepository -> TeamRepository: addTeam(team)
 
-                    TeamRepository --> CTRL: team
+
                     deactivate TeamRepository
     end
 
     autonumber 17
-    <-- CTRL : success
-deactivate CTRL
+    <-- TeamRepository : team
+deactivate TeamRepository
 
 
 @enduml

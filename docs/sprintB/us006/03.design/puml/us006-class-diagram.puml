@@ -20,7 +20,7 @@ skinparam line type polyline
     }
 
     class VehicleRepository {
-        + verifyExistedVehicle(VIN: String, VehiclePlate: String): boolean
+        + verifyExistingVehicle(VIN: String, VehiclePlate: String): boolean
         + addVehicle(vehicle: Vehicle): boolean
     }
 
@@ -37,6 +37,7 @@ skinparam line type polyline
         - maintenanceFrequency: int
 
         + validateVehicle(vehicle: Vehicle): boolean
+        + createVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     }
 
     RegisterVehicleUI --> RegisterVehicleController: Submit vehicle data

@@ -12,13 +12,13 @@ participant ":System" as System
 
 activate VFM
 
-    VFM -> System : requests to register a vehicle
+    VFM -> System : asks to register a new vehicle
     activate System
 
-        System --> VFM : requests vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency, )
+        System --> VFM : requested vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency, )
     deactivate System
 
-    VFM -> System : types vehicle data
+    VFM -> System : types requests data
 
     activate System
 
@@ -28,7 +28,7 @@ activate VFM
     VFM -> System : confirms data
     activate System
 
-        System --> VFM :  shows vehicle registration information
+        System --> VFM :  displays success message (Vehicle registered successfully)
     deactivate System
 
 @enduml

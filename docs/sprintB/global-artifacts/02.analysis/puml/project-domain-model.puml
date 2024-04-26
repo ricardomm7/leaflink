@@ -61,7 +61,7 @@ class Model{
 class VehicleCheckup{
     date
     currentKm
-    vehicleID
+    vehiclePlate
 }
 
 'class Person {

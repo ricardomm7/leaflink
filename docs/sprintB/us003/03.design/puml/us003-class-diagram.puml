@@ -24,6 +24,8 @@ class Repositories {
 class CollaboratorRepository {
     + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, documentCode : String, job : Job)
     + checkForDuplicates()
+    + addCollaborator(collaborator)
+
 }
 
 class JobRepository {

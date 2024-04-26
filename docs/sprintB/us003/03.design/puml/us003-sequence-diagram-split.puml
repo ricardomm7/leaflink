@@ -77,12 +77,11 @@ Register a Collaborator
 end ref
 
 
-CLBREP -> CLBREP : check for duplicates (documentCode[])
-activate CLBREP
-CLBREP --> CLBREP
-deactivate CLBREP
+
+
 CLBREP --> CTRL : collaborator
 deactivate CLBREP
+
 activate CTRL
 
 

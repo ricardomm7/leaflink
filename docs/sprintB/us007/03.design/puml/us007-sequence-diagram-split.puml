@@ -13,74 +13,83 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
-
+participant ":Maintenance" as Maintenance
 
 activate VFM
 
-    VFM -> UI : requests to list vehicles needing maintenance
+    VFM -> UI : asks to register a vehicle checkup
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesList()
+
+
+        UI -> CTRL : get vehicles plate List
         deactivate UI
         activate CTRL
 
-             ref over CTRL
-                Get Vehicle List
+        ref over CTRL
+                      Get Vehicles Plates List
 
-             end ref
+                                 end ref
 
-            CTRL --> UI : vehicleList
-          deactivate CTRL
-           activate UI
 
-            UI --> VFM : displays vehicle List
 
-            VFM -> UI : chooses vehicle
 
-            UI -> CTRL : vehicle
-            activate CTRL
-
-            CTRL --> UI : requests data(date, current Km)
+            CTRL --> UI : platesList
             deactivate CTRL
+            activate UI
+
+            UI --> VFM : shows the list of vehicle plate and requests to select one
+            deactivate UI
+
+            VFM -> UI : select vehicle plate
+            activate UI
+
 
             UI --> VFM : requests data (date, current Km)
+            deactivate UI
 
-            VFM -> UI : types data (date, current Km)
+            VFM -> UI : types requests data
+            activate UI
 
-            UI -> CTRL : data (date, current Km)
+            UI --> VFM : shows all data and requests confirmation
+            deactivate UI
+
+            VFM -> UI : confirms data
+            activate UI
+
+
+            UI -> CTRL : submit data
             deactivate UI
             activate CTRL
 
-            CTRL -> PLAT : getMaintenanceRepository()
-            activate PLAT
+            ref over CTRL
+                                  Get Maintenance Repository
 
-            PLAT --> CTRL : MaintenanceRepository
-            deactivate PLAT
+                                             end ref
 
 
             CTRL -> MaintenanceRepository : register maintenance
+                        deactivate CTRL
             activate MaintenanceRepository
 
-                ref over MaintenanceRepository
-                    Create Maintenance
-                end
+             ref over MaintenanceRepository
+                                              Create Maintenance
+
+                                                         end ref
+
+
                MaintenanceRepository --> CTRL : maintenance
                deactivate MaintenanceRepository
+                              activate CTRL
+
                CTRL --> UI : maintenance
-               activate UI
                deactivate CTRL
-               UI --> VFM : displays maintenance data and requests confirmation
-               VFM -> UI : confirms data
+               activate UI
 
-               UI -> CTRL : confirmation
-               activate CTRL
-
-               CTRL --> UI : operation success
-               deactivate
-               UI --> VFM : displays operation success
-               deactivate
+               UI --> VFM : displays success message (vehicle checkup registered successfully)
+               deactivate UI
 
                deactivate VFM
 

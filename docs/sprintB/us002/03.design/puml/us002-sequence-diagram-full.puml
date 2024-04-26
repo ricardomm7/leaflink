@@ -72,6 +72,8 @@ activate jobRepository
     activate jobRepository
     jobRepository --> jobRepository
     deactivate jobRepository
+
+    jobRepository -> jobRepository: addJob(job)
     deactivate Job
 jobRepository --> CTRL : job
 deactivate jobRepository

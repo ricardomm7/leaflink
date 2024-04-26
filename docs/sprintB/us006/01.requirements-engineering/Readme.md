@@ -40,9 +40,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 > 
 > **Answer:** The VFM is a role or system user profile that has the rights to perform some system actions (like the ones described by the US06, US07 and US08). In theory If there is no need to register a vehicle, no vehicles will be registered but that would be rather odd.
 
-> **Question:** When the user is registering a vehicle's check-up it's supposed to insert vehicle ID, Date and Current Kms. My question is: Is this vehicle ID the license plate? Because in ther US006 it's supposed to register the license plate of the vehicle and not an vehicle ID. If these concepts are not the same where in the process the user register the vehicle ID?
->
-> **Answer:** The business vehicle ID is the licence plate.
+
 
 ### 1.3. Acceptance Criteria
 

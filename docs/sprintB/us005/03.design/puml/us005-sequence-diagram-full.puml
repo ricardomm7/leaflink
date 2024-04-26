@@ -86,17 +86,18 @@ activate ADM
                 deactivate CTRL
                 activate TeamRepository
 
-                TeamRepository -> Team**: addTeam (team)
+                TeamRepository -> Team**: createTeam(skills, minTeamSize, maxTeamSize )
 
-                    TeamRepository -> TeamRepository: addTeam(team)
-                    activate TeamRepository
                         TeamRepository -> TeamRepository: validateTeam(team)
-                        activate TeamRepository
-                            TeamRepository --> TeamRepository
-                            deactivate TeamRepository
+                    activate TeamRepository
+
+
 
                     TeamRepository --> TeamRepository
                 deactivate TeamRepository
+
+                                    TeamRepository -> TeamRepository: addTeam(team)
+
 
             TeamRepository --> CTRL: team
             deactivate TeamRepository

@@ -14,19 +14,24 @@ participant ":Maintenance" as Maintenance
                group Register maintenance
             activate MaintenanceRepository
 
-            MaintenanceRepository -> Maintenance** : create(date, current Km)
-            activate Maintenance
+            MaintenanceRepository -> Maintenance** : create(vehicle plate, date, current Km)
+                        deactivate MaintenanceRepository
+                        activate Maintenance
 
-                            Maintenance -> Maintenance : verifyFilled(maintenance)
-                            activate Maintenance
-                            Maintenance -> Maintenance : verifySpecialCharacters(maintenance)
+
+                            Maintenance -> Maintenance : validateMaintenance(maintenance)
                             activate Maintenance
                             Maintenance --> Maintenance
                             deactivate Maintenance
-                            Maintenance --> Maintenance
-                            deactivate Maintenance
-                Maintenance --> MaintenanceRepository : maintenance
-               deactivate Maintenance
+
+
+                            Maintenance --> MaintenanceRepository : maintenance
+                           deactivate Maintenance
+
+                           activate MaintenanceRepository
+
+                            MaintenanceRepository -> MaintenanceRepository: addMaintenance(maintenance)
+
 
                end
                 <-- MaintenanceRepository : maintenance

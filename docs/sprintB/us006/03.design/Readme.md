@@ -60,9 +60,9 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get Vehicle Repository](svg/us006-sequence-diagram-partial-get-vehicle-repository.svg)
 
-**Verify Existed Vehicle Partial SD**
+**Verify Existing Vehicle Partial SD**
 
-![Sequence Diagram - Partial - Verify Existed Vehicle](svg/us006-sequence-diagram-partial-verify-existed-vehicle.svg)
+![Sequence Diagram - Partial - Verify Existing Vehicle](svg/us006-sequence-diagram-partial-verify-existing-vehicle.svg)
 
 **Register a Vehicle**
 

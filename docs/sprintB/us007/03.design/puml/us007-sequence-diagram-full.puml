@@ -17,12 +17,14 @@ participant ":Maintenance" as Maintenance
 
 activate VFM
 
-    VFM -> UI : requests to list vehicles needing maintenance
+    VFM -> UI : asks to register a vehicle checkup
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesList()
+
+
+        UI -> CTRL : get vehicles plate List
         deactivate UI
         activate CTRL
 
@@ -44,29 +46,48 @@ activate VFM
                 VehicleRepository --> CTRL : vehicleList
             deactivate VehicleRepository
 
-            CTRL --> UI : vehicleList
+            CTRL -> VehicleRepository : getPlatesListByVehicle(vehicleList)
+            activate VehicleRepository
+
+            VehicleRepository -> VehicleRepository: getVehiclePlate(vehicleList)
+
+            VehicleRepository --> CTRL: platesList
+            deactivate VehicleRepository
+
+
+            CTRL --> UI : platesList
             deactivate CTRL
             activate UI
 
-            UI --> VFM : displays vehicle List
+            UI --> VFM : shows the list of vehicle plate and requests to select one
+            deactivate UI
 
-            VFM -> UI : chooses vehicle
+            VFM -> UI : select vehicle plate
+            activate UI
 
-            UI -> CTRL : vehicle
-            activate CTRL
-
-            CTRL --> UI : requests data(date, current Km)
-            deactivate CTRL
 
             UI --> VFM : requests data (date, current Km)
+            deactivate UI
 
-            VFM -> UI : types data (date, current Km)
+            VFM -> UI : types requests data
+            activate UI
+
+            UI --> VFM : shows all data and requests confirmation
+            deactivate UI
+
+            VFM -> UI : confirms data
+            activate UI
 
 
-            UI -> CTRL : data (date, current Km)
+            UI -> CTRL : submit data
             deactivate UI
             activate CTRL
 
+            CTRL -> RepositorySingleton: getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL:repositories
+            deactivate RepositorySingleton
 
             CTRL -> PLAT : getMaintenanceRepository()
             activate PLAT
@@ -75,38 +96,36 @@ activate VFM
             deactivate PLAT
 
             CTRL -> MaintenanceRepository : register maintenance
+                        deactivate CTRL
             activate MaintenanceRepository
 
-            MaintenanceRepository -> Maintenance** : create(date, current Km)
+            MaintenanceRepository -> Maintenance** : create(vehicle plate, date, current Km)
+            deactivate MaintenanceRepository
             activate Maintenance
 
-                Maintenance -> Maintenance : verifyFilled(maintenance)
-                activate Maintenance
-                Maintenance -> Maintenance : verifySpecialCharacters(maintenance)
+
+                Maintenance -> Maintenance : validateMaintenance(maintenance)
                 activate Maintenance
                 Maintenance --> Maintenance
                 deactivate Maintenance
-                Maintenance --> Maintenance
-                deactivate Maintenance
+
 
                 Maintenance --> MaintenanceRepository : maintenance
                deactivate Maintenance
+
+               activate MaintenanceRepository
+
+                MaintenanceRepository -> MaintenanceRepository: addMaintenance(maintenance)
+
                MaintenanceRepository --> CTRL : maintenance
                deactivate MaintenanceRepository
+                              activate CTRL
+
                CTRL --> UI : maintenance
                deactivate CTRL
                activate UI
 
-               UI --> VFM : displays maintenance data and requests confirmation
-               VFM -> UI : confirms data
-
-               UI -> CTRL : confirmation
-               activate CTRL
-
-               CTRL --> UI : operation success
-               deactivate CTRL
-
-               UI --> VFM : displays operation success
+               UI --> VFM : displays success message (vehicle checkup registered successfully)
                deactivate UI
 
                deactivate VFM

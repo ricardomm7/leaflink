@@ -32,6 +32,7 @@ group Create Job
     activate JobRepository
     JobRepository --> JobRepository
 deactivate JobRepository
+    JobRepository -> JobRepository: addJob(job)
     deactivate Job
 end
 <-- JobRepository : job

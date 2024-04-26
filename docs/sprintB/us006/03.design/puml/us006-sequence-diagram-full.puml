@@ -17,7 +17,7 @@ participant "vehicle\n:Vehicle" as VEI
 
 activate VFM
 
-    VFM -> UI : requests to register a vehicle
+    VFM -> UI : asks to register a new vehicle
     activate UI
 
         UI -> CTRL** : create
@@ -25,7 +25,7 @@ activate VFM
         UI --> VFM : requests vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         deactivate UI
 
-    VFM -> UI : types vehicle data
+    VFM -> UI : types requested data
     activate UI
 
     UI --> VFM : shows all data and requests confirmation
@@ -50,19 +50,13 @@ activate VFM
             PLAT --> CTRL: VehicleRepository
             deactivate PLAT
 
-        CTRL -> VehicleRepository : verifyExistedVehicle(VIN, Vehicle Plate)
+        CTRL -> VehicleRepository : verifyExistingVehicle(VIN, Vehicle Plate)
         deactivate CTRL
 
             activate VehicleRepository
 
-            VehicleRepository -> VehicleRepository: verifyExistedVehicle(VIN, Vehicle Plate)
-            activate VehicleRepository
 
-            VehicleRepository --> VehicleRepository
-            deactivate VehicleRepository
-
-
-            VehicleRepository -> VEI **: addVehicle(vehicle)
+            VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         deactivate VehicleRepository
             activate VEI
 
@@ -76,16 +70,25 @@ activate VFM
             deactivate VEI
             activate VehicleRepository
 
+            VehicleRepository -> VehicleRepository: verifyExistingVehicle(VIN, Vehicle Plate)
+                        activate VehicleRepository
+
+                        VehicleRepository --> VehicleRepository
+                        deactivate VehicleRepository
+
+                        VehicleRepository -> VehicleRepository: addVehicle(vehicle)
+
+
             VehicleRepository --> CTRL: vehicle
             deactivate VehicleRepository
             activate CTRL
 
 
-            CTRL --> UI : vehicle
+            CTRL --> UI : success
             deactivate CTRL
             activate UI
 
-    UI --> VFM : shows vehicle registration information
+    UI --> VFM : displays success message (Vehicle registered successfully)
     deactivate UI
 
 deactivate VFM

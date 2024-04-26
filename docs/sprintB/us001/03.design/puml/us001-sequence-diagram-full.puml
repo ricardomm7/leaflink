@@ -68,6 +68,7 @@ activate skillRepository
     activate skillRepository
     skillRepository -->skillRepository
     deactivate skillRepository
+    skillRepository -> skillRepository: addSkill(skill)
     deactivate Skill
 
     CTRL <-- skillRepository : skill

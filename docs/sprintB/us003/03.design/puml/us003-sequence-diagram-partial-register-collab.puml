@@ -52,6 +52,8 @@ CLBREP -> CLBREP : check for duplicates (documentCode[])
 activate CLBREP
 CLBREP --> CLBREP
 deactivate CLBREP
+CLBREP -> CLBREP: addCollaborator(collaborator)
+
 end
 <--CLBREP : collaborator
 deactivate CLBREP

@@ -20,6 +20,7 @@ class Repositories {
 class JobRepository {
     +createJob(title : String) : Job
     +checkForDuplicates() : void
+    +addJob(job): void
 }
 
 class Job {

@@ -33,6 +33,9 @@ group Create Skill
         skillRepository -->skillRepository
         deactivate skillRepository
 
+            skillRepository -> skillRepository: addSkill(skill)
+
+
 end
  <- skillRepository: skill
 

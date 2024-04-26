@@ -15,9 +15,9 @@ activate VFM
     VFM -> System : asks to register a vehicle checkup
         activate System
 
-    System --> VFM : asks vehicle to checkup
+    System --> VFM : shows the list of vehicle Plate and requests to select one
         deactivate System
-    VFM -> System : select  vehicle (by ID)
+    VFM -> System : select vehicle Plate
     activate System
 
     System --> VFM : requests data (date, currentKm)
@@ -32,7 +32,7 @@ activate VFM
     VFM -> System : confirms data
     activate System
 
-        System --> VFM : displays operation success
+        System --> VFM : displays success message (vehicle checkup registered successfully)
     deactivate System
 
 @enduml

@@ -45,10 +45,6 @@ activate jobRepository
             Create Job
         end ref
 
-    activate jobRepository
-    jobRepository -> jobRepository : check for duplicates
-    activate jobRepository
-    jobRepository --> jobRepository
     deactivate jobRepository
 
 jobRepository --> CTRL : job

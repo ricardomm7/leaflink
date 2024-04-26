@@ -35,7 +35,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle's c
 >
 > **Answer:** Yes.
 
-> **Question:**  What´s the supposed vehicle check up supposed to look like?
+> **Question:** What's the supposed vehicle check up supposed to look like?
 >
 > **Answer:** while registering a checkup, the vehicle id, date and current kms, should be considered.
 
@@ -46,6 +46,10 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle's c
 > **Question:** Which attributes will you need for the vehicle's check-up?
 > 
 > **Answer:** Plate number, date, kms at checkup
+
+> **Question:** When the user is registering a vehicle's check-up, it's supposed to insert vehicle ID, Date and Current Kms. My question is: Is this vehicle ID the license plate? Because in ther US006 it's supposed to register the license plate of the vehicle and not an vehicle ID. If these concepts are not the same where in the process the user register the vehicle ID?
+>
+> **Answer:** The business vehicle ID is the licence plate.
 
 
 
@@ -64,11 +68,13 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle's c
 
 **Input Data:**
 
+
+* Selected data:
+    * Vehicle Plate
+
 * Typed data:
     * Date of the checkup
-	* Current Km
-* Selected data:
-    * Vehicle ID
+    * Current Km
 
 **Output Data:**
 
