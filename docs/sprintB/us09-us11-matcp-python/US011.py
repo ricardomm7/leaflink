@@ -12,7 +12,7 @@ proportion_recommendations = df.groupby('Age')['Y/N'].apply(lambda x: round((x =
 
 # Definir o tipo de variável para cada coluna
 variable_types = {
-    'Escalão': 'Qualitativa Ordinal',
+    'Child, Adult, Senior': 'Qualitativa Ordinal',
     'Y/N': 'Qualitativa Nominal',
     'Visits': 'Quantitativa Discreta'
 }
