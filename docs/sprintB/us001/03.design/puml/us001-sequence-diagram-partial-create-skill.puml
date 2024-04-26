@@ -23,10 +23,17 @@ group Create Skill
     deactivate Skill
     Skill --> Skill
     deactivate Skill
-end
+
     Skill --> skillRepository : skill
     deactivate Skill
     activate skillRepository
 
+    skillRepository -> skillRepository : check for duplicates
+        activate skillRepository
+        skillRepository -->skillRepository
+        deactivate skillRepository
+
+end
+ <- skillRepository: skill
 
 @enduml

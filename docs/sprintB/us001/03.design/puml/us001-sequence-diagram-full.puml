@@ -21,8 +21,10 @@ activate UI
 UI -> CTRL** : create
 
 UI --> HRM : asks for a skill designation
+deactivate UI
 
 HRM -> UI : enters a skill designation
+activate UI
 
 UI->CTRL : createSkill(designation)
 deactivate UI
@@ -79,7 +81,7 @@ activate skillRepository
     activate UI
 
 
-    UI --> HRM : displays successful or unsuccessful operation
+    UI --> HRM : displays successful
     deactivate UI
 deactivate HRM
 @enduml

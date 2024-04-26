@@ -3,7 +3,6 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam line type polyline
 
-package VehicleRegistrationSystem {
     class RegisterVehicleUI {
 
     }
@@ -45,6 +44,6 @@ package VehicleRegistrationSystem {
     RegisterVehicleController --> VehicleRepository: Verify Existed Vehicle
     Repositories --> VehicleRepository: Get
     VehicleRepository -> Vehicle: Register
-}
+
 
 @enduml

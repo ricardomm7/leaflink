@@ -19,7 +19,7 @@ activate Employee
 
     Employee -> System : types requested data
     activate System
-        System --> Employee : shows all data (job title) and requests confirmation
+        System --> Employee : shows data (job title) and requests confirmation
     deactivate System
 
     Employee -> System : confirms data
