@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber 28
+autonumber 17
 
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as GlobRepo

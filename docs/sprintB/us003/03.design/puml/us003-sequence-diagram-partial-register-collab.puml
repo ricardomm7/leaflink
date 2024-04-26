@@ -6,11 +6,11 @@ skinparam shadowing false
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 participant "Collaborator" as CLB
 
-autonumber 10
---> CLBREP: createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+autonumber 22
+--> CLBREP: createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, taxpayerNumber)
 activate CLBREP
     group Register collaborator
-    CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate)
+    CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, taxpayerNumber)
 deactivate CLBREP
 
         activate CLB
@@ -23,6 +23,8 @@ deactivate CLBREP
         CLB -> CLB : verifyZipCode(collaborator)
         activate CLB
         CLB -> CLB : verifyBirth(collaborator)
+        activate CLB
+        CLB -> CLB : verifyTaxpayerNumber(collaborator)
         activate CLB
 
         loop for all documentType objects
@@ -42,13 +44,15 @@ deactivate CLBREP
         deactivate CLB
         CLB --> CLB
         deactivate CLB
+        CLB --> CLB
+        deactivate CLB
 
 
         CLB --> CLBREP : collaborator
         deactivate CLB
         activate CLBREP
 
-CLBREP -> CLBREP : check for duplicates (documentCode[])
+CLBREP -> CLBREP : check for duplicates (identificationNumber[])
 activate CLBREP
 CLBREP --> CLBREP
 deactivate CLBREP

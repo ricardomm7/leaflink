@@ -67,7 +67,7 @@ end ref
 
 
 
-CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType[], documentCode, admissionDate, job)
+CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, job, taxpayerNumber)
 deactivate CTRL
 
 activate CLBREP

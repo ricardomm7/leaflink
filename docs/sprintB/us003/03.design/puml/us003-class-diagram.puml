@@ -9,7 +9,7 @@ class RegisterCollaboratorUI {
 }
 
 class RegisterCollaboratorController {
-    + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, documentCode : String, job : Job)
+    + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, identificationNumber : String, job : Job)
     + assignJob(job : Job)
     + getInstance() : JobRepository
     + getInstance() : CollaboratorRepository
@@ -22,7 +22,7 @@ class Repositories {
 }
 
 class CollaboratorRepository {
-    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, documentCode : String, job : Job)
+    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, admissionDate : Date, taxpayerNumber : int, job : Job)
     + checkForDuplicates()
     + addCollaborator(collaborator)
 
@@ -41,10 +41,10 @@ class Collaborator {
     - address : String
     - zipCode : String
     - city : String
-    - documentTypes : List<DocumentType>
     - admissionDate : Date
     - job : Job
-    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, documentCode : String, job : Job)
+    - taxpayerNumber : int
+    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, identificationNumber : String, job : Job)
     + verifyFilled(collaborator)
     + verifyMobile(collaborator)
     + verifyEmail(collaborator)

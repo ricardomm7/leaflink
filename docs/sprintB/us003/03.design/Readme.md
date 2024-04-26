@@ -10,10 +10,10 @@ _**Note that SSD - Alternative One is adopted.**_
 |:---------------|:----------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------|
 |                | 	... interacting with the actor?              | RegisterCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
 |                | 	... coordinating the US?                     | RegisterCollaboratorController | Controller  (Model-View-Controller)                                                       |
-|                | 	... instantiating a new Collaborator?        | CollaboratorRepository         | Creator (Rule 1): Instantiating a new Collaborator entity.                                |
+|                | 	... instantiating a new Collaborator?        | CollaboratorRepository         | Creator                                                                                   |
 |                | 	...saving the inputted data?                 | Collaborator                   | Creator Pattern                                                                           |
 |                | 	... validating all data (local validation)?  | Collaborator                   | Information Expert                                                                        | 
-|                | 	... validating all data (global validation)? | CollaboratorRepository         |                                                                                           | 
+|                | 	... validating all data (global validation)? | CollaboratorRepository         | Information Expert                                                                        | 
 |                | 	... saving the Collaborator?                 | CollaboratorRepository         |                                                                                           | 
 |                | 	... informing operation success?             | RegisterCollaboratorUI         | Model-View-Controller                                                                     | 
 |                | 	... handling the user selecting a job?       | RegisterCollaboratorController | Model-View-Controller                                                                     | 

@@ -8,7 +8,7 @@ participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "jobRepository:\nJobRepository" as jobRepository
 
-autonumber 38
+autonumber 5
 activate CTRL
 
 -> CTRL: get job list
@@ -28,5 +28,5 @@ jobRepository --> CTRL : jobsList
 deactivate jobRepository
 
 end
-<- CTRL: job list
+<- CTRL: job List
 @enduml
