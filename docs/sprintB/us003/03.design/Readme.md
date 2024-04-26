@@ -6,20 +6,19 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...     | Answer                         | Justification (with patterns)                                                                                 |
-|:---------------|:------------------------------------------------|:-------------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1         | 	... interacting with the actor?                | RegisterCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | 	... coordinating the US?                       | RegisterCollaboratorController | Controller                                                                                                    |
-|                | 	... instantiating a new Collaborator?          | CollaboratorRepository         | Creator (Rule 1): Instantiating a new Collaborator entity.                                                    |
-| Step 3         | 	...saving the inputted data?                   | Collaborator                   |                                                                                                               |
-| Step 7         | 	... validating all data (local validation)?    | Collaborator                   |                                                                                                               | 
-|                | 	... validating all data (global validation)?   | CollaboratorRepository         |                                                                                                               | 
-|                | 	... saving the Collaborator?                   | CollaboratorRepository         |                                                                                                               | 
-| Step 8         | 	... informing operation success?               | CreateTaskUI                   |                                                                                                               | 
-|                | 	... handling the user selecting a job?         | RegisterCollaboratorController |                                                                                                               | 
-|                | 	... assigning the selected job to the user?    | Collaborator                   |                                                                                                               | 
-|                | 	... handling the user selecting skills?        | RegisterCollaboratorController |                                                                                                               | 
-|                | 	... assigning the selected skills to the user? | Collaborator                   |                                                                                                               | 
+| Interaction ID | Question: Which class is responsible for...   | Answer                         | Justification (with patterns)                                                             |
+|:---------------|:----------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------|
+|                | 	... interacting with the actor?              | RegisterCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
+|                | 	... coordinating the US?                     | RegisterCollaboratorController | Controller  (Model-View-Controller)                                                       |
+|                | 	... instantiating a new Collaborator?        | CollaboratorRepository         | Creator (Rule 1): Instantiating a new Collaborator entity.                                |
+|                | 	...saving the inputted data?                 | Collaborator                   | Creator Pattern                                                                           |
+|                | 	... validating all data (local validation)?  | Collaborator                   | Information Expert                                                                        | 
+|                | 	... validating all data (global validation)? | CollaboratorRepository         |                                                                                           | 
+|                | 	... saving the Collaborator?                 | CollaboratorRepository         |                                                                                           | 
+|                | 	... informing operation success?             | RegisterCollaboratorUI         | Model-View-Controller                                                                     | 
+|                | 	... handling the user selecting a job?       | RegisterCollaboratorController | Model-View-Controller                                                                     | 
+|                | 	... assigning the selected job to the user?  | RegisterCollaboratorController |                                                                                           | 
+|                | ... have all the repositories?                | Repositories                   | Repository Pattern                                                                        |
 
 ### Systematization ##
 
@@ -33,7 +32,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 * CreateTaskUI  
 * CreateTaskController
 * JobRepository
-* SkillsRepository
 * CollaboratorRepository
 
 

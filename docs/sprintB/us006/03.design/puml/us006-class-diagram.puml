@@ -4,7 +4,6 @@ skinparam shadowing false
 skinparam line type polyline
 
     class RegisterVehicleUI {
-
     }
 
     class RegisterVehicleController {

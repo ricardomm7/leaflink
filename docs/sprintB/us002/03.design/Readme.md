@@ -6,16 +6,16 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                              | Justification (with patterns)                                                                                |
-|:---------------|:----------------------------------------------|:------------------------------------|:-------------------------------------------------------------------------------------------------------------|
-| 		             | 	... interacting with the actor?              | CreateJobUI                         | Pure Fabrication: there is no reason to assign this responsibility to any existing class.                    |
-| 		             | 	... coordinating the US?                     | CreateJobController                 | Controller  (Model-View-Controller)                                                                          |
-| 	  		          | 	... instantiating a new Job?                 | JobRepository                       | Creator Pattern                                                                                              |
-| 		             | 	...saving the inputted data?                 | CreateJobUI and CreateJobController | Model-View-Controller                                                                                        |
-| 		             | 	... saving the job?                          | JobRepository                       | Repository Pattern                                                                                           |
-| 		             | 	... validating all data (global validation)? | JobRepository                       | Information Expert                                                                                           | 
-|   		           | 	... informing operation success?             | CreateJobUI                         | Model-View-Controller                                                                                        | 
-|                | ... have all the repositories?                | Repositories                        | Repository Pattern                                                                                           |
+| Interaction ID | Question: Which class is responsible for...   | Answer              | Justification (with patterns)                                                             |
+|:---------------|:----------------------------------------------|:--------------------|:------------------------------------------------------------------------------------------|
+| 		             | 	... interacting with the actor?              | CreateJobUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
+| 		             | 	... coordinating the US?                     | CreateJobController | Controller  (Model-View-Controller)                                                       |
+| 	  		          | 	... instantiating a new Job?                 | JobRepository       | Creator Pattern                                                                           |
+| 		             | 	...saving the inputted data?                 | Job                 | Information Expert                                                                        |
+| 		             | 	... saving the job?                          | JobRepository       | Repository Pattern                                                                        |
+| 		             | 	... validating all data (global validation)? | JobRepository       | Information Expert                                                                        | 
+|   		           | 	... informing operation success?             | CreateJobUI         | Model-View-Controller                                                                     | 
+|                | ... have all the repositories?                | Repositories        | Repository Pattern                                                                        |
 
 ### Systematization ##
 
