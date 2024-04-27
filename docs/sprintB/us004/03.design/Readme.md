@@ -6,41 +6,38 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                 | Justification (with patterns)                                                                                 |
-|----------------|:----------------------------------------------|:-----------------------|---------------------------------------------------------------------------------------------------------------|
-| Step 1 	       | ... interacting with the actor?               | AssignSkillsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | ... coordinating the US?                      |                        |                                                                                                               |
-|                | ... knowing the user using the system?        |                        |                                                                                                               |
-|                | ... showing a list of collaborators?          |                        |                                                                                                               |
-| Step 2         | ... asking to select a collaborator?          |                        |                                                                                                               |
-|                | ... selecting a collaborator?                 |                        |                                                                                                               |
-| Step 3         | ... showing list of available skills?         |                        |                                                                                                               |
-| Step 4         | ... asking to select one or more skills?      |                        |                                                                                                               |
-|                | ... selecting desired skills?                 |                        |                                                                                                               |
-|                | ... assigning skills to a collaborator?       |                        |                                                                                                               |                |                                             |                        |                                                                                                               |
-| Step 7         | ... saving the updated collaborator's skills? |                        |                                                                                                               |
-| Step 8         | ... informing of operation success?           |                        |                                                                                                               |
-|                |                                               |                        |                                                                                                               |
-|                |                                               |                        |                                                                                                               |
-|                |                                               |                        |                                                                                                               |
-|                |                                               |                        |                                                                                                               |
-|                |                                               |                        |                                                                                                               |
-|                |                                               |                        |                                                                                                               |
+| Interaction ID | Question: Which class is responsible for...          | Answer                 | Justification (with patterns)                                                             |
+|----------------|:-----------------------------------------------------|:-----------------------|-------------------------------------------------------------------------------------------|
+|                | ... interacting with the actor?                      | AssignSkillsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
+|                | ... coordinating the US?                             | AssignSkillsController | Controller (Model View Controller)                                                        |
+|                | ... displaying list of collaborators?                | CollaboratorRepository | Information Expert                                                                        |
+|                | ... displaying list of available skills?             | SkillsRepository       | Information Expert                                                                        |
+|                | ... saving the selected data?                        | Collaborator           | Creator                                                                                   |
+|                | ... validating all data (local validation)?          | Collaborator           | Information Expert                                                                        |
+|                | ... validating all data (global validation)?         | CollaboratorRepository | Information Expert                                                                        |
+|                | ... saving the updated collaborator's skills?        | CollaboratorRepository | Repository Pattern                                                                        |
+|                | ... informing of operation success?                  | AssignSkillsUI         | Model-View-Controller                                                                     |
+|                | ... having all the repositories?                     | Repositories           | Repository Pattern                                                                        |
+|                | ... assigning the selected skills to a collaborator? | CollaboratorRpository  | Creator                                                                                   |
+|                | ... handling the user selecting a job?               | AssignSkillsController | Model-View-Controller                                                                     |
+|                |                                                      |                        |                                                                                           |
+|                |                                                      |                        |                                                                                           |
+|                |                                                      |                        |                                                                                           |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
 * Collaborator
+
+
+Other software classes (i.e. Pure Fabrication) identified: 
+
 * AssignSkillsUI
 * AssignSkillsController
 * CollaboratorRepository
 * SkillsRepository
-
-Other software classes (i.e. Pure Fabrication) identified: 
-
-* AssignSkillsUI  
-* AssignSkillsController
+* Repositories
 
 
 ## 3.2. Sequence Diagram (SD)
