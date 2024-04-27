@@ -8,12 +8,13 @@ dados = pd.read_csv(caminho_arquivo, skiprows=1, header=None, names=["Equipment"
 # Calcular o número de vezes que cada equipamento foi usado
 contagem_equipamentos = dados["Equipment"].value_counts()
 
-# Calcular a porcentagem de uso de cada equipamento
-porcentagens = (contagem_equipamentos / len(dados)) * 100
+# Calcular a percentagem de uso de cada equipamento
+percentagens = (contagem_equipamentos / len(dados))*100
 
 # Criar o gráfico de pizza
 plt.figure(figsize=(12, 12))
-plt.pie(porcentagens, labels=porcentagens.index, autopct='%1.1f%%', startangle=160)
-plt.title('Uso de Equipamentos no Parque')
+plt.pie(percentagens, labels=percentagens.index, autopct='%1.1f%%', startangle=160, textprops={'fontsize': 20})
+plt.title('Graph of Equipment Used in the Park', pad=20, size=30)
 plt.axis('equal')  # Faz com que o gráfico seja circular
+plt.tight_layout()  # Adiciona espaçamento
 plt.show()

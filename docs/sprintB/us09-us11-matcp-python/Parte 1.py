@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
-
+from tabulate import tabulate
 
 ####################################################################
 ####################################################################
@@ -25,7 +25,6 @@ def calcular_custo_agua(consumo):
     return custo_ate_limite + custo_excedente
 
 
-# Função para imprimir o gráfico de barras representando o consumo mensal de água
 # Função para imprimir o gráfico de barras representando o consumo mensal de água
 def imprimir_consumo_mensal_agua(dados, ano, mes_inicio, mes_fim, identificacao_parque):
     # Filtra os dados com base no ano, período de tempo e identificação do parque
@@ -244,20 +243,7 @@ def construir_tabela_informacoes(parque_menor, dados_parque_menor, parque_maior,
 
 
 def imprimir_tabela_formatada(tabela):
-    # Imprime o cabeçalho da tabela
-    header = tabela.columns.tolist()
-    print('{:<25}'.format(header[0]), end='')
-    for coluna in header[1:]:
-        print('|{:^25}'.format(coluna), end='')
-    print('\n' + '-' * (25 * len(header) + len(header) - 1))
-
-    # Imprime o conteúdo da tabela
-    for i in range(len(tabela)):
-        linha = tabela.iloc[i].tolist()
-        print('{:<25}'.format(linha[0]), end='')
-        for valor in linha[1:]:
-            print('|{:^25}'.format(valor), end='')
-        print()
+    print(tabulate(tabela, headers='keys', tablefmt='grid'))
 
 
 # Construir tabela de dados para os parques com maior e menor consumo
