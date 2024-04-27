@@ -19,8 +19,8 @@ class Collaborator {
     name
     birthdate
     admissionDate
-    mobileNumber
-    e-mail
+    contactMobile
+    email
     taxpayerNumber
 }
 
@@ -33,7 +33,7 @@ class Collaborator {
 '}
 
 class Address{
-    street
+    address
     zipCode
     city
 
