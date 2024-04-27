@@ -140,7 +140,7 @@ def calcular_custos_medios_mensais(dados, num_parques, parq_unic):
 # Input do número de parques a serem analisados
 num_parques = int(input("\nDigite o número de parques a serem analisados: "))
 # Verificação número de parques inseridos
-while num_parques > numero_de_parques or num_parques <= 0:
+while num_parques > numero_de_parques or num_parques < 0:
     num_parques = int(input("\nO valor inserido é inválido.\n\n Digite o número de parques a serem analisados: "))
 
 custos_medios_parques = calcular_custos_medios_mensais(dados, num_parques, parques_unicos)

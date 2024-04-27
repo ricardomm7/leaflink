@@ -22,17 +22,20 @@ activate QAM
             activate CTRL
 
                 CTRL -> Test : runs
+                deactivate CTRL
                 activate Test
 
-                    Test -> RunGraphWP: send inicial values
-                activate RunGraphWP
+                    ref over Test
+                                            Run Tests
+                                       end
 
-                    RunGraphWP -> RunGraphWP: runCalculus()
-                RunGraphWP --> Test : results
-                deactivate RunGraphWP
-                    Test -> Test : compareResults()
+
+
 
                 Test --> CTRL : test results
+                deactivate  Test
+
+                activate CTRL
             deactivate Test
 
             CTRL --> UI : test results
