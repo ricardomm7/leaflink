@@ -2,7 +2,7 @@
 ###### LeafLink is currently not registered under our ownership, and our group is solely utilizing it for educational purposes and not for any commercial endeavors. It's essential to emphasize that the name LeafLink is still under consideration and not yet finalized. We are committed to ensuring that all aspects of our project, including branding elements, align with ethical and legal standards.
 
 ## Glossary
-[CLICK HERE TO BE REDIRECTED](sprintA/global-artifacts/01.requirements-engineering/glossary.md)
+[CLICK HERE TO BE REDIRECTED](sprintB/global-artifacts/01.requirements-engineering/glossary.md)
 
 ## Introduction
 This document serves to offer comprehensive guidance on the LeafLink Software, encompassing a broad spectrum of topics ranging from the product's general overview to its specific functionalities tailored for users. It caters to various user demographics, providing guidance suitable for their respective interactions with the application.
@@ -21,7 +21,7 @@ appropriate skills; work team management; vehicle and machinery management; and 
 ### Main Features
 The main features of LeafLink are:
 - #### Employee registration and management
-Registering and maintaining collaborators information, assigning skills and jobs and generating team proposals based on 
+Registering and maintaining collaborators' information, assigning skills and jobs and generating team proposals based on 
 required competencies
 - #### Vehicle registration and management
 Registering and managing the vehicles used in the management of green spaces, organizing maintenance checks and managing
@@ -78,7 +78,7 @@ This feature allows HRM to assign one or more skills to an employee.
 3. Click on the option to assign skills to a collaborator.
 4. The system will display a list of collaborators. Select the collaborator to whom you want to assign skills.
 5. After selecting the collaborator, the system will prompt you to provide the required data. Enter or select the skills from the available options as needed.
-6. Upon providing the skills data, the system display all selected skills assigned to the collaborator. Review the information provided for accuracy.
+6. Upon providing the skills data, the system displays all selected skills assigned to the collaborator. Review the information provided for accuracy.
 7. Confirm the assigned skills by selecting the appropriate option on the confirmation dialog. 
 8. Upon confirmation, the system will display a success message confirming the assignment of skills to the collaborator.
 
@@ -96,12 +96,12 @@ This feature allows HRM to generate a team proposal automatically
 7. Confirm the generated team by selecting the appropriate option on the confirmation dialog.
 8. Upon confirmation, the system will display a success message confirming the team generated and their skills.
 
-### 6. Register a vehicle | Fleet Manager 
+### 6. Register a vehicle | Vehicle and Equipment Fleet Manager 
 
-This feature allows FM to register a vehicle with various characteristics.
+This feature allows VFM to register a vehicle with various characteristics.
 
 ### Step by step:
-1. Open the FM system.
+1. Open the VFM system.
 2. Navigate to the section designated for registering a vehicle.
 3. Click on the option to register a vehicle.
 4. The system will request the vehicle data such as VIN, Vehicle Platte, Tare Weight, Gross Weight, Current Km, Acquisition Date and Maintenance Frequency.
@@ -111,26 +111,26 @@ This feature allows FM to register a vehicle with various characteristics.
 8. After typing the remaining data, the system will show all the data and request a confirmation.
 9. Upon confirmation, the system will display the vehicle registration information.
 
-### 7. Register a vehicle's check-up | Fleet Manager 
+### 7. Register a vehicle's check-up | Vehicle and Equipment Fleet Manager 
 
-This feature allows FM to register a vehicle's check-up
+This feature allows VFM to register a vehicle's check-up
 
 ### Step by step:
-1. Open the FM system.
+1. Open the VFM system.
 2. Navigate to the section designated for registering a vehicle's check-up.
 3. Click on the option to register a vehicle's check-up.
 4. The system will display a list of the vehicles registered and ask witch vehicle will have a check-up.
-5. Now the FM will choose the vehicle that he wants to register a check-up.
+5. Now the VFM will choose the vehicle that he wants to register a check-up.
 6. After that, the system will request the date of the check-up.
 7. After typing the date, the system will show all the data and request a confirmation.
 8. Upon confirmation, the system will display an operation success message.
 
-### 8. List the vehicles needing the check-up | Fleet Manager
+### 8. List the vehicles needing the check-up | Vehicle and Equipment Fleet Manager
 
-This feature allows FM to list the vehicles needing the check-up.
+This feature allows VFM to list the vehicles needing the check-up.
 
 ### Step by step:
-1. Open the FM system.
+1. Open the VFM system.
 2. Navigate to the section designated for listing the vehicles needing the check-up.
 3. Click on the option to list the vehicles needing a check-up.
 4. The system will display a list of the vehicles needing a check-up, their information and an operation message.

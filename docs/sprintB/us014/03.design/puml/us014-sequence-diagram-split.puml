@@ -21,14 +21,24 @@ activate QAM
             activate CTRL
 
                 CTRL -> Test : runs
+                deactivate CTRL
                 activate Test
 
-                   ref over Test
-                        Run Tests
-                   end
+                    Test -> RunGraphWP: send initial values
+                    deactivate Test
+                activate RunGraphWP
 
+                    RunGraphWP -> RunGraphWP: runCalculus()
+                RunGraphWP --> Test : results
+                deactivate RunGraphWP
+                activate Test
+
+                Test -> Test : compareResults()
 
                 Test --> CTRL : test results
+                deactivate  Test
+
+                activate CTRL
             deactivate Test
 
             CTRL --> UI : test results
@@ -38,5 +48,7 @@ activate QAM
     UI --> QAM : Displays passed or failed tests
     deactivate UI
 deactivate QAM
+
+
 
 @enduml

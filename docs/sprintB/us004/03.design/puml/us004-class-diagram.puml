@@ -3,83 +3,60 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 
-class HRM {
-}
-
-
 class AssignSkillsUI {
 }
 
+class AssignSkillsController {
+    + assignSkills(skill : Skill) : void
+    + getInstance() : CollaboratorRepository
+    + getInstance() : SkillsRepository
+}
+
 class Repositories {
-    + getInstance()
+    + getCollaboratorRepository() : CollaboratorRepository
+    + getSkillsRepository() : SkillsRepository
 }
 
 class CollaboratorRepository {
-    + getCollaborator
+        + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+        + checkForDuplicates() : void
+        + addCollaborator(collaborator) : void
 }
 
 class SkillsRepository {
-    + getSkills()
-}
-
-class AssignSkillsController {
-    +assignSkills(collaboratorId: String, skills: List<String>) : void
-    +getInstance() : Repositories
+    + createSkill(name : String) : Skill
+    + checkForDuplicates() : void
 }
 
 class Collaborator {
-    - name: String
-    - birthdate: Date
-    - contactMobile: String
-    - email: String
-    - address: String
-    - zipCode: String
-    - city: String
-    - documentTypes: List<DocumentType>
-    - admissionDate: Date
-    - job: Job
-    - skills: List<Skill>
+    - name : String
+    - birthdate : Date
+    - contactMobile : String
+    - email : String
+    - address : String
+    - zipCode : String
+    - city : String
+    - admissionDate : Date
+    - job : Job
+    - taxpayerNumber : int
+    + setSkills(selectedSkills : Skill[]) : void
 }
-
 
 class Skill {
-    - name: String
+    - name : String
+    + Skill(title : String)
+    + verifyFilled(skill : Skill) : void
+    + verifySpecialCharacters(skill : Skill) : void
 }
+
+AssignSkillsUI ..> AssignSkillsController
+AssignSkillsController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> "1" CollaboratorRepository : collaboratorRepository
+Repositories --> "1" SkillsRepository : skillsRepository
+AssignSkillsController ..> CollaboratorRepository : collaboratorRepository
+AssignSkillsController ..> SkillsRepository : skillsRepository
+CollaboratorRepository --> "*" Collaborator : collaborators
+SkillsRepository --> "*" Skill : skills
 
 @enduml
-
-
-\*
-skinparam packageStyle rectangle
-skinparam shadowing false
-skinparam linetype polyline
-
-class HRM {
-}
-
-class AssignSkillsUI {
-
-}
-
-class AssignSkillsController {
-    +assignSkills(collaboratorId: String, skills: List<String>) : void
-    +getInstance() : Repositories
-}
-
-class Repositories {
-    +getSkillRepository() : SkillRepository
-}
-
-class SkillRepository {
-    +assignSkills(collaboratorId: String, skills: List<String>) : void
-}
-
-class Collaborator {
-    - id: String
-    - skills: List<String>
-    + Collaborator(id: String)
-    + assignSkills(skills: List<String>) : void
-    + verifySkills(skills: List<String>) : void
-}
-
-@enduml*/
