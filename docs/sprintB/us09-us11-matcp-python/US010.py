@@ -14,7 +14,7 @@ percentagens = (contagem_equipamentos / len(dados))*100
 # Criar o gráfico de pizza
 plt.figure(figsize=(12, 12))
 plt.pie(percentagens, labels=percentagens.index, autopct='%1.1f%%', startangle=160, textprops={'fontsize': 20})
-plt.title('Graph of Equipment Used in the Park', pad=20, size=30)
+plt.title('Gráfico percentual do uso de equipamento no parque', pad=20, size=30)
 plt.axis('equal')  # Faz com que o gráfico seja circular
 plt.tight_layout()  # Adiciona espaçamento
 plt.show()

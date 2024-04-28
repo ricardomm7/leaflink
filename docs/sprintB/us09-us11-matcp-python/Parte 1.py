@@ -200,12 +200,12 @@ outliers_menor = verificar_outliers(dados_parque_menor_consumo)
 
 # Função para construir tabela de frequência
 def construir_tabela_frequencia(dados, num_classes):
-    intervalos = pd.cut(dados, bins=num_classes, include_lowest=True)
+    intervalos = pd.cut(dados, bins=num_classes, include_lowest=True, right=False)
     frequencia_absoluta = intervalos.value_counts().sort_index()
     frequencia_relativa = (frequencia_absoluta / len(dados)
                            * 100).round(2).astype(str) + '%'
     consumo = [
-        f'[{intervalo.left:.1f}, {intervalo.right:.1f}]' for intervalo in frequencia_absoluta.index]
+        f'[{intervalo.left:.2f}, {intervalo.right:.2f}]' for intervalo in frequencia_absoluta.index]
     tabela_frequencia = pd.DataFrame(
         {'Intervalos de Consumo': consumo, 'Freq. abs.': frequencia_absoluta, 'Freq. rel.': frequencia_relativa})
     return tabela_frequencia
@@ -243,7 +243,7 @@ def construir_tabela_informacoes(parque_menor, dados_parque_menor, parque_maior,
 
 
 def imprimir_tabela_formatada(tabela):
-    print(tabulate(tabela, headers='keys', tablefmt='grid'))
+    print(tabulate(tabela, headers='keys', tablefmt='grid', showindex= False))
 
 
 # Construir tabela de dados para os parques com maior e menor consumo
