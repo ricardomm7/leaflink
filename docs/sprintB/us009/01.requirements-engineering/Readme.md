@@ -25,7 +25,7 @@ As a GSM, I want to know the exact costs referring to water consumption of speci
 > 
 > **Answer:** To the exceeded volume.
 
-> **Question:** Is the consumption limit of 50m^3 calculated per day or per month?
+> **Question:** Is the consumption limit of 50m³ calculated per day or per month?
 > 
 > **Answer:** Per month.
 
@@ -53,15 +53,17 @@ As a GSM, I want to know the exact costs referring to water consumption of speci
 >
 > **Answer:** Presents the analysis for this park only.
 
-> **Question:** What happens if there are several parks with the same highest water consumption and the same for the smallest?
-Do we choose two at our discretion? Or do we study all the parks in question?
+> **Question:** What happens if there are several parks with the same highest water consumption and the same for the smallest? Do we choose two at our discretion? Or do we study all the parks in question?
 >
-> **Answer:** Carry out the study for all parks.
+> **Answer:** Carry out the study for all parks, including the histograms.
 
 > **Question:** Should we output all the information to a file or show it on the screen and offer that option to the user?
 >
 > **Answer:** The output should be shown.
-
+>
+> **Question:** Regarding the creation of the Barplot with the monthly water consumption of the selected park, do the start and end months belong to the same year or can the year change?
+>
+> **Answer:** They belong to the same year.
 
 ### 1.3. Acceptance Criteria
 
