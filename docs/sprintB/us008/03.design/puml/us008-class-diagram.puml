@@ -61,13 +61,14 @@ class MaintenanceReport {
 
 }
 
-ListMaintenanceUI --> ListMaintenanceController: Submit request
-ListMaintenanceController --> Repositories: Get
-ListMaintenanceController --> MaintenanceRepository: Create Maintenance Report
-Repositories --> VehicleRepository: Get
-Repositories --> MaintenanceRepository: Get
-VehicleRepository --> Vehicle: Has
-MaintenanceRepository --> Vehicle: Get
-MaintenanceRepository --> MaintenanceReport: Create
+ListMaintenanceUI ..> ListMaintenanceController
+ListMaintenanceController ..> Repositories: repositories
+Repositories --> Repositories: instance
+ListMaintenanceController ..> MaintenanceRepository: MaintenanceRepository
+Repositories --> "1"VehicleRepository: VehicleRepository
+Repositories --> "1"MaintenanceRepository: MaintenanceRepository
+VehicleRepository "1"--> "*"Vehicle: vehicle
+MaintenanceRepository "1"--> "*"Vehicle: vehicle
+MaintenanceRepository "1"-->"*" MaintenanceReport: maintenanceReport
 }
 @enduml

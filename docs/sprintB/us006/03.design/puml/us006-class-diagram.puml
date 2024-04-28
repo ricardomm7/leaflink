@@ -1,7 +1,8 @@
 @startuml
-skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam line type polyline
+skinparam linetype polyline
+
+'left to right direction
 
     class RegisterVehicleUI {
     }
@@ -39,11 +40,11 @@ skinparam line type polyline
         + createVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     }
 
-    RegisterVehicleUI --> RegisterVehicleController: Submit vehicle data
-    RegisterVehicleController --> Repositories: get
-    RegisterVehicleController --> VehicleRepository: Verify Existed Vehicle
-    Repositories --> VehicleRepository: Get
-    VehicleRepository -> Vehicle: Register
-
+RegisterVehicleUI ..> RegisterVehicleController
+RegisterVehicleController ..> Repositories: repositories
+Repositories --> Repositories: instance
+RegisterVehicleController ..> VehicleRepository: vehicleRepository
+Repositories --> "1"VehicleRepository: vehicleRepository
+VehicleRepository "1"-->"*" Vehicle: vehicle
 
 @enduml

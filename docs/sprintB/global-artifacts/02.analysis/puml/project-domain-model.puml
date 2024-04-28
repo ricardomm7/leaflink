@@ -88,7 +88,7 @@ class ElectronicDevice{
 }
 
 class GreenSpace{
-    name
+    designation
 }
 
 class Task{
@@ -96,7 +96,11 @@ class Task{
     date
 }
 
-class Equipment{
+class Machines{
+    designation
+}
+
+class GardenTools{
     designation
 }
 
@@ -106,13 +110,17 @@ class Agenda{
 class Portal{
 }
 
+class GardenEquipment{
+    designation
+}
+
 Vehicle "1..*" -- "1" Brand : has >
 
 Model "1..*" -- "1" Brand : has <
 
 Collaborator "1" -- "1..*" Document : has >
 
-Job "1" -- "1..*" Collaborator : to >
+Job "*" -- "1..*" Collaborator : to >
 
 
 Skill "*" -- "1..*" Collaborator : to >
@@ -128,11 +136,15 @@ GreenSpace "1" -- "1" WaterStatisticalAnalysis : is analysed >
 
 GreenSpace "1" -- "1" Address : has an >
 
+GreenSpace "1" -- "*" GardenEquipment: has >
+
 Task "1" -- "*" Vehicle : needs >
+
+Task "1" --"*" Machines: needs >
 
 Task "1" -- "1" Team : is assigned >
 
-Task "1" -- "*" Equipment : has >
+Task "1" -- "*" GardenTools : has >
 
 GreenSpace "1" -- "1..*" ElectronicDevice: has >
 

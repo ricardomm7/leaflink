@@ -12,6 +12,7 @@ rectangle "System User" as actors {
     actor VFM
     actor GSM
     actor QAM
+    actor GSU
 }
 
 rectangle "Use Cases" as usecases{
