@@ -32,11 +32,13 @@ for age, proportion in proportion_recommendations.items():
     table_data.append([age, proportion])
 print(tabulate(table_data, headers=['Idade', 'Proporção'], tablefmt='grid'))
 
+# plt.figure(dpi=300)
+
 # Criar boxplot para a frequência mensal de uso do parque por grupo de idade, incluindo outliers
 df.boxplot(column='Visits', by='Age', grid=True, showfliers=True)  # showfliers=True indica outliers
 plt.xlabel("Idade")  # Legenda do eixo x
 plt.ylabel("Visitas")  # Legenda do eixo y
-plt.title("Frequência mensal de uso do parque por grupo de idade")  # Título
+plt.title("Frequência mensal de uso do parque por grupo de idade", pad=25, size=15)  # Título
 plt.suptitle("") #Retira subtítulo
 plt.tight_layout()  # Adiciona espaço
 
@@ -62,6 +64,6 @@ plt.show()
 # Calcular número de registros por grupo etário
 count_per_age_group = df['Age'].value_counts()
 
-# Imprimir o número de registros por grupo etário
+# Imprimir a tabela usando tabulate
 print("\nNúmero de registros por grupo etário:")
-print(count_per_age_group)
+print(tabulate(count_per_age_group.reset_index(), headers=['Idade', 'Número de Registros'], tablefmt='grid'))

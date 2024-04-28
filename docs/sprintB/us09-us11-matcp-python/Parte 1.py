@@ -48,6 +48,7 @@ def imprimir_consumo_mensal_agua(dados, ano, mes_inicio, mes_fim, identificacao_
     consumos = [consumo_mensal[mes] for mes in meses_ordenados]
 
     # Imprime o gráfico de barras
+    plt.figure(dpi=300)
     plt.bar(meses, consumos, color='blue')
     plt.xlabel('Mês')
     plt.ylabel('Consumo de Água (m3)')
@@ -81,11 +82,11 @@ for anos in dados['Year']:
     anos_unicos.add(anos)
 
 # Input das especificações (Período de tempo e nome do Parque)
-ano = int(input("Digite o ano a analisar(2023-2024): "))
+ano = int(input("Digite o ano a analisar (2023-2024): "))
 # Verificação dos anos
 while ano not in anos_unicos:
     print('\nO ano inserido não está no ficheiro dado.\n')
-    ano = int(input("Digite o ano a analisar(2023-2024): "))
+    ano = int(input("Digite o ano a analisar (2023-2024): "))
 
 mes_inicio = int(input("Digite o mês inicial (1-12): "))
 mes_fim = int(input("Digite o mês final (1-12): "))
@@ -270,7 +271,7 @@ print(
 imprimir_tabela_formatada(tabela_frequencia_menor)
 
 # Histograma do parque com maior consumo com 10 classes e do parque com menor consumo com 10 classes
-plt.figure(figsize=(14, 7))
+plt.figure(figsize=(14, 7),dpi=300)
 
 plt.subplot(2, 2, 1)
 plt.hist(dados_parque_maior_consumo['Consumption'], bins=10, color='blue', alpha=0.7)
