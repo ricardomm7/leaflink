@@ -1,4 +1,4 @@
-# US009 - Known the exact costs referring to water consumption of specific green spaces
+# US009 - Know the exact costs referring to water consumption of specific green spaces
 
 
 ## 1. Requirements Engineering

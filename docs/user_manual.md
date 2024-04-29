@@ -134,3 +134,68 @@ This feature allows VFM to list the vehicles needing the check-up.
 2. Navigate to the section designated for listing the vehicles needing the check-up.
 3. Click on the option to list the vehicles needing a check-up.
 4. The system will display a list of the vehicles needing a check-up, their information and an operation message.
+
+### 9. Know the exact costs referring to water consumption of specific green spaces
+
+This feature allows the GSM to request a statistical analysis of water consumption costs.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section for requesting statistical analysis of water consumption costs.
+3. The system will request to input the data about the time period and park identification.
+4. Input the data.
+5. The system will validate the input data and displays the analysis outcome, that include a bar plot, average costs, and statistical indicators.
+
+### 10. Know in a pie chart which piece(s) of equipment is/are used in each day
+
+This feature enables the GSM to analyze equipment usage.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section for analysing equipment usage.
+3. The system will request to upload the file "EquipmentUsed.csv".
+4. Provide the file path and upload the file.
+5. The system will process the uploaded file and display the analysis result in the form of a pie chart.
+
+### 11. Collect data from the user portal
+
+This feature enables the GSM to collect data from the user portal regarding the use of the park.
+
+#### Step by step:
+
+1. Open the GMS system.
+2. Navigate to the section for collecting data from the user portal.
+3. The system will request to upload the file "Inquiry.csv".
+4. Provide the file path and upload the file.
+5. The system will process the uploaded file and display the analysis result and conclusions about the use of the park
+
+### 12.Import a .csv file containing routes for pipe installation
+
+This feature enables the GSM to import a .csv file containing data about possible routes for laying pipes between water points, including their installation costs.
+
+#### Step by step:
+
+1. Open the GMS system.
+2. Navigate to the section for pipe installation routes.
+3. The system will request to upload the cvs file that has the water points and distances between them.
+4. Provide the file path and upload the file.
+5. The system will process the uploaded file and display a graph representing the imported routes data.
+
+
+### 13. Know the routes to be opened, with minimum cost
+
+This feature allows the GSM to apply an algorithm that determines the optimal routes to be opened and the pipes needed to be laid with the minimum accumulated cost, ensuring adequate water supply to all points.
+
+#### Step by step:
+
+1. Open the GMS system.
+2. Navigate to the section for pipe installation routes.
+3. The system will request to upload the cvs file that has the water points and distances between them.
+4. Provide the file path and upload the file.
+5. The system will process the uploaded file and display a graph representing the imported routes data.
+6. The system will process the routes previously collected and generate another graph with the routes that connect all water points and has the minimum cost.
+
+
+
+
+
