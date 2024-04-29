@@ -3,50 +3,53 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam line type polyline
 
-package CreateMaintenanceReportSystem {
 class ListMaintenanceUI{
 }
 
 class ListMaintenanceController {
-    - vehicleRepository: VehicleRepository
-    - maintenanceRepository: MaintenanceRepository
+    - vehicleRepository : VehicleRepository
+    - maintenanceRepository : MaintenanceRepository
 
-    + createMaintenanceReport(vehiclesList: List<Vehicle>): MaintenanceReport
+
+    + createMaintenanceReport(vehiclesList: List<Vehicle>) : MaintenanceReport
+    + getMaintenanceRepository() : maintenanceRepository
+    + getVehicleRepository() : vehicleRepository
 }
 
 class Repositories {
-    - instance: Repositories
-    - vehicleRepository: VehicleRepository
-    - maintenanceRepository: MaintenanceRepository
+    - vehicleRepository : VehicleRepository
+    - maintenanceRepository : MaintenanceRepository
 
-    + getInstance(): Repositories
-    + getVehicleRepository(): VehicleRepository
-    + getMaintenanceRepository(): MaintenanceRepository
+    + getInstance() : Repositories
+    + getVehicleRepository() : VehicleRepository
+    + getMaintenanceRepository() : MaintenanceRepository
 }
 
 class VehicleRepository {
-    - vehicleList: List<vehicle>
+    - vehicleList : List<vehicle>
+
+    + getVehicleList() : List<vehicle>
 
 }
 
 class MaintenanceRepository {
-    - maintenanceReport: MaintenanceReport
+    - maintenanceReport : MaintenanceReport
 
-    + getVehiclesNeedingMaintenance(vehicleList: List<Vehicle>): List<Vehicle>
-    + createMaintenanceReport(vehiclesList: List<Vehicle>): MaintenanceReport
+    + getVehiclesNeedingMaintenance(vehicleList: List<Vehicle>) : List<Vehicle>
+    + createMaintenanceReport(vehiclesList: List<Vehicle>) : MaintenanceReport
 }
 
 class Vehicle {
-     - VIN: String
-     - brand: String
-     - model: String
-     - type: String
-     - vehiclePlate: String
-     - tareWeight: double
-     - grossWeight: double
-     - currentKm: double
-     - acquisitionDate: Date
-     - maintenanceFrequency: int
+     - VIN : String
+     - brand : String
+     - model : String
+     - type : String
+     - vehiclePlate : String
+     - tareWeight : double
+     - grossWeight : double
+     - currentKm : double
+     - acquisitionDate : Date
+     - maintenanceFrequency : int
 
     + Vehicle(VIN: String,brand: String, model: String, type: String, vehiclePlate: String, tareWeight: double, \ngrossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int)
 }
@@ -54,10 +57,10 @@ class Vehicle {
 
 
 class MaintenanceReport {
-    - data: String
-    - vehicleList: List<vehicle>
+    - data : String
+    - vehicleList : List<vehicle>
 
-    + MaintenanceReport(data: String, vehicleList: List<vehicleList>
+    + MaintenanceReport(data: String, vehicleList) : List<vehicleList>
 
 }
 

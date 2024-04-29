@@ -13,27 +13,28 @@ _**Note that SSD - Alternative One is adopted.**_
 | 			  		        | 	... instantiating a new Route?               | RouteRepository | Creator (Rule 1): the Repository creates instances of routes based on the imported data.                      |
 | 			  		        | ... knowing the user using the system?        | UserSession     | IE: cf. A&A component documentation.                                                                          |
 | 			  		        | 							                                       | RouteRepository | IE: knows/has its own Routes                                                                                  |
-| 			  		        | 							                                       | Route           | IE: knows its own data (WaterPoint, Distance)                                                                 |
-| Step 2  		     | 	... processing the imported CSV file?					   | RouteRepository | The Repository class processes the imported CSV file to extract route data.                                   |
-| Step 3  		     | 	...saving the inputted data?                 | RouteRepository | IE: The repository persists the routes data.                                                                  |
-| Step 4  		     | 	...knowing the task categories to show?      | System          | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		     | 	... saving the selected category?            | RouteRepository | IE: The repository associates the selected category with the imported routes.                                 |
-| Step 6  		     | 							                                       |                 |                                                                                                               |              
-| Step 7  		     | 	... validating all data (local validation)?  | Routes          | IE: owns its data.                                                                                            | 
+| 		    		       | 							                                       | Route           | IE: knows its own data (WaterPoint, Distance)                                                                 |
+| 		             | 	... processing the imported CSV file?					   | RouteRepository | The Repository class processes the imported CSV file to extract route data.                                   |
+| 		             | 	...saving the inputted data?                 | RouteRepository | IE: The repository persists the routes data.                                                                  |
+| 		             | 	...knowing the task categories to show?      | System          | IE: Task Categories are defined by the Administrators.                                                        |
+| 		             | 	... saving the selected category?            | RouteRepository | IE: The repository associates the selected category with the imported routes.                                 |
+| 		             | 							                                       |                 |                                                                                                               |              
+| 		             | 	... validating all data (local validation)?  | Routes          | IE: owns its data.                                                                                            | 
 | 			  		        | 	... validating all data (global validation)? | RouteRepository | IE: The repository ensures the overall consistency and integrity of the imported routes data                  | 
 | 			  		        | 	... saving the imported route?               | RouteRepository | IE: The repository persists the imported routes data                                                          | 
-| Step 8  		     | 	... informing operation success?             | RouteUI         | IE: is responsible for user interactions.                                                                     | 
+| Step 2  		     | 	... informing operation success?             | RouteUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* RouteRepository
+* Route 
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
 * RouteUI  
 * RoteController
+* RouteRepository
 
 
 ## 3.2. Sequence Diagram (SD)

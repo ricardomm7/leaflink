@@ -6,21 +6,21 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                        | Justification (with patterns)                                                                                 |
-|:---------------|:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?              | CreateSkillUI                 | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        | 	... coordinating the US?                     | CreateSkillController         | Controller                                                                                                    |
-| 			  		        | 	... instantiating a new Task?                | skillRepository               | Repository Pattern                                                                                            |
-| 			  		        | ... knowing the user using the system?        | N/A                           | N/A                                                                                                           |
-| Step 2  		     | 	...saving the inputted data?                 | CreateSkillUI and CreateSkill | MVC  (Model-View-Controller)                                                                                  |
-| Step 3  		     | 	... saving the skill?                        | skillRepository               | Repository                                                                                                    |
-| Step 4  		     | 	... validating all data (global validation)? | skillRepository               |                                                                                                               | 
-| Step 5  		     | 	... informing operation success?             | CreateSkillUI                 | Is responsible for user interactions.                                                                         | 
+| Interaction ID | Question: Which class is responsible for...   | Answer                | Justification (with patterns)                                                                                 |
+|:---------------|:----------------------------------------------|:----------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?              | CreateSkillUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		        | 	... coordinating the US?                     | CreateSkillController | Controller                                                                                                    |
+| Step 2  		     | 	...saving the inputted data?                 | CreateSkillUI         | Pure Fabrication                                                                                              |
+| Step 3  		     | 	... instantiating  the skill?                | skillRepository       | Information Expert, High Cohesion and Low Coupling:                                                           |
+| Step 4  		     | 	... validating all data (global validation)? | skillRepository       | Information Expert:                                                                                           | 
+|                | ... validating all data (local validation)    | Skill                 | Information Expert:                                                                                           |
+| Step 5  		     | 	... informing operation success?             | CreateSkillUI         | Is responsible for user interactions.                                                                         | 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
 * Skill
+
 
 Other software classes (i.e. Pure Fabrication) identified: 
 

@@ -10,13 +10,16 @@ class RegisterCollaboratorUI {
 
 class RegisterCollaboratorController {
     + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, identificationNumber : String, job : Job)
-    + assignJob(job : Job) : void
-    + getInstance() : JobRepository
-    + getInstance() : CollaboratorRepository
+    + getJobRepository() : JobRepository
+    + getCollaboratorRepository() : CollaboratorRepository
 
 }
 
 class Repositories {
+    -jobRepository: JobRepository
+    -collaboratorRepository: CollaboratorRepository
+
+    + getInstance(): Repositories
     +getJobRepository() : JobRepository
     +getCollaboratorRepository() : CollaboratorRepository
 }

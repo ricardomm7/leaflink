@@ -48,7 +48,10 @@ activate VFM
 
             activate VehicleRepository
 
+        ref over VehicleRepository
+                                                                            Verify Existing Vehicle
 
+                                                                        end ref
 
 
             VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
@@ -65,10 +68,7 @@ activate VFM
             deactivate VEI
             activate VehicleRepository
 
-            ref over VehicleRepository
-                                                                    Verify Existing Vehicle
 
-                                                                end ref
 
 
             VehicleRepository -> VehicleRepository: addVehicle(vehicle)

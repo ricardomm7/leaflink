@@ -8,36 +8,36 @@ skinparam linetype polyline
     }
 
     class RegisterVehicleController {
-        - vehicleRepository: VehicleRepository
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int): boolean
+        - vehicleRepository : VehicleRepository
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int) : boolean
+        + getVehicleRepository() : VehicleRepository
     }
 
     class Repositories {
-        - instance: Repositories
-        - vehicleRepository: VehicleRepository
-        + getInstance(): Repositories
-        + getVehicleRepository(): VehicleRepository
+        - vehicleRepository : VehicleRepository
+        + getInstance() : Repositories
+        + getVehicleRepository() : VehicleRepository
     }
 
     class VehicleRepository {
-        + verifyExistingVehicle(VIN: String, VehiclePlate: String): boolean
-        + addVehicle(vehicle: Vehicle): boolean
+        + verifyExistingVehicle(VIN: String, VehiclePlate: String) : boolean
+        + addVehicle(vehicle: Vehicle) : boolean
     }
 
     class Vehicle {
-        - VIN: String
-        - brand: String
-        - model: String
-        - type: String
-        - vehiclePlate: String
-        - tareWeight: double
-        - grossWeight: double
-        - currentKm: double
-        - acquisitionDate: Date
-        - maintenanceFrequency: int
+        - VIN : String
+        - brand : String
+        - model : String
+        - type : String
+        - vehiclePlate : String
+        - tareWeight : double
+        - grossWeight : double
+        - currentKm : double
+        - acquisitionDate : Date
+        - maintenanceFrequency : int
 
-        + validateVehicle(vehicle: Vehicle): boolean
-        + createVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        + validateVehicle(vehicle: Vehicle) : boolean
+        + Vehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
     }
 
 RegisterVehicleUI ..> RegisterVehicleController
