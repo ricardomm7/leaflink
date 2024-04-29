@@ -1,6 +1,6 @@
 @startuml
 skinparam shadowing false
-skinparam linetype polyline
+skinparam line type polyline
 
 'left to right direction
 

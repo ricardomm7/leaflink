@@ -13,20 +13,20 @@ hide methods
 'title Domain Model - US012
 
 class WaterPoint {
-    name
+    id
 
 }
 
 class Route {
 
-    distance
+    cost
 }
 
-class RouteCSVImporter {
-    filePath
+class ExternalCSV {
+    CSVFilepath
 }
 
 Route "1" -- "2" WaterPoint: has  >
-RouteCSVImporter "1" -- "*" Route: imports >
+ExternalCSV "1" -- "*" Route: imports >
 
 @enduml
