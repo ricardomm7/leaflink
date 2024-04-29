@@ -18,14 +18,51 @@ Its main aim is to simplify and facilitate the process of administering and main
 managing resources, guaranteeing their sustainability, functionality and aesthetics. This software will simplify and 
 clarify different aspects of green space management, such as collaborator management, with their professions and 
 appropriate skills; work team management; vehicle and machinery management; and vehicle maintenance.
+
 ### Main Features
 The main features of LeafLink are:
+
 - #### Employee registration and management
-Registering and maintaining collaborators' information, assigning skills and jobs and generating team proposals based on 
-required competencies
+LeafLink simplifies the process of registering and managing collaborator information. It allows users to input and 
+maintain detailed information about employees, including their skills, qualifications, and job history. By centralizing 
+this information, LeafLink enables efficient assignment of tasks and roles based on employees' competencies, ensuring 
+optimal utilization of workforce resources.
+
 - #### Vehicle registration and management
-Registering and managing the vehicles used in the management of green spaces, organizing maintenance checks and managing
-vehicle-related tasks.
+With LeafLink, users can easily register and manage vehicles essential for green space management operations. 
+This feature enables the tracking of vehicle information such as model, registration details, and maintenance schedules.
+By organizing maintenance checks and managing vehicle-related tasks, LeafLink ensures that vehicles are well-maintained, 
+minimizing downtime and maximizing operational efficiency.
+
+- #### Team Proposal Generation
+LeafLink streamlines the process of forming work teams by automatically generating proposals based on required competencies. 
+This feature analyzes the skills and qualifications of available employees and proposes the most suitable team composition 
+for specific tasks or projects. By optimizing workforce allocation, LeafLink helps ensure that projects are completed 
+efficiently and effectively.
+
+- #### Water Consumption Cost Analysis
+LeafLink provides tools for analyzing water consumption costs in specific green spaces. By collecting and analyzing data
+related to water usage, this feature helps green space managers identify areas of high consumption and potential inefficiencies. 
+With insights gained from cost analysis, managers can implement strategies to optimize water usage, reduce costs, and 
+promote sustainability.
+
+- #### Optimal Route Determination
+Using advanced algorithms, LeafLink calculates optimal routes for pipe installation within green spaces. By considering 
+factors such as terrain, distance, and water supply requirements, this feature helps ensure efficient and effective 
+distribution of water resources. By optimizing route planning, LeafLink supports the development of robust irrigation 
+systems that meet the needs of green spaces while minimizing resource waste.
+
+- #### Equipment Usage Analysis 
+LeafLink's equipment usage analysis feature enables managers to track and analyze the usage of equipment within green 
+spaces. By monitoring factors such as equipment utilization rates, maintenance schedules, and performance metrics, this 
+feature provides valuable insights into equipment efficiency and effectiveness. Armed with this information, managers 
+can make informed decisions regarding equipment maintenance, replacement, and utilization strategies.
+
+- #### User Portal Data Collection 
+LeafLink facilitates the collection of data from user portals regarding park usage. This feature enables managers to 
+gather information on visitor demographics, usage patterns, and preferences. By understanding how users interact with 
+green spaces, managers can tailor maintenance and management strategies to better meet the needs and expectations of 
+park visitors.
 
 ## Features/Functions
 ### 1. Register Skills for Collaborator | Human Resources Manager
