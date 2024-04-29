@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 
-# Carregar o arquivo CSV
+# Importar o arquivo CSV
 df = pd.read_csv('Inquiry.csv', delimiter=';')
 
 # Adicionar uma coluna 'Age' com base no valor de 'Escalao'
@@ -18,17 +18,19 @@ print("Tipo de variável para cada uma das três questões:")
 for column, variable_type in variable_types.items():
     print(f"{column}: {variable_type}")
 
-# Calcular o número total de recomendações e recomendações por faixa etária
-total_recommendations = df['Y/N'].eq('Y').sum()
-recommendations_by_age = df.groupby('Age')['Y/N'].apply(lambda x: (x == 'Y').sum())
+# Calcular o número total de Inqueridos em cada faixa etária
+total_users_by_age = df.groupby('Age')['Y/N'].count()
 
-# Calcular a proporção de recomendações para cada faixa etária
-proportion_recommendations = round(recommendations_by_age / total_recommendations,2)
+# Calcular o número de Inqueridos em cada faixa etária que responderam "Sim"
+users_recommending_by_age = df[df['Y/N'] == 'Y'].groupby('Age')['Y/N'].count()
+
+# Calcular a proporção de Inqueridos em cada faixa etária que responderam "Sim"
+proportion_recommendations_by_age = round(users_recommending_by_age / total_users_by_age,2)
 
 # Imprimir as proporções em uma tabela formatada
 print("\nProporção de utilizadores em cada grupo etário que recomendam o parque:")
 table_data = []
-for age, proportion in proportion_recommendations.items():
+for age, proportion in proportion_recommendations_by_age.items():
     table_data.append([age, proportion])
 print(tabulate(table_data, headers=['Idade', 'Proporção'], tablefmt='grid'))
 
@@ -42,7 +44,7 @@ plt.title("Frequência mensal de uso do parque por grupo de idade", pad=25, size
 plt.suptitle("") #Retira subtítulo
 plt.tight_layout()  # Adiciona espaço
 
-# Adicionar conclusões revisadas
+# Conclusões do boxplot
 conclusions = """
 Conclusões:
 - Os Idosos tendem a ter uma mediana mais alta na frequência de uso do parque, sugerindo que visitam o parque com mais 
@@ -60,10 +62,3 @@ Conclusões:
 print(conclusions)
 
 plt.show()
-
-# Calcular número de registros por grupo etário
-count_per_age_group = df['Age'].value_counts()
-
-# Imprimir a tabela usando tabulate
-print("\nNúmero de registros por grupo etário:")
-print(tabulate(count_per_age_group.reset_index(), headers=['Idade', 'Número de Registros'], tablefmt='grid'))

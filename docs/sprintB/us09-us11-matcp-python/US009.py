@@ -121,8 +121,7 @@ def calcular_custos_medios_mensais(dados, num_parques, parq_unic):
             identificacao_parque = input("Digite a identificação do parque: ")
 
         # Filtra os dados com base na identificação do parque especificada
-        dados_filtrados = dados[dados['Park']
-                                == identificacao_parque]
+        dados_filtrados = dados[dados['Park'] == identificacao_parque]
 
         # Agrupa os dados filtrados por mês e calcula o consumo total para cada mês
         consumo_mensal = dados_filtrados.groupby('Month')['Consumption'].sum()

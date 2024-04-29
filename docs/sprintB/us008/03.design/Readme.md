@@ -62,7 +62,7 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get Maintenance Repository](svg/us008-sequence-diagram-partial-get-maintenance-repository.svg)
 
-**Create Maintenance Report*
+**Create Maintenance Report**
 
 ![Sequence Diagram - Partial - Create Maintenance Report](svg/us008-sequence-diagram-partial-create-maintenance-report.svg)
 

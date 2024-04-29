@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Carregar os dados do arquivo EquipmentUsed.csv
+# Importar os dados do arquivo
 caminho_arquivo = "EquipmentUsed.csv"
 dados = pd.read_csv(caminho_arquivo, skiprows=1, header=None, names=["Equipment"]) #ignora a primeira linha do ficheiro
 
