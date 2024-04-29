@@ -6,16 +6,20 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer              | Justification (with patterns)                                                             |
-|:---------------|:----------------------------------------------|:--------------------|:------------------------------------------------------------------------------------------|
-| Step 2		       | 	... interacting with the actor?              | CreateJobUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
-| 		             | 	... coordinating the US?                     | CreateJobController | Controller  (Model-View-Controller)                                                       |
-| 	  	Step 5	    | 	... instantiating a new Job?                 | JobRepository       | Creator Pattern                                                                           |
-| 		             | 	...saving the inputted data?                 | Job                 | Information Expert                                                                        |
-| 		             | 	... saving the job?                          | JobRepository       | Repository Pattern                                                                        |
-| 		             | 	... validating all data (global validation)? | JobRepository       | Information Expert                                                                        | 
-| 		             | 	... informing operation success?             | CreateJobUI         | Model-View-Controller                                                                     | 
-|                | ... have all the repositories?                | Repositories        | Repository Pattern                                                                        |
+| Interaction ID | Question: Which class is responsible for...   | Answer                 | Justification (with patterns)                                                           |
+|:---------------|:----------------------------------------------|:-----------------------|:----------------------------------------------------------------------------------------|
+| Step 1		       | 	... interacting with the actor?              | CreateJobUI            | Pure Fabrication: there is no need to assign this responsibility to any existing class. |
+| 		             | 	... coordinating the US?                     | CreateJobController    | Controller.                                                                             |
+| Step 2         | ... requesting data?                          | RegisterCollaboratorUI | Pure Fabrication.                                                                       |
+| Step 3         | ... receiving the data?                       | RegisterCollaboratorUI | Pure Fabrication.                                                                       |
+| Step 4         | ... show the confirmation info?               | RegisterCollaboratorUI | Pure Fabrication.                                                                       |
+| 	Step 5	       | 	... get the job repository?                  | Repositories           | Information Expert, High cohesion, Low coupling.                                        |
+| 	              | 	... instantiating a new Job?                 | JobRepository          | Creator.                                                                                |
+| 		             | 	...saving the inputted data?                 | Job                    | Information Expert.                                                                     |
+|                | 	... validating all data (local validation)?  | Job                    | Information Expert.                                                                     |
+| 		             | 	... saving the job?                          | JobRepository          | Information Expert.                                                                     |
+| 		             | 	... validating all data (global validation)? | JobRepository          | Information Expert.                                                                     | 
+| Step 6         | ... informing operation success?              | CreateJobUI            | Pure Fabrication.                                                                       |
 
 ### Systematization ##
 

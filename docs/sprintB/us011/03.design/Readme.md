@@ -6,11 +6,13 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for... | Answer                   | Justification (with patterns)                                                             |
-|:---------------|:--------------------------------------------|:-------------------------|:------------------------------------------------------------------------------------------|
-| 		   Step 2    | 	... interacting with the actor?            | CreateTaskUI             | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
-| 			  		        | 	... coordinating the US?                   | AnalyseParkUseController | Controller                                                                                |
-| 		             | 	... informing operation success?           | AnalyseParkUseUI         | Model-View-Controller                                                                     | 
+| Interaction ID | Question: Which class is responsible for... | Answer                   | Justification (with patterns)                                                           |
+|:---------------|:--------------------------------------------|:-------------------------|:----------------------------------------------------------------------------------------|
+| 		   Step 1    | 	... interacting with the actor?            | AnalyseParkUseUI         | Pure Fabrication: there is no need to assign this responsibility to any existing class. |
+| 			  		        | 	... coordinating the US?                   | AnalyseParkUseController | Controller.                                                                             |
+| Step 2         | ... asking the filepath?                    | AnalyseParkUseUI         | Pure Fabrication.                                                                       |
+| Step 3         | ... executing the python file?              | AnalyseParkUseController | Controller.                                                                             |
+| 		Step 4       | 	... informing operation success?           | AnalyseParkUseUI         | Pure Fabrication.                                                                       | 
 
 ### Systematization ##
 
