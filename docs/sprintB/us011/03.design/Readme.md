@@ -8,7 +8,7 @@ _**Note that SSD - Alternative One is adopted.**_
 
 | Interaction ID | Question: Which class is responsible for... | Answer                   | Justification (with patterns)                                                             |
 |:---------------|:--------------------------------------------|:-------------------------|:------------------------------------------------------------------------------------------|
-| 		             | 	... interacting with the actor?            | CreateTaskUI             | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
+| 		   Step 2    | 	... interacting with the actor?            | CreateTaskUI             | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
 | 			  		        | 	... coordinating the US?                   | AnalyseParkUseController | Controller                                                                                |
 | 		             | 	... informing operation success?           | AnalyseParkUseUI         | Model-View-Controller                                                                     | 
 
