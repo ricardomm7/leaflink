@@ -1,10 +1,7 @@
 @startuml
-'skinparam monochrome true
-skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam line type polyline
 
-skinparam classAttributeIconSize 0
 
 class Route {
     - startPoint: WaterPoint
@@ -24,20 +21,25 @@ class WaterPoint {
     + WaterPoint(nome: String)
 }
 
-class RoutePointsReader {
-    + importRoutesFromCSV(filePath: String): List<Route>
+class ExternalCSV {
+    + importerAndCreateRoutes(filePath: String): List<Route>
+    + getAllRoutes(): List<Route>
+    + writeMSTCSV(minimumSpanningTree: List<Route>, path: String): void
+
+
 }
 
 class Main {
-    - unidade: String
-    - caminho: String
+    - caminho_1: String
+    - caminho_2: String
 
-    + writeGraph(routes: List<Route>): void
-    + executarDOT(nomeArquivo: String): void
+    + executeSingle(nomeArquivo: String): void
+    + executeMultiple(nomeArquivo: String): void
 }
 
-RoutePointsReader ..> Route : creates
-Main --> "1" RoutePointsReader : uses
+Route  -->  WaterPoint: uses
+ExternalCSV ..> Route : creates
+Main --> "1" ExternalCSV : uses
 Main --> "1" Route : uses
 
 @enduml
