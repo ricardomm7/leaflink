@@ -98,10 +98,12 @@ class Task{
 
 class Machines{
     designation
+    machineNumber
 }
 
 class GardenTools{
     designation
+    toolsNumber
 }
 
 class Agenda{
@@ -110,8 +112,50 @@ class Agenda{
 class Portal{
 }
 
-class GardenEquipment{
+class UserEquipment{
     designation
+    UserEquipmentNumber
+}
+
+class IrrigationSystem{
+
+}
+
+class IrrigationEquipment{
+    designation
+    IrrigationEquipmentNumber
+}
+
+class LightningSystem{
+
+}
+
+class LightningEquipment{
+    designation
+    lightningEquipmentNumber
+}
+
+class DrainageSystem{
+
+}
+
+class DrainageEquipment{
+    designation
+    drainageEquipmentNumber
+}
+
+class DrinkingSystem{
+
+}
+
+class DrinkingEquipment{
+    designation
+    drinkingEquipmentNumber
+}
+
+class Zones{
+    zoneIdentification
+
 }
 
 Vehicle "1..*" -- "1" Brand : has >
@@ -122,9 +166,9 @@ Collaborator "1" -- "1..*" Document : has >
 
 Job "*" -- "1..*" Collaborator : to >
 
-
 Skill "*" -- "1..*" Collaborator : to >
-Team "1..**" -- "1..*" Skill : needs >
+
+Team "1..*" -- "1..*" Skill : needs >
 
 Team "1" -- "1..*" Collaborator : has >
 
@@ -136,17 +180,41 @@ GreenSpace "1" -- "1" WaterStatisticalAnalysis : is analysed >
 
 GreenSpace "1" -- "1" Address : has an >
 
-GreenSpace "1" -- "*" GardenEquipment: has >
+GreenSpace "1" -- "*" UserEquipment: has >
+
+GreenSpace "1" -- "*" Zones: is divided >
+
+Zones "1" -- "*" DrainageSystem: has >
+
+DrainageSystem "1" -- "*" DrainageEquipment: has >
+
+Zones "1"--"*" LightningSystem: has >
+
+LightningSystem "1" -- "*" LightningEquipment: has >
+
+Zones "1" -- "*" DrinkingSystem: has >
+
+DrinkingSystem "1" -- "*" DrinkingEquipment: has >
+
+Zones "1" -- "*" IrrigationSystem:has >
+
+IrrigationSystem "1" -- "*" IrrigationEquipment: has >
 
 Task "1" -- "*" Vehicle : needs >
 
 Task "1" --"*" Machines: needs >
 
+Machines "*" -- "1" Brand: has >
+
 Task "1" -- "1" Team : is assigned >
 
 Task "1" -- "*" GardenTools : has >
 
+Task "*" -- "1" GreenSpace: assigned to:
+
 GreenSpace "1" -- "1..*" ElectronicDevice: has >
+
+GreenSpace "1" -- "*" IrrigationSystem: has >
 
 ElectronicDevice "1" -- "1" EquipmentStatisticalAnalysis: is analysed >
 
