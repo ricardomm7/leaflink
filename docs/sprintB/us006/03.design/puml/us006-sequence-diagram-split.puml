@@ -43,7 +43,7 @@ activate VFM
 
                                         end ref
 
-        CTRL -> VehicleRepository : verifyExistingVehicle(VIN, Vehicle Plate)
+        CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
         deactivate CTRL
 
             activate VehicleRepository
@@ -72,7 +72,7 @@ activate VFM
 
 
             VehicleRepository -> VehicleRepository: addVehicle(vehicle)
-            VehicleRepository --> CTRL: vehicle
+            VehicleRepository --> CTRL: success
                         deactivate VehicleRepository
 
             activate CTRL

@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.repository;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -13,7 +14,9 @@ public class VehicleRepository {
         vehicleList = new ArrayList<>();
     }
 
+    public List<Vehicle> getVehicleList() {return new ArrayList<>(vehicleList);}
 
+    public void addVehicle(Vehicle vehicle) {vehicleList.add(vehicle);}
 
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
         for (Vehicle vehicle : getVehicleList()) {
@@ -24,14 +27,20 @@ public class VehicleRepository {
         return true;
     }
 
+    public Boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
+                                 double grossWeight, double currentKm, Date acquisitionDate,
+                                 int maintenanceFrequency){
 
-    public boolean addVehicle(Vehicle vehicle) {
-        return vehicleList.add(vehicle);
+        Vehicle vehicle = new Vehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
+                currentKm, acquisitionDate, maintenanceFrequency);
+
+        if (vehicle.validateVehicle()){
+            addVehicle(vehicle);
+            return true;
+        }
+        return false;
     }
 
-    public boolean removeVehicle(Vehicle vehicle) {
-        return vehicleList.remove(vehicle);
-    }
 
     public List<Vehicle> getVehicleNeedingMaintenance(){
         List<Vehicle> vehiclesNeedingMaintenance = new ArrayList<>();
@@ -63,8 +72,8 @@ public class VehicleRepository {
         return lastMaintenanceKm;
     }
 
-    public List<Vehicle> getVehicleList() {
-        return new ArrayList<>(vehicleList);
-    }
+    public void removeVehicle(Vehicle vehicle) { vehicleList.remove(vehicle);}
+
+
 }
 

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.domain;
 
 
+import java.util.Date;
+
 public class Vehicle {
     private String VIN;
     private String brand;
@@ -10,11 +12,11 @@ public class Vehicle {
     private double tareWeight;
     private double grossWeight;
     private double currentKm;
-    private String acquisitionDate;
+    private Date acquisitionDate;
     private int maintenanceFrequency;
 
     public Vehicle(String VIN, String brand, String model, String type, String vehiclePlate, double tareWeight, double grossWeight,
-                   double currentKm, String acquisitionDate, int maintenanceFrequency) {
+                   double currentKm, Date acquisitionDate, int maintenanceFrequency) {
 
         this.VIN = VIN;
         this.brand = brand;
@@ -67,9 +69,7 @@ public class Vehicle {
         return VIN;
     }
 
-    public void setVIN(String VIN) {
-        this.VIN = VIN;
-    }
+    public void setVIN(String VIN) {this.VIN = VIN;}
 
     public String getBrand() {return brand;}
 
@@ -111,11 +111,11 @@ public class Vehicle {
         this.currentKm = currentKm;
     }
 
-    public String getAcquisitionDate() {
+    public Date getAcquisitionDate() {
         return acquisitionDate;
     }
 
-    public void setAcquisitionDate(String acquisitionDate) {
+    public void setAcquisitionDate(Date acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
 
@@ -131,11 +131,7 @@ public class Vehicle {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
+    public void setType(String type) {this.type = type;}
 
 }
 

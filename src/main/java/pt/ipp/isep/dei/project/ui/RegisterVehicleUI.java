@@ -1,8 +1,11 @@
 package pt.ipp.isep.dei.project.ui;
 
-import java.util.Scanner;
-
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 public class RegisterVehicleUI {
     private final RegisterVehicleController controller;
@@ -38,21 +41,43 @@ public class RegisterVehicleUI {
         System.out.println("Enter current km:");
         double currentKm = Double.parseDouble(scanner.nextLine());
 
-        System.out.println("Enter acquisition date (DD-MM-YYYY):");
-        String acquisitionDateStr = scanner.nextLine();
+        Date acquisitionDate;
+        do {
+            System.out.println("Enter acquisition date (DD/MM/YYYY):");
+            acquisitionDate = parseDate(scanner.nextLine());
+        } while (acquisitionDate == null);
 
         System.out.println("Enter maintenance frequency (in km):");
         int maintenanceFrequency = Integer.parseInt(scanner.nextLine());
 
-        boolean success = controller.registerVehicle(vin, brand,model, type, vehiclePlate, tareWeight, grossWeight,
-                currentKm, acquisitionDateStr, maintenanceFrequency);
+        System.out.println("\nConfirms Vehicle data:\n");
+        System.out.println("Vin: " + vin + "\nBrand: " + brand + "\nModel: " + model + "\nVehicle Plate: " + vehiclePlate + "\nTare Weight: "
+                + tareWeight + "\nGross Weight: " + grossWeight + "\nCurrent Kilometers: " + currentKm + "\nAcquisition date: "
+                + acquisitionDate + "\nMaintenance Frequency: " + maintenanceFrequency);
 
-        if (success) {
-            System.out.println("Vehicle registered successfully!");
+        System.out.println("\n Types 'Yes' to confirm data:");
+        String confirmation = scanner.nextLine();
+
+        if (confirmation.equalsIgnoreCase("yes")) {
+            if (controller.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
+                    currentKm, acquisitionDate, maintenanceFrequency)) {
+                System.out.println("Vehicle registered successfully!");
+            } else {
+                System.out.println("Failed to register vehicle.");
+            }
         } else {
-            System.out.println("Failed to register vehicle.");
+            System.out.println("Vehicle registration canceled.");
         }
     }
 
-
+    private Date parseDate(String dateStr) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
+        try {
+            return dateFormat.parse(dateStr);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format! Please enter date in DD/MM/YYYY format.");
+            return null;
+        }
+    }
 }
