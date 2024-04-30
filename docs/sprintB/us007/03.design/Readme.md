@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US007 - Register vehicle checkup
 
 ## 3. Design - User Story Realization 
 
@@ -6,35 +6,29 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID                             | Question: Which class is responsible for...       | Answer                        | Justification (with patterns)                                                                                 |
+|:-------------------------------------------|:--------------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1: asks to register a vehicle checkup | 	... interacting with the actor?                  | RegisterMaintenanceUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		                                    | 	... coordinating the US?                         | RegisterMaintenenceController | Controller                                                                                                    |
+| Step 2: asks for the needed data           | 	displaying the form for the actor to input data? | RegisterMaintenanceUI         | IE: is responsible for interacting with the user (Fleet Manager)                                              |
+| Step 3: inputs requested data	             | 	...instaliating a new vehicle's checkup?         | MaintenanceRepository         | IE:                                                                                                           |
+| 		                                         | 	...saving the inputted data?                     | VehicleCheckup                | IE:                                                                                                           |
+| 		                                         | 	... validating all data (local validation)       | VehicleCheckup                | IE:                                                                                                           |
+| 			  		                                    | 	... validating all data (global validation)?     | MaintenanceRepository         | IE: knows all its vehicle's checkups.                                                                         | 
+| 			  		                                    | 	... saving the registered vehicle checkup?       | MaintenanceRepository         | IE: owns all its vehicle's checkups.                                                                                       | 
+| Step 4: displays operation success  		     | 	... informing operation success?                 | RegisterMaintenanceUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Fleet Manager
+* VehicleCheckup
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* RegisterMaintenanceUI  
+* RegisterMaintenenceController
 
 
 ## 3.2. Sequence Diagram (SD)
