@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui;
 
 import java.util.Scanner;
 
-import pt.ipp.isep.dei.esoft.project.application.Controller.RegisterVehicleController.java;
+import pt.ipp.isep.dei.esoft.project.application.Controller.RegisterVehicleController;
 
 public class RegisterVehicleUI {
     private final RegisterVehicleController controller;
@@ -45,7 +45,7 @@ public class RegisterVehicleUI {
         int maintenanceFrequency = Integer.parseInt(scanner.nextLine());
 
         boolean success = controller.registerVehicle(vin, brand,model, type, vehiclePlate, tareWeight, grossWeight,
-                currentKm, acquisitionDate, maintenanceFrequency);
+                currentKm, acquisitionDateStr, maintenanceFrequency);
 
         if (success) {
             System.out.println("Vehicle registered successfully!");
