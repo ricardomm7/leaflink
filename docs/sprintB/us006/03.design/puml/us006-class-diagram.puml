@@ -10,7 +10,7 @@ skinparam line type polyline
 
     class RegisterVehicleController {
         - vehicleRepository : VehicleRepository
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int) : boolean
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : boolean
         + RegisterVehicleController()
     }
 
@@ -25,7 +25,7 @@ skinparam line type polyline
         - vehicleList : List<Vehicle>
         + getVehicleList : List<Vehicles>
         + addVehicle(vehicle: Vehicle) : void
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int) : boolean
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : boolean
         + verifyExistingVehicle(VIN: String, VehiclePlate: String) : boolean
     }
 
@@ -38,11 +38,12 @@ skinparam line type polyline
         - tareWeight : double
         - grossWeight : double
         - currentKm : double
+        - registrationDate: Date
         - acquisitionDate : Date
         - maintenanceFrequency : int
 
         + validateVehicle(vehicle: Vehicle) : boolean
-        + Vehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int)
+        + Vehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: double, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int)
     }
 
 RegisterVehicleUI ..> RegisterVehicleController

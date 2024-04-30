@@ -22,7 +22,7 @@ activate VFM
 
         UI -> CTRL** : create
 
-        UI --> VFM : requests vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        UI --> VFM : requests vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
         deactivate UI
 
     VFM -> UI : types requested data
@@ -50,7 +50,7 @@ activate VFM
             PLAT --> CTRL: VehicleRepository
             deactivate PLAT
 
-        CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+        CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
         deactivate CTRL
 
             activate VehicleRepository
@@ -62,7 +62,7 @@ activate VFM
                                 deactivate VehicleRepository
 
 
-            VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+            VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
         deactivate VehicleRepository
             activate VEI
 

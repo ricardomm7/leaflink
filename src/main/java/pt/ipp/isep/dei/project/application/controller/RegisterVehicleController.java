@@ -15,13 +15,13 @@ public class RegisterVehicleController {
 
 
     public boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
-                                   double grossWeight, double currentKm, Date acquisitionDate,
+                                   double grossWeight, double currentKm,Date registrationDate, Date acquisitionDate,
                                    int maintenanceFrequency) {
 
         if (!vehicleRepository.verifyExistingVehicles(vin,vehiclePlate)) {
 
             return vehicleRepository.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                    currentKm, acquisitionDate, maintenanceFrequency);
+                    currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
 
         }
 

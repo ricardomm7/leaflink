@@ -28,11 +28,11 @@ public class VehicleRepository {
     }
 
     public Boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
-                                 double grossWeight, double currentKm, Date acquisitionDate,
+                                 double grossWeight, double currentKm, Date registrationDate,Date acquisitionDate,
                                  int maintenanceFrequency){
 
         Vehicle vehicle = new Vehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                currentKm, acquisitionDate, maintenanceFrequency);
+                currentKm, registrationDate ,acquisitionDate, maintenanceFrequency);
 
         if (vehicle.validateVehicle()){
             addVehicle(vehicle);

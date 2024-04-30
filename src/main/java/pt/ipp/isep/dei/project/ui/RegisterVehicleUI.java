@@ -41,6 +41,12 @@ public class RegisterVehicleUI {
         System.out.println("Enter current km:");
         double currentKm = Double.parseDouble(scanner.nextLine());
 
+        Date registrationDate;
+        do{
+            System.out.println("Enter registration date (DD/MM/YYYY):");
+            registrationDate = parseDate(scanner.nextLine());
+        }while (registrationDate==null);
+
         Date acquisitionDate;
         do {
             System.out.println("Enter acquisition date (DD/MM/YYYY):");
@@ -52,7 +58,7 @@ public class RegisterVehicleUI {
 
         System.out.println("\nConfirms Vehicle data:\n");
         System.out.println("Vin: " + vin + "\nBrand: " + brand + "\nModel: " + model + "\nVehicle Plate: " + vehiclePlate + "\nTare Weight: "
-                + tareWeight + "\nGross Weight: " + grossWeight + "\nCurrent Kilometers: " + currentKm + "\nAcquisition date: "
+                + tareWeight + "\nGross Weight: " + grossWeight + "\nCurrent Kilometers: " + currentKm + "\nRegistration Date"+ registrationDate +"\nAcquisition date: "
                 + acquisitionDate + "\nMaintenance Frequency: " + maintenanceFrequency);
 
         System.out.println("\n Types 'Yes' to confirm data:");
@@ -60,7 +66,7 @@ public class RegisterVehicleUI {
 
         if (confirmation.equalsIgnoreCase("yes")) {
             if (controller.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                    currentKm, acquisitionDate, maintenanceFrequency)) {
+                    currentKm, registrationDate, acquisitionDate, maintenanceFrequency)) {
                 System.out.println("Vehicle registered successfully!");
             } else {
                 System.out.println("Failed to register vehicle.");

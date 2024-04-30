@@ -7,7 +7,7 @@ participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "vehicle\n:Vehicle" as VEI
 
 autonumber 9
-            VehicleRepository -> VEI: createVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Acquisition Date, Maintenance Frequency)
+            VehicleRepository -> VEI: createVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date Acquisition Date, Maintenance Frequency)
 
 activate VEI
     group Register Vehicle

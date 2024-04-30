@@ -17,6 +17,7 @@ vehiclePlate
 tareWeight
 grossWeight
 currentKm
+registrationDate
 acquisitionDate
 maintenanceFrequency
 type
