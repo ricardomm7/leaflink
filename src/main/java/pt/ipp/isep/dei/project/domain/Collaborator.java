@@ -122,6 +122,9 @@ public class Collaborator {
     }
 
     private boolean verifyBirth(Date date) {
+        if (date == null) {
+            return false;
+        }
         // Verifica se a data não é a de hoje ou futura
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
@@ -130,7 +133,7 @@ public class Collaborator {
 
     private boolean verifyZipCode(String zipCode) {
         // Verifica se o código postal tem o comprimento correto
-        if (zipCode.length() != 8 || zipCode.charAt(4) != '-') {
+        if (zipCode == null || zipCode.length() != 8 || zipCode.charAt(4) != '-') {
             return false;
         }
         // Verifica se os caracteres nas posições corretas são dígitos
@@ -147,6 +150,9 @@ public class Collaborator {
     }
 
     private boolean verifyEmail(String email) {
+        if (email == null) {
+            return false;
+        }
         // Verifica se o email contém "@" e se há pelo menos um caractere antes e depois dele
         int atIndex = email.indexOf('@');
         int dotIndex = email.lastIndexOf('.');
@@ -155,6 +161,9 @@ public class Collaborator {
     }
 
     private boolean verifyIdentificationNumber(String identificationNumber) {
+        if (identificationNumber == null) {
+            return false;
+        }
         // Itera sobre cada caractere do número de identificação
         for (char c : identificationNumber.toCharArray()) {
             // Verifica se o caractere não é uma letra ou um número
@@ -166,6 +175,9 @@ public class Collaborator {
     }
 
     private boolean verifyAdmissionDate(Date admissionDate) {
+        if (admissionDate == null || this.birthdate == null) {
+            return false;
+        }
         // Verifica se a data de admissão não é anterior à data de nascimento
         if (admissionDate.before(this.birthdate)) {
             return false;

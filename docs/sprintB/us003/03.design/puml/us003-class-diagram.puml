@@ -9,31 +9,34 @@ class RegisterCollaboratorUI {
 }
 
 class RegisterCollaboratorController {
+    -jobRepository : JobRepository
+    -collaboratorRepository : CollaboratorRepository
+    +RegisterCollaboratorController()
     + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, identificationNumber : String, job : Job)
-    + getJobRepository() : JobRepository
-    + getCollaboratorRepository() : CollaboratorRepository
+    '+ getJobRepository() : JobRepository
+    '+ getCollaboratorRepository() : CollaboratorRepository
     + getJobs() : List<Job>
 }
 
 class Repositories {
-    -jobRepository : JobRepository
-    -collaboratorRepository : CollaboratorRepository
-
     + getInstance() : Repositories
     +getJobRepository() : JobRepository
     +getCollaboratorRepository() : CollaboratorRepository
 }
 
 class CollaboratorRepository {
+    -collaboratorList : List<Collaborator>
+    +CollaboratorRepository()
     + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
     + checkForDuplicates() : void
     + addCollaborator(collaborator) : void
-
 }
 
 class JobRepository {
     +createJob(title : String) : Job
     +checkForDuplicates() : void
+    +addJob(job) : void
+    +getJobList() : List<Job>
 }
 
 class Collaborator {
@@ -57,11 +60,26 @@ class Collaborator {
     + verifyAdmissionDate(collaborator) : boolean
     - documentType : String
     - identificationNumber : String
+    +setAddress(address : String) : void
+    +setAdmissionDate(admissionDate : Date) : void
+    +setBirthdate(birthdate : Date) : void
+    +setCity(city : String) : void
+    +setContactMobile(mobile : int) : void
+    +setDocumentType(documentType : String) : void
+    +setEmail(email : String) : void
+    +setIdentificationNumber(identificationNumber : String) : void
+    +setJob(job : Job) : void
+    +setName(name : String) : void
+    +setTaxpayerNumber(taxpayerNumber : int) : void
+    +setZipCode(zipcode : String) : void
+    +getTaxpayerNumber() : int
 }
 
 class Job {
     - title : String
     + Job(title : String)
+    + setTitle() : void
+    + getTitle() : String
     +verifyFilled(job : Job) : void
     +verifySpecialCharacters(job : Job) : void
 }

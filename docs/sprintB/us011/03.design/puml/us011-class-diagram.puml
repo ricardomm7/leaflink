@@ -7,7 +7,7 @@ skinparam linetype polyline
 
 class AnalyseParkUseUI {
     + uploadFile() : void
-    + execute(filename : String) : void
+    + execute() : void
 }
 
 class AnalyseParkUseController {

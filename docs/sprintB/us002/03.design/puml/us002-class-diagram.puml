@@ -6,11 +6,14 @@ skinparam linetype polyline
 'left to right direction
 
 class CreateJobUI {
+    +createNewJob() : void
 }
 
 class CreateJobController {
+-jobRepository
     +createJob(title : String) : void
-    +getJobRepository() : JobRepository
+    +CreateJobController()
+    '+getJobRepository() : JobRepository
 }
 
 class Repositories {
@@ -19,14 +22,18 @@ class Repositories {
 }
 
 class JobRepository {
+-jobList : List<Job>
     +createJob(title : String) : Job
     +checkForDuplicates() : void
-    +addJob(job): void
+    +addJob(job) : void
+    +getJobList() : List<Job>
 }
 
 class Job {
     - title : String
     + Job(title : String)
+    + setTitle() : void
+    + getTitle() : String
     +verifyFilled(job : Job) : void
     +verifySpecialCharacters(job : Job) : void
 }
