@@ -84,7 +84,7 @@ deactivate CLBREP
 activate CLB
 CLB -> CLB : verifyFilled(collaborator)
 activate CLB
-CLB -> CLB : verifyMobile(collaborator)
+CLB -> CLB : verifyNineDigits(collaborator)
 activate CLB
 CLB -> CLB : verifyEmail(collaborator)
 activate CLB
@@ -92,11 +92,11 @@ CLB -> CLB : verifyZipCode(collaborator)
 activate CLB
 CLB -> CLB : verifyBirth(collaborator)
 activate CLB
-CLB -> CLB : verifyTaxpayerNumber(collaborator)
+CLB -> CLB : verifyAdmissionDate(collaborator)
 activate CLB
 
 loop for all documentType objects
-CLB -> CLB : verifyDocumentCode(collaborator)
+CLB -> CLB : verifyIdentificationNumber(collaborator)
 activate CLB
 CLB --> CLB
 deactivate CLB
@@ -114,6 +114,8 @@ CLB --> CLB
 deactivate CLB
 CLB --> CLB
 deactivate CLB
+
+
 
 CLB -->CLBREP : collaborator
 deactivate CLB

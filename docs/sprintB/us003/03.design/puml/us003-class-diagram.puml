@@ -48,13 +48,13 @@ class Collaborator {
     - job : Job
     - taxpayerNumber : int
     + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
-    + verifyFilled(collaborator) : void
-    + verifyMobile(collaborator) : void
-    + verifyEmail(collaborator) : void
-    + verifyZipCode(collaborator) : void
-    + verifyBirth(collaborator) : void
-    + verifyDocumentCode(collaborator) : void
-    + verifyTaxpayerNumber(collaborator) : void
+    + verifyFilled(collaborator) : boolean
+    + verifyNineDigits(collaborator) : boolean
+    + verifyEmail(collaborator) : boolean
+    + verifyZipCode(collaborator) : boolean
+    + verifyBirth(collaborator) : boolean
+    + verifyIdentificationNumber(collaborator) : boolean
+    + verifyAdmissionDate(collaborator) : boolean
     - documentType : String
     - identificationNumber : String
 }
