@@ -93,6 +93,7 @@ mvn test javadoc:javadoc jacoco:report org.pitest:pitest-maven:mutationCoverage 
 Place the following plugin on the appropriate place of the pom.xml file.
 
 ```xml
+
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-assembly-plugin</artifactId>
@@ -106,7 +107,7 @@ Place the following plugin on the appropriate place of the pom.xml file.
             <configuration>
                 <archive>
                     <manifest>
-                        <mainClass>pt.ipp.isep.dei.esoft.project.ui.Main</mainClass>
+                        <mainClass>ui.pt.ipp.isep.dei.project.Mainpt.ipp.isep.dei.project.ui.Main</mainClass>
                     </manifest>
                 </archive>
                 <descriptorRefs>
