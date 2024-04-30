@@ -22,7 +22,7 @@ activate VFM
 
         UI -> CTRL** : create
 
-        UI -> CTRL : get Vehicle List
+        UI -> CTRL : get vehicles needing maintenance list
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -37,10 +37,10 @@ activate VFM
                 PLAT --> CTRL: VehicleRepository
             deactivate PLAT
 
-            CTRL -> VehicleRepository : getVehicleList()
+            CTRL -> VehicleRepository : getVehiclesNeedingMaintenanceList()
             activate VehicleRepository
 
-                VehicleRepository --> CTRL : vehicleList
+                VehicleRepository --> CTRL : vehicleNeedingMaintenanceList
             deactivate VehicleRepository
 
 
@@ -57,13 +57,12 @@ activate VFM
                 deactivate PLAT
 
 
-                CTRL -> MaintenanceRepository : createMaintenanceReport(vehiclesList)
+                CTRL -> MaintenanceRepository : createMaintenanceReport(vehicleNeedingMaintenanceList)
                 deactivate CTRL
                 activate MaintenanceRepository
 
-                MaintenanceRepository -> MaintenanceRepository: getVehiclesNeedingMaintenance(vehicleList)
 
-                    MaintenanceRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
+                    MaintenanceRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesNeedingMaintenanceList)
                     deactivate MaintenanceRepository
                     activate MaintenanceReport
 

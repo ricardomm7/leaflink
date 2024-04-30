@@ -24,33 +24,6 @@ public class MaintenanceRepository {
 
     }
 
-    public List<Vehicle> getVehiclesNeedingMaintenance(List<Vehicle> vehicleList) {
-        List<Vehicle> vehiclesNeedingMaintenance = new ArrayList<>();
-        for (Vehicle vehicle : vehicleList) {
-            double currentKm = vehicle.getCurrentKm();
-            double maintenanceFrequency = vehicle.getMaintenanceFrequency();
-            double lastMaintenanceKm = getLastMaintenanceKm(vehicle.getVehiclePlate());
-
-            // Se não houver registro de manutenção anterior, consideramos o último km de manutenção como 0
-            if (lastMaintenanceKm == -1 || currentKm - lastMaintenanceKm >= maintenanceFrequency) {
-                vehiclesNeedingMaintenance.add(vehicle);
-            }
-        }
-        return vehiclesNeedingMaintenance;
-    }
-
-    private double getLastMaintenanceKm(String vehiclePlate) {
-        double lastMaintenanceKm = -1; // Valor padrão para indicar que não há registro de manutenção
-
-        // Lógica para obter o km da última manutenção para o veículo com a placa especificada
-        for (Maintenance maintenance : maintenanceList) {
-            if (maintenance.getVehiclePlate().equals(vehiclePlate)) {
-                lastMaintenanceKm = maintenance.getKm();
-            }
-        }
-
-        return lastMaintenanceKm;
-    }
 
     public void createMaintenanceReport() {
         writeReportToFile(getMaintenanceList());

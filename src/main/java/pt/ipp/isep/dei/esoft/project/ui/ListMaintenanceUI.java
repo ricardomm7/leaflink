@@ -19,7 +19,7 @@ public class ListMaintenanceUI {
 
         System.out.println("Listing vehicles needing maintenance...");
 
-        List<Vehicle> vehiclesList = controller.getVehiclesList();
+        List<Vehicle> vehiclesList = controller.getVehiclesNeedingMaintenanceList();
 
         if (vehiclesList.isEmpty()) {
             System.out.println("No vehicles needing maintenance.");

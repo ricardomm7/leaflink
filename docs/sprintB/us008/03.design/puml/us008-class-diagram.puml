@@ -26,9 +26,9 @@ class Repositories {
 }
 
 class VehicleRepository {
-    - vehicleList : List<vehicle>
+    - vehicleNeedingMaintenanceList : List<vehicle>
 
-    + getVehicleList() : List<vehicle>
+    + getVehiclesNeedingMaintenance() : List<vehicle>
 
 }
 

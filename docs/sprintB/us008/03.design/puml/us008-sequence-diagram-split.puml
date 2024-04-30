@@ -22,11 +22,11 @@ activate VFM
 
         UI -> CTRL** : create
 
-        UI -> CTRL : get Vehicle List
+        UI -> CTRL : get vehicles needing maintenance list
         activate CTRL
 
         ref over CTRL
-                                            Get Vehicle List
+                                            Get Vehicle Needing Maintenance List
 
                                                 end ref
 
@@ -36,7 +36,7 @@ activate VFM
                                                 end ref
 
 
-                CTRL -> MaintenanceRepository : createMaintenanceReport(vehiclesList)
+                CTRL -> MaintenanceRepository : createMaintenanceReport(vehiclesNeedingMaintenanceList)
                 deactivate CTRL
                 activate MaintenanceRepository
 

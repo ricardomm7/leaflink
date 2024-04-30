@@ -64,13 +64,9 @@ class VehicleCheckup{
     vehiclePlate
 }
 
-'class Person {
- '   name
- '   birthdate
- '   contactMobile
- '   email
-  '  taxpayerNumber
-'}
+class ReportIssues{
+
+}
 
 class Address{
     street
@@ -200,6 +196,8 @@ Zones "1" -- "*" IrrigationSystem:has >
 
 IrrigationSystem "1" -- "*" IrrigationEquipment: has >
 
+ReportIssues "*" -- "1" Portal: is reported >
+
 Task "1" -- "*" Vehicle : needs >
 
 Task "1" --"*" Machines: needs >
@@ -213,8 +211,6 @@ Task "1" -- "*" GardenTools : has >
 Task "*" -- "1" GreenSpace: assigned to:
 
 GreenSpace "1" -- "1..*" ElectronicDevice: has >
-
-GreenSpace "1" -- "*" IrrigationSystem: has >
 
 ElectronicDevice "1" -- "1" EquipmentStatisticalAnalysis: is analysed >
 

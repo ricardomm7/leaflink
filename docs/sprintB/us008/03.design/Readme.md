@@ -12,8 +12,7 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... coordinating the US?                             | ListMaintenanceController | Controller: ListMaintenanceController is responsible for coordinating and controlling the flow of interaction between UI and domain classes, promoting low coupling and high cohesion. |
 |                | ... handles the creation of the report?              | ListMaintenanceController | Controller: ListMaintenanceController manages the creation process, applying the Controller pattern by coordinating the interaction between UI and domain classes.                     |
 |                | ... get VehicleRepository and MaintenanceRepository? | Repositories              | Pure Fabrication:                                                                                                                                                                      |
-|                | ... knowing the vehicles list?                       | VehicleRepository         | Information Expert: VehicleRepository holds information about vehicle data, facilitating operations related to vehicle management.                                                     |
-|                | ... knowing the vehicles needing maintenance?        | MaintenanceRepository     | Information Expert: MaintenanceRepository possesses the logic for determining vehicles needing maintenance, based on predefined criteria, promoting high cohesion.                     |
+|                | ... knowing the vehicles needing maintenance?        | VehicleRepository         | Information Expert: VehicleRepository possesses the logic for determining vehicles needing maintenance, based on predefined criteria, promoting high cohesion.                         |
 |                | ... creating a maintenance report?                   | MaintenanceRepository     | Creator: MaintenanceReport is directly created by MaintenanceRepository, which encapsulates the logic for managing maintenance reports.                                                |
 |                | ... validating all data (local validation)?          | MaintenanceReport         | Information Expert: MaintenanceReport owns its data and is responsible for local validation of its attributes, ensuring data integrity and consistency.                                | 
 |                | ... validating all data (global validation)?         | MaintenanceRepository     | Information Expert: MaintenanceRepository performs global validation, often involving querying data from multiple sources to ensure data consistency.                                  | 
@@ -53,9 +52,9 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us008-sequence-diagram-split.svg)
 
-**Get Vehicle List Partial SD**
+**Get Vehicle Needing Maintenance List Partial SD**
 
-![Sequence Diagram - Partial - Get Vehicle List](svg/us008-sequence-diagram-partial-get-vehicle-list.svg)
+![Sequence Diagram - Partial - Get Vehicle Needing Maintenance List](svg/us008-sequence-diagram-partial-get-vehicle-needing-maintenance-list.svg)
 
 **Get Maintenance Repository Partial SD**
 

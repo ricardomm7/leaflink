@@ -7,7 +7,7 @@ participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceReposi
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
 autonumber 11
--> MaintenanceRepository : createMaintenanceReport(vehiclesList)
+-> MaintenanceRepository : createMaintenanceReport(vehiclesNeedingMaintenance)
 activate MaintenanceRepository
 
     group Create Maintenance Report

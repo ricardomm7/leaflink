@@ -17,8 +17,8 @@ public class ListMaintenanceController {
         this.maintenanceRepository = repositories.getMaintenanceRepository();
     }
 
-    public List<Vehicle> getVehiclesList() {
-        return maintenanceRepository.getVehiclesNeedingMaintenance(vehicleRepository.getVehicleList());
+    public List<Vehicle> getVehiclesNeedingMaintenanceList() {
+        return vehicleRepository.getVehicleNeedingMaintenance();
     }
 
     public void generateMaintenanceReport() {
