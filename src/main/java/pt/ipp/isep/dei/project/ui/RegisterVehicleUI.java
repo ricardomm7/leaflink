@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.project.ui;
 
 import java.util.Scanner;
 
-import pt.ipp.isep.dei.esoft.project.application.Controller.RegisterVehicleController;
+import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
 
 public class RegisterVehicleUI {
     private final RegisterVehicleController controller;

@@ -15,7 +15,7 @@ public class VehicleRepository {
 
 
 
-    public boolean verifyExistedVehicles( String vin, String vehiclePlate) {
+    public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
         for (Vehicle vehicle : getVehicleList()) {
             if (!vin.equalsIgnoreCase(vehicle.getVIN()) || !vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate()) ) {
                 return false;

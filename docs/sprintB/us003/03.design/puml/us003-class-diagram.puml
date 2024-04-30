@@ -12,14 +12,14 @@ class RegisterCollaboratorController {
     + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, identificationNumber : String, job : Job)
     + getJobRepository() : JobRepository
     + getCollaboratorRepository() : CollaboratorRepository
-
+    + getJobs() : List<Job>
 }
 
 class Repositories {
-    -jobRepository: JobRepository
-    -collaboratorRepository: CollaboratorRepository
+    -jobRepository : JobRepository
+    -collaboratorRepository : CollaboratorRepository
 
-    + getInstance(): Repositories
+    + getInstance() : Repositories
     +getJobRepository() : JobRepository
     +getCollaboratorRepository() : CollaboratorRepository
 }

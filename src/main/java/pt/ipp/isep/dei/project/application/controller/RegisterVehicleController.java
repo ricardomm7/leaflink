@@ -19,7 +19,7 @@ public class RegisterVehicleController {
                 currentKm, acquisitionDate, maintenanceFrequency);
 
 
-        return vehicleRepository.addVehicle(vehicle) && vehicle.validateVehicle() && vehicleRepository.verifyExistedVehicles(vin,vehiclePlate);
+        return vehicleRepository.addVehicle(vehicle) && vehicle.validateVehicle() && vehicleRepository.verifyExistingVehicles(vin,vehiclePlate);
     }
 }
 

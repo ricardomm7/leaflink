@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.project.ui;
 
-import pt.ipp.isep.dei.esoft.project.application.Controller.ListMaintenanceController;
+import pt.ipp.isep.dei.project.application.controller.ListMaintenanceController;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 

@@ -113,6 +113,10 @@ public class Collaborator {
         }
     }
 
+    public int getTaxpayerNumber() {
+        return taxpayerNumber;
+    }
+
     private boolean verifyFilled(String name) {
         return (!name.trim().isEmpty());
     }
