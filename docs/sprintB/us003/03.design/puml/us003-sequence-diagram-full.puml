@@ -13,6 +13,8 @@ participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 participant "jobRepository:\nJobRepository" as jobRepository
 participant ":Collaborator" as CLB
+participant ":Address" as Address
+
 
 
 activate HRM
@@ -88,22 +90,26 @@ CLB -> CLB : verifyNineDigits(collaborator)
 activate CLB
 CLB -> CLB : verifyEmail(collaborator)
 activate CLB
-CLB -> CLB : verifyZipCode(collaborator)
-activate CLB
 CLB -> CLB : verifyBirth(collaborator)
 activate CLB
 CLB -> CLB : verifyAdmissionDate(collaborator)
 activate CLB
 
-loop for all documentType objects
 CLB -> CLB : verifyIdentificationNumber(collaborator)
 activate CLB
-CLB --> CLB
-deactivate CLB
-end loop
+CLB -> Address** : setAddress(address, city, zipCode)
+activate Address
+Address -> Address : Address(address, city, zipCode)
 
+Address -> Address : verifyZipCode(collaborator)
+activate Address
+Address --> Address
+deactivate Address
+Address --> CLB : address
+deactivate Address
 CLB --> CLB
 deactivate CLB
+
 CLB --> CLB
 deactivate CLB
 CLB --> CLB

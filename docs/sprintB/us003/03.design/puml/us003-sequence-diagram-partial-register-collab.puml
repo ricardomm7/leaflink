@@ -4,7 +4,8 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
-participant "Collaborator" as CLB
+participant ":Collaborator" as CLB
+participant ":Address" as Address
 
 autonumber 22
 --> CLBREP: createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, taxpayerNumber)
@@ -20,21 +21,25 @@ deactivate CLBREP
         activate CLB
         CLB -> CLB : verifyEmail(collaborator)
         activate CLB
-        CLB -> CLB : verifyZipCode(collaborator)
-        activate CLB
         CLB -> CLB : verifyBirth(collaborator)
         activate CLB
-                CLB -> CLB : verifyAdmissionDate(collaborator)
-                activate CLB
+        CLB -> CLB : verifyAdmissionDate(collaborator)
+        activate CLB
 
-
-        loop for all documentType objects
         CLB -> CLB : verifyIdentificationNumber(collaborator)
         activate CLB
-        CLB --> CLB
-        deactivate CLB
-        end loop
+        CLB -> Address** : setAddress(address, city, zipCode)
+        activate Address
+        Address -> Address : Address(address, city, zipCode)
 
+        Address -> Address : verifyZipCode(collaborator)
+        activate Address
+        Address --> Address
+        deactivate Address
+        Address --> CLB : address
+        deactivate Address
+        CLB --> CLB
+        deactivate CLB
 
         CLB --> CLB
         deactivate CLB
@@ -46,8 +51,6 @@ deactivate CLBREP
         deactivate CLB
         CLB --> CLB
         deactivate CLB
-                CLB --> CLB
-                deactivate CLB
 
 
         CLB --> CLBREP : collaborator

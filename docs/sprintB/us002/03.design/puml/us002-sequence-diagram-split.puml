@@ -10,6 +10,9 @@ actor "HRM" as Employee
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant "jobRepository:\nJobRepository" as jobRepository
+participant ":Job" as Job
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
 
 activate Employee
 

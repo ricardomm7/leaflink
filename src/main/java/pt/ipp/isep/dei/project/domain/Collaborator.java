@@ -9,13 +9,11 @@ public class Collaborator {
     private int contactMobile;
     private int taxpayerNumber;
     private String email;
-    private String address;
-    private String zipCode;
-    private String city;
     private String documentType;
     private String identificationNumber;
     private Date admissionDate;
     private Job job;
+    private Address address;
 
     public Collaborator(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
         setName(name);
@@ -23,17 +21,15 @@ public class Collaborator {
         setContactMobile(contactMobile);
         setTaxpayerNumber(taxpayerNumber);
         setEmail(email);
-        setAddress(address);
-        setZipCode(zipCode);
-        setCity(city);
+        setAddress(address, city, zipCode);
         setDocumentType(documentType);
         setIdentificationNumber(identificationNumber);
         setAdmissionDate(admissionDate);
         setJob(job);
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String address, String city, String zipCode) {
+        this.address = new Address(address, city, zipCode);
     }
 
     public void setAdmissionDate(Date admissionDate) {
@@ -52,10 +48,6 @@ public class Collaborator {
         }
     }
 
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public void setContactMobile(int contactMobile) {
         if (verifyNineDigits(contactMobile)) {
@@ -105,14 +97,6 @@ public class Collaborator {
         }
     }
 
-    public void setZipCode(String zipCode) {
-        if (verifyZipCode(zipCode)) {
-            this.zipCode = zipCode;
-        } else {
-            throw new IllegalArgumentException("The zip code must be in the format ####-###.");
-        }
-    }
-
     public int getTaxpayerNumber() {
         return taxpayerNumber;
     }
@@ -129,20 +113,6 @@ public class Collaborator {
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
         return !date.after(today.getTime());
-    }
-
-    private boolean verifyZipCode(String zipCode) {
-        // Verifica se o código postal tem o comprimento correto
-        if (zipCode == null || zipCode.length() != 8 || zipCode.charAt(4) != '-') {
-            return false;
-        }
-        // Verifica se os caracteres nas posições corretas são dígitos
-        for (int i = 0; i < 8; i++) {
-            if (i != 4 && !Character.isDigit(zipCode.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private boolean verifyNineDigits(int number) {

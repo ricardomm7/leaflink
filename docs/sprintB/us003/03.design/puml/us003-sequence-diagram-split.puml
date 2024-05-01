@@ -13,6 +13,7 @@ participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 participant "jobRepository:\nJobRepository" as jobRepository
 participant ":Collaborator" as CLB
+participant ":Address" as Address
 
 
 activate HRM

@@ -6,6 +6,8 @@ skinparam linetype polyline
 'left to right direction
 
 class RegisterCollaboratorUI {
++registerCollaborator() : void
+-parseDate : Date
 }
 
 class RegisterCollaboratorController {
@@ -44,9 +46,6 @@ class Collaborator {
     - birthdate : Date
     - contactMobile : String
     - email : String
-    - address : String
-    - zipCode : String
-    - city : String
     - admissionDate : Date
     - job : Job
     - taxpayerNumber : int
@@ -75,6 +74,18 @@ class Collaborator {
     +getTaxpayerNumber() : int
 }
 
+class Address {
+    -address : String
+    -city : String
+    -zipcode : String
+    +setAddress() : void
+    +setCity() : void
+    +setZipCode() : void
+    +getAddress() : String
+    +getCity() : String
+    +getZipCode() : String
+}
+
 class Job {
     - title : String
     + Job(title : String)
@@ -95,5 +106,6 @@ CollaboratorRepository --> "*" Collaborator : collaborators
 RegisterCollaboratorController ..> CollaboratorRepository : collaboratorRepository
 RegisterCollaboratorController ..> JobRepository : jobRepository
 JobRepository --> "*" Job : jobs
+Collaborator --> "1" Address : has
 
 @enduml
