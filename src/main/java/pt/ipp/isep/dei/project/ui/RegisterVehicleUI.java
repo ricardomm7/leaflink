@@ -11,7 +11,6 @@ public class RegisterVehicleUI implements Runnable {
 
     public RegisterVehicleUI() {
         controller = new RegisterVehicleController();
-        registerVehicle();
     }
 
     public void registerVehicle() {
