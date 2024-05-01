@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.ui.console.authorization;
 
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.project.ui.console.menu.AdminUI;
+import pt.ipp.isep.dei.project.ui.console.menu.HrmUI;
 import pt.ipp.isep.dei.project.ui.console.menu.MenuItem;
 import pt.ipp.isep.dei.project.ui.console.menu.VfmUI;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
@@ -47,6 +48,7 @@ public class AuthenticationUI implements Runnable {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
 
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
