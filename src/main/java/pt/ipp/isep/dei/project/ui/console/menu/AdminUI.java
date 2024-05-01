@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.ui.console.menu;
 
 
+import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
+import pt.ipp.isep.dei.project.ui.RegisterCollaboratorUI;
 import pt.ipp.isep.dei.project.ui.console.ShowTextUI;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
@@ -17,7 +19,8 @@ public class AdminUI implements Runnable {
 
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Create Task", new CreateTaskUI()));
+        options.add(new MenuItem("Register a Collaborator", new RegisterCollaboratorUI()));
+        options.add(new MenuItem("Register a Vehicle", new RegisterVehicleUI()));
         options.add(new MenuItem("Option 2", new ShowTextUI("You have chosen Option 2.")));
         options.add(new MenuItem("Option 3", new ShowTextUI("You have chosen Option 3.")));
         options.add(new MenuItem("Option 4", new ShowTextUI("You have chosen Option 4.")));

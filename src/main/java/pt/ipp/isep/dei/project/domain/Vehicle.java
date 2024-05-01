@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 
+import java.util.Date;
 
 public class Vehicle {
     private String VIN;
@@ -10,13 +11,13 @@ public class Vehicle {
     private String vehiclePlate;
     private double tareWeight;
     private double grossWeight;
-    private double currentKm;
-    private String registrationDate;
-    private String acquisitionDate;
+    private int currentKm;
+    private Date registrationDate;
+    private Date acquisitionDate;
     private int maintenanceFrequency;
 
     public Vehicle(String VIN, String brand, String model, String type, String vehiclePlate, double tareWeight, double grossWeight,
-                   double currentKm, String registrationDate, String acquisitionDate, int maintenanceFrequency) {
+                   int currentKm, Date registrationDate, Date acquisitionDate, int maintenanceFrequency) {
 
         this.VIN = VIN;
         this.brand = brand;
@@ -29,9 +30,6 @@ public class Vehicle {
         this.registrationDate = registrationDate;
         this.acquisitionDate = acquisitionDate;
         this.maintenanceFrequency = maintenanceFrequency;
-
-        Vehicle vehicle = new Vehicle(VIN, brand, model, type,vehiclePlate, tareWeight, grossWeight,
-                currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
 
     }
 
@@ -104,21 +102,21 @@ public class Vehicle {
         this.grossWeight = grossWeight;
     }
 
-    public double getCurrentKm() {
+    public int getCurrentKm() {
         return currentKm;
     }
 
-    public void setCurrentKm(double currentKm) {
+    public void setCurrentKm(int currentKm) {
         this.currentKm = currentKm;
     }
 
-    public String getRegistrationDate() {return registrationDate;}
+    public Date getRegistrationDate() {return registrationDate;}
 
-    public void setRegistrationDate(String registrationDate) {this.registrationDate = registrationDate;}
+    public void setRegistrationDate(Date registrationDate) {this.registrationDate = registrationDate;}
 
-    public String getAcquisitionDate() {return acquisitionDate;}
+    public Date getAcquisitionDate() {return acquisitionDate;}
 
-    public void setAcquisitionDate(String acquisitionDate) {this.acquisitionDate = acquisitionDate;}
+    public void setAcquisitionDate(Date acquisitionDate) {this.acquisitionDate = acquisitionDate;}
 
     public int getMaintenanceFrequency() {
         return maintenanceFrequency;

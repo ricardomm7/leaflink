@@ -2,7 +2,10 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
+
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,8 +30,8 @@ public class VehicleRepository {
     }
 
     public Boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
-                                 double grossWeight, double currentKm, String registrationDate,String acquisitionDate,
-                                 int maintenanceFrequency){
+                                   double grossWeight, int currentKm, Date registrationDate, Date acquisitionDate,
+                                   int maintenanceFrequency){
 
         Vehicle vehicle = new Vehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
                 currentKm, registrationDate ,acquisitionDate, maintenanceFrequency);

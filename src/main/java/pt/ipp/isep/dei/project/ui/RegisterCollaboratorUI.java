@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class RegisterCollaboratorUI {
+public class RegisterCollaboratorUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
     public void registerCollaborator() {
@@ -103,5 +103,10 @@ public class RegisterCollaboratorUI {
 
         // Create a Date object
         return new Date(year - 1900, month, day);
+    }
+
+    @Override
+    public void run() {
+        registerCollaborator();
     }
 }
