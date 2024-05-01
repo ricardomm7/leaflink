@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.domain;
 
 
-import java.util.Date;
 
 public class Vehicle {
     private String VIN;
@@ -12,12 +11,12 @@ public class Vehicle {
     private double tareWeight;
     private double grossWeight;
     private double currentKm;
-    private Date registrationDate;
-    private Date acquisitionDate;
+    private String registrationDate;
+    private String acquisitionDate;
     private int maintenanceFrequency;
 
     public Vehicle(String VIN, String brand, String model, String type, String vehiclePlate, double tareWeight, double grossWeight,
-                   double currentKm, Date registrationDate, Date acquisitionDate, int maintenanceFrequency) {
+                   double currentKm, String registrationDate, String acquisitionDate, int maintenanceFrequency) {
 
         this.VIN = VIN;
         this.brand = brand;
@@ -113,13 +112,13 @@ public class Vehicle {
         this.currentKm = currentKm;
     }
 
-    public Date getRegistrationDate() {return registrationDate;}
+    public String getRegistrationDate() {return registrationDate;}
 
-    public void setRegistrationDate(Date registrationDate) {this.registrationDate = registrationDate;}
+    public void setRegistrationDate(String registrationDate) {this.registrationDate = registrationDate;}
 
-    public Date getAcquisitionDate() {return acquisitionDate;}
+    public String getAcquisitionDate() {return acquisitionDate;}
 
-    public void setAcquisitionDate(Date acquisitionDate) {this.acquisitionDate = acquisitionDate;}
+    public void setAcquisitionDate(String acquisitionDate) {this.acquisitionDate = acquisitionDate;}
 
     public int getMaintenanceFrequency() {
         return maintenanceFrequency;

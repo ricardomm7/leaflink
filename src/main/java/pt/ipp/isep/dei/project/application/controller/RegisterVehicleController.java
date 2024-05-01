@@ -15,7 +15,7 @@ public class RegisterVehicleController {
 
 
     public boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
-                                   double grossWeight, double currentKm,Date registrationDate, Date acquisitionDate,
+                                   double grossWeight, double currentKm,String registrationDate, String acquisitionDate,
                                    int maintenanceFrequency) {
 
         if (!vehicleRepository.verifyExistingVehicles(vin,vehiclePlate)) {

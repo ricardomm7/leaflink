@@ -3,8 +3,6 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class RegisterVehicleUI {
@@ -41,17 +39,11 @@ public class RegisterVehicleUI {
         System.out.println("Enter current km:");
         double currentKm = Double.parseDouble(scanner.nextLine());
 
-        Date registrationDate;
-        do{
-            System.out.println("Enter registration date (DD/MM/YYYY):");
-            registrationDate = parseDate(scanner.nextLine());
-        }while (registrationDate==null);
+        System.out.println("Enter registration date (DD/MM/YYYY):");
+        String registrationDate = scanner.nextLine();
 
-        Date acquisitionDate;
-        do {
-            System.out.println("Enter acquisition date (DD/MM/YYYY):");
-            acquisitionDate = parseDate(scanner.nextLine());
-        } while (acquisitionDate == null);
+        System.out.println("Enter acquisition date (DD/MM/YYYY):");
+        String acquisitionDate = scanner.nextLine();
 
         System.out.println("Enter maintenance frequency (in km):");
         int maintenanceFrequency = Integer.parseInt(scanner.nextLine());
@@ -76,14 +68,4 @@ public class RegisterVehicleUI {
         }
     }
 
-    private Date parseDate(String dateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        dateFormat.setLenient(false);
-        try {
-            return dateFormat.parse(dateStr);
-        } catch (ParseException e) {
-            System.out.println("Invalid date format! Please enter date in DD/MM/YYYY format.");
-            return null;
-        }
-    }
 }
