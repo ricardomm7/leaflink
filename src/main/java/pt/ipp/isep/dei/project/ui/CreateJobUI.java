@@ -4,7 +4,7 @@ import pt.ipp.isep.dei.project.application.controller.CreateJobController;
 
 import java.util.Scanner;
 
-public class CreateJobUI {
+public class CreateJobUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
     public void createNewJob() {
@@ -22,4 +22,8 @@ public class CreateJobUI {
         }
     }
 
+    @Override
+    public void run() {
+        createNewJob();
+    }
 }

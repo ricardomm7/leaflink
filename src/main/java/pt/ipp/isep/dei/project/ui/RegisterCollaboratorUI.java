@@ -21,6 +21,7 @@ public class RegisterCollaboratorUI implements Runnable {
 
         System.out.println("Enter collaborator's mobile contact:");
         int contactMobile = sc.nextInt();
+        sc.nextLine();
 
         System.out.println("Enter collaborator's email:");
         String email = sc.nextLine();

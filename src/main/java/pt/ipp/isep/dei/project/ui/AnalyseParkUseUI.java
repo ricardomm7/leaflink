@@ -6,7 +6,7 @@ import pt.ipp.isep.dei.project.application.controller.AnalyseParkUseController;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class AnalyseParkUseUI {
+public class AnalyseParkUseUI implements Runnable {
     private String filepath;
 
     public void execute() throws FileNotFoundException {
@@ -18,5 +18,10 @@ public class AnalyseParkUseUI {
         Scanner sc = new Scanner(System.in);
         String a = sc.nextLine();
         this.filepath = a;
+    }
+
+    @Override
+    public void run() {
+        
     }
 }
