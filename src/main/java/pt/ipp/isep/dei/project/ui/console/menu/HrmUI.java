@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.ui.console.menu;
 
 
 import pt.ipp.isep.dei.project.ui.CreateJobUI;
+import pt.ipp.isep.dei.project.ui.CreateSkillUI;
 import pt.ipp.isep.dei.project.ui.RegisterCollaboratorUI;
 import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
 import pt.ipp.isep.dei.project.ui.console.ShowTextUI;
@@ -22,7 +23,7 @@ public class HrmUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Register a Collaborator", new RegisterCollaboratorUI()));
         options.add(new MenuItem("Register Job", new CreateJobUI()));
-        options.add(new MenuItem("Option 3", new ShowTextUI("You have chosen Option 3.")));
+        options.add(new MenuItem("Register a Skill", new CreateSkillUI()));
         options.add(new MenuItem("Option 4", new ShowTextUI("You have chosen Option 4.")));
 
         int option = 0;
