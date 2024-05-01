@@ -9,23 +9,23 @@ class CreateSkillUI {
 }
 
 class CreateSkillController {
-    +createSkill(title : String) : void
+    +createSkill(designation : String) : void
     +getInstance() : SkillRepository
 }
 
 class Repositories {
-    +getJobRepository() : SkillRepository
+    +getSkillRepository() : SkillRepository
 }
 
 class SkillRepository {
-    +createSkill(title : String) : Skill
+    +createSkill(designation : String) : Skill
     +checkForDuplicates() : void
     +addSkill(skill): void
 }
 
 class Skill {
     - title : String
-    + Skill(title : String)
+    + Skill(designation : String)
     +verifyFilled(skill : Skill) : void
     +verifySpecialCharacters(skill : Skill) : void
 }
