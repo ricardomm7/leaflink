@@ -7,9 +7,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The RegisterCollaboratorUI class provides a user interface for registering a new collaborator.
+ */
 public class RegisterCollaboratorUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Registers a new collaborator based on user input.
+     */
     public void registerCollaborator() {
         RegisterCollaboratorController rc = new RegisterCollaboratorController();
         System.out.println("Enter collaborator's name:");
@@ -90,6 +96,13 @@ public class RegisterCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Parses a string into a Date object.
+     *
+     * @param dateString the string representation of the date
+     * @return the Date object parsed from the string
+     * @throws IllegalArgumentException if the date format is invalid
+     */
     private Date parseDate(String dateString) {
         String[] parts = dateString.split("/");
         if (parts.length != 3) {

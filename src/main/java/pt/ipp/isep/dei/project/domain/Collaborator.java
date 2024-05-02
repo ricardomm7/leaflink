@@ -3,6 +3,11 @@ package pt.ipp.isep.dei.project.domain;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * The Collaborator class represents an individual who collaborates within an organization.
+ * It holds information such as name, birthdate, contact details, taxpayer number, email, address, identification number,
+ * admission date, and job.
+ */
 public class Collaborator {
     private String name;
     private Date birthdate;
@@ -15,6 +20,22 @@ public class Collaborator {
     private Job job;
     private Address address;
 
+    /**
+     * Constructor for Collaborator class.
+     *
+     * @param name                 The name of the collaborator.
+     * @param birthdate            The birthdate of the collaborator.
+     * @param contactMobile        The mobile contact number of the collaborator.
+     * @param taxpayerNumber       The taxpayer number of the collaborator.
+     * @param email                The email address of the collaborator.
+     * @param address              The address of the collaborator.
+     * @param zipCode              The zip code of the collaborator's address.
+     * @param city                 The city of the collaborator's address.
+     * @param documentType         The type of document of the collaborator.
+     * @param identificationNumber The identification number of the collaborator.
+     * @param admissionDate        The admission date of the collaborator.
+     * @param job                  The job of the collaborator.
+     */
     public Collaborator(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
         setName(name);
         setBirthdate(birthdate);
@@ -28,10 +49,23 @@ public class Collaborator {
         setJob(job);
     }
 
+    /**
+     * Sets the address of the collaborator.
+     *
+     * @param address The address of the collaborator.
+     * @param city    The city of the collaborator's address.
+     * @param zipCode The zip code of the collaborator's address.
+     */
     public void setAddress(String address, String city, String zipCode) {
         this.address = new Address(address, city, zipCode);
     }
 
+    /**
+     * Sets the admission date of the collaborator.
+     *
+     * @param admissionDate The admission date of the collaborator.
+     * @throws IllegalArgumentException If the admission date is invalid.
+     */
     public void setAdmissionDate(Date admissionDate) {
         if (verifyAdmissionDate(admissionDate)) {
             this.admissionDate = admissionDate;
@@ -40,6 +74,12 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Sets the birthdate of the collaborator.
+     *
+     * @param birthdate the birthdate of the collaborator
+     * @throws IllegalArgumentException if the birthdate is invalid
+     */
     public void setBirthdate(Date birthdate) {
         if (verifyBirth(birthdate)) {
             this.birthdate = birthdate;
@@ -48,7 +88,12 @@ public class Collaborator {
         }
     }
 
-
+    /**
+     * Sets the mobile contact number of the collaborator.
+     *
+     * @param contactMobile the mobile contact number of the collaborator
+     * @throws IllegalArgumentException if the contact number is not exactly 9 digits long
+     */
     public void setContactMobile(int contactMobile) {
         if (verifyNineDigits(contactMobile)) {
             this.contactMobile = contactMobile;
@@ -57,10 +102,21 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Sets the document type of the collaborator.
+     *
+     * @param documentType the document type of the collaborator
+     */
     public void setDocumentType(String documentType) {
         this.documentType = documentType;
     }
 
+    /**
+     * Sets the email address of the collaborator.
+     *
+     * @param email the email address of the collaborator
+     * @throws IllegalArgumentException if the email address is not valid
+     */
     public void setEmail(String email) {
         if (verifyEmail(email)) {
             this.email = email;
@@ -69,6 +125,12 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Sets the identification number of the collaborator.
+     *
+     * @param identificationNumber the identification number of the collaborator
+     * @throws IllegalArgumentException if the identification number is not valid
+     */
     public void setIdentificationNumber(String identificationNumber) {
         if (verifyIdentificationNumber(identificationNumber)) {
             this.identificationNumber = identificationNumber;
@@ -77,10 +139,21 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Sets the job of the collaborator.
+     *
+     * @param job the job of the collaborator
+     */
     public void setJob(Job job) {
         this.job = job;
     }
 
+    /**
+     * Sets the name of the collaborator.
+     *
+     * @param name the name of the collaborator
+     * @throws IllegalArgumentException if the provided name is empty or consists of only whitespace
+     */
     public void setName(String name) {
         if (verifyFilled(name)) {
             this.name = name;
@@ -89,6 +162,12 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Sets the taxpayer number of the collaborator.
+     *
+     * @param taxpayerNumber the taxpayer number of the collaborator
+     * @throws IllegalArgumentException if the taxpayer number is not exactly 9 digits long
+     */
     public void setTaxpayerNumber(int taxpayerNumber) {
         if (verifyNineDigits(taxpayerNumber)) {
             this.taxpayerNumber = taxpayerNumber;
@@ -97,14 +176,31 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Retrieves the taxpayer number of the collaborator.
+     *
+     * @return the taxpayer number of the collaborator
+     */
     public int getTaxpayerNumber() {
         return taxpayerNumber;
     }
 
+    /**
+     * Verifies if the field is filled.
+     *
+     * @param name the field analysed
+     * @return true if is filled and false if it isn't
+     */
     private boolean verifyFilled(String name) {
         return (!name.trim().isEmpty());
     }
 
+    /**
+     * Verifies if the birthdate is valid.
+     *
+     * @param date the birthdate to verify
+     * @return true if the birthdate is valid, false otherwise
+     */
     private boolean verifyBirth(Date date) {
         if (date == null) {
             return false;
@@ -115,10 +211,22 @@ public class Collaborator {
         return !date.after(today.getTime());
     }
 
+    /**
+     * Verifies if the provided number has exactly nine digits.
+     *
+     * @param number the number to verify
+     * @return true if the number has exactly nine digits, false otherwise
+     */
     private boolean verifyNineDigits(int number) {
         return (String.valueOf(number).length() == 9);
     }
 
+    /**
+     * Verifies if the provided email address is valid.
+     *
+     * @param email the email address to verify
+     * @return true if the email address is valid, false otherwise
+     */
     private boolean verifyEmail(String email) {
         if (email == null) {
             return false;
@@ -130,6 +238,12 @@ public class Collaborator {
         return !(atIndex <= 0 || dotIndex < atIndex + 2 || dotIndex == email.length() - 1);
     }
 
+    /**
+     * Verifies if the provided identification number consists of only letters and numbers.
+     *
+     * @param identificationNumber the identification number to verify
+     * @return true if the identification number consists of only letters and numbers, false otherwise
+     */
     private boolean verifyIdentificationNumber(String identificationNumber) {
         if (identificationNumber == null) {
             return false;
@@ -144,6 +258,12 @@ public class Collaborator {
         return true; // Retorna verdadeiro se todos os caracteres forem letras ou números
     }
 
+    /**
+     * Verifies if the admission date is valid.
+     *
+     * @param admissionDate the admission date to verify
+     * @return true if the admission date is valid, false otherwise
+     */
     private boolean verifyAdmissionDate(Date admissionDate) {
         if (admissionDate == null || this.birthdate == null) {
             return false;
@@ -168,6 +288,11 @@ public class Collaborator {
         return ageDifference >= 18;
     }
 
+    /**
+     * Gets the name of the collaborator.
+     *
+     * @return The name of the collaborator.
+     */
     public String getName() {
         return name;
     }

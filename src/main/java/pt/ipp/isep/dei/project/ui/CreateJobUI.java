@@ -4,9 +4,19 @@ import pt.ipp.isep.dei.project.application.controller.CreateJobController;
 
 import java.util.Scanner;
 
+import pt.ipp.isep.dei.project.application.controller.CreateJobController;
+
+import java.util.Scanner;
+
+/**
+ * The CreateJobUI class provides a user interface for creating a new job.
+ */
 public class CreateJobUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Creates a new job based on user input.
+     */
     public void createNewJob() {
         CreateJobController jc = new CreateJobController();
         System.out.println("What is the job title?");
@@ -27,3 +37,4 @@ public class CreateJobUI implements Runnable {
         createNewJob();
     }
 }
+

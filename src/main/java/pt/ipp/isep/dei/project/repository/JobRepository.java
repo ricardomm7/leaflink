@@ -5,13 +5,24 @@ import pt.ipp.isep.dei.project.domain.Job;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The JobRepository class manages the storage and retrieval of job positions within the application.
+ */
 public class JobRepository {
     private final List<Job> jobList;
 
+    /**
+     * Constructs a new JobRepository object with an empty list of jobs.
+     */
     public JobRepository() {
         jobList = new ArrayList<>();
     }
 
+    /**
+     * Creates a new job with the provided title and adds it to the repository if it does not already exist.
+     *
+     * @param title the title of the job to create
+     */
     public void createJob(String title) {
         Job j = new Job(title);
         if (checkForDuplicates(j)) {
@@ -19,6 +30,12 @@ public class JobRepository {
         }
     }
 
+    /**
+     * Checks if a job with the same title already exists in the repository.
+     *
+     * @param j the job to check for duplicates
+     * @return true if no job with the same title exists, false otherwise
+     */
     private boolean checkForDuplicates(Job j) {
         for (Job x : jobList) {
             if (x.getTitle().equalsIgnoreCase(j.getTitle())) {
@@ -28,11 +45,22 @@ public class JobRepository {
         return true;
     }
 
+    /**
+     * Adds a job to the repository.
+     *
+     * @param job the job to add
+     */
     private void addJob(Job job) {
         jobList.add(job);
     }
 
+    /**
+     * Retrieves a copy of the list of jobs stored in the repository.
+     *
+     * @return a list of jobs
+     */
     public List<Job> getJobList() {
         return new ArrayList<>(jobList);
     }
 }
+
