@@ -13,14 +13,44 @@ class RepositoriesTest {
     }
 
     @Test
-    void testGetOrganizationRepository() {
+    void testGetCollaboratorRepository() {
         Repositories instance = Repositories.getInstance();
-        assertNotNull(instance.getOrganizationRepository());
+        assertNotNull(instance.getCollaboratorRepository());
     }
 
     @Test
-    void testGetTaskCategoryRepository() {
+    void testGetJobRepository() {
         Repositories instance = Repositories.getInstance();
-        assertNotNull(instance.getTaskCategoryRepository());
+        assertNotNull(instance.getJobRepository());
+    }
+
+    @Test
+    void testGetMaintenanceRepository() {
+        Repositories instance = Repositories.getInstance();
+        assertNotNull(instance.getMaintenanceRepository());
+    }
+
+    @Test
+    void testGetSkillRepository() {
+        Repositories instance = Repositories.getInstance();
+        assertNotNull(instance.getSkillRepository());
+    }
+
+    @Test
+    void testGetTeamRepository() {
+        Repositories instance = Repositories.getInstance();
+        assertNotNull(instance.getTeamRepository());
+    }
+
+    @Test
+    void testGetVehicleRepository() {
+        Repositories instance = Repositories.getInstance();
+        assertNotNull(instance.getVehicleRepository());
+    }
+
+    @Test
+    void testGetAuthenticationRepository() {
+        Repositories instance = Repositories.getInstance();
+        assertNotNull(instance.getAuthenticationRepository());
     }
 }

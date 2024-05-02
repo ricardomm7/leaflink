@@ -167,4 +167,8 @@ public class Collaborator {
         // Verifica se a diferença de idade é pelo menos 18 anos
         return ageDifference >= 18;
     }
+
+    public String getName() {
+        return name;
+    }
 }

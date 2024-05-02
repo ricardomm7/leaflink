@@ -30,6 +30,10 @@ public class CollaboratorRepository {
         return true;
     }
 
+    public List<Collaborator> getCollaboratorList() {
+        return collaboratorList;
+    }
+
     public void addCollaborator(Collaborator collab) {
         collaboratorList.add(collab);
     }
