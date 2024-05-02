@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -18,10 +19,10 @@ public class ListMaintenanceController {
     }
 
     public List<Vehicle> getVehiclesNeedingMaintenanceList() {
-        return vehicleRepository.getVehicleNeedingMaintenance();
+        return vehicleRepository.getVehiclesNeedingMaintenanceList(maintenanceRepository.getMaintenanceList());
     }
 
     public void generateMaintenanceReport() {
-        maintenanceRepository.createMaintenanceReport();
+        maintenanceRepository.createMaintenanceReport(getVehiclesNeedingMaintenanceList());
     }
 }

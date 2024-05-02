@@ -25,28 +25,8 @@ public class ListMaintenanceUI implements Runnable {
             System.out.println("No vehicles needing maintenance.");
         } else {
             System.out.println("Vehicles needing maintenance:");
-            for (Vehicle vehicle : vehiclesList) {
-                System.out.println("Plate: " + vehicle.getVehiclePlate());
-                System.out.println("Brand: " + vehicle.getBrand());
-                System.out.println("Model: " + vehicle.getModel());
-                System.out.println("Current Km: " + vehicle.getCurrentKm());
-                System.out.println("Maintenance Frequency: " + vehicle.getMaintenanceFrequency() + " km");
-                System.out.println("Last Maintenance Km: " + (vehicle.getCurrentKm() - vehicle.getMaintenanceFrequency()) + " km");
-                System.out.println("Next Maintenance Km: " + (vehicle.getCurrentKm() + vehicle.getMaintenanceFrequency()) + " km");
-                System.out.println();
-            }
+            controller.generateMaintenanceReport();
         }
-
-        System.out.println("Do you want to generate a maintenance report? (yes/no)");
-        String choice = scanner.nextLine();
-        if (choice.equalsIgnoreCase("yes")) {
-            generateMaintenanceReport();
-        }
-    }
-
-    private void generateMaintenanceReport() {
-        controller.generateMaintenanceReport();
-        System.out.println("Maintenance report generated successfully ");
     }
 
     @Override

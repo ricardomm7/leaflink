@@ -15,9 +15,13 @@ public class VehicleRepository {
         vehicleList = new ArrayList<>();
     }
 
-    public List<Vehicle> getVehicleList() {return new ArrayList<>(vehicleList);}
+    public List<Vehicle> getVehicleList() {
+        return new ArrayList<>(vehicleList);
+    }
 
-    public void addVehicle(Vehicle vehicle) {vehicleList.add(vehicle);}
+    public void addVehicle(Vehicle vehicle) {
+        vehicleList.add(vehicle);
+    }
 
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
         for (Vehicle vehicle : getVehicleList()) {
@@ -30,12 +34,12 @@ public class VehicleRepository {
 
     public Boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
                                    double grossWeight, int currentKm, Date registrationDate, Date acquisitionDate,
-                                   int maintenanceFrequency){
+                                   int maintenanceFrequency) {
 
         Vehicle vehicle = new Vehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                currentKm, registrationDate ,acquisitionDate, maintenanceFrequency);
+                currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
 
-        if (vehicle.validateVehicle()){
+        if (vehicle.validateVehicle()) {
             addVehicle(vehicle);
             return true;
         }
@@ -43,25 +47,23 @@ public class VehicleRepository {
     }
 
 
-    public List<Vehicle> getVehicleNeedingMaintenance(){
+    public List<Vehicle> getVehiclesNeedingMaintenanceList(List<Maintenance> maintenanceList) {
         List<Vehicle> vehiclesNeedingMaintenance = new ArrayList<>();
 
         for (Vehicle vehicle : vehicleList) {
             double currentKm = vehicle.getCurrentKm();
             double maintenanceFrequency = vehicle.getMaintenanceFrequency();
-            double lastMaintenanceKm = getLastMaintenanceKm(vehicle.getVehiclePlate());
+            double lastMaintenanceKm = getLastMaintenanceKm(vehicle.getVehiclePlate(), maintenanceList);
 
-            // Se não houver registro de manutenção anterior, consideramos o último km de manutenção como 0
             if (lastMaintenanceKm == -1 || currentKm - lastMaintenanceKm >= maintenanceFrequency) {
                 vehiclesNeedingMaintenance.add(vehicle);
             }
         }
         return vehiclesNeedingMaintenance;
-
     }
-    private double getLastMaintenanceKm(String vehiclePlate) {
+
+    private double getLastMaintenanceKm(String vehiclePlate, List<Maintenance> maintenanceList) {
         double lastMaintenanceKm = -1; // Valor padrão para indicar que não há registro de manutenção
-        List<Maintenance> maintenanceList = Repositories.getInstance().getMaintenanceRepository().getMaintenanceList();
 
         // Lógica para obter o km da última manutenção para o veículo com a placa especificada
         for (Maintenance maintenance : maintenanceList) {
@@ -73,7 +75,19 @@ public class VehicleRepository {
         return lastMaintenanceKm;
     }
 
-    public void removeVehicle(Vehicle vehicle) { vehicleList.remove(vehicle);}
+    public Vehicle getVehicleByPlate(String plate) {
+        Vehicle vehicle = null;
+        for (Vehicle v : vehicleList) {
+            if (v.getVehiclePlate().equalsIgnoreCase(plate)) {
+                vehicle = v;
+            }
+        }
+        return vehicle;
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        vehicleList.remove(vehicle);
+    }
 
 
 }
