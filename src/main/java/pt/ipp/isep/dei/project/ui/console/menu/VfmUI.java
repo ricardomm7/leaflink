@@ -20,6 +20,7 @@ public class VfmUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Register a Vehicle", new RegisterVehicleUI()));
+        options.add(new MenuItem("Register a Vehicle's Maintenance", new ShowTextUI("Apagar até ao new e colocar devido UI")));
         options.add(new MenuItem("List Vehicles Needing Maintenance", new ListMaintenanceUI()));
         options.add(new MenuItem("Option 3", new ShowTextUI("You have chosen Option 3.")));
         options.add(new MenuItem("Option 4", new ShowTextUI("You have chosen Option 4.")));
