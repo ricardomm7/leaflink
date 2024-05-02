@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.project.repository;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,11 +21,11 @@ public class VehicleRepository {
 
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
         for (Vehicle vehicle : getVehicleList()) {
-            if (!vin.equalsIgnoreCase(vehicle.getVIN()) || !vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate()) ) {
-                return false;
+            if (vin.equalsIgnoreCase(vehicle.getVIN()) || vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate())) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public Boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,

@@ -34,18 +34,24 @@ public class Vehicle {
     }
 
     public boolean validateVehicle() {
-        if (VIN == null || VIN.length() != 17) {
+        if (!brand.matches("[a-zA-Z0-9]+") || !model.matches("[a-zA-Z0-9]+") || !type.matches("[a-zA-Z0-9]+")) {
+            return false;
+        }
+        if (VIN == null || !VIN.matches("[a-zA-Z0-9]{17}")) {
             return false;
         }
 
-        if (vehiclePlate == null || !vehiclePlate.matches("[a-zA-Z0-9]{6}")) {
+        if (((vehiclePlate == null) || !vehiclePlate.matches("[a-zA-Z0-9]{6}"))) {
             return false;
         }
 
         if (tareWeight <= 0 || grossWeight <= 0 || currentKm < 0 || maintenanceFrequency <= 0) {
             return false;
         }
+        if (!registrationDate.before(acquisitionDate)){
+            return false;
 
+        }
         return true;
     }
 
