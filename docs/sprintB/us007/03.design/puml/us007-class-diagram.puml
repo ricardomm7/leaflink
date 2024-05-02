@@ -17,41 +17,38 @@ class VehicleCheckup {
 }
 
 
-class MaintenenceRepository {
+class MaintenanceRepository {
     + registerVehicleCheckup(plateNumber, date, kmAtCheckup)
 }
 
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getMaintenenceRepository()
+    + getMaintenanceRepository()
 }
 
-class RegisterMaintenenceController {
-    + RegisterMaintenenceController()
-    + getMaintenenceRepository()
-    + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
-    - getEmployeeFromSession()
+class RegisterMaintenanceController {
+    + RegisterMaintenanceController()
+    + getMaintenanceRepository()
 }
 
-class RegisterMaintenenceUI {
+class RegisterMaintenanceUI {
 }
 
 Repositories -> Repositories : instance
 
-RegisterMaintenenceUI .> RegisterMaintenenceController
+RegisterMaintenanceUI .> RegisterMaintenanceController
 
-RegisterMaintenenceController .> Repositories
+RegisterMaintenanceController .> Repositories
 
-RegisterMaintenenceController ..> MaintenenceRepository
+RegisterMaintenanceController ..> MaintenanceRepository
 
-Repositories -> "1" MaintenenceRepository
+Repositories -> "1" MaintenanceRepository
 
-MaintenenceRepository "1" -> "*" VehicleCheckup
+MaintenanceRepository "1" -> "*" VehicleCheckup
 
 
-RegisterMaintenenceController ..> VehicleCheckup
+RegisterMaintenanceController ..> VehicleCheckup
 
 VehicleCheckup "*" --> "*" FleetManager : registered by
 
