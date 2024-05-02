@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.project.domain.Vehicle;
 import java.util.List;
 import java.util.Scanner;
 
-public class ListMaintenanceUI {
+public class ListMaintenanceUI implements Runnable {
     private final ListMaintenanceController controller;
 
     public ListMaintenanceUI() {
@@ -47,5 +47,11 @@ public class ListMaintenanceUI {
     private void generateMaintenanceReport() {
         controller.generateMaintenanceReport();
         System.out.println("Maintenance report generated successfully ");
+    }
+
+    @Override
+    public void run() {
+        listVehiclesNeedingMaintenance();
+
     }
 }
