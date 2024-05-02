@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
+import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
 import pt.ipp.isep.dei.project.domain.Job;
 
 import java.util.Date;
@@ -13,11 +14,8 @@ import java.util.Scanner;
 public class RegisterCollaboratorUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
-    /**
-     * Registers a new collaborator based on user input.
-     */
     public void registerCollaborator() {
-        RegisterCollaboratorController rc = new RegisterCollaboratorController();
+        RegisterMaintenanceController rc = new RegisterMaintenanceController();
         System.out.println("Enter collaborator's name:");
         String name = sc.nextLine();
 
@@ -96,13 +94,6 @@ public class RegisterCollaboratorUI implements Runnable {
         }
     }
 
-    /**
-     * Parses a string into a Date object.
-     *
-     * @param dateString the string representation of the date
-     * @return the Date object parsed from the string
-     * @throws IllegalArgumentException if the date format is invalid
-     */
     private Date parseDate(String dateString) {
         String[] parts = dateString.split("/");
         if (parts.length != 3) {
@@ -123,4 +114,5 @@ public class RegisterCollaboratorUI implements Runnable {
     public void run() {
         registerCollaborator();
     }
+
 }
