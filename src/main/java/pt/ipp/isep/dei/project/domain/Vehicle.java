@@ -31,6 +31,7 @@ public class Vehicle {
         this.acquisitionDate = acquisitionDate;
         this.maintenanceFrequency = maintenanceFrequency;
 
+
     }
 
     public boolean validateVehicle() {

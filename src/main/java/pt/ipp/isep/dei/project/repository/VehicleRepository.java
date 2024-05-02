@@ -24,6 +24,16 @@ public class VehicleRepository {
     }
 
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
+        // Verify if params are null
+        if (vin == null || vehiclePlate == null) {
+            throw new IllegalArgumentException("VIN and vehicle plate cannot be null.");
+        }
+        // Verify the size of the params
+        if (vin.length() != 17 || vehiclePlate.length() != 6) {
+            throw new IllegalArgumentException("VIN must be exactly 17 characters and vehicle plate must be exactly 6 characters.");
+        }
+
+        // Verify existing vehicle
         for (Vehicle vehicle : getVehicleList()) {
             if (vin.equalsIgnoreCase(vehicle.getVIN()) || vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate())) {
                 return true;

@@ -15,7 +15,7 @@ public class RegisterVehicleUI implements Runnable {
 
     public void registerVehicle() {
         Scanner scanner = new Scanner(System.in);
-        boolean flag=false;
+        boolean flag = false;
 
         do {
 
@@ -95,7 +95,7 @@ public class RegisterVehicleUI implements Runnable {
             } catch (InvalidDateException e) {
                 System.out.println("Invalid date: " + e.getMessage());
             }
-        }while (!flag);
+        } while (!flag);
     }
 
     private void validateVin(String vin) {
@@ -167,7 +167,7 @@ public class RegisterVehicleUI implements Runnable {
         int month = Integer.parseInt(parts[1]);
         int year = Integer.parseInt(parts[2]);
 
-        if (day > 31 || month > 12 ){
+        if (day > 31 || month > 12) {
             throw new InvalidDateException("Invalid date. Please try again using DD/MM/YYYY:");
         }
 
@@ -182,11 +182,13 @@ public class RegisterVehicleUI implements Runnable {
     public void run() {
         registerVehicle();
     }
-}
 
-class InvalidDateException extends RuntimeException {
-    public InvalidDateException(String message) {
-        super(message);
+    static class InvalidDateException extends RuntimeException {
+        public InvalidDateException(String message) {
+            super(message);
+        }
     }
 }
+
+
 
