@@ -1,18 +1,30 @@
 package pt.ipp.isep.dei.project.domain;
 
+
+import java.util.Date;
+
 public class Maintenance {
-    private final String data;
     private final String vehiclePlate;
+    private final Date date;
     private final int km;
 
-    public Maintenance(String data, String vehiclesPlate, int kilometragem)  {
-        this.data = data;
-        this.vehiclePlate = vehiclesPlate;
-        this.km = kilometragem;
+    public Maintenance(String vehiclePlate, Date date, int kilometers)  {
+        if (kilometers < 0) {
+            throw new IllegalArgumentException("Kilometers cannot be negative");
+        }
+        if (date == null ) {
+            throw new IllegalArgumentException("Date cannot be null");
+        }
+        if (vehiclePlate == null || vehiclePlate.isEmpty() || !vehiclePlate.matches("[a-zA-Z0-9]+")) {
+            throw new IllegalArgumentException("Vehicle plate cannot be null or empty");
+        }
+        this.vehiclePlate = vehiclePlate;
+        this.date = date;
+        this.km = kilometers;
     }
 
-    public String getData() {
-        return data;
+    public Date getDate() {
+        return date;
     }
 
     public int getKm() {

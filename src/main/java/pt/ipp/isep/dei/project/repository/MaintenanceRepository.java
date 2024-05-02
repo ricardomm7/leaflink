@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MaintenanceRepository {
@@ -13,7 +14,7 @@ public class MaintenanceRepository {
         this.maintenanceList = new ArrayList<>();
     }
 
-    public void createMaintenance(String plate, String date, int currentKm) {
+    public void createMaintenance(String plate, Date date, int currentKm) {
         Maintenance maintenance = new Maintenance(plate, date, currentKm);
         addMaintenance(maintenance);
 
