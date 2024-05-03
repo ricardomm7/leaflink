@@ -29,9 +29,9 @@ algorithm
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The graphic referring to the asymptotic behavior of the
-  execution running time tests should be presented in a time unit
-  that allows to distinguish the running times of all tested examples.
+* **AC1:** The graphic referring to the asymptotic behavior of the execution running time tests should be presented in a time unit that allows to distinguish the running times of all tested examples.
+* **AC2:** The procedure should run for 30 given files, and return (i) a .csv file with (input size, execution time) of the algorithm, and (ii) an image file with the execution time graphic, as a function of the input size, for the .csv data (use any package, for example, Gnuplot). 
+* **AC3:** Work delivery format: a folder with (i) the .csv file for the 30 examples available, and (ii) an image file with the graphic of the execution time as a function of the input size, for this .csv data.
 
 ### 1.4. Found out Dependencies
 
