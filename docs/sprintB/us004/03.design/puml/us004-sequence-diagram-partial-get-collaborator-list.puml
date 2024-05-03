@@ -5,7 +5,7 @@ skinparam shadowing false
 
 autonumber 23
 
-participant ":AssignSkillsController" as CTRL
+participant ":AssignSkillController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP

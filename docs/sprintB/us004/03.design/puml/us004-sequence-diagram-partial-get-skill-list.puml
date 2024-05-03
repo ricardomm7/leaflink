@@ -5,13 +5,13 @@ skinparam shadowing false
 
 autonumber 23
 
-participant ":AssignSkillsController" as CTRL
+participant ":AssignSkillController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
-participant "skillsRepository:\nSkillsRepository" as skillsRepository
+participant "skillRepository:\nSkillRepository" as skillRepository
 
 
--> CTRL : get skillsList
+-> CTRL : get skillList
 activate CTRL
 group Get Skill List
 CTRL -> GlobRepo : getInstance()
@@ -20,19 +20,19 @@ activate GlobRepo
 GlobRepo --> CTRL : repositories
 deactivate GlobRepo
 
-CTRL -> PLAT : getSkillsRepository()
+CTRL -> PLAT : getSkillRepository()
 activate PLAT
 
-PLAT -->  CTRL: skillsRepository
+PLAT -->  CTRL: skillRepository
 deactivate PLAT
 
-CTRL -> skillsRepository : getSkills()
-activate skillsRepository
+CTRL -> skillRepository : getSkill()
+activate skillRepository
 
-skillsRepository --> CTRL : skillsList
-deactivate skillsRepository
+skillRepository --> CTRL : skillList
+deactivate skillRepository
 end
-<-- CTRL : skillsList
+<-- CTRL : skillList
 deactivate CTRL
 
 @enduml

@@ -6,12 +6,12 @@ skinparam shadowing false
 autonumber
 
 participant "HRM" as HRM
-participant ":AssignSkillsUI" as UI
-participant ":AssignSkillsController" as CTRL
+participant ":AssignSkillUI" as UI
+participant ":AssignSkillController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
-participant "skillsRepository:\nSkillsRepository" as skillsRepository
+participant "skillRepository:\nSkillRepository" as skillRepository
 participant ":Collaborator" as CLB
 
 
@@ -35,7 +35,7 @@ deactivate UI
 HRM -> UI : selects a collaborator
 activate UI
 
-UI -> CTRL : get skillsList
+UI -> CTRL : get skillList
 deactivate UI
 activate CTRL
 
@@ -45,7 +45,7 @@ end ref
 
 
 
-CTRL --> UI : skillsList
+CTRL --> UI : skillList
 deactivate CTRL
 activate UI
 
@@ -66,7 +66,7 @@ deactivate UI
 activate CTRL
 
 
-CTRL -> CLBREP : assignSkills(collaborator, selectedSkills[])
+CTRL -> CLBREP : assignSkill(collaborator, selectedSkills[])
 deactivate CTRL
 
 activate CLBREP

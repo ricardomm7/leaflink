@@ -3,29 +3,36 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 
-class AssignSkillsUI {
+class AssignSkillUI {
 }
 
-class AssignSkillsController {
-    + assignSkills(skill : Skill) : void
-    + getInstance() : CollaboratorRepository
-    + getInstance() : SkillsRepository
+class AssignSkillController {
+    - skillRepository : SkillRepository
+    - collaboratorRepository : CollaboratorRepository
+    + assignSkill(skill : Skill) : void
+    + getSkill () : List<Skill>
+    + getCollaborator () : List<Collaborator>
 }
 
 class Repositories {
+    + getInstance() : Repositories
     + getCollaboratorRepository() : CollaboratorRepository
-    + getSkillsRepository() : SkillsRepository
+    + getSkillRepository() : SkillRepository
 }
 
 class CollaboratorRepository {
-        + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
-        + checkForDuplicates() : void
-        + addCollaborator(collaborator) : void
+    -collaboratorList : List<Collaborator>
+    +CollaboratorRepository()
+    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + checkForDuplicates() : void
+    + addCollaborator(collaborator) : void
+    + getCollaboratorList : List<Collaborator>
 }
 
-class SkillsRepository {
-    + createSkill(name : String) : Skill
+class SkillRepository {
+    + createSkill(designation : String) : Skill
     + checkForDuplicates() : void
+    + addSkill(skill): void
 }
 
 class Collaborator {
@@ -33,30 +40,50 @@ class Collaborator {
     - birthdate : Date
     - contactMobile : String
     - email : String
-    - address : String
-    - zipCode : String
-    - city : String
     - admissionDate : Date
     - job : Job
     - taxpayerNumber : int
-    + setSkills(selectedSkills : Skill[]) : void
+    - documentType : String
+    - identificationNumber : String
+    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + verifyFilled(collaborator) : boolean
+    + verifyNineDigits(collaborator) : boolean
+    + verifyEmail(collaborator) : boolean
+    + verifyZipCode(collaborator) : boolean
+    + verifyBirth(collaborator) : boolean
+    + verifyIdentificationNumber(collaborator) : boolean
+    + verifyAdmissionDate(collaborator) : boolean
+    + setAddress(address : String) : void
+    + setAdmissionDate(admissionDate : Date) : void
+    + setBirthdate(birthdate : Date) : void
+    + setCity(city : String) : void
+    + setContactMobile(mobile : int) : void
+    + setDocumentType(documentType : String) : void
+    + setEmail(email : String) : void
+    + setIdentificationNumber(identificationNumber : String) : void
+    + setJob(job : Job) : void
+    + setName(name : String) : void
+    + setTaxpayerNumber(taxpayerNumber : int) : void
+    + setZipCode(zipcode : String) : void
+    + getTaxpayerNumber() : int
+    + getName : String
 }
 
 class Skill {
-    - name : String
-    + Skill(title : String)
+    - title : String
+    + Skill(designation : String)
     + verifyFilled(skill : Skill) : void
     + verifySpecialCharacters(skill : Skill) : void
 }
 
-AssignSkillsUI ..> AssignSkillsController
-AssignSkillsController ..> Repositories : repositories
+AssignSkillUI ..> AssignSkillController
+AssignSkillController ..> Repositories : repositories
 Repositories --> Repositories : instance
 Repositories --> "1" CollaboratorRepository : collaboratorRepository
-Repositories --> "1" SkillsRepository : skillsRepository
-AssignSkillsController ..> CollaboratorRepository : collaboratorRepository
-AssignSkillsController ..> SkillsRepository : skillsRepository
+Repositories --> "1" SkillRepository : skillRepository
+AssignSkillController ..> CollaboratorRepository : collaboratorRepository
+AssignSkillController ..> SkillRepository : skillRepository
 CollaboratorRepository --> "*" Collaborator : collaborators
-SkillsRepository --> "*" Skill : skills
+SkillRepository --> "*" Skill : skill
 
 @enduml
