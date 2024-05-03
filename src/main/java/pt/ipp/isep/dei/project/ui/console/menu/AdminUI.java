@@ -24,7 +24,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Assign a Skill to Collaborator", new ShowTextUI("Apagar até ao new e colocar devido UI")));
         options.add(new MenuItem("Generate Team Proposal", new ShowTextUI("Apagar até ao new e colocar devido UI")));
         options.add(new MenuItem("Register a Vehicle", new RegisterVehicleUI()));
-        options.add(new MenuItem("Register a Vehicle's Maintenance", new ShowTextUI("Apagar até ao new e colocar devido UI")));
+        options.add(new MenuItem("Register a Vehicle's Maintenance", new RegisterMaintenanceUI()));
         options.add(new MenuItem("List Vehicles Needing Maintenance", new ListMaintenanceUI()));
 
         int option = 0;
