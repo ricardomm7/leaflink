@@ -48,7 +48,7 @@ public class RegisterMaintenanceUI {
     }
 
     private Date parseDate(String dateString) {
-        String[] parts = dateString.split("/");
+        String[] parts = dateString.split("[/-]");
         if (parts.length != 3) {
             throw new IllegalArgumentException("Invalid date format. Please use DD/MM/YYYY.");
         }
@@ -63,8 +63,8 @@ public class RegisterMaintenanceUI {
         return new Date(year - 1900, month, day);
     }
 
-    public void run(){
+    @Override
+    public void run() {
         RegisterMaintenance();
     }
-
 }

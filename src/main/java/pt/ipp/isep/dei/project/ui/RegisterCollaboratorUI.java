@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
-import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
 import pt.ipp.isep.dei.project.domain.Job;
 
 import java.util.Date;
@@ -15,7 +14,7 @@ public class RegisterCollaboratorUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
     public void registerCollaborator() {
-        RegisterMaintenanceController rc = new RegisterMaintenanceController();
+        RegisterCollaboratorController rc = new RegisterCollaboratorController();
         System.out.println("Enter collaborator's name:");
         String name = sc.nextLine();
 
