@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.project.repository.VehicleRepository;
 import java.util.Date;
 import java.util.Scanner;
 
-public class RegisterMaintenanceUI {
+public class RegisterMaintenanceUI implements Runnable{
     private static Scanner sc = new Scanner(System.in);
 
     public void RegisterMaintenance() {
