@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +43,7 @@ class MaintenanceRepositoryTest {
 
     //create a list of Vehicle objects and call createMaintenanceReport method, then verify that the output is correct
     @Test
-    public void test_create_maintenance_report() {
+    public void test_create_maintenance_report() throws FileNotFoundException {
         MaintenanceRepository maintenanceRepository = new MaintenanceRepository();
         List<Vehicle> vehicleList = new ArrayList<>();
         Vehicle vehicle1 = new Vehicle("VIN123polkiujhygt", "Brand1", "Model1", "Type1", "ABC123", 1000.0, 2000.0, 5000, new Date(), new Date(), 5000);
@@ -53,17 +52,15 @@ class MaintenanceRepositoryTest {
         vehicleList.add(vehicle2);
         maintenanceRepository.createMaintenance("ABC123", new Date(), 10000);
         maintenanceRepository.createMaintenance("DEF456", new Date(), 12000);
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        maintenanceRepository.createMaintenanceReport(vehicleList);
-        String expectedOutput = "Maintenance Report\n\n" +
+        System.out.println(maintenanceRepository.createMaintenanceReport(vehicleList));
+        String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +
                 "ABC123          Brand1          Model1          5000            5000            10000           15000          \n" +
                 "\n" +
                 "DEF456          Brand2          Model2          8000            6000            12000           18000          \n" +
                 "\n";
 
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput, maintenanceRepository.createMaintenanceReport(vehicleList));
     }
 
     // Create a new Maintenance object with a null date and verify that an IllegalArgumentException is thrown

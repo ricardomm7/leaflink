@@ -20,8 +20,12 @@ public class ListMaintenanceUI implements Runnable {
         if (vehiclesList.isEmpty()) {
             System.out.println("No vehicles needing maintenance.");
         } else {
-            System.out.println("Vehicles needing maintenance:");
-            controller.generateMaintenanceReport();
+            if (controller.generateMaintenanceReport() != null) {
+                System.out.println("Vehicles needing maintenance:");
+                System.out.println(controller.generateMaintenanceReport());
+
+            }
+            System.out.println("Something went wrong");
         }
     }
 

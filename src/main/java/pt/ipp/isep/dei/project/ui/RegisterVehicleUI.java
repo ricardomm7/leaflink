@@ -6,19 +6,18 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * The RegisterVehicleUI class provides a user interface for registering a new vehicle.
+ */
 public class RegisterVehicleUI implements Runnable {
-    private final RegisterVehicleController controller;
+    public static  final Scanner scanner = new Scanner(System.in);
 
-    public RegisterVehicleUI() {
-        controller = new RegisterVehicleController();
-    }
 
     public void registerVehicle() {
-        Scanner scanner = new Scanner(System.in);
+        RegisterVehicleController controller = new RegisterVehicleController();
         boolean flag = false;
 
         do {
-
             try {
                 System.out.println("Enter VIN:");
                 String vin = scanner.nextLine();
@@ -183,7 +182,15 @@ public class RegisterVehicleUI implements Runnable {
         registerVehicle();
     }
 
+    /**
+     * The type Invalid date exception.
+     */
     static class InvalidDateException extends RuntimeException {
+        /**
+         * Instantiates a new Invalid date exception.
+         *
+         * @param message The message
+         */
         public InvalidDateException(String message) {
             super(message);
         }

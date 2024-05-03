@@ -8,21 +8,44 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * The VehicleRepository class manages the storage and retrieval of Vehicles within the application.
+ */
 public class VehicleRepository {
     private final List<Vehicle> vehicleList;
 
+    /**
+     * Instantiates a new Vehicle repository with an empty list of vehicles.
+     */
     public VehicleRepository() {
         vehicleList = new ArrayList<>();
     }
 
+    /**
+     * Gets vehicle list.
+     *
+     * @return the vehicle list
+     */
     public List<Vehicle> getVehicleList() {
         return new ArrayList<>(vehicleList);
     }
 
+    /**
+     * Add vehicle.
+     *
+     * @param vehicle The vehicle
+     */
     public void addVehicle(Vehicle vehicle) {
         vehicleList.add(vehicle);
     }
 
+    /**
+     * Verify existing vehicles boolean.
+     *
+     * @param vin          The vin of the vehicle
+     * @param vehiclePlate The vehicle plate of the vehicle
+     * @return the boolean (True if vehicle exists, False otherwise)
+     */
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
         // Verify if params are null
         if (vin == null || vehiclePlate == null) {
@@ -42,6 +65,22 @@ public class VehicleRepository {
         return false;
     }
 
+    /**
+     * Register vehicle .
+     *
+     * @param vin                  the vin
+     * @param brand                the brand
+     * @param model                the model
+     * @param type                 the type
+     * @param vehiclePlate         the vehicle plate
+     * @param tareWeight           the tare weight
+     * @param grossWeight          the gross weight
+     * @param currentKm            the current km
+     * @param registrationDate     the registration date
+     * @param acquisitionDate      the acquisition date
+     * @param maintenanceFrequency the maintenance frequency
+     * @return the boolean (True if successful / False otherwise)
+     */
     public Boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
                                    double grossWeight, int currentKm, Date registrationDate, Date acquisitionDate,
                                    int maintenanceFrequency) {
@@ -57,6 +96,12 @@ public class VehicleRepository {
     }
 
 
+    /**
+     * Gets vehicles needing maintenance list.
+     *
+     * @param maintenanceList The maintenance list
+     * @return The list of vehicles needing maintenance
+     */
     public List<Vehicle> getVehiclesNeedingMaintenanceList(List<Maintenance> maintenanceList) {
         List<Vehicle> vehiclesNeedingMaintenance = new ArrayList<>();
 
@@ -72,6 +117,13 @@ public class VehicleRepository {
         return vehiclesNeedingMaintenance;
     }
 
+    /**
+     * Get the last maintenance km registered of a vehicle
+     * @param vehiclePlate The vehicle plate
+     * @param maintenanceList The list of the maintenance
+     * @return The km of the last maintenance
+     */
+
     private double getLastMaintenanceKm(String vehiclePlate, List<Maintenance> maintenanceList) {
         double lastMaintenanceKm = -1; // Valor padrão para indicar que não há registro de manutenção
 
@@ -85,6 +137,12 @@ public class VehicleRepository {
         return lastMaintenanceKm;
     }
 
+    /**
+     * Gets vehicle by plate.
+     *
+     * @param plate The vehicle plate
+     * @return The vehicle
+     */
     public Vehicle getVehicleByPlate(String plate) {
         Vehicle vehicle = null;
         for (Vehicle v : vehicleList) {
@@ -95,10 +153,13 @@ public class VehicleRepository {
         return vehicle;
     }
 
+    /**
+     * Remove vehicle.
+     *
+     * @param vehicle The vehicle
+     */
     public void removeVehicle(Vehicle vehicle) {
         vehicleList.remove(vehicle);
     }
-
-
 }
 

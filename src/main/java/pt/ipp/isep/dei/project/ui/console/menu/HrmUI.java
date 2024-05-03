@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.project.ui.console.menu;
 
 
-import pt.ipp.isep.dei.project.ui.CreateJobUI;
-import pt.ipp.isep.dei.project.ui.CreateSkillUI;
-import pt.ipp.isep.dei.project.ui.RegisterCollaboratorUI;
-import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
+import pt.ipp.isep.dei.project.ui.*;
 import pt.ipp.isep.dei.project.ui.console.ShowTextUI;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
@@ -24,7 +21,7 @@ public class HrmUI implements Runnable {
         options.add(new MenuItem("Register a Collaborator", new RegisterCollaboratorUI()));
         options.add(new MenuItem("Register Job", new CreateJobUI()));
         options.add(new MenuItem("Register a Skill", new CreateSkillUI()));
-        options.add(new MenuItem("Assign a Skill to Collaborator", new ShowTextUI("Apagar até ao new e colocar devido UI")));
+        options.add(new MenuItem("Assign a Skill to Collaborator", new AssignSkillUI()));
         options.add(new MenuItem("Generate Team Proposal", new ShowTextUI("Apagar até ao new e colocar devido UI")));
         options.add(new MenuItem("Option 4", new ShowTextUI("You have chosen Option 4.")));
 

@@ -28,26 +28,39 @@ public class MaintenanceRepository {
         return maintenanceList;
     }
 
-    public void createMaintenanceReport(List<Vehicle> vehicleList) {
+
+    public String createMaintenanceReport(List<Vehicle> vehicleList) {
         List<Maintenance> maintenanceList = getMaintenanceList();
-        System.out.println("Maintenance Report\n");
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
-                "Plate", "Brand", "Model", "Curr.Kms", "Freq", "Last", "Next");
+        StringBuilder reportBuilder = new StringBuilder();
+        boolean hasValidEntry = false;
+
+        reportBuilder.append("Maintenance Report\n");
+        reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
+                "Plate", "Brand", "Model", "Curr.Kms", "Freq", "Last", "Next"));
+
         for (Maintenance maintenance : maintenanceList) {
             for (Vehicle vehicle : vehicleList) {
                 if (vehicle != null && maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
+                    hasValidEntry = true;
                     String plate = vehicle.getVehiclePlate();
                     String brand = vehicle.getBrand();
                     String model = vehicle.getModel();
                     int curr_km = vehicle.getCurrentKm();
                     int freq = vehicle.getMaintenanceFrequency();
                     int last = maintenance.getKm();
-                    int next = last + vehicle.getMaintenanceFrequency();
-                    System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
-                            plate, brand, model, curr_km, freq, last, next);
+                    int next = last + freq;
+                    reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
+                            plate, brand, model, curr_km, freq, last, next));
                 }
             }
-            System.out.println();
+            reportBuilder.append("\n");
         }
+
+        if (hasValidEntry) {
+            return reportBuilder.toString();
+        }
+        return null;
+
     }
+
 }
