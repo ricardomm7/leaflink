@@ -8,11 +8,11 @@ _**Note that SSD - Alternative One is adopted.**_
 
 | Interaction ID | Question: Which class is responsible for...          | Answer                                 | Justification (with patterns)                                                             |
 |----------------|:-----------------------------------------------------|:---------------------------------------|-------------------------------------------------------------------------------------------|
-|                | ... interacting with the actor?                      | AnalyseParkWaterConsumptionUI          | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
+| Step 1         | ... interacting with the actor?                      | AnalyseParkWaterConsumptionUI          | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
 |                | ... coordinating the US?                             | AnalyseParkWaterConsumptionController  | Controller (Model View Controller)                                                        |
-|                | ... validating file format?                          | AnalyseParkWaterConsumptionController  | Information Expert                                                                        |
-|                | ... performing statistical analysis?                 | AnalyseParkWaterConsumptionController  | Controller: Responsible for executing the statistical analysis logic.                     |
-|                | ... providing statistical results?                   | AnalyseParkWaterConsumptionController  | Controller                                                                                |
+| Step 2         | ... validating file format?                          | AnalyseParkWaterConsumptionController  | Information Expert                                                                        |
+| Step 3         | ... performing statistical analysis?                 | AnalyseParkWaterConsumptionController  | Controller: Responsible for executing the statistical analysis logic.                     |
+| Step 4         | ... providing statistical results?                   | AnalyseParkWaterConsumptionController  | Controller                                                                                |
 |                | ... displaying results to the user?                  | AnalyseParkWaterConsumptionUI          | Pure Fabrication: UI component for displaying results to the user.                        |
 
 ### Systematization ##
