@@ -33,6 +33,7 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 * Collaborator
 * Skill
+* Address
 
 
 Other software classes (i.e. Pure Fabrication) identified: 

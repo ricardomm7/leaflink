@@ -1,28 +1,21 @@
 @startuml
 skinparam shadowing false
-skinparam linetype polyline
+skinparam line type polyline
 
-
-skinparam classAttributeIconSize 0
-
-
-
-class FleetManager {
-}
+'left to right direction
 
 class VehicleCheckup {
-    - String plateNumber
-    - String date
-    - String kmAtCheckup
+    - plateNumber : String
+    - date : Date
+    - kmAtCheckup : int
 }
 
 
 class MaintenanceRepository {
-    + registerVehicleCheckup(plateNumber, date, kmAtCheckup)
+    + registerVehicleCheckup(plateNumber : String, date : Date, kmAtCheckup : int)
 }
 
 class Repositories {
-    - Repositories()
     + getInstance() : Repositories
     + getMaintenanceRepository()
 }
@@ -50,6 +43,5 @@ MaintenanceRepository "1" -> "*" VehicleCheckup
 
 RegisterMaintenanceController ..> VehicleCheckup
 
-VehicleCheckup "*" --> "*" FleetManager : registered by
 
 @enduml

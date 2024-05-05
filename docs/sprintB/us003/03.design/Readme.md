@@ -16,7 +16,7 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... get all the jobs and return them as a list? | JobRepository                  | Information Expert.                                                                     |
 | Step 4         | 	... showing the jobs to select?                | RegisterCollaboratorUI         | Pure Fabrication.                                                                       |
 | Step 5         | ... handling the user selecting a job?          | RegisterCollaboratorUI         | Pure Fabrication.                                                                       |
-| Step 6         | ... show the confirmation i//nfo?               | RegisterCollaboratorUI         | Pure Fabrication.                                                                       |
+| Step 6         | ... show the confirmation info?                 | RegisterCollaboratorUI         | Pure Fabrication.                                                                       |
 | Step 7         | 	... instantiating a new Collaborator?          | CollaboratorRepository         | Creator, High cohesion, Low coupling.                                                   |
 |                | 	... validating all data (local validation)?    | Collaborator                   | Information Expert.                                                                     | 
 |                | 	... validating all data (global validation)?   | CollaboratorRepository         | Information Expert.                                                                     | 

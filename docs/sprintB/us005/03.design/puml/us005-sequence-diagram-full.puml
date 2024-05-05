@@ -48,7 +48,7 @@ activate ADM
 
         activate UI
 
-        UI --> ADM : shows skills list and asks to select one
+        UI --> ADM : shows skills list and asks to select one or more
         deactivate UI
 
     ADM -> UI : selects skills

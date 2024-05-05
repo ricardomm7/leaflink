@@ -47,18 +47,46 @@ activate ADM
     ADM -> UI : confirms data
     activate UI
 
+UI -> CTRL : generateTeam(List<Skill>, minTeamSize, maxTeamSize)
+deactivate UI
+activate CTRL
+ref over CTRL
+                                Get Team Repository
+
+                            end ref
+                            ref over CTRL
+                                                            Get Collaborator Repository
+
+                                                        end ref
+        CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
+
+        CTRL -> TeamRepository : generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
+    deactivate CTRL
+    activate TeamRepository
+    ref over TeamRepository
+                                    Generate Proposal
+
+                                end ref
+                                TeamRepository --> CTRL : team
+                                                                deactivate TeamRepository
+
+                                activate CTRL
+                                CTRL --> UI : team
+                                activate UI
+
+    deactivate CTRL
     UI --> ADM: show the proposal
         deactivate UI
 
-        ADM -> UI: use accepts
+        ADM -> UI: user accepts
         activate UI
 
-        UI -> CTRL : create Team
+        UI -> CTRL : create team
         deactivate UI
         activate CTRL
 
             |||
-                CTRL -> TeamRepository: createTeam(skills, minTeamSize, maxTeamSize)
+            CTRL -> TeamRepository: createTeam(List<Collaborator>, List<Skill>, minTeamSize, maxTeamSize)
                 deactivate CTRL
                 activate TeamRepository
 

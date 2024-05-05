@@ -6,32 +6,39 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer               | Justification (with patterns)                                                                                 |
-|:---------------|:----------------------------------------------|:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?              | CreateTeamUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  	         | 	... coordinating the US?                     | CreateTeamController | Controller                                                                                                    |
-| 			  	         | 	... instantiating a new Task?                | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  	         | ... knowing the user using the system?        | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  	         | 							                                       | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  	         | 							                                       | HRM                  | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		     | 							                                       |                      |                                                                                                               |
-| Step 3  		     | 	...saving the inputted data?                 | Team                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		     | 	...knowing the team information to show?     | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		     | 	... validating all data (local validation)?  | Team                 | IE: owns its data.                                                                                            | 
-| 			  	         | 	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  	         | 	... saving the created team?                 | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 6  		     | 	... informing operation success?             | CreateTeamUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...     | Answer               | Justification (with patterns)                                                             |
+|:---------------|:------------------------------------------------|:---------------------|:------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?                | CreateTeamUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
+| 			  	         | 	... coordinating the US?                       | CreateTeamController | Controller                                                                                |
+| Step 2         | ... requesting data?                            | CreateTeamUI         | Pure Fabrication.                                                                         |
+| Step 3         | ... receiving data?                             | RegisterTeamUI       | Pure Fabrication.                                                                         |
+| Step 7         | ... get the skills list?                        | SkillRepository      | Information Expert.                                                                       |
+|                | ... get the collaborators repository?           | Repositories         | Information Expert, High cohesion, Low coupling.                                          |
+|                | ... matching the skills with the collaborators? | CreateTeamController | Controller.                                                                               |
+|                | ... having all the repositories?                | Repositories         | Information Expert, High cohesion, Low coupling.                                          |
+|                | ... generating a team proposal?                 | TeamRepository       | Creator.                                                                                  |
+| Step 8         | ... displaying the confirmation operation?      | CreateTeamUI         | Pure Fabrication.                                                                         |
+| 	Step 9	       | 	... instantiating a new team.                  | TeamRepository       | Creator.                                                                                  |
+| 		             | 	... validating all data (local validation)?    | Team                 | Information Expert.                                                                       | 
+| 			  	         | 	... validating all data (global validation)?   | TeamRepository       | Information Expert.                                                                       | 
+| 			  	         | 	... saving the created team?                   | TeamRepository       | Information Expert.                                                                       | 
+| Step 10		      | 	... informing operation success?               | CreateTeamUI         | Pure Fabrication.                                                                         | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
 * Team
+* Collaborator
+* Skill
+* Address
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
 * CreateTeamUI  
 * CreateTeamController
+* TeamRepository
+* Repositories
 
 
 ## 3.2. Sequence Diagram (SD)
