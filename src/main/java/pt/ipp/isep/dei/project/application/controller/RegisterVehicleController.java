@@ -7,9 +7,10 @@ import java.util.Date;
 
 public class RegisterVehicleController {
     private final VehicleRepository vehicleRepository;
+    private final Repositories repositories;
 
     public RegisterVehicleController() {
-        Repositories repositories = Repositories.getInstance();
+        repositories = Repositories.getInstance();
         vehicleRepository = repositories.getVehicleRepository();
     }
 

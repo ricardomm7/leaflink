@@ -26,7 +26,7 @@ activate CTRL
                     RepositorySingleton --> CTRL: repositories
                     deactivate RepositorySingleton
 
-                    CTRL -> PLAT: getVehicleRepository
+                    CTRL -> PLAT: getVehicleRepository()
                     activate PLAT
 
                     PLAT --> CTRL: VehicleRepository

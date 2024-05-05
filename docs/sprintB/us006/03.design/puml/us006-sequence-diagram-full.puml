@@ -1,3 +1,4 @@
+
 @startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
@@ -44,7 +45,7 @@ activate VFM
             RepositorySingleton --> CTRL: repositories
             deactivate RepositorySingleton
 
-            CTRL -> PLAT: getVehicleRepository
+            CTRL -> PLAT: getVehicleRepository()
             activate PLAT
 
             PLAT --> CTRL: VehicleRepository

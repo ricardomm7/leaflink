@@ -49,9 +49,8 @@ public class Repositories {
     public TeamRepository getTeamRepository() {
         return teamRepository;
     }
-    public VehicleRepository getVehicleRepository() {return vehicleRepository;
-    }
 
+    public VehicleRepository getVehicleRepository() {return vehicleRepository;}
 
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;

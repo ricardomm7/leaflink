@@ -61,15 +61,7 @@ activate VFM
                 deactivate CTRL
                 activate MaintenanceRepository
 
-
-                    MaintenanceRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesNeedingMaintenanceList)
-                    deactivate MaintenanceRepository
-                    activate MaintenanceReport
-
-                    MaintenanceReport --> MaintenanceRepository : maintenance Report
-                    deactivate MaintenanceReport
-
-                    activate MaintenanceRepository
+                MaintenanceRepository -> MaintenanceRepository: createMaintenanceReport(vehiclesNeedingMaintenanceList)
 
                 MaintenanceRepository --> CTRL : maintenance Report
                 deactivate MaintenanceRepository

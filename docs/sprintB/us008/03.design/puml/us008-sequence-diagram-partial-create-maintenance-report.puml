@@ -12,16 +12,9 @@ activate MaintenanceRepository
 
     group Create Maintenance Report
 
-        MaintenanceRepository -> MaintenanceRepository: getVehiclesNeedingMaintenance(vehicleList)
+         MaintenanceRepository -> MaintenanceRepository: createMaintenanceReport(vehiclesNeedingMaintenanceList)
 
-        MaintenanceRepository -> MaintenanceReport **: createMaintenanceReport(vehiclesList)
-        deactivate MaintenanceRepository
-        activate MaintenanceReport
 
-        MaintenanceReport --> MaintenanceRepository : maintenance Report
-        deactivate MaintenanceReport
-
-        activate MaintenanceRepository
     end group
 
     autonumber 13

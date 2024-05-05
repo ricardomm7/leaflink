@@ -5,27 +5,34 @@ skinparam line type polyline
 'left to right direction
 
     class RegisterVehicleUI {
+        - controller : RegisterVehicleController
         + registerVehicle() : void
     }
 
     class RegisterVehicleController {
+        - repositories: Repositories
         - vehicleRepository : VehicleRepository
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : boolean
+
         + RegisterVehicleController()
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : boolean
     }
 
     class Repositories {
         - instance : Repositories
         - vehicleRepository : VehicleRepository
+
+        - Repositories()
         + getInstance() : Repositories
         + getVehicleRepository() : VehicleRepository
     }
 
     class VehicleRepository {
         - vehicleList : List<Vehicle>
-        + getVehicleList : List<Vehicles>
-        + addVehicle(vehicle: Vehicle) : void
+
+        + VehicleRepository()
+        + getVehicleList () : List<Vehicles>
         + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : boolean
+        + addVehicle(vehicle: Vehicle) : void
         + verifyExistingVehicle(VIN: String, VehiclePlate: String) : boolean
     }
 
@@ -51,6 +58,6 @@ RegisterVehicleController ..> Repositories: repositories
 Repositories --> Repositories: instance
 RegisterVehicleController ..> VehicleRepository: vehicleRepository
 Repositories --> "1"VehicleRepository: vehicleRepository
-VehicleRepository "1"-->"*" Vehicle: vehicle
+VehicleRepository -->"*" Vehicle: vehicle
 
 @enduml

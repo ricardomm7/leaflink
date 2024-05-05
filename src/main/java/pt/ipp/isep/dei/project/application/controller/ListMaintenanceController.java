@@ -35,7 +35,7 @@ public class ListMaintenanceController {
     /**
      * Generate maintenance report.
      */
-    public String generateMaintenanceReport() {
+    public String createMaintenanceReport() {
         return maintenanceRepository.createMaintenanceReport(getVehiclesNeedingMaintenanceList());
     }
 }

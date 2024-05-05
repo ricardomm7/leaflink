@@ -4,25 +4,29 @@ skinparam shadowing false
 skinparam line type polyline
 
 class ListMaintenanceUI{
+    - controller : ListMaintenanceController
+    + listMaintenanceUI()
+    + listVehiclesNeedingMaintenance() void
 }
 
 class ListMaintenanceController {
     - vehicleRepository : VehicleRepository
     - maintenanceRepository : MaintenanceRepository
 
-
-    + createMaintenanceReport(vehiclesList: List<Vehicle>) : MaintenanceReport
-    + getMaintenanceRepository() : maintenanceRepository
-    + getVehicleRepository() : vehicleRepository
+    + listMaintenanceController()
+    + getVehiclesNeedingMaintenanceList() : List <Vehicle>
+    + createMaintenanceReport(vehiclesList) : String
 }
 
 class Repositories {
-    - vehicleRepository : VehicleRepository
-    - maintenanceRepository : MaintenanceRepository
+        - instance : Repositories
+        - vehicleRepository : VehicleRepository
+        - maintenanceRepository : MaintenanceRepository
 
-    + getInstance() : Repositories
-    + getVehicleRepository() : VehicleRepository
-    + getMaintenanceRepository() : MaintenanceRepository
+        - Repositories()
+        + getInstance() : Repositories
+        + getVehicleRepository() : VehicleRepository
+        + getMaintenanceRepository() : MaintenanceRepository
 }
 
 class VehicleRepository {
@@ -33,10 +37,12 @@ class VehicleRepository {
 }
 
 class MaintenanceRepository {
-    - maintenanceReport : MaintenanceReport
+    - maintenanceReport : Maintenance
 
+    + maintenanceRepository()
+    + getMaintenanceList() : List <Maintenance>
     + getVehiclesNeedingMaintenance(vehicleList: List<Vehicle>) : List<Vehicle>
-    + createMaintenanceReport(vehiclesList: List<Vehicle>) : MaintenanceReport
+    + createMaintenanceReport(vehiclesList: List<Vehicle>) : Maintenance
 }
 
 class Vehicle {
@@ -52,26 +58,38 @@ class Vehicle {
      - maintenanceFrequency : int
 
     + Vehicle(VIN: String,brand: String, model: String, type: String, vehiclePlate: String, tareWeight: double, \ngrossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int)
+    + getVehiclePlate() : String
 }
 
 
 
-class MaintenanceReport {
-    - data : String
-    - vehicleList : List<vehicle>
+class Maintenance {
+    - data : Date
+    - vehiclePlate : String
+    - km : int
 
-    + MaintenanceReport(data: String, vehicleList) : List<vehicleList>
-
+    + Maintenance(String vehiclePlate, Date date, int kilometers)
+    + getDate() : Date
+    + getKm() : int
+    + getVehiclePlate() : String
 }
 
 ListMaintenanceUI ..> ListMaintenanceController
+
 ListMaintenanceController ..> Repositories: repositories
+
 Repositories --> Repositories: instance
+
 ListMaintenanceController ..> MaintenanceRepository: MaintenanceRepository
+
 Repositories --> "1"VehicleRepository: VehicleRepository
+
 Repositories --> "1"MaintenanceRepository: MaintenanceRepository
+
 VehicleRepository "1"--> "*"Vehicle: vehicle
-MaintenanceRepository "1"--> "*"Vehicle: vehicle
-MaintenanceRepository "1"-->"*" MaintenanceReport: maintenanceReport
+
+MaintenanceRepository  ..>  VehicleRepository: uses
+
+MaintenanceRepository "1"-->"*" Maintenance: maintenance
 }
 @enduml
