@@ -32,7 +32,7 @@ class CollaboratorRepository {
     + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
     + checkForDuplicates() : void
     + addCollaborator(collaborator) : void
-    + getCollaboratorList : List<Collaborator>
+    + getCollaboratorList() : List<Collaborator>
 }
 
 class JobRepository {
@@ -73,7 +73,7 @@ class Collaborator {
     +setTaxpayerNumber(taxpayerNumber : int) : void
     +setZipCode(zipcode : String) : void
     +getTaxpayerNumber() : int
-    +getName : String
+    +getName() : String
 }
 
 class Address {

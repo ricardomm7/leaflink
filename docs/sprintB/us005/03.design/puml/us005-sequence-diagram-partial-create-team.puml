@@ -5,28 +5,28 @@ skinparam shadowing false
 
 participant "TeamRepository:\nTeamRepository" as TeamRepository
 
-autonumber 16
--> TeamRepository: createTeam(skills, minTeamSize, maxTeamSize )
+autonumber 32
+-> TeamRepository: createTeam(List<Collaborator>, List<Skill>, minTeamSize, maxTeamSize)
 
 activate TeamRepository
     group Create Team
+            activate TeamRepository
 
-                        activate TeamRepository
+            TeamRepository -> Team**: createTeam(List<Collaborator>, List<Skill>, minTeamSize, maxTeamSize)
 
-                        TeamRepository -> Team**: createTeam (skills, maxTeamSize)
+                TeamRepository -> TeamRepository: validateTeam(team)
+            activate TeamRepository
 
-                                TeamRepository -> TeamRepository: validateTeam()
-                                activate TeamRepository
-                                    TeamRepository --> TeamRepository
-                                    deactivate TeamRepository
+                TeamRepository --> TeamRepository
+            deactivate TeamRepository
 
-                            TeamRepository -> TeamRepository: addTeam(team)
+            TeamRepository -> TeamRepository: addTeam(team)
 
 
-                    deactivate TeamRepository
+        deactivate TeamRepository
+
     end
 
-    autonumber 17
     <-- TeamRepository : team
 deactivate TeamRepository
 

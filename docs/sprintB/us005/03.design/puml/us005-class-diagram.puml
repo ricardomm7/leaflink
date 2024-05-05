@@ -1,130 +1,117 @@
 @startuml
-'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-'skinparam linetype orto
 
-skinparam classAttributeIconSize 0
-
-'left to right direction
-
-class ApplicationSession
-{
-    + static getInstance()
-    + getCurrentSession()
+class CreateTeamUI {
 }
 
-class UserSession
-{
-    + getUserEmail()
-}
+class CreateTeamController {
+    - teamRepository : TeamRepository
+    - skillRepository : SkillRepository
+    - collaboratorRepository : CollaboratorRepository
+    + createTeam(collaborators : List<Collaborator>, skills : List<Skill>, minTeamSize : int, maxTeamSize : int) : void
+    + getSkills() : List<Skill>
+        + generateProposal(collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
 
-class Employee {
-    - name
-    - email
-    - position
-    - phone
-}
-
-class Task {
-    - String reference
-    - String description
-    - String informalDescription
-    - String technicalDescription
-    - Integer duration
-    - Double cost
-
-    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
-}
-
-class TaskCategory {
-    - String description
-
-    + TaskCategory(description)
-}
-
-class Organization {
-    - String name
-    - String vatNumber
-    - String website
-    - String phone
-    - String email
-
-    - addTask(task)
-    - validateTask(task)
-    + anyEmployeeHasEmail(email)
-    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
-    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
-    - getEmployeeByEmail(email)
-
-'  +saveTask(task)
-}
-
-class TaskCategoryRepository {
-    + getTaskCategoryByDescription(description)
-}
-
-class OrganizationRepository {
-    + getOrganizationByEmployeeEmail(email)
 }
 
 class Repositories {
-    - Repositories()
     + getInstance() : Repositories
-    + getTaskCategoryRepository()
-    + getOrganizationRepository()
+    + getTeamRepository() : TeamRepository
+    + getSkillRepository() : SkillRepository
+    + getCollaboratorRepository() : CollaboratorRepository
+
 }
 
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
-    + getTaskCategories()
-    + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
-    - getEmployeeFromSession()
+class TeamRepository {
+    - teamList : List<Team>
++ createTeam(skills : List<Skill>, collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
++ validateTeam(team : Team) : boolean
+    + addTeam(team : Team) : void
+    + generateProposal(collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
 }
 
-note right of CreateTaskController
-    - userEmail is obtained
-    from the user session
-    - categoryDescription
-    is retrieved from selected data
-end note
-
-note bottom of TaskCategoryRepository
-    - used for displaying
-    the category list
-end note
-
-class CreateTaskUI {
+class SkillRepository {
+    - skillList : List<Skill>
+    +createSkill(designation : String) : Skill
+        +checkForDuplicates() : void
+        +addSkill(skill): void
 }
 
-Repositories -> Repositories : instance
-ApplicationSession -> ApplicationSession : instance
+class Team {
+    - skills : List<Skill>
+    - minTeamSize : int
+    - maxTeamSize : int
+    - collaborators : List<Collaborator>
+    + Team(skills : List<Skill>, collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
+    + generateProposal(collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
+}
 
-CreateTaskUI .> CreateTaskController
+class Skill {
+    - title : String
+    + Skill(designation : String)
+    +verifyFilled(skill : Skill) : void
+    +verifySpecialCharacters(skill : Skill) : void
+}
 
-CreateTaskController .> Repositories : repositories
+class Collaborator {
+    - name : String
+    - birthdate : Date
+    - contactMobile : String
+    - email : String
+    - admissionDate : Date
+    - job : Job
+    - taxpayerNumber : int
+    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + verifyFilled(collaborator) : boolean
+    + verifyNineDigits(collaborator) : boolean
+    + verifyEmail(collaborator) : boolean
+    + verifyZipCode(collaborator) : boolean
+    + verifyBirth(collaborator) : boolean
+    + verifyIdentificationNumber(collaborator) : boolean
+    + verifyAdmissionDate(collaborator) : boolean
+    - documentType : String
+    - identificationNumber : String
+    +setAddress(address : String) : void
+    +setAdmissionDate(admissionDate : Date) : void
+    +setBirthdate(birthdate : Date) : void
+    +setCity(city : String) : void
+    +setContactMobile(mobile : int) : void
+    +setDocumentType(documentType : String) : void
+    +setEmail(email : String) : void
+    +setIdentificationNumber(identificationNumber : String) : void
+    +setJob(job : Job) : void
+    +setName(name : String) : void
+    +setTaxpayerNumber(taxpayerNumber : int) : void
+    +setZipCode(zipcode : String) : void
+    +getTaxpayerNumber() : int
+    +getName() : String
+}
 
-Repositories -> "1" TaskCategoryRepository
+class Address {
+    -address : String
+    -city : String
+    -zipcode : String
+    +setAddress() : void
+    +setCity() : void
+    +setZipCode() : void
+    +getAddress() : String
+    +getCity() : String
+    +getZipCode() : String
+}
 
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
+CreateTeamUI ..> CreateTeamController
+CreateTeamController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> "1" TeamRepository : teamRepository
+Repositories --> "1" SkillRepository : skillRepository
+CreateTeamController ..> TeamRepository : teamRepository
+CreateTeamController ..> SkillRepository : skillRepository
+TeamRepository --> "*" Team : team
+SkillRepository --> "*" Skill : skill
+Team --> Collaborator : collaborator
+Collaborator --> "1" Address : has
 
-Repositories --> "1" OrganizationRepository
-
-OrganizationRepository --> "*" Organization
-ApplicationSession --> "1" UserSession : userSession
-
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
-Task "*" --> "1" TaskCategory : taskCategory
-TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
-Organization "1" --> "*" Task : tasks
-Task --> Employee : createdBy
-
-Organization --> "*" Employee : employs
 
 @enduml

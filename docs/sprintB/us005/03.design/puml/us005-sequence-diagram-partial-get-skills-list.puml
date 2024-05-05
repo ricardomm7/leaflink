@@ -3,21 +3,16 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber
-
-'hide footbox
-
-participant ":CreateTaskController" as CTRL
+participant ":CreateTeamController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "skillRepository:\nSkillRepository" as SkillRepository
+participant "skillRepository:\nskillRepository" as SkillRepository
 
 autonumber 3
 
- -> CTRL : getSkillsList()
-activate CTRL
-    group Get Skills List
 
+activate CTRL
+    group Get Skill
 
             CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton
@@ -34,13 +29,14 @@ activate CTRL
             CTRL -> SkillRepository : getSkills()
             activate SkillRepository
 
-                SkillRepository --> CTRL : skillList
+                SkillRepository --> CTRL : skillsList
             deactivate SkillRepository
 
 
-    end
-    autonumber 4
-    <-- CTRL  : SkillsList
+    end group
+
+    <-- CTRL : skillsList
+
 deactivate CTRL
 
 

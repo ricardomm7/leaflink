@@ -26,7 +26,7 @@ class CollaboratorRepository {
     + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
     + checkForDuplicates() : void
     + addCollaborator(collaborator) : void
-    + getCollaboratorList : List<Collaborator>
+    + getCollaboratorList() : List<Collaborator>
 }
 
 class SkillRepository {
@@ -43,8 +43,6 @@ class Collaborator {
     - admissionDate : Date
     - job : Job
     - taxpayerNumber : int
-    - documentType : String
-    - identificationNumber : String
     + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
     + verifyFilled(collaborator) : boolean
     + verifyNineDigits(collaborator) : boolean
@@ -53,20 +51,34 @@ class Collaborator {
     + verifyBirth(collaborator) : boolean
     + verifyIdentificationNumber(collaborator) : boolean
     + verifyAdmissionDate(collaborator) : boolean
-    + setAddress(address : String) : void
-    + setAdmissionDate(admissionDate : Date) : void
-    + setBirthdate(birthdate : Date) : void
-    + setCity(city : String) : void
-    + setContactMobile(mobile : int) : void
-    + setDocumentType(documentType : String) : void
-    + setEmail(email : String) : void
-    + setIdentificationNumber(identificationNumber : String) : void
-    + setJob(job : Job) : void
-    + setName(name : String) : void
-    + setTaxpayerNumber(taxpayerNumber : int) : void
-    + setZipCode(zipcode : String) : void
-    + getTaxpayerNumber() : int
-    + getName : String
+    - documentType : String
+    - identificationNumber : String
+    +setAddress(address : String) : void
+    +setAdmissionDate(admissionDate : Date) : void
+    +setBirthdate(birthdate : Date) : void
+    +setCity(city : String) : void
+    +setContactMobile(mobile : int) : void
+    +setDocumentType(documentType : String) : void
+    +setEmail(email : String) : void
+    +setIdentificationNumber(identificationNumber : String) : void
+    +setJob(job : Job) : void
+    +setName(name : String) : void
+    +setTaxpayerNumber(taxpayerNumber : int) : void
+    +setZipCode(zipcode : String) : void
+    +getTaxpayerNumber() : int
+    +getName() : String
+}
+
+class Address {
+    -address : String
+    -city : String
+    -zipcode : String
+    +setAddress() : void
+    +setCity() : void
+    +setZipCode() : void
+    +getAddress() : String
+    +getCity() : String
+    +getZipCode() : String
 }
 
 class Skill {
@@ -85,5 +97,7 @@ AssignSkillController ..> CollaboratorRepository : collaboratorRepository
 AssignSkillController ..> SkillRepository : skillRepository
 CollaboratorRepository --> "*" Collaborator : collaborators
 SkillRepository --> "*" Skill : skill
+Collaborator --> "1" Address : has
+
 
 @enduml

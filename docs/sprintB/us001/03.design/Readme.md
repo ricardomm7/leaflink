@@ -26,7 +26,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 * CreateSkillUI
 * CreateSkillController
-* skillRepository
+* SkillRepository
+* Repositories
 
 
 ## 3.2. Sequence Diagram (SD)

@@ -18,6 +18,7 @@ class Repositories {
 }
 
 class SkillRepository {
+    - skillList : List<Skill>
     +createSkill(designation : String) : Skill
     +checkForDuplicates() : void
     +addSkill(skill): void
