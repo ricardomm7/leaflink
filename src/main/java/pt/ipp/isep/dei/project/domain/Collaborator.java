@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The Collaborator class represents an individual who collaborates within an organization.
@@ -19,6 +21,7 @@ public class Collaborator {
     private Date admissionDate;
     private Job job;
     private Address address;
+    private List<Skill> skills;
 
     /**
      * Constructor for Collaborator class.
@@ -47,6 +50,7 @@ public class Collaborator {
         setIdentificationNumber(identificationNumber);
         setAdmissionDate(admissionDate);
         setJob(job);
+        skills = new ArrayList<>();
     }
 
     /**
@@ -295,5 +299,13 @@ public class Collaborator {
      */
     public String getName() {
         return name;
+    }
+
+    public void assignSkills(Skill[] selectedSkills) {
+        for (Skill skill : selectedSkills) {
+            if (!skills.contains(skill)) {
+                skills.add(skill);
+            }
+        }
     }
 }

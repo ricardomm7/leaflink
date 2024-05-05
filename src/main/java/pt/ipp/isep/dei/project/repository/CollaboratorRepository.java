@@ -23,18 +23,18 @@ public class CollaboratorRepository {
     /**
      * Creates a new collaborator with the provided information and adds it to the repository if it does not already exist.
      *
-     * @param name                the name of the collaborator
-     * @param birthdate           the birthdate of the collaborator
-     * @param contactMobile       the mobile contact number of the collaborator
-     * @param taxpayerNumber      the taxpayer number of the collaborator
-     * @param email               the email address of the collaborator
-     * @param address             the address of the collaborator
-     * @param zipCode             the ZIP code of the collaborator's address
-     * @param city                the city of the collaborator's address
-     * @param documentType        the document type of the collaborator's identification
+     * @param name                 the name of the collaborator
+     * @param birthdate            the birthdate of the collaborator
+     * @param contactMobile        the mobile contact number of the collaborator
+     * @param taxpayerNumber       the taxpayer number of the collaborator
+     * @param email                the email address of the collaborator
+     * @param address              the address of the collaborator
+     * @param zipCode              the ZIP code of the collaborator's address
+     * @param city                 the city of the collaborator's address
+     * @param documentType         the document type of the collaborator's identification
      * @param identificationNumber the identification number of the collaborator
-     * @param admissionDate       the date of admission of the collaborator
-     * @param job                 the job of the collaborator
+     * @param admissionDate        the date of admission of the collaborator
+     * @param job                  the job of the collaborator
      */
     public void create(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
         Collaborator c = new Collaborator(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
@@ -74,6 +74,16 @@ public class CollaboratorRepository {
      */
     public void addCollaborator(Collaborator collab) {
         collaboratorList.add(collab);
+    }
+
+    public void updateCollaborator(Collaborator collaborator) {
+        for (int i = 0; i < collaboratorList.size(); i++) {
+            if (collaboratorList.get(i).getTaxpayerNumber() == collaborator.getTaxpayerNumber()) {
+                collaboratorList.set(i, collaborator);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Collaborator not found in the repository.");
     }
 }
 

@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
-import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 
@@ -18,28 +17,22 @@ public class AssignSkillController {
      * Construvts a new AssignSkillController object.
      * Initializes the CollaboratorRepository and JobRepository instances.
      */
-    public AssignSkillController() {
-        Repositories repositories = Repositories.getInstance();
-        collaboratorRepository = repositories.getCollaboratorRepository();
-        skillRepository = repositories.getSkillRepository();
+    public AssignSkillController(CollaboratorRepository collaboratorRepository, SkillRepository skillRepository) {
+        this.collaboratorRepository = collaboratorRepository;
+        this.skillRepository = skillRepository;
     }
 
-
-
-    /**
-     * Retrieves the list of available collaborators
-     * @return the list of available collaborators
-     */
-    public List<Collaborator> getCollaborator() {
+    public List<Collaborator> getCollaboratorList() {
         return collaboratorRepository.getCollaboratorList();
     }
 
-    /**
-     * Retrieves the list of available skills
-     * @return the list of available skills
-     */
-    public List<Skill> getSkill() {
+    public List<Skill> getSkillList() {
         return skillRepository.getSkillList();
+    }
+
+    public void assignSkill(Collaborator collaborator, Skill skill) {
+        collaborator.assignSkills(new Skill[]{skill});
+        collaboratorRepository.updateCollaborator(collaborator);
     }
 
 }

@@ -3,61 +3,62 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
-import pt.ipp.isep.dei.project.repository.SkillRepository;
 
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * The AssignSkillUI class provides a user interface for assigning a skill to a collaborator.
- */
 public class AssignSkillUI implements Runnable {
 
-    private static Scanner sc =  new Scanner(System.in);
+    private final AssignSkillController assignSkillController;
+    private static final Scanner sc = new Scanner(System.in);
+
+    public AssignSkillUI(AssignSkillController assignSkillController) {
+        this.assignSkillController = assignSkillController;
+    }
+
+    @Override
+    public void run() {
+        assignSkill();
+    }
 
     public void assignSkill() {
-        AssignSkillController as = new AssignSkillController();
         System.out.println("Please select a collaborator to assign a skill to:");
-        List<Collaborator> collaboratorIdentification = as.getCollaborator();
-        for (int i = 0; i < collaboratorIdentification.size(); i++) {
-            System.out.println((i + 1) + ". " + collaboratorIdentification.get(i));
+        List<Collaborator> collaboratorList = assignSkillController.getCollaboratorList();
+        for (int i = 0; i < collaboratorList.size(); i++) {
+            System.out.println((i + 1) + ". " + collaboratorList.get(i).getName());
         }
         int collaboratorIndex = sc.nextInt();
         sc.nextLine();
-        if (collaboratorIndex < 1 || collaboratorIndex > collaboratorIdentification.size()) {
+        if (collaboratorIndex < 1 || collaboratorIndex > collaboratorList.size()) {
             System.out.println("Invalid selection. Please select a valid collaborator index");
             return;
         }
-        Collaborator collaborator = collaboratorIdentification.get(collaboratorIndex - 1);
+        Collaborator selectedCollaborator = collaboratorList.get(collaboratorIndex - 1);
 
         System.out.println("Please select a skill to assign to the collaborator:");
-        List<Skill> skillDesignation = as.getSkill();
-        for (int i = 0; i < skillDesignation.size(); i++) {
-            System.out.println((i + 1) + ". " + skillDesignation.get(i));
+        List<Skill> skillList = assignSkillController.getSkillList();
+        for (int i = 0; i < skillList.size(); i++) {
+            System.out.println((i + 1) + ". " + skillList.get(i).getDesignation());
         }
         int skillIndex = sc.nextInt();
         sc.nextLine();
-        if (skillIndex < 1 || skillIndex > skillDesignation.size()) {
+        if (skillIndex < 1 || skillIndex > skillList.size()) {
             System.out.println("Invalid Selection. Please select a valid skill index");
             return;
         }
-        Skill skill = skillDesignation.get(skillIndex - 1);
+        Skill selectedSkill = skillList.get(skillIndex - 1);
 
-        System.out.println("\n Please review the entered information:");
-        System.out.println("Collaborator: " + collaborator.getIdentification());
-        System.out.println("Assigned skills: " + skill.getSkillDesignation());
+        System.out.println("\nPlease review the entered information:");
+        System.out.println("Collaborator: " + selectedCollaborator.getName());
+        System.out.println("Assigned skill: " + selectedSkill.getDesignation());
 
-        System.out.println("\n Do you want to assign these skills to this collaborator? (Y/N)");
+        System.out.println("\nDo you want to assign this skill to this collaborator? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            as.assignSkill();
-            System.out.println("Skills assigned successfully!");
-        } else { //devia ser else ou especificar mesmo para o N? se carregar noutre tecla qualquer vai cencelar
+            assignSkillController.assignSkill(selectedCollaborator, selectedSkill);
+            System.out.println("Skill assigned successfully!");
+        } else {
             System.out.println("Operation cancelled!");
         }
-    }
-    @Override
-    public void run() {
-
     }
 }
