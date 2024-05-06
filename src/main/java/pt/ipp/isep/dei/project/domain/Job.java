@@ -25,7 +25,7 @@ public class Job {
      * @throws IllegalArgumentException if the title is empty, consists only of whitespace, or contains special characters
      */
     public void setTitle(String title) {
-        if (!verifyFilled(title) || !verifySpecialCharacters(title)) {
+        if (!verifyFilled(title) && verifySpecialCharacters(title)) {
             this.title = title;
         } else {
             throw new IllegalArgumentException("The job title is invalid!");

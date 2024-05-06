@@ -15,6 +15,10 @@ class AssignSkillController {
 }
 
 class Repositories {
+    - instance : Repositories
+    - Repositories()
+    -skillRepository : SkillRepository
+    -collaboratorRepository : CollaboratorRepository
     + getInstance() : Repositories
     + getCollaboratorRepository() : CollaboratorRepository
     + getSkillRepository() : SkillRepository
@@ -67,6 +71,7 @@ class Collaborator {
     +setZipCode(zipcode : String) : void
     +getTaxpayerNumber() : int
     +getName() : String
+    +getBirthdate() : Date
 }
 
 class Address {

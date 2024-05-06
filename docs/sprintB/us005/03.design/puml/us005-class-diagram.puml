@@ -17,6 +17,11 @@ class CreateTeamController {
 }
 
 class Repositories {
+    - instance : Repositories
+    - Repositories()
+    -teamRepository : TeamRepository
+    -skillRepository : SkillRepository
+    -collaboratorRepository : CollaboratorRepository
     + getInstance() : Repositories
     + getTeamRepository() : TeamRepository
     + getSkillRepository() : SkillRepository
@@ -87,6 +92,8 @@ class Collaborator {
     +setZipCode(zipcode : String) : void
     +getTaxpayerNumber() : int
     +getName() : String
+    +getBirthdate() : Date
+
 }
 
 class Address {

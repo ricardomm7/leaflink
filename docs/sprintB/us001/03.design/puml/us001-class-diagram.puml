@@ -15,6 +15,9 @@ class CreateSkillController {
 
 class Repositories {
     +getSkillRepository() : SkillRepository
+    -skillRepository : SkillRepository
+            - instance : Repositories
+            - Repositories()
 }
 
 class SkillRepository {

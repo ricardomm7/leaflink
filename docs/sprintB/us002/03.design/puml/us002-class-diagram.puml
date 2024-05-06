@@ -19,6 +19,9 @@ class CreateJobController {
 class Repositories {
     +getInstance() : Repositories
     +getJobRepository() : JobRepository
+    - instance : Repositories
+    - Repositories()
+    -jobRepository : JobRepository
 }
 
 class JobRepository {

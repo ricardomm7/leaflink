@@ -21,6 +21,10 @@ class RegisterCollaboratorController {
 }
 
 class Repositories {
+    - instance : Repositories
+    - Repositories()
+    -jobRepository : JobRepository
+    -collaboratorRepository : CollaboratorRepository
     + getInstance() : Repositories
     +getJobRepository() : JobRepository
     +getCollaboratorRepository() : CollaboratorRepository
@@ -74,6 +78,7 @@ class Collaborator {
     +setZipCode(zipcode : String) : void
     +getTaxpayerNumber() : int
     +getName() : String
+    +getBirthdate() : Date
 }
 
 class Address {

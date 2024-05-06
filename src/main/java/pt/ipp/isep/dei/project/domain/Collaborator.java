@@ -308,4 +308,8 @@ public class Collaborator {
             }
         }
     }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
 }

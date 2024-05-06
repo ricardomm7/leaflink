@@ -16,6 +16,9 @@ class MaintenanceRepository {
 }
 
 class Repositories {
+-maintenanceRepository : MaintenanceRepository
+        - instance : Repositories
+        - Repositories()
     + getInstance() : Repositories
     + getMaintenanceRepository()
 }

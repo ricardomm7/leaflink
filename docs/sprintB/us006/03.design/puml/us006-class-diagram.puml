@@ -20,7 +20,6 @@ skinparam line type polyline
     class Repositories {
         - instance : Repositories
         - vehicleRepository : VehicleRepository
-
         - Repositories()
         + getInstance() : Repositories
         + getVehicleRepository() : VehicleRepository
