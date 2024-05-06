@@ -1,69 +1,65 @@
-# US006 - Create a Task 
+# US003 - Register a collaborator with a job and fundamental characteristics
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that a valid name is considered valid in the program. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+    @Test
+    public void testSetName_ValidName() {
+        collaborator.setName("Jane Doe");
+        assertEquals("Jane Doe", collaborator.getName());
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that an empty name is not considered valid by the program.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+    @Test
+    public void testSetName_EmptyName() {
+        assertThrows(IllegalArgumentException.class, () -> collaborator.setName(""));
+    }
 
-_It is also recommended to organize this content by subsections._ 
 
+**Test 3:** Verify that a valid date of birth that is over 18 years old is considered valid by the program.
+
+    @Test
+    public void testSetBirthdate_ValidDate() {
+        collaborator.setBirthdate(getDate(1980, Calendar.JANUARY, 1));
+        assertEquals(getDate(1980, Calendar.JANUARY, 1), collaborator.getBirthdate());
+    }
+
+
+**Test 4:** Check that a null date is not considered valid.
+
+    @Test
+    public void testSetBirthdate_NullDate() {
+        assertThrows(IllegalArgumentException.class, () -> collaborator.setBirthdate(null));
+    }
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class RegisterCollaboratorController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
-
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
+public void createCLB(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
+    collaboratorRepository.create(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
 }
 ```
 
-### Class Organization
+### Class CollaboratorRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
+public void create(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
+    Collaborator c = new Collaborator(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
+    if (checkForDuplicates(c)) {
+        addCollaborator(c);
+    }
 }
 ```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* For demo purposes some tasks are bootstrapped while system starts.
+* A new option on the HRM menu & Admin menu, was added.
 
 
 ## 7. Observations

@@ -1,69 +1,67 @@
-# US006 - Create a Task 
+# US002 - Register a Job
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Verify if the valid title is considered valid.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+	@Test
+    public void testSetTitle_ValidTitle() {
+        String validTitle = "Software Engineer";
+        Job job = new Job(validTitle);
+        assertEquals(validTitle, job.getTitle());
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is not possible to create an instance of the Job class with an empty title. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+	@Test
+    public void testSetTitle_InvalidTitle_Empty() {
+        assertThrows(IllegalArgumentException.class, () -> new Job(""));
+    }
 
-_It is also recommended to organize this content by subsections._ 
+
+**Test 3:** Check that it is not possible to create an instance of the Job class with a title containing blanks.
+
+    @Test
+    public void testSetTitle_InvalidTitle_Whitespace() {
+        assertThrows(IllegalArgumentException.class, () -> new Job("   "));
+    }
+
+
+**Test 4:** Check that it is not possible to create an instance of the Job class with a title with symbols.
+
+    @Test
+    public void testSetTitle_InvalidTitle_SpecialCharacters() {
+        assertThrows(IllegalArgumentException.class, () -> new Job("Software Engineer!"));
+    }
+
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class CreateJobController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
-
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
+public void createJob(String title) {
+    jobRepository.createJob(title);
 }
 ```
 
-### Class Organization
+### Class JobRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
+public void createJob(String title) {
+    Job j = new Job(title);
+    if (checkForDuplicates(j)) {
+        addJob(j);
+    }
 }
 ```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* For demo purposes some tasks are bootstrapped while system starts.
+* A new option on the HRM menu & Admin menu, was added.
 
 
 ## 7. Observations

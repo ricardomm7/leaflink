@@ -51,8 +51,6 @@ class CollaboratorTest {
         assertThrows(IllegalArgumentException.class, () -> collaborator.setBirthdate(null));
     }
 
-    // Add more tests for other methods as needed...
-
     // Helper method to create Date objects
     private Date getDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
