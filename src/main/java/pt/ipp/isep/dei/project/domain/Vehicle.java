@@ -270,11 +270,11 @@ public class Vehicle {
         if (!brand.matches("[a-zA-Z0-9]+") || !model.matches("[a-zA-Z0-9]+") || !type.matches("[a-zA-Z0-9]+")) {
             return false;
         }
-        if (VIN == null || !VIN.matches("[a-zA-Z0-9]{17}")) {
+        if (VIN == null || !VIN.matches("[a-zA-Z0-9]{17}+")) {
             return false;
         }
 
-        if (((vehiclePlate == null) || !vehiclePlate.matches("[a-zA-Z0-9]{6}"))) {
+        if (((vehiclePlate == null) || !vehiclePlate.matches("[a-zA-Z0-9]{6}+"))) {
             return false;
         }
 

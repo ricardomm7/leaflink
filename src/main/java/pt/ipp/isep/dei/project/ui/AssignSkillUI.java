@@ -9,11 +9,11 @@ import java.util.Scanner;
 
 public class AssignSkillUI implements Runnable {
 
-    private final AssignSkillController assignSkillController;
+    private final AssignSkillController assignSkillController ;
     private static final Scanner sc = new Scanner(System.in);
 
-    public AssignSkillUI(AssignSkillController assignSkillController) {
-        this.assignSkillController = assignSkillController;
+    public AssignSkillUI() {
+        this.assignSkillController =  new AssignSkillController();
     }
 
     @Override

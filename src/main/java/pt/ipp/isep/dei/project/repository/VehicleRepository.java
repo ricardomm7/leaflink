@@ -36,6 +36,12 @@ public class VehicleRepository {
      * @param vehicle The vehicle
      */
     public void addVehicle(Vehicle vehicle) {
+        if (!vehicle.validateVehicle()) {
+            throw new IllegalArgumentException("Invalid vehicle.");
+        }
+        if (getVehicleList().contains(vehicle)) {
+            throw new IllegalArgumentException("Vehicle already exists.");
+        }
         vehicleList.add(vehicle);
     }
 

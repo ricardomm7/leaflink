@@ -33,7 +33,7 @@ class VehicleRepository {
     - vehicleNeedingMaintenanceList : List<vehicle>
 
     + getVehiclesNeedingMaintenance() : List<vehicle>
-
+    - getLastMaintenanceKm(String vehiclePlate, List<Maintenance> maintenanceList) : double
 }
 
 class MaintenanceRepository {

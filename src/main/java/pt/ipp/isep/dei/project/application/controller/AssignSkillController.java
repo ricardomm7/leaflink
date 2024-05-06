@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 
 public class AssignSkillController {
+    private final Repositories repositories;
     private final SkillRepository skillRepository;
     private final CollaboratorRepository collaboratorRepository;
 
@@ -17,9 +19,10 @@ public class AssignSkillController {
      * Construvts a new AssignSkillController object.
      * Initializes the CollaboratorRepository and JobRepository instances.
      */
-    public AssignSkillController(CollaboratorRepository collaboratorRepository, SkillRepository skillRepository) {
-        this.collaboratorRepository = collaboratorRepository;
-        this.skillRepository = skillRepository;
+    public AssignSkillController() {
+        repositories = Repositories.getInstance();
+        collaboratorRepository = repositories.getCollaboratorRepository();
+        skillRepository = repositories.getSkillRepository();
     }
 
     public List<Collaborator> getCollaboratorList() {
