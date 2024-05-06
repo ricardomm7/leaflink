@@ -309,6 +309,10 @@ public class Collaborator {
         }
     }
 
+    public List<Skill> getSkills() {
+        return new ArrayList<>(skills);
+    }
+
     public Date getBirthdate() {
         return birthdate;
     }
