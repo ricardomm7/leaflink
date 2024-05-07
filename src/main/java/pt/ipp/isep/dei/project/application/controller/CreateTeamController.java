@@ -19,16 +19,14 @@ public class CreateTeamController {
         this.skillRepository = repositories.getSkillRepository();
     }
 
-    public List<Skill> getSkills () {
+    public List<Skill> getSkills() {
         return skillRepository.getSkillList();
     }
 
-    public void createTeam(List<Collaborator> collaborators, List<Skill> skills, int minTeamSize, int maxTeamSize) {
-        List<Collaborator> matchedCollaborator = matchSkills(collaborators, skills);
-        teamRepository.generateProposal(matchedCollaborator, minTeamSize, maxTeamSize);
-    }
-
-    private List<Collaborator> matchSkills(List<Collaborator> collaborators, List<Skill> skills) {
-        return new ArrayList<>();
+    public List<Collaborator> generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
+        // Retrieve collaborators from the repository or any other source
+        List<Collaborator> collaborators = teamRepository.getCollaborators(); // Assuming this method exists to fetch collaborators
+        // Call the generateProposal method of the TeamRepository passing the required arguments
+        return teamRepository.generateProposal(requiredSkills, minTeamSize, maxTeamSize);
     }
 }

@@ -28,35 +28,27 @@ public class TeamRepository {
         // Additional validation logic can be added here
         return true;
     }
-
-    public void addTeam(Team team) {
-        teamList.add(team);
+    public List<Collaborator> getCollaborators() {
+        // Implement method to fetch collaborators from data source (e.g., database)
+        // Return the list of collaborators fetched
+        return new ArrayList<>(); // Placeholder return value
     }
 
-    public List<Collaborator> generateProposal(List<Collaborator> collaborators, List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
-        // Implement logic to select collaborators with combined skills to meet the required skills, within minTeamSize and maxTeamSize
+    public List<Collaborator> generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
         List<Collaborator> selectedCollaborators = new ArrayList<>();
-        for (Collaborator collaborator : collaborators) {
-            if (meetsCombinedSkills(selectedCollaborators, collaborator, requiredSkills) && selectedCollaborators.size() < maxTeamSize) {
-                selectedCollaborators.add(collaborator);
-            }
-        }
+        // Implement logic to select collaborators based on required skills
+        // Ensure the selected collaborators meet the team size constraints
         return selectedCollaborators;
     }
 
-    private boolean meetsCombinedSkills(List<Collaborator> selectedCollaborators, Collaborator newCollaborator, List<Skill> requiredSkills) {
-        List<Skill> combinedSkills = new ArrayList<>();
-        for (Collaborator collaborator : selectedCollaborators) {
-            combinedSkills.addAll(collaborator.getSkills());
-        }
-        combinedSkills.addAll(newCollaborator.getSkills());
+    private boolean meetsRequiredSkills(Collaborator collaborator, List<Skill> requiredSkills) {
+        List<Skill> collaboratorSkills = collaborator.getSkills();
         for (Skill requiredSkill : requiredSkills) {
-            if (!combinedSkills.contains(requiredSkill)) {
+            if (!collaboratorSkills.contains(requiredSkill)) {
                 return false;
             }
         }
         return true;
     }
-
 
 }
