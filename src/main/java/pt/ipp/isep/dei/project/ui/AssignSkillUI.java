@@ -7,20 +7,34 @@ import pt.ipp.isep.dei.project.domain.Skill;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class provides an user inteface for assigning skills to collaborators.
+ * It pronps the user to select a collaborator and a skill, displays the selected choices, and asks for confirmation before assigning the skillto the collaborator.
+ */
 public class AssignSkillUI implements Runnable {
 
     private final AssignSkillController assignSkillController ;
     private static final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Constructs an AssignUI object with a new AssignSkillController instance.
+     */
     public AssignSkillUI() {
         this.assignSkillController =  new AssignSkillController();
     }
 
+    /**
+     * Implements the run method of the Runnable interface.
+     * Calls the assignSkill method.
+     */
     @Override
     public void run() {
         assignSkill();
     }
 
+    /**
+     * Displays a menu to assign a skill to a collaborator
+     */
     public void assignSkill() {
         System.out.println("Please select a collaborator to assign a skill to:");
         List<Collaborator> collaboratorList = assignSkillController.getCollaboratorList();

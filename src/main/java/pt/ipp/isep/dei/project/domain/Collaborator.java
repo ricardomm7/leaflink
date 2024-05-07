@@ -301,6 +301,10 @@ public class Collaborator {
         return name;
     }
 
+    /**
+     * Assigns skills to the collaborator
+     * @param selectedSkills the skills to be assigned
+     */
     public void assignSkills(Skill[] selectedSkills) {
         for (Skill skill : selectedSkills) {
             if (!skills.contains(skill)) {
@@ -309,6 +313,10 @@ public class Collaborator {
         }
     }
 
+    /**
+     * retrieves the skills of the collaborator
+     * @return the list of skills of the collaborator
+     */
     public List<Skill> getSkills() {
         return new ArrayList<>(skills);
     }

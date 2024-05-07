@@ -9,15 +9,18 @@ import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 
 import java.util.List;
 
-
+/**
+ *  The AssignSkillController class handles the logic for assigning skills to collaborators.
+ *  It interacts with the CollaboratorRepository and SkillRepository to retrieve collaborator and skill lists, and updates the collaborator repository after assigning a skill.
+ */
 public class AssignSkillController {
     private final Repositories repositories;
     private final SkillRepository skillRepository;
     private final CollaboratorRepository collaboratorRepository;
 
     /**
-     * Construvts a new AssignSkillController object.
-     * Initializes the CollaboratorRepository and JobRepository instances.
+     * Constructs a new AssignSkillController object.
+     * Initializes the CollaboratorRepository and SkillRepository instances.
      */
     public AssignSkillController() {
         repositories = Repositories.getInstance();
@@ -25,14 +28,27 @@ public class AssignSkillController {
         skillRepository = repositories.getSkillRepository();
     }
 
+    /**
+     * retrieves the list of collaborators
+     * @return the list of collaborators
+     */
     public List<Collaborator> getCollaboratorList() {
         return collaboratorRepository.getCollaboratorList();
     }
 
+    /**
+     * Retrieves the list of skills
+     * @return the list of skills
+     */
     public List<Skill> getSkillList() {
         return skillRepository.getSkillList();
     }
 
+    /**
+     * Assigns a skill to a collaborator
+     * @param collaborator the collaborator to whom the skill is assigned
+     * @param skill the skill to be assigned
+     */
     public void assignSkill(Collaborator collaborator, Skill skill) {
         collaborator.assignSkills(new Skill[]{skill});
         collaboratorRepository.updateCollaborator(collaborator);
