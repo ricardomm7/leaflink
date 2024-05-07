@@ -3,11 +3,22 @@ package pt.ipp.isep.dei.project.domain;
 
 import java.util.Date;
 
+/**
+ * The Maintenance class represents the object maintenance (Check-up).
+ *  It holds information such as vehicle plate, date and kilometers (at the moment of the maintenance).
+ */
 public class Maintenance {
     private final String vehiclePlate;
     private final Date date;
     private final int km;
 
+    /**
+     * Instantiates a new Maintenance with verifications and exceptions.
+     *
+     * @param vehiclePlate the vehicle plate
+     * @param date         the date
+     * @param kilometers   the kilometers
+     */
     public Maintenance(String vehiclePlate, Date date, int kilometers)  {
         if (kilometers < 0) {
             throw new IllegalArgumentException("Kilometers cannot be negative");
@@ -23,14 +34,29 @@ public class Maintenance {
         this.km = kilometers;
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Gets km.
+     *
+     * @return the km
+     */
     public int getKm() {
         return km;
     }
 
+    /**
+     * Get vehicle plate string.
+     *
+     * @return the string
+     */
     public String getVehiclePlate(){
         return vehiclePlate;
     }

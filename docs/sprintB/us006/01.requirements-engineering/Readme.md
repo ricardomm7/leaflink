@@ -44,7 +44,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All attributes must be filled.
+* **AC1:** All attributes must be filled with a valid form.
 * **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
 * **AC3:** Acquisition date must be after the registration date.
 

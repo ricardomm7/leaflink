@@ -251,6 +251,30 @@ class VehicleRepositoryTest {
                 assertEquals(0, vehicleRepository.getVehicleList().size());
             }
 
+            // does not register a vehicle with an acquisition date before the registration date
+            @Test
+            public void test_does_not_register_new_vehicle_with_incorrect_date_input_() {
+
+                VehicleRepository vehicleRepository = new VehicleRepository();
+                String vin = "VIN12345678901234";
+                String brand = "Brand1";
+                String model = "Model1";
+                String type = "Type1";
+                String vehiclePlate = "Plate1";
+                double tareWeight = 1000.0;
+                double grossWeight = 2000.0;
+                int currentKm = 5000;
+                Date registrationDate = new Date(2023,10,10);
+                Date acquisitionDate = new Date(2020,9,9);
+                int maintenanceFrequency = 10000;
+
+                Boolean result = vehicleRepository.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
+                        currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
+
+                assertFalse(result);
+                assertEquals(0, vehicleRepository.getVehicleList().size());
+            }
+
             @Nested
             class TestGetVehicleNeedingMaintenanceFrequency {
 

@@ -2,11 +2,11 @@
 
 ## 4. Tests 
 
-**Test 1:** Check if it is possible to register a vehicle with invalid parameters. 
+**Test 1:** Check if it is possible to register a vehicle with invalid parameters. **AC1**
 
             @Test
             public void test_does_not_register_new_vehicle_with_null_or_empty_input_values() {
-                // Arrange
+
                 VehicleRepository vehicleRepository = new VehicleRepository();
                 String vin = null;
                 String brand = "";
@@ -20,22 +20,49 @@
                 Date acquisitionDate = new Date();
                 int maintenanceFrequency = 10000;
 
-                // Act
                 Boolean result = vehicleRepository.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
                         currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
 
-                // Assert
                 assertFalse(result);
                 assertEquals(0, vehicleRepository.getVehicleList().size());
             }
 
-**Test2** Check if it is possible to register a vehicle with valid parameters.
+**Test 2:** Check that if it is possible to add a vehicle that already exists in the repository. **AC2**
+
+        @Test
+        public void test_add_existing_vehicle_to_repository() {
+
+            VehicleRepository vehicleRepository = new VehicleRepository();
+            Vehicle vehicle = new Vehicle("VIN1234fdhbgterkm", "Brand1", "Model1", "Type1", "Plate1", 1000.0, 2000.0, 5000, new Date(2020, 10, 12), new Date (2022, 10, 12), 10000);
+            vehicleRepository.addVehicle(vehicle);
+
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                vehicleRepository.addVehicle(vehicle);
+            });
+
+            assertEquals("Vehicle already exists.", exception.getMessage());
+        }
+
+**Test 3:** Check if there is a vehicle that already exists in the repository by VIN and if it is in correct form. **AC2**
 
             @Test
-            public void test_register_new_vehicle() {
-                // Arrange
+            public void test_both_vin_and_vehicle_plate_not_null_and_correct_length() {
                 VehicleRepository vehicleRepository = new VehicleRepository();
-                String vin = "VIN1234567890qwer";
+                vehicleRepository.addVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", "Type", "PLATE1", 1000.0, 2000.0, 
+                5000, new Date(2014,10,10), new Date(2022,10,10), 10000));
+
+                boolean result = vehicleRepository.verifyExistingVehicles("VIN12345678901234", "PLATE1");
+
+                assertTrue(result);
+            }
+
+**Test 4:** Check if it is possible to register a vehicle with a registration date after to acquisition date. **AC3**
+
+            @Test
+            public void test_does_not_register_new_vehicle_with_incorrect_date_input_() {
+
+                VehicleRepository vehicleRepository = new VehicleRepository();
+                String vin = "VIN12345678901234";
                 String brand = "Brand1";
                 String model = "Model1";
                 String type = "Type1";
@@ -43,72 +70,18 @@
                 double tareWeight = 1000.0;
                 double grossWeight = 2000.0;
                 int currentKm = 5000;
-                Date registrationDate = new Date(2010, 2, 12);
-                Date acquisitionDate = new Date(2020, 9, 2013);
+                Date registrationDate = new Date(2023,10,10);
+                Date acquisitionDate = new Date(2020,9,9);
                 int maintenanceFrequency = 10000;
 
-                // Act
                 Boolean result = vehicleRepository.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
                         currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
 
-                // Assert
-                assertTrue(result);
-                assertEquals(1, vehicleRepository.getVehicleList().size());
+                assertFalse(result);
+                assertEquals(0, vehicleRepository.getVehicleList().size());
             }
-	
 
-**Test 3:** Check that it is not possible to add a vehicle with invalid attributes.
 
-        @Test
-        public void test_add_invalid_vehicle_to_repository() {
-            // Arrange
-            VehicleRepository vehicleRepository = new VehicleRepository();
-            Vehicle vehicle = new Vehicle("VIN1@@", "@@pp.2123", "Mod---el1", "Type1", "Plate1", -1000.0, -2000.0, 5000, new Date(2020, 10, 12), new Date(2022, 10, 12), 10000);
-
-            // Act
-            try {
-                vehicleRepository.addVehicle(vehicle);
-
-                // Assert
-                fail("Expected IllegalArgumentException to be thrown");
-            } catch (IllegalArgumentException e) {
-                assertEquals("Invalid vehicle.", e.getMessage());
-            }
-        }
-
-**Test 4:** Check that it is possible to add a vehicle with valid attributes.
-
-        @Test
-        public void test_add_vehicle_to_repository() {
-            // Arrange
-            VehicleRepository vehicleRepository = new VehicleRepository();
-            Vehicle vehicle = new Vehicle("VIN1234fdhbgterkm", "Brand1", "Model1", "Type1", "Plate1", 1000.0, 2000.0, 5000, new Date(2020, 10, 12), new Date(2022, 10, 1), 10000);
-
-            // Act
-            vehicleRepository.addVehicle(vehicle);
-            List<Vehicle> result = vehicleRepository.getVehicleList();
-
-            // Assert
-            assertEquals(1, result.size());
-            assertTrue(result.contains(vehicle));
-        }
-
-**Test 5:** Check that if it is possible to add a vehicle that already exists in the repository.
-
-        @Test
-        public void test_add_existing_vehicle_to_repository() {
-            // Arrange
-            VehicleRepository vehicleRepository = new VehicleRepository();
-            Vehicle vehicle = new Vehicle("VIN1234fdhbgterkm", "Brand1", "Model1", "Type1", "Plate1", 1000.0, 2000.0, 5000, new Date(2020, 10, 12), new Date (2022, 10, 12), 10000);
-            vehicleRepository.addVehicle(vehicle);
-
-            // Act & Assert
-            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                vehicleRepository.addVehicle(vehicle);
-            });
-
-            assertEquals("Vehicle already exists.", exception.getMessage());
-        }
 
 _It is also recommended to organize this content by subsections._ 
 

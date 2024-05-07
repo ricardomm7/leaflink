@@ -8,7 +8,9 @@ import pt.ipp.isep.dei.project.repository.VehicleRepository;
 import java.util.List;
 
 /**
- * The type List maintenance controller.
+ * The ListMaintenanceController class manages the listing the vehicles needing a maintenance.
+ * It interacts with the ListMaintenanceUI and with VehicleRepository and MaintenanceRepository
+ * to get vehicle-related information.
  */
 public class ListMaintenanceController {
     private final VehicleRepository vehicleRepository;
@@ -32,8 +34,11 @@ public class ListMaintenanceController {
         return vehicleRepository.getVehiclesNeedingMaintenanceList(maintenanceRepository.getMaintenanceList());
     }
 
+
     /**
-     * Generate maintenance report.
+     * Create maintenance report string.
+     *
+     * @return the string
      */
     public String createMaintenanceReport() {
         return maintenanceRepository.createMaintenanceReport(getVehiclesNeedingMaintenanceList());

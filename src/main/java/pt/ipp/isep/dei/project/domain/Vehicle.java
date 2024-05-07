@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  *
- * The Vehicle class represents the object Vehicle that belongs to an organization.
+ * The Vehicle class represents the object Vehicle.
  * It holds information such as VIN, brand, model, type, plate,tare Weight, gross weight, currently kilometer, registration date,
  * acquisition date and maintenance frequency.
  *
@@ -34,7 +34,7 @@ public class Vehicle {
     public String getVIN() {return VIN;}
 
     /**
-     * Sets VIN of the vehicle.
+     * Sets VIN of the vehicle with validation exception.
      *
      * @param vin New VIN introduced for the vehicle
      */
@@ -53,7 +53,7 @@ public class Vehicle {
     public String getBrand() {return brand;}
 
     /**
-     * Sets brand of the vehicle.
+     * Sets brand of the vehicle with validation exception.
      *
      * @param brand New brand introduced for the vehicle
      */
@@ -72,7 +72,7 @@ public class Vehicle {
     public String getModel() {return model;}
 
     /**
-     * Sets model.
+     * Sets model with validation exception.
      *
      * @param model New model of the vehicle
      */
@@ -92,7 +92,7 @@ public class Vehicle {
 
 
     /**
-     * Sets type.
+     * Sets type with validation exception.
      *
      * @param type New type of vehicle
      */
@@ -111,7 +111,7 @@ public class Vehicle {
     public String getVehiclePlate() {return vehiclePlate;}
 
     /**
-     * Sets vehicle plate.
+     * Sets vehicle plate with validation exception.
      *
      * @param vehiclePlate New vehicle plate
      */
@@ -130,7 +130,7 @@ public class Vehicle {
     public double getTareWeight() {return tareWeight;}
 
     /**
-     * Sets tare weight.
+     * Sets tare weight with validation exception.
      *
      * @param tareWeight New tare weight of the vehicle
      */
@@ -149,7 +149,7 @@ public class Vehicle {
     public double getGrossWeight() {return grossWeight;}
 
     /**
-     * Sets gross weight.
+     * Sets gross weight with validation exception.
      *
      * @param grossWeight New gross weight of the vehicle
      */
@@ -168,7 +168,7 @@ public class Vehicle {
     public int getCurrentKm() {return currentKm;}
 
     /**
-     * Sets current km.
+     * Sets current km with validation exception.
      *
      * @param currentKm New current Kilometer of the vehicle
      */
@@ -187,7 +187,7 @@ public class Vehicle {
     public Date getRegistrationDate() {return registrationDate;}
 
     /**
-     * Sets registration date.
+     * Sets registration date with validation exception.
      *
      * @param registrationDate New registration date of the vehicle
      */
@@ -203,7 +203,7 @@ public class Vehicle {
     public Date getAcquisitionDate() {return acquisitionDate;}
 
     /**
-     * Sets acquisition date.
+     * Sets acquisition date with validation exception.
      *
      * @param acquisitionDate New acquisition date of the vehicle
      */
@@ -217,7 +217,7 @@ public class Vehicle {
     public int getMaintenanceFrequency() {return maintenanceFrequency;}
 
     /**
-     * Sets maintenance frequency.
+     * Sets maintenance frequency with validation exception.
      *
      * @param maintenanceFrequency New maintenance frequency of the vehicle
      */
@@ -301,8 +301,4 @@ public class Vehicle {
     public int hashCode() {
         return VIN.hashCode();
     }
-
-
-
 }
-

@@ -46,8 +46,8 @@ class MaintenanceRepositoryTest {
     public void test_create_maintenance_report() throws FileNotFoundException {
         MaintenanceRepository maintenanceRepository = new MaintenanceRepository();
         List<Vehicle> vehicleList = new ArrayList<>();
-        Vehicle vehicle1 = new Vehicle("VIN123polkiujhygt", "Brand1", "Model1", "Type1", "ABC123", 1000.0, 2000.0, 5000, new Date(), new Date(), 5000);
-        Vehicle vehicle2 = new Vehicle("VIN45sxcdfvmnhre6", "Brand2", "Model2", "Type2", "DEF456", 1500.0, 2500.0, 8000, new Date(), new Date(), 6000);
+        Vehicle vehicle1 = new Vehicle("VIN123polkiujhygt", "Brand1", "Model1", "Type1", "ABC123", 1000.0, 2000.0, 16000, new Date(), new Date(), 5000);
+        Vehicle vehicle2 = new Vehicle("VIN45sxcdfvmnhre6", "Brand2", "Model2", "Type2", "DEF456", 1500.0, 2500.0, 19000, new Date(), new Date(), 6000);
         vehicleList.add(vehicle1);
         vehicleList.add(vehicle2);
         maintenanceRepository.createMaintenance("ABC123", new Date(), 10000);
@@ -55,9 +55,9 @@ class MaintenanceRepositoryTest {
         System.out.println(maintenanceRepository.createMaintenanceReport(vehicleList));
         String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +
-                "ABC123          Brand1          Model1          5000            5000            10000           15000          \n" +
+                "ABC123          Brand1          Model1          16000           5000            10000           15000          \n" +
                 "\n" +
-                "DEF456          Brand2          Model2          8000            6000            12000           18000          \n" +
+                "DEF456          Brand2          Model2          19000           6000            12000           18000          \n" +
                 "\n";
 
         assertEquals(expectedOutput, maintenanceRepository.createMaintenanceReport(vehicleList));

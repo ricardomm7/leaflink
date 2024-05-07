@@ -13,6 +13,9 @@ public class RegisterVehicleUI implements Runnable {
     public static  final Scanner scanner = new Scanner(System.in);
 
 
+    /**
+     * Register vehicle UI.
+     */
     public void registerVehicle() {
         RegisterVehicleController controller = new RegisterVehicleController();
         boolean flag = false;
@@ -97,66 +100,113 @@ public class RegisterVehicleUI implements Runnable {
         } while (!flag);
     }
 
+    /**
+     * Validates the input parameter.
+     * @param vin
+     */
     private void validateVin(String vin) {
         if (vin == null || vin.length() != 17 || !vin.matches("[a-zA-Z0-9]{17}")) {
             throw new IllegalArgumentException("VIN must have 17 alphanumeric characters (letters and numbers).");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param brand
+     */
     private void validateBrand(String brand) {
         if (brand == null || !brand.matches("[a-zA-Z0-9]+")) {
             throw new IllegalArgumentException("Brand name must have only alphanumeric characters (letters and numbers).");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param model
+     */
     private void validateModel(String model) {
         if (model == null || !model.matches("[a-zA-Z0-9]+")) {
             throw new IllegalArgumentException("Model name must have only alphanumeric characters (letters and numbers).");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param type
+     */
     private void validateType(String type) {
         if (type == null || !type.matches("[a-zA-Z0-9]+")) {
             throw new IllegalArgumentException("Vehicle type must have only alphanumeric characters (letters and numbers).");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param vehiclePlate
+     */
     private void validateVehiclePlate(String vehiclePlate) {
         if (vehiclePlate == null || !vehiclePlate.matches("[a-zA-Z0-9]{6}")) {
             throw new IllegalArgumentException("Vehicle plate must have 6 alphanumeric characters (letters and numbers).\n");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param tareWeight
+     */
     private void validateTareWeight(double tareWeight) {
         if (tareWeight <= 0) {
             throw new IllegalArgumentException("Tare weight must be greater than zero.");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param grossWeight
+     */
     private void validateGrossWeight(double grossWeight) {
         if (grossWeight <= 0) {
             throw new IllegalArgumentException("Gross weight must be greater than 0 Kg.");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param currentKm
+     */
     private void validateCurrentKm(int currentKm) {
         if (currentKm < 0) {
             throw new IllegalArgumentException("Current kilometers must be greater than 0 Km.");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param registrationDate
+     * @param acquisitionDate
+     */
     private void validateAcquisitionDate(Date registrationDate, Date acquisitionDate) {
         if (acquisitionDate.before(registrationDate)) {
             throw new InvalidDateException("Acquisition date must be after registration date.");
         }
     }
 
+    /**
+     * Validates the input parameter.
+     * @param maintenanceFrequency
+     */
     private void validateMaintenanceFrequency(int maintenanceFrequency) {
         if (maintenanceFrequency <= 0) {
             throw new IllegalArgumentException("Maintenance frequency must be greater than 0 Km.");
         }
     }
 
+    /**
+     * Parse the input date (String) to Date.
+     * @param dateString
+     * @return
+     * @throws ParseException
+     */
     private Date parseDate(String dateString) throws ParseException {
         String[] parts = dateString.split("[-,. /]");
         if (parts.length != 3) {

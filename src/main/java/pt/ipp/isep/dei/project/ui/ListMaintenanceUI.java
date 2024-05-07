@@ -5,13 +5,23 @@ import pt.ipp.isep.dei.project.domain.Vehicle;
 
 import java.util.List;
 
+
+/**
+ * The ListMaintenanceUI class provides a user interface to get a list of vehicles needing check-up/maintenance.
+ */
 public class ListMaintenanceUI implements Runnable {
     private final ListMaintenanceController controller;
 
+    /**
+     * Instantiates a new List maintenance ui.
+     */
     public ListMaintenanceUI() {
         this.controller = new ListMaintenanceController();
     }
 
+    /**
+     * List vehicles needing maintenance UI.
+     */
     public void listVehiclesNeedingMaintenance() {
         System.out.println("Listing vehicles needing maintenance...");
 

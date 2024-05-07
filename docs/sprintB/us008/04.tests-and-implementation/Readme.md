@@ -2,30 +2,7 @@
 
 ## 4. Tests
 
-**Test 1:** The getVehiclePlate method returns the value of the vehiclePlate attribute.
-
-        @Test
-        public void test_getVehiclePlate_returns_vehiclePlate_attribute_value() {
-            Maintenance maintenance = new Maintenance("ABC123", new Date(2022,1,1),10000);
-
-            assert(maintenance.getVehiclePlate().equals("ABC123"));
-        }
-
-**Test 2:** The constructor throws an exception if the vehiclesPlate parameter is null.
-
-        @Test(expected = IllegalArgumentException.class)
-        public void test_constructor_throws_exception_if_vehiclesPlate_parameter_is_null() {
-            new Maintenance(null, new Date(2021,1,1),  10000);
-        }
-
-**Test 3:** The constructor throws an exception if the vehiclesPlate parameter is invalid.
-
-        @Test(expected = IllegalArgumentException.class)
-        public void test_constructor_throws_exception_if_vehiclesPlate_parameter_is_invalid_string() {
-            new Maintenance("@saswqd3432qqd", new Date(2021,1,1), 10000);
-        }
-
-**Test 4:** Returns an empty list when there are no vehicles in the repository.
+**Test 1:** Returns an empty list when there are no vehicles in the repository.
 
     @Test
     public void test_empty_vehicle_list() {
@@ -37,8 +14,7 @@
         assertTrue(result.isEmpty());
     }
 
-** Test 5:** Returns a list of vehicles needing maintenance when there are vehicles in the repository that require
-maintenance.
+**Test 2:** Returns a list of vehicles needing maintenance when there are vehicles in the repository that require maintenance.
 
     @Test
     public void test_vehicles_needing_maintenance() {
@@ -66,15 +42,14 @@ maintenance.
         assertFalse(result.contains(vehicle2));
     }
 
-**Test 2:** Create a list of Vehicle objects and call createMaintenanceReport method, then verify that the output is
-correct
+**Test 3:** Create a list of Vehicle objects and call createMaintenanceReport method, then verify that the output is correct. **AC1**
 
-	@Test
+    @Test
     public void test_create_maintenance_report() throws FileNotFoundException {
         MaintenanceRepository maintenanceRepository = new MaintenanceRepository();
         List<Vehicle> vehicleList = new ArrayList<>();
-        Vehicle vehicle1 = new Vehicle("VIN123polkiujhygt", "Brand1", "Model1", "Type1", "ABC123", 1000.0, 2000.0, 5000, new Date(), new Date(), 5000);
-        Vehicle vehicle2 = new Vehicle("VIN45sxcdfvmnhre6", "Brand2", "Model2", "Type2", "DEF456", 1500.0, 2500.0, 8000, new Date(), new Date(), 6000);
+        Vehicle vehicle1 = new Vehicle("VIN123polkiujhygt", "Brand1", "Model1", "Type1", "ABC123", 1000.0, 2000.0, 16000, new Date(), new Date(), 5000);
+        Vehicle vehicle2 = new Vehicle("VIN45sxcdfvmnhre6", "Brand2", "Model2", "Type2", "DEF456", 1500.0, 2500.0, 19000, new Date(), new Date(), 6000);
         vehicleList.add(vehicle1);
         vehicleList.add(vehicle2);
         maintenanceRepository.createMaintenance("ABC123", new Date(), 10000);
@@ -82,9 +57,9 @@ correct
         System.out.println(maintenanceRepository.createMaintenanceReport(vehicleList));
         String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +
-                "ABC123          Brand1          Model1          5000            5000            10000           15000          \n" +
+                "ABC123          Brand1          Model1          16000           5000            10000           15000          \n" +
                 "\n" +
-                "DEF456          Brand2          Model2          8000            6000            12000           18000          \n" +
+                "DEF456          Brand2          Model2          19000           6000            12000           18000          \n" +
                 "\n";
 
         assertEquals(expectedOutput, maintenanceRepository.createMaintenanceReport(vehicleList));
@@ -183,16 +158,18 @@ public class MaintenanceRepository {
         for (Maintenance maintenance : maintenanceList) {
             for (Vehicle vehicle : vehicleList) {
                 if (vehicle != null && maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
-                    hasValidEntry = true;
-                    String plate = vehicle.getVehiclePlate();
-                    String brand = vehicle.getBrand();
-                    String model = vehicle.getModel();
-                    int curr_km = vehicle.getCurrentKm();
-                    int freq = vehicle.getMaintenanceFrequency();
-                    int last = maintenance.getKm();
-                    int next = last + freq;
-                    reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
-                            plate, brand, model, curr_km, freq, last, next));
+                    if (vehicle.getCurrentKm() - maintenance.getKm() >= vehicle.getMaintenanceFrequency()) {
+                        hasValidEntry = true;
+                        String plate = vehicle.getVehiclePlate();
+                        String brand = vehicle.getBrand();
+                        String model = vehicle.getModel();
+                        int curr_km = vehicle.getCurrentKm();
+                        int freq = vehicle.getMaintenanceFrequency();
+                        int last = maintenance.getKm();
+                        int next = last + freq;
+                        reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
+                                plate, brand, model, curr_km, freq, last, next));
+                    }
                 }
             }
             reportBuilder.append("\n");
