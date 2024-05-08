@@ -45,5 +45,5 @@ class Document{
 Collaborator "1..*"--"1" Address: has an >
 Collaborator  "1"--"1..*"  Document: has >
 
-Skill "*" -- "1..*" Collaborator : to >
+Skill "*" -- "1..*" Collaborator : assign to >
 @enduml

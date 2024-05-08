@@ -182,7 +182,7 @@ remembering, or it is derivable from the List of Common Associations:
 | Portal            |   is analyzed   |              Stats User Portal |
 | Report Issues     |   is reported   |                         Portal |
 | Team              |      needs      |                          Skill |
-| Skill             |       to        |                   Collaborator |
+| Skill             |    assign to    |                   Collaborator |
 | Team              |       has       |                   Collaborator |
 | Collaborator      |       has       |                            Job |
 | Collaborator      |       has       |                       Document |

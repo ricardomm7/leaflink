@@ -160,9 +160,9 @@ Model "1..*" -- "1" Brand : has <
 
 Collaborator "1" -- "1..*" Document : has >
 
-Job "*" -- "1..*" Collaborator : to >
+Job "*" -- "1..*" Collaborator : assign to >
 
-Skill "*" -- "1..*" Collaborator : to >
+Skill "*" -- "1..*" Collaborator : assign to >
 
 Team "1..*" -- "1..*" Skill : needs >
 

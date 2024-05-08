@@ -47,6 +47,6 @@ class Document{
 ' Relationships
 Collaborator "1..*" -- "1" Address: has  >
 Collaborator  "1" -- "1..*"  Document : has >
-Job "1" -- "1..*" Collaborator : to >
+Job "1" -- "1..*" Collaborator : assign to >
 
 @enduml
