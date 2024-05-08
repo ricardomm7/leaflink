@@ -31,6 +31,20 @@ public class VehicleRepository {
     }
 
     /**
+     * Get vehicles plates list.
+     *
+     * @return the list
+     */
+    public List<String> getVehiclesPlates(){
+        ArrayList plates = new ArrayList<>();
+
+        for (Vehicle vehicle: vehicleList){
+            plates.add(vehicle.getVehiclePlate());
+        }
+        return plates;
+    }
+
+    /**
      * Add vehicle.
      *
      * @param vehicle The vehicle

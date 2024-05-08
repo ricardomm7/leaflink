@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * The RegisterVehicleController class manages the registration of a vehicle within the application.
@@ -50,6 +51,15 @@ public class RegisterVehicleController {
         }
 
         return false;
+    }
+
+    /**
+     * Gets plates list of the vehicles registered.
+     *
+     * @return the plate list
+     */
+    public List<String> getPlatesList() {
+        return vehicleRepository.getVehiclesPlates();
     }
 
 }

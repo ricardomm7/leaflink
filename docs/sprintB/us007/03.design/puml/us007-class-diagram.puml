@@ -4,15 +4,20 @@ skinparam line type polyline
 
 'left to right direction
 
-class VehicleCheckup {
-    - plateNumber : String
-    - date : Date
-    - kmAtCheckup : int
+class Maintenance {
+    - data : Date
+    - vehiclePlate : String
+    - km : int
+
+    + Maintenance(String vehiclePlate, Date date, int kilometers)
+    + getDate() : Date
+    + getKm() : int
+    + getVehiclePlate() : String
 }
 
 
 class MaintenanceRepository {
-    + registerVehicleCheckup(plateNumber : String, date : Date, kmAtCheckup : int)
+    + createMaintenance(String plate, Date date, int currentKm) : void
 }
 
 class Repositories {
@@ -41,10 +46,10 @@ RegisterMaintenanceController ..> MaintenanceRepository
 
 Repositories -> "1" MaintenanceRepository
 
-MaintenanceRepository "1" -> "*" VehicleCheckup
+MaintenanceRepository "1" -> "*" Maintenance
 
 
-RegisterMaintenanceController ..> VehicleCheckup
+RegisterMaintenanceController ..> Maintenance
 
 
 @enduml

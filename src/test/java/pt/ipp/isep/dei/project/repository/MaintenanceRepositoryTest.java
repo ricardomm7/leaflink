@@ -55,9 +55,9 @@ class MaintenanceRepositoryTest {
         System.out.println(maintenanceRepository.createMaintenanceReport(vehicleList));
         String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +
-                "ABC123          Brand1          Model1          16000           5000            10000           15000          \n" +
+                "ABC123          Brand1          Model1          16000           5000            10000           21000          \n" +
                 "\n" +
-                "DEF456          Brand2          Model2          19000           6000            12000           18000          \n" +
+                "DEF456          Brand2          Model2          19000           6000            12000           25000          \n" +
                 "\n";
 
         assertEquals(expectedOutput, maintenanceRepository.createMaintenanceReport(vehicleList));

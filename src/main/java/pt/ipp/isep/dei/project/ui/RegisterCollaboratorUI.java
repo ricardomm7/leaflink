@@ -55,7 +55,7 @@ public class RegisterCollaboratorUI implements Runnable {
         System.out.println("Select a collaborator's job title:");
         List<Job> jobTitles = rc.getJobs();
         for (int i = 0; i < jobTitles.size(); i++) {
-            System.out.println((i + 1) + ". " + jobTitles.get(i));
+            System.out.println((i + 1) + ". "+ jobTitles.get(i).getTitle());
         }
         // Prompt user to select a job title
         int jobIndex = sc.nextInt();

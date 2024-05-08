@@ -78,7 +78,7 @@ public class MaintenanceRepository {
                         int curr_km = vehicle.getCurrentKm();
                         int freq = vehicle.getMaintenanceFrequency();
                         int last = maintenance.getKm();
-                        int next = last + freq;
+                        int next = curr_km + freq;
                         reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
                                 plate, brand, model, curr_km, freq, last, next));
                     }

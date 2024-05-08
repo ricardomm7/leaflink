@@ -1,25 +1,31 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
-import pt.ipp.isep.dei.project.domain.Vehicle;
-import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class RegisterMaintenanceUI implements Runnable{
     private static Scanner sc = new Scanner(System.in);
+    private static RegisterMaintenanceController controller;
 
-    public void RegisterMaintenance() {
-        RegisterMaintenanceController rm = new RegisterMaintenanceController();
+    public RegisterMaintenanceUI() {
+        controller = new RegisterMaintenanceController();
+
+    }
+
+    public void RegisterMaintenance(){
         System.out.println("Select vehicle to register a maintenance.");
+        List<String> plates = controller.getPlatesList();
         // apresentar lista de veículos (verificar se está correto)
-        VehicleRepository vr = new VehicleRepository();
-        for (Vehicle vehicle : vr.getVehicleList()) {
-            System.out.println(vehicle);
+        for (int i = 0; i < plates.size(); i++) {
+            System.out.println((i + 1) + ". "+ plates.get(i));
+
         }
-        //Select option
-        //get vehicle plate number
+        int plateIdx = sc.nextInt();
+        sc.nextLine();
+        String plate = plates.get(plateIdx - 1);
 
         System.out.println("Insert the date of the maintenance (DD-MM-YYYY).");
         String date = sc.nextLine();
@@ -27,12 +33,13 @@ public class RegisterMaintenanceUI implements Runnable{
 
 
         System.out.println("Insert the current Km of the vehicle.");
-        String currentKm = sc.nextLine();
+        int currentKm = sc.nextInt();
+        sc.nextLine();
 
 
         //displays all data and requests confirmation
         System.out.println("Do you want to register this maintenance?");
-        System.out.println("Vehicle plate: " + "VEHICLE PLATE NUMBER");
+        System.out.println("Vehicle plate: " + plate);
         System.out.println("Date: " + date1.toString());
         System.out.println("Current Km: " + currentKm);
 
@@ -40,11 +47,12 @@ public class RegisterMaintenanceUI implements Runnable{
         System.out.println("\nDo you want to register this collaborator? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            rm.createMNT("Vehicle plate" + date1 + currentKm);
+            controller.createMaintenance(plate , date1 , currentKm);
             System.out.println("Collaborator successfully registered!");
         } else {
             System.out.println("Operation cancelled!");
         }
+
     }
 
     private Date parseDate(String dateString) {

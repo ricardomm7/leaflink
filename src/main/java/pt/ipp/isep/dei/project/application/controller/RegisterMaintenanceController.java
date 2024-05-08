@@ -1,32 +1,31 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.domain.Job;
-import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
-import pt.ipp.isep.dei.project.repository.JobRepository;
+import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
+import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.util.Date;
 import java.util.List;
 
 public class RegisterMaintenanceController {
-    private final CollaboratorRepository collaboratorRepository;
-    private final JobRepository jobRepository;
+    private final MaintenanceRepository maintenanceRepository;
+    private VehicleRepository vehicleRepository;
 
 
     public RegisterMaintenanceController() {
         Repositories repositories = Repositories.getInstance();
-        collaboratorRepository = repositories.getCollaboratorRepository();
-        jobRepository = repositories.getJobRepository();
+        maintenanceRepository = repositories.getMaintenanceRepository();
+        vehicleRepository = repositories.getVehicleRepository();
     }
 
-    public void createCLB(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
-        collaboratorRepository.create(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
+    public void createMaintenance(String plate, Date maintenanceDate, int kilometers) {
+        maintenanceRepository.createMaintenance(plate, maintenanceDate, kilometers);
+
     }
 
-    public List<Job> getJobs() {
-        return jobRepository.getJobList();
+    public List<String> getPlatesList(){
+        return vehicleRepository.getVehiclesPlates();
     }
 
-    public void createMNT(String s) {
-    }
+
 }

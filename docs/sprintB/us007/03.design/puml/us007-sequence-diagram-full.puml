@@ -40,18 +40,12 @@ activate VFM
                 PLAT --> CTRL: VehicleRepository
             deactivate PLAT
 
-            CTRL -> VehicleRepository : getVehiclesList()
+            CTRL -> VehicleRepository : getVehiclesPlates()
             activate VehicleRepository
 
-                VehicleRepository --> CTRL : vehicleList
+                VehicleRepository --> CTRL : platesList
             deactivate VehicleRepository
 
-            CTRL -> VehicleRepository : getPlatesListByVehicle(vehicleList)
-            activate VehicleRepository
-
-            VehicleRepository -> VehicleRepository: getVehiclePlate(vehicleList)
-
-            VehicleRepository --> CTRL: platesList
             deactivate VehicleRepository
 
 
@@ -95,11 +89,11 @@ activate VFM
             PLAT --> CTRL : MaintenanceRepository
             deactivate PLAT
 
-            CTRL -> MaintenanceRepository : register maintenance
+            CTRL -> MaintenanceRepository : createMaintenance(vehicle plate, date, current Km)
                         deactivate CTRL
             activate MaintenanceRepository
 
-            MaintenanceRepository -> Maintenance** : create(vehicle plate, date, current Km)
+            MaintenanceRepository -> Maintenance** : createMaintenance(vehicle plate, date, current Km)
             deactivate MaintenanceRepository
             activate Maintenance
 

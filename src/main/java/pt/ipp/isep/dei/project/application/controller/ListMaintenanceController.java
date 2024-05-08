@@ -40,7 +40,7 @@ public class ListMaintenanceController {
      *
      * @return the string
      */
-    public String createMaintenanceReport() {
-        return maintenanceRepository.createMaintenanceReport(getVehiclesNeedingMaintenanceList());
+    public String createMaintenanceReport(List<Vehicle> vehicles) {
+        return maintenanceRepository.createMaintenanceReport(vehicles);
     }
 }
