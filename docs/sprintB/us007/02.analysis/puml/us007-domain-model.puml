@@ -27,8 +27,17 @@ registrationDate
 acquisitionDate
 maintenanceFrequency
 type
-
 }
 
+class Brand {
+    designation
+}
+
+class Model{
+    designation
+}
+
+Vehicle "1..*"-- "1" Brand: has >
+Brand "1" -- "1..*" Model: has >
 Vehicle "1" - "*" VehicleCheckup : needs >
 @enduml

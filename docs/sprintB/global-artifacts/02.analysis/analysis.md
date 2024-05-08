@@ -154,34 +154,42 @@ remembering, or it is derivable from the List of Common Associations:
 
 | Concept (A) 		    | Association   	 |                    Concept (B) |
 |-------------------|:---------------:|-------------------------------:|
-| Task  	           |    assign to    |                           Team |
-| Vehicles  	       |     used by     |                           Task |
+| Agenda            |       has       |                           Task |
+| Task              |    can have     |                    Garden Tool |
+| Task              |      needs      |                        Vehicle |
+| Task              |      needs      |                       Machines |
+| Task              |    assign to    |                    Green Space |
+| Task              |    assign to    |                           Team |
 | Vehicle           |       has       |                          Brand |
+| Vehicle           |       has       |                       Check-up |
+| Machine           |       has       |                          Brand |
 | Brand             |       has       |                          Model |
+| Green Space       |       has       |                 User Equipment |
+| Green Space       |       has       |                        Address |
+| Green Space       |   is divided    |                          Zones |
+| Zones             |    can have     |               Lightning System |
+| Zones             |    can have     |              Irrigation System |
+| Zones             |    can have     |                Drainage System |
+| Zones             |    can have     |                Drinking System |
+| Lightning system  |      have       |            Lightning Equipment |
+| Irrigation system |      have       |           Irrigation Equipment |
+| Drainage system   |      have       |             Drainage Equipment |
+| Drinking system   |      have       |             Drinking Equipment |
+| Green Space       |   is analyzed   |     Water Statistical Analysis |
+| Green Space       |       has       |              Electronic Device |
+| Electronic Device |   is analyzed   | Equipment Statistical Analysis |
+| Green Space       |  is connected   |                         Portal |
+| Portal            |   is analyzed   |              Stats User Portal |
+| Report Issues     |   is reported   |                         Portal |
+| Team              |      needs      |                          Skill |
+| Skill             |       to        |                   Collaborator |
+| Team              |       has       |                   Collaborator |
 | Collaborator      |       has       |                            Job |
 | Collaborator      |       has       |                       Document |
 | Collaborator      |       has       |                        Address |
-| Green Space       |       has       |                        Address |
-| Green Space       |       has       |              Electronic Device |
-| Vehicle           |      needs      |                        Checkup |
 | Collaborator      |   assigned to   |                           Team |
-| Task              |    can need     |                        Vehicle |
-| Task              |    includes     |                         Skills |
-| GardenTools       |    used for     |                          Tasks |
-| Machines          |    used for     |                          Tasks |
-| Garden Equipment  |     used by     |                            GSU |
-| Task              |  scheduled in   |                         Agenda |
 | GSU               | interacts with  |                    User Portal |
 | GSU               | interacts with  |              Electronic Device |
-| Collaborator      |    can have     |                         Skills |
-| Green Space       |    can have     |               Lightning system |
-| Green Space       |    can have     |              Irrigation System |
-| Green Space       |  is connected   |                         Portal |
-| Green Space       |   is analyzed   |     Water Statistical Analysis |
-| Portal            |   is analyzed   |              Stats User Portal |
-| Electronic Device |   is analyzed   | Equipment Statistical Analysis |
-
-
 
 ## Domain Model
 

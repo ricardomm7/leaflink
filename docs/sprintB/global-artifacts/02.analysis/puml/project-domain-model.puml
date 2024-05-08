@@ -92,12 +92,12 @@ class Task{
     date
 }
 
-class Machines{
+class Machine{
     designation
     machineNumber
 }
 
-class GardenTools{
+class GardenTool{
     designation
     toolsNumber
 }
@@ -200,13 +200,13 @@ ReportIssues "*" -- "1" Portal: is reported >
 
 Task "1" -- "*" Vehicle : needs >
 
-Task "1" --"*" Machines: needs >
+Task "1" --"*" Machine: needs >
 
-Machines "*" -- "1" Brand: has >
+Machine "*" -- "1" Brand: has >
 
 Task "1" -- "1" Team : is assigned >
 
-Task "1" -- "*" GardenTools : has >
+Task "1" -- "*" GardenTool : has >
 
 Task "*" -- "1" GreenSpace: assigned to:
 
