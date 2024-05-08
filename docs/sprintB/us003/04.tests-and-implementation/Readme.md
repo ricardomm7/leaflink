@@ -23,17 +23,28 @@
 
     @Test
     public void testSetBirthdate_ValidDate() {
-        collaborator.setBirthdate(getDate(1980, Calendar.JANUARY, 1));
-        assertEquals(getDate(1980, Calendar.JANUARY, 1), collaborator.getBirthdate());
+        Date expectedDate = getDate(1980, Calendar.JANUARY, 1);
+
+        collaborator.setBirthdate(expectedDate);
+
+        Date actualDate = collaborator.getBirthdate();
+        assertEquals(expectedDate.getTime(), actualDate.getTime());
     }
 
+**Test 4:** Checks whether a non-adult age is considered invalid by the program.
 
-**Test 4:** Check that a null date is not considered valid.
+    @Test
+    public void testSetAdmissionDate_NotAdultAtAdmission() {
+        assertThrows(IllegalArgumentException.class, () -> collaborator.setAdmissionDate(getDate(2002, Calendar.JANUARY, 1)));
+    }
+
+**Test 5:** Check that a null date is not considered valid.
 
     @Test
     public void testSetBirthdate_NullDate() {
         assertThrows(IllegalArgumentException.class, () -> collaborator.setBirthdate(null));
     }
+
 
 ## 5. Construction (Implementation)
 

@@ -2,10 +2,8 @@ package pt.ipp.isep.dei.project.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Calendar;
 import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CollaboratorTest {
@@ -42,8 +40,12 @@ class CollaboratorTest {
 
     @Test
     public void testSetBirthdate_ValidDate() {
-        collaborator.setBirthdate(getDate(1980, Calendar.JANUARY, 1));
-        assertEquals(getDate(1980, Calendar.JANUARY, 1), collaborator.getBirthdate());
+        Date expectedDate = getDate(1980, Calendar.JANUARY, 1);
+
+        collaborator.setBirthdate(expectedDate);
+
+        Date actualDate = collaborator.getBirthdate();
+        assertEquals(expectedDate.getTime(), actualDate.getTime());
     }
 
     @Test
@@ -51,7 +53,11 @@ class CollaboratorTest {
         assertThrows(IllegalArgumentException.class, () -> collaborator.setBirthdate(null));
     }
 
-    // Helper method to create Date objects
+    @Test
+    public void testSetAdmissionDate_NotAdultAtAdmission() {
+        assertThrows(IllegalArgumentException.class, () -> collaborator.setAdmissionDate(getDate(2002, Calendar.JANUARY, 1)));
+    }
+
     private Date getDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);

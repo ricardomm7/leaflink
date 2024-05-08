@@ -195,7 +195,7 @@ public class Collaborator {
      * @param name the field analysed
      * @return true if is filled and false if it isn't
      */
-    private boolean verifyFilled(String name) {
+    public boolean verifyFilled(String name) {
         return (!name.trim().isEmpty());
     }
 
@@ -205,7 +205,7 @@ public class Collaborator {
      * @param date the birthdate to verify
      * @return true if the birthdate is valid, false otherwise
      */
-    private boolean verifyBirth(Date date) {
+    public boolean verifyBirth(Date date) {
         if (date == null) {
             return false;
         }
@@ -221,7 +221,7 @@ public class Collaborator {
      * @param number the number to verify
      * @return true if the number has exactly nine digits, false otherwise
      */
-    private boolean verifyNineDigits(int number) {
+    public boolean verifyNineDigits(int number) {
         return (String.valueOf(number).length() == 9);
     }
 
@@ -231,7 +231,7 @@ public class Collaborator {
      * @param email the email address to verify
      * @return true if the email address is valid, false otherwise
      */
-    private boolean verifyEmail(String email) {
+    public boolean verifyEmail(String email) {
         if (email == null) {
             return false;
         }
@@ -248,7 +248,7 @@ public class Collaborator {
      * @param identificationNumber the identification number to verify
      * @return true if the identification number consists of only letters and numbers, false otherwise
      */
-    private boolean verifyIdentificationNumber(String identificationNumber) {
+    public boolean verifyIdentificationNumber(String identificationNumber) {
         if (identificationNumber == null) {
             return false;
         }
@@ -268,7 +268,7 @@ public class Collaborator {
      * @param admissionDate the admission date to verify
      * @return true if the admission date is valid, false otherwise
      */
-    private boolean verifyAdmissionDate(Date admissionDate) {
+    public boolean verifyAdmissionDate(Date admissionDate) {
         if (admissionDate == null || this.birthdate == null) {
             return false;
         }
