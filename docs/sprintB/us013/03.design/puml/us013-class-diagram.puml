@@ -1,0 +1,35 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+
+class RunTestsUI{
+}
+
+class RunTestsController{
+}
+
+class ExternalCSV {
+}
+
+abstract class Gnuplot{
+}
+
+abstract class Graphviz{
+}
+
+class KruskalAlgorithm{
+}
+
+class Route{
+}
+
+class WaterPoint{
+}
+
+RunTestsUI ..> RunTestsController
+RunTestsController ..> Gnuplot
+RunTestsController ..> ExternalCSV
+RunTestsController ..>
+@enduml

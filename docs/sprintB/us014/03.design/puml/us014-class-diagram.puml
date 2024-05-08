@@ -8,16 +8,14 @@ class RunTestsUI{
 }
 
 class RunTestsController{
++ executeMultiple()
 }
 
-class RunGraphWaterPoint {
-    + runCalculus()
+class Gnuplot {
+    + execute()
 }
 
-class GraphTest {
-    arrayList<Route>
-    + compareResults()
-}
-
+RunTestsUI..>RunTestsController
+RunTestsController..>Gnuplot
 
 @enduml

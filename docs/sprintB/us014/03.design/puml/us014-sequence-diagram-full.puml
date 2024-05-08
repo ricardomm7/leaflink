@@ -9,8 +9,8 @@ autonumber
 actor "QAM" as QAM
 participant ":RunTestsUI" as UI
 participant ":RunTestsController" as CTRL
-participant ":GraphTest" as Test
-participant ":RunGraphWaterPoint" as RunGraphWP
+participant ":Gnuplot" as Gnuplot
+
 activate QAM
 
         QAM -> UI : asks to run a test
@@ -21,29 +21,23 @@ activate QAM
             UI -> CTRL** : create
             activate CTRL
 
-                CTRL -> Test : runs
-                deactivate CTRL
-                activate Test
-
-                    ref over Test
-                                            Run Tests
-                                       end
-
-
-
-
-                Test --> CTRL : test results
-                deactivate  Test
-
+                CTRL -> CTRL : executeMultiple()
                 activate CTRL
-            deactivate Test
+                CTRL --> CTRL
+                deactivate CTRL
+                CTRL -> Gnuplot : execute()
+                activate Gnuplot
+                Gnuplot -> CTRL : results
+                deactivate Gnuplot
 
             CTRL --> UI : test results
 
         deactivate CTRL
 
-    UI --> QAM : Displays passed or failed tests
+    UI --> QAM : displays graph
     deactivate UI
 deactivate QAM
+
+
 
 @enduml
