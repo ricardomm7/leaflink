@@ -1,0 +1,63 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "GSM" as GSM
+participant ":RunTestsUI" as UI
+participant ":RunTestsController" as CTRL
+participant ":ExternalCSV" as extenal
+participant ":Graphviz" as graph
+participant ":KruskalAlgorithm" as kskl
+
+activate GSM
+
+GSM -> UI : wants to calculate the minimum cost tree
+activate UI
+UI->CTRL** : create
+UI --> GSM : asks for a file
+GSM -> UI : uploads the file
+UI->CTRL : gives the filepath
+deactivate UI
+activate CTRL
+CTRL -> extenal** : create
+activate extenal
+CTRL -> extenal : import all routes from the file
+extenal --> CTRL : gives all the routes
+deactivate extenal
+CTRL -> kskl : asks to calculate
+deactivate CTRL
+activate kskl
+kskl -> kskl : sort all the routes by cost
+kskl -> kskl : initializes vertexes
+kskl -> kskl : Kruskal's algorithm to find MST
+kskl -> CTRL : MST list of routes
+deactivate kskl
+activate CTRL
+CTRL -> graph : execute(listMST)
+activate graph
+graph -> graph : write and execute
+graph --> CTRL : graph done
+deactivate graph
+CTRL -> extenal : writeMSTCSV(listMST)
+activate extenal
+extenal -> extenal : writes csv
+extenal --> CTRL :csv done
+deactivate extenal
+CTRL --> UI : done
+deactivate CTRL
+activate UI
+
+UI -->GSM : operation success
+deactivate UI
+
+
+
+
+
+
+
+@enduml
