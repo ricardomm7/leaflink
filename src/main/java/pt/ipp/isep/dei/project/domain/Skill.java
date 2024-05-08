@@ -10,16 +10,16 @@ public class Skill {
     }
 
     public void setDesignation(String designation) {
-        if (!verifyFilled(designation) || !verifySpecialCharacters(designation)) {
+        if (!verifyFilled(designation) && verifySpecialCharacters(designation)) {
             this.designation = designation;
         } else {
             throw new IllegalArgumentException("The skill designation is invalid!");
         }
     }
 
-    private boolean verifySpecialCharacters(String designation) {
+    private boolean verifySpecialCharacters(String title) {
         String regex = "^[a-zA-Z0-9 ]+$";
-        return Pattern.matches(regex, designation);
+        return Pattern.matches(regex, title);
     }
 
     private boolean verifyFilled(String title) {

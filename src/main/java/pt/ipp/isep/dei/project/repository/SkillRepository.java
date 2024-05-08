@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.project.repository;
 
-import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
 
 import java.util.ArrayList;
