@@ -1,70 +1,72 @@
-# US006 - Create a Task 
+# US001 - Register a Skill
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check if a valid designation is considered valid by the program. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
-	
+    @Test
+    public void testValidSkillDesignation() {
+        String validDesignation = "Programming";
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+        Skill skill = new Skill(validDesignation);
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+        assertEquals(validDesignation, skill.getDesignation());
+    }
 
-_It is also recommended to organize this content by subsections._ 
+**Test 2:** Check if an invalid designation (with special characters) is considered invalid by the program.
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidSkillDesignationWithSpecialCharacters() {
+        String invalidDesignation = "Progra**mming";
+
+        new Skill(invalidDesignation);
+    }
+
+**Test 3:** Check if an empty designation is considered invalid by the program.
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidSkillDesignationWithEmptyString() {
+        String invalidDesignation = "";
+
+        new Skill(invalidDesignation);
+
+    }
+
+**Test 4:** Check whether a designation full of spaces is considered invalid by the program.
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidSkillDesignationWithOnlySpaces() {
+        String invalidDesignation = "    ";
+
+        new Skill(invalidDesignation);
+    }
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class CreateSkillController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
-
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
+public void createSkill(String designation){
+    skillRepository.createSkill(designation);
 }
 ```
 
-### Class Organization
+### Class SkillRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
+public void createSkill (String designation){
+    Skill skill = new Skill(designation);
+    if (checkForDuplicates(skill)) {
+        addSkill(skill);
+    }
 }
 ```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* For demo purposes some tasks are bootstrapped while system starts.
-
+* A new option on the HRM menu and Admin menu was added.
 
 ## 7. Observations
 
