@@ -5,7 +5,7 @@ skinparam line type polyline
 
 class ListMaintenanceUI{
     - controller : ListMaintenanceController
-    + listMaintenanceUI()
+    + ListMaintenanceUI()
     + listVehiclesNeedingMaintenance() void
 }
 
@@ -13,9 +13,9 @@ class ListMaintenanceController {
     - vehicleRepository : VehicleRepository
     - maintenanceRepository : MaintenanceRepository
 
-    + listMaintenanceController()
+    + ListMaintenanceController()
     + getVehiclesNeedingMaintenanceList() : List <Vehicle>
-    + createMaintenanceReport(vehiclesList) : String
+    + createMaintenanceReport(List <Vehicle> : vehiclesList) : String
 }
 
 class Repositories {
@@ -33,7 +33,7 @@ class VehicleRepository {
     - vehicleNeedingMaintenanceList : List<vehicle>
 
     + getVehiclesNeedingMaintenance() : List<vehicle>
-    - getLastMaintenanceKm(String vehiclePlate, List<Maintenance> maintenanceList) : double
+    + getLastMaintenanceKm(String vehiclePlate, List<Maintenance> maintenanceList) : double
 }
 
 class MaintenanceRepository {

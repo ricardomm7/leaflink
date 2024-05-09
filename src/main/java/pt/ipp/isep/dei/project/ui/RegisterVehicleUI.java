@@ -11,13 +11,16 @@ import java.util.Scanner;
  */
 public class RegisterVehicleUI implements Runnable {
     public static  final Scanner scanner = new Scanner(System.in);
+    private final RegisterVehicleController controller;
 
+    public RegisterVehicleUI(){
+        this.controller = new RegisterVehicleController();
+    }
 
     /**
      * Register vehicle UI.
      */
     public void registerVehicle() {
-        RegisterVehicleController controller = new RegisterVehicleController();
         boolean flag = false;
 
         do {
@@ -236,11 +239,6 @@ public class RegisterVehicleUI implements Runnable {
      * The type Invalid date exception.
      */
     static class InvalidDateException extends RuntimeException {
-        /**
-         * Instantiates a new Invalid date exception.
-         *
-         * @param message The message
-         */
         public InvalidDateException(String message) {
             super(message);
         }

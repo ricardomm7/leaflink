@@ -6,6 +6,7 @@ skinparam line type polyline
 
     class RegisterVehicleUI {
         - controller : RegisterVehicleController
+        + RegisterVehicleUI()
         + registerVehicle() : void
     }
 
@@ -14,7 +15,7 @@ skinparam line type polyline
         - vehicleRepository : VehicleRepository
 
         + RegisterVehicleController()
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : boolean
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
     }
 
     class Repositories {
@@ -30,9 +31,9 @@ skinparam line type polyline
 
         + VehicleRepository()
         + getVehicleList () : List<Vehicles>
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : boolean
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
         + addVehicle(vehicle: Vehicle) : void
-        + verifyExistingVehicle(VIN: String, VehiclePlate: String) : boolean
+        + verifyExistingVehicle(VIN: String, VehiclePlate: String) : Boolean
     }
 
     class Vehicle {
@@ -48,8 +49,8 @@ skinparam line type polyline
         - acquisitionDate : Date
         - maintenanceFrequency : int
 
-        + validateVehicle(vehicle: Vehicle) : boolean
         + Vehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int)
+        + validateVehicle(vehicle: Vehicle) : Boolean
     }
 
 RegisterVehicleUI ..> RegisterVehicleController

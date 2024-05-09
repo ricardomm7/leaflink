@@ -11,7 +11,7 @@ import java.util.List;
  * The CreateTeamUI class provides a user interface for generating team proposals.
  * It interacts with the CreateTeamController to obtain skills, minimum and maximum team sizes, and generates a proposal of collaborators for the team.
  */
-public class CreateTeamUI {
+public class CreateTeamUI implements Runnable {
     private final CreateTeamController createTeamController;
     private final Scanner scanner;
 

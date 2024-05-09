@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.ui.console.menu;
 
 
 import pt.ipp.isep.dei.project.ui.*;
-import pt.ipp.isep.dei.project.ui.console.ShowTextUI;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Register Job", new CreateJobUI()));
         options.add(new MenuItem("Register a Skill", new CreateSkillUI()));
         options.add(new MenuItem("Assign a Skill to Collaborator", new AssignSkillUI()));
-        options.add(new MenuItem("Generate Team Proposal", new ShowTextUI("Apagar até ao new e colocar devido UI")));
+        options.add(new MenuItem("Generate Team Proposal", new CreateTeamUI()));
         options.add(new MenuItem("Register a Vehicle", new RegisterVehicleUI()));
         options.add(new MenuItem("Register a Vehicle's Maintenance", new RegisterMaintenanceUI()));
         options.add(new MenuItem("List Vehicles Needing Maintenance", new ListMaintenanceUI()));

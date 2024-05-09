@@ -11,7 +11,6 @@ public class Main {
         try {
             MainMenuUI menu = new MainMenuUI();
             menu.run();
-            bootstrap.run();
         } catch (Exception e) {
             e.printStackTrace();
         }
