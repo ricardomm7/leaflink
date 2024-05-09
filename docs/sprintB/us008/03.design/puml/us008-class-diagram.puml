@@ -91,5 +91,5 @@ VehicleRepository "1"--> "*"Vehicle: vehicle
 MaintenanceRepository  ..>  VehicleRepository: uses
 
 MaintenanceRepository "1"-->"*" Maintenance: maintenance
-}
+
 @enduml
