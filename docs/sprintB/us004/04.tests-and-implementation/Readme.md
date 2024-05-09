@@ -19,8 +19,6 @@
 		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
 	}
 
-_It is also recommended to organize this content by subsections._ 
-
 
 ## 5. Construction (Implementation)
 

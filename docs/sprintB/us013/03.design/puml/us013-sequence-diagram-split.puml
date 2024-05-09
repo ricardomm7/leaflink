@@ -7,8 +7,8 @@ autonumber
 
 'hide footbox
 actor "GSM" as GSM
-participant ":RunTestsUI" as UI
-participant ":RunTestsController" as CTRL
+participant ":WaterIrrigationUI" as UI
+participant ":WaterIrrigationController" as CTRL
 participant ":ExternalCSV" as extenal
 participant ":Graphviz" as graph
 participant ":KruskalAlgorithm" as kskl

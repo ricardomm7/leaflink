@@ -82,10 +82,6 @@
             }
 
 
-
-_It is also recommended to organize this content by subsections._ 
-
-
 ## 5. Construction (Implementation)
 
 ### Class RegisterVehicleUI 
