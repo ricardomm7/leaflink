@@ -3,8 +3,6 @@ package pt.ipp.isep.dei.project.domain;
 
 import java.util.Date;
 
-
-
 /**
  *
  * The Vehicle class represents the object Vehicle.

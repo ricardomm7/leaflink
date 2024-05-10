@@ -13,6 +13,9 @@ import java.util.Scanner;
 public class RegisterCollaboratorUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Registers a new collaborator based on user input.
+     */
     public void registerCollaborator() {
         RegisterCollaboratorController rc = new RegisterCollaboratorController();
         System.out.println("Enter collaborator's name:");
@@ -93,6 +96,13 @@ public class RegisterCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Parses a string representation of a date into a Date object.
+     *
+     * @param dateString the string representation of the date.
+     * @return the Date object.
+     * @throws IllegalArgumentException if the date format is invalid.
+     */
     private Date parseDate(String dateString) {
         String[] parts = dateString.split("/");
         if (parts.length != 3) {

@@ -4,10 +4,16 @@ import pt.ipp.isep.dei.project.application.controller.CreateSkillController;
 
 import java.util.Scanner;
 
+/**
+ * This class represents the user interface for creating a new skill.
+ */
 public class CreateSkillUI implements Runnable {
 
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Prompts the user to create a new skill.
+     */
     public void createNewSkill(){
         CreateSkillController jc = new CreateSkillController();
         System.out.println("What is the skill designation");
@@ -22,6 +28,10 @@ public class CreateSkillUI implements Runnable {
             System.out.println("Operation cancelled!");
         }
     }
+
+    /**
+     * Runs the user interface for creating a new skill.
+     */
     public void run(){
         createNewSkill();
     }

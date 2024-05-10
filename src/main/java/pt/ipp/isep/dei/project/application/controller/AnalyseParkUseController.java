@@ -4,12 +4,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * This class represents the controller responsible for analyzing the use of the park.
+ */
 public class AnalyseParkUseController {
+
+    /**
+     * Executes the specified Python script.
+     *
+     * @param filename the name of the Python file to be executed.
+     * @throws FileNotFoundException if the specified file is not found.
+     */
     public static void runsPythonScript(String filename) throws FileNotFoundException {
         checksFormattingErrors(filename);
         //é suposto executar mas não sei como fazer
     }
 
+    /**
+     * Checks for formatting errors in the specified CSV file.
+     *
+     * @param filename the name of the CSV file to be checked.
+     * @throws FileNotFoundException if the specified file is not found.
+     */
     private static void checksFormattingErrors(String filename) throws FileNotFoundException {
         // Abre o arquivo CSV
         File file = new File(filename);
