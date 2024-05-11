@@ -84,113 +84,15 @@
 
 ## 5. Construction (Implementation)
 
-### Class RegisterVehicleUI 
-
-```java
-public class RegisterVehicleUI implements Runnable {
-    public static final Scanner scanner = new Scanner(System.in);
-
-
-    public void registerVehicle() {
-        RegisterVehicleController controller = new RegisterVehicleController();
-        boolean flag = false;
-
-        do {
-            try {
-                System.out.println("Enter VIN:");
-                String vin = scanner.nextLine();
-                validateVin(vin);
-
-                System.out.println("Enter Brand name:");
-                String brand = scanner.nextLine();
-                validateBrand(brand);
-
-                System.out.println("Enter Model name:");
-                String model = scanner.nextLine();
-                validateModel(model);
-
-                System.out.println("Enter vehicle type:");
-                String type = scanner.nextLine();
-                validateType(type);
-
-                System.out.println("Enter vehicle plate:");
-                String vehiclePlate = scanner.nextLine();
-                validateVehiclePlate(vehiclePlate);
-
-                System.out.println("Enter tare weight:");
-                double tareWeight = Double.parseDouble(scanner.nextLine());
-                validateTareWeight(tareWeight);
-
-                System.out.println("Enter gross weight:");
-                double grossWeight = Double.parseDouble(scanner.nextLine());
-                validateGrossWeight(grossWeight);
-
-                System.out.println("Enter current km:");
-                int currentKm = Integer.parseInt(scanner.nextLine());
-                validateCurrentKm(currentKm);
-
-                System.out.println("Enter registration date (DD/MM/YYYY):");
-                String registrationDateStr = scanner.nextLine();
-                Date registrationDate = parseDate(registrationDateStr);
-
-                System.out.println("Enter acquisition date (DD/MM/YYYY):");
-                String acquisitionDateStr = scanner.nextLine();
-                Date acquisitionDate = parseDate(acquisitionDateStr);
-                validateAcquisitionDate(registrationDate, acquisitionDate);
-
-                System.out.println("Enter maintenance frequency (in km):");
-                int maintenanceFrequency = Integer.parseInt(scanner.nextLine());
-                validateMaintenanceFrequency(maintenanceFrequency);
-
-                // Confirm Vehicle data
-                System.out.println("\nConfirms Vehicle data:\n");
-                System.out.println("Vin: " + vin + "\nBrand: " + brand + "\nModel: " + model + "\nVehicle Plate: " + vehiclePlate + "\nTare Weight: "
-                        + tareWeight + "\nGross Weight: " + grossWeight + "\nCurrent Kilometers: " + currentKm + "\nRegistration date: " + registrationDateStr + "\nAcquisition date: "
-                        + acquisitionDateStr + "\nMaintenance Frequency: " + maintenanceFrequency);
-
-                System.out.println("\nTypes 'Yes' to confirm data:");
-                String confirmation = scanner.nextLine();
-
-                if (confirmation.equalsIgnoreCase("yes")) {
-                    if (controller.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                            currentKm, registrationDate, acquisitionDate, maintenanceFrequency)) {
-                        System.out.println("Vehicle registered successfully!");
-                        flag = true;
-                    } else {
-                        System.out.println("Failed to register vehicle.");
-                    }
-                } else {
-                    System.out.println("Vehicle registration canceled.");
-                    flag = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input for maintenance frequency: " + e.getMessage());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid input: " + e.getMessage());
-            } catch (ParseException e) {
-                System.out.println("Failed to parse date: " + e.getMessage());
-            } catch (InvalidDateException e) {
-                System.out.println("Invalid date: " + e.getMessage());
-            }
-        } while (!flag);
-    }
-
-}
-```
-
 ### Class RegisterVehicleController
 
 ```java
-public class RegisterVehicleController {
-    private final VehicleRepository vehicleRepository;
-    private final Repositories repositories;
 
     public RegisterVehicleController() {
         repositories = Repositories.getInstance();
         vehicleRepository = repositories.getVehicleRepository();
     }
-
-
+    
     public boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
                                    double grossWeight, int currentKm,Date registrationDate, Date acquisitionDate,
                                    int maintenanceFrequency) {
@@ -205,24 +107,14 @@ public class RegisterVehicleController {
         return false;
     }
 
-}
 ```
 
 ### VehicleRepository
 
 ````java
 
-public class VehicleRepository {
-    private final List<Vehicle> vehicleList;
-
-
     public VehicleRepository() {
         vehicleList = new ArrayList<>();
-    }
-
- 
-    public List<Vehicle> getVehicleList() {
-        return new ArrayList<>(vehicleList);
     }
 
     public void addVehicle(Vehicle vehicle) {
@@ -268,7 +160,6 @@ public class VehicleRepository {
         return false;
     }
 
-}
 ````
 
 ### Vehicle
@@ -288,121 +179,7 @@ public class Vehicle {
     private Date acquisitionDate;
     private int maintenanceFrequency;
     
-    public String getVIN() {
-        return VIN;
-    }
-
-    public void setVIN(String vin) {
-        if (vin == null || vin.length() != 17 || !vin.matches("[a-zA-Z0-9]{17}")) {
-            throw new IllegalArgumentException("VIN must have 17 alphanumeric characters (letters and numbers).");
-        }
-        this.VIN = vin;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        if (brand == null || !brand.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Brand name must have only alphanumeric characters (letters and numbers).");
-        }
-        this.brand = brand;
-    }
-    
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        if (model == null || !model.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Model name must have only alphanumeric characters (letters and numbers).");
-        }
-        this.model = model;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        if (type == null || !type.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Vehicle type must have only alphanumeric characters (letters and numbers).");
-        }
-        this.type = type;
-    }
-
-    public String getVehiclePlate() {
-        return vehiclePlate;
-    }
-    
-    public void setVehiclePlate(String vehiclePlate) {
-        if (vehiclePlate == null || !vehiclePlate.matches("[a-zA-Z0-9]{6}")) {
-            throw new IllegalArgumentException("Vehicle plate must have 6 alphanumeric characters (letters and numbers).\n");
-        }
-        this.vehiclePlate = vehiclePlate;
-    }
-
-    public double getTareWeight() {
-        return tareWeight;
-    }
-
-    public void setTareWeight(double tareWeight) {
-        if (tareWeight <= 0) {
-            throw new IllegalArgumentException("Tare weight must be greater than zero.");
-        }
-        this.tareWeight = tareWeight;
-    }
-
-    public double getGrossWeight() {
-        return grossWeight;
-    }
-
-    public void setGrossWeight(double grossWeight) {
-        if (grossWeight <= 0) {
-            throw new IllegalArgumentException("Gross weight must be greater than 0 Kg.");
-        }
-        this.grossWeight = grossWeight;
-    }
-
-    public int getCurrentKm() {
-        return currentKm;
-    }
-
-    public void setCurrentKm(int currentKm) {
-        if (currentKm < 0) {
-            throw new IllegalArgumentException("Current kilometers must be greater than 0 Km.");
-        }
-        this.currentKm = currentKm;
-    }
-    
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-    
-    public Date getAcquisitionDate() {
-        return acquisitionDate;
-    }
-
-    public void setAcquisitionDate(Date acquisitionDate) {
-        this.acquisitionDate = acquisitionDate;
-    }
-
-    public int getMaintenanceFrequency() {
-        return maintenanceFrequency;
-    }
-
-    public void setMaintenanceFrequency(int maintenanceFrequency) {
-        if (maintenanceFrequency <= 0) {
-            throw new IllegalArgumentException("Maintenance frequency must be greater than 0 Km.");
-        }
-        this.maintenanceFrequency = maintenanceFrequency;
-    }
-    
+   
     public Vehicle(String VIN, String brand, String model, String type, String vehiclePlate, double tareWeight, double grossWeight,
                    int currentKm, Date registrationDate, Date acquisitionDate, int maintenanceFrequency) {
 
@@ -417,8 +194,7 @@ public class Vehicle {
         this.registrationDate = registrationDate;
         this.acquisitionDate = acquisitionDate;
         this.maintenanceFrequency = maintenanceFrequency;
-
-
+        
     }
     
     public boolean validateVehicle() {
@@ -448,7 +224,7 @@ public class Vehicle {
 
 ## 6. Integration and Demo 
 
-* A new option on the Vehicle and Equipment Resources Manager menu options was added.
+* A new option on the VFM menu options was added.
 
 * For demo purposes some vehicles are bootstrapped while system starts.
 

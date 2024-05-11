@@ -57,9 +57,9 @@
         System.out.println(maintenanceRepository.createMaintenanceReport(vehicleList));
         String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +
-                "ABC123          Brand1          Model1          16000           5000            10000           15000          \n" +
+                "ABC123          Brand1          Model1          16000           5000            10000           21000          \n" +
                 "\n" +
-                "DEF456          Brand2          Model2          19000           6000            12000           18000          \n" +
+                "DEF456          Brand2          Model2          19000           6000            12000           25000          \n" +
                 "\n";
 
         assertEquals(expectedOutput, maintenanceRepository.createMaintenanceReport(vehicleList));
@@ -68,49 +68,9 @@
 
 ## 5. Construction (Implementation)
 
-### CLass ListMaintenanceUI
-
-```java
-public class ListMaintenanceUI implements Runnable {
-    private final ListMaintenanceController controller;
-
-    public ListMaintenanceUI() {
-        this.controller = new ListMaintenanceController();
-    }
-
-    public void listVehiclesNeedingMaintenance() {
-        System.out.println("Listing vehicles needing maintenance...");
-
-        List<Vehicle> vehiclesList = controller.getVehiclesNeedingMaintenanceList();
-
-        if (vehiclesList.isEmpty()) {
-            System.out.println("No vehicles needing maintenance.");
-        } else {
-            if (controller.createMaintenanceReport() != null) {
-                System.out.println("Vehicles needing maintenance:");
-                System.out.println(controller.createMaintenanceReport());
-
-            }
-            System.out.println("Something went wrong");
-        }
-    }
-
-    @Override
-    public void run() {
-        listVehiclesNeedingMaintenance();
-
-    }
-}
-
-````
-
 ### Class ListMaintenanceController
 
 ```java
-public class ListMaintenanceController {
-    private final VehicleRepository vehicleRepository;
-    private final MaintenanceRepository maintenanceRepository;
-
 
     public ListMaintenanceController() {
         Repositories repositories = Repositories.getInstance();
@@ -127,14 +87,11 @@ public class ListMaintenanceController {
     public String createMaintenanceReport() {
         return maintenanceRepository.createMaintenanceReport(getVehiclesNeedingMaintenanceList());
     }
-}
 ```
 
 ### Class MaintenanceRepository
 
 ```java
-public class MaintenanceRepository {
-    private final List<Maintenance> maintenanceList;
 
     public MaintenanceRepository() {
         this.maintenanceList = new ArrayList<>();
@@ -181,15 +138,11 @@ public class MaintenanceRepository {
 
     }
 
-}
 ```
 
 ### Class VehicleRepository
 
 ````java
-
-public class VehicleRepository {
-    private final List<Vehicle> vehicleList;
 
     public VehicleRepository() {
         vehicleList = new ArrayList<>();
@@ -223,7 +176,6 @@ public class VehicleRepository {
         return lastMaintenanceKm;
     }
 
-}
 ````
 
 ````java
