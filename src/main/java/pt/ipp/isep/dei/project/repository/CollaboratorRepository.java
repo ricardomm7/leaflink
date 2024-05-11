@@ -64,7 +64,7 @@ public class CollaboratorRepository {
      * @return the list of collaborators
      */
     public List<Collaborator> getCollaboratorList() {
-        return collaboratorList;
+        return new ArrayList<>(collaboratorList);
     }
 
     /**
@@ -76,14 +76,13 @@ public class CollaboratorRepository {
         collaboratorList.add(collab);
     }
 
-    public void updateCollaborator(Collaborator collaborator) {
-        for (int i = 0; i < collaboratorList.size(); i++) {
-            if (collaboratorList.get(i).getTaxpayerNumber() == collaborator.getTaxpayerNumber()) {
-                collaboratorList.set(i, collaborator);
-                return;
-            }
+    public boolean updateCollaborator(Collaborator collaborator) {
+        int index = collaboratorList.indexOf(collaborator);
+        if (index != -1) {
+            collaboratorList.set(index, collaborator);
+            return true;
         }
-        throw new IllegalArgumentException("Collaborator not found in the repository.");
+        return false;
     }
 }
 

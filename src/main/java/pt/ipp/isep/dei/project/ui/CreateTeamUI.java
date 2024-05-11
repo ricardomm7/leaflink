@@ -61,7 +61,9 @@ public class CreateTeamUI implements Runnable {
      */
     private int getMinTeamSizeFromUser() {
         System.out.print("Enter minimum team size: ");
-        return scanner.nextInt();
+        int minTeamSize = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+        return minTeamSize;
     }
 
     /**
@@ -71,7 +73,9 @@ public class CreateTeamUI implements Runnable {
      */
     private int getMaxTeamSizeFromUser() {
         System.out.print("Enter maximum team size: ");
-        return scanner.nextInt();
+        int maxTeamSize = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+        return maxTeamSize;
     }
 
     /**

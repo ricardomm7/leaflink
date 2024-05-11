@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
+import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class CreateTeamController {
     private final TeamRepository teamRepository;
     private final SkillRepository skillRepository;
+    private final CollaboratorRepository collaboratorRepository;
 
     /**
      * Constructs a new CreateTeamController object.
@@ -26,6 +28,7 @@ public class CreateTeamController {
         Repositories repositories = Repositories.getInstance();
         this.teamRepository = repositories.getTeamRepository();
         this.skillRepository = repositories.getSkillRepository();
+        this.collaboratorRepository = repositories.getCollaboratorRepository();
     }
 
     /**
@@ -38,33 +41,25 @@ public class CreateTeamController {
     }
 
     public List<Collaborator> generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
-        List<Collaborator> collaborators = teamRepository.getCollaborators();
+        List<Collaborator> collaborators = collaboratorRepository.getCollaboratorList();
         List<Collaborator> selectedCollaborators = new ArrayList<>();
 
         for (Collaborator collaborator : collaborators) {
-            if (meetsRequiredSkills(collaborator, requiredSkills)) {
-                selectedCollaborators.add(collaborator);
-            }
-
-            // Debugging output to print skills
-            System.out.println("Collaborator: " + collaborator.getName() + ", Skills: " + collaborator.getSkills());
-
-            if (selectedCollaborators.size() >= maxTeamSize) {
-                break;
+            List<Skill> collaboratorSkills = collaborator.getSkills();
+            for (Skill skill : requiredSkills) {
+                if (collaboratorSkills.contains(skill) && !selectedCollaborators.contains(collaborator)) {
+                    selectedCollaborators.add(collaborator);
+                    break; // Move to the next collaborator once a match is found
+                }
             }
         }
 
         if (selectedCollaborators.size() < minTeamSize) {
             System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
-            return new ArrayList<>(); // Return an empty list to indicate no valid team proposal
+            return new ArrayList<>();
         }
 
-        System.out.println("Team Proposal:");
-        for (Collaborator collaborator : selectedCollaborators) {
-            System.out.println(collaborator.getName());
-        }
-
-        return selectedCollaborators;
+        return selectedCollaborators.subList(0, Math.min(selectedCollaborators.size(), maxTeamSize));
     }
 
     /**
