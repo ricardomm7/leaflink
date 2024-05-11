@@ -6,7 +6,9 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * The CreateTeamController class handles the logic for creating teams.
@@ -35,16 +37,46 @@ public class CreateTeamController {
         return skillRepository.getSkillList();
     }
 
-    /**
-     * Generates a proposal of collaborators for a team based on required skills and team size constraints.
-     *
-     * @param requiredSkills the skills required for the team
-     * @param minTeamSize    the minimum team size constraint
-     * @param maxTeamSize    the maximum team size constraint
-     * @return the list of selected collaborators for the team proposal
-     */
     public List<Collaborator> generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
-        List<Collaborator> collaborators = teamRepository.getCollaborators(); // Assuming this method exists to fetch collaborators
-        return teamRepository.generateProposal(requiredSkills, minTeamSize, maxTeamSize);
+        List<Collaborator> collaborators = teamRepository.getCollaborators();
+        List<Collaborator> selectedCollaborators = new ArrayList<>();
+
+        for (Collaborator collaborator : collaborators) {
+            if (meetsRequiredSkills(collaborator, requiredSkills)) {
+                selectedCollaborators.add(collaborator);
+            }
+
+            // Debugging output to print skills
+            System.out.println("Collaborator: " + collaborator.getName() + ", Skills: " + collaborator.getSkills());
+
+            if (selectedCollaborators.size() >= maxTeamSize) {
+                break;
+            }
+        }
+
+        if (selectedCollaborators.size() < minTeamSize) {
+            System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
+            return new ArrayList<>(); // Return an empty list to indicate no valid team proposal
+        }
+
+        System.out.println("Team Proposal:");
+        for (Collaborator collaborator : selectedCollaborators) {
+            System.out.println(collaborator.getName());
+        }
+
+        return selectedCollaborators;
+    }
+
+    /**
+     * Checks if a collaborator meets the required skills for a team.
+     *
+     * @param collaborator   the collaborator to check
+     * @param requiredSkills the skills required for the team
+     * @return true if the collaborator meets the required skills, false otherwise
+     */
+    private boolean meetsRequiredSkills(Collaborator collaborator, List<Skill> requiredSkills) {
+        List<Skill> collaboratorSkills = collaborator.getSkills();
+        return collaboratorSkills.containsAll(requiredSkills);
     }
 }
+

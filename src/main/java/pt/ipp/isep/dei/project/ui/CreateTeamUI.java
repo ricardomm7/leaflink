@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
@@ -30,9 +31,26 @@ public class CreateTeamUI implements Runnable {
      */
     public void run() {
         List<Skill> skills = createTeamController.getSkills();
+        if (skills.isEmpty()) {
+            System.out.println("No skills available. Exiting.");
+            return;
+        }
+
+        System.out.println("Available skills:");
+        for (int i = 0; i < skills.size(); i++) {
+            System.out.println((i + 1) + ". " + skills.get(i).getDesignation());
+        }
+
+        List<Skill> selectedSkills = getSelectedSkillsFromUser(skills);
+        if (selectedSkills.isEmpty()) {
+            System.out.println("No skills selected. Exiting.");
+            return;
+        }
+
         int minTeamSize = getMinTeamSizeFromUser();
         int maxTeamSize = getMaxTeamSizeFromUser();
-        List<Collaborator> collaborators = createTeamController.generateProposal(skills, minTeamSize, maxTeamSize);
+
+        List<Collaborator> collaborators = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
         displayProposal(collaborators);
     }
 
@@ -63,8 +81,30 @@ public class CreateTeamUI implements Runnable {
      */
     private void displayProposal(List<Collaborator> collaborators) {
         System.out.println("Generated Team Proposal:");
-        for (int i = 0; i < collaborators.size(); i++) {
-            System.out.println((i + 1) + ". " + collaborators.get(i).getName());
+        for (Collaborator collaborator : collaborators) {
+            System.out.println(collaborator.getName());
         }
+    }
+
+    /**
+     * Prompts the user to select skills from the provided list of skills.
+     *
+     * @param skills the list of available skills
+     * @return the list of selected skills
+     */
+    private List<Skill> getSelectedSkillsFromUser(List<Skill> skills) {
+        List<Skill> selectedSkills = new ArrayList<>();
+        System.out.print("Enter the numbers of the selected skills (comma-separated): ");
+        String input = scanner.nextLine();
+        String[] skillNumbers = input.split(",");
+        for (String skillNumber : skillNumbers) {
+            int index = Integer.parseInt(skillNumber.trim()) - 1;
+            if (index >= 0 && index < skills.size()) {
+                selectedSkills.add(skills.get(index));
+            } else {
+                System.out.println("Invalid skill number: " + skillNumber);
+            }
+        }
+        return selectedSkills;
     }
 }
