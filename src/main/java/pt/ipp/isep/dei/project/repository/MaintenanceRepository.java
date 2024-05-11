@@ -30,7 +30,6 @@ public class MaintenanceRepository {
     public void createMaintenance(String plate, Date date, int currentKm) {
         Maintenance maintenance = new Maintenance(plate, date, currentKm);
         addMaintenance(maintenance);
-
     }
 
     /**
