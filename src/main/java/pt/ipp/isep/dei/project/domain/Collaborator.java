@@ -312,6 +312,11 @@ public class Collaborator {
             }
         }
     }
+    public void addSkill(Skill skill) {
+        if (!skills.contains(skill)) {
+            skills.add(skill);
+        }
+    }
 
     /**
      * retrieves the skills of the collaborator

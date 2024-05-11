@@ -4,8 +4,11 @@ import pt.ipp.isep.dei.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * This class provides an user inteface for assigning skills to collaborators.
@@ -13,14 +16,14 @@ import java.util.Scanner;
  */
 public class AssignSkillUI implements Runnable {
 
-    private final AssignSkillController assignSkillController ;
+    private final AssignSkillController assignSkillController;
     private static final Scanner sc = new Scanner(System.in);
 
     /**
      * Constructs an AssignUI object with a new AssignSkillController instance.
      */
     public AssignSkillUI() {
-        this.assignSkillController =  new AssignSkillController();
+        this.assignSkillController = new AssignSkillController();
     }
 
     /**
@@ -49,28 +52,56 @@ public class AssignSkillUI implements Runnable {
         }
         Collaborator selectedCollaborator = collaboratorList.get(collaboratorIndex - 1);
 
-        System.out.println("Please select a skill to assign to the collaborator:");
-        List<Skill> skillList = assignSkillController.getSkillList();
-        for (int i = 0; i < skillList.size(); i++) {
-            System.out.println((i + 1) + ". " + skillList.get(i).getDesignation());
-        }
-        int skillIndex = sc.nextInt();
-        sc.nextLine();
-        if (skillIndex < 1 || skillIndex > skillList.size()) {
-            System.out.println("Invalid Selection. Please select a valid skill index");
-            return;
-        }
-        Skill selectedSkill = skillList.get(skillIndex - 1);
+        List<Skill> selectedSkills = new ArrayList<>();
+        Set<String> selectedSkillsIds = new HashSet<>();
+        boolean continueSelectingSkills = true;
+        while (continueSelectingSkills) {
+            System.out.println("Please select a skill to assign to the collaborator:");
+            List<Skill> skillList = assignSkillController.getSkillList();
+            for (int i = 0; i < skillList.size(); i++) {
+                System.out.println((i + 1) + ". " + skillList.get(i).getDesignation());
+            }
+            int skillIndex = sc.nextInt();
+            sc.nextLine();
+            if (skillIndex < 1 || skillIndex > skillList.size()) {
+                System.out.println("Invalid Selection. Please select a valid skill index");
+                continue;
+            }
+            Skill selectedSkill = skillList.get(skillIndex - 1);
 
+            if (selectedSkillsIds.contains(selectedSkill.getDesignation())) {
+                System.out.println("The selected skill has already been assigned. Please select another skill.");
+                continue;
+            }
+
+            if (selectedCollaborator.getSkills().contains(selectedSkill)) {
+                System.out.println("The selected skill is already assigned to the collaborator. Please select another skill.");
+                continue;
+            }
+
+            selectedSkills.add(selectedSkill);
+            selectedSkillsIds.add(selectedSkill.getDesignation());
+
+            // Ask user if they want to select another skill
+            System.out.println("Do you want to select another skill? (Y/N)");
+            String decision = sc.nextLine();
+            continueSelectingSkills = decision.trim().equalsIgnoreCase("Y");
+        }
+
+        // Display selected information
         System.out.println("\nPlease review the entered information:");
         System.out.println("Collaborator: " + selectedCollaborator.getName());
-        System.out.println("Assigned skill: " + selectedSkill.getDesignation());
+        System.out.println("Assigned skills:");
+        for (Skill skill : selectedSkills) {
+            System.out.println("- " + skill.getDesignation());
+        }
 
-        System.out.println("\nDo you want to assign this skill to this collaborator? (Y/N)");
+        // Confirm assignment
+        System.out.println("\nDo you want to assign these skills to this collaborator? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            assignSkillController.assignSkill(selectedCollaborator, selectedSkill);
-            System.out.println("Skill assigned successfully!");
+            assignSkillController.assignSkill(selectedCollaborator, selectedSkills);
+            System.out.println("Skills assigned successfully!");
         } else {
             System.out.println("Operation cancelled!");
         }
