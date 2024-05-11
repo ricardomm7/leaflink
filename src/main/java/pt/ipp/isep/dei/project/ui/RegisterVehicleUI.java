@@ -10,10 +10,10 @@ import java.util.Scanner;
  * The RegisterVehicleUI class provides a user interface for registering a new vehicle.
  */
 public class RegisterVehicleUI implements Runnable {
-    public static  final Scanner scanner = new Scanner(System.in);
+    public static final Scanner scanner = new Scanner(System.in);
     private final RegisterVehicleController controller;
 
-    public RegisterVehicleUI(){
+    public RegisterVehicleUI() {
         this.controller = new RegisterVehicleController();
     }
 
@@ -105,6 +105,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param vin
      */
     private void validateVin(String vin) {
@@ -115,6 +116,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param brand
      */
     private void validateBrand(String brand) {
@@ -125,6 +127,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param model
      */
     private void validateModel(String model) {
@@ -135,6 +138,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param type
      */
     private void validateType(String type) {
@@ -145,6 +149,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param vehiclePlate
      */
     private void validateVehiclePlate(String vehiclePlate) {
@@ -155,6 +160,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param tareWeight
      */
     private void validateTareWeight(double tareWeight) {
@@ -165,6 +171,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param grossWeight
      */
     private void validateGrossWeight(double grossWeight) {
@@ -175,6 +182,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param currentKm
      */
     private void validateCurrentKm(int currentKm) {
@@ -185,6 +193,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param registrationDate
      * @param acquisitionDate
      */
@@ -196,6 +205,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Validates the input parameter.
+     *
      * @param maintenanceFrequency
      */
     private void validateMaintenanceFrequency(int maintenanceFrequency) {
@@ -206,6 +216,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Parse the input date (String) to Date.
+     *
      * @param dateString
      * @return
      * @throws ParseException

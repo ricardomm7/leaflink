@@ -39,10 +39,10 @@ public class RegisterVehicleController {
      * @return the boolean
      */
     public boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
-                                   double grossWeight, int currentKm,Date registrationDate, Date acquisitionDate,
+                                   double grossWeight, int currentKm, Date registrationDate, Date acquisitionDate,
                                    int maintenanceFrequency) {
 
-        if (!vehicleRepository.verifyExistingVehicles(vin,vehiclePlate)) {
+        if (!vehicleRepository.verifyExistingVehicles(vin, vehiclePlate)) {
 
             return vehicleRepository.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
                     currentKm, registrationDate, acquisitionDate, maintenanceFrequency);

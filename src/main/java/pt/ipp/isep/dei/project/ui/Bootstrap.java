@@ -18,23 +18,25 @@ public class Bootstrap implements Runnable {
 
 
     }
-    private void addVehicles(){
+
+    private void addVehicles() {
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
 
         // Example 1
         vehicleRepository.registerVehicle("VIN12345678901234", "Toyota", "Corolla", "Sedan", "AB1234", 1500.0, 2000.0,
-                50000, new Date(2013,3,15) ,new Date(2023,3,12), 10000);
+                50000, new Date(2013, 3, 15), new Date(2023, 3, 12), 10000);
 
         // Example 2
         vehicleRepository.registerVehicle("VIN56789012345678", "Ford", "Fiesta", "Hatchback", "CD5678", 1200.0, 1800.0,
-                40000, new Date(2010,10,10), new Date(2020,9,30), 8000);
+                40000, new Date(2010, 10, 10), new Date(2020, 9, 30), 8000);
 
         // Example 3
         vehicleRepository.registerVehicle("VIN90123456789012", "Volkswagen", "Golf", "Hatchback", "EF9012", 1400.0, 2100.0,
-                60000, new Date(2000,22,10), new Date(2010,10,01), 12000);
+                60000, new Date(2000, 22, 10), new Date(2010, 10, 01), 12000);
 
     }
-    private void addSkills(){
+
+    private void addSkills() {
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
 
         // Example 1
@@ -78,20 +80,21 @@ public class Bootstrap implements Runnable {
         // Example 5
         jobRepository.createJob("plumber");
     }
-    private void addCollaborators(){
+
+    private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
         // Example 1
-        collaboratorRepository.create("Bob Smith", new Date(1990, Calendar.JANUARY,22), 987654321,
+        collaboratorRepository.create("Bob Smith", new Date(1990, Calendar.JANUARY, 22), 987654321,
                 123456789, "bob.smith@example.com", "5678 Oak Street", "6789-100",
-                "Shelbyville", "ID Card", "CD2345678", new Date(2021,Calendar.MAY,15),
+                "Shelbyville", "ID Card", "CD2345678", new Date(2021, Calendar.MAY, 15),
                 jobRepository.getJobList().get(0));
 
         // Example 2
-        collaboratorRepository.create("Alice Johnson", new Date(1985,Calendar.JANUARY,15), 123456789,
+        collaboratorRepository.create("Alice Johnson", new Date(1985, Calendar.JANUARY, 15), 123456789,
                 987654321, "alice.johnson@example.com", "1234 Elm Street", "1234-125",
-                "Springfield", "Passport", "AB1234567", new Date(2020,Calendar.MAY,1),
+                "Springfield", "Passport", "AB1234567", new Date(2020, Calendar.MAY, 1),
                 jobRepository.getJobList().get(1));
 
         // Example 3
@@ -114,20 +117,19 @@ public class Bootstrap implements Runnable {
     }
 
 
-
     private void addUsers() {
         //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLAB, AuthenticationController.ROLE_COLLAB);
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM,AuthenticationController.ROLE_VFM);
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM,AuthenticationController.ROLE_HRM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
 
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
 
-        authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@this.app","vfm",
+        authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@this.app", "vfm",
                 AuthenticationController.ROLE_VFM);
 
         authenticationRepository.addUserWithRole("Human Resources Manager", "hrm@this.app", "hrm",

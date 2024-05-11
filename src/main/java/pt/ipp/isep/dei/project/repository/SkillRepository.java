@@ -24,7 +24,7 @@ public class SkillRepository {
      *
      * @param designation the designation of the skill to create.
      */
-    public void createSkill(String designation){
+    public void createSkill(String designation) {
         Skill skill = new Skill(designation);
         if (checkForDuplicates(skill)) {
             addSkill(skill);

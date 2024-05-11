@@ -14,7 +14,7 @@ public class CreateSkillUI implements Runnable {
     /**
      * Prompts the user to create a new skill.
      */
-    public void createNewSkill(){
+    public void createNewSkill() {
         CreateSkillController jc = new CreateSkillController();
         System.out.println("What is the skill designation");
         String designation = sc.nextLine();
@@ -32,7 +32,7 @@ public class CreateSkillUI implements Runnable {
     /**
      * Runs the user interface for creating a new skill.
      */
-    public void run(){
+    public void run() {
         createNewSkill();
     }
 }

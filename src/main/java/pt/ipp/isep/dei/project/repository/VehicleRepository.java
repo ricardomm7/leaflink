@@ -17,7 +17,9 @@ public class VehicleRepository {
     /**
      * Instantiates a new Vehicle repository with an empty list of vehicles.
      */
-    public VehicleRepository() {vehicleList = new ArrayList<>();}
+    public VehicleRepository() {
+        vehicleList = new ArrayList<>();
+    }
 
     /**
      * Gets vehicle list.
@@ -105,10 +107,10 @@ public class VehicleRepository {
      *
      * @return the list
      */
-    public List<String> getVehiclesPlates(){
+    public List<String> getVehiclesPlates() {
         List<String> plates = new ArrayList<>();
 
-        for (Vehicle vehicle: vehicleList){
+        for (Vehicle vehicle : vehicleList) {
             plates.add(vehicle.getVehiclePlate());
         }
         return plates;
@@ -137,7 +139,8 @@ public class VehicleRepository {
 
     /**
      * Get the last maintenance km registered of a vehicle
-     * @param vehiclePlate The vehicle plate
+     *
+     * @param vehiclePlate    The vehicle plate
      * @param maintenanceList The list of the maintenance
      * @return The km of the last maintenance
      */

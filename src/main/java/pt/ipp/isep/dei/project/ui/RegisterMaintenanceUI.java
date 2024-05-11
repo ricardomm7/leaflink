@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * The RegisterMaintenanceUI class provides a user interface for registering maintenance for vehicles.
  */
-public class RegisterMaintenanceUI implements Runnable{
+public class RegisterMaintenanceUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
     private static RegisterMaintenanceController controller;
 
@@ -24,12 +24,12 @@ public class RegisterMaintenanceUI implements Runnable{
     /**
      * Registers maintenance for a selected vehicle.
      */
-    public void RegisterMaintenance(){
+    public void RegisterMaintenance() {
         System.out.println("Select vehicle to register a maintenance.");
         List<String> plates = controller.getPlatesList();
         // present list of vehicles
         for (int i = 0; i < plates.size(); i++) {
-            System.out.println((i + 1) + ". "+ plates.get(i));
+            System.out.println((i + 1) + ". " + plates.get(i));
         }
         int plateIdx = sc.nextInt();
         sc.nextLine();
@@ -53,7 +53,7 @@ public class RegisterMaintenanceUI implements Runnable{
         System.out.println("\nDo you want to register this maintenance? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            controller.createMaintenance(plate , date1 , currentKm);
+            controller.createMaintenance(plate, date1, currentKm);
             System.out.println("Maintenance successfully registered!");
         } else {
             System.out.println("Operation cancelled!");

@@ -15,10 +15,10 @@ public class Team {
     /**
      * Constructs a new Team object with the provided skills, collaborators, and team size constraints.
      *
-     * @param skills         the required skills for the team
-     * @param collaborators  the list of collaborators in the team
-     * @param minTeamSize    the minimum team size constraint
-     * @param maxTeamSize    the maximum team size constraint
+     * @param skills        the required skills for the team
+     * @param collaborators the list of collaborators in the team
+     * @param minTeamSize   the minimum team size constraint
+     * @param maxTeamSize   the maximum team size constraint
      */
     public Team(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize) {
         this.skills = skills;

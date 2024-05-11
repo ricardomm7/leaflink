@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * The Maintenance class represents the object maintenance (Check-up).
- *  It holds information such as vehicle plate, date and kilometers (at the moment of the maintenance).
+ * It holds information such as vehicle plate, date and kilometers (at the moment of the maintenance).
  */
 public class Maintenance {
     private final String vehiclePlate;
@@ -19,11 +19,11 @@ public class Maintenance {
      * @param date         the date
      * @param kilometers   the kilometers
      */
-    public Maintenance(String vehiclePlate, Date date, int kilometers)  {
+    public Maintenance(String vehiclePlate, Date date, int kilometers) {
         if (kilometers < 0) {
             throw new IllegalArgumentException("Kilometers cannot be negative");
         }
-        if (date == null ) {
+        if (date == null) {
             throw new IllegalArgumentException("Date cannot be null");
         }
         if (vehiclePlate == null || vehiclePlate.isEmpty() || !vehiclePlate.matches("[a-zA-Z0-9]+")) {
@@ -57,7 +57,7 @@ public class Maintenance {
      *
      * @return the string
      */
-    public String getVehiclePlate(){
+    public String getVehiclePlate() {
         return vehiclePlate;
     }
 }

@@ -12,7 +12,7 @@ public class Address {
      * Constructs a new Address object with the specified address, city, and zip code.
      *
      * @param address the address.
-     * @param city the city.
+     * @param city    the city.
      * @param zipCode the zip code.
      */
     public Address(String address, String city, String zipCode) {

@@ -303,6 +303,7 @@ public class Collaborator {
 
     /**
      * Assigns skills to the collaborator
+     *
      * @param selectedSkills the skills to be assigned
      */
     public void assignSkills(Skill[] selectedSkills) {
@@ -312,6 +313,7 @@ public class Collaborator {
             }
         }
     }
+
     public void addSkill(Skill skill) {
         if (!skills.contains(skill)) {
             skills.add(skill);
@@ -320,6 +322,7 @@ public class Collaborator {
 
     /**
      * retrieves the skills of the collaborator
+     *
      * @return the list of skills of the collaborator
      */
     public List<Skill> getSkills() {

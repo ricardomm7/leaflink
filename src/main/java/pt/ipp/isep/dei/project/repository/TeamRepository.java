@@ -58,8 +58,8 @@ public class TeamRepository {
     /**
      * Checks if a collaborator meets the required skills for a team.
      *
-     * @param collaborator    the collaborator to check
-     * @param requiredSkills  the skills required for the team
+     * @param collaborator   the collaborator to check
+     * @param requiredSkills the skills required for the team
      * @return true if the collaborator meets the required skills, false otherwise
      */
     private boolean meetsRequiredSkills(Collaborator collaborator, List<Skill> requiredSkills) {

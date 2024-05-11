@@ -4,11 +4,9 @@ package pt.ipp.isep.dei.project.domain;
 import java.util.Date;
 
 /**
- *
  * The Vehicle class represents the object Vehicle.
  * It holds information such as VIN, brand, model, type, plate,tare Weight, gross weight, currently kilometer, registration date,
  * acquisition date and maintenance frequency.
- *
  */
 public class Vehicle {
     private String VIN;
@@ -29,7 +27,9 @@ public class Vehicle {
      *
      * @return The VIN of the vehicle
      */
-    public String getVIN() {return VIN;}
+    public String getVIN() {
+        return VIN;
+    }
 
     /**
      * Sets VIN of the vehicle with validation exception.
@@ -48,7 +48,9 @@ public class Vehicle {
      *
      * @return The brand of the vehicle
      */
-    public String getBrand() {return brand;}
+    public String getBrand() {
+        return brand;
+    }
 
     /**
      * Sets brand of the vehicle with validation exception.
@@ -67,7 +69,9 @@ public class Vehicle {
      *
      * @return The model of the vehicle
      */
-    public String getModel() {return model;}
+    public String getModel() {
+        return model;
+    }
 
     /**
      * Sets model with validation exception.
@@ -86,7 +90,9 @@ public class Vehicle {
      *
      * @return The type of the vehicle
      */
-    public String getType() {return type;}
+    public String getType() {
+        return type;
+    }
 
 
     /**
@@ -106,7 +112,9 @@ public class Vehicle {
      *
      * @return The vehicle plate
      */
-    public String getVehiclePlate() {return vehiclePlate;}
+    public String getVehiclePlate() {
+        return vehiclePlate;
+    }
 
     /**
      * Sets vehicle plate with validation exception.
@@ -125,7 +133,9 @@ public class Vehicle {
      *
      * @return The tare weight of the vehicle
      */
-    public double getTareWeight() {return tareWeight;}
+    public double getTareWeight() {
+        return tareWeight;
+    }
 
     /**
      * Sets tare weight with validation exception.
@@ -144,7 +154,9 @@ public class Vehicle {
      *
      * @return The gross weight of the vehicle
      */
-    public double getGrossWeight() {return grossWeight;}
+    public double getGrossWeight() {
+        return grossWeight;
+    }
 
     /**
      * Sets gross weight with validation exception.
@@ -163,7 +175,9 @@ public class Vehicle {
      *
      * @return The current kilometers of the vehicle
      */
-    public int getCurrentKm() {return currentKm;}
+    public int getCurrentKm() {
+        return currentKm;
+    }
 
     /**
      * Sets current km with validation exception.
@@ -182,7 +196,9 @@ public class Vehicle {
      *
      * @return The registration date of the vehicle
      */
-    public Date getRegistrationDate() {return registrationDate;}
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
 
     /**
      * Sets registration date with validation exception.
@@ -198,21 +214,27 @@ public class Vehicle {
      *
      * @return The acquisition date of the vehicle
      */
-    public Date getAcquisitionDate() {return acquisitionDate;}
+    public Date getAcquisitionDate() {
+        return acquisitionDate;
+    }
 
     /**
      * Sets acquisition date with validation exception.
      *
      * @param acquisitionDate New acquisition date of the vehicle
      */
-    public void setAcquisitionDate(Date acquisitionDate) {this.acquisitionDate = acquisitionDate;}
+    public void setAcquisitionDate(Date acquisitionDate) {
+        this.acquisitionDate = acquisitionDate;
+    }
 
     /**
      * Gets maintenance frequency.
      *
      * @return The maintenance frequency
      */
-    public int getMaintenanceFrequency() {return maintenanceFrequency;}
+    public int getMaintenanceFrequency() {
+        return maintenanceFrequency;
+    }
 
     /**
      * Sets maintenance frequency with validation exception.
