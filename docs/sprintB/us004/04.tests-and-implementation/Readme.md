@@ -1,68 +1,96 @@
-# US006 - Create a Task 
+# US004 - Assign skills to a collaborator 
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that a collaborator can be assigned one or more skills successfully.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+	@Test
+    public void testAssignSkills_Success() {
+        Collaborator collaborator = new Collaborator("John Doe", getDate(1990, Calendar.JANUARY, 1), 123456789, 123456789, "john.doe@example.com", "123 Main St", "12345", "Anytown", "ID", "123456789", getDate(2020, Calendar.JANUARY, 1), new Job("Developer"));
+
+        Skill skill1 = new Skill("Java Programming");
+        Skill skill2 = new Skill("Database Management");
+
+        List<Skill> skills = new ArrayList<>();
+        skills.add(skill1);
+        skills.add(skill2);
+
+        collaborator.assignSkills(skills);
+
+        assertEquals(2, collaborator.getSkills().size());
+        assertTrue(collaborator.getSkills().contains(skill1));
+        assertTrue(collaborator.getSkills().contains(skill2));
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that assigning duplicate skills to a collaborator is handled properly. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+	@Test
+    public void testAssignSkills_DuplicateSkills() {
+        Collaborator collaborator = new Collaborator("John Doe", getDate(1990, Calendar.JANUARY, 1), 123456789, 123456789, "john.doe@example.com", "123 Main St", "12345", "Anytown", "ID", "123456789", getDate(2020, Calendar.JANUARY, 1), new Job("Developer"));
+
+        Skill skill1 = new Skill("Java Programming");
+
+        List<Skill> skills = new ArrayList<>();
+        skills.add(skill1);
+
+        collaborator.assignSkills(skills);
+        collaborator.assignSkills(skills); // Try assigning the same skills again
+
+        assertEquals(1, collaborator.getSkills().size()); // Ensure only one instance of the skill is assigned
+    }
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class AssignSkillController
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
-
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
-}
+public void assignSkill(Collaborator collaborator, List<Skill> skills) {
+        collaborator.assignSkills(skills);
+        collaboratorRepository.updateCollaborator(collaborator);
+        }
 ```
 
-### Class Organization
+### Class CollaboratorRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
-}
+public void updateCollaborator(Collaborator collaborator) {
+    for (int i = 0; i < collaboratorList.size(); i++) {
+        if (collaboratorList.get(i).getTaxpayerNumber() == collaborator.getTaxpayerNumber()) {
+        collaboratorList.set(i, collaborator);
+        return;
+        }
+    }
+    throw new IllegalArgumentException("Collaborator not found in the repository.");
+    }
 ```
+### Class Collaborator
 
+```java
+public void assignSkills(Skill[] selectedSkills) {
+    for (Skill skill : selectedSkills) {
+        if (!skills.contains(skill)) {
+        skills.add(skill);
+        }
+    }
+}
+
+public void addSkill(Skill skill) {
+        if (!skills.contains(skill)) {
+            skills.add(skill);
+        }
+    }
+
+public List<Skill> getSkills() {
+        return new ArrayList<>(skills);
+    }
+```
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* For demo purposes some tasks are bootstrapped while system starts.
-
+* The functionality to assign skills to a collaborator has been integrated into the HRM menu and Admin menu.
+* Demo: The Assign Skill option is accessible through the HRM and Admin menus, allowing users to assign skills to collaborators.
 
 ## 7. Observations
 
