@@ -6,12 +6,12 @@ skinparam shadowing false
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "vehicle\n:Vehicle" as VEI
 
-autonumber 9
-            VehicleRepository -> VEI: createVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date Acquisition Date, Maintenance Frequency)
+autonumber 8
+            VehicleRepository -> VEI: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date Acquisition Date, Maintenance Frequency)
 
 activate VEI
     group Register Vehicle
-    autonumber 9.1
+    autonumber 8.1
 
 
                               VEI -> VEI: validateVehicle(vehicle))
@@ -25,7 +25,7 @@ activate VEI
 
     end
 
-autonumber 10
+autonumber 9
     VEI --> VehicleRepository: vehicle
 deactivate VEI
 

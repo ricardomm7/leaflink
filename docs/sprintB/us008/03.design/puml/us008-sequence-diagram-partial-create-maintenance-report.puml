@@ -18,7 +18,7 @@ activate MaintenanceRepository
     end group
 
     autonumber 13
-    <-- MaintenanceRepository : maintenanceReport
+    <-- MaintenanceRepository : maintenance Report
 
 deactivate MaintenanceRepository
 

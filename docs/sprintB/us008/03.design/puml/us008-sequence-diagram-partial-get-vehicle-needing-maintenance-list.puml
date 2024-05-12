@@ -16,7 +16,7 @@ autonumber 3
  -> CTRL : get vehicles needing maintenance list
 activate CTRL
     group Get Vehicle Needing Maintenance List
-
+autonumber 3.1
 
             CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton

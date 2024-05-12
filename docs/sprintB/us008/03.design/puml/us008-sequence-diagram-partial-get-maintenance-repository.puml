@@ -11,11 +11,10 @@ participant ":ListMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 
-autonumber 3
 
- -> CTRL : get vehicles needing maintenance list
 activate CTRL
-    group Get Vehicle List
+autonumber 3.1
+    group Get Maintenance Repository
 
         CTRL -> RepositorySingleton : getInstance()
         activate RepositorySingleton
@@ -31,7 +30,7 @@ activate CTRL
 
     end
 
-    autonumber 4
+
 deactivate CTRL
 
 
