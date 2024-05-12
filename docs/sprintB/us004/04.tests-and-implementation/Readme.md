@@ -2,42 +2,19 @@
 
 ## 4. Tests 
 
-**Test 1:** Check that a collaborator can be assigned one or more skills successfully.
+**Test 1:** Checks that the assignSkills() method correctly assigns skills to a collaborator and that the getSkills() method retrieves the assigned skills accurately.
 
-	@Test
-    public void testAssignSkills_Success() {
-        Collaborator collaborator = new Collaborator("John Doe", getDate(1990, Calendar.JANUARY, 1), 123456789, 123456789, "john.doe@example.com", "123 Main St", "12345", "Anytown", "ID", "123456789", getDate(2020, Calendar.JANUARY, 1), new Job("Developer"));
-
+    @Test
+    public void testAssignSkillsAndGetSkills() {
         Skill skill1 = new Skill("Java Programming");
-        Skill skill2 = new Skill("Database Management");
+        Skill skill2 = new Skill("Project Management");
+        collaborator.assignSkills(new Skill[] {skill1, skill2});
 
-        List<Skill> skills = new ArrayList<>();
-        skills.add(skill1);
-        skills.add(skill2);
+        List<Skill> assignedSkills = collaborator.getSkills();
 
-        collaborator.assignSkills(skills);
-
-        assertEquals(2, collaborator.getSkills().size());
-        assertTrue(collaborator.getSkills().contains(skill1));
-        assertTrue(collaborator.getSkills().contains(skill2));
-    }
-	
-
-**Test 2:** Check that assigning duplicate skills to a collaborator is handled properly. 
-
-	@Test
-    public void testAssignSkills_DuplicateSkills() {
-        Collaborator collaborator = new Collaborator("John Doe", getDate(1990, Calendar.JANUARY, 1), 123456789, 123456789, "john.doe@example.com", "123 Main St", "12345", "Anytown", "ID", "123456789", getDate(2020, Calendar.JANUARY, 1), new Job("Developer"));
-
-        Skill skill1 = new Skill("Java Programming");
-
-        List<Skill> skills = new ArrayList<>();
-        skills.add(skill1);
-
-        collaborator.assignSkills(skills);
-        collaborator.assignSkills(skills); // Try assigning the same skills again
-
-        assertEquals(1, collaborator.getSkills().size()); // Ensure only one instance of the skill is assigned
+        assertTrue(assignedSkills.contains(skill1));
+        assertTrue(assignedSkills.contains(skill2));
+        assertEquals(2, assignedSkills.size());
     }
 
 

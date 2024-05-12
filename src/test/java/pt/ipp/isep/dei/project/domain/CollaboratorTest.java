@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CollaboratorTest {
@@ -62,5 +64,18 @@ class CollaboratorTest {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         return calendar.getTime();
+    }
+
+    @Test
+    public void testAssignSkillsAndGetSkills() {
+        Skill skill1 = new Skill("Java Programming");
+        Skill skill2 = new Skill("Project Management");
+        collaborator.assignSkills(new Skill[] {skill1, skill2});
+
+        List<Skill> assignedSkills = collaborator.getSkills();
+
+        assertTrue(assignedSkills.contains(skill1));
+        assertTrue(assignedSkills.contains(skill2));
+        assertEquals(2, assignedSkills.size());
     }
 }
