@@ -1,24 +1,20 @@
 package pt.ipp.isep.dei.project.ui;
-
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Collaborator;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
 /**
- * The CreateTeamUI class provides a user interface for generating team proposals.
- * It interacts with the CreateTeamController to obtain skills, minimum and maximum team sizes, and generates a proposal of collaborators for the team.
+ * The CreateTeamUI class provides a user interface for creating teams.
  */
 public class CreateTeamUI implements Runnable {
     private final CreateTeamController createTeamController;
     private final Scanner scanner;
 
     /**
-     * Constructs a new CreateTeamUI object
-     * Initializes the CreateTeamController and scanner instances
+     * Constructs a new CreateTeamUI object.
      */
     public CreateTeamUI() {
         this.createTeamController = new CreateTeamController();
@@ -26,8 +22,7 @@ public class CreateTeamUI implements Runnable {
     }
 
     /**
-     * Runs the CreateTeamUI functionality.
-     * Retrieves skills, minimum and maximum team sizes, generates a proposal of collaborators for the team, and displays the proposal.
+     * Runs the user interface for creating teams.
      */
     public void run() {
         List<Skill> skills = createTeamController.getSkills();
@@ -35,29 +30,25 @@ public class CreateTeamUI implements Runnable {
             System.out.println("No skills available. Exiting.");
             return;
         }
-
         System.out.println("Available skills:");
         for (int i = 0; i < skills.size(); i++) {
             System.out.println((i + 1) + ". " + skills.get(i).getDesignation());
         }
-
         List<Skill> selectedSkills = getSelectedSkillsFromUser(skills);
         if (selectedSkills.isEmpty()) {
             System.out.println("No skills selected. Exiting.");
             return;
         }
-
         int minTeamSize = getMinTeamSizeFromUser();
         int maxTeamSize = getMaxTeamSizeFromUser();
-
         List<Collaborator> collaborators = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
         displayProposal(collaborators);
     }
 
     /**
-     * Retrieves the minimum team size input from the user
+     * Prompts the user to enter the minimum team size and returns the entered value.
      *
-     * @return the minimum team size input by the user
+     * @return The minimum team size entered by the user.
      */
     private int getMinTeamSizeFromUser() {
         System.out.print("Enter minimum team size: ");
@@ -67,9 +58,9 @@ public class CreateTeamUI implements Runnable {
     }
 
     /**
-     * Retrieves the maximum team size input from the user
+     * Prompts the user to enter the maximum team size and returns the entered value.
      *
-     * @return the maximum team size input by the user
+     * @return The maximum team size entered by the user.
      */
     private int getMaxTeamSizeFromUser() {
         System.out.print("Enter maximum team size: ");
@@ -79,9 +70,9 @@ public class CreateTeamUI implements Runnable {
     }
 
     /**
-     * Displays the generated team proposal.
+     * Displays the proposal of collaborators for the team.
      *
-     * @param collaborators the list of collaborators in the proposed team
+     * @param collaborators The list of collaborators proposed for the team.
      */
     private void displayProposal(List<Collaborator> collaborators) {
         System.out.println("Generated Team Proposal:");
@@ -91,10 +82,10 @@ public class CreateTeamUI implements Runnable {
     }
 
     /**
-     * Prompts the user to select skills from the provided list of skills.
+     * Prompts the user to select skills from the available list and returns the selected skills.
      *
-     * @param skills the list of available skills
-     * @return the list of selected skills
+     * @param skills The list of available skills.
+     * @return The list of selected skills.
      */
     private List<Skill> getSelectedSkillsFromUser(List<Skill> skills) {
         List<Skill> selectedSkills = new ArrayList<>();

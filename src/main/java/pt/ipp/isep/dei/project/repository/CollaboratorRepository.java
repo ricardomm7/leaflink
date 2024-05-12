@@ -76,6 +76,12 @@ public class CollaboratorRepository {
         collaboratorList.add(collab);
     }
 
+    /**
+     * Updates an existing collaborator in the repository.
+     *
+     * @param collaborator the collaborator to update
+     * @return true if the collaborator was successfully updated, false otherwise
+     */
     public boolean updateCollaborator(Collaborator collaborator) {
         int index = collaboratorList.indexOf(collaborator);
         if (index != -1) {

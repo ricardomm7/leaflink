@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 /**
  * This class provides an user inteface for assigning skills to collaborators.
- * It pronps the user to select a collaborator and a skill, displays the selected choices, and asks for confirmation before assigning the skillto the collaborator.
+ * It pronps the user to select a collaborator and a skill, displays the selected choices, and asks for confirmation before assigning the skill to the collaborator.
  */
 public class AssignSkillUI implements Runnable {
 
@@ -82,13 +82,11 @@ public class AssignSkillUI implements Runnable {
             selectedSkills.add(selectedSkill);
             selectedSkillsIds.add(selectedSkill.getDesignation());
 
-            // Ask user if they want to select another skill
             System.out.println("Do you want to select another skill? (Y/N)");
             String decision = sc.nextLine();
             continueSelectingSkills = decision.trim().equalsIgnoreCase("Y");
         }
 
-        // Display selected information
         System.out.println("\nPlease review the entered information:");
         System.out.println("Collaborator: " + selectedCollaborator.getName());
         System.out.println("Assigned skills:");
@@ -96,7 +94,6 @@ public class AssignSkillUI implements Runnable {
             System.out.println("- " + skill.getDesignation());
         }
 
-        // Confirm assignment
         System.out.println("\nDo you want to assign these skills to this collaborator? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
