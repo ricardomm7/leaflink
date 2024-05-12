@@ -21,11 +21,11 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... showing the skills available for selection?          | AssignSkillsUI         | Pure Fabrication.                                                                                                                             |
 | Step 6         | ... handling the user selecting a skill?                 | AssignSkillsUI         | Pure Fabrication.                                                                                                                             |
 | Step 7         | ... showing the confirmation info?                       | AssignSkillsUI         | Pure Fabrication.                                                                                                                             |
-| Step 8         | ... validating all data (local validation)?              | Collaborator           | Information Expert                                                                                                                            |
+|                | ... validating all data (local validation)?              | Collaborator           | Information Expert                                                                                                                            |
 |                | ... validating all data (global validation)?             | CollaboratorRepository | Information Expert                                                                                                                            |
 |                | ... saving the updated collaborator's skills?            | CollaboratorRepository | Information Expert.                                                                                                                           |
 |                | ... having all the repositories?                         | Repositories           | Information Expert, High cohesion, Low coupling.                                                                                              |
-| Step 9         | ... informing of operation success?                      | AssignSkillsUI         | Pure Fabrication.                                                                                                                             |
+| Step 8         | ... informing of operation success?                      | AssignSkillsUI         | Pure Fabrication.                                                                                                                             |
 
 ### Systematization ##
 

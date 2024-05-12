@@ -58,7 +58,7 @@ ref over CTRL
                                                             Get Collaborator Repository
 
                                                         end ref
-        CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
+        'CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
 
         CTRL -> TeamRepository : generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
     deactivate CTRL
@@ -72,9 +72,10 @@ ref over CTRL
 
                                 activate CTRL
                                 CTRL --> UI : team
+                                deactivate CTRL
                                 activate UI
 
-    deactivate CTRL
+
     UI --> ADM: show the proposal
         deactivate UI
 

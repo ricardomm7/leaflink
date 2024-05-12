@@ -6,23 +6,23 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...     | Answer               | Justification (with patterns)                                                             |
-|:---------------|:------------------------------------------------|:---------------------|:------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?                | CreateTeamUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
-| 			  	         | 	... coordinating the US?                       | CreateTeamController | Controller                                                                                |
-| Step 2         | ... requesting data?                            | CreateTeamUI         | Pure Fabrication.                                                                         |
-| Step 3         | ... receiving data?                             | RegisterTeamUI       | Pure Fabrication.                                                                         |
-| Step 7         | ... get the skills list?                        | SkillRepository      | Information Expert.                                                                       |
-|                | ... get the collaborators repository?           | Repositories         | Information Expert, High cohesion, Low coupling.                                          |
-|                | ... matching the skills with the collaborators? | CreateTeamController | Controller.                                                                               |
-|                | ... having all the repositories?                | Repositories         | Information Expert, High cohesion, Low coupling.                                          |
-|                | ... generating a team proposal?                 | TeamRepository       | Creator.                                                                                  |
-| Step 8         | ... displaying the confirmation operation?      | CreateTeamUI         | Pure Fabrication.                                                                         |
-| 	Step 9	       | 	... instantiating a new team.                  | TeamRepository       | Creator.                                                                                  |
-| 		             | 	... validating all data (local validation)?    | Team                 | Information Expert.                                                                       | 
-| 			  	         | 	... validating all data (global validation)?   | TeamRepository       | Information Expert.                                                                       | 
-| 			  	         | 	... saving the created team?                   | TeamRepository       | Information Expert.                                                                       | 
-| Step 10		      | 	... informing operation success?               | CreateTeamUI         | Pure Fabrication.                                                                         | 
+| Interaction ID  | Question: Which class is responsible for...     | Answer               | Justification (with patterns)                                                             |
+|:----------------|:------------------------------------------------|:---------------------|:------------------------------------------------------------------------------------------|
+| Step 1  		      | 	... interacting with the actor?                | CreateTeamUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class. |
+| 			  	          | 	... coordinating the US?                       | CreateTeamController | Controller                                                                                |
+|                 | ... get the skills list?                        | SkillRepository      | Information Expert.                                                                       |
+| Step 2          | ... requesting data?                            | CreateTeamUI         | Pure Fabrication.                                                                         |
+| Step 3, 4, 5, 6 | ... receiving data?                             | RegisterTeamUI       | Pure Fabrication.                                                                         |
+| Step 7          | ... get the collaborators repository?           | Repositories         | Information Expert, High cohesion, Low coupling.                                          |
+|                 | ... matching the skills with the collaborators? | CreateTeamController | Controller.                                                                               |
+|                 | ... having all the repositories?                | Repositories         | Information Expert, High cohesion, Low coupling.                                          |
+|                 | ... generating a team proposal?                 | TeamRepository       | Creator.                                                                                  |
+| Step 8          | ... displaying the confirmation operation?      | CreateTeamUI         | Pure Fabrication.                                                                         |
+| 	Step 9	        | 	... instantiating a new team.                  | TeamRepository       | Creator.                                                                                  |
+| 		              | 	... validating all data (local validation)?    | Team                 | Information Expert.                                                                       | 
+| 			  	          | 	... validating all data (global validation)?   | TeamRepository       | Information Expert.                                                                       | 
+| 			  	          | 	... saving the created team?                   | TeamRepository       | Information Expert.                                                                       | 
+| Step 10		       | 	... informing operation success?               | CreateTeamUI         | Pure Fabrication.                                                                         | 
 
 ### Systematization ##
 

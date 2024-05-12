@@ -33,7 +33,7 @@ activate CTRL
             deactivate PLAT
 
 
-            CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
+            'CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
 
             CTRL -> TeamRepository : generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
 deactivate CTRL
