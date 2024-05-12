@@ -34,9 +34,10 @@ class CollaboratorRepository {
 }
 
 class SkillRepository {
-    + createSkill(designation : String) : Skill
-    + checkForDuplicates() : void
-    + addSkill(skill): void
+     - skillList : List<Skill>
+     + createSkill(designation : String) : Skill
+     + checkForDuplicates() : void
+     + addSkill(skill): void
 }
 
 class Collaborator {
