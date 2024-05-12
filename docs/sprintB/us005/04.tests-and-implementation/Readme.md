@@ -77,32 +77,40 @@
 ### Class CreateTeamController 
 
 ```java
- public List<Collaborator> generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
-        List<Collaborator> collaborators = collaboratorRepository.getCollaboratorList();
-        List<Collaborator> selectedCollaborators = new ArrayList<>();
-
-        for (Collaborator collaborator : collaborators) {
+public List<Collaborator> generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
+    List<Collaborator> allCollaborators = collaboratorRepository.getCollaboratorList();
+    List<Collaborator> selectedCollaborators = new ArrayList<>();
+    List<Skill> combinedSkills = new ArrayList<>();
+        for (Collaborator collaborator : allCollaborators) {
             List<Skill> collaboratorSkills = collaborator.getSkills();
-            for (Skill skill : requiredSkills) {
-                if (collaboratorSkills.contains(skill) && !selectedCollaborators.contains(collaborator)) {
-                    selectedCollaborators.add(collaborator);
-                    break; // Move to the next collaborator once a match is found
+            for (Skill skill : collaboratorSkills) {
+                if (!combinedSkills.contains(skill)) {
+                    combinedSkills.add(skill);
                 }
+            }
+            selectedCollaborators.add(collaborator);
+            if (combinedSkills.containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
+                teamRepository.addTeam(new Team(requiredSkills, selectedCollaborators, minTeamSize, maxTeamSize));
+                return selectedCollaborators;
             }
         }
 
-        if (selectedCollaborators.size() < minTeamSize) {
-            System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
-            return new ArrayList<>();
+        System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
+        return new ArrayList<>();
         }
-
-        return selectedCollaborators.subList(0, Math.min(selectedCollaborators.size(), maxTeamSize));
 }
 ```
 
 ### Class TeamRepository
 
 ```java
+public void addTeam(Team team) {
+    teamList.add(team);
+}
+
+public List<Team> getTeamList(){
+        return new ArrayList<>(teamList);
+}
 
 ```
 

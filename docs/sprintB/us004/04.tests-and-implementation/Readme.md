@@ -17,6 +17,17 @@
         assertEquals(2, assignedSkills.size());
     }
 
+**Test 2:** Checks that the assignSkills() method correctly handles duplicate skills by only adding them once to the collaborator's skill list, preventing duplication.
+    
+    @Test
+    public void testAssignSkills_DuplicateSkills() {
+        Skill skill1 = new Skill("Java Programming");
+        collaborator.assignSkills(new Skill[] { skill1, skill1 });
+
+        List<Skill> assignedSkills = collaborator.getSkills();
+
+        assertEquals(1, assignedSkills.size());
+    }
 
 ## 5. Construction (Implementation)
 
@@ -27,19 +38,19 @@ public void assignSkill(Collaborator collaborator, List<Skill> skills) {
         collaborator.assignSkills(skills);
         collaboratorRepository.updateCollaborator(collaborator);
         }
+}
 ```
 
 ### Class CollaboratorRepository
 
 ```java
-public void updateCollaborator(Collaborator collaborator) {
-    for (int i = 0; i < collaboratorList.size(); i++) {
-        if (collaboratorList.get(i).getTaxpayerNumber() == collaborator.getTaxpayerNumber()) {
-        collaboratorList.set(i, collaborator);
-        return;
+    public boolean updateCollaborator(Collaborator collaborator) {
+        int index = collaboratorList.indexOf(collaborator);
+        if (index != -1) {
+            collaboratorList.set(index, collaborator);
+            return true;
         }
-    }
-    throw new IllegalArgumentException("Collaborator not found in the repository.");
+        return false;
     }
 ```
 ### Class Collaborator
@@ -53,15 +64,10 @@ public void assignSkills(Skill[] selectedSkills) {
     }
 }
 
-public void addSkill(Skill skill) {
-        if (!skills.contains(skill)) {
-            skills.add(skill);
-        }
-    }
-
 public List<Skill> getSkills() {
         return new ArrayList<>(skills);
     }
+}
 ```
 
 ## 6. Integration and Demo 

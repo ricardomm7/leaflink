@@ -78,4 +78,14 @@ class CollaboratorTest {
         assertTrue(assignedSkills.contains(skill2));
         assertEquals(2, assignedSkills.size());
     }
+
+    @Test
+    public void testAssignSkills_DuplicateSkills() {
+        Skill skill1 = new Skill("Java Programming");
+        collaborator.assignSkills(new Skill[] { skill1, skill1 });
+
+        List<Skill> assignedSkills = collaborator.getSkills();
+
+        assertEquals(1, assignedSkills.size());
+    }
 }
