@@ -61,17 +61,5 @@ public class CreateTeamController {
 
         return selectedCollaborators.subList(0, Math.min(selectedCollaborators.size(), maxTeamSize));
     }
-
-    /**
-     * Checks if a collaborator meets the required skills for a team.
-     *
-     * @param collaborator   the collaborator to check
-     * @param requiredSkills the skills required for the team
-     * @return true if the collaborator meets the required skills, false otherwise
-     */
-    private boolean meetsRequiredSkills(Collaborator collaborator, List<Skill> requiredSkills) {
-        List<Skill> collaboratorSkills = collaborator.getSkills();
-        return collaboratorSkills.containsAll(requiredSkills);
-    }
 }
 
