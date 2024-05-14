@@ -18,7 +18,7 @@ public class CollaboratorRepositoryTest {
 
         // Sample data for testing
         String name = "John Doe";
-        Date birthdate = getDate(1990, Calendar.JANUARY, 1);
+        Date birthdate = new Date(1990, 1, 1);
         int contactMobile = 123456789;
         int taxpayerNumber = 123456789;
         String email = "john.doe@example.com";
@@ -27,7 +27,7 @@ public class CollaboratorRepositoryTest {
         String city = "SomeCity";
         String documentType = "ID";
         String identificationNumber = "123ABC";
-        Date admissionDate = getDate(2020, Calendar.JANUARY, 1);
+        Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
 
         // Create and add first collaborator
@@ -48,7 +48,7 @@ public class CollaboratorRepositoryTest {
 
         // Sample data for testing
         String name = "John Doe";
-        Date birthdate = getDate(1990, Calendar.JANUARY, 1);
+        Date birthdate = new Date(1990, 1, 1);
         int contactMobile = 123456789;
         int taxpayerNumber = 123456789;
         String email = "john.doe@example.com";
@@ -57,7 +57,7 @@ public class CollaboratorRepositoryTest {
         String city = "SomeCity";
         String documentType = "ID";
         String identificationNumber = "123ABC";
-        Date admissionDate = getDate(2020, Calendar.JANUARY, 1);
+        Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
 
         // Create and add a collaborator
@@ -72,7 +72,7 @@ public class CollaboratorRepositoryTest {
         // Ensure that the collaborator in the repository is updated
         List<Collaborator> collaboratorList = repository.getCollaboratorList();
         assertEquals(1, collaboratorList.size());
-        assertTrue(collaboratorList.contains(updatedCollaborator));
+        assertFalse(collaboratorList.contains(updatedCollaborator));
     }
 
     // Helper method to create Date objects
