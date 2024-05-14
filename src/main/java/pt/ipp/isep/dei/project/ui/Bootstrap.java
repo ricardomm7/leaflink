@@ -15,6 +15,7 @@ public class Bootstrap implements Runnable {
         addJobs();
         addVehicles();
         addCollaborators();
+        addMaintenance();
 
 
     }
@@ -34,6 +35,45 @@ public class Bootstrap implements Runnable {
         vehicleRepository.registerVehicle("VIN90123456789012", "Volkswagen", "Golf", "Hatchback", "EF9012", 1400.0, 2100.0,
                 60000, new Date(2000, 22, 10), new Date(2010, 10, 01), 12000);
 
+        // Example 4: Ford Transit for Equipment Transportation
+        vehicleRepository.registerVehicle("VIN12345678901234", "Ford", "Transit", "Cargo Van", "AB1234", 2500.0, 3500.0,
+                80000, new Date(2017, 5, 15), new Date(2024, 5, 14), 20000);
+
+        // Example 5: Utility Truck for Landscaping Equipment
+        vehicleRepository.registerVehicle("VIN56789012345678", "Chevrolet", "Silverado", "Utility Truck", "CD5678", 2800.0, 4000.0,
+                90000, new Date(2019, 8, 20), new Date(2024, 8, 19), 25000);
+
+        // Example 6: Ford F-250 for Heavy Duty Landscaping
+        vehicleRepository.registerVehicle("VIN90123456789012", "Ford", "F-250", "Pickup Truck", "EF9012", 3200.0, 5000.0,
+                120000, new Date(2018, 10, 10), new Date(2024, 10, 9), 30000);
+
+        // Example 7: Isuzu NQR for Commercial Landscaping
+        vehicleRepository.registerVehicle("VIN23456789012345", "Isuzu", "NQR", "Box Truck", "GH2345", 3500.0, 6000.0,
+                150000, new Date(2016, 6, 25), new Date(2024, 6, 24), 35000);
+
+        // Example 8: Mitsubishi Fuso Canter for Green Waste Collection
+        vehicleRepository.registerVehicle("VIN67890123456789", "Mitsubishi", "Fuso Canter", "Dump Truck", "IJ6789", 4000.0, 7000.0,
+                180000, new Date(2017, 7, 30), new Date(2024, 7, 29), 40000);
+
+
+    }
+    private void addMaintenance(){
+        MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
+
+        // Example 1: Maintenance for Ford Transit
+        maintenanceRepository.createMaintenance("AB1234", new Date(2024, 6, 10), 25000);
+
+    // Example 2: Maintenance for Utility Truck
+        maintenanceRepository.createMaintenance("CD5678", new Date(2024, 6, 15), 6500);
+
+    // Example 3: Maintenance for Ford F-250
+        maintenanceRepository.createMaintenance("EF9012", new Date(2024, 6, 20), 12500);
+
+    // Example 4: Maintenance for Isuzu NQR
+        maintenanceRepository.createMaintenance("GH2345", new Date(2024, 6, 25), 11000);
+
+    // Example 5: Maintenance for Mitsubishi Fuso Canter
+        maintenanceRepository.createMaintenance("IJ6789", new Date(2024, 7, 1), 19000);
     }
 
     private void addSkills() {
@@ -56,7 +96,7 @@ public class Bootstrap implements Runnable {
 
         skillRepository.createSkill("Pest and Weed Control");
 
-        skillRepository.createSkill("Hardscape Installation (e.g., paths, walls)");
+        skillRepository.createSkill("Hardscape Installation");
 
         skillRepository.createSkill("Tree Planting and Care");
 
@@ -79,8 +119,6 @@ public class Bootstrap implements Runnable {
         jobRepository.createJob("Arborist");
 
         jobRepository.createJob("Pest Control Technician");
-
-        jobRepository.createJob("Developer");
 
         jobRepository.createJob("Driver");
 
