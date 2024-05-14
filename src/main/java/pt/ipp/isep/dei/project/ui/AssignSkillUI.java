@@ -97,7 +97,7 @@ public class AssignSkillUI implements Runnable {
         System.out.println("\nDo you want to assign these skills to this collaborator? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            assignSkillController.assignSkill(selectedCollaborator, selectedSkills);
+            assignSkillController.assignSkills(selectedCollaborator, selectedSkills);
             System.out.println("Skills assigned successfully!");
         } else {
             System.out.println("Operation cancelled!");

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Job;
+import pt.ipp.isep.dei.project.domain.Skill;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,18 +78,13 @@ public class CollaboratorRepository {
     }
 
     /**
-     * Updates an existing collaborator in the repository.
+     * Assigns one or more skills to a collaborator.
      *
-     * @param collaborator the collaborator to update
-     * @return true if the collaborator was successfully updated, false otherwise
+     * @param collaborator The collaborator to whom the skill(s) will be assigned.
+     * @param skills       The skills to be assigned.
      */
-    public boolean updateCollaborator(Collaborator collaborator) {
-        int index = collaboratorList.indexOf(collaborator);
-        if (index != -1) {
-            collaboratorList.set(index, collaborator);
-            return true;
-        }
-        return false;
+    public void assignSkills(Collaborator collaborator, List<Skill> skills) {
+        collaborator.assignSkills(skills.toArray(new Skill[0]));
     }
 }
 
