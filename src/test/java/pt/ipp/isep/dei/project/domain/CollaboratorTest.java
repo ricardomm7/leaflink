@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ class CollaboratorTest {
     public void setUp() {
         // Sample data for testing
         String name = "John Doe";
-        Date birthdate = getDate(1990, Calendar.JANUARY, 1);
+        Date birthdate = new Date(1990, 1, 1);
         int contactMobile = 123456789;
         int taxpayerNumber = 123456789;
         String email = "john.doe@example.com";
@@ -24,7 +25,7 @@ class CollaboratorTest {
         String city = "SomeCity";
         String documentType = "ID";
         String identificationNumber = "123ABC";
-        Date admissionDate = getDate(2020, Calendar.JANUARY, 1);
+        Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
         collaborator = new Collaborator(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
     }
@@ -42,7 +43,7 @@ class CollaboratorTest {
 
     @Test
     public void testSetBirthdate_ValidDate() {
-        Date expectedDate = getDate(1980, Calendar.JANUARY, 1);
+        Date expectedDate = new Date(1980, 1, 1);
 
         collaborator.setBirthdate(expectedDate);
 
@@ -57,20 +58,14 @@ class CollaboratorTest {
 
     @Test
     public void testSetAdmissionDate_NotAdultAtAdmission() {
-        assertThrows(IllegalArgumentException.class, () -> collaborator.setAdmissionDate(getDate(2002, Calendar.JANUARY, 1)));
-    }
-
-    private Date getDate(int year, int month, int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-        return calendar.getTime();
+        assertThrows(IllegalArgumentException.class, () -> collaborator.setAdmissionDate(new Date(2002, 1, 1)));
     }
 
     @Test
     public void testAssignSkillsAndGetSkills() {
         Skill skill1 = new Skill("Java Programming");
         Skill skill2 = new Skill("Project Management");
-        collaborator.assignSkills(new Skill[] {skill1, skill2});
+        collaborator.assignSkills(new Skill[]{skill1, skill2});
 
         List<Skill> assignedSkills = collaborator.getSkills();
 
@@ -82,7 +77,7 @@ class CollaboratorTest {
     @Test
     public void testAssignSkills_DuplicateSkills() {
         Skill skill1 = new Skill("Java Programming");
-        collaborator.assignSkills(new Skill[] { skill1, skill1 });
+        collaborator.assignSkills(new Skill[]{skill1, skill1});
 
         List<Skill> assignedSkills = collaborator.getSkills();
 
