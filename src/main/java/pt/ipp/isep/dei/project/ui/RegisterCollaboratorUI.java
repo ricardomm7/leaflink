@@ -116,7 +116,7 @@ public class RegisterCollaboratorUI implements Runnable {
         month--;
 
         // Create a Date object
-        return new Date(year - 1900, month, day);
+        return new Date(year, month, day);
     }
 
     @Override

@@ -212,7 +212,7 @@ public class Collaborator {
         // Verifica se a data não é a de hoje ou futura
         Calendar today = Calendar.getInstance();
         today.setTime(new Date());
-        return !date.after(today.getTime());
+        return date.after(today.getTime());
     }
 
     /**
