@@ -40,45 +40,55 @@ public class Bootstrap implements Runnable {
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
 
         // Example 1
-        skillRepository.createSkill("Driving Licence");
+        skillRepository.createSkill("Class A Driving Licence");
 
-        // Example 2
-        skillRepository.createSkill("Programming");
+        skillRepository.createSkill("Class B Driving Licence");
 
-        // Example 3
-        skillRepository.createSkill("Management Licence");
+        skillRepository.createSkill("Class C Driving Licence");
 
-        // Example 4
-        skillRepository.createSkill("Customer Service");
+        skillRepository.createSkill("Operation of Landscaping Machinery");
 
-        // Example 5
-        skillRepository.createSkill("Mechanical Repair");
+        skillRepository.createSkill("Irrigation System Installation and Maintenance");
 
-        // Example 6
-        skillRepository.createSkill("Plumb Repair");
+        skillRepository.createSkill("Pruning and Trimming Techniques");
 
-        // Example 7
-        skillRepository.createSkill("Financial Analysis");
+        skillRepository.createSkill("Soil Testing and Analysis");
 
+        skillRepository.createSkill("Pest and Weed Control");
+
+        skillRepository.createSkill("Hardscape Installation (e.g., paths, walls)");
+
+        skillRepository.createSkill("Tree Planting and Care");
+
+        skillRepository.createSkill("Safety Procedures for Green Space Maintenance");
+
+        skillRepository.createSkill("Seasonal Planting and Maintenance");
     }
 
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
-        // Example 1
-        jobRepository.createJob("manager");
+        jobRepository.createJob("Manager");
 
-        // Example 2
-        jobRepository.createJob("developer");
+        jobRepository.createJob("Heavy Equipment Operator");
 
-        // Example 3
-        jobRepository.createJob("driver");
+        jobRepository.createJob("Landscaping Technician");
 
-        // Example 4
-        jobRepository.createJob("server");
+        jobRepository.createJob("Irrigation Technician");
 
-        // Example 5
-        jobRepository.createJob("plumber");
+        jobRepository.createJob("Arborist");
+
+        jobRepository.createJob("Pest Control Technician");
+
+        jobRepository.createJob("Developer");
+
+        jobRepository.createJob("Driver");
+
+        jobRepository.createJob("Gardener");
+
+        jobRepository.createJob("Plumber");
+
+        jobRepository.createJob("Machine Operator");
     }
 
     private void addCollaborators() {
