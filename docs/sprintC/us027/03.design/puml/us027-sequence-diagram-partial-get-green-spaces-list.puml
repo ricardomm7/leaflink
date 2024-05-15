@@ -9,7 +9,7 @@ autonumber
 
 participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
 
-autonumber 5
+autonumber 10
 
 
 
@@ -21,9 +21,9 @@ autonumber 5
 activate GreenSpaceRepo
 GreenSpaceRepo -> GreenSpaceRepo : getOrganizedList(algorithm, loggedUser)
 activate GreenSpaceRepo
-GreenSpaceRepo -> GreenSpaceRepo : verifies if the list has any entry
-activate GreenSpaceRepo
 GreenSpaceRepo -> GreenSpaceRepo : matchWithLoggedUser(loggedUser)
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : verifies if the list has any entry
 activate GreenSpaceRepo
 GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm)
 GreenSpaceRepo --> GreenSpaceRepo

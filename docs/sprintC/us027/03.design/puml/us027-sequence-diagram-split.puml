@@ -9,7 +9,7 @@ title System Sequence Diagram (SSD) - US006
 autonumber
 
 actor "GSM" as GSM
-participant ":ListGreeSpacesUI" as UI
+participant ":ListGreenSpacesUI" as UI
 participant ":ListGreenSpacesController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
