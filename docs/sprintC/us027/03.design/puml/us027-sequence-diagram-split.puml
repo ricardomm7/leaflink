@@ -1,0 +1,50 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "GSM" as GSM
+participant ":ListGreeSpacesUI" as UI
+participant ":ListGreenSpacesController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
+
+activate GSM
+GSM -> UI : asks to list all green spaces managed by him
+activate UI
+UI -> CTRL** : create
+UI --> GSM : requests the sorting algorithm
+GSM -> UI : selects the sorting algorithm
+UI -> CTRL : getOrganizedList(algorithm, loggedUser)
+
+deactivate UI
+activate CTRL
+
+ref over CTRL
+Get Green Space Repository
+end ref
+CTRL -> GreenSpaceRepo : getList(algorithm, loggedUser)
+deactivate CTRL
+
+activate GreenSpaceRepo
+ref over GreenSpaceRepo
+Get Green Space List
+end ref
+GreenSpaceRepo --> CTRL:list
+deactivate GreenSpaceRepo
+activate CTRL
+CTRL --> UI : list
+
+deactivate CTRL
+activate UI
+UI --> GSM : displays operation success by showing the list
+deactivate UI
+deactivate GSM
+
+@enduml

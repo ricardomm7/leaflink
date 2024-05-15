@@ -213,7 +213,7 @@ Task "1" -- "1" Team : is assigned >
 
 Task "1" -- "*" GardenTool : has >
 
-Task "*" -- "1" GreenSpace: assigned to:
+Task "*" -- "1" GreenSpace: assigned to >
 
 GreenSpace "1" -- "1..*" ElectronicDevice: has >
 

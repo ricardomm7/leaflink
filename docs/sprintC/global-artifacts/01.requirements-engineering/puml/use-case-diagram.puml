@@ -91,11 +91,11 @@ rectangle "Use Cases" as usecases{
     GSM --> UC016
 }
 rectangle "Use Cases" as usecases{
-    usecase "US017/UC017 - I want to place signs to evacuate to an Assembly Point." as UC017
+    usecase "US017/UC017 - Place signs to evacuate to an Assembly Point." as UC017
     GSM --> UC017
 }
 rectangle "Use Cases" as usecases{
-    usecase "US018/UC018 - I want to place signs to evacuate to an Meeting Point." as UC018
+    usecase "US018/UC018 - Place signs to evacuate to an Meeting Point." as UC018
     GSM --> UC018
 }
 rectangle "Use Cases" as usecases{
@@ -103,43 +103,43 @@ rectangle "Use Cases" as usecases{
     QAM --> UC019
 }
 rectangle "Use Cases" as usecases{
-    usecase "US020/UC020 - I want to register a green space and its respective area." as UC020
+    usecase "US020/UC020 - Register a green space and its respective area." as UC020
     GSM --> UC020
 }
 rectangle "Use Cases" as usecases{
-    usecase "US021/UC021 - I want to add a new entry to the To-Do List." as UC021
+    usecase "US021/UC021 - Add a new entry to the To-Do List." as UC021
     GSM --> UC021
 }
 rectangle "Use Cases" as usecases{
-    usecase "US022/UC022 - I want to add a new entry in the Agenda." as UC022
+    usecase "US022/UC022 - Add a new entry in the Agenda." as UC022
     GSM --> UC022
 }
 rectangle "Use Cases" as usecases{
-    usecase "US023/UC023 - I want to assign a Team to an entry in the Agenda." as UC023
+    usecase "US023/UC023 - Assign a Team to an entry in the Agenda." as UC023
     GSM --> UC023
 }
 rectangle "Use Cases" as usecases{
-    usecase "US024/UC024 - I want to Postpone an entry in the Agenda to a future date." as UC024
+    usecase "US024/UC024 - Postpone an entry in the Agenda to a future date." as UC024
     GSM --> UC024
 }
 rectangle "Use Cases" as usecases{
-    usecase "US025/UC025 - I want to Cancel an entry in the Agenda." as UC025
+    usecase "US025/UC025 - Cancel an entry in the Agenda." as UC025
     GSM --> UC025
 }
 rectangle "Use Cases" as usecases{
-    usecase "US026/UC026 - I want to assign one or more vehicles to an entry in the Agenda." as UC026
+    usecase "US026/UC026 - Assign one or more vehicles to an entry in the Agenda." as UC026
     GSM --> UC026
 }
 rectangle "Use Cases" as usecases{
-    usecase "US027/UC027 - I need to list all green spaces managed by me." as UC027
+    usecase "US027/UC027 - List all green spaces managed by a GSM." as UC027
     GSM --> UC027
 }
 rectangle "Use Cases" as usecases{
-    usecase "US028/UC028 - I wish to consult the tasks assigned to me." as UC028
+    usecase "US028/UC028 - Consult the tasks assigned to a CLB." as UC028
     CLB --> UC028
 }
 rectangle "Use Cases" as usecases{
-    usecase "US029/UC029 - I want to record the completion of a task." as UC029
+    usecase "US029/UC029 - Record the completion of a task." as UC029
     CLB --> UC029
 }
 @enduml

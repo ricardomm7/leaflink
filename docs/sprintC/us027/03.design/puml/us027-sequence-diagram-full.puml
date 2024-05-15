@@ -1,0 +1,65 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "GSM" as GSM
+participant ":ListGreeSpacesUI" as UI
+participant ":ListGreenSpacesController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
+
+activate GSM
+GSM -> UI : asks to list all green spaces managed by him
+activate UI
+UI -> CTRL** : create
+UI --> GSM : requests the sorting algorithm
+GSM -> UI : selects the sorting algorithm
+UI -> CTRL : getOrganizedList(algorithm, loggedUser)
+
+deactivate UI
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+RepositorySingleton --> CTRL : repositories
+deactivate RepositorySingleton
+CTRL -> PLAT : getGreenSpaceRepository()
+activate PLAT
+PLAT -->  CTRL: greenSpaceRepository
+deactivate PLAT
+CTRL -> GreenSpaceRepo : getList(algorithm, loggedUser)
+deactivate CTRL
+
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : getOrganizedList(algorithm, loggedUser)
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : verifies if the list has any entry
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : matchWithLoggedUser(loggedUser)
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm)
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
+GreenSpaceRepo --> CTRL:list
+deactivate GreenSpaceRepo
+activate CTRL
+CTRL --> UI : list
+
+deactivate CTRL
+activate UI
+UI --> GSM : displays operation success by showing the list
+deactivate UI
+deactivate GSM
+
+@enduml

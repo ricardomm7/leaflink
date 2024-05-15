@@ -48,7 +48,7 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us027-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -56,20 +56,16 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us027-sequence-diagram-split.svg)
 
-**Get Vehicle Repository Partial SD**
+**Get Green Space Repository Partial SD**
 
-![Sequence Diagram - Partial - Get Vehicle Repository](svg/us006-sequence-diagram-partial-get-vehicle-repository.svg)
+![Sequence Diagram - Partial - Get Vehicle Repository](svg/us027-sequence-diagram-partial-get-green-space-repository.svg)
 
-**Verify Existing Vehicle Partial SD**
+**Get Green Space Repository Partial SD**
 
-![Sequence Diagram - Partial - Verify Existing Vehicle](svg/us006-sequence-diagram-partial-verify-existing-vehicle.svg)
-
-**Register a Vehicle**
-
-![Sequence Diagram - Partial - Register a Vehicle](svg/us006-sequence-diagram-partial-register-vehicle.svg)
+![Sequence Diagram - Partial - Get Vehicle Repository](svg/us027-sequence-diagram-partial-get-green-spaces-list.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us027-class-diagram.svg)

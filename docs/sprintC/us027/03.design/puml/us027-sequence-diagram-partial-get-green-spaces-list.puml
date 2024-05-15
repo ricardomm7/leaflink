@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
+
+autonumber 5
+
+
+
+ -> GreenSpaceRepo: getList(algorithm, loggedUser)
+
+    group Get Green Space List
+
+
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : getOrganizedList(algorithm, loggedUser)
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : verifies if the list has any entry
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : matchWithLoggedUser(loggedUser)
+activate GreenSpaceRepo
+GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm)
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
+<-- GreenSpaceRepo  :list
+deactivate GreenSpaceRepo
+
+
+    end
+
+
+@enduml
