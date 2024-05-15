@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US021
+
+autonumber
+
+actor "GSM" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : asks to add a new entry to the To-Do List
+    activate System
+
+        System --> GSM : Displays a list of the green spaces managed by that GSM
+    deactivate System
+
+    GSM -> System : Selects the green space
+
+    activate System
+
+        System --> GSM : requests entry data (description, degree of urgency, and approximate expected duration)
+    deactivate System
+
+    GSM -> System : types requested data
+    activate System
+
+    System --> GSM : shows all data and requests confirmation
+        deactivate System
+
+        GSM -> System : confirms data
+        activate System
+
+            System --> GSM :  displays success message (Vehicle registered successfully)
+        deactivate System
+
+@enduml
