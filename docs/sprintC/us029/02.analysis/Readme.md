@@ -8,8 +8,4 @@
 
 ### 2.2. Other Remarks
 
-- All dates used (birthDate and admissionDate) are in day/month/year format.
-- The mobile number should have nine numbers.
-- The e-mail should have one arroba ("@") and one dot (".").
-- The taxpayer number should have 9 numbers.
-- 
+- The collaborator only can record the completion of tasks assigned to him.

@@ -18,7 +18,7 @@ activate CLB
         System --> CLB : shows the list of the task assign to the collaborator and requests to select the one to record
     deactivate System
 
-    CLB -> System : select assign task
+    CLB -> System : select an assign task
 
     activate System
 
@@ -28,7 +28,7 @@ activate CLB
     CLB -> System : confirms data
     activate System
 
-        System --> CLB :  displays success message (Task record has completed)
+        System --> CLB :  displays success message (Task record as completed)
     deactivate System
 
 @enduml
