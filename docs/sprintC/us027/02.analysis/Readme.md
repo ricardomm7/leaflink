@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-- The size unit will be in Km.
+- The size unit will be in Km^2.
