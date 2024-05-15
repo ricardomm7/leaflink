@@ -14,7 +14,8 @@ public class Bootstrap implements Runnable {
         addSkills();
         addJobs();
         addVehicles();
-        //addCollaborators();
+        addCollaborators();
+        addMaintenance();
 
 
     }
@@ -34,51 +35,98 @@ public class Bootstrap implements Runnable {
         vehicleRepository.registerVehicle("VIN90123456789012", "Volkswagen", "Golf", "Hatchback", "EF9012", 1400.0, 2100.0,
                 60000, new Date(2000, 22, 10), new Date(2010, 10, 01), 12000);
 
+        // Example 4: Ford Transit for Equipment Transportation
+        vehicleRepository.registerVehicle("VIN12345678901234", "Ford", "Transit", "Cargo Van", "AB1234", 2500.0, 3500.0,
+                80000, new Date(2017, 5, 15), new Date(2024, 5, 14), 20000);
+
+        // Example 5: Utility Truck for Landscaping Equipment
+        vehicleRepository.registerVehicle("VIN56789012345678", "Chevrolet", "Silverado", "Utility Truck", "CD5678", 2800.0, 4000.0,
+                90000, new Date(2019, 8, 20), new Date(2024, 8, 19), 25000);
+
+        // Example 6: Ford F-250 for Heavy Duty Landscaping
+        vehicleRepository.registerVehicle("VIN90123456789012", "Ford", "F-250", "Pickup Truck", "EF9012", 3200.0, 5000.0,
+                120000, new Date(2018, 10, 10), new Date(2024, 10, 9), 30000);
+
+        // Example 7: Isuzu NQR for Commercial Landscaping
+        vehicleRepository.registerVehicle("VIN23456789012345", "Isuzu", "NQR", "Box Truck", "GH2345", 3500.0, 6000.0,
+                150000, new Date(2016, 6, 25), new Date(2024, 6, 24), 35000);
+
+        // Example 8: Mitsubishi Fuso Canter for Green Waste Collection
+        vehicleRepository.registerVehicle("VIN67890123456789", "Mitsubishi", "Fuso Canter", "Dump Truck", "IJ6789", 4000.0, 7000.0,
+                180000, new Date(2017, 7, 30), new Date(2024, 7, 29), 40000);
+
+
+    }
+    private void addMaintenance(){
+        MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
+
+        // Example 1: Maintenance for Ford Transit
+        maintenanceRepository.createMaintenance("AB1234", new Date(2024, 6, 10), 25000);
+
+    // Example 2: Maintenance for Utility Truck
+        maintenanceRepository.createMaintenance("CD5678", new Date(2024, 6, 15), 6500);
+
+    // Example 3: Maintenance for Ford F-250
+        maintenanceRepository.createMaintenance("EF9012", new Date(2024, 6, 20), 12500);
+
+    // Example 4: Maintenance for Isuzu NQR
+        maintenanceRepository.createMaintenance("GH2345", new Date(2024, 6, 25), 11000);
+
+    // Example 5: Maintenance for Mitsubishi Fuso Canter
+        maintenanceRepository.createMaintenance("IJ6789", new Date(2024, 7, 1), 19000);
     }
 
     private void addSkills() {
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
 
         // Example 1
-        skillRepository.createSkill("Driving Licence");
+        skillRepository.createSkill("Class A Driving Licence");
 
-        // Example 2
-        skillRepository.createSkill("Programming");
+        skillRepository.createSkill("Class B Driving Licence");
 
-        // Example 3
-        skillRepository.createSkill("Management Licence");
+        skillRepository.createSkill("Class C Driving Licence");
 
-        // Example 4
-        skillRepository.createSkill("Customer Service");
+        skillRepository.createSkill("Operation of Landscaping Machinery");
 
-        // Example 5
-        skillRepository.createSkill("Mechanical Repair");
+        skillRepository.createSkill("Irrigation System Installation and Maintenance");
 
-        // Example 6
-        skillRepository.createSkill("Plumb Repair");
+        skillRepository.createSkill("Pruning and Trimming Techniques");
 
-        // Example 7
-        skillRepository.createSkill("Financial Analysis");
+        skillRepository.createSkill("Soil Testing and Analysis");
 
+        skillRepository.createSkill("Pest and Weed Control");
+
+        skillRepository.createSkill("Hardscape Installation");
+
+        skillRepository.createSkill("Tree Planting and Care");
+
+        skillRepository.createSkill("Safety Procedures for Green Space Maintenance");
+
+        skillRepository.createSkill("Seasonal Planting and Maintenance");
     }
 
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
-        // Example 1
-        jobRepository.createJob("manager");
+        jobRepository.createJob("Manager");
 
-        // Example 2
-        jobRepository.createJob("developer");
+        jobRepository.createJob("Heavy Equipment Operator");
 
-        // Example 3
-        jobRepository.createJob("driver");
+        jobRepository.createJob("Landscaping Technician");
 
-        // Example 4
-        jobRepository.createJob("server");
+        jobRepository.createJob("Irrigation Technician");
 
-        // Example 5
-        jobRepository.createJob("plumber");
+        jobRepository.createJob("Arborist");
+
+        jobRepository.createJob("Pest Control Technician");
+
+        jobRepository.createJob("Driver");
+
+        jobRepository.createJob("Gardener");
+
+        jobRepository.createJob("Plumber");
+
+        jobRepository.createJob("Machine Operator");
     }
 
     private void addCollaborators() {
@@ -86,33 +134,33 @@ public class Bootstrap implements Runnable {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
         // Example 1
-        collaboratorRepository.create("Bob Smith", new Date(1990, Calendar.JANUARY, 22), 987654321,
+        collaboratorRepository.create("Bob Smith", new Date(1990, 1, 22), 987654321,
                 123456789, "bob.smith@example.com", "5678 Oak Street", "6789-100",
-                "Shelbyville", "ID Card", "CD2345678", new Date(2021, Calendar.MAY, 15),
+                "Shelbyville", "ID Card", "CD2345678", new Date(2021, 5, 15),
                 jobRepository.getJobList().get(0));
 
         // Example 2
-        collaboratorRepository.create("Alice Johnson", new Date(1985, Calendar.JANUARY, 15), 123456789,
+        collaboratorRepository.create("Alice Johnson", new Date(1985, 1, 15), 123456789,
                 987654321, "alice.johnson@example.com", "1234 Elm Street", "1234-125",
-                "Springfield", "Passport", "AB1234567", new Date(2020, Calendar.MAY, 1),
+                "Springfield", "Passport", "AB1234567", new Date(2020, 5, 1),
                 jobRepository.getJobList().get(1));
 
         // Example 3
-        collaboratorRepository.create("Charlie Brown", new Date(1992, Calendar.JANUARY, 30), 234567891,
+        collaboratorRepository.create("Charlie Brown", new Date(1992, 1, 30), 234567891,
                 876543219, "charlie.brown@example.com", "3456 Maple Street", "2345-226",
-                "Centerville", "Driver License", "EF3456789", new Date(2022, Calendar.MAY, 20),
+                "Centerville", "Driver License", "EF3456789", new Date(2022, 5, 20),
                 jobRepository.getJobList().get(2));
 
         // Example 4
-        collaboratorRepository.create("Diana Prince", new Date(1988, Calendar.JANUARY, 7), 345678912,
+        collaboratorRepository.create("Diana Prince", new Date(1988, 1, 7), 345678912,
                 765432198, "diana.prince@example.com", "4567 Birch Street", "3456-987",
-                "Metro City", "ID Card", "GH4567890", new Date(2019, Calendar.MAY, 25),
+                "Metro City", "ID Card", "GH4567890", new Date(2019, 5, 25),
                 jobRepository.getJobList().get(3));
 
         // Example 5
-        collaboratorRepository.create("Edward Scissorhands", new Date(1993, Calendar.JANUARY, 14), 456789123,
+        collaboratorRepository.create("Edward Scissorhands", new Date(1993, 1, 14), 456789123,
                 654321987, "edward.scissorhands@example.com", "5678 Pine Street", "4567-908",
-                "Suburbia", "ID Card", "IJ5678901", new Date(2023, Calendar.MAY, 15),
+                "Suburbia", "ID Card", "IJ5678901", new Date(2023, 1, 15),
                 jobRepository.getJobList().get(4));
     }
 

@@ -31,6 +31,7 @@ class CollaboratorRepository {
     + checkForDuplicates() : void
     + addCollaborator(collaborator) : void
     + getCollaboratorList() : List<Collaborator>
+    + assignSkills() : void
 }
 
 class SkillRepository {
