@@ -11,26 +11,22 @@ hide circle
 hide methods
 
 
-class Vehicle {
-vin
-vehiclePlate
-tareWeight
-grossWeight
-currentKm
-registrationDate
-acquisitionDate
-maintenanceFrequency
-type
+class Collaborator {
+    name
+    birthdate
+    admissionDate
+    mobileNumber
+    e-mail
+    taxpayerNumber
 }
 
-class Brand {
+
+class Task {
     designation
+    status
+    duration
 }
 
-class Model {
-    designation
-}
+Collaborator "1..*" -- "*" Task : record conclusion >
 
-Vehicle "1..*" - "1" Brand : has >
-Model "1..*" -"1" Brand: has <
 @enduml

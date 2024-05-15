@@ -14,9 +14,9 @@ As a GSM, I need to list all green spaces managed by me.
  
 **From the client clarifications:**
 
-> **Question:** None
+> **Question:** What's in the configuration file mentioned in AC1?
 > 
-> **Answer:** None
+> **Answer:** That file will indicate the possible sorting methods that the application works with. Through a method given in ESOFT (protected variations), an interface with several methods will be imported.
 
 ### 1.3. Acceptance Criteria
 
@@ -51,4 +51,4 @@ As a GSM, I need to list all green spaces managed by me.
 
 ### 1.7 Other Relevant Remarks
 
-* Implement appropriate permissions and access controls to restrict the ability to register a vehicle to authorized VFM users only.
+* none
