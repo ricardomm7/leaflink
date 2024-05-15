@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "CLB" as CLB
+participant ":System" as System
+
+activate CLB
+
+    CLB -> System : asks to record a complete task
+    activate System
+
+        System --> CLB : shows the list of the task assign to the collaborator and requests to select the one to record
+    deactivate System
+
+    CLB -> System : select assign task
+
+    activate System
+
+        System --> CLB : show task and requests confirmation
+    deactivate System
+
+    CLB -> System : confirms data
+    activate System
+
+        System --> CLB :  displays success message (Task record has completed)
+    deactivate System
+
+@enduml
