@@ -85,6 +85,8 @@ class ElectronicDevice{
 
 class GreenSpace{
     designation
+    area
+    size
 }
 
 class Task{
@@ -106,6 +108,9 @@ class Agenda{
 }
 
 class Portal{
+}
+
+class ToDoList{
 }
 
 class UserEquipment{
@@ -218,5 +223,10 @@ GreenSpace "1" -- "1" Portal : is connected >
 
 Portal "1" -- "1" StatsUserPortal : is analysed >
 
-Agenda "1" -- "1..*" Task : has >
+ToDoList "1" -- "1..*" Task : has >
+
+Agenda "1" -- "1..*" Team : has >
+
+Agenda "1" -- "*" Vehicle : has >
+
 @enduml
