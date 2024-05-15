@@ -1,0 +1,124 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class CreateTeamUI {
+}
+
+class CreateTeamController {
+    - teamRepository : TeamRepository
+    - skillRepository : SkillRepository
+    - collaboratorRepository : CollaboratorRepository
+    + createTeam(collaborators : List<Collaborator>, skills : List<Skill>, minTeamSize : int, maxTeamSize : int) : void
+    + getSkills() : List<Skill>
+        + generateProposal(collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
+
+}
+
+class Repositories {
+    - instance : Repositories
+    - Repositories()
+    -teamRepository : TeamRepository
+    -skillRepository : SkillRepository
+    -collaboratorRepository : CollaboratorRepository
+    + getInstance() : Repositories
+    + getTeamRepository() : TeamRepository
+    + getSkillRepository() : SkillRepository
+    + getCollaboratorRepository() : CollaboratorRepository
+
+}
+
+class TeamRepository {
+    - teamList : List<Team>
++ createTeam(skills : List<Skill>, collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
++ validateTeam(team : Team) : boolean
+    + addTeam(team : Team) : void
+    + generateProposal(collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
+}
+
+class SkillRepository {
+    - skillList : List<Skill>
+    +createSkill(designation : String) : Skill
+        +checkForDuplicates() : void
+        +addSkill(skill): void
+}
+
+class Team {
+    - skills : List<Skill>
+    - minTeamSize : int
+    - maxTeamSize : int
+    - collaborators : List<Collaborator>
+    + Team(skills : List<Skill>, collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
+    + generateProposal(collaborators : List<Collaborator>, minTeamSize : int, maxTeamSize : int)
+}
+
+class Skill {
+    - title : String
+    + Skill(designation : String)
+    +verifyFilled(skill : Skill) : void
+    +verifySpecialCharacters(skill : Skill) : void
+}
+
+class Collaborator {
+    - name : String
+    - birthdate : Date
+    - contactMobile : String
+    - email : String
+    - admissionDate : Date
+    - job : Job
+    - taxpayerNumber : int
+    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + verifyFilled(collaborator) : boolean
+    + verifyNineDigits(collaborator) : boolean
+    + verifyEmail(collaborator) : boolean
+    + verifyZipCode(collaborator) : boolean
+    + verifyBirth(collaborator) : boolean
+    + verifyIdentificationNumber(collaborator) : boolean
+    + verifyAdmissionDate(collaborator) : boolean
+    - documentType : String
+    - identificationNumber : String
+    +setAddress(address : String) : void
+    +setAdmissionDate(admissionDate : Date) : void
+    +setBirthdate(birthdate : Date) : void
+    +setCity(city : String) : void
+    +setContactMobile(mobile : int) : void
+    +setDocumentType(documentType : String) : void
+    +setEmail(email : String) : void
+    +setIdentificationNumber(identificationNumber : String) : void
+    +setJob(job : Job) : void
+    +setName(name : String) : void
+    +setTaxpayerNumber(taxpayerNumber : int) : void
+    +setZipCode(zipcode : String) : void
+    +getTaxpayerNumber() : int
+    +getName() : String
+    +getBirthdate() : Date
+
+}
+
+class Address {
+    -address : String
+    -city : String
+    -zipcode : String
+    +setAddress() : void
+    +setCity() : void
+    +setZipCode() : void
+    +getAddress() : String
+    +getCity() : String
+    +getZipCode() : String
+}
+
+CreateTeamUI ..> CreateTeamController
+CreateTeamController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> "1" TeamRepository : teamRepository
+Repositories --> "1" SkillRepository : skillRepository
+CreateTeamController ..> TeamRepository : teamRepository
+CreateTeamController ..> SkillRepository : skillRepository
+TeamRepository --> "*" Team : team
+SkillRepository --> "*" Skill : skill
+Team --> Collaborator : collaborator
+Collaborator --> "1" Address : has
+
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+participant ":RouteRepository" as Repository
+participant ":Route" as Importer
+autonumber 3
+
+
+ -> Repository : importRoutes(filePath)
+
+activate Repository
+
+  Group Import Routes from .csv File
+
+  Repository -> Repository: validateRoutes(routes)
+      activate Repository
+
+          Repository --> Repository
+          deactivate Repository
+
+    Repository -> Importer**: importRoutesFromCSV(filePath)
+        activate Importer
+
+        Importer --> Repository: routes
+        deactivate Importer
+
+    end
+    autonumber 4
+
+
+     <-- Repository  : routes
+deactivate Repository
+
+
+@enduml

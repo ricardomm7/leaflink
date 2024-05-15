@@ -1,0 +1,97 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "VFM" as VFM
+participant ":RegisterMaintenanceUI" as UI
+participant ":RegisterMaintenanceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
+participant ":Maintenance" as Maintenance
+
+activate VFM
+
+    VFM -> UI : asks to register a vehicle checkup
+    activate UI
+
+        UI -> CTRL** : create
+
+
+
+        UI -> CTRL : get vehicles plate List
+        deactivate UI
+        activate CTRL
+
+        ref over CTRL
+                      Get Vehicles Plates List
+
+                                 end ref
+
+
+
+
+            CTRL --> UI : platesList
+            deactivate CTRL
+            activate UI
+
+            UI --> VFM : shows the list of vehicle plate and requests to select one
+            deactivate UI
+
+            VFM -> UI : select vehicle plate
+            activate UI
+
+
+            UI --> VFM : requests data (date, current Km)
+            deactivate UI
+
+            VFM -> UI : types requests data
+            activate UI
+
+            UI --> VFM : shows all data and requests confirmation
+            deactivate UI
+
+            VFM -> UI : confirms data
+            activate UI
+
+
+            UI -> CTRL : submit data
+            deactivate UI
+            activate CTRL
+
+            ref over CTRL
+                                  Get Maintenance Repository
+
+                                             end ref
+
+
+            CTRL -> MaintenanceRepository : register maintenance
+                        deactivate CTRL
+            activate MaintenanceRepository
+
+             ref over MaintenanceRepository
+                                              Create Maintenance
+
+                                                         end ref
+
+
+               MaintenanceRepository --> CTRL : maintenance
+               deactivate MaintenanceRepository
+                              activate CTRL
+
+               CTRL --> UI : maintenance
+               deactivate CTRL
+               activate UI
+
+               UI --> VFM : displays success message (vehicle checkup registered successfully)
+               deactivate UI
+
+               deactivate VFM
+
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber 23
+
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant ":Collaborator" as CLB
+
+-> CLBREP : assignSkill(collaborator, selectedSkills[])
+activate CLBREP
+group Assign skill
+CLBREP -> CLB : assignSkill(selectedSkills[])
+activate CLB
+CLB -> CLB : setSkill(selectedSkills[])
+CLB --> CLBREP : collaborator
+deactivate CLB
+end
+<-- CLBREP : collaborator
+deactivate CLBREP
+
+@enduml

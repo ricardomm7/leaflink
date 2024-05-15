@@ -1,0 +1,95 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam line type polyline
+
+class ListMaintenanceUI{
+    - controller : ListMaintenanceController
+    + ListMaintenanceUI()
+    + listVehiclesNeedingMaintenance() void
+}
+
+class ListMaintenanceController {
+    - vehicleRepository : VehicleRepository
+    - maintenanceRepository : MaintenanceRepository
+
+    + ListMaintenanceController()
+    + getVehiclesNeedingMaintenanceList() : List <Vehicle>
+    + createMaintenanceReport(List <Vehicle> : vehiclesList) : String
+}
+
+class Repositories {
+        - instance : Repositories
+        - vehicleRepository : VehicleRepository
+        - maintenanceRepository : MaintenanceRepository
+
+        - Repositories()
+        + getInstance() : Repositories
+        + getVehicleRepository() : VehicleRepository
+        + getMaintenanceRepository() : MaintenanceRepository
+}
+
+class VehicleRepository {
+    - vehicleNeedingMaintenanceList : List<vehicle>
+
+    + getVehiclesNeedingMaintenance() : List<vehicle>
+    + getLastMaintenanceKm(String vehiclePlate, List<Maintenance> maintenanceList) : double
+}
+
+class MaintenanceRepository {
+    - maintenanceReport : Maintenance
+
+    + maintenanceRepository()
+    + getMaintenanceList() : List <Maintenance>
+    + getVehiclesNeedingMaintenance(vehicleList: List<Vehicle>) : List<Vehicle>
+    + createMaintenanceReport(vehiclesList: List<Vehicle>) : Maintenance
+}
+
+class Vehicle {
+     - VIN : String
+     - brand : String
+     - model : String
+     - type : String
+     - vehiclePlate : String
+     - tareWeight : double
+     - grossWeight : double
+     - currentKm : double
+     - acquisitionDate : Date
+     - maintenanceFrequency : int
+
+    + Vehicle(VIN: String,brand: String, model: String, type: String, vehiclePlate: String, tareWeight: double, \ngrossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int)
+    + getVehiclePlate() : String
+}
+
+
+
+class Maintenance {
+    - data : Date
+    - vehiclePlate : String
+    - km : int
+
+    + Maintenance(String vehiclePlate, Date date, int kilometers)
+    + getDate() : Date
+    + getKm() : int
+    + getVehiclePlate() : String
+}
+
+ListMaintenanceUI ..> ListMaintenanceController
+
+ListMaintenanceController ..> Repositories: repositories
+
+Repositories --> Repositories: instance
+
+ListMaintenanceController ..> MaintenanceRepository: MaintenanceRepository
+
+Repositories --> "1"VehicleRepository: VehicleRepository
+
+Repositories --> "1"MaintenanceRepository: MaintenanceRepository
+
+VehicleRepository "1"--> "*"Vehicle: vehicle
+
+MaintenanceRepository  ..>  VehicleRepository: uses
+
+MaintenanceRepository "1"-->"*" Maintenance: maintenance
+
+@enduml

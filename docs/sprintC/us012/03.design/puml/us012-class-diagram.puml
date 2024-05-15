@@ -1,0 +1,45 @@
+@startuml
+skinparam shadowing false
+skinparam line type polyline
+
+
+class Route {
+    - startPoint: WaterPoint
+    - endPoint: WaterPoint
+    - cost: double
+
+    + getCost(): double
+    + getStartPoint(): WaterPoint
+    + getEndPoint(): WaterPoint
+    + Route(startPoint: WaterPoint, endPoint: WaterPoint, cost: double)
+}
+
+class WaterPoint {
+    - ID: String
+
+    + getID(): String
+    + WaterPoint(nome: String)
+}
+
+class ExternalCSV {
+    + importerAndCreateRoutes(filePath: String): List<Route>
+    + getAllRoutes(): List<Route>
+    + writeMSTCSV(minimumSpanningTree: List<Route>, path: String): void
+
+
+}
+
+class Main {
+    - caminho_1: String
+    - caminho_2: String
+
+    + executeSingle(nomeArquivo: String): void
+    + executeMultiple(nomeArquivo: String): void
+}
+
+Route  -->  WaterPoint: uses
+ExternalCSV ..> Route : creates
+Main --> "1" ExternalCSV : uses
+Main --> "1" Route : uses
+
+@enduml

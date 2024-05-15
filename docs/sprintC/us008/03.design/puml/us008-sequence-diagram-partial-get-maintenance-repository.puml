@@ -1,0 +1,37 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":ListMaintenanceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+
+
+activate CTRL
+autonumber 3.1
+    group Get Maintenance Repository
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getMaintenanceRepository()
+        activate PLAT
+
+        PLAT --> CTRL: MaintenanceRepository
+        deactivate PLAT
+
+    end
+
+
+deactivate CTRL
+
+
+@enduml

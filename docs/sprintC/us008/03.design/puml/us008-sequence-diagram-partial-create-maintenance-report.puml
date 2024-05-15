@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
+participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
+
+autonumber 11
+-> MaintenanceRepository : createMaintenanceReport(vehiclesNeedingMaintenance)
+activate MaintenanceRepository
+
+    group Create Maintenance Report
+
+         MaintenanceRepository -> MaintenanceRepository: createMaintenanceReport(vehiclesNeedingMaintenanceList)
+
+
+    end group
+
+    autonumber 13
+    <-- MaintenanceRepository : maintenance Report
+
+deactivate MaintenanceRepository
+
+
+@enduml

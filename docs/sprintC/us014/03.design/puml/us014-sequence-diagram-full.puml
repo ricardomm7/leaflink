@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+
+actor "QAM" as QAM
+participant ":RunTestsUI" as UI
+participant ":RunTestsController" as CTRL
+participant ":Gnuplot" as Gnuplot
+
+activate QAM
+
+        QAM -> UI : asks to run a test
+
+        activate UI
+
+
+            UI -> CTRL** : create
+            activate CTRL
+
+                CTRL -> CTRL : executeMultiple()
+                activate CTRL
+                CTRL --> CTRL
+                deactivate CTRL
+                CTRL -> Gnuplot : execute()
+                activate Gnuplot
+                Gnuplot -> CTRL : results
+                deactivate Gnuplot
+
+            CTRL --> UI : test results
+
+        deactivate CTRL
+
+    UI --> QAM : displays graph
+    deactivate UI
+deactivate QAM
+
+
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "CreateTeamController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "SkillRepository:\nSkillRepository" as SkillRepository
+
+autonumber 24
+
+ -> CTRL : generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
+activate CTRL
+    group Generate Proposal
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getTeamRepository()
+            activate PLAT
+
+                PLAT --> CTRL: teamRepository
+            deactivate PLAT
+
+            CTRL -> PLAT : getCollaboratorRepository()
+            activate PLAT
+
+                PLAT --> CTRL: collaboratorRepository
+            deactivate PLAT
+
+
+            'CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
+
+            CTRL -> TeamRepository : generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
+deactivate CTRL
+    activate TeamRepository
+
+        TeamRepository -> Team**: generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
+activate Team
+Team -->TeamRepository : team
+deactivate Team
+TeamRepository --> CTRL : team
+    deactivate TeamRepository
+    activate CTRL
+    deactivate CTRL
+
+    end
+    <-- CTRL : team
+deactivate CTRL
+
+
+@enduml

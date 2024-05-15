@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+'title Domain Model
+
+class Park {
+    identification
+    openingDate
+}
+
+class WaterConsumption {
+    parkId
+    year
+    month
+    day
+    consumption
+}
+
+class WaterStatisticalAnalysis {
+    parkId
+    startMonth
+    endMonth
+    numberOfParks
+}
+
+Park "1" - "0..*" WaterConsumption : has >
+WaterConsumption "*" -- "1" Park : belongs to >
+WaterStatisticalAnalysis -- Park : analyses >
+
+@enduml

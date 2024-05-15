@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber 3
+
+'hide footbox
+
+
+ -> CTRL : runs
+                    group Run Tests
+activate CTRL
+
+                CTRL -> CTRL : executeMultiple()
+                activate CTRL
+                CTRL --> CTRL
+                deactivate CTRL
+                CTRL -> Gnuplot : execute()
+                activate Gnuplot
+                Gnuplot -> CTRL : results
+                deactivate Gnuplot
+
+            <-- CTRL : test results
+
+        deactivate CTRL
+                    end
+
+@enduml

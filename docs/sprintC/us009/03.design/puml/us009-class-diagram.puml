@@ -1,0 +1,43 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+class GSM {
+    + uploadFile(file: File): void
+}
+
+class AnalyseParkWaterConsumptionUI {
+    + displayBarplot(year: int, startMonth: int, endMonth: int, parkID: String): void
+    + displayAverageMonthlyCosts(numParks: int, parkID: String): void
+    + displayStatisticalIndicators(highestParkID: String, lowestParkID: String): void
+    + displayFrequencyTables(highestParkID: String, lowestParkID: String): void
+    + displayOutliers(highestParkID: String, lowestParkID: String): void
+    + displayHistograms(highestParkID: String, lowestParkID: String): void
+}
+
+class AnalyseParkWaterConsumptionController {
+    + create(): void
+    + sendFile(file: File): void
+    + analyzeBarplot(year: int, startMonth: int, endMonth: int, parkID: String): void
+    + analyzeAverageMonthlyCosts(numParks: int, parkID: String): void
+    + analyzeStatisticalIndicators(highestParkID: String, lowestParkID: String): void
+    + analyzeFrequencyTables(highestParkID: String, lowestParkID: String): void
+    + analyzeOutliers(highestParkID: String, lowestParkID: String): void
+    + analyzeHistograms(highestParkID: String, lowestParkID: String): void
+}
+
+class ParkWaterConsumptionData {
+    - parkID: String
+    - year: int
+    - month: int
+    - day: int
+    - consumption: double
+}
+
+GSM --> AnalyseParkWaterConsumptionUI
+AnalyseParkWaterConsumptionUI --> AnalyseParkWaterConsumptionController
+AnalyseParkWaterConsumptionController --> ParkWaterConsumptionData
+@enduml

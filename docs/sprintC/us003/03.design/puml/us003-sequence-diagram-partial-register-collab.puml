@@ -1,0 +1,72 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
+participant ":Collaborator" as CLB
+participant ":Address" as Address
+
+autonumber 22
+--> CLBREP: createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, taxpayerNumber)
+activate CLBREP
+    group Register collaborator
+    CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, taxpayerNumber)
+deactivate CLBREP
+
+        activate CLB
+        CLB -> CLB : verifyFilled(collaborator)
+        activate CLB
+        CLB -> CLB : verifyNineDigits(collaborator)
+        activate CLB
+        CLB -> CLB : verifyEmail(collaborator)
+        activate CLB
+        CLB -> CLB : verifyBirth(collaborator)
+        activate CLB
+        CLB -> CLB : verifyAdmissionDate(collaborator)
+        activate CLB
+
+        CLB -> CLB : verifyIdentificationNumber(collaborator)
+        activate CLB
+        CLB -> Address** : setAddress(address, city, zipCode)
+        activate Address
+        Address -> Address : Address(address, city, zipCode)
+
+        Address -> Address : verifyZipCode(collaborator)
+        activate Address
+        Address --> Address
+        deactivate Address
+        Address --> CLB : address
+        deactivate Address
+        CLB --> CLB
+        deactivate CLB
+
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+        CLB --> CLB
+        deactivate CLB
+
+
+        CLB --> CLBREP : collaborator
+        deactivate CLB
+        activate CLBREP
+
+CLBREP -> CLBREP : check for duplicates (identificationNumber[])
+activate CLBREP
+CLBREP --> CLBREP
+deactivate CLBREP
+CLBREP -> CLBREP: addCollaborator(collaborator)
+
+end
+<--CLBREP : collaborator
+deactivate CLBREP
+        deactivate CLB
+
+
+@enduml

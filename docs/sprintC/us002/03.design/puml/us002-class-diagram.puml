@@ -1,0 +1,51 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+'left to right direction
+
+class CreateJobUI {
+    +createNewJob() : void
+}
+
+class CreateJobController {
+-jobRepository
+    +createJob(title : String) : void
+    +CreateJobController()
+    '+getJobRepository() : JobRepository
+}
+
+class Repositories {
+    +getInstance() : Repositories
+    +getJobRepository() : JobRepository
+    - instance : Repositories
+    - Repositories()
+    -jobRepository : JobRepository
+}
+
+class JobRepository {
+-jobList : List<Job>
+    +createJob(title : String) : Job
+    +checkForDuplicates() : void
+    +addJob(job) : void
+    +getJobList() : List<Job>
+}
+
+class Job {
+    - title : String
+    + Job(title : String)
+    + setTitle() : void
+    + getTitle() : String
+    +verifyFilled(job : Job) : void
+    +verifySpecialCharacters(job : Job) : void
+}
+
+CreateJobUI ..> CreateJobController
+Repositories --> "1" JobRepository : jobRepository
+Repositories --> Repositories : instance
+JobRepository --> "*" Job : jobs
+CreateJobController ..> Repositories : repositories
+CreateJobController ..> JobRepository : jobRepository
+
+@enduml

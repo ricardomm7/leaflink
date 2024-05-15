@@ -1,0 +1,21 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+
+class RunTestsUI{
+}
+
+class RunTestsController{
++ executeMultiple()
+}
+
+class Gnuplot {
+    + execute()
+}
+
+RunTestsUI..>RunTestsController
+RunTestsController..>Gnuplot
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":RegisterVehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+autonumber 7
+
+
+activate CTRL
+
+ -> CTRL: submit vehicle data
+
+    group Get Vehicle Repository
+    autonumber 7.1
+
+         CTRL -> RepositorySingleton: getInstance()
+                    activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                    deactivate RepositorySingleton
+
+                    CTRL -> PLAT: getVehicleRepository()
+                    activate PLAT
+
+                    PLAT --> CTRL: VehicleRepository
+                    deactivate PLAT
+
+    end
+deactivate CTRL
+
+
+@enduml

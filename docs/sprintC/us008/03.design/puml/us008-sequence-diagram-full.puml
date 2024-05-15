@@ -1,0 +1,79 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "VFM" as VFM
+participant ":ListMaintenanceUI" as UI
+participant ":ListMaintenanceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
+participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
+
+activate VFM
+
+    VFM -> UI : asks to list vehicles needing maintenance
+    activate UI
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : get vehicles needing maintenance list
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getVehicleRepository()
+            activate PLAT
+
+                PLAT --> CTRL: VehicleRepository
+            deactivate PLAT
+
+            CTRL -> VehicleRepository : getVehiclesNeedingMaintenanceList()
+            activate VehicleRepository
+
+                VehicleRepository --> CTRL : vehicleNeedingMaintenanceList
+            deactivate VehicleRepository
+
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getMaintenanceRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: MaintenanceRepository
+                deactivate PLAT
+
+
+                CTRL -> MaintenanceRepository : createMaintenanceReport(vehicleNeedingMaintenanceList)
+                deactivate CTRL
+                activate MaintenanceRepository
+
+                MaintenanceRepository -> MaintenanceRepository: createMaintenanceReport(vehiclesNeedingMaintenanceList)
+
+                MaintenanceRepository --> CTRL : maintenance Report
+                deactivate MaintenanceRepository
+
+            activate CTRL
+
+            CTRL --> UI : maintenance Report
+            deactivate CTRL
+
+        UI --> VFM : displays list of vehicles needing checkup
+    deactivate UI
+
+deactivate VFM
+
+@enduml

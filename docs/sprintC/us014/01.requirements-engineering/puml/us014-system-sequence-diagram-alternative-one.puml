@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US014
+
+autonumber
+
+actor "QAM" as QAM
+participant ":System" as System
+
+activate QAM
+
+    QAM -> System : asks to run the tests
+    activate System
+
+        System --> QAM : shows test results
+    deactivate System
+
+@enduml

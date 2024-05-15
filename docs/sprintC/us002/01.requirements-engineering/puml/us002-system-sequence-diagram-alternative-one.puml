@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US002
+
+autonumber
+
+actor "HRM" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to create a new job
+    activate System
+        System --> Employee : requests data (job title)
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+        System --> Employee : shows data (job title) and requests confirmation
+    deactivate System
+
+    Employee -> System : confirms data
+    activate System
+
+        System --> Employee : displays success message (job created successfully)
+    deactivate System
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+'title Domain Model - US012
+
+class WaterPoint {
+    id
+
+}
+
+class Route {
+
+    cost
+}
+
+class ExternalCSV {
+    CSVFilepath
+}
+
+Route "1" -- "2" WaterPoint: has  >
+ExternalCSV "1" -- "*" Route: imports >
+
+@enduml

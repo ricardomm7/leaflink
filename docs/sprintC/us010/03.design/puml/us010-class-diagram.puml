@@ -1,0 +1,20 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+'left to right direction
+
+class AnalyseParkEquipmentUsageUI {
+    + uploadFile() : void
+    + execute() : void
+}
+
+class AnalyseParkEquipmentUsageController {
+    + checksFormattingErrors(filename : String) : void
+    + runsPythonScript(filename : String) : void
+}
+
+AnalyseParkEquipmentUsageUI --> AnalyseParkEquipmentUsageController : uses
+
+@enduml

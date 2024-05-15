@@ -1,0 +1,35 @@
+@startuml
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber 20
+
+participant ":RegisterMaintenanceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+
+
+-> CTRL : submit data
+               group Get Maintenance Repository
+            activate CTRL
+
+            CTRL -> RepositorySingleton: getInstance()
+                        activate RepositorySingleton
+
+                        RepositorySingleton --> CTRL:repositories
+                        deactivate RepositorySingleton
+
+                        CTRL -> PLAT : getMaintenanceRepository()
+                        activate PLAT
+
+                        PLAT --> CTRL : MaintenanceRepository
+                        deactivate PLAT
+
+                                    deactivate CTRL
+
+               end
+deactivate CTRL
+
+@enduml

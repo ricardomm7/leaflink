@@ -1,0 +1,222 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+left to right direction
+
+title Domain Model
+
+class Skill {
+    designation
+}
+
+class Job {
+    title
+}
+
+class Collaborator {
+    name
+    birthdate
+    admissionDate
+    mobileNumber
+    e-mail
+    taxpayerNumber
+}
+
+class Document{
+    documentType
+    identificationNumber
+}
+
+
+class Team {
+    teamId
+    maxNumberElements
+    minNumberElements
+}
+
+class Vehicle {
+    vin
+    vehiclePlate
+    tareWeight
+    grossWeight
+    currentKm
+    registrationDate
+    acquisitionDate
+    maintenanceFrequency
+    type
+}
+
+class Brand{
+    designation
+}
+
+class Model{
+    designation
+}
+
+class VehicleCheckup{
+    date
+    currentKm
+    vehiclePlate
+}
+
+class ReportIssues{
+
+}
+
+class Address{
+    street
+    zipCode
+    city
+}
+
+class WaterStatisticalAnalysis{
+}
+
+class StatsUserPortal{
+}
+
+class ElectronicDevice{
+}
+
+class GreenSpace{
+    designation
+}
+
+class Task{
+    designation
+    date
+}
+
+class Machine{
+    designation
+    machineNumber
+}
+
+class GardenTool{
+    designation
+    toolsNumber
+}
+
+class Agenda{
+}
+
+class Portal{
+}
+
+class UserEquipment{
+    designation
+    UserEquipmentNumber
+}
+
+class IrrigationSystem{
+
+}
+
+class IrrigationEquipment{
+    designation
+    IrrigationEquipmentNumber
+}
+
+class LightningSystem{
+
+}
+
+class LightningEquipment{
+    designation
+    lightningEquipmentNumber
+}
+
+class DrainageSystem{
+
+}
+
+class DrainageEquipment{
+    designation
+    drainageEquipmentNumber
+}
+
+class DrinkingSystem{
+
+}
+
+class DrinkingEquipment{
+    designation
+    drinkingEquipmentNumber
+}
+
+class Zones{
+    zoneIdentification
+
+}
+
+Vehicle "1..*" -- "1" Brand : has >
+
+Model "1..*" -- "1" Brand : has <
+
+Collaborator "1" -- "1..*" Document : has >
+
+Job "*" -- "1..*" Collaborator : assign to >
+
+Skill "*" -- "1..*" Collaborator : assign to >
+
+Team "1..*" -- "1..*" Skill : needs >
+
+Team "1" -- "1..*" Collaborator : has >
+
+Vehicle "1" -- "*" VehicleCheckup : has >
+
+Collaborator "1..*" -- "1" Address : has a >
+
+GreenSpace "1" -- "1" WaterStatisticalAnalysis : is analysed >
+
+GreenSpace "1" -- "1" Address : has an >
+
+GreenSpace "1" -- "*" UserEquipment: has >
+
+GreenSpace "1" -- "*" Zones: is divided >
+
+Zones "1" -- "*" DrainageSystem: has >
+
+DrainageSystem "1" -- "*" DrainageEquipment: has >
+
+Zones "1"--"*" LightningSystem: has >
+
+LightningSystem "1" -- "*" LightningEquipment: has >
+
+Zones "1" -- "*" DrinkingSystem: has >
+
+DrinkingSystem "1" -- "*" DrinkingEquipment: has >
+
+Zones "1" -- "*" IrrigationSystem:has >
+
+IrrigationSystem "1" -- "*" IrrigationEquipment: has >
+
+ReportIssues "*" -- "1" Portal: is reported >
+
+Task "1" -- "*" Vehicle : needs >
+
+Task "1" --"*" Machine: needs >
+
+Machine "*" -- "1" Brand: has >
+
+Task "1" -- "1" Team : is assigned >
+
+Task "1" -- "*" GardenTool : has >
+
+Task "*" -- "1" GreenSpace: assigned to:
+
+GreenSpace "1" -- "1..*" ElectronicDevice: has >
+
+ElectronicDevice "1" -- "1" EquipmentStatisticalAnalysis: is analysed >
+
+GreenSpace "1" -- "1" Portal : is connected >
+
+Portal "1" -- "1" StatsUserPortal : is analysed >
+
+Agenda "1" -- "1..*" Task : has >
+@enduml

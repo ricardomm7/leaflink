@@ -1,0 +1,61 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+
+class RunTestsUI{
+}
+
+class RunTestsController{
++execute(filepath : String)
+}
+
+class ExternalCSV {
+- CSVFilepath : String
+- allRoutes : List<Route>
++ExternalCSV(CSVFilepath : String)
++importAndCreateRoutes() : void
++getAllRoutes() : List<Route>
++writeMSTCSV(minimumSpanningTree : List<Route>, path : String)
++countLines() : int
+}
+
+
+abstract class Graphviz{
++execute(tree : List<Route>, filename : String)
+-writeGraphvizDotFile(tree : List<Route>)
+}
+
+abstract class KruskalAlgorithm{
++findMinimumSpanningTree(allRoutes : List<Route>)
++initializeSets(allRoutes : List<Route>)
++findSet(pointID : String, sets : List<List<String>>)
++unionSets(index1 : int, index2 : int, sets : List<List<String>>)
++orderLengths(allRoutes : List<Route>)
++countVertices(allRoutes : List<Route>)
+}
+
+class Route{
+- startPoint : WaterPoint
+- endPoint : WaterPoint
+- cost : double
++ getStartPoint() : WaterPoint
++ getEndPoint() : WaterPoint
++ getCost() : double
++Route (startPoint : WaterPoint, endPoint : WaterPoint, cost : double)
+}
+
+class WaterPoint{
+- ID : String
++ getID() : String
++ WaterPoint(name : String)
+}
+
+RunTestsUI ..> RunTestsController
+RunTestsController ..> ExternalCSV
+RunTestsController ..> Graphviz
+RunTestsController ..> KruskalAlgorithm
+ExternalCSV ..> Route
+Route "1" ..> "2" WaterPoint  : formed by
+@enduml

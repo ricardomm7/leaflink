@@ -1,0 +1,83 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Global Use Case Diagram
+
+left to right direction
+
+rectangle "System User" as actors {
+    actor HRM
+    actor VFM
+    actor GSM
+    actor QAM
+    actor GSU
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US001/UC001 - Register a Skill" as UC001
+    HRM --> UC001
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US002/UC002 - Register a Job" as UC002
+    HRM --> UC002
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US003/UC003 - Register a collaborator with a job\n and fundamental characteristics." as UC003
+    HRM --> UC003
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US004/UC004 - Assign skills to a collaborator" as UC004
+    HRM --> UC004
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US005/UC005 - Generate a team" as UC005
+    HRM --> UC005
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US006/UC006 - Register a vehicle" as UC006
+    VFM --> UC006
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US007/UC007 - Register a Vehicle checkup" as UC007
+    VFM --> UC007
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US008/UC008 - List Vehicles Needing Check-up" as UC008
+    VFM --> UC008
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US009/UC009 - See the exact costs referring to \nwater consumption of specific green spaces" as UC009
+    GSM --> UC009
+}
+
+rectangle "Use Cases" as usecases{
+    usecase "US010/UC010 - See in a pie chart which piece(s) \nof equipment is/are used in each day" as UC010
+    GSM --> UC010
+}
+rectangle "Use Cases" as usecases{
+    usecase "US011/UC011 - Collect data from the user portal" as UC011
+    GSM --> UC011
+}
+rectangle "Use Cases" as usecases{
+    usecase "US012/UC012 - I want to import a .csv file containing routes" as UC012
+    GSM --> UC012
+}
+rectangle "Use Cases" as usecases{
+    usecase "US013/UC013 - Apply an algorithm that returns the \nroutes to be opened, with minimum cost" as UC013
+    GSM --> UC013
+}
+rectangle "Use Cases" as usecases{
+    usecase "US014/UC014 - Run tests for inputs of variable size,\nto observe the asymptotic behavior of the execution\ntime of the US13" as UC014
+    QAM --> UC014
+}
+@enduml

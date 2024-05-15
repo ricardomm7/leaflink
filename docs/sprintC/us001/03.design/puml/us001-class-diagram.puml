@@ -1,0 +1,44 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+'left to right direction
+
+class CreateSkillUI {
+}
+
+class CreateSkillController {
+    +createSkill(designation : String) : void
+    +getInstance() : SkillRepository
+}
+
+class Repositories {
+    +getSkillRepository() : SkillRepository
+    -skillRepository : SkillRepository
+            - instance : Repositories
+            - Repositories()
+}
+
+class SkillRepository {
+    - skillList : List<Skill>
+    +createSkill(designation : String) : Skill
+    +checkForDuplicates() : void
+    +addSkill(skill): void
+}
+
+class Skill {
+    - title : String
+    + Skill(designation : String)
+    +verifyFilled(skill : Skill) : void
+    +verifySpecialCharacters(skill : Skill) : void
+}
+
+CreateSkillUI ..> CreateSkillController
+Repositories --> "1" SkillRepository : skillRepository
+Repositories --> Repositories : instance
+SkillRepository --> "*" Skill : skills
+CreateSkillController ..> Repositories : repositories
+CreateSkillController ..> SkillRepository : skillRepository
+
+@enduml

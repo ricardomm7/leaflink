@@ -1,0 +1,150 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "HRM" as ADM
+participant ":CreateTeamUI" as UI
+participant ":CreateTeamController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "SkillRepository:\nSkillRepository" as SkillRepository
+participant "TeamRepository:\nTeamRepository" as TeamRepository
+participant "team\n:Team" as Team
+participant "collaborator\n:Collaborator" as Collaborator
+
+activate ADM
+
+    ADM -> UI : asks to create a new team
+    activate UI
+
+        UI -> CTRL** : create
+        deactivate UI
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
+
+                PLAT --> CTRL: skillRepository
+            deactivate PLAT
+
+            CTRL -> SkillRepository : getSkills()
+            activate SkillRepository
+
+                SkillRepository --> CTRL : skillsList
+            deactivate SkillRepository
+
+            CTRL --> UI : skillsList
+            deactivate CTRL
+
+        activate UI
+
+        UI --> ADM : shows skills list and asks to select one or more
+        deactivate UI
+
+    ADM -> UI : selects skills
+    activate UI
+
+    UI --> ADM : requests data (maximum and minimum team size)
+    deactivate UI
+
+ADM -> UI : types requested data
+activate UI
+
+    UI --> ADM : shows data and requests for confirmation
+    deactivate UI
+
+ADM -> UI : confirms data
+activate UI
+
+UI -> CTRL : generateTeam(List<Skill>, minTeamSize, maxTeamSize)
+deactivate UI
+activate CTRL
+
+    CTRL -> RepositorySingleton : getInstance()
+    activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+    deactivate RepositorySingleton
+
+    CTRL -> PLAT : getTeamRepository()
+    activate PLAT
+
+        PLAT --> CTRL: teamRepository
+    deactivate PLAT
+
+    CTRL -> PLAT : getCollaboratorRepository()
+    activate PLAT
+
+        PLAT --> CTRL: collaboratorRepository
+    deactivate PLAT
+
+
+    'CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
+
+    CTRL -> TeamRepository : generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
+deactivate CTRL
+    activate TeamRepository
+
+        TeamRepository -> Team**: generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
+activate Team
+Team -->TeamRepository : team
+deactivate Team
+TeamRepository --> CTRL : team
+    deactivate TeamRepository
+    activate CTRL
+    CTRL --> UI : team
+    deactivate CTRL
+    activate UI
+
+
+
+
+
+UI --> ADM: show the proposal
+deactivate UI
+
+ADM -> UI: user accepts
+activate UI
+
+    UI -> CTRL : create team
+    deactivate UI
+    activate CTRL
+
+            CTRL -> TeamRepository: createTeam(List<Collaborator>, List<Skill>, minTeamSize, maxTeamSize)
+            deactivate CTRL
+            activate TeamRepository
+
+            TeamRepository -> Team**: createTeam(List<Collaborator>, List<Skill>, minTeamSize, maxTeamSize)
+
+                TeamRepository -> TeamRepository: validateTeam(team)
+            activate TeamRepository
+
+                TeamRepository --> TeamRepository
+            deactivate TeamRepository
+
+            TeamRepository -> TeamRepository: addTeam(team)
+
+            TeamRepository --> CTRL: team
+        deactivate TeamRepository
+        activate CTRL
+
+        CTRL --> UI : success
+        deactivate CTRL
+        activate UI
+
+        UI --> ADM: displays operation success
+deactivate UI
+
+deactivate ADM
+
+@enduml

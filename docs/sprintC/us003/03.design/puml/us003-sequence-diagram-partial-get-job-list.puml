@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterCollaboratorController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "jobRepository:\nJobRepository" as jobRepository
+
+autonumber 5
+activate CTRL
+
+-> CTRL: get job list
+group Get Job List
+
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+CTRL -> PLAT : getJobRepository()
+activate PLAT
+PLAT -->  CTRL: jobRepository
+deactivate PLAT
+CTRL -> jobRepository : getJobs()
+activate jobRepository
+jobRepository --> CTRL : jobsList
+deactivate jobRepository
+
+end
+<- CTRL: job List
+@enduml

@@ -1,0 +1,118 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+'left to right direction
+
+class RegisterCollaboratorUI {
++registerCollaborator() : void
+-parseDate : Date
+}
+
+class RegisterCollaboratorController {
+    -jobRepository : JobRepository
+    -collaboratorRepository : CollaboratorRepository
+    +RegisterCollaboratorController()
+    + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, identificationNumber : String, job : Job)
+    '+ getJobRepository() : JobRepository
+    '+ getCollaboratorRepository() : CollaboratorRepository
+    + getJobs() : List<Job>
+}
+
+class Repositories {
+    - instance : Repositories
+    - Repositories()
+    -jobRepository : JobRepository
+    -collaboratorRepository : CollaboratorRepository
+    + getInstance() : Repositories
+    +getJobRepository() : JobRepository
+    +getCollaboratorRepository() : CollaboratorRepository
+}
+
+class CollaboratorRepository {
+    -collaboratorList : List<Collaborator>
+    +CollaboratorRepository()
+    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + checkForDuplicates() : void
+    + addCollaborator(collaborator) : void
+    + getCollaboratorList() : List<Collaborator>
+}
+
+class JobRepository {
+    +createJob(title : String) : Job
+    +checkForDuplicates() : void
+    +addJob(job) : void
+    +getJobList() : List<Job>
+}
+
+class Collaborator {
+    - name : String
+    - birthdate : Date
+    - contactMobile : String
+    - email : String
+    - admissionDate : Date
+    - job : Job
+    - taxpayerNumber : int
+    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + verifyFilled(collaborator) : boolean
+    + verifyNineDigits(collaborator) : boolean
+    + verifyEmail(collaborator) : boolean
+    + verifyZipCode(collaborator) : boolean
+    + verifyBirth(collaborator) : boolean
+    + verifyIdentificationNumber(collaborator) : boolean
+    + verifyAdmissionDate(collaborator) : boolean
+    - documentType : String
+    - identificationNumber : String
+    +setAddress(address : String) : void
+    +setAdmissionDate(admissionDate : Date) : void
+    +setBirthdate(birthdate : Date) : void
+    +setCity(city : String) : void
+    +setContactMobile(mobile : int) : void
+    +setDocumentType(documentType : String) : void
+    +setEmail(email : String) : void
+    +setIdentificationNumber(identificationNumber : String) : void
+    +setJob(job : Job) : void
+    +setName(name : String) : void
+    +setTaxpayerNumber(taxpayerNumber : int) : void
+    +setZipCode(zipcode : String) : void
+    +getTaxpayerNumber() : int
+    +getName() : String
+    +getBirthdate() : Date
+}
+
+class Address {
+    -address : String
+    -city : String
+    -zipcode : String
+    +setAddress() : void
+    +setCity() : void
+    +setZipCode() : void
+    +getAddress() : String
+    +getCity() : String
+    +getZipCode() : String
+}
+
+class Job {
+    - title : String
+    + Job(title : String)
+    + setTitle() : void
+    + getTitle() : String
+    +verifyFilled(job : Job) : void
+    +verifySpecialCharacters(job : Job) : void
+}
+
+
+
+RegisterCollaboratorUI ..> RegisterCollaboratorController
+RegisterCollaboratorController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> JobRepository : jobRepository
+Repositories --> "1"CollaboratorRepository : collaboratorRepository
+CollaboratorRepository --> "*" Collaborator : collaborators
+RegisterCollaboratorController ..> CollaboratorRepository : collaboratorRepository
+RegisterCollaboratorController ..> JobRepository : jobRepository
+JobRepository --> "*" Job : jobs
+Collaborator --> "1" Address : has
+
+@enduml

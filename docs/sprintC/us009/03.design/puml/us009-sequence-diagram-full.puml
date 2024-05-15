@@ -1,0 +1,35 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "GSM" as GSM
+participant ":AnalyseParkWaterConsumptionUI" as UI
+participant ":AnalyseParkWaterConsumptionController" as CTRL
+
+activate GSM
+
+GSM -> UI : asks statistical analysis of water consumption costs
+activate UI
+
+UI -> CTRL** : creates
+UI --> GSM : asks to upload the file (water_consumption.csv)
+deactivate UI
+GSM -> UI : provides the file path (uploads the file)
+activate UI
+UI -> CTRL : sends the file
+
+activate CTRL
+CTRL -> CTRL : checks for formatting errors
+activate CTRL
+CTRL -->CTRL
+deactivate CTRL
+CTRL -> CTRL : runs the statistical analysis
+CTRL --> UI : results
+deactivate CTRL
+UI --> GSM : displays the outcome
+deactivate UI
+deactivate GSM
+@enduml

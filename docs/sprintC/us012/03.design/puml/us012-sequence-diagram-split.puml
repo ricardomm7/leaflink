@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "GSM" as GSM
+participant ":RouteUI" as UI
+participant ":RouteController" as CTR
+participant ":RouteRepository" as Repository
+
+activate GSM
+
+GSM -> UI : requests to import a .csv file
+activate UI
+
+UI -> CTR : sendFilePath(filePath)
+activate CTR
+
+CTR -> Repository : importRoutesFromCSV(filePath)
+activate Repository
+
+ref over Repository
+                                Import a .csv File
+
+                            end ref
+
+Repository --> CTR: routes
+deactivate Repository
+
+CTR --> UI : displayConfirmation(success)
+deactivate CTR
+
+UI --> GSM : displays confirmation message
+deactivate UI
+
+@enduml

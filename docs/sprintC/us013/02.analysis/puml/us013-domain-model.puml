@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+class Kruskal {
+listMST
+}
+
+class CSVExternal {
+listAllRoutes
+}
+
+class Graphviz{
+image
+}
+
+CSVExternal "1" - "1" Kruskal : is analysed >
+Kruskal "1"- "1"Graphviz : executes >
+@enduml

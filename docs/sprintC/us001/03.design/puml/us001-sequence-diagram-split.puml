@@ -1,0 +1,55 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "HRM" as HRM
+participant ":CreateSkillUI" as UI
+participant ":CreateSkillController" as CTRL
+participant "skillRepository:\nskillRepository" as skillRepository
+participant ":Skill"
+activate HRM
+
+HRM ->UI : asks to create a skill
+activate UI
+
+UI -> CTRL** : create
+
+UI --> HRM : asks for a skill designation
+deactivate UI
+
+HRM -> UI : enters a skill designation
+activate UI
+
+UI->CTRL : createSkill(designation)
+deactivate UI
+activate CTRL
+
+ref over CTRL
+Get Skill Repository
+end ref
+
+CTRL -> skillRepository : createSkill(designation)
+deactivate CTRL
+activate skillRepository
+
+ref over skillRepository
+Create Skill
+end ref
+
+    CTRL <-- skillRepository : skill
+    deactivate skillRepository
+    activate CTRL
+
+
+
+    CTRL --> UI : skill
+    deactivate CTRL
+    activate UI
+
+    UI --> HRM : displays success message (skill created successfully)
+    deactivate UI
+deactivate HRM
+@enduml

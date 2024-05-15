@@ -1,0 +1,109 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class AssignSkillUI {
+}
+
+class AssignSkillController {
+    - skillRepository : SkillRepository
+    - collaboratorRepository : CollaboratorRepository
+    + assignSkill(skill : Skill) : void
+    + getSkill () : List<Skill>
+    + getCollaborator () : List<Collaborator>
+}
+
+class Repositories {
+    - instance : Repositories
+    - Repositories()
+    -skillRepository : SkillRepository
+    -collaboratorRepository : CollaboratorRepository
+    + getInstance() : Repositories
+    + getCollaboratorRepository() : CollaboratorRepository
+    + getSkillRepository() : SkillRepository
+}
+
+class CollaboratorRepository {
+    -collaboratorList : List<Collaborator>
+    +CollaboratorRepository()
+    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + checkForDuplicates() : void
+    + addCollaborator(collaborator) : void
+    + getCollaboratorList() : List<Collaborator>
+}
+
+class SkillRepository {
+     - skillList : List<Skill>
+     + createSkill(designation : String) : Skill
+     + checkForDuplicates() : void
+     + addSkill(skill): void
+}
+
+class Collaborator {
+    - name : String
+    - birthdate : Date
+    - contactMobile : String
+    - email : String
+    - admissionDate : Date
+    - job : Job
+    - taxpayerNumber : int
+    + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + verifyFilled(collaborator) : boolean
+    + verifyNineDigits(collaborator) : boolean
+    + verifyEmail(collaborator) : boolean
+    + verifyZipCode(collaborator) : boolean
+    + verifyBirth(collaborator) : boolean
+    + verifyIdentificationNumber(collaborator) : boolean
+    + verifyAdmissionDate(collaborator) : boolean
+    - documentType : String
+    - identificationNumber : String
+    +setAddress(address : String) : void
+    +setAdmissionDate(admissionDate : Date) : void
+    +setBirthdate(birthdate : Date) : void
+    +setCity(city : String) : void
+    +setContactMobile(mobile : int) : void
+    +setDocumentType(documentType : String) : void
+    +setEmail(email : String) : void
+    +setIdentificationNumber(identificationNumber : String) : void
+    +setJob(job : Job) : void
+    +setName(name : String) : void
+    +setTaxpayerNumber(taxpayerNumber : int) : void
+    +setZipCode(zipcode : String) : void
+    +getTaxpayerNumber() : int
+    +getName() : String
+    +getBirthdate() : Date
+}
+
+class Address {
+    -address : String
+    -city : String
+    -zipcode : String
+    +setAddress() : void
+    +setCity() : void
+    +setZipCode() : void
+    +getAddress() : String
+    +getCity() : String
+    +getZipCode() : String
+}
+
+class Skill {
+    - title : String
+    + Skill(designation : String)
+    + verifyFilled(skill : Skill) : void
+    + verifySpecialCharacters(skill : Skill) : void
+}
+
+AssignSkillUI ..> AssignSkillController
+AssignSkillController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> "1" CollaboratorRepository : collaboratorRepository
+Repositories --> "1" SkillRepository : skillRepository
+AssignSkillController ..> CollaboratorRepository : collaboratorRepository
+AssignSkillController ..> SkillRepository : skillRepository
+CollaboratorRepository --> "*" Collaborator : collaborators
+SkillRepository --> "*" Skill : skill
+Collaborator --> "1" Address : has
+
+
+@enduml

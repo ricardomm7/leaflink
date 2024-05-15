@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "GSM" as GSM
+participant ":AnalyseParkUseUI" as UI
+participant ":AnalyseParkUseController" as CTRL
+
+activate GSM
+GSM -> UI : wants to create the statistic
+activate UI
+UI -> CTRL** : creates
+UI --> GSM : asks to upload the file (.csv)
+deactivate UI
+GSM -> UI : gives the file path (uploads the file)
+activate UI
+UI -> CTRL : sends the file
+activate CTRL
+CTRL -> CTRL : checks for formatting errors
+activate CTRL
+CTRL -->CTRL
+deactivate CTRL
+CTRL -> CTRL : runs the python script
+CTRL --> UI : results
+deactivate CTRL
+UI --> GSM : shows the results window
+deactivate UI
+deactivate GSM
+@enduml

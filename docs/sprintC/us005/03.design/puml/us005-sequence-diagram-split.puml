@@ -1,0 +1,112 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "HRM" as ADM
+participant ":CreateTeamUI" as UI
+participant ":CreateTeamController" as CTRL
+participant "TeamRepository:\nTeamRepository" as TeamRepository
+
+activate ADM
+
+    ADM -> UI : asks to create a new team
+    activate UI
+
+                UI -> CTRL** : create
+                deactivate UI
+                activate CTRL
+
+                    ref over CTRL
+                                Get Skills List
+
+                            end ref
+
+                    CTRL --> UI : skillsList
+                deactivate CTRL
+                activate UI
+
+                UI --> ADM : shows skills list and asks to select one
+                deactivate UI
+
+        ADM --> UI : selects skills
+        activate UI
+
+        UI --> ADM : requests data (maximum team size)
+        deactivate UI
+
+    ADM -> UI : types requested data
+    activate UI
+
+        UI --> ADM : shows data and requests for confirmation
+        deactivate UI
+
+    ADM -> UI : confirms data
+    activate UI
+
+UI -> CTRL : generateTeam(List<Skill>, minTeamSize, maxTeamSize)
+deactivate UI
+activate CTRL
+ref over CTRL
+                                Get Team Repository
+
+                            end ref
+                            ref over CTRL
+                                                            Get Collaborator Repository
+
+                                                        end ref
+        'CTRL -> CTRL : matchSkills(collaboratorSkills, skillsList) : List<Collaborator>
+
+        CTRL -> TeamRepository : generateProposal(List<Collaborator>, minTeamSize, maxTeamSize)
+    deactivate CTRL
+    activate TeamRepository
+    ref over TeamRepository
+                                    Generate Proposal
+
+                                end ref
+                                TeamRepository --> CTRL : team
+                                                                deactivate TeamRepository
+
+                                activate CTRL
+                                CTRL --> UI : team
+                                deactivate CTRL
+                                activate UI
+
+
+    UI --> ADM: show the proposal
+        deactivate UI
+
+        ADM -> UI: user accepts
+        activate UI
+
+        UI -> CTRL : create team
+        deactivate UI
+        activate CTRL
+
+            |||
+            CTRL -> TeamRepository: createTeam(List<Collaborator>, List<Skill>, minTeamSize, maxTeamSize)
+                deactivate CTRL
+                activate TeamRepository
+
+                ref over TeamRepository
+
+                            Create Team
+
+                        end ref
+
+            TeamRepository --> CTRL: team
+            deactivate TeamRepository
+            activate CTRL
+
+            CTRL --> UI : success
+            deactivate CTRL
+            activate UI
+            UI --> ADM: displays operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml

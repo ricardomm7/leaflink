@@ -1,0 +1,49 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+left to right direction
+
+hide circle
+hide methods
+
+
+class Skill {
+    designation
+}
+
+class Collaborator {
+    name
+    birthdate
+    admissionDate
+    mobileNumber
+    e-mail
+    taxpayerNumber
+}
+
+'class Person {
+'    name
+'    birthdate
+'    contactMobile
+'    email
+ '   taxpayerNumber
+'}
+
+class Address{
+    street
+    zipCode
+    city
+}
+
+class Document{
+    documentType
+    identificationNumber
+}
+
+Collaborator "1..*"--"1" Address: has an >
+Collaborator  "1"--"1..*"  Document: has >
+
+Skill "*" -- "1..*" Collaborator : assign to >
+@enduml

@@ -1,0 +1,91 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "HRM" as Employee
+participant ":CreateJobUI" as UI
+participant ":CreateJobController" as CTRL
+participant ":Repositories" as GlobRepo
+participant "repositories\n:Repositories" as PLAT
+participant "jobRepository:\nJobRepository" as jobRepository
+participant ":Job" as Job
+
+activate Employee
+
+Employee -> UI : asks to create a new job
+activate UI
+
+UI -> CTRL** : create
+
+UI --> Employee : requests data (job title)
+deactivate UI
+
+Employee -> UI : types requested data
+activate UI
+
+UI --> Employee : shows data (job title) and requests confirmation
+deactivate UI
+
+Employee -> UI : confirms data
+activate UI
+
+UI -> CTRL : createJob(title)
+deactivate UI
+activate CTRL
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+
+CTRL -> PLAT : getJobRepository()
+activate PLAT
+PLAT -->  CTRL: jobRepository
+deactivate PLAT
+
+CTRL -> jobRepository : createJob(title)
+deactivate CTRL
+activate jobRepository
+
+    jobRepository -> Job** : create(title)
+    deactivate jobRepository
+
+        activate Job
+
+    Job -> Job : verifyFilled(job)
+        activate Job
+        Job -> Job : verifySpecialCharacters(job)
+        activate Job
+        Job --> Job
+        deactivate Job
+    Job --> Job
+    deactivate Job
+    'Job -> Job : addJob(job)
+    Job --> jobRepository : job
+    deactivate Job
+    activate jobRepository
+
+    jobRepository -> jobRepository : check for duplicates
+    activate jobRepository
+    jobRepository --> jobRepository
+    deactivate jobRepository
+
+    jobRepository -> jobRepository: addJob(job)
+    deactivate Job
+jobRepository --> CTRL : job
+deactivate jobRepository
+activate CTRL
+deactivate jobRepository
+
+CTRL --> UI : success
+deactivate CTRL
+activate UI
+UI --> Employee : displays success message (job created successfully)
+
+deactivate UI
+deactivate Employee
+
+@enduml
