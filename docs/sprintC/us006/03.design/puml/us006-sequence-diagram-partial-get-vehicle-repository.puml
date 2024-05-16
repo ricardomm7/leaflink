@@ -18,7 +18,6 @@ activate CTRL
  -> CTRL: submit vehicle data
 
     group Get Vehicle Repository
-    autonumber 7.1
 
          CTRL -> RepositorySingleton: getInstance()
                     activate RepositorySingleton

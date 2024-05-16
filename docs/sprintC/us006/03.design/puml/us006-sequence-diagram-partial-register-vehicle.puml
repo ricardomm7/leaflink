@@ -3,30 +3,23 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "vehicle\n:Vehicle" as VEI
 
-autonumber 8
-            VehicleRepository -> VEI: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date Acquisition Date, Maintenance Frequency)
+autonumber 15
+ -> VEI: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date Acquisition Date, Maintenance Frequency)
 
 activate VEI
     group Register Vehicle
-    autonumber 8.1
 
+        VEI -> VEI: validateVehicle(vehicle))
+        activate VEI
 
-                              VEI -> VEI: validateVehicle(vehicle))
-                              activate VEI
-
-                              VEI --> VEI
-                              deactivate VEI
-
-
-
+        VEI --> VEI
+        deactivate VEI
 
     end
 
-autonumber 9
-    VEI --> VehicleRepository: vehicle
+    <-- VEI : vehicle
 deactivate VEI
 
 

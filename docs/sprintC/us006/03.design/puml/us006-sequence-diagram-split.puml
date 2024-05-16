@@ -3,8 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
-
 autonumber
 
 actor "VFM" as VFM

@@ -8,14 +8,13 @@ skinparam shadowing false
 participant ":RecordTaskController" as CTRL
 participant "TeamRepository:\nTeamRepository" as TeamRepository
 
-autonumber 7
+autonumber 6
 
 
 activate CTRL
 
 
     group Get Task List
-    autonumber 7.1
 
     CTRL -> TeamRepository : getTasksOfCollaborator()
     activate TeamRepository

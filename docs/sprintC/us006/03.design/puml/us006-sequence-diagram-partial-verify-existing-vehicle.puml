@@ -5,12 +5,11 @@ skinparam shadowing false
 
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 
-autonumber 8
+autonumber 12
 -> VehicleRepository  : registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
 
 activate VehicleRepository
     group Verify Existing Vehicle
-    autonumber 8.1
 
         VehicleRepository -> VehicleRepository: verifyExistingVehicle(VIN, Vehicle Plate)
         activate VehicleRepository

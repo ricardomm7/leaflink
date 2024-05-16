@@ -6,7 +6,7 @@ skinparam shadowing false
 participant "maintenanceRepository:\nMaintenanceRepository" as MaintenanceRepository
 participant "maintenanceReport\n:MaintenanceReport" as MaintenanceReport
 
-autonumber 11
+autonumber 14
 -> MaintenanceRepository : createMaintenanceReport(vehiclesNeedingMaintenance)
 activate MaintenanceRepository
 

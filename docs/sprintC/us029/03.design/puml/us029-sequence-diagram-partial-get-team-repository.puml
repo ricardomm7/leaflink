@@ -8,14 +8,12 @@ skinparam shadowing false
 participant ":RecordTaskController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-autonumber 7
+autonumber 3
 
 
 activate CTRL
 
-
     group Get Team Repository
-    autonumber 7.1
 
             CTRL -> RepositorySingleton: getInstance()
             activate RepositorySingleton

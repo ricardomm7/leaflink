@@ -3,7 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-autonumber
 
 'hide footbox
 
@@ -11,9 +10,9 @@ participant ":ListMaintenanceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 
+autonumber 10
 
 activate CTRL
-autonumber 3.1
     group Get Maintenance Repository
 
         CTRL -> RepositorySingleton : getInstance()
@@ -29,7 +28,6 @@ autonumber 3.1
         deactivate PLAT
 
     end
-
 
 deactivate CTRL
 
