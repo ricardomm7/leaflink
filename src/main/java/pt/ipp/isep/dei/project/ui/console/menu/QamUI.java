@@ -16,12 +16,11 @@ public class QamUI implements Runnable {
 
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Option 1", new ShowTextUI("You have chosen Option 3.")));
         options.add(new MenuItem("Run Tests", new RunTestsUI()));
 
         int option = 0;
         do {
-            option = Utils.showAndSelectIndex(options, "\n\n--- ADMIN MENU -------------------------");
+            option = Utils.showAndSelectIndex(options, "\n\n--- QAM MENU -------------------------");
 
             if ((option >= 0) && (option < options.size())) {
                 options.get(option).run();

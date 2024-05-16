@@ -173,6 +173,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_QAM, AuthenticationController.ROLE_QAM);
 
 
 
@@ -190,5 +191,8 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Collaborator", "collaborator@this.app", "collab",
                 AuthenticationController.ROLE_COLLAB);
+
+        authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@this.app", "qam",
+                AuthenticationController.ROLE_QAM);
     }
 }

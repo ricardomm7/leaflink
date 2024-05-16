@@ -9,7 +9,7 @@ public class WaterIrrigationUI implements Runnable{
     private String filepath;
 
     /**
-     * Executes the park usage analysis.
+     * Executes the park irrigation calculation.
      *
      * @throws FileNotFoundException if the specified file is not found.
      */
@@ -24,12 +24,11 @@ public class WaterIrrigationUI implements Runnable{
     public void uploadFile() {
         System.out.print("Enter the file path for the minimum cost route calculation: ");
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        this.filepath = input;
+        this.filepath = sc.nextLine();
     }
 
     /**
-     * Runs the user interface for analyzing park usage.
+     * Runs the user interface for getting the water routes.
      */
     @Override
     public void run() {

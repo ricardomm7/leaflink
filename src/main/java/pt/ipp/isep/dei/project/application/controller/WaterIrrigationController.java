@@ -12,7 +12,7 @@ public class WaterIrrigationController {
         executeSingle(filepath);
     }
 
-    public void executeSingle(String caminhoFile) {
+    private void executeSingle(String caminhoFile) {
         // Creates an instance of ExternalCSV with a given file name
         ExternalCSV ex = new ExternalCSV(caminhoFile + ".csv");
 
