@@ -18,6 +18,17 @@ As a Green Space Manager (GSM), I want to register a green space (garden, medium
 > 
 > **Answer:** Yes. In that case, the name should be the «park» name, defined by the GSM registering it.
 
+> **Question:** To register a green space, what is the criteria needed to classify it as a medium-sized park or a large-sized park?
+> 
+> **Answer:** It's a GSM responsability to decide the classification.
+
+> **Question:** In which unit should the area be measured in?
+>
+> **Answer:** Usually, areas are measured in hectares.
+
+> **Question:** Can the GSM register multiple green spaces at once?
+> 
+> **Answer:** That's a matter of UX/UI, each dev team can decide about it.
 
 ### 1.3. Acceptance Criteria
 

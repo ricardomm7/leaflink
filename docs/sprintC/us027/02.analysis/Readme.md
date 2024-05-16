@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-- The size unit will be in Km^2.
+- The size unit will be in hectares.
