@@ -4,60 +4,50 @@ skinparam line type polyline
 
 'left to right direction
 
-    class RegisterVehicleUI {
-        - controller : RegisterVehicleController
-        + RegisterVehicleUI()
-        + registerVehicle() : void
+    class RegisterGreenSpaceUI {
+        - controller : RegisterGreenSpaceController
+        + RegisterGreenSpaceUI()
+        + createNewGS(name : String, type : String, area : Double) : void
     }
 
-    class RegisterVehicleController {
+    class RegisterGreenSpaceController {
         - repositories: Repositories
-        - vehicleRepository : VehicleRepository
-
-        + RegisterVehicleController()
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
+        - greenSpaceRepository : GreenSpaceRepository
+        + createNewGS(name : String, type : String, area : Double) : void
+        + RegisterGreenSpaceController()
     }
 
     class Repositories {
         - instance : Repositories
-        - vehicleRepository : VehicleRepository
+        - greenSpaceRepository : GreenSpaceRepository
         - Repositories()
         + getInstance() : Repositories
-        + getVehicleRepository() : VehicleRepository
+        + getGreenSpaceRepository() : GreenSpaceRepository
     }
 
-    class VehicleRepository {
-        - vehicleList : List<Vehicle>
+    class GreenSpaceRepository {
+        - greenSpaceList : List<GreenSpace>
 
-        + VehicleRepository()
-        + getVehicleList () : List<Vehicles>
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
-        + addVehicle(vehicle: Vehicle) : void
-        + verifyExistingVehicle(VIN: String, VehiclePlate: String) : Boolean
+        + GreenSpaceRepository()
+        + create(name : String, type : String, area : Double) : void
+        + addGreenSpace(greenSpace: GreenSpace) : void
+        + verifyDuplicates(greenSpace: GreenSpace) : Boolean
     }
 
-    class Vehicle {
-        - VIN : String
-        - brand : String
-        - model : String
+    class GreenSpace {
+        - name : String
         - type : String
-        - vehiclePlate : String
-        - tareWeight : double
-        - grossWeight : double
-        - currentKm : int
-        - registrationDate: Date
-        - acquisitionDate : Date
-        - maintenanceFrequency : int
+        - area : Double
 
-        + Vehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int)
-        + validateVehicle(vehicle: Vehicle) : Boolean
+        + GreenSpace(name : String, type : String, area : Double)
+        + verifyFilled(greenSpace: GreenSpace) : Boolean
     }
 
-RegisterVehicleUI ..> RegisterVehicleController
-RegisterVehicleController ..> Repositories: repositories
+RegisterGreenSpaceUI ..> RegisterGreenSpaceController
+RegisterGreenSpaceController ..> Repositories: repositories
 Repositories --> Repositories: instance
-RegisterVehicleController ..> VehicleRepository: vehicleRepository
-Repositories --> "1"VehicleRepository: vehicleRepository
-VehicleRepository -->"*" Vehicle: vehicle
+RegisterGreenSpaceController ..> GreenSpaceRepository: greenSpaceRepository
+Repositories --> "1"GreenSpaceRepository: greenSpaceRepository
+GreenSpaceRepository -->"*" GreenSpace: greenSpaceRepository
 
 @enduml
