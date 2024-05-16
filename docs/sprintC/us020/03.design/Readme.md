@@ -7,36 +7,34 @@
 _**Note that SSD - Alternative One is adopted.**_
 
 
-| Interaction ID | Question: Which class is responsible for...  | Answer                    | Justification (with patterns)                                                                                                                                                                 |
-|:---------------|:---------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?              | RegisterVehicleUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction.                    |
-|                | ... coordinating the US?                     | RegisterVehicleController | Controller: RegisterVehicleController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                                               |
-| Step 2         | ... display vehicle data input fields?       | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 3         | ... types vehicle data?                      | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 4         | ... confirms the user's input data?          | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI confirms the user's input data before proceeding with the registration process, ensuring data integrity and adhering to the Creator pattern.              |
-| Step 5         | ... handles the registration of the vehicle? | RegisterVehicleController | Controller: RegisterVehicleController manages the registration process, ensuring high cohesion and low coupling by encapsulating related functionality.                                       |
-|                | ... get VehicleRepository?                   | Repositories              | Pure Fabrication:  Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic.                   |
-|                | ... verify existing vehicle?                 | VehicleRepository         | Information Expert: VehicleRepository performs global validation, adhering to the Protected Variation pattern by encapsulating data access.                                                   |
-|                | ... register a vehicle?                      | VehicleRepository         | Creator: Vehicle is directly created by vehicleRepository, which encapsulates the logic for managing vehicles.                                                                                |
-|                | ... validating all data (local validation)?  | Vehicle                   | Information Expert: Vehicle performs local validation on its attributes, adhering to the Information Expert pattern by encapsulating its own data validation logic.                           | 
-|                | ... validating all data (global validation)? | VehicleRepository         | Information Expert: VehicleRepository performs global validation, following the Protected Variation pattern by encapsulating validation rules.                                                | 
-|                | ... stores vehicle registration data?        | VehicleRepository         | Repository Pattern: VehicleRepository is responsible for persisting and managing vehicle registration data, applying the Low Coupling pattern by decoupling data storage from business logic. |
-| Step 6         | ... informing operation success?             | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.                         | 
-
+| Interaction ID | Question: Which class is responsible for...   | Answer                       | Justification (with patterns)                                                           |
+|:---------------|:----------------------------------------------|:-----------------------------|:----------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?               | RegisterGreenSpaceUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class. |
+|                | ... coordinating the US?                      | RegisterGreenSpaceController | Controller.                                                                             |
+| Step 2         | ... requesting data?                          | RegisterGreenSpaceUI         | Pure Fabrication.                                                                       |
+| Step 3         | ... receiving data?                           | RegisterGreenSpaceUI         | Pure Fabrication.                                                                       |
+| Step 4         | ... showing data and requesting confirmation? | RegisterGreenSpaceUI         | Pure Fabrication.                                                                       |
+| Step 5         | ... get the Green Space repository?           | Repositories                 | Information Expert.                                                                     |
+|                | ... having all the repositories?              | Repositories                 | Information Expert, High cohesion, Low coupling.                                        |
+|                | ... instantiating a new green space?          | GreenSpaceRepository         | Creator, High cohesion, Low coupling.                                                   |
+|                | ... validating all data (local validation)?   | GreenSpace                   | Information Expert.                                                                     | 
+|                | ... validating all data (global validation)?  | GreenSpaceRepository         | Information Expert.                                                                     | 
+|                | ... saving the green space created?           | GreenSpaceRepository         | Information Expert.                                                                     |
+| Step 6         | ... informing operation success?              | RegisterGreenSpaceUI         | Pure Fabrication.                                                                       |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Vehicle
+* GreenSpace
 
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
 * Repositories
-* RegisterVehicleUI
-* VehicleRepository
-* RegisterVehicleController
+* RegisterGreenSpaceController
+* GreenSpaceRepository
+* RegisterGreenSpaceUI
 
 
 
@@ -58,17 +56,13 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us020-sequence-diagram-split.svg)
 
-**Get Vehicle Repository Partial SD**
+**Get Green Space Repository Partial SD**
 
-![Sequence Diagram - Partial - Get Vehicle Repository](svg/us020-sequence-diagram-partial-get-vehicle-repository.svg)
+![Sequence Diagram - Partial - Get Vehicle Repository](svg/us020-sequence-diagram-partial-get-green-space-repository.svg)
 
-**Verify Existing Vehicle Partial SD**
+**Register a Green Space**
 
-![Sequence Diagram - Partial - Verify Existing Vehicle](svg/us020-sequence-diagram-partial-verify-existing-vehicle.svg)
-
-**Register a Vehicle**
-
-![Sequence Diagram - Partial - Register a Vehicle](svg/us020-sequence-diagram-partial-register-vehicle.svg)
+![Sequence Diagram - Partial - Register a Vehicle](svg/us020-sequence-diagram-partial-register-green-space.svg)
 
 ## 3.3. Class Diagram (CD)
 

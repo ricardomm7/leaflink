@@ -13,6 +13,7 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... coordinating the US?                      | ListGreenSpacesController | Controller.                                                                             |
 | Step 2         | ... request the sorting algorithm?            | RegisterVehicleUI         | Pure Fabrication.                                                                       |
 | Step 3         | ... get the Green Space Repository?           | Repositories              | Information Expert, High cohesion, Low coupling.                                        |
+|                | ... having all the repositories?              | Repositories              | Information Expert, High cohesion, Low coupling.                                        |
 |                | ... creating the Green Spaces List?           | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... verifying if the generated list is empty? | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... organizing the list?                      | GreenSpaceRepository      | Information Expert.                                                                     |

@@ -4,16 +4,16 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+'title System Sequence Diagram (SSD) - US006
 
 autonumber
 
 actor "GSM" as GSM
 participant ":ListGreenSpacesUI" as UI
 participant ":ListGreenSpacesController" as CTRL
+participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
 
 activate GSM
 GSM -> UI : asks to list all green spaces managed by him

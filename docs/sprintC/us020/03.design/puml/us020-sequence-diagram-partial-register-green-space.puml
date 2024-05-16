@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant "greenSpaceRepository:\nGreenSpaceRepository" as gsrepo
+participant ":GreenSpace" as GS
+
+autonumber 13
+
+
+
+
+    group Register green space
+
+
+gsrepo -> GS** : create(name, type, area)
+
+activate GS
+GS -> GS : verifyFilled(greenSpace)
+activate GS
+GS--> GS
+deactivate GS
+GS --> gsrepo : greenSpace
+deactivate GS
+activate gsrepo
+gsrepo -> gsrepo : verify duplicates by name
+activate gsrepo
+gsrepo -> gsrepo : addGreenSpace(greenSpace)
+activate gsrepo
+gsrepo-->gsrepo
+deactivate gsrepo
+gsrepo-->gsrepo
+deactivate gsrepo
+    end
+
+
+@enduml

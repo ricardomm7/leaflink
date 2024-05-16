@@ -4,97 +4,71 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+'title System Sequence Diagram (SSD) - US020
 
 autonumber
 
-actor "VFM" as VFM
-participant ":RegisterVehicleUI" as UI
-participant ":RegisterVehicleController" as CTRL
+actor "GSM" as GSM
+participant ":RegisterGreenSpaceUI" as UI
+participant ":RegisterGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "vehicle\n:Vehicle" as VEI
+participant "greenSpaceRepository:\nGreenSpaceRepository" as gsrepo
+participant ":GreenSpace" as GS
 
-activate VFM
+activate GSM
 
-    VFM -> UI : asks to register a new vehicle
+    GSM -> UI : wants to register a new green space
     activate UI
 
         UI -> CTRL** : create
 
-        UI --> VFM : requests vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
+        UI --> GSM : requests data (name, type, area)
         deactivate UI
-
-    VFM -> UI : types requested data
-    activate UI
-
-    UI --> VFM : shows all data and requests confirmation
-    deactivate UI
-
-    VFM -> UI: confirms Data
-    activate UI
-
-        UI -> CTRL : submit vehicle data
-        deactivate UI
-        activate CTRL
-
-            CTRL -> RepositorySingleton: getInstance()
-            activate RepositorySingleton
-
-            RepositorySingleton --> CTRL: repositories
-            deactivate RepositorySingleton
-
-            CTRL -> PLAT: getVehicleRepository()
-            activate PLAT
-
-            PLAT --> CTRL: VehicleRepository
-            deactivate PLAT
-
-        CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
-        deactivate CTRL
-
-            activate VehicleRepository
-
-        VehicleRepository -> VehicleRepository: verifyExistingVehicle(VIN, Vehicle Plate)
-                                activate VehicleRepository
-
-                                VehicleRepository --> VehicleRepository
-                                deactivate VehicleRepository
-
-
-            VehicleRepository -> VEI **: registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
-        deactivate VehicleRepository
-            activate VEI
-
-
-            VEI -> VEI: validateVehicle(vehicle)
-            activate VEI
-
-            VEI --> VEI
-            deactivate VEI
-
-            VEI --> VehicleRepository: vehicle
-            deactivate VEI
-            activate VehicleRepository
-
-
-
-                        VehicleRepository -> VehicleRepository: addVehicle(vehicle)
-
-
-            VehicleRepository --> CTRL: success
-            deactivate VehicleRepository
-            activate CTRL
-
-
-            CTRL --> UI : success
-            deactivate CTRL
-            activate UI
-
-    UI --> VFM : displays success message (Vehicle registered successfully)
-    deactivate UI
-
-deactivate VFM
+GSM -> UI : the user enters and selects the data
+activate UI
+UI-> GSM : shows data and requests confirmation
+deactivate UI
+GSM -> UI: user confirms
+activate UI
+UI -> CTRL : createNewGS(name, type, area)
+deactivate UI
+activate CTRL
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+RepositorySingleton --> CTRL : repositories
+deactivate RepositorySingleton
+CTRL -> PLAT : getGreenSpaceRepository()
+activate PLAT
+PLAT -->  CTRL: greenSpaceRepository
+deactivate PLAT
+CTRL -> gsrepo : createNewGS(name, type, area)
+deactivate CTRL
+activate gsrepo
+gsrepo -> GS** : create(name, type, area)
+activate GS
+GS -> GS : verifyFilled(greenSpace)
+activate GS
+GS--> GS
+deactivate GS
+GS --> gsrepo : greenSpace
+deactivate GS
+gsrepo -> gsrepo : verify duplicates by name
+activate gsrepo
+gsrepo -> gsrepo : addGreenSpace(greenSpace)
+activate gsrepo
+gsrepo-->gsrepo
+deactivate gsrepo
+gsrepo-->gsrepo
+deactivate gsrepo
+gsrepo --> CTRL : greenSpace
+deactivate gsrepo
+activate CTRL
+CTRL --> UI : success
+deactivate CTRL
+activate UI
+UI-->GSM:displays success message
+deactivate UI
+deactivate GSM
 
 @enduml
