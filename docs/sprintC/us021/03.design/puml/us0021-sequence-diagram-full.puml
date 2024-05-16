@@ -1,0 +1,100 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "GSM" as GSM
+participant ":AddNewEntryUI" as UI
+participant ":AddNewEntryController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository:\nVehicleRepository" as GreenSpaceRepository
+participant "entryRepository" as EntryRep
+participant "entry" as Entry
+
+activate GSM
+
+    GSM -> UI : asks to add a new entry
+    activate UI
+
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : get list of green spaces
+        activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+        deactivate CTRL
+        activate RepositorySingleton
+
+
+        RepositorySingleton --> CTRL : repositories
+        deactivate RepositorySingleton
+        activate CTRL
+
+        CTRL -> PLAT :getGreenSpaceRepository
+        deactivate CTRL
+        activate PLAT
+
+
+        PLAT --> CTRL : GreenSpaceRepository
+        deactivate PLAT
+        activate CTRL
+
+
+        CTRL -> GreenSpaceRepository : getGreenSpaceList()
+        deactivate CTRL
+        activate GreenSpaceRepository
+
+        GreenSpaceRepository --> CTRL : greenSpaceList
+        deactivate GreenSpaceRepository
+        activate CTRL
+
+        CTRL --> UI : greenSpaceList
+        deactivate CTRL
+
+
+        UI --> GSM : displays list of green spaces
+        deactivate UI
+
+        GSM -> UI : Selects the green space
+        activate UI
+
+        UI --> GSM : requests entry data (description, degree of urgency, and approximate expected duration)
+        deactivate UI
+
+        GSM -> UI : types requested data
+        activate UI
+
+        UI -> CTRL : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
+        deactivate UI
+        activate CTRL
+
+
+        CTRL -> PLAT : getEntryRepository()
+        deactivate CTRL
+        activate PLAT
+
+        PLAT -> EntryRep : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
+        deactivate PLAT
+        activate EntryRep
+
+        EntryRep -> Entry : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
+        deactivate EntryRep
+        activate Entry
+
+
+            CTRL --> UI : success
+            activate UI
+
+    UI --> GSM : displays success message (Vehicle registered successfully)
+    deactivate UI
+
+deactivate GSM
+
+@enduml

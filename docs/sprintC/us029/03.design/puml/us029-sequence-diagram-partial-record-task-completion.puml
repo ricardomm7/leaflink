@@ -1,0 +1,37 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+participant "TeamRepository:\nTeamRepository" as TeamRepository
+participant "task\n:Task" as Task
+
+autonumber 8
+-> TeamRepository : recordTaskCompletion(selectedTask)
+activate TeamRepository
+
+    group Record Task Completion
+    autonumber 8.1
+
+    TeamRepository -> Task : recordTaskCompletion(selectedTask)
+    deactivate TeamRepository
+    activate Task
+
+        Task -> Task : setStatus(complete)
+
+    Task --> TeamRepository : success
+    deactivate Task
+    activate TeamRepository
+
+
+
+
+    end
+
+autonumber 9
+     <-- TeamRepository: success
+deactivate TeamRepository
+
+
+@enduml

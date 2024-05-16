@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'hide footbox
+
+participant ":RecordTaskController" as CTRL
+participant "TeamRepository:\nTeamRepository" as TeamRepository
+
+autonumber 7
+
+
+activate CTRL
+
+
+    group Get Task List
+    autonumber 7.1
+
+    CTRL -> TeamRepository : getTasksOfCollaborator()
+    activate TeamRepository
+
+    TeamRepository --> CTRL : taskList
+    deactivate TeamRepository
+
+
+    end
+deactivate CTRL
+
+
+@enduml

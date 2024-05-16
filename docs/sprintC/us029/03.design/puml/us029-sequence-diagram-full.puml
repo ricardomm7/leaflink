@@ -1,0 +1,106 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US029
+
+autonumber
+
+actor "CLB" as CLB
+participant ":RecordTaskUI" as UI
+participant ":RecordTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "TeamRepository:\nTeamRepository" as TeamRepository
+participant ":Agenda" as Agenda
+participant ":taskList" as taskList
+
+participant "task\n:Task" as Task
+
+
+activate CLB
+
+    CLB -> UI : asks to record a complete task
+    activate UI
+
+        UI -> CTRL** : create
+        deactivate UI
+        activate CTRL
+
+            CTRL -> RepositorySingleton: getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getTeamRepository()
+            activate PLAT
+
+                PLAT --> CTRL: TeamRepository
+            deactivate PLAT
+
+            CTRL -> TeamRepository : getTasksOfCollaborator()
+            activate TeamRepository
+
+                TeamRepository --> CTRL : taskList
+            deactivate TeamRepository
+
+            CTRL -> Agenda : verifyExistingTasks(taskList)
+            activate Agenda
+
+                Agenda --> CTRL : taskList
+            deactivate Agenda
+
+            CTRL -> taskList : verifyExistingTasks(taskList)
+            activate taskList
+
+                taskList --> CTRL : taskList
+            deactivate taskList
+
+            CTRL --> UI : taskList
+        deactivate CTRL
+        activate UI
+
+        UI -> CLB : shows the list of the task assign to the collaborator and requests to select the one to record
+    deactivate UI
+
+    CLB -> UI : select an assigned task
+    activate UI
+
+        UI --> CLB : show task and requests confirmation
+    deactivate UI
+
+    CLB -> UI : confirms data
+    activate UI
+
+        UI -> CTRL : submit data
+        deactivate UI
+        activate CTRL
+
+            CTRL -> TeamRepository : recordTaskCompletion(selectedTask)
+            deactivate CTRL
+            activate TeamRepository
+
+                TeamRepository -> Task : recordTaskCompletion(selectedTask)
+                deactivate TeamRepository
+                activate Task
+
+                    Task -> Task : setStatus(complete)
+
+                Task --> TeamRepository : success
+                deactivate Task
+                activate TeamRepository
+
+            TeamRepository --> CTRL : success
+            deactivate TeamRepository
+            activate CTRL
+
+            CTRL --> UI : success
+        deactivate CTRL
+        activate UI
+
+        UI --> CLB : displays success message (Task record as completed)
+    deactivate UI
+
+@enduml

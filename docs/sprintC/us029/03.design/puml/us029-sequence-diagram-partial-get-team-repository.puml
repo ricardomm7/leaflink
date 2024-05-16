@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'hide footbox
+
+participant ":RecordTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+autonumber 7
+
+
+activate CTRL
+
+
+    group Get Team Repository
+    autonumber 7.1
+
+            CTRL -> RepositorySingleton: getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getTeamRepository()
+            activate PLAT
+
+                PLAT --> CTRL: TeamRepository
+            deactivate PLAT
+
+    end
+deactivate CTRL
+
+
+@enduml
