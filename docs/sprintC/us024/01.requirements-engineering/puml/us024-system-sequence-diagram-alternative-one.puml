@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US024
+
+autonumber
+
+actor "GSM" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : asks to postpone an agenda entry
+    activate System
+
+        System --> GSM : shows the list of agenda entries and requests to select
+    deactivate System
+
+    GSM -> System : selects an agenda entry
+
+    activate System
+
+        System --> GSM : requests new date for the selected entry
+    deactivate System
+
+    GSM -> System : types new date
+
+    activate System
+
+        System --> GSM : shows new date and requests confirmation
+    deactivate System
+
+    GSM -> System : confirms new date
+    activate System
+
+        System --> GSM : displays success message (Entry postponed successfully)
+    deactivate System
+
+@enduml

@@ -89,9 +89,12 @@ class GreenSpace{
     size
 }
 
-class Task{
-    designation
-    date
+class Task {
+    title
+    description
+    progressStatus
+    urgencyStatus
+    estimatedDate
 }
 
 class Machine{
@@ -228,5 +231,7 @@ ToDoList "1" -- "1..*" Task : has >
 Agenda "1" -- "1..*" Team : has >
 
 Agenda "1" -- "*" Vehicle : has >
+
+Agenda "1" -- "1..*" Task: has >
 
 @enduml

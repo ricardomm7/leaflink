@@ -1,0 +1,71 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Domain Model - US024
+
+left to right direction
+
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+class Agenda {
+
+}
+
+class Task {
+    title
+    description
+    progressStatus
+    urgencyStatus
+    estimatedDate
+}
+
+class GreenSpace{
+    designation
+    area
+    size
+}
+
+class Collaborator {
+    name
+    birthdate
+    admissionDate
+    mobileNumber
+    e-mail
+    taxpayerNumber
+}
+
+class Document{
+    documentType
+    identificationNumber
+}
+
+class Address{
+    street
+    zipCode
+    city
+}
+
+class Team {
+    id
+    name
+}
+
+Collaborator "1..*" -- "1" Address : has a >
+
+Collaborator "1" -- "1..*" Document : has >
+
+Agenda "1" -- "1..*" Task : has >
+
+Task "1" -- "1" Collaborator : assigned to >
+
+Task "1" -- "1" Team : executed by >
+
+Task "*" -- "1" GreenSpace: assigned to >
+
+Team "1" -- "1..*" Collaborator : has >
+
+@enduml
