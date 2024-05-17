@@ -1,0 +1,20 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "VFM" as VFM
+participant ":System" as System
+
+activate VFM
+
+    VFM -> System : asks to consult the tasks assigned to himself
+    activate System
+
+        System --> VFM : displays greens spaces sorted by date
+    deactivate System
+@enduml
