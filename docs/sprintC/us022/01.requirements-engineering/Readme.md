@@ -43,10 +43,11 @@ As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manag
 
 * **AC1:** The new entry must be associated with a green space managed by the GSM.
 * **AC2:** The new entry must exist in the To-Do list.
+* **AC3:** The system should validate that all required attributes are filled correctly.
 
 ### 1.4. Found out Dependencies
 
-* US 
+* US021 - Add a New Entry to the To-Do List: The task must exist in the To-Do list before it can be added to the Agenda.
 
 ### 1.5 Input and Output Data
 
@@ -56,8 +57,7 @@ As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manag
     * Unique Entry ID
     * Title/Description of the entry
     * Green Space ID (to link the entry to a green space managed by the GSM)
-    * Date and Time of the entry
-    * Priority level (e.g., high, medium, low)
+    * Date and Time of the entry (Starting date)
 	
 * Selected data:
     * Green Space (from a list of green spaces managed by the GSM)
@@ -78,3 +78,4 @@ As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manag
 
 * Implement appropriate permissions and access controls to restrict the ability to add agenda entries to authorized GSM users only.
 * Ensure that the list of green spaces is maintained and updated to reflect current management responsibilities.
+* Provide feedback and error messages to GSM in case of any issues during the entry process.
