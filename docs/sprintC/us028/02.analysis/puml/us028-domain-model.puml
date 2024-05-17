@@ -5,13 +5,13 @@ skinparam shadowing false
 
 'left to right direction
 
-skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
 
 
-class Vehicle {
+class Taskçç
+ {
 vin
 vehiclePlate
 tareWeight
