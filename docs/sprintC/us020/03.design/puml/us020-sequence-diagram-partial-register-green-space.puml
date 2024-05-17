@@ -18,7 +18,7 @@ autonumber 13
     group Register green space
 
 
-gsrepo -> GS** : create(name, type, area, loggedUser)
+gsrepo -> GS** : create(name, type, area, loggedUser, address)
 
 activate GS
 GS -> GS : verifyFilled(greenSpace)

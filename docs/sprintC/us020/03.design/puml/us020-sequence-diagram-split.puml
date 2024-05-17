@@ -23,7 +23,7 @@ activate GSM
 
         UI -> CTRL** : create
 
-        UI --> GSM : requests data (name, type, area, loggedUser)
+        UI --> GSM : requests data (name, type, area, loggedUser, \naddress (address, zip-code, city))
         deactivate UI
 GSM -> UI : the user enters and selects the data
 activate UI
@@ -31,13 +31,13 @@ UI-> GSM : shows data and requests confirmation
 deactivate UI
 GSM -> UI: user confirms
 activate UI
-UI -> CTRL : createNewGS(name, type, area, loggedUser)
+UI -> CTRL : createNewGS(name, type, area, loggedUser, \naddress (address, zip-code, city))
 deactivate UI
 activate CTRL
 ref over CTRL
 Get Green Space Repository
 end ref
-CTRL -> gsrepo : createNewGS(name, type, area, loggedUser)
+CTRL -> gsrepo : createNewGS(name, type, area, loggedUser, address)
 deactivate CTRL
 activate gsrepo
 ref over gsrepo

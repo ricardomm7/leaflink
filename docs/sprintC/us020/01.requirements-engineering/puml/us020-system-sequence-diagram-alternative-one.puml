@@ -15,7 +15,7 @@ activate GSM
     GSM -> System : wants to register a new green space
     activate System
 
-        System --> GSM : requests data (name, type, area)
+        System --> GSM : requests data (name, type, area, \naddress (address, zip-code, city))
     deactivate System
     GSM -> System : the user enters and selects the data
     activate System

@@ -45,6 +45,7 @@ As a Green Space Manager (GSM), I want to register a green space (garden, medium
 * Typed data:
     * Name
     * Area
+    * Address (address, zip-code, city)
 	
 * Selected data:
     * Type (garden, medium-sized park or large-sized park)
