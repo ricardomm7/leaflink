@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "GSM" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : asks to cancel an agenda entry
+    activate System
+
+        System --> GSM : provides cancellation form
+    deactivate System
+
+    GSM -> System : submits cancellation form with reason
+
+    activate System
+
+        System --> GSM : validates entry details
+    deactivate System
+
+    GSM -> System : confirms data
+    activate System
+
+        System --> GSM :  displays success message (Vehicle registered successfully)
+    deactivate System
+
+@enduml

@@ -5,15 +5,14 @@
 
 ### 1.1. User Story Description
 
-As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle including Vin, Brand, Model, Type, Tare Weight, Gross Weight, Current Km, Register Date, Acquisition Date, and Maintenance/Check-up Frequency (in km).
-
+As a Green Space Manager (GSM), I want to cancel an entry in the Agenda to manage and update task statuses effectively.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->  To register a vehicle is required some attributes. The person who register the vehicles is the fleet manager (VFM) and the vehicle is saved by in system. 
->  All the listed vehicle registration attributes are mandatory for successful registration. The system should not allow registration with missing information.
- 
+> The person who cancels the entries in the Agenda is the GSM, and the entry status is updated in the system.
+> A canceled task should not be deleted but rather change its state.
+
 **From the client clarifications:**
 
 > **Question:** To register a vehicle is necessary all attributes ?
@@ -44,30 +43,22 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All attributes must be filled with a valid form.
-* **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
-* **AC3:** Acquisition date must be after the registration date.
+* **AC1:** A canceled task should not be deleted but rather change its state to "canceled."
+* **AC2:** The system should notify all team members assigned to the task about the cancellation.
+* **AC3:** The reason for cancellation must be recorded.
 
 ### 1.4. Found out Dependencies
 
-* None.
+* US022 - Add a new entry in the Agenda: An entry must exist in the agenda first in order to be cancelled.
+* US023 - Assign a Team to an Entry in the Agenda: Team members need to be notified upon task cancellation.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * Vehicle identification number (VIN)
-    * Vehicle Plate
-    * Brand
-    * Model
-    * Type (car, truck, etc.)
-    * Tare Weight (weight of the empty vehicle)
-    * Gross weight (maximum weight of the loaded vehicle)
-    * Current Kilometer Reading
-    * Registration Date
-    * Acquisition Date
-    * Checkup Frequency (in Kilometers)
+    * Unique Entry ID
+    * Reason for cancellation
 	
 * Selected data:
     * None
@@ -75,6 +66,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 **Output Data:**
 
 * (In)Success of the operation
+* Notifications sent to team members.
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -86,4 +78,5 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 
 ### 1.7 Other Relevant Remarks
 
-* Implement appropriate permissions and access controls to restrict the ability to register a vehicle to authorized VFM users only.
+* Implement appropriate permissions and access controls to restrict the ability to cancel agenda entries to authorized GSM users only.
+* Provide clear feedback and error messages to GSM in case of any issues during the cancellation process.
