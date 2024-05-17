@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":AddNewEntryController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository:\nVehicleRepository" as GreenSpaceRepository
+
+autonumber 3
+
+
+-> CTRL : get list of green spaces
+        activate CTRL
+group Get Green Space List
+CTRL -> RepositorySingleton : getInstance()
+        deactivate CTRL
+        activate RepositorySingleton
+
+
+        RepositorySingleton --> CTRL : repositories
+        deactivate RepositorySingleton
+        activate CTRL
+
+        CTRL -> PLAT :getGreenSpaceRepository
+        deactivate CTRL
+        activate PLAT
+
+
+        PLAT --> CTRL : GreenSpaceRepository
+        deactivate PLAT
+        activate CTRL
+
+
+        CTRL -> GreenSpaceRepository : getGreenSpaceList()
+        deactivate CTRL
+        activate GreenSpaceRepository
+
+        GreenSpaceRepository --> CTRL : greenSpaceList
+        deactivate GreenSpaceRepository
+        activate CTRL
+end
+         <-- CTRL : greenSpaceList
+                deactivate CTRL
+@enduml
