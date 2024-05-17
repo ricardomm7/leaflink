@@ -1,4 +1,4 @@
-# US006 - Register a Vehicle 
+# US021 - Add a new entry to the To-Do List
 
 ## 3. Design - User Story Realization 
 
@@ -9,8 +9,8 @@ _**Note that SSD - Alternative One is adopted.**_
 
 | Interaction ID | Question: Which class is responsible for...  | Answer                    | Justification (with patterns)                                                                                                                                                                 |
 |:---------------|:---------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?              | RegisterVehicleUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction.                    |
-|                | ... coordinating the US?                     | RegisterVehicleController | Controller: RegisterVehicleController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                                               |
+| Step 1         | ... interacting with the actor?              | AddNewEntryUI             | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction.                    |
+|                | ... coordinating the US?                     | AddNewEntryController     | Controller: AddNewEntryController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                                                   |
 | Step 2         | ... display vehicle data input fields?       | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
 | Step 3         | ... types vehicle data?                      | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
 | Step 4         | ... confirms the user's input data?          | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI confirms the user's input data before proceeding with the registration process, ensuring data integrity and adhering to the Creator pattern.              |
