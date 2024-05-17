@@ -30,6 +30,10 @@ As a Green Space Manager (GSM), I want to register a green space (garden, medium
 > 
 > **Answer:** That's a matter of UX/UI, each dev team can decide about it.
 
+> **Question:** Can two green spaces have the same name?
+> 
+> **Answer:** No.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All attributes must be filled with a valid form.

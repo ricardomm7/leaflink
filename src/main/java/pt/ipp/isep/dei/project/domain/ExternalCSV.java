@@ -39,8 +39,8 @@ public class ExternalCSV {
                 }
 
                 // If the line is correct, it saves the data and creates a route
-                WaterPoint startPoint = new WaterPoint(data[0]);
-                WaterPoint endPoint = new WaterPoint(data[1]);
+                Point startPoint = new Point(data[0]);
+                Point endPoint = new Point(data[1]);
                 double distance = Double.parseDouble(data[2]);
 
                 Route route = new Route(startPoint, endPoint, distance);

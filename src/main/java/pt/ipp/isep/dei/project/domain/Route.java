@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.project.domain;
 
 public class Route {
-    private final WaterPoint startPoint;
-    private final WaterPoint endPoint;
+    private final Point startPoint;
+    private final Point endPoint;
     private final double cost;
 
     /**
@@ -18,7 +18,7 @@ public class Route {
      * Returns the starting point of this route
      * @return the starting point
      */
-    public WaterPoint getStartPoint() {
+    public Point getStartPoint() {
         return startPoint;
     }
 
@@ -26,7 +26,7 @@ public class Route {
      * Returns the ending point of this route
      * @return the ending point
      */
-    public WaterPoint getEndPoint() {
+    public Point getEndPoint() {
         return endPoint;
     }
 
@@ -38,7 +38,7 @@ public class Route {
      * @param endPoint   the ending point of the route
      * @param cost       the cost of crossing the route
      */
-    public Route(WaterPoint startPoint, WaterPoint endPoint, double cost) {
+    public Route(Point startPoint, Point endPoint, double cost) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.cost = cost;
