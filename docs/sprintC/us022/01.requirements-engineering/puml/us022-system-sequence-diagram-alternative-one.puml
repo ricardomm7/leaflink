@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "GSM" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : Request to add a new entry in the Agenda
+    activate System
+
+        System --> GSM : Provide form for new agenda entry
+    deactivate System
+
+    GSM -> System : submit form with entry details
+
+    activate System
+
+        System --> GSM : shows all data and requests confirmation
+    deactivate System
+
+    GSM -> System : confirms data
+    activate System
+
+        System --> GSM :  displays success message (Entry added successfully)
+    deactivate System
+
+@enduml

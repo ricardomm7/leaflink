@@ -1,0 +1,60 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+left to right direction
+
+hide circle
+hide methods
+
+
+class GreenSpace {
+    greenSpaceID
+    name
+    area
+    type
+}
+
+class ToDoEntry {
+    entryID
+    description
+    priorityLevel
+    expectedDuration
+}
+
+class AgendaEntry {
+    agendaEntryID
+    status
+    startDate
+    reasonForCancellation
+}
+
+class Team {
+    teamID
+    name
+    members
+}
+
+class Vehicle {
+    vehicleID
+    plate
+    brand
+    model
+    type
+    tareWeight
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    maintenanceFrequency
+}
+
+GreenSpace "1..*" -- "1..*" AgendaEntry : associated with >
+ToDoEntry "1" -- "1" AgendaEntry : must exist in >
+
+Team "1" -- "1..*" AgendaEntry : assigned to >
+Vehicle "0..*" -- "1..*" AgendaEntry : assigned to >
+
+@enduml

@@ -47,6 +47,7 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 * **AC1:** All attributes must be filled with a valid form.
 * **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
 * **AC3:** Acquisition date must be after the registration date.
+* **AC4:** Verify plate format with the acquisition date.
 
 ### 1.4. Found out Dependencies
 
