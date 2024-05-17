@@ -4,7 +4,7 @@ setlocal EnableDelayedExpansion
 set PLANTUML_PATH=../libs/plantuml-1.2023.1.jar
 set INPUT_FOLDER=../docs
 
-for /r "../docs" %%f in (*.puml) do (
+for /r "../docs/sprintC" %%f in (*.puml) do (
     set INPUT_FILE=%%f
     echo Processing file !INPUT_FILE!
     set OUTPUT_FILE=!INPUT_FILE:%INPUT_FOLDER%=!

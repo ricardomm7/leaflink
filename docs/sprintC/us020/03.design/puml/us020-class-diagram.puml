@@ -38,7 +38,7 @@ skinparam line type polyline
         - name : String
         - type : String
         - area : Double
-
+        - manager : Collaborator
         + GreenSpace(name : String, type : String, area : Double)
         + verifyFilled(greenSpace: GreenSpace) : Boolean
     }

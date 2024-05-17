@@ -23,7 +23,7 @@ activate GSM
 
         UI -> CTRL** : create
 
-        UI --> GSM : requests data (name, type, area)
+        UI --> GSM : requests data (name, type, area, loggedUser)
         deactivate UI
 GSM -> UI : the user enters and selects the data
 activate UI
@@ -31,7 +31,7 @@ UI-> GSM : shows data and requests confirmation
 deactivate UI
 GSM -> UI: user confirms
 activate UI
-UI -> CTRL : createNewGS(name, type, area)
+UI -> CTRL : createNewGS(name, type, area, loggedUser)
 deactivate UI
 activate CTRL
 CTRL -> RepositorySingleton : getInstance()
@@ -42,10 +42,10 @@ CTRL -> PLAT : getGreenSpaceRepository()
 activate PLAT
 PLAT -->  CTRL: greenSpaceRepository
 deactivate PLAT
-CTRL -> gsrepo : createNewGS(name, type, area)
+CTRL -> gsrepo : createNewGS(name, type, area, loggedUser)
 deactivate CTRL
 activate gsrepo
-gsrepo -> GS** : create(name, type, area)
+gsrepo -> GS** : create(name, type, area, loggedUser)
 activate GS
 GS -> GS : verifyFilled(greenSpace)
 activate GS
