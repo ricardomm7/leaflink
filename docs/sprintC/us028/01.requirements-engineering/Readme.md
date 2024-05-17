@@ -1,4 +1,4 @@
-# US028 - List the tasks asigned to myself
+# US028 - List the tasks assigned to myself
 
 
 ## 1. Requirements Engineering
@@ -15,9 +15,9 @@ As a Collaborator, I wish to consult the tasks assigned to me.
  
 **From the client clarifications:**
 
-> **Question:** 
+> **Question:** "As a Collaborator, I wish to consult the tasks assigned to me". That means that the collaborator can have more than one task assigned to them. To ensure that, the same task should be availvable for more than one team, am I right? The reason for that question is so that if a task is strictly related to only one team, a collaborator will end up being in two teams simultaneously, which cannot happen.
 > 
-> **Answer:** 
+> **Answer:** A team can have multiple task assigned, hence, if a collaborator belongs to a team. Besides, a collaborator can move from a team to another, so during, for instance, a month period a collaborator can belong to multiples teams.
 
 
 ### 1.3. Acceptance Criteria
