@@ -16,7 +16,7 @@ autonumber 7
 
 activate CTRL
 
- -> CTRL: createNewGS(name, type, area, loggedUser)
+ -> CTRL: createNewGS(name, type, area, loggedUser, address)
 
     group Get Green Space Repository
 
