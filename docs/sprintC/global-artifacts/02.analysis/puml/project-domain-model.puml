@@ -84,9 +84,11 @@ class ElectronicDevice{
 }
 
 class GreenSpace{
-    designation
-    area
-    size
+name
+type
+size
+manager
+
 }
 
 class Task {
