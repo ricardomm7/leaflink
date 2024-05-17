@@ -80,19 +80,42 @@ activate GSM
         deactivate CTRL
         activate PLAT
 
-        PLAT -> EntryRep : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
+        PLAT --> CTRL : entryRepository
         deactivate PLAT
+        activate CTRL
+
+        CTRL -> EntryRep : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
+        deactivate CTRL
         activate EntryRep
 
         EntryRep -> Entry : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
         deactivate EntryRep
         activate Entry
 
+        Entry -> Entry : verifyFilled(description)
+        activate Entry
 
-            CTRL --> UI : success
-            activate UI
+        Entry -> Entry : verifyDuration(aproxExpDuration)
+        activate Entry
 
-    UI --> GSM : displays success message (Vehicle registered successfully)
+        Entry --> Entry
+        deactivate Entry
+
+        Entry --> Entry
+        deactivate Entry
+
+        Entry -> EntryRep : Entry
+        deactivate Entry
+        activate EntryRep
+
+        EntryRep --> CTRL : Entry
+        activate CTRL
+
+        CTRL --> UI : Entry
+        deactivate CTRL
+        activate UI
+
+    UI --> GSM : displays success message (Entry registered successfully)
     deactivate UI
 
 deactivate GSM
