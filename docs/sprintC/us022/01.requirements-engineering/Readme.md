@@ -1,76 +1,66 @@
-# US006 - Register a Vehicle
+# US022 - Add a new entry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle including Vin, Brand, Model, Type, Tare Weight, Gross Weight, Current Km, Register Date, Acquisition Date, and Maintenance/Check-up Frequency (in km).
+As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manage tasks related to green spaces effectively.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->  To register a vehicle is required some attributes. The person who register the vehicles is the fleet manager (VFM) and the vehicle is saved by in system. 
->  All the listed vehicle registration attributes are mandatory for successful registration. The system should not allow registration with missing information.
+>  The person who adds the entries in the Agenda is the GSM, and the entry is saved in the system. 
+>  The new entry must have an associated green space managed by the GSM.
+> The new entry must already exist in the To-Do list.
  
 **From the client clarifications:**
 
-> **Question:** To register a vehicle is necessary all attributes ?
+> **Question:**  When a new entry is added to the Agenda, the status of that task will be, by default, set to "planned"?
 > 
-> **Answer:** Yes. To register a vehicle in the system, is request every attribute, in other case, the system should reject.
-
-> **Question:** Should the application identify a registered vehicle by a serial number or other attribute?
->
-> **Answer:** By plate id
-
-> **Question:** Should the application a group the vehicles by their brand, serial number or other attribute?
->
-> **Answer:** No requirements were set concerning groups of vehicles
-
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform the user of the mistake and give him the option to add another vehicle?
->
-> **Answer:** Duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates
-
-> **Question:** When a vehicle is registered, are there specific requirements for accepting the brand? For example, does the system need to check if the brand is on a predetermined list? Does this also apply to the model or any other characteristics?
->
-> **Answer:** No. One can consider a list os brands and a list of models previously inserted in the system. No need to go through validations.
-
-> **Question:** Can a fm register no vehicles or does he have to register at least one?
+> **Answer:** Correct.
 > 
-> **Answer:** The VFM is a role or system user profile that has the rights to perform some system actions (like the ones described by the US06, US07 and US08). In theory If there is no need to register a vehicle, no vehicles will be registered but that would be rather odd.
+> **Question:** When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/information does he need to input when planning?
+>
+> **Answer:** The starting date for the task. Later the GSM will be able to add the Team and vehicles (if required).
+> 
+> **Question:**
+>
+> **Answer:**
+> 
+> **Question:**
+>
+> **Answer:**
+> 
+> **Question:**
+>
+> **Answer:**
 
 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All attributes must be filled with a valid form.
-* **AC2:** The system must validate the VIN to ensure it is unique and corresponds to a non-registered vehicle.
-* **AC3:** Acquisition date must be after the registration date.
+* **AC1:** The new entry must be associated with a green space managed by the GSM.
+* **AC2:** The new entry must exist in the To-Do list.
 
 ### 1.4. Found out Dependencies
 
-* None.
+* US 
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * Vehicle identification number (VIN)
-    * Vehicle Plate
-    * Brand
-    * Model
-    * Type (car, truck, etc.)
-    * Tare Weight (weight of the empty vehicle)
-    * Gross weight (maximum weight of the loaded vehicle)
-    * Current Kilometer Reading
-    * Registration Date
-    * Acquisition Date
-    * Checkup Frequency (in Kilometers)
+    * Unique Entry ID
+    * Title/Description of the entry
+    * Green Space ID (to link the entry to a green space managed by the GSM)
+    * Date and Time of the entry
+    * Priority level (e.g., high, medium, low)
 	
 * Selected data:
-    * None
+    * Green Space (from a list of green spaces managed by the GSM)
 
 **Output Data:**
 
@@ -86,4 +76,5 @@ As a Vehicle and Equipment fleet manager (VFM), I wish to register a vehicle inc
 
 ### 1.7 Other Relevant Remarks
 
-* Implement appropriate permissions and access controls to restrict the ability to register a vehicle to authorized VFM users only.
+* Implement appropriate permissions and access controls to restrict the ability to add agenda entries to authorized GSM users only.
+* Ensure that the list of green spaces is maintained and updated to reflect current management responsibilities.
