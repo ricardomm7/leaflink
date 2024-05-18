@@ -7,14 +7,15 @@ skinparam line type polyline
     class RegisterGreenSpaceUI {
         - controller : RegisterGreenSpaceController
         + RegisterGreenSpaceUI()
-        + createNewGS(name : String, type : String, area : Double) : void
+        + createNewGS(name : String, type : String, area : Double, street : String, zipcode : String, city : String, manager : UserSession) : void
     }
 
     class RegisterGreenSpaceController {
         - repositories: Repositories
         - greenSpaceRepository : GreenSpaceRepository
-        + createNewGS(name : String, type : String, area : Double) : void
+        + createNewGS(name : String, type : String, area : Double, street : String, zipcode : String, city : String, manager : UserSession) : void
         + RegisterGreenSpaceController()
+        - parseAddress(street : String, zipcode : String, city : String) : Address
     }
 
     class Repositories {
@@ -29,7 +30,7 @@ skinparam line type polyline
         - greenSpaceList : List<GreenSpace>
 
         + GreenSpaceRepository()
-        + create(name : String, type : String, area : Double) : void
+        + create(name : String, type : String, area : Double, address : Address, manager : UserSession) : void
         + addGreenSpace(greenSpace: GreenSpace) : void
         + verifyDuplicates(greenSpace: GreenSpace) : Boolean
     }
@@ -39,7 +40,8 @@ skinparam line type polyline
         - type : String
         - area : Double
         - manager : Collaborator
-        + GreenSpace(name : String, type : String, area : Double)
+        - address : Address
+        + GreenSpace(name : String, type : String, area : Double, address : Address, manager : UserSession)
         + verifyFilled(greenSpace: GreenSpace) : Boolean
     }
 

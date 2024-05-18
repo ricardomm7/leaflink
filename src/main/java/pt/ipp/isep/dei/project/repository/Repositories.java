@@ -12,6 +12,7 @@ public class Repositories {
     private final MaintenanceRepository maintenanceRepository;
     private final SkillRepository skillRepository;
     private final TeamRepository teamRepository;
+    private final GreenSpaceRepository greenSpaceRepository;
     private final AuthenticationRepository authenticationRepository;
 
     /**
@@ -25,6 +26,7 @@ public class Repositories {
         skillRepository = new SkillRepository();
         teamRepository = new TeamRepository();
         authenticationRepository = new AuthenticationRepository();
+        greenSpaceRepository = new GreenSpaceRepository();
     }
 
     /**
@@ -93,6 +95,15 @@ public class Repositories {
      */
     public VehicleRepository getVehicleRepository() {
         return vehicleRepository;
+    }
+
+    /**
+     * Retrieves the GreenSpaceRepository.
+     *
+     * @return the GreenSpaceRepository.
+     */
+    public GreenSpaceRepository getGreenSpaceRepository() {
+        return greenSpaceRepository;
     }
 
     /**

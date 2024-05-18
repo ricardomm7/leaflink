@@ -19,6 +19,7 @@ public class GsmUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Calculate the minimum cost Irrigation Route", new WaterIrrigationUI()));
+        options.add(new MenuItem("Create a new Green Space", new RegisterGreenSpaceUI()));
 
 
         int option = 0;

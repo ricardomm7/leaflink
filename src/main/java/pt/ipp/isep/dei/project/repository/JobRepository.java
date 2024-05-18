@@ -27,6 +27,8 @@ public class JobRepository {
         Job j = new Job(title);
         if (checkForDuplicates(j)) {
             addJob(j);
+        } else {
+            throw new IllegalArgumentException("There is already a job with that name.");
         }
     }
 
