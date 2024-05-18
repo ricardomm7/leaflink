@@ -5,12 +5,12 @@ skinparam line type polyline
 'left to right direction
 
 class Maintenance {
-    - data : Date
-    - vehiclePlate : String
-    - km : int
+    - date: LocalDate
+    - vehiclePlate: String
+    - km: int
 
-    + Maintenance(String vehiclePlate, Date date, int kilometers)
-    + getDate() : Date
+    + Maintenance( vehiclePlate: String, date : LocalDate, kilometers: int)
+    + getDate() : LocalDate
     + getKm() : int
     + getVehiclePlate() : String
 }

@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class RegisterMaintenanceController {
      * @param maintenanceDate the date of the maintenance.
      * @param kilometers      the kilometers of the vehicle at the time of maintenance.
      */
-    public void createMaintenance(String plate, Date maintenanceDate, int kilometers) {
+    public void createMaintenance(String plate, LocalDate maintenanceDate, int kilometers) {
         maintenanceRepository.createMaintenance(plate, maintenanceDate, kilometers);
     }
 

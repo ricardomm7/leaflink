@@ -49,27 +49,28 @@ class Vehicle {
      - VIN : String
      - brand : String
      - model : String
-     - type : String
+     - type : VehicleType
+     - registrationDate : LocalDate
      - vehiclePlate : String
      - tareWeight : double
      - grossWeight : double
      - currentKm : double
-     - acquisitionDate : Date
+     - acquisitionDate : LocalDate
      - maintenanceFrequency : int
 
-    + Vehicle(VIN: String,brand: String, model: String, type: String, vehiclePlate: String, tareWeight: double, \ngrossWeight: double, currentKm: double, acquisitionDate: Date, maintenanceFrequency: int)
+    + Vehicle(VIN: String,brand: String, model: String, type: VehicleType, registrationDate: LocalDate vehiclePlate: String, tareWeight: double, \ngrossWeight: double, currentKm: double, acquisitionDate: LocalDate, maintenanceFrequency: int)
     + getVehiclePlate() : String
 }
 
 
 
 class Maintenance {
-    - data : Date
-    - vehiclePlate : String
-    - km : int
+    - date: LocalDate
+    - vehiclePlate: String
+    - km: int
 
-    + Maintenance(String vehiclePlate, Date date, int kilometers)
-    + getDate() : Date
+    + Maintenance( vehiclePlate: String, date : LocalDate, kilometers: int)
+    + getDate() : LocalDate
     + getKm() : int
     + getVehiclePlate() : String
 }

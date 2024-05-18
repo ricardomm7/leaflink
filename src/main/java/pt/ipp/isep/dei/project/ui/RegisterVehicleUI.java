@@ -1,9 +1,12 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
+import pt.ipp.isep.dei.project.domain.VehicleType;
 
-import java.text.ParseException;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -37,13 +40,18 @@ public class RegisterVehicleUI implements Runnable {
                 String model = scanner.nextLine();
                 validateModel(model);
 
-                System.out.println("Enter vehicle type:");
-                String type = scanner.nextLine();
-                validateType(type);
+                displayVehicleTypes();
+                int typeChoice = Integer.parseInt(scanner.nextLine());
+                VehicleType type = getVehicleTypeByChoice(typeChoice);
+
+                System.out.println("Enter registration date (DD/MM/YYYY):");
+                String registrationDateStr = scanner.nextLine();
+                LocalDate registrationDate = parseDate(registrationDateStr);
 
                 System.out.println("Enter vehicle plate:");
+                displayVehiclePlateFormat(registrationDate.getYear());
                 String vehiclePlate = scanner.nextLine();
-                validateVehiclePlate(vehiclePlate);
+                validateVehiclePlate(vehiclePlate, registrationDate.getYear());
 
                 System.out.println("Enter tare weight:");
                 double tareWeight = Double.parseDouble(scanner.nextLine());
@@ -57,13 +65,9 @@ public class RegisterVehicleUI implements Runnable {
                 int currentKm = Integer.parseInt(scanner.nextLine());
                 validateCurrentKm(currentKm);
 
-                System.out.println("Enter registration date (DD/MM/YYYY):");
-                String registrationDateStr = scanner.nextLine();
-                Date registrationDate = parseDate(registrationDateStr);
-
                 System.out.println("Enter acquisition date (DD/MM/YYYY):");
                 String acquisitionDateStr = scanner.nextLine();
-                Date acquisitionDate = parseDate(acquisitionDateStr);
+                LocalDate acquisitionDate = parseDate(acquisitionDateStr);
                 validateAcquisitionDate(registrationDate, acquisitionDate);
 
                 System.out.println("Enter maintenance frequency (in km):");
@@ -76,12 +80,12 @@ public class RegisterVehicleUI implements Runnable {
                         + tareWeight + "\nGross Weight: " + grossWeight + "\nCurrent Kilometers: " + currentKm + "\nRegistration date: " + registrationDateStr + "\nAcquisition date: "
                         + acquisitionDateStr + "\nMaintenance Frequency: " + maintenanceFrequency);
 
-                System.out.println("\nTypes 'Yes' to confirm data:");
+                System.out.println("\nType 'Y' to confirm data:");
                 String confirmation = scanner.nextLine();
 
-                if (confirmation.equalsIgnoreCase("yes")) {
-                    if (controller.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                            currentKm, registrationDate, acquisitionDate, maintenanceFrequency)) {
+                if (confirmation.equalsIgnoreCase("Y")) {
+                    if (controller.registerVehicle(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight,
+                            currentKm, acquisitionDate, maintenanceFrequency)) {
                         System.out.println("Vehicle registered successfully!");
                         flag = true;
                     } else {
@@ -95,10 +99,10 @@ public class RegisterVehicleUI implements Runnable {
                 System.out.println("Invalid input for maintenance frequency: " + e.getMessage());
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input: " + e.getMessage());
-            } catch (ParseException e) {
-                System.out.println("Failed to parse date: " + e.getMessage());
             } catch (InvalidDateException e) {
                 System.out.println("Invalid date: " + e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format: " + e.getMessage());
             }
         } while (!flag);
     }
@@ -139,22 +143,29 @@ public class RegisterVehicleUI implements Runnable {
     /**
      * Validates the input parameter.
      *
-     * @param type
-     */
-    private void validateType(String type) {
-        if (type == null || !type.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Vehicle type must have only alphanumeric characters (letters and numbers).");
-        }
-    }
-
-    /**
-     * Validates the input parameter.
-     *
      * @param vehiclePlate
      */
-    private void validateVehiclePlate(String vehiclePlate) {
+    private void validateVehiclePlate(String vehiclePlate, int year) {
         if (vehiclePlate == null || !vehiclePlate.matches("[a-zA-Z0-9]{6}")) {
-            throw new IllegalArgumentException("Vehicle plate must have 6 alphanumeric characters (letters and numbers).\n");
+            throw new IllegalArgumentException("Vehicle plate must have 6 alphanumeric characters (letters and numbers).");
+        }
+
+        if (year >= 2020) {
+            if (!vehiclePlate.matches("^[a-zA-Z]{2}\\d{2}[a-zA-Z]{2}$")) {
+                throw new IllegalArgumentException("Vehicle plate should be in this format: AA00AA");
+            }
+        } else if (year >= 2005) {
+            if (!vehiclePlate.matches("^\\d{2}[a-zA-Z]{2}\\d{2}$")) {
+                throw new IllegalArgumentException("Vehicle plate should be in this format: 00AA00");
+            }
+        } else if (year >= 1992) {
+            if (!vehiclePlate.matches("^\\d{4}[a-zA-Z]{2}$")) {
+                throw new IllegalArgumentException("Vehicle plate should be in this format: 0000AA");
+            }
+        } else {
+            if (!vehiclePlate.matches("^[a-zA-Z]{2}\\d{4}$")) {
+                throw new IllegalArgumentException("Vehicle plate should be in this format: AA0000");
+            }
         }
     }
 
@@ -197,8 +208,8 @@ public class RegisterVehicleUI implements Runnable {
      * @param registrationDate
      * @param acquisitionDate
      */
-    private void validateAcquisitionDate(Date registrationDate, Date acquisitionDate) {
-        if (acquisitionDate.before(registrationDate)) {
+    private void validateAcquisitionDate(LocalDate registrationDate, LocalDate acquisitionDate) {
+        if (acquisitionDate.isBefore(registrationDate)) {
             throw new InvalidDateException("Acquisition date must be after registration date.");
         }
     }
@@ -215,30 +226,66 @@ public class RegisterVehicleUI implements Runnable {
     }
 
     /**
-     * Parse the input date (String) to Date.
+     * Parse the input date (String) to LocalDate.
      *
      * @param dateString
      * @return
-     * @throws ParseException
+     * @throws DateTimeParseException
      */
-    private Date parseDate(String dateString) throws ParseException {
-        String[] parts = dateString.split("[-,. /]");
+    private LocalDate parseDate(String dateString) {
+        // Remove espaços em branco
+        String cleanedDateString = dateString.replaceAll("\\s", "");
+
+        // Substitui vírgulas e hífens por barras
+        cleanedDateString = cleanedDateString.replace(',', '/').replace('-', '/');
+
+        // Padroniza o formato para DD/MM/YYYY, adicionando zeros à esquerda quando necessário
+        String[] parts = cleanedDateString.split("/");
         if (parts.length != 3) {
             throw new IllegalArgumentException("Invalid date format. Please use DD/MM/YYYY.");
         }
-        int day = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]);
-        int year = Integer.parseInt(parts[2]);
 
-        if (day > 31 || month > 12) {
-            throw new InvalidDateException("Invalid date. Please try again using DD/MM/YYYY:");
+        String day = parts[0].length() == 1 ? "0" + parts[0] : parts[0];
+        String month = parts[1].length() == 1 ? "0" + parts[1] : parts[1];
+        String year = parts[2];
+
+        String formattedDate = day + "/" + month + "/" + year;
+
+        // Usar o DateTimeFormatter padrão
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(formattedDate, formatter);
+    }
+
+
+    // Método para exibir todos os tipos de veículos na interface do usuário
+    private void displayVehicleTypes() {
+        System.out.println("Select vehicle type:");
+        VehicleType[] types = VehicleType.values();
+        for (int i = 0; i < types.length; i++) {
+            System.out.println(i + 1 + ". " + types[i]);
         }
+    }
 
-        // Adjust month value to be 0-based (0 for January)
-        month--;
+    // Método para obter o tipo de veículo com base na escolha do usuário
+    private VehicleType getVehicleTypeByChoice(int choice) {
+        VehicleType[] types = VehicleType.values();
+        if (choice < 1 || choice > types.length) {
+            throw new IllegalArgumentException("Invalid vehicle type choice.");
+        }
+        return types[choice - 1];
+    }
 
-        // Create a Date object
-        return new Date(year - 1900, month, day);
+    // Método para exibir o formato da placa do veículo com base no ano de registro
+    private void displayVehiclePlateFormat(int year) {
+        if (year >= 2020) {
+            System.out.println("Vehicle plate should be in this format: AA00AA");
+        } else if (year >= 2005) {
+            System.out.println("Vehicle plate should be in this format: 00AA00");
+        } else if (year >= 1992) {
+            System.out.println("Vehicle plate should be in this format: 0000AA");
+        } else {
+            System.out.println("Vehicle plate should be in this format: AA0000");
+        }
     }
 
     @Override
@@ -255,6 +302,3 @@ public class RegisterVehicleUI implements Runnable {
         }
     }
 }
-
-
-

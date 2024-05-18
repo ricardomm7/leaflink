@@ -43,5 +43,30 @@ public enum VehicleType {
         public String toString() {
             return "Pickup Truck";
         }
+    },
+    TRACTOR {
+        public String toString() {
+            return "Tractor";
+        }
+    },
+    ATV {
+        public String toString() {
+            return "ATV (All-Terrain Vehicle)";
+        }
+    },
+    GARDEN_TRACTOR {
+        public String toString() {
+            return "Garden Tractor";
+        }
+    },
+    LAWN_MOWER {
+        public String toString() {
+            return "Lawn Mower";
+        }
+    },
+    UTILITY_VEHICLE {
+        public String toString() {
+            return "Utility Vehicle";
+        }
     }
 }

@@ -15,7 +15,7 @@ skinparam line type polyline
         - vehicleRepository : VehicleRepository
 
         + RegisterVehicleController()
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: LocalDate, acquisitionDate: LocalDate, maintenanceFrequency: int) : Boolean
     }
 
     class Repositories {
@@ -31,7 +31,7 @@ skinparam line type polyline
 
         + VehicleRepository()
         + getVehicleList () : List<Vehicles>
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
+        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: LocalDate, acquisitionDate: LocalDate, maintenanceFrequency: int) : Boolean
         + addVehicle(vehicle: Vehicle) : void
         + verifyExistingVehicle(VIN: String, VehiclePlate: String) : Boolean
     }
@@ -40,16 +40,16 @@ skinparam line type polyline
         - VIN : String
         - brand : String
         - model : String
-        - type : String
+        - type : VehicleType
+        - registrationDate: LocalDate
         - vehiclePlate : String
         - tareWeight : double
         - grossWeight : double
         - currentKm : int
-        - registrationDate: Date
-        - acquisitionDate : Date
+        - acquisitionDate : LocalDate
         - maintenanceFrequency : int
 
-        + Vehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int)
+        + Vehicle(VIN: String, brand: String, model: String, type: VehicleType, registrationDate: LocalDate vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, acquisitionDate: LocalDate, maintenanceFrequency: int)
         + validateVehicle(vehicle: Vehicle) : Boolean
     }
 

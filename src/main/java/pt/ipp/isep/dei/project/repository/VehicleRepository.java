@@ -2,7 +2,9 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
+import pt.ipp.isep.dei.project.domain.VehicleType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,12 +49,12 @@ public class VehicleRepository {
      * @param maintenanceFrequency the maintenance frequency
      * @return the boolean (True if successful / False otherwise)
      */
-    public Boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
-                                   double grossWeight, int currentKm, Date registrationDate, Date acquisitionDate,
+    public Boolean registerVehicle(String vin, String brand, String model, VehicleType type, LocalDate registrationDate,
+                                   String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate,
                                    int maintenanceFrequency) {
 
-        Vehicle vehicle = new Vehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
+        Vehicle vehicle = new Vehicle(vin, brand, model, type,  registrationDate, vehiclePlate, tareWeight, grossWeight,
+                currentKm, acquisitionDate, maintenanceFrequency);
 
         if (vehicle.validateVehicle()) {
             addVehicle(vehicle);
@@ -130,7 +132,10 @@ public class VehicleRepository {
             double maintenanceFrequency = vehicle.getMaintenanceFrequency();
             double lastMaintenanceKm = getLastMaintenanceKm(vehicle.getVehiclePlate(), maintenanceList);
 
-            if (lastMaintenanceKm == -1 || currentKm - lastMaintenanceKm >= maintenanceFrequency) {
+            double nextMaintenanceKm = lastMaintenanceKm + maintenanceFrequency;
+
+
+            if (lastMaintenanceKm == -1 || currentKm >= nextMaintenanceKm * 0.95 ) {
                 vehiclesNeedingMaintenance.add(vehicle);
             }
         }

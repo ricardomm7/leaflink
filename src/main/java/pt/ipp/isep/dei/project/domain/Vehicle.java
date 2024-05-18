@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,13 +13,13 @@ public class Vehicle {
     private String VIN;
     private String brand;
     private String model;
-    private String type;
+    private VehicleType type;
+    private LocalDate registrationDate;
     private String vehiclePlate;
     private double tareWeight;
     private double grossWeight;
     private int currentKm;
-    private Date registrationDate;
-    private Date acquisitionDate;
+    private LocalDate acquisitionDate;
     private int maintenanceFrequency;
 
 
@@ -90,7 +91,7 @@ public class Vehicle {
      *
      * @return The type of the vehicle
      */
-    public String getType() {
+    public VehicleType getType() {
         return type;
     }
 
@@ -100,10 +101,7 @@ public class Vehicle {
      *
      * @param type New type of vehicle
      */
-    public void setType(String type) {
-        if (type == null || !type.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Vehicle type must have only alphanumeric characters (letters and numbers).");
-        }
+    public void setType(VehicleType type) {
         this.type = type;
     }
 
@@ -196,7 +194,7 @@ public class Vehicle {
      *
      * @return The registration date of the vehicle
      */
-    public Date getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
@@ -205,7 +203,7 @@ public class Vehicle {
      *
      * @param registrationDate New registration date of the vehicle
      */
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 
@@ -214,7 +212,7 @@ public class Vehicle {
      *
      * @return The acquisition date of the vehicle
      */
-    public Date getAcquisitionDate() {
+    public LocalDate getAcquisitionDate() {
         return acquisitionDate;
     }
 
@@ -223,7 +221,7 @@ public class Vehicle {
      *
      * @param acquisitionDate New acquisition date of the vehicle
      */
-    public void setAcquisitionDate(Date acquisitionDate) {
+    public void setAcquisitionDate(LocalDate acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
 
@@ -263,18 +261,18 @@ public class Vehicle {
      * @param acquisitionDate      the acquisition date of vehicle
      * @param maintenanceFrequency the maintenance frequency of vehicle
      */
-    public Vehicle(String VIN, String brand, String model, String type, String vehiclePlate, double tareWeight, double grossWeight,
-                   int currentKm, Date registrationDate, Date acquisitionDate, int maintenanceFrequency) {
+    public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
+                   int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
 
         this.VIN = VIN;
         this.brand = brand;
         this.model = model;
         this.type = type;
+        this.registrationDate = registrationDate;
         this.vehiclePlate = vehiclePlate;
         this.tareWeight = tareWeight;
         this.grossWeight = grossWeight;
         this.currentKm = currentKm;
-        this.registrationDate = registrationDate;
         this.acquisitionDate = acquisitionDate;
         this.maintenanceFrequency = maintenanceFrequency;
 
@@ -287,7 +285,7 @@ public class Vehicle {
      * @return boolean (True if it is valid / False if it is invalid)
      */
     public boolean validateVehicle() {
-        if (!brand.matches("[a-zA-Z0-9]+") || !model.matches("[a-zA-Z0-9]+") || !type.matches("[a-zA-Z0-9]+")) {
+        if (!brand.matches("[a-zA-Z0-9]+") || !model.matches("[a-zA-Z0-9]+") ){
             return false;
         }
         if (VIN == null || !VIN.matches("[a-zA-Z0-9]{17}+")) {
@@ -298,10 +296,26 @@ public class Vehicle {
             return false;
         }
 
+        int year = registrationDate.getYear();
+
+        if (year >= 2020) {
+            if (!vehiclePlate.matches("^[a-zA-Z]{2}\\d{2}[a-zA-Z]{2}$")) {
+                return false;
+            }
+        } else if (year >= 2005) {
+            if (!vehiclePlate.matches("^\\d{2}[a-zA-Z]{2}\\d{2}$")) {
+                return false;
+            }
+        } else if (year < 2005) {
+            if (!vehiclePlate.matches("^\\d{4}[a-zA-Z]{2}$")) {
+                return false;
+            }
+        }
         if (tareWeight <= 0 || grossWeight <= 0 || currentKm < 0 || maintenanceFrequency <= 0) {
             return false;
         }
-        if (!registrationDate.before(acquisitionDate)) {
+
+        if (!registrationDate.isBefore(acquisitionDate)) {
             return false;
 
         }

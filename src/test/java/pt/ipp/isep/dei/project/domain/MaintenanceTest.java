@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.domain;
 
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,8 +12,8 @@ public class MaintenanceTest {
     @Test
     public void test_constructor_initializes_attributes() {
         // Arrange
-        Date expectedData = new Date(2023, 12, 10);
-        String expectedVehiclePlate = "ABC123";
+        LocalDate expectedData = LocalDate.of(2023, 12, 10);
+        String expectedVehiclePlate = "AB23CA";
         int expectedKm = 10000;
 
         // Act
@@ -28,7 +29,7 @@ public class MaintenanceTest {
     // The getVehiclePlate method returns the value of the vehiclePlate attribute.
     @Test
     public void test_getVehiclePlate_returns_vehiclePlate_attribute_value() {
-        Maintenance maintenance = new Maintenance("ABC123", new Date(2022, 1, 1), 10000);
+        Maintenance maintenance = new Maintenance("ABC123", LocalDate.of(2022, 1, 1), 10000);
 
         assert (maintenance.getVehiclePlate().equals("ABC123"));
     }
@@ -36,38 +37,38 @@ public class MaintenanceTest {
     // The constructor throws an exception if the vehiclesPlate parameter is null.
     @Test(expected = IllegalArgumentException.class)
     public void test_constructor_throws_exception_if_vehiclesPlate_parameter_is_null() {
-        new Maintenance(null, new Date(2021, 1, 1), 10000);
+        new Maintenance(null, LocalDate.of(2021, 1, 1), 10000);
     }
 
     // The constructor throws an exception if the vehiclesPlate parameter is an invalid.
     @Test(expected = IllegalArgumentException.class)
     public void test_constructor_throws_exception_if_vehiclesPlate_parameter_is_invalid_string() {
-        new Maintenance("@saswqd3432qqd", new Date(2021, 1, 1), 10000);
+        new Maintenance("@saswqd3432qqd", LocalDate.of(2021, 1, 1), 10000);
     }
 
 
     // The getKm method returns the value of the km attribute.
     @Test
     public void test_getKm_returns_km_attribute_value() {
-        Maintenance maintenance = new Maintenance("ABC123", new Date(2021, 1, 1), 10000);
+        Maintenance maintenance = new Maintenance("ABC123", LocalDate.of(2021, 1, 1), 10000);
         assertEquals(10000, maintenance.getKm());
     }
 
     // The constructor throws an exception if the kilometre parameter is negative.
     @Test(expected = IllegalArgumentException.class)
     public void test_constructor_throws_exception_if_kilometragem_parameter_is_negative() {
-        new Maintenance("ABC123", new Date(2021, 1, 1), -10000);
+        new Maintenance("ABC123", LocalDate.of(2021, 1, 1), -10000);
     }
 
     // The getDate method returns the value of the date attribute
     @Test
     public void test_getData_returns_date_attribute_value() {
         // Arrange
-        Date expectedData = new Date(2021, 1, 1);
-        Maintenance maintenance = new Maintenance("ABC123", expectedData, 10000);
+        LocalDate expectedData = LocalDate.of(2021, 1, 1);
+        Maintenance maintenance = new Maintenance("ABCD23", expectedData, 10000);
 
         // Act
-        Date actualData = maintenance.getDate();
+        LocalDate actualData = maintenance.getDate();
 
         // Assert
         assertEquals(expectedData, actualData);
@@ -77,13 +78,13 @@ public class MaintenanceTest {
     // The constructor throws an exception if the date parameter is null.
     @Test(expected = IllegalArgumentException.class)
     public void test_constructor_throws_exception_if_date_parameter_is_null() {
-        new Maintenance("ABC123", null, 10000);
+        new Maintenance("ABCD23", null, 10000);
     }
 
     // The constructor throws an exception if the date parameter is an empty string.
     @Test(expected = IllegalArgumentException.class)
     public void test_constructor_throws_exception_if_date_parameter_is_empty_string() {
-        new Maintenance("ABC123", null, 10000);
+        new Maintenance("ABCD23", null, 10000);
     }
 
 }

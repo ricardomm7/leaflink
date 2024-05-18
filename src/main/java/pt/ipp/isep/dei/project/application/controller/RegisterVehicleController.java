@@ -1,9 +1,12 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The RegisterVehicleController class manages the registration of a vehicle within the application.
@@ -38,14 +41,14 @@ public class RegisterVehicleController {
      * @param maintenanceFrequency the maintenance frequency
      * @return the boolean
      */
-    public boolean registerVehicle(String vin, String brand, String model, String type, String vehiclePlate, double tareWeight,
-                                   double grossWeight, int currentKm, Date registrationDate, Date acquisitionDate,
+    public boolean registerVehicle(String vin, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight,
+                                   double grossWeight, int currentKm, LocalDate acquisitionDate,
                                    int maintenanceFrequency) {
 
         if (!vehicleRepository.verifyExistingVehicles(vin, vehiclePlate)) {
 
-            return vehicleRepository.registerVehicle(vin, brand, model, type, vehiclePlate, tareWeight, grossWeight,
-                    currentKm, registrationDate, acquisitionDate, maintenanceFrequency);
+            return vehicleRepository.registerVehicle(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight,
+                    currentKm, acquisitionDate, maintenanceFrequency);
 
         }
 

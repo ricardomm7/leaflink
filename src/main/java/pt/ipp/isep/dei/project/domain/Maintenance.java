@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  */
 public class Maintenance {
     private final String vehiclePlate;
-    private final Date date;
+    private final LocalDate date;
     private final int km;
 
     /**
@@ -19,7 +20,7 @@ public class Maintenance {
      * @param date         the date
      * @param kilometers   the kilometers
      */
-    public Maintenance(String vehiclePlate, Date date, int kilometers) {
+    public Maintenance(String vehiclePlate, LocalDate date, int kilometers) {
         if (kilometers < 0) {
             throw new IllegalArgumentException("Kilometers cannot be negative");
         }
@@ -39,7 +40,7 @@ public class Maintenance {
      *
      * @return the date
      */
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

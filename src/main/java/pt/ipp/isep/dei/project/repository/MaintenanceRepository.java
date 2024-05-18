@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.repository;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class MaintenanceRepository {
      * @param date      the date
      * @param currentKm the current km
      */
-    public void createMaintenance(String plate, Date date, int currentKm) {
+    public void createMaintenance(String plate, LocalDate date, int currentKm) {
         Maintenance maintenance = new Maintenance(plate, date, currentKm);
         addMaintenance(maintenance);
     }
@@ -77,7 +78,7 @@ public class MaintenanceRepository {
                         int curr_km = vehicle.getCurrentKm();
                         int freq = vehicle.getMaintenanceFrequency();
                         int last = maintenance.getKm();
-                        int next = curr_km + freq;
+                        int next = last + freq;
                         reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
                                 plate, brand, model, curr_km, freq, last, next));
                     }
