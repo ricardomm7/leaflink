@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.RegisterGreenSpaceController;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 
 import java.util.Scanner;
@@ -35,28 +36,13 @@ public class RegisterGreenSpaceUI implements Runnable {
             System.out.print("Enter the name of the green space: ");
             String name = scanner.nextLine();
 
-            System.out.print("Select the type of the green space: ");
-            System.out.println("\n1. Garden");
-            System.out.println("2. Medium-Sized Park");
-            System.out.println("3. Large-Sized Park");
-            System.out.print("Enter the corresponding number: ");
-
-            int typeOption = Integer.parseInt(scanner.nextLine());
-
-            GreenSpaceType type;
-            switch (typeOption) {
-                case 1:
-                    type = GreenSpaceType.GARDEN;
-                    break;
-                case 2:
-                    type = GreenSpaceType.MEDIUM_SIZED_PARK;
-                    break;
-                case 3:
-                    type = GreenSpaceType.LARGE_SIZED_PARK;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid option. Please select a valid number.");
+            GreenSpaceType[] greeST = GreenSpaceType.values();
+            System.out.print("Select the type of the green space:\n");
+            for (int i = 0; i < greeST.length; i++) {
+                System.out.println((i + 1) + ". " + greeST[i]);
             }
+            GreenSpaceType type = greeST[scanner.nextInt()-1];
+            scanner.nextLine();
 
             System.out.print("Enter the area of the green space (in hectares): ");
             double area = Double.parseDouble(scanner.nextLine());
