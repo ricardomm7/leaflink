@@ -5,7 +5,7 @@ import pt.ipp.isep.dei.project.application.controller.WaterIrrigationController;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class WaterIrrigationUI implements Runnable{
+public class WaterIrrigationUI implements Runnable {
     private String filepath;
 
     /**

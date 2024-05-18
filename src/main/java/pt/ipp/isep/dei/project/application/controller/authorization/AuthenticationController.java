@@ -19,8 +19,6 @@ public class AuthenticationController {
     public static final String ROLE_QAM = "QAM";
 
 
-
-
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
 

@@ -4,11 +4,7 @@ import pt.ipp.isep.dei.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * This class provides an user inteface for assigning skills to collaborators.

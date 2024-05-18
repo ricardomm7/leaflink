@@ -16,6 +16,7 @@ public class Route {
 
     /**
      * Returns the starting point of this route
+     *
      * @return the starting point
      */
     public Point getStartPoint() {
@@ -24,6 +25,7 @@ public class Route {
 
     /**
      * Returns the ending point of this route
+     *
      * @return the ending point
      */
     public Point getEndPoint() {

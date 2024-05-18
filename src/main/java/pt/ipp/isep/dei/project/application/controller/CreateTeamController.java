@@ -3,10 +3,10 @@ package pt.ipp.isep.dei.project.application.controller;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
-import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 
 import java.util.ArrayList;
 import java.util.List;

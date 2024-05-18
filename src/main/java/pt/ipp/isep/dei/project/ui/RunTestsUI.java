@@ -52,7 +52,7 @@ public class RunTestsUI implements Runnable {
                         String fileName = file.getName();
                         int dotIndex = fileName.lastIndexOf('.');
                         if (dotIndex > 0) {
-                            fileName = folder+"/"+fileName.substring(0, dotIndex);
+                            fileName = folder + "/" + fileName.substring(0, dotIndex);
                         }
                         fileList.add(fileName);
                     }

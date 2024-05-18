@@ -57,22 +57,23 @@ public class Bootstrap implements Runnable {
 
 
     }
-    private void addMaintenance(){
+
+    private void addMaintenance() {
         MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
 
         // Example 1: Maintenance for Ford Transit
         maintenanceRepository.createMaintenance("AB1234", new Date(2024, 6, 10), 25000);
 
-    // Example 2: Maintenance for Utility Truck
+        // Example 2: Maintenance for Utility Truck
         maintenanceRepository.createMaintenance("CD5678", new Date(2024, 6, 15), 6500);
 
-    // Example 3: Maintenance for Ford F-250
+        // Example 3: Maintenance for Ford F-250
         maintenanceRepository.createMaintenance("EF9012", new Date(2024, 6, 20), 12500);
 
-    // Example 4: Maintenance for Isuzu NQR
+        // Example 4: Maintenance for Isuzu NQR
         maintenanceRepository.createMaintenance("GH2345", new Date(2024, 6, 25), 11000);
 
-    // Example 5: Maintenance for Mitsubishi Fuso Canter
+        // Example 5: Maintenance for Mitsubishi Fuso Canter
         maintenanceRepository.createMaintenance("IJ6789", new Date(2024, 7, 1), 19000);
     }
 
@@ -174,7 +175,6 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_QAM, AuthenticationController.ROLE_QAM);
-
 
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",

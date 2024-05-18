@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.project.domain;
 
-import java.io.File;
 import java.io.IOException;
 
 /**

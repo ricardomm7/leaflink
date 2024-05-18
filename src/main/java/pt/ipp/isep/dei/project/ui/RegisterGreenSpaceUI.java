@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.RegisterGreenSpaceController;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 
 import java.util.Scanner;
@@ -41,7 +40,7 @@ public class RegisterGreenSpaceUI implements Runnable {
             for (int i = 0; i < greeST.length; i++) {
                 System.out.println((i + 1) + ". " + greeST[i]);
             }
-            GreenSpaceType type = greeST[scanner.nextInt()-1];
+            GreenSpaceType type = greeST[scanner.nextInt() - 1];
             scanner.nextLine();
 
             System.out.print("Enter the area of the green space (in hectares): ");

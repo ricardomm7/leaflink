@@ -6,13 +6,13 @@ import pt.ipp.isep.dei.project.domain.Team;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TeamRepositoryTest {
 
     @Test
     void addTeam() {
-       Team team = new Team(new ArrayList<>(), new ArrayList<>(), 3, 5);
+        Team team = new Team(new ArrayList<>(), new ArrayList<>(), 3, 5);
 
         TeamRepository teamRepository = new TeamRepository();
 

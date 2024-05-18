@@ -3,10 +3,10 @@ package pt.ipp.isep.dei.project.repository;
 import org.junit.Test;
 import pt.ipp.isep.dei.project.domain.Skill;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SkillRepositoryTest {
 

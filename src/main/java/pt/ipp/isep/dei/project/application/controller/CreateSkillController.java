@@ -14,7 +14,7 @@ public class CreateSkillController {
      * Constructs a new CreateSkillController object.
      * Initializes the SkillRepository using the Repositories singleton instance.
      */
-    public CreateSkillController(){
+    public CreateSkillController() {
         Repositories repositories = Repositories.getInstance();
         skillRepository = repositories.getSkillRepository();
     }
@@ -24,7 +24,7 @@ public class CreateSkillController {
      *
      * @param designation the designation of the skill to be created.
      */
-    public void createSkill(String designation){
+    public void createSkill(String designation) {
         skillRepository.createSkill(designation);
     }
 }

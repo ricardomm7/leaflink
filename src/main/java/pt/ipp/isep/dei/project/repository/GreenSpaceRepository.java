@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.domain.Address;
+import pt.ipp.isep.dei.project.domain.GreenSpace;
+import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 
 import java.util.ArrayList;
 import java.util.List;

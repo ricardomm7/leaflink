@@ -2,12 +2,12 @@ package pt.ipp.isep.dei.project.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TeamTest {
 
@@ -50,6 +50,7 @@ class TeamTest {
 
         assertEquals(5, team.getMaxTeamSize());
     }
+
     private Date getDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);

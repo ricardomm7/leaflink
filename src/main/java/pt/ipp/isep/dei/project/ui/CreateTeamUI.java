@@ -1,10 +1,12 @@
 package pt.ipp.isep.dei.project.ui;
+
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
-import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.Skill;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * The CreateTeamUI class provides a user interface for creating teams.

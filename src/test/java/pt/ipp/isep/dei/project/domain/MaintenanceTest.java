@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.project.domain;
 
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-
 
 import java.util.Date;
 

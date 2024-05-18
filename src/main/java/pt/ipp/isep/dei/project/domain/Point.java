@@ -7,6 +7,7 @@ public class Point {
 
     /**
      * Returns the unique identifier of the point.
+     *
      * @return the identifier of the point
      */
     public String getID() {
@@ -15,6 +16,7 @@ public class Point {
 
     /**
      * Constructs a Point object with the given identifier.
+     *
      * @param nome the unique identifier of the point
      */
     public Point(String nome) {

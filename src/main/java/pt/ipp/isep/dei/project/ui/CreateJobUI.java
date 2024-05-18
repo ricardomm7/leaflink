@@ -4,10 +4,6 @@ import pt.ipp.isep.dei.project.application.controller.CreateJobController;
 
 import java.util.Scanner;
 
-import pt.ipp.isep.dei.project.application.controller.CreateJobController;
-
-import java.util.Scanner;
-
 /**
  * The CreateJobUI class provides a user interface for creating a new job.
  */

@@ -47,7 +47,7 @@ public class RegisterCollaboratorUI implements Runnable {
         for (int i = 0; i < documentTypes.length; i++) {
             System.out.println((i + 1) + ". " + documentTypes[i]);
         }
-        DocumentType documentType = documentTypes[sc.nextInt()-1];
+        DocumentType documentType = documentTypes[sc.nextInt() - 1];
         sc.nextLine();
 
         System.out.println("Enter collaborator's identification number:");

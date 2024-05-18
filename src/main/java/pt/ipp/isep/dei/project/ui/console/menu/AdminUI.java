@@ -29,7 +29,6 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Run Tests for time about Kruskal", new RunTestsUI()));
 
 
-
         int option = 0;
         do {
             option = Utils.showAndSelectIndex(options, "\n\n--- ADMIN MENU -------------------------");

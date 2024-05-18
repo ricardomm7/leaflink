@@ -86,6 +86,7 @@ public class ExternalCSV {
 
     /**
      * Cpunts the total number of lines in the CSv file
+     *
      * @return the number of lines in the CSv file
      */
     public int countLines() {
