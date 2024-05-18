@@ -16,7 +16,7 @@ public class Collaborator {
     private int contactMobile;
     private int taxpayerNumber;
     private String email;
-    private String documentType;
+    private DocumentType documentType;
     private String identificationNumber;
     private Date admissionDate;
     private Job job;
@@ -39,14 +39,14 @@ public class Collaborator {
      * @param admissionDate        The admission date of the collaborator.
      * @param job                  The job of the collaborator.
      */
-    public Collaborator(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
+    public Collaborator(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, Date admissionDate, Job job) {
         setName(name);
         setBirthdate(birthdate);
         setContactMobile(contactMobile);
         setTaxpayerNumber(taxpayerNumber);
         setEmail(email);
         setAddress(address, city, zipCode);
-        setDocumentType(documentType);
+        this.documentType = documentType;
         setIdentificationNumber(identificationNumber);
         setAdmissionDate(admissionDate);
         setJob(job);
@@ -106,14 +106,6 @@ public class Collaborator {
         }
     }
 
-    /**
-     * Sets the document type of the collaborator.
-     *
-     * @param documentType the document type of the collaborator
-     */
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
-    }
 
     /**
      * Sets the email address of the collaborator.
@@ -159,11 +151,21 @@ public class Collaborator {
      * @throws IllegalArgumentException if the provided name is empty or consists of only whitespace
      */
     public void setName(String name) {
-        if (verifyFilled(name)) {
+        if (verifyFilled(name) && !containsSpecialCharacters(name)) {
             this.name = name;
         } else {
             throw new IllegalArgumentException("The given name is invalid!");
         }
+    }
+
+    /**
+     * Verifies if a string has special characters.
+     *
+     * @param str the analysed string
+     * @return true if the string has special characters
+     */
+    private boolean containsSpecialCharacters(String str) {
+        return !str.matches("[a-zA-Z0-9 ]*");
     }
 
     /**

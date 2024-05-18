@@ -52,7 +52,6 @@ class MaintenanceRepositoryTest {
         vehicleList.add(vehicle2);
         maintenanceRepository.createMaintenance("ABC123", new Date(), 10000);
         maintenanceRepository.createMaintenance("DEF456", new Date(), 12000);
-        System.out.println(maintenanceRepository.createMaintenanceReport(vehicleList));
         String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +
                 "ABC123          Brand1          Model1          16000           5000            10000           21000          \n" +

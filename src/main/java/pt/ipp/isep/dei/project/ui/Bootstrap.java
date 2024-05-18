@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.repository.*;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Bootstrap implements Runnable {
@@ -136,31 +136,31 @@ public class Bootstrap implements Runnable {
         // Example 1
         collaboratorRepository.create("Bob Smith", new Date(1990, 1, 22), 987654321,
                 123456789, "bob.smith@example.com", "5678 Oak Street", "6789-100",
-                "Shelbyville", "ID Card", "CD2345678", new Date(2021, 5, 15),
+                "Shelbyville", DocumentType.CITIZEN_CARD, "CD2345678", new Date(2021, 5, 15),
                 jobRepository.getJobList().get(0));
 
         // Example 2
         collaboratorRepository.create("Alice Johnson", new Date(1985, 1, 15), 123456789,
                 987654321, "alice.johnson@example.com", "1234 Elm Street", "1234-125",
-                "Springfield", "Passport", "AB1234567", new Date(2020, 5, 1),
+                "Springfield", DocumentType.PASSPORT, "AB1234567", new Date(2020, 5, 1),
                 jobRepository.getJobList().get(1));
 
         // Example 3
         collaboratorRepository.create("Charlie Brown", new Date(1992, 1, 30), 234567891,
                 876543219, "charlie.brown@example.com", "3456 Maple Street", "2345-226",
-                "Centerville", "Driver License", "EF3456789", new Date(2022, 5, 20),
+                "Centerville", DocumentType.CITIZEN_CARD, "EF3456789", new Date(2022, 5, 20),
                 jobRepository.getJobList().get(2));
 
         // Example 4
         collaboratorRepository.create("Diana Prince", new Date(1988, 1, 7), 345678912,
                 765432198, "diana.prince@example.com", "4567 Birch Street", "3456-987",
-                "Metro City", "ID Card", "GH4567890", new Date(2019, 5, 25),
+                "Metro City", DocumentType.CITIZEN_CARD, "GH4567890", new Date(2019, 5, 25),
                 jobRepository.getJobList().get(3));
 
         // Example 5
         collaboratorRepository.create("Edward Scissorhands", new Date(1993, 1, 14), 456789123,
                 654321987, "edward.scissorhands@example.com", "5678 Pine Street", "4567-908",
-                "Suburbia", "ID Card", "IJ5678901", new Date(2023, 1, 15),
+                "Suburbia", DocumentType.IDENTITY_CARD, "IJ5678901", new Date(2023, 1, 15),
                 jobRepository.getJobList().get(4));
     }
 

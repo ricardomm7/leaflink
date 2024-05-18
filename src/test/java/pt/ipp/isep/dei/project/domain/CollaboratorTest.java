@@ -23,7 +23,7 @@ class CollaboratorTest {
         String address = "123 Main St";
         String zipCode = "1234-985";
         String city = "SomeCity";
-        String documentType = "ID";
+        DocumentType documentType = DocumentType.IDENTITY_CARD;
         String identificationNumber = "123ABC";
         Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
@@ -34,6 +34,11 @@ class CollaboratorTest {
     public void testSetName_ValidName() {
         collaborator.setName("Jane Doe");
         assertEquals("Jane Doe", collaborator.getName());
+    }
+
+    @Test
+    public void testSetName_InvalidCharacters() {
+        assertThrows(IllegalArgumentException.class, () -> collaborator.setName("###Truma$&"));
     }
 
     @Test

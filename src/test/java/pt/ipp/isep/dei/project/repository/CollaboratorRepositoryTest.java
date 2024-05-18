@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.repository;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
 
@@ -26,7 +27,7 @@ public class CollaboratorRepositoryTest {
         String address = "123 Main St";
         String zipCode = "1234-845";
         String city = "SomeCity";
-        String documentType = "ID";
+        DocumentType documentType = DocumentType.CITIZEN_CARD;
         String identificationNumber = "123ABC";
         Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
@@ -58,7 +59,7 @@ public class CollaboratorRepositoryTest {
         String address = "123 Main St";
         String zipCode = "1234-845";
         String city = "SomeCity";
-        String documentType = "ID";
+        DocumentType documentType = DocumentType.CITIZEN_CARD;
         String identificationNumber = "123ABC";
         Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");

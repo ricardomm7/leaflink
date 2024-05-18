@@ -25,14 +25,16 @@ class JobRepositoryTest {
     void testCreateDuplicateJob() {
         JobRepository jobRepository = new JobRepository();
         String title = "Software Developer";
+
+        // Criar o trabalho pela primeira vez
         jobRepository.createJob(title);
 
-        // Trying to add duplicate job
-        jobRepository.createJob(title);
+        // Tentar criar o mesmo trabalho novamente deve lançar uma exceção
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            jobRepository.createJob(title);
+        });
 
-        List<Job> jobList = jobRepository.getJobList();
-
-        assertEquals(1, jobList.size());
+        assertNotNull(thrown);
     }
 
     @Test

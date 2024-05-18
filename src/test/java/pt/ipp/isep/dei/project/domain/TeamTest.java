@@ -25,8 +25,8 @@ class TeamTest {
     @Test
     void getCollaborators() {
         List<Collaborator> collaborators = new ArrayList<>();
-        Collaborator collaborator1 = new Collaborator("John Doe", new Date(1990, 2, 1), 123456789, 123456789, "john.doe@example.com", "123 Main St", "1234-985", "SomeCity", "ID", "123ABC", new Date(2020, 2, 1), new Job("Software Engineer"));
-        Collaborator collaborator2 = new Collaborator("Jane Doe", new Date(1995, 8, 20), 987654321, 987654321, "jane.doe@example.com", "456 Oak St", "5432-100", "AnotherCity", "Passport", "XYZ789", new Date(2019, 6, 1), new Job("Designer"));
+        Collaborator collaborator1 = new Collaborator("John Doe", new Date(1990, 2, 1), 123456789, 123456789, "john.doe@example.com", "123 Main St", "1234-985", "SomeCity", DocumentType.CITIZEN_CARD, "123ABC", new Date(2020, 2, 1), new Job("Software Engineer"));
+        Collaborator collaborator2 = new Collaborator("Jane Doe", new Date(1995, 8, 20), 987654321, 987654321, "jane.doe@example.com", "456 Oak St", "5432-100", "AnotherCity", DocumentType.PASSPORT, "XYZ789", new Date(2019, 6, 1), new Job("Designer"));
         collaborators.add(collaborator1);
         collaborators.add(collaborator2);
 

@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
+import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 
 import java.util.Date;
@@ -41,8 +42,13 @@ public class RegisterCollaboratorUI implements Runnable {
         System.out.println("Enter collaborator's city:");
         String city = sc.nextLine();
 
-        System.out.println("Enter collaborator's document type:");
-        String documentType = sc.nextLine();
+        DocumentType[] documentTypes = DocumentType.values();
+        System.out.println("Select a Document Type:");
+        for (int i = 0; i < documentTypes.length; i++) {
+            System.out.println((i + 1) + ". " + documentTypes[i]);
+        }
+        DocumentType documentType = documentTypes[sc.nextInt()];
+        sc.nextLine();
 
         System.out.println("Enter collaborator's identification number:");
         String identificationNumber = sc.nextLine();

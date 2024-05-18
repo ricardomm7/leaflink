@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
 
@@ -37,7 +38,7 @@ public class CollaboratorRepository {
      * @param admissionDate        the date of admission of the collaborator
      * @param job                  the job of the collaborator
      */
-    public void create(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, String documentType, String identificationNumber, Date admissionDate, Job job) {
+    public void create(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, Date admissionDate, Job job) {
         Collaborator c = new Collaborator(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
         if (checkForDuplicates(c)) {
             addCollaborator(c);

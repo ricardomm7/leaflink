@@ -28,6 +28,8 @@ public class SkillRepository {
         Skill skill = new Skill(designation);
         if (checkForDuplicates(skill)) {
             addSkill(skill);
+        } else {
+            throw new IllegalArgumentException("There is already a skill with that name.");
         }
     }
 

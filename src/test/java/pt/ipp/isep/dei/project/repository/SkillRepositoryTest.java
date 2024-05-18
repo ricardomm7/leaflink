@@ -4,6 +4,8 @@ import org.junit.Test;
 import pt.ipp.isep.dei.project.domain.Skill;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.List;
 
 public class SkillRepositoryTest {
@@ -26,10 +28,8 @@ public class SkillRepositoryTest {
         String designation = "Programming";
 
         repository.createSkill(designation);
-        repository.createSkill(designation); // Attempt to create duplicate
-        List<Skill> skillList = repository.getSkillList();
 
-        assertEquals(1, skillList.size()); // Only one skill should be added
+        assertThrows(IllegalArgumentException.class, () -> repository.createSkill("Programming"));
     }
 
     @Test
