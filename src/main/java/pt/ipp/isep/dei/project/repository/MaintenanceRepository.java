@@ -67,31 +67,71 @@ public class MaintenanceRepository {
         reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
                 "Plate", "Brand", "Model", "Curr.Kms", "Freq", "Last", "Next"));
 
-        for (Maintenance maintenance : maintenanceList) {
-            for (Vehicle vehicle : vehicleList) {
-                if (vehicle != null && maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
-                    if (vehicle.getCurrentKm() - maintenance.getKm() >= vehicle.getMaintenanceFrequency()) {
+        for (Vehicle vehicle : vehicleList) {
+            if (vehicle != null) {
+                Maintenance latestMaintenance = getLatestMaintenance(vehicle, maintenanceList);
+
+                if (latestMaintenance != null) {
+                    int lastKm = latestMaintenance.getKm();
+                    int currKm = vehicle.getCurrentKm();
+                    int freq = vehicle.getMaintenanceFrequency();
+                    int nextKm = lastKm + freq;
+
+                    if (currKm >= nextKm * 0.95) {
                         hasValidEntry = true;
                         String plate = vehicle.getVehiclePlate();
                         String brand = vehicle.getBrand();
                         String model = vehicle.getModel();
-                        int curr_km = vehicle.getCurrentKm();
-                        int freq = vehicle.getMaintenanceFrequency();
-                        int last = maintenance.getKm();
-                        int next = last + freq;
+
                         reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
-                                plate, brand, model, curr_km, freq, last, next));
+                                plate, brand, model, currKm, freq, lastKm, nextKm));
                     }
                 }
             }
-            reportBuilder.append("\n");
         }
 
         if (hasValidEntry) {
             return reportBuilder.toString();
         }
-        return null;
 
+        return null;
+    }
+
+    private static Maintenance getLatestMaintenance(Vehicle vehicle, List<Maintenance> maintenanceList) {
+        Maintenance latestMaintenance = null;
+
+        // Find the latest maintenance for the vehicle
+        for (Maintenance maintenance : maintenanceList) {
+            if (maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
+                if (latestMaintenance == null || maintenance.getDate().isAfter(latestMaintenance.getDate())) {
+                    latestMaintenance = maintenance;
+                }
+            }
+        }
+        return latestMaintenance;
+    }
+
+
+    /**
+     * Get the last maintenance of a vehicle
+     *
+     * @param vehicle
+     * @param maintenanceList
+     * @return
+     */
+    private static Maintenance getMaintenance(Vehicle vehicle, List<Maintenance> maintenanceList) {
+        Maintenance latestMaintenance = null;
+
+        // Find the latest maintenance for the vehicle
+        for (Maintenance maintenance : maintenanceList) {
+            if (maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
+                if (latestMaintenance == null || maintenance.getDate().isAfter(latestMaintenance.getDate())) {
+                    latestMaintenance = maintenance;
+                }
+            }
+        }
+        return latestMaintenance;
     }
 
 }
+

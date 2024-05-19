@@ -47,6 +47,7 @@ public class RegisterVehicleUI implements Runnable {
                 System.out.println("Enter registration date (DD/MM/YYYY):");
                 String registrationDateStr = scanner.nextLine();
                 LocalDate registrationDate = parseDate(registrationDateStr);
+                validateDate(registrationDate);
 
                 System.out.println("Enter vehicle plate:");
                 displayVehiclePlateFormat(registrationDate.getYear());
@@ -68,6 +69,7 @@ public class RegisterVehicleUI implements Runnable {
                 System.out.println("Enter acquisition date (DD/MM/YYYY):");
                 String acquisitionDateStr = scanner.nextLine();
                 LocalDate acquisitionDate = parseDate(acquisitionDateStr);
+                validateDate(acquisitionDate);
                 validateAcquisitionDate(registrationDate, acquisitionDate);
 
                 System.out.println("Enter maintenance frequency (in km):");
@@ -76,7 +78,7 @@ public class RegisterVehicleUI implements Runnable {
 
                 // Confirm Vehicle data
                 System.out.println("\nConfirms Vehicle data:\n");
-                System.out.println("Vin: " + vin + "\nBrand: " + brand + "\nModel: " + model + "\nVehicle Plate: " + vehiclePlate + "\nTare Weight: "
+                System.out.println("Vin: " + vin + "\nBrand: " + brand + "\nModel: " + model + "\nVehicle Type: " + type.name() + "\nVehicle Plate: " + vehiclePlate + "\nTare Weight: "
                         + tareWeight + "\nGross Weight: " + grossWeight + "\nCurrent Kilometers: " + currentKm + "\nRegistration date: " + registrationDateStr + "\nAcquisition date: "
                         + acquisitionDateStr + "\nMaintenance Frequency: " + maintenanceFrequency);
 
@@ -211,6 +213,18 @@ public class RegisterVehicleUI implements Runnable {
     private void validateAcquisitionDate(LocalDate registrationDate, LocalDate acquisitionDate) {
         if (acquisitionDate.isBefore(registrationDate)) {
             throw new InvalidDateException("Acquisition date must be after registration date.");
+        }
+
+    }
+
+    /**
+     * Validates the date parameter. It must exist.
+     * @param date
+     */
+    private void validateDate(LocalDate date) {
+        if (date.isAfter(LocalDate.now())){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            throw new InvalidDateException("Date must be before " + LocalDate.now().format(formatter));
         }
     }
 
