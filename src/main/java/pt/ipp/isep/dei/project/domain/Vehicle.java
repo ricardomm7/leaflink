@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.domain;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * The Vehicle class represents the object Vehicle.
@@ -306,7 +305,7 @@ public class Vehicle {
             if (!vehiclePlate.matches("^\\d{2}[a-zA-Z]{2}\\d{2}$")) {
                 return false;
             }
-        } else if (year < 2005) {
+        } else {
             if (!vehiclePlate.matches("^\\d{4}[a-zA-Z]{2}$")) {
                 return false;
             }
@@ -315,11 +314,7 @@ public class Vehicle {
             return false;
         }
 
-        if (!registrationDate.isBefore(acquisitionDate)) {
-            return false;
-
-        }
-        return true;
+        return registrationDate.isBefore(acquisitionDate);
     }
 
 

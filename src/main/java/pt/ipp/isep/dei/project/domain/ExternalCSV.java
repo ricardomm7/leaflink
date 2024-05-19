@@ -100,7 +100,7 @@ public class ExternalCSV {
             }
         } catch (IOException e) {
             // Handles IOException if unable to read the CSv file
-            e.printStackTrace();
+            System.out.println("There was an error counting lines: " + e.getMessage());
         }
 
         return lineCount;

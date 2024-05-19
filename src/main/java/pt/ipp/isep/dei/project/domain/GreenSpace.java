@@ -64,4 +64,39 @@ public class GreenSpace {
     public String getName() {
         return name;
     }
+    /**
+     * Retrieves the address of the green space.
+     *
+     * @return the address of the green space
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * Retrieves the type of the green space.
+     *
+     * @return the type of the green space
+     */
+    public GreenSpaceType getType() {
+        return type;
+    }
+
+    /**
+     * Retrieves the area of the green space in square meters.
+     *
+     * @return the area of the green space
+     */
+    public double getArea() {
+        return area;
+    }
+
+    /**
+     * Retrieves the manager of the green space.
+     *
+     * @return the user session of the manager
+     */
+    public UserSession getManager() {
+        return manager;
+    }
 }

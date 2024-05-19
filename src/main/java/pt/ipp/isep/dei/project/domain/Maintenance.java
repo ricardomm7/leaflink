@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.domain;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * The Maintenance class represents the object maintenance (Check-up).

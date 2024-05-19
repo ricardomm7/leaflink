@@ -304,9 +304,9 @@ public class Collaborator {
     }
 
     /**
-     * Assigns skills to the collaborator
+     * Assigns skills to the collaborator.
      *
-     * @param selectedSkills the skills to be assigned
+     * @param selectedSkills the skills to be assigned.
      */
     public void assignSkills(Skill[] selectedSkills) {
         for (Skill skill : selectedSkills) {
@@ -317,15 +317,83 @@ public class Collaborator {
     }
 
     /**
-     * retrieves the skills of the collaborator
+     * retrieves the skills of the collaborator.
      *
-     * @return the list of skills of the collaborator
+     * @return the list of skills of the collaborator.
      */
     public List<Skill> getSkills() {
         return new ArrayList<>(skills);
     }
 
+    /**
+     * Retrieves the collaborator's birthdate.
+     *
+     * @return the collaborator birthdate.
+     */
     public Date getBirthdate() {
         return birthdate;
     }
+    /**
+     * Gets the address of the person.
+     *
+     * @return the address of the person.
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * Gets the admission date of the person.
+     *
+     * @return the admission date of the person.
+     */
+    public Date getAdmissionDate() {
+        return admissionDate;
+    }
+
+    /**
+     * Gets the document type of the person's identification.
+     *
+     * @return the document type of the person's identification.
+     */
+    public DocumentType getDocumentType() {
+        return documentType;
+    }
+
+    /**
+     * Gets the mobile contact number of the person.
+     *
+     * @return the mobile contact number of the person.
+     */
+    public int getContactMobile() {
+        return contactMobile;
+    }
+
+    /**
+     * Gets the job of the person.
+     *
+     * @return the job of the person.
+     */
+    public Job getJob() {
+        return job;
+    }
+
+    /**
+     * Gets the email address of the person.
+     *
+     * @return the email address of the person.
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Gets the identification number of the person.
+     *
+     * @return the identification number of the person.
+     */
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
 }
