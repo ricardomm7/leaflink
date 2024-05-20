@@ -64,4 +64,8 @@ public class GreenSpaceRepository {
         }
         return true;
     }
+
+    public List<GreenSpace> getGreenSpaceList() {
+        return greenSpaceList;
+    }
 }
