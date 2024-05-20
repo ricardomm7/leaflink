@@ -12,13 +12,27 @@ participant ":System" as System
 
 activate GSM
 
-    GSM -> System : Request to add a new entry in the Agenda
+    GSM -> System : Request to add a new task in the Agenda
     activate System
 
-        System --> GSM : Provide form for new agenda entry
+        System --> GSM : shows the To-do List and requests to select a task
     deactivate System
 
-    GSM -> System : submit form with entry details
+    GSM -> System : selects a task
+
+    activate System
+
+        System --> GSM : shows the list fo Green Spaces and asks to select one
+    deactivate System
+
+    GSM -> System : selects a Green Space
+
+    activate System
+
+        System --> GSM : requests a starting date for the selected task
+    deactivate System
+
+    GSM -> System : types date
 
     activate System
 
@@ -28,7 +42,7 @@ activate GSM
     GSM -> System : confirms data
     activate System
 
-        System --> GSM :  displays success message (Entry added successfully)
+        System --> GSM : displays success message (Task added to the Agenda successfully)
     deactivate System
 
 @enduml

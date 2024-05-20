@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-- 
+- All dates used (acquisition date and registration date) are in day/month/year format.

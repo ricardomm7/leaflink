@@ -5,14 +5,14 @@
 
 ### 1.1. User Story Description
 
-As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manage tasks related to green spaces effectively.
+As a Green Space Manager (GSM), I want to add a new entry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->  The person who adds the entries in the Agenda is the GSM, and the entry is saved in the system. 
->  The new entry must have an associated green space managed by the GSM.
+> The person who adds the entries in the Agenda is the GSM, and the entry is saved in the system. 
+> The new entry must have an associated green space managed by the GSM.
 > The new entry must already exist in the To-Do list.
  
 **From the client clarifications:**
@@ -25,17 +25,17 @@ As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manag
 >
 > **Answer:** The starting date for the task. Later the GSM will be able to add the Team and vehicles (if required).
 > 
-> **Question:**
+> **Question:** We know that an Agenda entry has a target date, but is this target date supposed to be inputted upon transferring a task from the to-do list to the agenda, or is it supposed to be inputted upon creating the task in the to-do list?
 >
-> **Answer:**
+> **Answer:** To-do list entries doesn't have dates!
 > 
-> **Question:**
+> **Question:** Can I add an entry that has a time period that already has an existing entry in the Agenda?
 >
-> **Answer:**
+> **Answer:** Yes, because there are many parks to manage and different tasks can be executed at same time in the same park.
 > 
-> **Question:**
+> **Question:** When we are registering an entry to the agenda, are the three inputs (selecting an existing task from the to-do list, starting date, and finishing date) sufficient?
 >
-> **Answer:**
+> **Answer:** The starting date will be enough because the task already has the predicted duration.
 
 
 
@@ -54,13 +54,11 @@ As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manag
 **Input Data:**
 
 * Typed data:
-    * Unique Entry ID
-    * Title/Description of the entry
-    * Green Space ID (to link the entry to a green space managed by the GSM)
-    * Date and Time of the entry (Starting date)
+    * Starting date of the task
 	
 * Selected data:
     * Green Space (from a list of green spaces managed by the GSM)
+    * Task on the To-Do List
 
 **Output Data:**
 
@@ -78,4 +76,3 @@ As a Green Space Manager (GSM), I want to add a new entry in the Agenda to manag
 
 * Implement appropriate permissions and access controls to restrict the ability to add agenda entries to authorized GSM users only.
 * Ensure that the list of green spaces is maintained and updated to reflect current management responsibilities.
-* Provide feedback and error messages to GSM in case of any issues during the entry process.
