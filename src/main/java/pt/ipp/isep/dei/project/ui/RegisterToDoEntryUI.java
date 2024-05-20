@@ -1,13 +1,9 @@
 package pt.ipp.isep.dei.project.ui;
 
-import org.w3c.dom.ls.LSOutput;
-import pt.ipp.isep.dei.project.Dto.GreenSpaceDto;
-import pt.ipp.isep.dei.project.application.controller.RegisterGreenSpaceController;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
 import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
-import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 
-import java.io.Console;
 import java.util.List;
 import java.util.Scanner;
 

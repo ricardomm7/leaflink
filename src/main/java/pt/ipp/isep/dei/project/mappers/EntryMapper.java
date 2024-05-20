@@ -1,7 +1,7 @@
-package pt.ipp.isep.dei.project.Mappers;
+package pt.ipp.isep.dei.project.mappers;
 
-import pt.ipp.isep.dei.project.Dto.EntryDto;
-import pt.ipp.isep.dei.project.Dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.dto.EntryDto;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.domain.Entry;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
 

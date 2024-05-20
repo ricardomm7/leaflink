@@ -4,7 +4,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+''title System Sequence Diagram (SSD) - US006
 
 autonumber
 
@@ -88,7 +88,7 @@ activate GSM
         deactivate CTRL
         activate EntryRep
 
-        EntryRep -> Entry : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
+        EntryRep -> Entry** : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
         deactivate EntryRep
         activate Entry
 
@@ -109,6 +109,7 @@ activate GSM
         activate EntryRep
 
         EntryRep --> CTRL : Entry
+        deactivate EntryRep
         activate CTRL
 
         CTRL --> UI : Entry

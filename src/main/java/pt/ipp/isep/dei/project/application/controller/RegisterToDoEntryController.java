@@ -1,12 +1,11 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.Dto.GreenSpaceDto;
-import pt.ipp.isep.dei.project.Mappers.GreenSpaceMapper;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
-import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 

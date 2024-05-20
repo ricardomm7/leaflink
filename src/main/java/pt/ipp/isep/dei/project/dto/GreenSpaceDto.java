@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.project.Dto;
+package pt.ipp.isep.dei.project.dto;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
