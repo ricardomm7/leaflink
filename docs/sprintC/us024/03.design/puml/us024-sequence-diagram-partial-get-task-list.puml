@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":PostponeAgendaEntryController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:TaskRepository" as TaskRepo
+
+autonumber 2
+
+activate CTRL
+
+ -> CTRL: submit vehicle data
+
+    group Get Task List
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+            CTRL -> TaskRepo : getTaskRepository()
+            activate TaskRepo
+
+                TaskRepo --> CTRL : taskRepository
+            deactivate TaskRepo
+
+            CTRL -> TaskRepo :getTaskList()
+            activate TaskRepo
+
+            TaskRepo --> CTRL : taskList
+            deactivate TaskRepo
+    end
+deactivate CTRL
+
+
+@enduml

@@ -22,8 +22,8 @@ class CollaboratorTest {
         String address = "123 Main St";
         String zipCode = "1234-985";
         String city = "SomeCity";
-        DocumentType documentType = DocumentType.IDENTITY_CARD;
-        String identificationNumber = "123ABC";
+        DocumentType documentType = DocumentType.PASSPORT;
+        String identificationNumber = "BSD987890";
         Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
         collaborator = new Collaborator(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);

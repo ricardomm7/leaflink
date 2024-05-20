@@ -27,8 +27,8 @@ public class CollaboratorRepositoryTest {
         String address = "123 Main St";
         String zipCode = "1234-845";
         String city = "SomeCity";
-        DocumentType documentType = DocumentType.CITIZEN_CARD;
-        String identificationNumber = "123ABC";
+        DocumentType documentType = DocumentType.PASSPORT;
+        String identificationNumber = "123ABC666";
         Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
 
@@ -59,8 +59,8 @@ public class CollaboratorRepositoryTest {
         String address = "123 Main St";
         String zipCode = "1234-845";
         String city = "SomeCity";
-        DocumentType documentType = DocumentType.CITIZEN_CARD;
-        String identificationNumber = "123ABC";
+        DocumentType documentType = DocumentType.PASSPORT;
+        String identificationNumber = "123ABC999";
         Date admissionDate = new Date(2020, 1, 1);
         Job job = new Job("Software Engineer");
 
