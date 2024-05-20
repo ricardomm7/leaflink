@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+participant ":CancelAgendaTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:TaskRepository" as TaskRepo
+
+autonumber 2
+
+activate CTRL
+
+ -> CTRL: create
+
+    group Get Task List
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+            CTRL -> TaskRepo : getTaskRepository()
+            activate TaskRepo
+
+                TaskRepo --> CTRL : taskRepository
+            deactivate TaskRepo
+
+            CTRL -> TaskRepo :getTaskList()
+            activate TaskRepo
+
+            TaskRepo --> CTRL : taskList
+            deactivate TaskRepo
+    end
+
+ <-- CTRL: task List
+deactivate CTRL
+
+
+@enduml

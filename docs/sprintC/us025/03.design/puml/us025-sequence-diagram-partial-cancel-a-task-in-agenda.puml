@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":Agenda" as Agenda
+
+autonumber 13
+
+-> Agenda : cancelTask(task)
+
+activate Agenda
+    group Cancel a Task in Agenda
+
+      Agenda -> Agenda : updateTaskStatus(task, CANCELLED)
+
+    end
+
+<-- Agenda
+deactivate Agenda
+
+
+@enduml

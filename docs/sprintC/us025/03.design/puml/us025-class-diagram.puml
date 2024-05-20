@@ -1,0 +1,69 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class CancelAgendaEntryUI {
+}
+
+class CancelAgendaEntryController {
+    - agendaRepository : AgendaRepository
+    - teamRepository : TeamRepository
+    + cancelAgendaEntry(agendaEntry : AgendaEntry, reason : String) : void
+    + getAgendaList() : List<AgendaEntry>
+    + getTeamForEntry(agendaEntry : AgendaEntry) : Team
+}
+
+class Repositories {
+    - instance : Repositories
+    - Repositories()
+    - agendaRepository : AgendaRepository
+    - teamRepository : TeamRepository
+    + getInstance() : Repositories
+    + getAgendaRepository() : AgendaRepository
+    + getTeamRepository() : TeamRepository
+}
+
+class AgendaRepository {
+    - agendaEntries : List<AgendaEntry>
+    + createAgendaEntry(status : String, startDate : Date) : AgendaEntry
+    + cancelAgendaEntry(agendaEntry : AgendaEntry, reason : String) : void
+    + checkForDuplicates() : void
+    + addAgendaEntry(agendaEntry : AgendaEntry) : void
+    + getAgendaList() : List<AgendaEntry>
+}
+
+class TeamRepository {
+    - teamList : List<Team>
+    + createTeam(name : String, members : List<Collaborator>) : Team
+    + checkForDuplicates() : void
+    + addTeam(team : Team) : void
+    + getTeamForEntry(agendaEntry : AgendaEntry) : Team
+    + notifyCancellation(agendaEntry : AgendaEntry) : void
+}
+
+class AgendaEntry {
+    - agendaEntryID : String
+    - status : String
+    - startDate : Date
+    - reasonForCancellation : String
+}
+
+class Team {
+    - teamID : String
+    - name : String
+    - members : List<Collaborator>
+}
+
+CancelAgendaEntryUI ..> CancelAgendaEntryController
+CancelAgendaEntryController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> "1" AgendaRepository : agendaRepository
+Repositories --> "1" TeamRepository : teamRepository
+CancelAgendaEntryController ..> AgendaRepository : agendaRepository
+CancelAgendaEntryController ..> TeamRepository : teamRepository
+AgendaRepository --> "*" AgendaEntry : agendaEntries
+TeamRepository --> "*" Team : teamList
+
+
+@enduml

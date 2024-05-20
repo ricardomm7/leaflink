@@ -1,0 +1,81 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+participant "GSM" as GSM
+participant ":CancelAgendaTaskUI" as UI
+participant ":CancelAgendaTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:TaskRepository" as TaskRepo
+participant ":Agenda" as Agenda
+participant ":TeamRepository" as TeamRepo
+participant ":NotificationService" as NotificationService
+
+activate GSM
+    GSM -> UI : requests to cancel an agenda task
+    activate UI
+
+       UI -> CTRL : create
+       deactivate UI
+       activate CTRL
+
+       ref over CTRL
+
+          Get Task List
+
+       end ref
+
+           CTRL --> UI : task List
+       deactivate CTRL
+       activate UI
+
+        UI -> GSM : shows the list of agenda task and requests to select
+    deactivate UI
+
+    GSM -> UI : selects an agenda task
+    activate UI
+
+        UI -> CTRL : submit cancellation request
+        deactivate UI
+        activate CTRL
+
+            CTRL -> Agenda : cancelTask(task)
+            deactivate CTRL
+            activate Agenda
+
+        ref over Agenda
+            Cancel a Task in Agenda
+
+        end ref
+                Agenda --> CTRL :
+            deactivate Agenda
+            activate CTRL
+
+            CTRL -> TeamRepo : notifyTeam(task)
+            deactivate CTRL
+            activate TeamRepo
+
+                TeamRepo -> NotificationService : sendNotification(team)
+                deactivate TeamRepo
+                activate NotificationService
+
+                    NotificationService --> TeamRepo : success
+                deactivate NotificationService
+                activate TeamRepo
+
+            TeamRepo --> CTRL : success
+            deactivate TeamRepo
+            activate CTRL
+
+            CTRL --> UI : success
+        deactivate CTRL
+        activate UI
+
+        UI --> GSM : displays success message (Entry cancelled successfully)
+    deactivate UI
+@enduml

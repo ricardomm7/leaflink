@@ -5,7 +5,8 @@
 
 ### 1.1. User Story Description
 
-As a Green Space Manager (GSM), I want to cancel an entry in the Agenda to manage and update task statuses effectively.
+As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
+
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
@@ -15,37 +16,31 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda to manag
 
 **From the client clarifications:**
 
-> **Question:** To register a vehicle is necessary all attributes ?
+> **Question:** When a task is cancelled, is it possible to put it back on the agenda again later?
 > 
-> **Answer:** Yes. To register a vehicle in the system, is request every attribute, in other case, the system should reject.
+> **Answer:** Yes.
 
-> **Question:** Should the application identify a registered vehicle by a serial number or other attribute?
+> **Question:** When we cancel a task, do we move it again to the To-Do List?
 >
-> **Answer:** By plate id
+> **Answer:** No.
 
-> **Question:** Should the application a group the vehicles by their brand, serial number or other attribute?
+> **Question:** As far as I understand, when a GSM wants to cancel a task or a Collaborator wants to record the completion of a task, the task just changes its status in the Agenda to "Canceled" or "Done", respectively. Correct?
 >
-> **Answer:** No requirements were set concerning groups of vehicles
+> **Answer:** Yes
 
-> **Question:** If the Fm inserts the same vehicle by mistake, should it inform the user of the mistake and give him the option to add another vehicle?
+> **Question:** Does the task associated with the Agenda entry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
 >
-> **Answer:** Duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates
+> **Answer:** I suppose when a task goes to the Agenda, it leaves the To-Do list but maybe a different flow could be considered.
 
-> **Question:** When a vehicle is registered, are there specific requirements for accepting the brand? For example, does the system need to check if the brand is on a predetermined list? Does this also apply to the model or any other characteristics?
+> **Question:**
 >
-> **Answer:** No. One can consider a list os brands and a list of models previously inserted in the system. No need to go through validations.
-
-> **Question:** Can a fm register no vehicles or does he have to register at least one?
-> 
-> **Answer:** The VFM is a role or system user profile that has the rights to perform some system actions (like the ones described by the US06, US07 and US08). In theory If there is no need to register a vehicle, no vehicles will be registered but that would be rather odd.
-
-
+> **Answer:**
 
 ### 1.3. Acceptance Criteria
 
+* **AC1:** The entry must exist in the Agenda
 * **AC1:** A canceled task should not be deleted but rather change its state to "canceled."
 * **AC2:** The system should notify all team members assigned to the task about the cancellation.
-* **AC3:** The reason for cancellation must be recorded.
 
 ### 1.4. Found out Dependencies
 
@@ -57,11 +52,10 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda to manag
 **Input Data:**
 
 * Typed data:
-    * Unique Entry ID
-    * Reason for cancellation
+    * None
 	
 * Selected data:
-    * None
+    * Task on the Agenda
 
 **Output Data:**
 
@@ -79,4 +73,3 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda to manag
 ### 1.7 Other Relevant Remarks
 
 * Implement appropriate permissions and access controls to restrict the ability to cancel agenda entries to authorized GSM users only.
-* Provide clear feedback and error messages to GSM in case of any issues during the cancellation process.

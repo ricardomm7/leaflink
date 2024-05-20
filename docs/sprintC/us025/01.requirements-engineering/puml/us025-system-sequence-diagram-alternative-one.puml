@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+title System Sequence Diagram (SSD) - US024
 
 autonumber
 
@@ -12,23 +12,23 @@ participant ":System" as System
 
 activate GSM
 
-    GSM -> System : asks to cancel an agenda entry
+    GSM -> System : asks to cancel an agenda task
     activate System
 
-        System --> GSM : provides cancellation form
+        System --> GSM : shows the list of agenda task and requests to select
     deactivate System
 
-    GSM -> System : submits cancellation form with reason
+    GSM -> System : selects an agenda task
 
     activate System
 
-        System --> GSM : validates entry details
+        System --> GSM : shows all data and requests confirmation
     deactivate System
 
     GSM -> System : confirms data
     activate System
 
-        System --> GSM :  displays success message (Vehicle registered successfully)
+        System --> GSM : displays success message (Entry cancelled successfully)
     deactivate System
 
 @enduml
