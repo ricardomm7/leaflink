@@ -43,12 +43,12 @@ public class Collaborator {
         setName(name);
         setBirthdate(birthdate);
         setContactMobile(contactMobile);
-        setTaxpayerNumber(taxpayerNumber);
         setEmail(email);
         setAddress(address, city, zipCode);
         this.documentType = documentType;
         setIdentificationNumber(identificationNumber);
         setAdmissionDate(admissionDate);
+        setTaxpayerNumber(taxpayerNumber);
         setJob(job);
         skills = new ArrayList<>();
     }
@@ -131,7 +131,7 @@ public class Collaborator {
         if (verifyIdentificationNumber(identificationNumber)) {
             this.identificationNumber = identificationNumber;
         } else {
-            throw new IllegalArgumentException("For the given document type (" + this.documentType.toString() + "), the identification number is invalid. Check the user manual for more info");
+            throw new IllegalArgumentException("For the given document type (" + this.documentType.toString() + "), the identification number is invalid. Check the user manual for more info.");
         }
     }
 
