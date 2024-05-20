@@ -1,0 +1,99 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "GSM" as GSM
+participant ":PostponeAgendaTaskUI" as UI
+participant ":PostponeAgendaTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:TaskRepository" as TaskRepo
+participant ":Agenda" as Agenda
+participant ":TeamRepository" as TeamRepo
+participant ":NotificationService" as NotificationService
+
+activate GSM
+
+    GSM -> UI : asks to postpone an agenda task
+    activate UI
+
+        UI -> CTRL : create
+        deactivate UI
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+            CTRL -> TaskRepo : getTaskRepository()
+            activate TaskRepo
+
+                TaskRepo --> CTRL : taskRepository
+            deactivate TaskRepo
+
+            CTRL -> TaskRepo :getTaskList()
+            activate TaskRepo
+
+            TaskRepo --> CTRL : taskList
+            deactivate TaskRepo
+
+            CTRL --> UI : task List
+        deactivate CTRL
+        activate UI
+
+        UI -> GSM : shows the list of agenda task and requests to select
+    deactivate UI
+
+    GSM -> UI : selects an agenda task
+    activate UI
+
+        UI --> GSM : requests new date for the selected task
+    deactivate UI
+
+    GSM -> UI : types new date
+    activate UI
+
+        UI -> CTRL : submit new date
+        deactivate UI
+        activate CTRL
+
+            CTRL -> Agenda : postponeTask(task, newDate)
+            deactivate CTRL
+            activate Agenda
+
+                Agenda -> Agenda : validateNewDate(newDate)
+                Agenda -> Agenda : updateTaskStatus(task, POSTPONED)
+                Agenda -> Agenda : setNewDate(task, newDate)
+
+                Agenda --> CTRL :
+            deactivate Agenda
+            activate CTRL
+
+            CTRL -> TeamRepo : notifyTeam(task, newDate)
+            deactivate CTRL
+            activate TeamRepo
+
+                TeamRepo -> NotificationService : sendNotification(team, newDate)
+                deactivate TeamRepo
+                activate NotificationService
+
+                    NotificationService --> TeamRepo : success
+                deactivate NotificationService
+                activate TeamRepo
+
+            TeamRepo --> CTRL : success
+            deactivate TeamRepo
+            activate CTRL
+
+            CTRL --> UI : success
+        deactivate CTRL
+        activate UI
+
+        UI --> GSM : displays success message (Entry postponed successfully)
+    deactivate UI
+
+@enduml
