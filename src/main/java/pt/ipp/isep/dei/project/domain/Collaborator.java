@@ -142,7 +142,9 @@ public class Collaborator {
      * with the first 9 being digits, the next 2 being letters, and the last being a digit.
      * <p>
      * For the document type {@link DocumentType#PASSPORT}, the identification number must be between 6 and 9 characters long
-     * alphanumeric.
+     * and alphanumeric.
+     * <p>
+     * For the document type {@link DocumentType#IDENTITY_CARD}, the ID number must be exactly 9 digits long.
      * <p>
      * For the document type {@link DocumentType#OTHER_TYPE}, the identification number must consist only of letters
      * and numbers.
@@ -151,51 +153,23 @@ public class Collaborator {
      * @return true if the identification number is valid according to the document type, false otherwise
      */
     private boolean verifyIdentificationNumber(String identificationNumber) {
-        if (identificationNumber == null || containsSpecialCharacters(identificationNumber)) {
+        if (identificationNumber == null || !verifyFilled(identificationNumber) || containsSpecialCharacters(identificationNumber)) {
             return false;
         }
-
         try {
             if (this.documentType == DocumentType.CITIZEN_CARD) {
-                if (identificationNumber.length() != 12) {
-                    return false;
-                }
-                for (int i = 0; i < 9; i++) {
-                    if (!Character.isDigit(identificationNumber.charAt(i))) {
-                        return false;
-                    }
-                }
-                for (int i = 9; i < 11; i++) {
-                    if (!Character.isLetter(identificationNumber.charAt(i))) {
-                        return false;
-                    }
-                }
-                return Character.isDigit(identificationNumber.charAt(11));
+                return DocumentType.CITIZEN_CARD.verifyNumber(identificationNumber);
             } else if (this.documentType == DocumentType.PASSPORT) {
-                int length = identificationNumber.length();
-                if (length < 6 || length > 9) {
-                    return false;
-                }
-                for (char c : identificationNumber.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c)) {
-                        return false;
-                    }
-                }
-                return true;
+                return DocumentType.PASSPORT.verifyNumber(identificationNumber);
+            } else if (this.documentType == DocumentType.IDENTITY_CARD) {
+                return DocumentType.IDENTITY_CARD.verifyNumber(identificationNumber);
             } else {
-                // Default check for OTHER_TYPE and any future types
-                for (char c : identificationNumber.toCharArray()) {
-                    if (!Character.isLetterOrDigit(c)) {
-                        return false;
-                    }
-                }
-                return true;
+                return DocumentType.OTHER_TYPE.verifyNumber(identificationNumber);
             }
         } catch (Exception e) {
             return false;
         }
     }
-
 
     /**
      * Sets the job of the collaborator.

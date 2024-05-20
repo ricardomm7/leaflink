@@ -8,15 +8,57 @@ public enum DocumentType {
         public String toString() {
             return "Citizen Card";
         }
+
+        public boolean verifyNumber(String numb) {
+            if (numb.length() != 12) {
+                return false;
+            }
+            for (int i = 0; i < 9; i++) {
+                if (!Character.isDigit(numb.charAt(i))) {
+                    return false;
+                }
+            }
+            for (int i = 9; i < 11; i++) {
+                if (!Character.isLetter(numb.charAt(i))) {
+                    return false;
+                }
+            }
+            return Character.isDigit(numb.charAt(11));
+        }
     },
     PASSPORT {
         public String toString() {
             return "Passport";
         }
+
+        public boolean verifyNumber(String numb) {
+            int length = numb.length();
+            if (length < 6 || length > 9) {
+                return false;
+            }
+            for (char c : numb.toCharArray()) {
+                if (!Character.isLetterOrDigit(c)) {
+                    return false;
+                }
+            }
+            return true;
+        }
     },
     IDENTITY_CARD {
         public String toString() {
             return "Identity Card";
+        }
+
+        public boolean verifyNumber(String numb) {
+            if (numb == null || numb.length() != 9) {
+                return false;
+            }
+            for (char c : numb.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    return false;
+                }
+            }
+            return true;
         }
     },
     OTHER_TYPE {
@@ -24,5 +66,15 @@ public enum DocumentType {
             return "Other type";
         }
 
-    }
+        public boolean verifyNumber(String numb) {
+            for (char c : numb.toCharArray()) {
+                if (!Character.isLetterOrDigit(c)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    };
+
+    public abstract boolean verifyNumber(String numb);
 }
