@@ -3,58 +3,35 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-skinparam classAttributeIconSize 0
+title Domain Model - US022
+
 left to right direction
 
+skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
+class Agenda {
 
-class GreenSpace {
-    greenSpaceID
-    name
-    area
-    type
 }
 
-class ToDoEntry {
-    entryID
+class Task {
+    title
     description
-    priorityLevel
-    expectedDuration
+    progressStatus
+    urgencyStatus
+    estimatedDate
 }
 
-class AgendaEntry {
-    agendaEntryID
-    status
-    startDate
-    reasonForCancellation
+class GreenSpace{
+    designation
+    area
+    size
 }
 
-class Team {
-    teamID
-    name
-    members
-}
 
-class Vehicle {
-    vehicleID
-    plate
-    brand
-    model
-    type
-    tareWeight
-    grossWeight
-    currentKm
-    registerDate
-    acquisitionDate
-    maintenanceFrequency
-}
+Agenda "1" -- "1..*" Task : has >
 
-GreenSpace "1..*" -- "1..*" AgendaEntry : associated with >
-ToDoEntry "1" -- "1" AgendaEntry : must exist in >
-
-Team "1" -- "1..*" AgendaEntry : assigned to >
-Vehicle "0..*" -- "1..*" AgendaEntry : assigned to >
+Task "*" -- "1" GreenSpace: associated to >
 
 @enduml

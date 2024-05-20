@@ -1,0 +1,62 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class AddAgendaEntryUI {
+}
+
+class AddAgendaEntryController {
+    - agendaRepository : AgendaRepository
+    - toDoRepository : ToDoRepository
+    + addAgendaEntry(toDoEntry : ToDoEntry, greenSpace : GreenSpace) : void
+    + getToDoList() : List<ToDoEntry>
+    + getGreenSpaceList() : List<GreenSpace>
+}
+
+class Repositories {
+    - instance : Repositories
+    - Repositories()
+    - agendaRepository : AgendaRepository
+    - toDoRepository : ToDoRepository
+    + getInstance() : Repositories
+    + getAgendaRepository() : AgendaRepository
+    + getToDoRepository() : ToDoRepository
+}
+
+class ToDoRepository {
+    - toDoList : List<ToDoEntry>
+    + create(description : String, priorityLevel : String, expectedDuration : int) : ToDoEntry
+    + checkForDuplicates() : void
+    + addToDoEntry(toDoEntry : ToDoEntry) : void
+    + getToDoList() : List<ToDoEntry>
+}
+
+class GreenSpaceRepository {
+    - greenSpaceList : List<GreenSpace>
+    + createGreenSpace(name : String, area : int, type : String) : GreenSpace
+    + checkForDuplicates() : void
+    + addGreenSpace(greenSpace : GreenSpace) : void
+    + getGreenSpaceList() : List<GreenSpace>
+}
+
+class GreenSpace {
+    - greenSpaceID : String
+    - name : String
+    - area : int
+    - type : String
+}
+
+AddAgendaEntryUI ..> AddAgendaEntryController
+AddAgendaEntryController ..> Repositories : repositories
+Repositories --> Repositories : instance
+Repositories --> "1" AgendaRepository : agendaRepository
+Repositories --> "1" ToDoRepository : toDoRepository
+AddAgendaEntryController ..> AgendaRepository : agendaRepository
+AddAgendaEntryController ..> ToDoRepository : toDoRepository
+AgendaRepository --> "*" AgendaEntry : agendaEntries
+ToDoRepository --> "*" ToDoEntry : toDoEntries
+GreenSpace --> "1" GreenSpaceRepository : has
+
+
+@enduml
