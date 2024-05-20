@@ -131,9 +131,71 @@ public class Collaborator {
         if (verifyIdentificationNumber(identificationNumber)) {
             this.identificationNumber = identificationNumber;
         } else {
-            throw new IllegalArgumentException("The identification number is not valid.");
+            throw new IllegalArgumentException("For the given document type (" + this.documentType.toString() + "), the identification number is invalid. Check the user manual for more info");
         }
     }
+
+    /**
+     * Checks that the identification number provided is valid according to the type of document.
+     * <p>
+     * For the document type {@link DocumentType#CITIZEN_CARD}, the ID number must be exactly 12 characters long,
+     * with the first 9 being digits, the next 2 being letters, and the last being a digit.
+     * <p>
+     * For the document type {@link DocumentType#PASSPORT}, the identification number must be between 6 and 9 characters long
+     * alphanumeric.
+     * <p>
+     * For the document type {@link DocumentType#OTHER_TYPE}, the identification number must consist only of letters
+     * and numbers.
+     *
+     * @param identificationNumber the identification number to be checked
+     * @return true if the identification number is valid according to the document type, false otherwise
+     */
+    private boolean verifyIdentificationNumber(String identificationNumber) {
+        if (identificationNumber == null || containsSpecialCharacters(identificationNumber)) {
+            return false;
+        }
+
+        try {
+            if (this.documentType == DocumentType.CITIZEN_CARD) {
+                if (identificationNumber.length() != 12) {
+                    return false;
+                }
+                for (int i = 0; i < 9; i++) {
+                    if (!Character.isDigit(identificationNumber.charAt(i))) {
+                        return false;
+                    }
+                }
+                for (int i = 9; i < 11; i++) {
+                    if (!Character.isLetter(identificationNumber.charAt(i))) {
+                        return false;
+                    }
+                }
+                return Character.isDigit(identificationNumber.charAt(11));
+            } else if (this.documentType == DocumentType.PASSPORT) {
+                int length = identificationNumber.length();
+                if (length < 6 || length > 9) {
+                    return false;
+                }
+                for (char c : identificationNumber.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c)) {
+                        return false;
+                    }
+                }
+                return true;
+            } else {
+                // Default check for OTHER_TYPE and any future types
+                for (char c : identificationNumber.toCharArray()) {
+                    if (!Character.isLetterOrDigit(c)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     /**
      * Sets the job of the collaborator.
@@ -197,7 +259,7 @@ public class Collaborator {
      * @param name the field analysed
      * @return true if is filled and false if it isn't
      */
-    public boolean verifyFilled(String name) {
+    private boolean verifyFilled(String name) {
         return (!name.trim().isEmpty());
     }
 
@@ -207,7 +269,7 @@ public class Collaborator {
      * @param date the birthdate to verify
      * @return true if the birthdate is valid, false otherwise
      */
-    public boolean verifyBirth(Date date) {
+    private boolean verifyBirth(Date date) {
         if (date == null) {
             return false;
         }
@@ -223,7 +285,7 @@ public class Collaborator {
      * @param number the number to verify
      * @return true if the number has exactly nine digits, false otherwise
      */
-    public boolean verifyNineDigits(int number) {
+    private boolean verifyNineDigits(int number) {
         return (String.valueOf(number).length() == 9);
     }
 
@@ -233,7 +295,7 @@ public class Collaborator {
      * @param email the email address to verify
      * @return true if the email address is valid, false otherwise
      */
-    public boolean verifyEmail(String email) {
+    private boolean verifyEmail(String email) {
         if (email == null) {
             return false;
         }
@@ -245,32 +307,12 @@ public class Collaborator {
     }
 
     /**
-     * Verifies if the provided identification number consists of only letters and numbers.
-     *
-     * @param identificationNumber the identification number to verify
-     * @return true if the identification number consists of only letters and numbers, false otherwise
-     */
-    public boolean verifyIdentificationNumber(String identificationNumber) {
-        if (identificationNumber == null) {
-            return false;
-        }
-        // Itera sobre cada caractere do número de identificação
-        for (char c : identificationNumber.toCharArray()) {
-            // Verifica se o caractere não é uma letra ou um número
-            if (!Character.isLetterOrDigit(c)) {
-                return false; // Retorna falso se encontrar um caractere que não seja letra ou número
-            }
-        }
-        return true; // Retorna verdadeiro se todos os caracteres forem letras ou números
-    }
-
-    /**
      * Verifies if the admission date is valid.
      *
      * @param admissionDate the admission date to verify
      * @return true if the admission date is valid, false otherwise
      */
-    public boolean verifyAdmissionDate(Date admissionDate) {
+    private boolean verifyAdmissionDate(Date admissionDate) {
         if (admissionDate == null || this.birthdate == null) {
             return false;
         }
@@ -333,6 +375,7 @@ public class Collaborator {
     public Date getBirthdate() {
         return birthdate;
     }
+
     /**
      * Gets the address of the person.
      *

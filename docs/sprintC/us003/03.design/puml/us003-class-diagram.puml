@@ -14,7 +14,7 @@ class RegisterCollaboratorController {
     -jobRepository : JobRepository
     -collaboratorRepository : CollaboratorRepository
     +RegisterCollaboratorController()
-    + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType, identificationNumber, admissionDate : Date, identificationNumber : String, job : Job)
+    + createCLB(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : DocumentType, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
     '+ getJobRepository() : JobRepository
     '+ getCollaboratorRepository() : CollaboratorRepository
     + getJobs() : List<Job>
@@ -33,7 +33,7 @@ class Repositories {
 class CollaboratorRepository {
     -collaboratorList : List<Collaborator>
     +CollaboratorRepository()
-    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
+    + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : DocumentType, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
     + checkForDuplicates() : void
     + addCollaborator(collaborator) : void
     + getCollaboratorList() : List<Collaborator>
@@ -56,14 +56,14 @@ class Collaborator {
     - job : Job
     - taxpayerNumber : int
     + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
-    + verifyFilled(collaborator) : boolean
-    + verifyNineDigits(collaborator) : boolean
-    + verifyEmail(collaborator) : boolean
-    + verifyZipCode(collaborator) : boolean
-    + verifyBirth(collaborator) : boolean
-    + verifyIdentificationNumber(collaborator) : boolean
-    + verifyAdmissionDate(collaborator) : boolean
-    - documentType : String
+    - verifyFilled(collaborator) : boolean
+    - verifyNineDigits(collaborator) : boolean
+    - verifyEmail(collaborator) : boolean
+    - verifyZipCode(collaborator) : boolean
+    - verifyBirth(collaborator) : boolean
+    - verifyIdentificationNumber(collaborator) : boolean
+    - verifyAdmissionDate(collaborator) : boolean
+    - documentType : DocumentType
     - identificationNumber : String
     +setAddress(address : String) : void
     +setAdmissionDate(admissionDate : Date) : void
@@ -77,9 +77,7 @@ class Collaborator {
     +setName(name : String) : void
     +setTaxpayerNumber(taxpayerNumber : int) : void
     +setZipCode(zipcode : String) : void
-    +getTaxpayerNumber() : int
-    +getName() : String
-    +getBirthdate() : Date
+    -containsSpecialCharacters(str : String) : boolean
 }
 
 class Address {
@@ -103,6 +101,11 @@ class Job {
     +verifySpecialCharacters(job : Job) : void
 }
 
+enum DocumentType{
++CITIZEN_CARD
++PASSPORT
++IDENTITY_CARD
+}
 
 
 RegisterCollaboratorUI ..> RegisterCollaboratorController
@@ -115,5 +118,7 @@ RegisterCollaboratorController ..> CollaboratorRepository : collaboratorReposito
 RegisterCollaboratorController ..> JobRepository : jobRepository
 JobRepository --> "*" Job : jobs
 Collaborator --> "1" Address : has
+RegisterCollaboratorUI ..> DocumentType
+Collaborator ..> DocumentType
 
 @enduml

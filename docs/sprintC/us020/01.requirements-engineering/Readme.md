@@ -34,6 +34,14 @@ As a Green Space Manager (GSM), I want to register a green space (garden, medium
 > 
 > **Answer:** No.
 
+> **Question:** Dear client, which info about Green Spaces do you want the GSM see when listing? only the name ?
+> 
+> **Answer:** Each de team can decide about the aspects related to UX/UI.
+
+> **Question:** Good afternoon, I would like to know between what ranges of hectares a green space is classified as garden, medium or large, or if it is possible to register 2 green spaces with the same area but in different typology, depending on the GSM it registers.
+> 
+> **Answer:** The classification is not automatic, it's up to GSM decide about it.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All attributes must be filled with a valid form.

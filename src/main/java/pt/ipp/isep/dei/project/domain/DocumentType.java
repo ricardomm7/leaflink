@@ -19,4 +19,10 @@ public enum DocumentType {
             return "Identity Card";
         }
     },
+    OTHER_TYPE {
+        public String toString() {
+            return "Other type";
+        }
+
+    }
 }

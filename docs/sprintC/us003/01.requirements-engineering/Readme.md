@@ -50,12 +50,13 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
     * Admission date
     * Mobile number
     * E-mail
-    * Identification document
     * Identification document number
     * Taxpayer number
 	
+
 * Selected data:
     * Job
+    * Document Type
 
 **Output Data:**
 
