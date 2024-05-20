@@ -41,7 +41,7 @@ public class AuthenticationUI implements Runnable {
         this.logout();
     }
 
-    private List<MenuItem> getMenuItemForRoles() {
+    public List<MenuItem> getMenuItemForRoles() {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));

@@ -1,0 +1,46 @@
+.root {
+    -fx-background-color: white;
+}
+
+.text-field-custom {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: rgba(72, 144, 255, 1); /* azul com transparência total */
+    -fx-border-width: 2px; /* ajuste o tamanho do contorno conforme necessário */
+}
+
+
+.tree-view-cstm {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: rgba(72, 144, 255, 0.5); /* azul com transparência total */
+    -fx-border-width: 2px; /* ajuste o tamanho do contorno conforme necessário */
+}
+
+.progress-cstm-indicator {
+    -fx-progress-color: rgba(72, 144, 255, 1); /* Define a cor do ProgressIndicator para azul */
+}
+
+.button-custom {
+    -fx-background-color: white; /* Define a cor de fundo para branco */
+    -fx-border-color: rgb(72, 144, 255); /* Define a cor da borda para azul */
+    -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
+    -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
+    -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+}
+
+.button-custom:hover {
+    -fx-background-color: rgb(60,125,244); /* Define a cor de fundo ao passar o mouse */
+    -fx-border-color:rgb(60,125,244);
+    -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
+    -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
+    -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+}
+
+.button-custom:pressed {
+    -fx-background-color: rgb(52,75,174); /* Define a cor de fundo ao clicar */
+    -fx-border-color:rgb(52,75,174);
+    -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
+    -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
+    -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+}

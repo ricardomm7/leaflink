@@ -1,0 +1,111 @@
+package pt.ipp.isep.dei.project.ui.gui;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.project.ui.console.menu.*;
+import pt.ipp.isep.dei.project.ui.console.utils.Utils;
+import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class AuthenticationGUI {
+
+    @FXML
+    private TextField usernameField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    private final AuthenticationController ctrl = new AuthenticationController();
+
+    @FXML
+    void handleLoginButtonAction(ActionEvent event) {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        boolean success = doLogin(username, password);
+        if (success) {
+            closeWindow();
+            redirectToRoleUI();
+        } else {
+            showAlert("Login Failed", "Invalid UserId and/or Password.");
+        }
+    }
+
+    private boolean doLogin(String username, String password) {
+        return ctrl.doLogin(username, password);
+    }
+
+    private void closeWindow() {
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        stage.close();
+    }
+
+    private void redirectToRoleUI() {
+        List<UserRoleDTO> roles = ctrl.getUserRoles();
+        if ((roles == null) || (roles.isEmpty())) {
+            System.out.println("No role assigned to user.");
+        } else {
+            UserRoleDTO role = selectsRole(roles);
+            if (!Objects.isNull(role)) {
+                List<MenuItem> rolesUI = getMenuItemForRoles();
+                redirectToRoleUI(rolesUI, role);
+            } else {
+                System.out.println("No role selected.");
+            }
+        }
+        ctrl.doLogout();
+    }
+
+    private List<MenuItem> getMenuItemForRoles() {
+        List<MenuItem> rolesUI = new ArrayList<>();
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_QAM, new QamUI()));
+
+
+        //TODO: Complete with other user roles and related RoleUI
+        return rolesUI;
+    }
+
+
+    private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
+        if (roles.size() == 1) {
+            return roles.get(0);
+        } else {
+            return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
+        }
+    }
+
+    private void redirectToRoleUI(List<MenuItem> rolesUI, UserRoleDTO role) {
+        boolean found = false;
+        for (MenuItem item : rolesUI) {
+            if (item.hasDescription(role.getDescription())) {
+                item.run();
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+}
