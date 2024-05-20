@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":TeamRepository" as TeamRepo
+participant ":NotificationService" as NotificationService
+
+
+autonumber 8
+ -> TeamRepo : notifyTeam(task, newDate)
+
+activate TeamRepo
+    group Notify Team
+
+    TeamRepo -> NotificationService : sendNotification(team, newDate)
+    deactivate TeamRepo
+    activate NotificationService
+
+    NotificationService --> TeamRepo : success
+    deactivate NotificationService
+    activate TeamRepo
+
+    end
+
+ <-- TeamRepo: success
+deactivate TeamRepo
+
+
+@enduml

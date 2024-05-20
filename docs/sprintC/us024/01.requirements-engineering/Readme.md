@@ -15,9 +15,9 @@
 
 **From the client clarifications:**
 
-> **Question:** 
+> **Question:** The selected task(s) will be postponed by one interval defined by the user or for the next day?
 > 
-> **Answer:** 
+> **Answer:** When postponing a task, the new predicated date for execution should be inserted.
 
 > **Question:** 
 > 
@@ -61,7 +61,7 @@
     * New specific future date for the task
 	
 * Selected data:
-    * Task entry in the Agenda.
+    * Task on the Agenda.
 
 **Output Data:**
 

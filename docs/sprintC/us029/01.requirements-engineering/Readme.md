@@ -16,13 +16,13 @@ As a Collaborator, I want to record the completion of a task.
 
 **From the client clarifications:**
 
-> **Question:**
+> **Question:** The collaborator can see what type of entry's? Like what status can he filter? Can he see canceled Entry's?
 >
-> **Answer:**
+> **Answer:** The ones assigned to him. He can filter by the different values the status of the status, like planned, executed, canceled ...
 
-> **Question:**
+> **Question:** When a collaborator records a task, it should be asked for any observations regarding the completed task?
 >
-> **Answer:**
+> **Answer:** Maybe if optional, not mandatory.
 
 > **Question:**
 >
