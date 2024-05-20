@@ -113,7 +113,7 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>pt.ipp.isep.dei.project.App</mainClass>
+                            <mainClass>pt.ipp.isep.dei.project.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>
