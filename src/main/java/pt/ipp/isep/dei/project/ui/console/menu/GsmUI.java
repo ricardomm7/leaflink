@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.ui.console.menu;
 
 
 import pt.ipp.isep.dei.project.ui.RegisterGreenSpaceUI;
+import pt.ipp.isep.dei.project.ui.RegisterToDoEntryUI;
 import pt.ipp.isep.dei.project.ui.WaterIrrigationUI;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
@@ -20,6 +21,7 @@ public class GsmUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Calculate the minimum cost Irrigation Route", new WaterIrrigationUI()));
         options.add(new MenuItem("Create a new Green Space", new RegisterGreenSpaceUI()));
+        options.add(new MenuItem("Add entry to To-Do List", new RegisterToDoEntryUI()));
 
 
         int option = 0;

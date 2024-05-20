@@ -14,6 +14,7 @@ public class Repositories {
     private final TeamRepository teamRepository;
     private final GreenSpaceRepository greenSpaceRepository;
     private final AuthenticationRepository authenticationRepository;
+    private final EntryRepository registerToDoEntryRepository;
 
     /**
      * Constructs a new Repositories object initializing all repositories.
@@ -27,6 +28,7 @@ public class Repositories {
         teamRepository = new TeamRepository();
         authenticationRepository = new AuthenticationRepository();
         greenSpaceRepository = new GreenSpaceRepository();
+        registerToDoEntryRepository = new EntryRepository();
     }
 
     /**
@@ -115,4 +117,7 @@ public class Repositories {
         return authenticationRepository;
     }
 
+    public EntryRepository registerToDoEntryRepository() {
+        return registerToDoEntryRepository;
+    }
 }

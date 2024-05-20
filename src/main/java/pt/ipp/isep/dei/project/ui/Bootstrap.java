@@ -1,12 +1,21 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.DocumentType;
+import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.repository.*;
+import pt.isep.lei.esoft.auth.domain.model.Email;
+import pt.isep.lei.esoft.auth.domain.model.Password;
+import pt.isep.lei.esoft.auth.domain.model.User;
+import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Bootstrap implements Runnable {
 
@@ -191,4 +200,13 @@ public void addVehicles() {
         authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@this.app", "qam",
                 AuthenticationController.ROLE_QAM);
     }
+
+    /*private void addGreenSpaces(){
+        Set<UserRole> roles = new HashSet();
+        roles.add(new UserRole("GSM","GSM"));
+        UserSession manager = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("gsm@this.app"), new Password("gsm"), "Green Space Manager", AuthenticationController.ROLE_GSM )));
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+        greenSpaceRepository.create("Jardim", GreenSpaceType.GARDEN, 23.4 ,manager,new Address("Rua Boda", "Porto", "4433-044"));
+
+    }*/
 }

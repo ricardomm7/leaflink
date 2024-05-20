@@ -55,7 +55,7 @@ activate GSM
         deactivate GreenSpaceRepository
         activate CTRL
 
-        CTRL --> UI : greenSpaceList
+        CTRL --> UI : greenSpaceList : List<GreenSpaceDTO>
         deactivate CTRL
 
 
