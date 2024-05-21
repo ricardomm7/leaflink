@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
 
 import java.util.*;
 
@@ -36,34 +38,35 @@ public class AssignSkillUI implements Runnable {
      */
     public void assignSkill() {
         System.out.println("Please select a collaborator to assign a skill to:");
-        List<Collaborator> collaboratorList = assignSkillController.getCollaboratorList();
-        for (int i = 0; i < collaboratorList.size(); i++) {
-            System.out.println((i + 1) + ". " + collaboratorList.get(i).getName());
+        List<CollaboratorDto> collaboratorDtoList = assignSkillController.getCollaboratorDtoList();
+        for (int i = 0; i < collaboratorDtoList.size(); i++) {
+            System.out.println((i + 1) + ". " + collaboratorDtoList.get(i).getName());
         }
         int collaboratorIndex = sc.nextInt();
         sc.nextLine();
-        if (collaboratorIndex < 1 || collaboratorIndex > collaboratorList.size()) {
+        if (collaboratorIndex < 1 || collaboratorIndex > collaboratorDtoList.size()) {
             System.out.println("Invalid selection. Please select a valid collaborator index");
             return;
         }
-        Collaborator selectedCollaborator = collaboratorList.get(collaboratorIndex - 1);
+        CollaboratorDto selectedCollaborator = collaboratorDtoList.get(collaboratorIndex - 1);
 
-        List<Skill> selectedSkills = new ArrayList<>();
+        List<SkillDto> selectedSkills = new ArrayList<>();
         Set<String> selectedSkillsIds = new HashSet<>();
         boolean continueSelectingSkills = true;
         while (continueSelectingSkills) {
             System.out.println("Please select a skill to assign to the collaborator:");
-            List<Skill> skillList = assignSkillController.getSkillList();
-            for (int i = 0; i < skillList.size(); i++) {
-                System.out.println((i + 1) + ". " + skillList.get(i).getDesignation());
+            List<SkillDto> skillDtoList = assignSkillController.getSkillDtoList();
+
+            for (int i = 0; i < skillDtoList.size(); i++) {
+                System.out.println((i + 1) + ". " + skillDtoList.get(i).getDesignation());
             }
             int skillIndex = sc.nextInt();
             sc.nextLine();
-            if (skillIndex < 1 || skillIndex > skillList.size()) {
+            if (skillIndex < 1 || skillIndex > skillDtoList.size()) {
                 System.out.println("Invalid Selection. Please select a valid skill index");
                 continue;
             }
-            Skill selectedSkill = skillList.get(skillIndex - 1);
+        SkillDto selectedSkill = skillDtoList.get(skillIndex - 1);
 
             if (selectedSkillsIds.contains(selectedSkill.getDesignation())) {
                 System.out.println("The selected skill has already been assigned. Please select another skill.");
@@ -86,7 +89,7 @@ public class AssignSkillUI implements Runnable {
         System.out.println("\nPlease review the entered information:");
         System.out.println("Collaborator: " + selectedCollaborator.getName());
         System.out.println("Assigned skills:");
-        for (Skill skill : selectedSkills) {
+        for (SkillDto skill : selectedSkills) {
             System.out.println("- " + skill.getDesignation());
         }
 
