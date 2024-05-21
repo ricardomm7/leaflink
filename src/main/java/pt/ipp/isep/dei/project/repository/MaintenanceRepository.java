@@ -2,6 +2,9 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
+import pt.ipp.isep.dei.project.dto.MaintenanceDto;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.MaintenanceMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,8 +49,13 @@ public class MaintenanceRepository {
      *
      * @return the maintenance list
      */
-    public List<Maintenance> getMaintenanceList() {
-        return maintenanceList;
+    public List<MaintenanceDto> getMaintenanceList() {
+        List<MaintenanceDto> u = new ArrayList<>();
+        for (Maintenance j : maintenanceList) {
+            MaintenanceDto k = MaintenanceMapper.toDto(j);
+            u.add(k);
+        }
+        return u;
     }
 
 
@@ -57,8 +65,8 @@ public class MaintenanceRepository {
      * @param vehicleList the vehicle list
      * @return the string
      */
-    public String createMaintenanceReport(List<Vehicle> vehicleList) {
-        List<Maintenance> maintenanceList = getMaintenanceList();
+    public String createMaintenanceReport(List<VehicleDto> vehicleList) {
+        List<MaintenanceDto> maintenanceList = getMaintenanceList();
         StringBuilder reportBuilder = new StringBuilder();
         boolean hasValidEntry = false;
 
@@ -66,9 +74,9 @@ public class MaintenanceRepository {
         reportBuilder.append(String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",
                 "Plate", "Brand", "Model", "Curr.Kms", "Freq", "Last", "Next"));
 
-        for (Vehicle vehicle : vehicleList) {
+        for (VehicleDto vehicle : vehicleList) {
             if (vehicle != null) {
-                Maintenance latestMaintenance = getLatestMaintenance(vehicle, maintenanceList);
+                MaintenanceDto latestMaintenance = getLatestMaintenance(vehicle, maintenanceList);
 
                 if (latestMaintenance != null) {
                     int lastKm = latestMaintenance.getKm();
@@ -96,11 +104,11 @@ public class MaintenanceRepository {
         return null;
     }
 
-    private static Maintenance getLatestMaintenance(Vehicle vehicle, List<Maintenance> maintenanceList) {
-        Maintenance latestMaintenance = null;
+    private static MaintenanceDto getLatestMaintenance(VehicleDto vehicle, List<MaintenanceDto> maintenanceList) {
+        MaintenanceDto latestMaintenance = null;
 
         // Find the latest maintenance for the vehicle
-        for (Maintenance maintenance : maintenanceList) {
+        for (MaintenanceDto maintenance : maintenanceList) {
             if (maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
                 if (latestMaintenance == null || maintenance.getDate().isAfter(latestMaintenance.getDate())) {
                     latestMaintenance = maintenance;

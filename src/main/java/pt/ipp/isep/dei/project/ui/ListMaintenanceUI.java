@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.ListMaintenanceController;
-import pt.ipp.isep.dei.project.domain.Vehicle;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ListMaintenanceUI implements Runnable {
     public void listVehiclesNeedingMaintenance() {
         System.out.println("Listing vehicles needing maintenance...");
 
-        List<Vehicle> vehiclesList = controller.getVehiclesNeedingMaintenanceList();
+        List<VehicleDto> vehiclesList = controller.getVehiclesNeedingMaintenanceList();
 
         if (vehiclesList.isEmpty()) {
             System.out.println("No vehicles needing maintenance.");

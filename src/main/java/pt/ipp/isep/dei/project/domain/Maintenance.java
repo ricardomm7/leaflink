@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.domain;
 
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * The Maintenance class represents the object maintenance (Check-up).
@@ -59,5 +60,20 @@ public class Maintenance {
      */
     public String getVehiclePlate() {
         return vehiclePlate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Maintenance that = (Maintenance) o;
+        return km == that.km &&
+                Objects.equals(vehiclePlate, that.vehiclePlate) &&
+                Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vehiclePlate, date, km);
     }
 }

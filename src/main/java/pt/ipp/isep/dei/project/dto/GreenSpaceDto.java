@@ -53,30 +53,12 @@ public class GreenSpaceDto {
     }
 
     /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Gets type.
      *
      * @return the type
      */
     public GreenSpaceType getType() {
         return type;
-    }
-
-    /**
-     * Sets type.
-     *
-     * @param type the type
-     */
-    public void setType(GreenSpaceType type) {
-        this.type = type;
     }
 
     /**
@@ -89,30 +71,12 @@ public class GreenSpaceDto {
     }
 
     /**
-     * Sets area.
-     *
-     * @param area the area
-     */
-    public void setArea(double area) {
-        this.area = area;
-    }
-
-    /**
      * Gets manager.
      *
      * @return the manager
      */
     public UserSession getManager() {
         return manager;
-    }
-
-    /**
-     * Sets manager.
-     *
-     * @param manager the manager
-     */
-    public void setManager(UserSession manager) {
-        this.manager = manager;
     }
 
     /**
@@ -125,15 +89,6 @@ public class GreenSpaceDto {
     }
 
     /**
-     * Sets address.
-     *
-     * @param address the address
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /**
      * Gets city.
      *
      * @return the city
@@ -143,30 +98,12 @@ public class GreenSpaceDto {
     }
 
     /**
-     * Sets city.
-     *
-     * @param city the city
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
      * Gets zip code.
      *
      * @return the zip code
      */
     public String getZipCode() {
         return zipCode;
-    }
-
-    /**
-     * Sets zip code.
-     *
-     * @param zipCode the zip code
-     */
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
     }
 
     @Override

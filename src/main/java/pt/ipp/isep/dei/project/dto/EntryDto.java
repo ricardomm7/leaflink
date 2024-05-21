@@ -42,15 +42,6 @@ public class EntryDto {
     }
 
     /**
-     * Sets green space dto.
-     *
-     * @param greenSpaceDto the green space dto
-     */
-    public void setGreenSpaceDto(GreenSpaceDto greenSpaceDto) {
-        this.greenSpaceDto = greenSpaceDto;
-    }
-
-    /**
      * Gets description.
      *
      * @return the description
@@ -59,14 +50,6 @@ public class EntryDto {
         return description;
     }
 
-    /**
-     * Sets description.
-     *
-     * @param description the description
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     /**
      * Gets degree of urgency.
@@ -78,15 +61,6 @@ public class EntryDto {
     }
 
     /**
-     * Sets degree of urgency.
-     *
-     * @param degreeOfUrgency the degree of urgency
-     */
-    public void setDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
-        this.degreeOfUrgency = degreeOfUrgency;
-    }
-
-    /**
      * Gets duration.
      *
      * @return the duration
@@ -95,14 +69,6 @@ public class EntryDto {
         return duration;
     }
 
-    /**
-     * Sets duration.
-     *
-     * @param duration the duration
-     */
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.dto;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /**
  * The type Skill dto.
@@ -34,42 +33,7 @@ public class SkillDto {
      * @param designation the designation of the skill.
      */
     public SkillDto(String designation) {
-        setDesignation(designation);
-    }
-
-    /**
-     * Sets the designation of the skill.
-     *
-     * @param designation the designation to set.
-     * @throws IllegalArgumentException if the skill designation is invalid.
-     */
-    public void setDesignation(String designation) {
-        if (!verifyFilled(designation) && verifySpecialCharacters(designation)) {
-            this.designation = designation;
-        } else {
-            throw new IllegalArgumentException("The skill designation is invalid!");
-        }
-    }
-
-    /**
-     * Verifies if the designation contains special characters.
-     *
-     * @param designation the designation to verify.
-     * @return true if the designation contains only letters, numbers, or spaces, false otherwise.
-     */
-    private boolean verifySpecialCharacters(String designation) {
-        String regex = "^[a-zA-Z0-9 ]+$";
-        return Pattern.matches(regex, designation);
-    }
-
-    /**
-     * Verifies if the designation is filled.
-     *
-     * @param designation the designation to verify.
-     * @return true if the designation is not empty after trimming, false otherwise.
-     */
-    private boolean verifyFilled(String designation) {
-        return designation.trim().isEmpty();
+        this.designation = designation;
     }
 
     /**

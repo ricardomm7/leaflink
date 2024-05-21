@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.domain.Vehicle;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
@@ -30,17 +30,16 @@ public class ListMaintenanceController {
      *
      * @return The list of vehicles needing maintenance
      */
-    public List<Vehicle> getVehiclesNeedingMaintenanceList() {
+    public List<VehicleDto> getVehiclesNeedingMaintenanceList() {
         return vehicleRepository.getVehiclesNeedingMaintenanceList(maintenanceRepository.getMaintenanceList());
     }
-
 
     /**
      * Create maintenance report string.
      *
      * @return the string
      */
-    public String createMaintenanceReport(List<Vehicle> vehicles) {
+    public String createMaintenanceReport(List<VehicleDto> vehicles) {
         return maintenanceRepository.createMaintenanceReport(vehicles);
     }
 }

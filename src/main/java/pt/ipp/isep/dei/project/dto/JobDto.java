@@ -25,12 +25,4 @@ public class JobDto {
         return title;
     }
 
-    /**
-     * Sets title.
-     *
-     * @param title the title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

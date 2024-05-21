@@ -1,11 +1,10 @@
 package pt.ipp.isep.dei.project.repository;
 
-import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
-import pt.ipp.isep.dei.project.domain.VehicleType;
+import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,8 +108,8 @@ public class VehicleRepository {
      * @param maintenanceList The maintenance list
      * @return The list of vehicles needing maintenance
      */
-    public List<Vehicle> getVehiclesNeedingMaintenanceList(List<Maintenance> maintenanceList) {
-        List<Vehicle> vehiclesNeedingMaintenance = new ArrayList<>();
+    public List<VehicleDto> getVehiclesNeedingMaintenanceList(List<MaintenanceDto> maintenanceList) {
+        List<VehicleDto> vehiclesNeedingMaintenance = new ArrayList<>();
 
         for (Vehicle vehicle : vehicleList) {
             double currentKm = vehicle.getCurrentKm();
@@ -121,7 +120,7 @@ public class VehicleRepository {
 
 
             if (lastMaintenanceKm == -1 || currentKm >= nextMaintenanceKm * 0.95) {
-                vehiclesNeedingMaintenance.add(vehicle);
+                vehiclesNeedingMaintenance.add(VehicleMapper.toDto(vehicle));
             }
         }
         return vehiclesNeedingMaintenance;
@@ -135,11 +134,11 @@ public class VehicleRepository {
      * @return The km of the last maintenance
      */
 
-    public double getLastMaintenanceKm(String vehiclePlate, List<Maintenance> maintenanceList) {
+    public double getLastMaintenanceKm(String vehiclePlate, List<MaintenanceDto> maintenanceList) {
         double lastMaintenanceKm = -1; // Valor padrão para indicar que não há registro de manutenção
 
         // Lógica para obter o km da última manutenção para o veículo com a placa especificada
-        for (Maintenance maintenance : maintenanceList) {
+        for (MaintenanceDto maintenance : maintenanceList) {
             if (maintenance.getVehiclePlate().equals(vehiclePlate)) {
                 lastMaintenanceKm = maintenance.getKm();
             }
