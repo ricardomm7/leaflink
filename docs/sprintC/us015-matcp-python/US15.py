@@ -2,22 +2,25 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
+from scipy import stats
+
 
 # Função para calcular o custo da água para um determinado consumo
 def calcular_custo_agua(consumo):
     TAXA = 0.15
     LIMITE_CONSUMO = 1000
     PRECO_BASE = 0.7
-    
+
     if consumo < 0:
         raise ValueError("Consumo must be a positive number.")
-    
+
     preco_com_taxa = PRECO_BASE + (PRECO_BASE * TAXA)
 
     if consumo <= LIMITE_CONSUMO:
         return consumo * PRECO_BASE
     else:
         return LIMITE_CONSUMO * PRECO_BASE + (consumo - LIMITE_CONSUMO) * preco_com_taxa
+
 
 # Lê o arquivo CSV com os dados de consumo de água
 caminho_arquivo_consumo = "water_consumption_updated.csv"
@@ -53,9 +56,11 @@ custos_medios_mensais = pd.DataFrame(custos_mensais)
 # Verifica se há áreas ausentes e remove esses registros
 custos_medios_mensais = custos_medios_mensais.dropna(subset=['Area'])
 
+
 # Função para imprimir a tabela formatada
 def imprimir_tabela_formatada(tabela):
     print(tabulate(tabela, headers='keys', tablefmt='grid', showindex=False))
+
 
 # Imprime o custo médio mensal para cada parque de forma formatada
 print("Custo médio mensal para cada parque:")
@@ -64,6 +69,7 @@ imprimir_tabela_formatada(custos_medios_mensais)
 # Definir as variáveis independentes (X) e dependentes (y)
 X = custos_medios_mensais['Area'].values
 y = custos_medios_mensais['Custo Medio Mensal'].values
+
 
 # Calcular a regressão linear manualmente
 def regressao_linear_manual(X, y):
@@ -82,16 +88,11 @@ def regressao_linear_manual(X, y):
 
     return a, b
 
+
 a, b = regressao_linear_manual(X, y)
 
 # Imprimir na consola a equação da regressão linear
 print(f"\nEquação da regressão linear: Custo = {b:.2f} + {a:.2f} * Área")
-
-# Prever o custo médio mensal para um parque de 55 hectares
-area_novo_parque = 55
-custo_previsto = a * area_novo_parque + b
-
-print(f"\nO custo médio mensal previsto para um parque com 55 hectares é: {custo_previsto:.2f}€")
 
 # Calcular o coeficiente de correlação
 correlacao = np.corrcoef(X, y)[0, 1]
@@ -123,11 +124,30 @@ elif correlacao == -1:
 
 print(f"\nCaracterização da correlação: {caracterizacao}")
 
+# Prever o custo médio mensal para um parque de 55 hectares
+area_novo_parque = 55
+custo_previsto = a * area_novo_parque + b
+
+# Calcular o intervalo de confiança de 5%
+# Erro padrão da estimativa
+y_pred = a * X + b
+residuals = y - y_pred
+s_err = np.sqrt(np.sum(residuals ** 2) / (len(y) - 2))
+mean_x = np.mean(X)
+t_value = stats.t.ppf(1 - 0.025, df=len(y) - 2)  # valor t para um intervalo de confiança de 95%
+conf_interval = t_value * s_err * np.sqrt(1 / len(X) + (area_novo_parque - mean_x) ** 2 / np.sum((X - mean_x) ** 2))
+
+valor_min = custo_previsto - conf_interval
+valor_max = custo_previsto + conf_interval
+print(
+    f"\nCom um grau de confiança de 95%, o custo médio mensal previsto para um parque com 55 hectares é esperado estar no intervalo: [{valor_min:.2f}€, {valor_max:.2f}€].")
+
 # Gráfico da regressão linear
-plt.figure(dpi=300, figsize=(10,7))
+plt.figure(dpi=300, figsize=(10, 7))
 plt.scatter(X, y, color='blue', label='Dados reais')
 plt.plot(X, a * X + b, color='red', label='Linha de regressão')
 plt.scatter([area_novo_parque], [custo_previsto], color='green', label=f'Previsão para 55 ha')
+plt.errorbar(area_novo_parque, custo_previsto, yerr=conf_interval, fmt='o', color='green', capsize=5)
 plt.xlabel('Área (hectares)')
 plt.ylabel('Custo Médio Mensal (€)')
 plt.title('Gráfico Regressão Linear: Custo Médio Mensal por Área')
@@ -135,7 +155,7 @@ plt.legend()
 
 # Adiciona o nome dos parques aos pontos no gráfico
 for i, parque in enumerate(custos_medios_mensais['Park name']):
-    plt.annotate(parque, (X[i], y[i]), textcoords="offset points", xytext=(0,7), ha='center')
+    plt.annotate(parque, (X[i], y[i]), textcoords="offset points", xytext=(0, 7), ha='center')
 
 plt.tight_layout()
 plt.show()
