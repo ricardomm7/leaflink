@@ -29,6 +29,7 @@ public class Repositories {
         authenticationRepository = new AuthenticationRepository();
         greenSpaceRepository = new GreenSpaceRepository();
         registerToDoEntryRepository = new EntryRepository();
+
     }
 
     /**
@@ -117,7 +118,13 @@ public class Repositories {
         return authenticationRepository;
     }
 
-    public EntryRepository registerToDoEntryRepository() {
+    /**
+     * Gets entry repository.
+     *
+     * @return the entry repository
+     */
+    public EntryRepository getEntryRepository() {
         return registerToDoEntryRepository;
     }
+
 }

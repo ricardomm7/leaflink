@@ -13,7 +13,7 @@ public class EntryMapper {
     /**
      * The Green space mapper.
      */
-    GreenSpaceMapper greenSpaceMapper = new GreenSpaceMapper();
+    static GreenSpaceMapper greenSpaceMapper = new GreenSpaceMapper();
 
     /**
      * To dto entry dto.
@@ -21,7 +21,7 @@ public class EntryMapper {
      * @param entry the entry
      * @return the entry dto
      */
-    public EntryDto toDto(Entry entry){
+    public static EntryDto toDto(Entry entry){
         GreenSpaceDto greenSpaceDto = greenSpaceMapper.toDto(entry.getGreenSpace());
         EntryDto e = new EntryDto(greenSpaceDto,entry.getDescription(),entry.getDegreeOfUrgency(), entry.getDuration());
         return e;
@@ -33,8 +33,8 @@ public class EntryMapper {
      * @param entry the entry
      * @return the entry
      */
-    public Entry toDomain(EntryDto entry){
-        GreenSpace greenSpace = greenSpaceMapper.toDomain(entry.getGreenSpaceDto());
+    public static Entry toDomain(EntryDto entry){
+        GreenSpace greenSpace = GreenSpaceMapper.toDomain(entry.getGreenSpaceDto());
         Entry e = new Entry(greenSpace,entry.getDescription(),entry.getDegreeOfUrgency(),entry.getDuration());
         return e;
     }

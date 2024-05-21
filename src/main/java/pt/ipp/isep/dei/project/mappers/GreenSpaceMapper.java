@@ -26,7 +26,7 @@ public class GreenSpaceMapper {
      * @param greenSpaceDto the green space dto
      * @return the green space
      */
-    public GreenSpace toDomain (GreenSpaceDto greenSpaceDto){
+    public static GreenSpace toDomain(GreenSpaceDto greenSpaceDto){
         GreenSpace gs = new GreenSpace(greenSpaceDto.getName(), greenSpaceDto.getType(), greenSpaceDto.getArea(), greenSpaceDto.getManager(),new Address(greenSpaceDto.getAddress(), greenSpaceDto.getCity(), greenSpaceDto.getZipCode()));
         return gs;
     }
