@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+title System Sequence Diagram (SSD) - US029
 
 autonumber
 
@@ -12,23 +12,23 @@ participant ":System" as System
 
 activate CLB
 
-    CLB -> System : asks to record a complete task
+    CLB -> System : asks to record a complete entry
     activate System
 
-        System --> CLB : shows the list of the task assign to the collaborator and requests to select the one to record
+        System --> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
     deactivate System
 
-    CLB -> System : select an assign task
+    CLB -> System : select an assign entry
 
     activate System
 
-        System --> CLB : show task and requests confirmation
+        System --> CLB : show entry and requests confirmation
     deactivate System
 
     CLB -> System : confirms data
     activate System
 
-        System --> CLB :  displays success message (Task record as completed)
+        System --> CLB :  displays success message (Entry record as completed)
     deactivate System
 
 @enduml

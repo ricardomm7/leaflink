@@ -9,14 +9,14 @@ actor "GSM" as GSM
 participant ":PostponeAgendaEntryUI" as UI
 participant ":PostponeAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:TaskRepository" as TaskRepo
+participant "repositories\n:EntryRepository" as EntryRepo
 participant ":Agenda" as Agenda
 participant ":TeamRepository" as TeamRepo
 participant ":NotificationService" as NotificationService
 
 activate GSM
 
-    GSM -> UI : asks to postpone an agenda task
+    GSM -> UI : asks to postpone an agenda entry
     activate UI
 
         UI -> CTRL : create
@@ -25,22 +25,22 @@ activate GSM
 
         ref over CTRL
 
-            Get Task List
+            Get Entry List
 
         end ref
 
 
-            CTRL --> UI : task List
+            CTRL --> UI : entry List
         deactivate CTRL
         activate UI
 
-        UI -> GSM : shows the list of agenda task and requests to select
+        UI -> GSM : shows the list of agenda entry and requests to select
     deactivate UI
 
-    GSM -> UI : selects an agenda task
+    GSM -> UI : selects an agenda entry
     activate UI
 
-        UI --> GSM : requests new date for the selected task
+        UI --> GSM : requests new date for the selected entry
     deactivate UI
 
     GSM -> UI : types new date
@@ -50,12 +50,12 @@ activate GSM
         deactivate UI
         activate CTRL
 
-            CTRL -> Agenda : postponeTask(task, newDate)
+            CTRL -> Agenda : postponeEntry(entry, newDate)
             deactivate CTRL
             activate Agenda
 
         ref over Agenda
-            Postpone a Task in Agenda
+            Postpone a Entry in Agenda
 
         end ref
 
@@ -65,7 +65,7 @@ activate GSM
             deactivate Agenda
             activate CTRL
 
-            CTRL -> TeamRepo : notifyTeam(task, newDate)
+            CTRL -> TeamRepo : notifyTeam(entry, newDate)
             deactivate CTRL
             activate TeamRepo
 

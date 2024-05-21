@@ -7,37 +7,37 @@
 _**Note that SSD - Alternative One is adopted.**_
 
 
-| Interaction ID | Question: Which class is responsible for... | Answer                       | Justification (with patterns)                                                                                                                                              |
-|:---------------|:--------------------------------------------|:-----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?             | PostponeAgendaTaskUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction. |
-|                | ... coordinating the US?                    | PostponeAgendaTaskController | Controller: PostponeAgendaTaskController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                         |
-|                | ... getting task repository?                | Repositories                 | Pure Fabrication: Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic. |
-| Step 2         | ... show the task list?                     | PostponeAgendaTaskUI         | Pure Fabrication: PostponeAgendaTaskUI displays the task list, promoting low coupling by separating UI logic from domain logic.                                            |
-| Step 3         | ... selecting a task?                       | PostponeAgendaTaskUI         | Pure Fabrication: PostponeAgendaTaskUI handles the user selection of tasks, maintaining low coupling and high cohesion by managing UI interactions.                        |
-| Step 4         | ... requesting new date for the task?       | PostponeAgendaTaskUI         | Pure Fabrication: PostponeAgendaTaskUI requests the new date from the user, ensuring separation of concerns between UI and business logic.                                 |
-| Step 5         | ... submitting the new date?                | PostponeAgendaTaskController | Controller: PostponeAgendaTaskController handles the submission of the new date, coordinating the process and applying the Controller pattern.                             |
-| Step 6         | ... displaying task data?                   | PostponeAgendaTaskUI         | Pure Fabrication: PostponeAgendaTaskUI shows the data user insert.                                                                                                         |
-| Step 7         | ... confirms data                           | PostponeAgendaTaskUI         | Pure Fabrication: PostponeAgendaTaskUI confirms the data from the user.                                                                                                    |
-|                | ... postponing the task?                    | Agenda                       | Information Expert: Vehicle performs local validation on its attributes, adhering to the Information Expert pattern by encapsulating its own data validation logic.        | 
-|                | ... notifying the team?                     | TeamRepository               | Information Expert: TeamRepository handles team notifications as it manages team data and relationships.                                                                   | 
-|                | ... sending notifications?                  | NotificationService          | Pure Fabrication: NotificationService is responsible for sending notifications, ensuring the separation of communication concerns from business logic.                     |
-| Step 8         | ... informing operation success?            | PostponeAgendaTaskUI         | Pure Fabrication: PostponeAgendaTaskUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.   | 
+| Interaction ID | Question: Which class is responsible for... | Answer                        | Justification (with patterns)                                                                                                                                              |
+|:---------------|:--------------------------------------------|:------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?             | PostponeAgendaEntryUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction. |
+|                | ... coordinating the US?                    | PostponeAgendaEntryController | Controller: PostponeAgendaEntryController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                        |
+|                | ... getting task repository?                | Repositories                  | Pure Fabrication: Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic. |
+| Step 2         | ... show the task list?                     | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI displays the entry list, promoting low coupling by separating UI logic from domain logic.                                          |
+| Step 3         | ... selecting a task?                       | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI handles the user selection of tasks, maintaining low coupling and high cohesion by managing UI interactions.                       |
+| Step 4         | ... requesting new date for the task?       | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI requests the new date from the user, ensuring separation of concerns between UI and business logic.                                |
+| Step 5         | ... submitting the new date?                | PostponeAgendaEntryController | Controller: PostponeAgendaEntryController handles the submission of the new date, coordinating the process and applying the Controller pattern.                            |
+| Step 6         | ... displaying task data?                   | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI shows the data user insert.                                                                                                        |
+| Step 7         | ... confirms data                           | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI confirms the data from the user.                                                                                                   |
+|                | ... postponing the task?                    | Agenda                        | Information Expert: Agenda has all entries and its attributes, adhering to the Information Expert pattern by encapsulating its own data validation logic.                  | 
+|                | ... notifying the team?                     | TeamRepository                | Information Expert: TeamRepository handles team notifications as it manages team data and relationships.                                                                   | 
+|                | ... sending notifications?                  | NotificationService           | Pure Fabrication: NotificationService is responsible for sending notifications, ensuring the separation of communication concerns from business logic.                     |
+| Step 8         | ... informing operation success?            | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.  | 
 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Task
+* Entry
 * Agenda
 
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
 * Repositories
-* PostponeAgendaTaskUI
-* PostponeAgendaTaskController
-* TaskRepository
+* PostponeAgendaEntryUI
+* PostponeAgendaEntryController
+* EntryRepository
 * TeamRepository
 * NotificationService
 
@@ -61,13 +61,13 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us024-sequence-diagram-split.svg)
 
-**Get Task List Partial SD**
+**Get Entry List Partial SD**
 
-![Sequence Diagram - Partial - Get Task List](svg/us024-sequence-diagram-partial-get-task-list.svg)
+![Sequence Diagram - Partial - Get Entry List](svg/us024-sequence-diagram-partial-get-entry-list.svg)
 
-**Postpone a Task in Agenda Partial SD**
+**Postpone an Entry in Agenda Partial SD**
 
-![Sequence Diagram - Partial - Postpone a Task in Agenda](svg/us024-sequence-diagram-partial-postpone-a-task-in-agenda.svg)
+![Sequence Diagram - Partial - Postpone an Entry in Agenda](svg/us024-sequence-diagram-partial-postpone-a-entry-in-agenda.svg)
 
 **Notify Team**
 

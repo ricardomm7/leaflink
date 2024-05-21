@@ -8,16 +8,16 @@ skinparam shadowing false
 autonumber
 
 participant "GSM" as GSM
-participant ":CancelAgendaTaskUI" as UI
-participant ":CancelAgendaTaskController" as CTRL
+participant ":CancelAgendaEntryUI" as UI
+participant ":CancelAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:TaskRepository" as TaskRepo
+participant "repositories\n:EntryRepository" as EntryRepo
 participant ":Agenda" as Agenda
 participant ":TeamRepository" as TeamRepo
 participant ":NotificationService" as NotificationService
 
 activate GSM
-    GSM -> UI : requests to cancel an agenda task
+    GSM -> UI : requests to cancel an agenda entry
     activate UI
 
        UI -> CTRL : create
@@ -30,43 +30,43 @@ activate GSM
                RepositorySingleton --> CTRL : repositories
            deactivate RepositorySingleton
 
-           CTRL -> TaskRepo : getTaskRepository()
-           activate TaskRepo
+           CTRL -> EntryRepo : getEntryRepository()
+           activate EntryRepo
 
-               TaskRepo --> CTRL : taskRepository
-           deactivate TaskRepo
+               EntryRepo --> CTRL : entryRepository
+           deactivate EntryRepo
 
-           CTRL -> TaskRepo :getTaskList()
-           activate TaskRepo
+           CTRL -> EntryRepo :getEntryList()
+           activate EntryRepo
 
-           TaskRepo --> CTRL : taskList
-           deactivate TaskRepo
+           EntryRepo --> CTRL : entryList
+           deactivate EntryRepo
 
-           CTRL --> UI : task List
+           CTRL --> UI : entry List
        deactivate CTRL
        activate UI
 
-        UI -> GSM : shows the list of agenda task and requests to select
+        UI -> GSM : shows the list of agenda entry and requests to select
     deactivate UI
 
-    GSM -> UI : selects an agenda task
+    GSM -> UI : selects an agenda entry
     activate UI
 
         UI -> CTRL : submit cancellation request
         deactivate UI
         activate CTRL
 
-            CTRL -> Agenda : cancelTask(task)
+            CTRL -> Agenda : cancelEntry(entry)
             deactivate CTRL
             activate Agenda
 
-                Agenda -> Agenda : updateTaskStatus(task, CANCELLED)
+                Agenda -> Agenda : updateEntryStatus(entry, CANCELLED)
 
-                Agenda --> CTRL :
+                Agenda --> CTRL : success
             deactivate Agenda
             activate CTRL
 
-            CTRL -> TeamRepo : notifyTeam(task)
+            CTRL -> TeamRepo : notifyTeam(entry)
             deactivate CTRL
             activate TeamRepo
 

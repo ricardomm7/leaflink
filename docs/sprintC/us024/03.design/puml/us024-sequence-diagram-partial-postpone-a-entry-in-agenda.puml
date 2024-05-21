@@ -6,14 +6,14 @@ skinparam shadowing false
 participant ":Agenda" as Agenda
 
 autonumber 8
--> Agenda : postponeTask(task, newDate)
+-> Agenda : postponeEntry(entry, newDate)
 
 activate Agenda
-    group Postpone a Task in Agenda
+    group Postpone a Entry in Agenda
 
     Agenda -> Agenda : validateNewDate(newDate)
-    Agenda -> Agenda : updateTaskStatus(task, POSTPONED)
-    Agenda -> Agenda : setNewDate(task, newDate)
+    Agenda -> Agenda : updateENtryStatus(entry, POSTPONED)
+    Agenda -> Agenda : setNewDate(entry, newDate)
 
     end
 

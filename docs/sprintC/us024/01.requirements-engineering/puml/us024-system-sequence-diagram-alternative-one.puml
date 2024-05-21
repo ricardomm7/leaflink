@@ -12,17 +12,17 @@ participant ":System" as System
 
 activate GSM
 
-    GSM -> System : asks to postpone an agenda task
+    GSM -> System : asks to postpone an agenda entry
     activate System
 
-        System --> GSM : shows the list of agenda task and requests to select
+        System --> GSM : shows the list of agenda entry and requests to select
     deactivate System
 
-    GSM -> System : selects an agenda task
+    GSM -> System : selects an agenda entry
 
     activate System
 
-        System --> GSM : requests new date for the selected task
+        System --> GSM : requests new date for the selected entry
     deactivate System
 
     GSM -> System : types new date

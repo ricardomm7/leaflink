@@ -7,9 +7,9 @@ skinparam shadowing false
 
 autonumber
 
-participant ":CancelAgendaTaskController" as CTRL
+participant ":CancelAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:TaskRepository" as TaskRepo
+participant "repositories\n:EntryRepository" as EntryRepo
 
 autonumber 2
 
@@ -17,7 +17,7 @@ activate CTRL
 
  -> CTRL: create
 
-    group Get Task List
+    group Get Entry List
 
             CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton
@@ -25,20 +25,20 @@ activate CTRL
                 RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
-            CTRL -> TaskRepo : getTaskRepository()
-            activate TaskRepo
+            CTRL -> EntryRepo : getEntryRepository()
+            activate EntryRepo
 
-                TaskRepo --> CTRL : taskRepository
-            deactivate TaskRepo
+                EntryRepo --> CTRL : entryRepository
+            deactivate EntryRepo
 
-            CTRL -> TaskRepo :getTaskList()
-            activate TaskRepo
+            CTRL -> EntryRepo :getEntryList()
+            activate EntryRepo
 
-            TaskRepo --> CTRL : taskList
-            deactivate TaskRepo
+            EntryRepo --> CTRL : entryList
+            deactivate EntryRepo
     end
 
- <-- CTRL: task List
+ <-- CTRL: entry List
 deactivate CTRL
 
 

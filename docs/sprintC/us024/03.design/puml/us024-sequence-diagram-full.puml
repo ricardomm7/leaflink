@@ -6,20 +6,20 @@ skinparam shadowing false
 autonumber
 
 actor "GSM" as GSM
-participant ":PostponeAgendaTaskUI" as UI
-participant ":PostponeAgendaTaskController" as CTRL
+participant ":PostponeAgendaEntryUI" as UI
+participant ":PostponeAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:TaskRepository" as TaskRepo
+participant "repositories\n:EntryRepository" as EntryRepo
 participant ":Agenda" as Agenda
 participant ":TeamRepository" as TeamRepo
 participant ":NotificationService" as NotificationService
 
 activate GSM
 
-    GSM -> UI : asks to postpone an agenda task
+    GSM -> UI : asks to postpone an agenda entry
     activate UI
 
-        UI -> CTRL : create
+        UI -> CTRL** : create
         deactivate UI
         activate CTRL
 
@@ -29,29 +29,29 @@ activate GSM
                 RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
-            CTRL -> TaskRepo : getTaskRepository()
-            activate TaskRepo
+            CTRL -> EntryRepo : getTaskRepository()
+            activate EntryRepo
 
-                TaskRepo --> CTRL : taskRepository
-            deactivate TaskRepo
+                EntryRepo --> CTRL : entryRepository
+            deactivate EntryRepo
 
-            CTRL -> TaskRepo :getTaskList()
-            activate TaskRepo
+            CTRL -> EntryRepo :getEntryList()
+            activate EntryRepo
 
-            TaskRepo --> CTRL : taskList
-            deactivate TaskRepo
+            EntryRepo --> CTRL : entryList
+            deactivate EntryRepo
 
-            CTRL --> UI : task List
+            CTRL --> UI : entry List
         deactivate CTRL
         activate UI
 
-        UI -> GSM : shows the list of agenda task and requests to select
+        UI -> GSM : shows the list of agenda entry and requests to select
     deactivate UI
 
-    GSM -> UI : selects an agenda task
+    GSM -> UI : selects an agenda entry
     activate UI
 
-        UI --> GSM : requests new date for the selected task
+        UI --> GSM : requests new date for the selected entry
     deactivate UI
 
     GSM -> UI : types new date
@@ -61,19 +61,19 @@ activate GSM
         deactivate UI
         activate CTRL
 
-            CTRL -> Agenda : postponeTask(task, newDate)
+            CTRL -> Agenda : postponeEntry(entry, newDate)
             deactivate CTRL
             activate Agenda
 
                 Agenda -> Agenda : validateNewDate(newDate)
-                Agenda -> Agenda : updateTaskStatus(task, POSTPONED)
-                Agenda -> Agenda : setNewDate(task, newDate)
+                Agenda -> Agenda : updateEntryStatus(entry, POSTPONED)
+                Agenda -> Agenda : setNewDate(entry, newDate)
 
                 Agenda --> CTRL :
             deactivate Agenda
             activate CTRL
 
-            CTRL -> TeamRepo : notifyTeam(task, newDate)
+            CTRL -> TeamRepo : notifyTeam(entry, newDate)
             deactivate CTRL
             activate TeamRepo
 

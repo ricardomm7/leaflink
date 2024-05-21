@@ -8,16 +8,16 @@ skinparam shadowing false
 autonumber
 
 participant "GSM" as GSM
-participant ":CancelAgendaTaskUI" as UI
-participant ":CancelAgendaTaskController" as CTRL
+participant ":CancelAgendaEntrykUI" as UI
+participant ":CancelAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:TaskRepository" as TaskRepo
+participant "repositories\n:EntryRepository" as EntryRepo
 participant ":Agenda" as Agenda
-participant ":TeamRepository" as TeamRepo
+participant ":TeamRepository" as EntryRepo
 participant ":NotificationService" as NotificationService
 
 activate GSM
-    GSM -> UI : requests to cancel an agenda task
+    GSM -> UI : requests to cancel an agenda entry
     activate UI
 
        UI -> CTRL : create
@@ -26,50 +26,50 @@ activate GSM
 
        ref over CTRL
 
-          Get Task List
+          Get Entry List
 
        end ref
 
-           CTRL --> UI : task List
+           CTRL --> UI : entry List
        deactivate CTRL
        activate UI
 
-        UI -> GSM : shows the list of agenda task and requests to select
+        UI -> GSM : shows the list of agenda entry and requests to select
     deactivate UI
 
-    GSM -> UI : selects an agenda task
+    GSM -> UI : selects an agenda entry
     activate UI
 
         UI -> CTRL : submit cancellation request
         deactivate UI
         activate CTRL
 
-            CTRL -> Agenda : cancelTask(task)
+            CTRL -> Agenda : cancelEntry(entry)
             deactivate CTRL
             activate Agenda
 
         ref over Agenda
-            Cancel a Task in Agenda
+            Cancel a Entry in Agenda
 
         end ref
                 Agenda --> CTRL :
             deactivate Agenda
             activate CTRL
 
-            CTRL -> TeamRepo : notifyTeam(task)
+            CTRL -> EntryRepo : notifyTeam(entry)
             deactivate CTRL
-            activate TeamRepo
+            activate EntryRepo
 
-                TeamRepo -> NotificationService : sendNotification(team)
-                deactivate TeamRepo
+                EntryRepo -> NotificationService : sendNotification(team)
+                deactivate EntryRepo
                 activate NotificationService
 
-                    NotificationService --> TeamRepo : success
+                    NotificationService --> EntryRepo : success
                 deactivate NotificationService
-                activate TeamRepo
+                activate EntryRepo
 
-            TeamRepo --> CTRL : success
-            deactivate TeamRepo
+            EntryRepo --> CTRL : success
+            deactivate EntryRepo
             activate CTRL
 
             CTRL --> UI : success

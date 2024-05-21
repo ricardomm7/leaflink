@@ -5,22 +5,22 @@ skinparam shadowing false
 
 
 participant "TeamRepository:\nTeamRepository" as TeamRepository
-participant "task\n:Task" as Task
+participant "entry\n:Entry" as Entry
 
 autonumber 13
--> TeamRepository : recordTaskCompletion(selectedTask)
+-> TeamRepository : recordEntryCompletion(selectedEntry)
 activate TeamRepository
 
-    group Record Task Completion
+    group Record Entry Completion
 
-    TeamRepository -> Task : recordTaskCompletion(selectedTask)
+    TeamRepository -> Entry : recordEntryCompletion(selectedEntry)
     deactivate TeamRepository
-    activate Task
+    activate Entry
 
-        Task -> Task : setStatus(complete)
+        Entry -> Entry : setStatus(complete)
 
-    Task --> TeamRepository : success
-    deactivate Task
+    Entry --> TeamRepository : success
+    deactivate Entry
     activate TeamRepository
 
 

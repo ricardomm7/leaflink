@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.project.domain;
 
 
+import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Vehicle class represents the object Vehicle.
@@ -313,10 +316,24 @@ public class Vehicle {
         if (tareWeight <= 0 || grossWeight <= 0 || currentKm < 0 || maintenanceFrequency <= 0) {
             return false;
         }
+        if (acquisitionDate.isAfter(LocalDate.now()) || registrationDate.isAfter(LocalDate.now())) {
+            return false;
+        }
 
-        return registrationDate.isBefore(acquisitionDate);
+        return registrationDate.isBefore(this.acquisitionDate);
     }
 
+    /**
+     * Validates the date parameter. It must exist.
+     * @param date
+     */
+    private boolean validateDate(LocalDate date) {
+        if (date.isAfter(LocalDate.now())){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            throw new RegisterVehicleUI.InvalidDateException("Date must be before " + LocalDate.now().format(formatter));
+        }
+        return true;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -3,69 +3,38 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Domain Model - US024
-
-left to right direction
+'left to right direction
 
 skinparam classAttributeIconSize 0
+
 hide circle
 hide methods
 
-class Agenda {
+
+
+class Entry {
+    urgencyStatus
+    estimatedDate
+    progressStatus
 
 }
+
 
 class Task {
     title
     description
-    progressStatus
-    urgencyStatus
-    estimatedDate
+
 }
 
-class GreenSpace{
-    designation
-    area
-    size
+class Agenda{
 }
 
-class Collaborator {
-    name
-    birthdate
-    admissionDate
-    mobileNumber
-    e-mail
-    taxpayerNumber
-}
 
-class Document{
-    documentType
-    identificationNumber
-}
 
-class Address{
-    street
-    zipCode
-    city
-}
 
-class Team {
-    id
-    name
-}
 
-Collaborator "1..*" -- "1" Address : has a >
+Agenda "1" -- "1..*" Entry: has >
 
-Collaborator "1" -- "1..*" Document : has >
-
-Agenda "1" -- "1..*" Task : has >
-
-Task "1" -- "1" Collaborator : assigned to >
-
-Task "1" -- "1" Team : executed by >
-
-Task "*" -- "1" GreenSpace: assigned to >
-
-Team "1" -- "1..*" Collaborator : has >
+Entry "1" -- "1" Task: is >
 
 @enduml

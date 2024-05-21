@@ -8,7 +8,7 @@ participant ":NotificationService" as NotificationService
 
 
 autonumber 8
- -> TeamRepo : notifyTeam(task, newDate)
+ -> TeamRepo : notifyTeam(entry, newDate)
 
 activate TeamRepo
     group Notify Team

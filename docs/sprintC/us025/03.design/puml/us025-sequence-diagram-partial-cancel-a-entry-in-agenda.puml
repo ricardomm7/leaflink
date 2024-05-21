@@ -7,16 +7,16 @@ participant ":Agenda" as Agenda
 
 autonumber 13
 
--> Agenda : cancelTask(task)
+-> Agenda : cancelTask(entry)
 
 activate Agenda
-    group Cancel a Task in Agenda
+    group Cancel a Entry in Agenda
 
-      Agenda -> Agenda : updateTaskStatus(task, CANCELLED)
+      Agenda -> Agenda : updateEntryStatus(entry, CANCELLED)
 
     end
 
-<-- Agenda
+<-- Agenda : success
 deactivate Agenda
 
 

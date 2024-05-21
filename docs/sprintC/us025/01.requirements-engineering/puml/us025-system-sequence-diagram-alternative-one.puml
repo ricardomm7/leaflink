@@ -12,13 +12,13 @@ participant ":System" as System
 
 activate GSM
 
-    GSM -> System : asks to cancel an agenda task
+    GSM -> System : asks to cancel an agenda entry
     activate System
 
-        System --> GSM : shows the list of agenda task and requests to select
+        System --> GSM : shows the list of agenda entry and requests to select
     deactivate System
 
-    GSM -> System : selects an agenda task
+    GSM -> System : selects an agenda entry
 
     activate System
 

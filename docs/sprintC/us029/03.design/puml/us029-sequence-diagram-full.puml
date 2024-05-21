@@ -7,20 +7,20 @@ skinparam shadowing false
 autonumber
 
 actor "CLB" as CLB
-participant ":RecordTaskUI" as UI
-participant ":RecordTaskController" as CTRL
+participant ":RecordEntryUI" as UI
+participant ":RecordEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "TeamRepository:\nTeamRepository" as TeamRepository
 participant ":Agenda" as Agenda
-participant ":taskList" as taskList
+participant ":toDoList" as ToDoList
 
-participant "task\n:Task" as Task
+participant "entry\n:Entry" as Entry
 
 
 activate CLB
 
-    CLB -> UI : asks to record a complete task
+    CLB -> UI : asks to record a complete entry
     activate UI
 
         UI -> CTRL** : create
@@ -42,32 +42,32 @@ activate CLB
             CTRL -> TeamRepository : getTasksOfCollaborator()
             activate TeamRepository
 
-                TeamRepository --> CTRL : taskList
+                TeamRepository --> CTRL : ToDoList
             deactivate TeamRepository
 
             CTRL -> Agenda : verifyExistingTasks(taskList)
             activate Agenda
 
-                Agenda --> CTRL : taskList
+                Agenda --> CTRL : ToDoList
             deactivate Agenda
 
-            CTRL -> taskList : verifyExistingTasks(taskList)
-            activate taskList
+            CTRL -> ToDoList : verifyExistingTasks(taskList)
+            activate ToDoList
 
-                taskList --> CTRL : taskList
-            deactivate taskList
+                ToDoList --> CTRL : ToDoList
+            deactivate ToDoList
 
-            CTRL --> UI : taskList
+            CTRL --> UI : ToDoList
         deactivate CTRL
         activate UI
 
-        UI -> CLB : shows the list of the task assign to the collaborator and requests to select the one to record
+        UI -> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
     deactivate UI
 
-    CLB -> UI : select an assigned task
+    CLB -> UI : select an assigned entry
     activate UI
 
-        UI --> CLB : show task and requests confirmation
+        UI --> CLB : show entry and requests confirmation
     deactivate UI
 
     CLB -> UI : confirms data
@@ -77,18 +77,18 @@ activate CLB
         deactivate UI
         activate CTRL
 
-            CTRL -> TeamRepository : recordTaskCompletion(selectedTask)
+            CTRL -> TeamRepository : recordEntryCompletion(selectedEntry)
             deactivate CTRL
             activate TeamRepository
 
-                TeamRepository -> Task : recordTaskCompletion(selectedTask)
+                TeamRepository -> Entry : recordEntryCompletion(selectedEntry)
                 deactivate TeamRepository
-                activate Task
+                activate Entry
 
-                    Task -> Task : setStatus(complete)
+                    Entry -> Entry : setStatus(complete)
 
-                Task --> TeamRepository : success
-                deactivate Task
+                Entry --> TeamRepository : success
+                deactivate Entry
                 activate TeamRepository
 
             TeamRepository --> CTRL : success
@@ -99,7 +99,7 @@ activate CLB
         deactivate CTRL
         activate UI
 
-        UI --> CLB : displays success message (Task record as completed)
+        UI --> CLB : displays success message (Entry record as completed)
     deactivate UI
 
 @enduml

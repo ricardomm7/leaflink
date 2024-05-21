@@ -5,7 +5,7 @@ skinparam shadowing false
 
 'hide footbox
 
-participant ":RecordTaskController" as CTRL
+participant ":RecordEntryController" as CTRL
 participant "TeamRepository:\nTeamRepository" as TeamRepository
 
 autonumber 6
@@ -14,12 +14,12 @@ autonumber 6
 activate CTRL
 
 
-    group Get Task List
+    group Get Entry List
 
-    CTRL -> TeamRepository : getTasksOfCollaborator()
+    CTRL -> TeamRepository : getEntryOfCollaborator()
     activate TeamRepository
 
-    TeamRepository --> CTRL : taskList
+    TeamRepository --> CTRL : entryList
     deactivate TeamRepository
 
 

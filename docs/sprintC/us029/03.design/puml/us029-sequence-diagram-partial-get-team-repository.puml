@@ -5,7 +5,7 @@ skinparam shadowing false
 
 'hide footbox
 
-participant ":RecordTaskController" as CTRL
+participant ":RecordEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 autonumber 3

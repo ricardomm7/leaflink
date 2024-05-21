@@ -47,7 +47,6 @@ public class RegisterVehicleUI implements Runnable {
                 System.out.println("Enter registration date (DD/MM/YYYY):");
                 String registrationDateStr = scanner.nextLine();
                 LocalDate registrationDate = parseDate(registrationDateStr);
-                validateDate(registrationDate);
 
                 System.out.println("Enter vehicle plate:");
                 displayVehiclePlateFormat(registrationDate.getYear());
@@ -69,7 +68,6 @@ public class RegisterVehicleUI implements Runnable {
                 System.out.println("Enter acquisition date (DD/MM/YYYY):");
                 String acquisitionDateStr = scanner.nextLine();
                 LocalDate acquisitionDate = parseDate(acquisitionDateStr);
-                validateDate(acquisitionDate);
                 validateAcquisitionDate(registrationDate, acquisitionDate);
 
                 System.out.println("Enter maintenance frequency (in km):");
@@ -217,16 +215,7 @@ public class RegisterVehicleUI implements Runnable {
 
     }
 
-    /**
-     * Validates the date parameter. It must exist.
-     * @param date
-     */
-    private void validateDate(LocalDate date) {
-        if (date.isAfter(LocalDate.now())){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            throw new InvalidDateException("Date must be before " + LocalDate.now().format(formatter));
-        }
-    }
+
 
     /**
      * Validates the input parameter.
@@ -310,7 +299,7 @@ public class RegisterVehicleUI implements Runnable {
     /**
      * The type Invalid date exception.
      */
-    static class InvalidDateException extends RuntimeException {
+    public static class InvalidDateException extends RuntimeException {
         public InvalidDateException(String message) {
             super(message);
         }
