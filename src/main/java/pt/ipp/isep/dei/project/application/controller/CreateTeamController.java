@@ -40,6 +40,10 @@ public class CreateTeamController {
         return skillRepository.getSkillList();
     }
 
+    public List<Collaborator> getCollaboratorList() {
+        return collaboratorRepository.getCollaboratorList();
+    }
+
     /**
      * Generates a proposal for a team based on required skills, minimum and maximum team size.
      *
@@ -54,6 +58,9 @@ public class CreateTeamController {
         List<Skill> combinedSkills = new ArrayList<>();
 
         for (Collaborator collaborator : allCollaborators) {
+            if (isCollaboratorAssignedToTeam(collaborator)) {
+                continue;
+            }
             List<Skill> collaboratorSkills = collaborator.getSkills();
             for (Skill skill : collaboratorSkills) {
                 if (!combinedSkills.contains(skill)) {
@@ -67,7 +74,41 @@ public class CreateTeamController {
             }
         }
 
-        System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
         return new ArrayList<>();
     }
+
+    /**
+     * Checks if a collaborator is already assigned to a team.
+     *
+     * @param collaborator The collaborator to check.
+     * @return true if the collaborator is already assigned to a team, false otherwise.
+     */
+    private boolean isCollaboratorAssignedToTeam(Collaborator collaborator) {
+        List<Team> teamList = teamRepository.getTeamList();
+        for (Team team : teamList) {
+            if (team.getCollaborators().contains(collaborator)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Saves the team of collaborators.
+     *
+     * @param allCollaborators The list of collaborators to be saved as a team.
+     */
+    public void saveTeam(List<Collaborator> allCollaborators) {
+        Team team = new Team(allCollaborators);
+        teamRepository.addTeam(team);
+    }
+    /**
+     * Retrieves the list of saved teams.
+     *
+     * @return The list of saved teams.
+     */
+    public List<Team> getSavedTeams() {
+        return teamRepository.getTeamList();
+    }
+
 }

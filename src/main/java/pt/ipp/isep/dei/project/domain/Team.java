@@ -13,6 +13,18 @@ public class Team {
     private final List<Collaborator> collaborators;
 
     /**
+     * Constructs a new Team with the given list of collaborators.
+     *
+     * @param collaborators The list of collaborators.
+     */
+    public Team(List<Collaborator> collaborators) {
+        this.collaborators = collaborators;
+        this.skills = List.of();
+        this.minTeamSize = 0;
+        this.maxTeamSize = collaborators.size();
+    }
+
+    /**
      * Constructs a new Team object with the provided skills, collaborators, and team size constraints.
      *
      * @param skills        the required skills for the team
@@ -20,6 +32,7 @@ public class Team {
      * @param minTeamSize   the minimum team size constraint
      * @param maxTeamSize   the maximum team size constraint
      */
+
     public Team(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize) {
         this.skills = skills;
         this.collaborators = collaborators;
@@ -27,6 +40,7 @@ public class Team {
         this.maxTeamSize = maxTeamSize;
 
     }
+
 
     /**
      * Retrieves the required skills for the team.
