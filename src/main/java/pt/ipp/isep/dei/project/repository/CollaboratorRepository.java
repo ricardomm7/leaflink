@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,8 +39,7 @@ public class CollaboratorRepository {
      * @param admissionDate        the date of admission of the collaborator
      * @param job                  the job of the collaborator
      */
-    public void create(String name, LocalDate birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate, Job job) {
-        Collaborator c = new Collaborator(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
+    public void create(Collaborator c) {
         if (checkForDuplicates(c)) {
             addCollaborator(c);
         }

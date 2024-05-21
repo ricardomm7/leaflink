@@ -1,13 +1,13 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.domain.DocumentType;
-import pt.ipp.isep.dei.project.domain.Job;
+import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.JobDto;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.JobRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -28,24 +28,17 @@ public class RegisterCollaboratorController {
         jobRepository = repositories.getJobRepository();
     }
 
+
     /**
-     * Creates a new collaborator with the provided details.
+     * Create clb from a collaborator DTO.
      *
-     * @param name                 the name of the collaborator
-     * @param birthdate            the birthdate of the collaborator
-     * @param contactMobile        the mobile contact number of the collaborator
-     * @param taxpayerNumber       the taxpayer number of the collaborator
-     * @param email                the email address of the collaborator
-     * @param address              the address of the collaborator
-     * @param zipCode              the zip code of the collaborator's address
-     * @param city                 the city of the collaborator's address
-     * @param documentType         the document type of the collaborator
-     * @param identificationNumber the identification number of the collaborator
-     * @param admissionDate        the admission date of the collaborator
-     * @param job                  the job position of the collaborator
+     * @param collDto the collaborator dto
      */
-    public void createCLB(String name, LocalDate birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate, Job job) {
-        collaboratorRepository.create(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
+    public void createCLB(CollaboratorDto collDto) {
+
+        Collaborator collaborator = CollaboratorMapper.toDomain(collDto);
+        collaboratorRepository.create(collaborator);
+
     }
 
     /**

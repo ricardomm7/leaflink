@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorContro
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.dto.JobDto;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.mappers.JobMapper;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -97,7 +99,8 @@ public class RegisterCollaboratorUI implements Runnable {
         System.out.println("\nDo you want to register this collaborator? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            rc.createCLB(name, birthdate1, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate1, job);
+            CollaboratorDto collDto = new CollaboratorDto(name, birthdate1, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate1, JobMapper.toDomain(jobDTO));
+            rc.createCLB(collDto);
             System.out.println("Collaborator successfully registered!");
         } else {
             System.out.println("Operation cancelled!");

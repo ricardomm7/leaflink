@@ -1,0 +1,41 @@
+package pt.ipp.isep.dei.project.mappers;
+
+import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.Job;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.JobDto;
+
+/**
+ * The type Collaborator mapper.
+ */
+public class CollaboratorMapper {
+
+    /**
+     * To dto collaborator dto.
+     *
+     * @param collaborator the collaborator
+     * @return the collaborator dto
+     */
+    public static CollaboratorDto toDto(Collaborator collaborator) {
+        CollaboratorDto cDto = new CollaboratorDto(collaborator.getName(), collaborator.getBirthdate(), collaborator.getContactMobile(),
+                collaborator.getTaxpayerNumber(), collaborator.getEmail(), collaborator.getAddress().getAddress(), collaborator.getAddress().getZipCode(),
+                collaborator.getAddress().getCity(), collaborator.getDocumentType(), collaborator.getIdentificationNumber(), collaborator.getAdmissionDate(),
+                collaborator.getJob());
+        return cDto;
+    }
+
+
+    /**
+     * To domain collaborator.
+     *
+     * @param collaboratorDto the collaborator dto
+     * @return the collaborator
+     */
+    public static Collaborator toDomain(CollaboratorDto collaboratorDto) {
+        Collaborator collaborator = new Collaborator(collaboratorDto.getName(), collaboratorDto.getBirthdate(), collaboratorDto.getContactMobile(),
+                collaboratorDto.getTaxpayerNumber(), collaboratorDto.getEmail(), collaboratorDto.getAddress().getAddress(), collaboratorDto.getAddress().getZipCode(),
+                collaboratorDto.getAddress().getCity(), collaboratorDto.getDocumentType(), collaboratorDto.getIdentificationNumber(), collaboratorDto.getAdmissionDate(),
+                collaboratorDto.getJob());
+        return collaborator;
+    }
+}
