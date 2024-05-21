@@ -17,6 +17,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Bootstrap.
+ */
 public class Bootstrap implements Runnable {
 
     //Add some task categories to the repository as bootstrap
@@ -31,7 +34,10 @@ public class Bootstrap implements Runnable {
 
     }
 
-public void addVehicles() {
+    /**
+     * Add vehicles.
+     */
+    public void addVehicles() {
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
 
         // Example 1

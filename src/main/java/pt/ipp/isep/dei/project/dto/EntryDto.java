@@ -4,6 +4,9 @@ import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
 
 import java.util.Objects;
 
+/**
+ * The type Entry dto.
+ */
 public class EntryDto {
 
    private GreenSpaceDto greenSpaceDto;
@@ -14,6 +17,14 @@ public class EntryDto {
 
    private String duration;
 
+    /**
+     * Instantiates a new Entry dto.
+     *
+     * @param greenSpaceDto   the green space dto
+     * @param description     the description
+     * @param degreeOfUrgency the degree of urgency
+     * @param duration        the duration
+     */
     public EntryDto(GreenSpaceDto greenSpaceDto, String description, DegreeOfUrgency degreeOfUrgency, String duration) {
         this.greenSpaceDto = greenSpaceDto;
         this.description = description;
@@ -21,34 +32,74 @@ public class EntryDto {
         this.duration = duration;
     }
 
+    /**
+     * Gets green space dto.
+     *
+     * @return the green space dto
+     */
     public GreenSpaceDto getGreenSpaceDto() {
         return greenSpaceDto;
     }
 
+    /**
+     * Sets green space dto.
+     *
+     * @param greenSpaceDto the green space dto
+     */
     public void setGreenSpaceDto(GreenSpaceDto greenSpaceDto) {
         this.greenSpaceDto = greenSpaceDto;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets degree of urgency.
+     *
+     * @return the degree of urgency
+     */
     public DegreeOfUrgency getDegreeOfUrgency() {
         return degreeOfUrgency;
     }
 
+    /**
+     * Sets degree of urgency.
+     *
+     * @param degreeOfUrgency the degree of urgency
+     */
     public void setDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
         this.degreeOfUrgency = degreeOfUrgency;
     }
 
+    /**
+     * Gets duration.
+     *
+     * @return the duration
+     */
     public String getDuration() {
         return duration;
     }
 
+    /**
+     * Sets duration.
+     *
+     * @param duration the duration
+     */
     public void setDuration(String duration) {
         this.duration = duration;
     }

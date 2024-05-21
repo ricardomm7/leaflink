@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Authentication gui.
+ */
 public class AuthenticationGUI {
 
     @FXML
@@ -26,6 +29,11 @@ public class AuthenticationGUI {
 
     private final AuthenticationController ctrl = new AuthenticationController();
 
+    /**
+     * Handle login button action.
+     *
+     * @param event the event
+     */
     @FXML
     void handleLoginButtonAction(ActionEvent event) {
         String username = usernameField.getText();

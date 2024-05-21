@@ -7,6 +7,9 @@ import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Register to do entry ui.
+ */
 public class RegisterToDoEntryUI implements Runnable {
 
     private final RegisterToDoEntryController controller;
@@ -18,6 +21,9 @@ public class RegisterToDoEntryUI implements Runnable {
         this.controller = new RegisterToDoEntryController();
     }
 
+    /**
+     * Register to do entry.
+     */
     public void registerToDoEntry(){
         Scanner sc = new Scanner(System.in);
         try{

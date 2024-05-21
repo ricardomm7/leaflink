@@ -9,7 +9,16 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * The type Run tests controller.
+ */
 public class RunTestsController {
+    /**
+     * Execute.
+     *
+     * @param caminhosFile the caminhos file
+     * @throws FileNotFoundException the file not found exception
+     */
     public void execute(List<String> caminhosFile) throws FileNotFoundException {
         executeMultiple(caminhosFile);
         Gnuplot.execute();

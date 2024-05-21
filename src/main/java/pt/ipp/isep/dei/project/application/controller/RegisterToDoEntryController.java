@@ -12,6 +12,9 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Register to do entry controller.
+ */
 public class RegisterToDoEntryController {
 
     private final Repositories repositories;
@@ -27,6 +30,11 @@ public class RegisterToDoEntryController {
         greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
 
+    /**
+     * Get green spaces dto list.
+     *
+     * @return the list
+     */
     public List<GreenSpaceDto> getGreenSpacesDto(){
         List<GreenSpaceDto> listToReturn = new LinkedList<>();
         List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaceList();
@@ -37,6 +45,15 @@ public class RegisterToDoEntryController {
         }
         return listToReturn;
     }
+
+    /**
+     * Create new entry.
+     *
+     * @param greenSpace      the green space
+     * @param description     the description
+     * @param degreeOfUrgency the degree of urgency
+     * @param duration        the duration
+     */
     public void createNewEntry(GreenSpaceDto greenSpace, String description, DegreeOfUrgency degreeOfUrgency, String duration) {
         //EntryRepository.create(greenSpace, description,degreeOfUrgency,duration));
     }

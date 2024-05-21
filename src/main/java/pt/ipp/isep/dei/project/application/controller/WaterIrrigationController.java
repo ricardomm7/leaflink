@@ -7,7 +7,15 @@ import pt.ipp.isep.dei.project.domain.Route;
 
 import java.util.List;
 
+/**
+ * The type Water irrigation controller.
+ */
 public class WaterIrrigationController {
+    /**
+     * Execute.
+     *
+     * @param filepath the filepath
+     */
     public void execute(String filepath) {
         executeSingle(filepath);
     }

@@ -4,6 +4,9 @@ package pt.ipp.isep.dei.project.domain;
  * Enum representing different types of identification for a person.
  */
 public enum DocumentType {
+    /**
+     * The Citizen card.
+     */
     CITIZEN_CARD {
         public String toString() {
             return "Citizen Card";
@@ -26,6 +29,9 @@ public enum DocumentType {
             return Character.isDigit(numb.charAt(11));
         }
     },
+    /**
+     * The Passport.
+     */
     PASSPORT {
         public String toString() {
             return "Passport";
@@ -44,6 +50,9 @@ public enum DocumentType {
             return true;
         }
     },
+    /**
+     * The Identity card.
+     */
     IDENTITY_CARD {
         public String toString() {
             return "Identity Card";
@@ -61,6 +70,9 @@ public enum DocumentType {
             return true;
         }
     },
+    /**
+     * The Other type.
+     */
     OTHER_TYPE {
         public String toString() {
             return "Other type";
@@ -76,5 +88,11 @@ public enum DocumentType {
         }
     };
 
+    /**
+     * Verify number boolean.
+     *
+     * @param numb the numb
+     * @return the boolean
+     */
     public abstract boolean verifyNumber(String numb);
 }
