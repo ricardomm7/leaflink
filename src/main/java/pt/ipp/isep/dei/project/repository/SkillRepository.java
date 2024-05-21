@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.SkillDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,7 @@ public class SkillRepository {
      *
      * @param designation the designation of the skill to create.
      */
-    public void createSkill(String designation) {
-        Skill skill = new Skill(designation);
+    public void createSkill(Skill skill) {
         if (checkForDuplicates(skill)) {
             addSkill(skill);
         } else {
