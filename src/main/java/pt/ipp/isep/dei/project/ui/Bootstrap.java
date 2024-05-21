@@ -1,21 +1,11 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.DocumentType;
-import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.repository.*;
-import pt.isep.lei.esoft.auth.domain.model.Email;
-import pt.isep.lei.esoft.auth.domain.model.Password;
-import pt.isep.lei.esoft.auth.domain.model.User;
-import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The type Bootstrap.
@@ -146,33 +136,33 @@ public class Bootstrap implements Runnable {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
         // Example 1
-        collaboratorRepository.create("Bob Smith", new Date(1990, 1, 22), 987654321,
+        collaboratorRepository.create("Bob Smith", LocalDate.of(2000, 9, 30), 987654321,
                 123456789, "bob.smith@example.com", "5678 Oak Street", "6789-100",
-                "Shelbyville", DocumentType.PASSPORT, "CD2345678", new Date(2021, 5, 15),
+                "Shelbyville", DocumentType.PASSPORT, "CD2345678", LocalDate.of(2021, 9, 30),
                 jobRepository.getJobList().get(0));
 
         // Example 2
-        collaboratorRepository.create("Alice Johnson", new Date(1985, 1, 15), 123456789,
+        collaboratorRepository.create("Alice Johnson", LocalDate.of(2000, 9, 30), 123456789,
                 987654321, "alice.johnson@example.com", "1234 Elm Street", "1234-125",
-                "Springfield", DocumentType.PASSPORT, "AB1234567", new Date(2020, 5, 1),
+                "Springfield", DocumentType.PASSPORT, "AB1234567", LocalDate.of(2021, 9, 30),
                 jobRepository.getJobList().get(1));
 
         // Example 3
-        collaboratorRepository.create("Charlie Brown", new Date(1992, 1, 30), 234567891,
+        collaboratorRepository.create("Charlie Brown", LocalDate.of(2000, 9, 30), 234567891,
                 876543219, "charlie.brown@example.com", "3456 Maple Street", "2345-226",
-                "Centerville", DocumentType.PASSPORT, "EF3456789", new Date(2022, 5, 20),
+                "Centerville", DocumentType.PASSPORT, "EF3456789", LocalDate.of(2021, 9, 30),
                 jobRepository.getJobList().get(2));
 
         // Example 4
-        collaboratorRepository.create("Diana Prince", new Date(1988, 1, 7), 345678912,
+        collaboratorRepository.create("Diana Prince", LocalDate.of(2000, 9, 30), 345678912,
                 765432198, "diana.prince@example.com", "4567 Birch Street", "3456-987",
-                "Metro City", DocumentType.PASSPORT, "GH4567890", new Date(2019, 5, 25),
+                "Metro City", DocumentType.PASSPORT, "GH4567890", LocalDate.of(2021, 9, 30),
                 jobRepository.getJobList().get(3));
 
         // Example 5
-        collaboratorRepository.create("Edward Scissorhands", new Date(1993, 1, 14), 456789123,
+        collaboratorRepository.create("Edward Scissorhands", LocalDate.of(2000, 9, 30), 456789123,
                 654321987, "edward.scissorhands@example.com", "5678 Pine Street", "4567-908",
-                "Suburbia", DocumentType.PASSPORT, "IJ5678901", new Date(2023, 1, 15),
+                "Suburbia", DocumentType.PASSPORT, "IJ5678901", LocalDate.of(2021, 9, 30),
                 jobRepository.getJobList().get(4));
     }
 

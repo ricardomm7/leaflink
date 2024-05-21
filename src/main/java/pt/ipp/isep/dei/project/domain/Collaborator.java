@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class Collaborator {
     private String name;
-    private Date birthdate;
+    private LocalDate birthdate;
     private int contactMobile;
     private int taxpayerNumber;
     private String email;
     private DocumentType documentType;
     private String identificationNumber;
-    private Date admissionDate;
+    private LocalDate admissionDate;
     private Job job;
     private Address address;
     private List<Skill> skills;
@@ -39,7 +39,7 @@ public class Collaborator {
      * @param admissionDate        The admission date of the collaborator.
      * @param job                  The job of the collaborator.
      */
-    public Collaborator(String name, Date birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, Date admissionDate, Job job) {
+    public Collaborator(String name, LocalDate birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate, Job job) {
         setName(name);
         setBirthdate(birthdate);
         setContactMobile(contactMobile);
@@ -70,7 +70,7 @@ public class Collaborator {
      * @param admissionDate The admission date of the collaborator.
      * @throws IllegalArgumentException If the admission date is invalid.
      */
-    public void setAdmissionDate(Date admissionDate) {
+    public void setAdmissionDate(LocalDate admissionDate) {
         if (verifyAdmissionDate(admissionDate)) {
             this.admissionDate = admissionDate;
         } else {
@@ -84,11 +84,11 @@ public class Collaborator {
      * @param birthdate the birthdate of the collaborator
      * @throws IllegalArgumentException if the birthdate is invalid
      */
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         if (verifyBirth(birthdate)) {
             this.birthdate = birthdate;
         } else {
-            throw new IllegalArgumentException("The collaborator must be at least 18 years old.");
+            throw new IllegalArgumentException("The collaborator birthdate mustn't be today or future.");
         }
     }
 
@@ -243,14 +243,16 @@ public class Collaborator {
      * @param date the birthdate to verify
      * @return true if the birthdate is valid, false otherwise
      */
-    private boolean verifyBirth(Date date) {
+    private boolean verifyBirth(LocalDate date) {
         if (date == null) {
             return false;
         }
+
+        // Obtém a data de hoje
+        LocalDate today = LocalDate.now();
+
         // Verifica se a data não é a de hoje ou futura
-        Calendar today = Calendar.getInstance();
-        today.setTime(new Date());
-        return date.after(today.getTime());
+        return !date.isAfter(today);
     }
 
     /**
@@ -286,25 +288,18 @@ public class Collaborator {
      * @param admissionDate the admission date to verify
      * @return true if the admission date is valid, false otherwise
      */
-    private boolean verifyAdmissionDate(Date admissionDate) {
+    private boolean verifyAdmissionDate(LocalDate admissionDate) {
         if (admissionDate == null || this.birthdate == null) {
             return false;
         }
+
         // Verifica se a data de admissão não é anterior à data de nascimento
-        if (admissionDate.before(this.birthdate)) {
+        if (admissionDate.isBefore(this.birthdate)) {
             return false;
         }
 
         // Calcula a diferença em anos entre a data de admissão e a data de nascimento
-        Calendar calendarAdmission = Calendar.getInstance();
-        calendarAdmission.setTime(admissionDate);
-        int yearAdmission = calendarAdmission.get(Calendar.YEAR);
-
-        Calendar calendarBirth = Calendar.getInstance();
-        calendarBirth.setTime(this.birthdate);
-        int yearBirth = calendarBirth.get(Calendar.YEAR);
-
-        int ageDifference = yearAdmission - yearBirth;
+        int ageDifference = Period.between(this.birthdate, admissionDate).getYears();
 
         // Verifica se a diferença de idade é pelo menos 18 anos
         return ageDifference >= 18;
@@ -346,7 +341,7 @@ public class Collaborator {
      *
      * @return the collaborator birthdate.
      */
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
@@ -364,7 +359,7 @@ public class Collaborator {
      *
      * @return the admission date of the person.
      */
-    public Date getAdmissionDate() {
+    public LocalDate getAdmissionDate() {
         return admissionDate;
     }
 

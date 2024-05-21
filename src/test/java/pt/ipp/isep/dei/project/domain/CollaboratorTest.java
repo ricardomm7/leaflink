@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.project.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +15,7 @@ class CollaboratorTest {
     public void setUp() {
         // Sample data for testing
         String name = "John Doe";
-        Date birthdate = new Date(1990, 1, 1);
+        LocalDate birthdate = LocalDate.of(1990, 1, 1);
         int contactMobile = 123456789;
         int taxpayerNumber = 123456789;
         String email = "john.doe@example.com";
@@ -24,7 +24,7 @@ class CollaboratorTest {
         String city = "SomeCity";
         DocumentType documentType = DocumentType.PASSPORT;
         String identificationNumber = "BSD987890";
-        Date admissionDate = new Date(2020, 1, 1);
+        LocalDate admissionDate = LocalDate.of(2020, 1, 1);
         Job job = new Job("Software Engineer");
         collaborator = new Collaborator(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
     }
@@ -47,12 +47,12 @@ class CollaboratorTest {
 
     @Test
     public void testSetBirthdate_ValidDate() {
-        Date expectedDate = new Date(1980, 1, 1);
+        LocalDate expectedDate = LocalDate.of(1980, 1, 1);
 
         collaborator.setBirthdate(expectedDate);
 
-        Date actualDate = collaborator.getBirthdate();
-        assertEquals(expectedDate.getTime(), actualDate.getTime());
+        LocalDate actualDate = collaborator.getBirthdate();
+        assertEquals(expectedDate, actualDate); // Comparação direta entre LocalDate
     }
 
     @Test
@@ -62,7 +62,7 @@ class CollaboratorTest {
 
     @Test
     public void testSetAdmissionDate_NotAdultAtAdmission() {
-        assertThrows(IllegalArgumentException.class, () -> collaborator.setAdmissionDate(new Date(2002, 1, 1)));
+        assertThrows(IllegalArgumentException.class, () -> collaborator.setAdmissionDate(LocalDate.of(2002, 1, 1)));
     }
 
     @Test
