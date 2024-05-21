@@ -23,21 +23,11 @@ public class CollaboratorRepository {
         collaboratorList = new ArrayList<>();
     }
 
+
     /**
-     * Creates a new collaborator with the provided information and adds it to the repository if it does not already exist.
+     * Add the collaborator created, with all attributes, to the collaborators list if's not a duplicate..
      *
-     * @param name                 the name of the collaborator
-     * @param birthdate            the birthdate of the collaborator
-     * @param contactMobile        the mobile contact number of the collaborator
-     * @param taxpayerNumber       the taxpayer number of the collaborator
-     * @param email                the email address of the collaborator
-     * @param address              the address of the collaborator
-     * @param zipCode              the ZIP code of the collaborator's address
-     * @param city                 the city of the collaborator's address
-     * @param documentType         the document type of the collaborator's identification
-     * @param identificationNumber the identification number of the collaborator
-     * @param admissionDate        the date of admission of the collaborator
-     * @param job                  the job of the collaborator
+     * @param c the collaborator created.
      */
     public void create(Collaborator c) {
         if (checkForDuplicates(c)) {

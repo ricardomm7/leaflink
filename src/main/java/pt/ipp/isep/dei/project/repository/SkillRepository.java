@@ -21,9 +21,9 @@ public class SkillRepository {
     }
 
     /**
-     * Creates a new skill with the specified designation and adds it to the skill list if it's not a duplicate.
+     *  Add a new skill, with the specified designation, to the skill list if it's not a duplicate.
      *
-     * @param designation the designation of the skill to create.
+     * @param skill the skill created.
      */
     public void createSkill(Skill skill) {
         if (checkForDuplicates(skill)) {

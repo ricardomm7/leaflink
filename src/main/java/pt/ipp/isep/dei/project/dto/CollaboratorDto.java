@@ -11,10 +11,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * The Collaborator class represents an individual who collaborates within an organization.
- * It holds information such as name, birthdate, contact details, taxpayer number, email, address, identification number,
- * admission date, and job.
+ * The type Collaborator dto.
  */
 public class CollaboratorDto {
     private String name;
@@ -30,7 +29,7 @@ public class CollaboratorDto {
     private List<Skill> skills;
 
     /**
-     * Constructor for Collaborator class.
+     * Constructor for Collaborator DTO class.
      *
      * @param name                 The name of the collaborator.
      * @param birthdate            The birthdate of the collaborator.
