@@ -12,12 +12,11 @@ participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "toDoRepository:\nToDoRepository" as TODOREP
 participant "agendaRepository:\nAgendaRepository" as AGENDREP
-participant ":GreenSpace" as GS
 
 activate GSM
 GSM -> UI : requests to add a new entry in the Agenda
 activate UI
-UI -> CTRL : create
+
 
 UI -> CTRL: get toDoList
 activate CTRL
@@ -43,38 +42,6 @@ deactivate UI
 GSM -> UI : selects a To-Do entry
 activate UI
 
-UI -> CTRL : get greenSpaceList
-deactivate UI
-activate CTRL
-
-CTRL -> GlobRepo : getInstance()
-activate GlobRepo
-
-GlobRepo --> CTRL : repositories
-deactivate GlobRepo
-
-CTRL -> PLAT : getGreenSpaceRepository()
-activate PLAT
-
-PLAT -->  CTRL: greenSpaceRepository
-deactivate PLAT
-
-CTRL -> greenSpaceRepository : getGreenSpaceList()
-activate greenSpaceRepository
-
-greenSpaceRepository --> CTRL : greenSpaceList
-deactivate greenSpaceRepository
-
-CTRL --> UI : greenSpaceList
-deactivate CTRL
-activate UI
-
-UI --> GSM : shows the list of green spaces and requests to select one
-deactivate UI
-
-GSM -> UI : selects a green space
-activate UI
-
 UI --> GSM: shows all data and requests confirmation
 deactivate UI
 
@@ -85,7 +52,7 @@ UI -> CTRL : add agenda entry
 deactivate UI
 activate CTRL
 
-CTRL -> AGENDREP : addAgendaEntry(toDoEntry, greenSpace)
+CTRL -> AGENDREP : addAgendaEntry(toDoEntry)
 deactivate CTRL
 
 activate AGENDREP

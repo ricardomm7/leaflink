@@ -22,13 +22,6 @@ activate GSM
 
     activate System
 
-        System --> GSM : shows the list fo Green Spaces and asks to select one
-    deactivate System
-
-    GSM -> System : selects a Green Space
-
-    activate System
-
         System --> GSM : requests a starting date for the selected task
     deactivate System
 
