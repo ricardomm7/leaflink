@@ -10,7 +10,6 @@ import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +41,6 @@ public class AssignSkillController {
     }
 
 
-
     /**
      * Retrieves the list of skillsDto
      *
@@ -51,7 +49,6 @@ public class AssignSkillController {
     public List<SkillDto> getSkillDtoList() {
         return skillRepository.getSkillDtoList();
     }
-
 
 
     /**

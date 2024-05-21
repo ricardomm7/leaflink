@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;

@@ -46,10 +46,10 @@ public class SkillMapper {
         return skillList;
     }
 
-        public static List<SkillDto> ListToDto(List<Skill> skillList) {
+    public static List<SkillDto> ListToDto(List<Skill> skillList) {
         List<SkillDto> copy = new ArrayList<SkillDto>();
-        for (Skill skill : skillList)  {
-            SkillDto skillDto= SkillMapper.toDto(skill);
+        for (Skill skill : skillList) {
+            SkillDto skillDto = SkillMapper.toDto(skill);
             copy.add(skillDto);
         }
         return copy;

@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.project.mappers;
 
-import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
-import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
 
 import java.util.ArrayList;
@@ -27,10 +25,10 @@ public class TeamMapper {
         return teamList;
     }
 
-        public static List<TeamDto> ListToDto(List<Team> teamList) {
+    public static List<TeamDto> ListToDto(List<Team> teamList) {
         List<TeamDto> copy = new ArrayList<>();
-        for (Team team : teamList)  {
-            TeamDto teamDto= TeamMapper.toDto(team);
+        for (Team team : teamList) {
+            TeamDto teamDto = TeamMapper.toDto(team);
             copy.add(teamDto);
         }
         return copy;

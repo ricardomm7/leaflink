@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.mappers.SkillMapper;
-import pt.ipp.isep.dei.project.repository.SkillRepository;
 
 import java.time.LocalDate;
 import java.time.Period;

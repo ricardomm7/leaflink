@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.project.mappers.SkillMapper;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**

@@ -69,7 +69,7 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 **Get Skill List**
 
-![Sequence Diagram - Partial - Get Employee](svg/us005-sequence-diagram-partial-get-skill-list.svg)
+![Sequence Diagram - Partial - Get Employee](svg/us005-sequence-diagram-partial-get-skills-list.svg)
 
 
 ## 3.3. Class Diagram (CD)

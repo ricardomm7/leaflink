@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.dto;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
-import pt.ipp.isep.dei.project.mappers.SkillMapper;
 
 import java.util.List;
 
