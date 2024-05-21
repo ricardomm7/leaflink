@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.CreateJobController;
+import pt.ipp.isep.dei.project.dto.JobDto;
 
 import java.util.Scanner;
 
@@ -21,7 +22,8 @@ public class CreateJobUI implements Runnable {
         System.out.println("You want to create a job with the name " + title + "? (Y/N)");
         String decis = sc.nextLine();
         if (decis.trim().equals("Y")) {
-            jc.createJob(title);
+            JobDto jobDTO = new JobDto(title);
+            jc.createJob(jobDTO);
             System.out.println("Operation successfully completed!");
         } else {
             System.out.println("Operation cancelled!");
