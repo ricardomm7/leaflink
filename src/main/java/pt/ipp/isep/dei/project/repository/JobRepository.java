@@ -19,12 +19,11 @@ public class JobRepository {
     }
 
     /**
-     * Creates a new job with the provided title and adds it to the repository if it does not already exist.
+     * Creates a new job with the provided dto and adds it to the repository if it does not already exist.
      *
-     * @param title the title of the job to create
+     * @param j the dto of the job to create
      */
-    public void createJob(String title) {
-        Job j = new Job(title);
+    public void createJob(Job j) {
         if (checkForDuplicates(j)) {
             addJob(j);
         } else {

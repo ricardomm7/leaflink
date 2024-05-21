@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.domain.Job;
+import pt.ipp.isep.dei.project.dto.JobDto;
+import pt.ipp.isep.dei.project.mappers.JobMapper;
 import pt.ipp.isep.dei.project.repository.JobRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
@@ -20,12 +23,13 @@ public class CreateJobController {
     }
 
     /**
-     * Creates a new job with the provided title.
+     * Creates a new job with the provided dto.
      *
-     * @param title the title of the job to be created
+     * @param dto the dto of the job to be created
      */
-    public void createJob(String title) {
-        jobRepository.createJob(title);
+    public void createJob(JobDto dto) {
+        Job job = JobMapper.toDomain(dto);
+        jobRepository.createJob(job);
     }
 }
 
