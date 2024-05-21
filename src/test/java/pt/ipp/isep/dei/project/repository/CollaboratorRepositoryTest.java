@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ public class CollaboratorRepositoryTest {
 
         // Sample data for testing
         String name = "John Doe";
-        Date birthdate = new Date(1990, 1, 1);
+        LocalDate birthdate = LocalDate.of(1990, 1, 1);
         int contactMobile = 123456789;
         int taxpayerNumber = 123456789;
         String email = "john.doe@example.com";
@@ -29,7 +30,7 @@ public class CollaboratorRepositoryTest {
         String city = "SomeCity";
         DocumentType documentType = DocumentType.PASSPORT;
         String identificationNumber = "123ABC666";
-        Date admissionDate = new Date(2020, 1, 1);
+        LocalDate admissionDate = LocalDate.of(2020, 1, 1);
         Job job = new Job("Software Engineer");
 
         // Create and add first collaborator
@@ -52,7 +53,7 @@ public class CollaboratorRepositoryTest {
 
         // Sample data for testing
         String collaboratorName = "John Doe";
-        Date birthdate = new Date(1990, 1, 1);
+        LocalDate birthdate = LocalDate.of(1990, 1, 1);
         int contactMobile = 123456789;
         int taxpayerNumber = 123456789;
         String email = "john.doe@example.com";
@@ -61,7 +62,7 @@ public class CollaboratorRepositoryTest {
         String city = "SomeCity";
         DocumentType documentType = DocumentType.PASSPORT;
         String identificationNumber = "123ABC999";
-        Date admissionDate = new Date(2020, 1, 1);
+        LocalDate admissionDate = LocalDate.of(2020, 1, 1);
         Job job = new Job("Software Engineer");
 
         // Create and add a collaborator
