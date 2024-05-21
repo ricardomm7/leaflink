@@ -18,8 +18,7 @@ public class SkillMapper {
      * @return the skill dto
      */
     public static SkillDto toDto(Skill skill) {
-        SkillDto s = new SkillDto(skill.getDesignation());
-        return s;
+        return new SkillDto(skill.getDesignation());
     }
 
     /**
@@ -29,17 +28,21 @@ public class SkillMapper {
      * @return the skill
      */
     public static Skill toDomain(SkillDto skill) {
-        Skill s = new Skill(skill.getDesignation());
-        return s;
+        return new Skill(skill.getDesignation());
     }
 
-    public static List<Skill> listToDomain(List<SkillDto> skillDtos){
-
+    /**
+     * List to domain list.
+     *
+     * @param skillDtos the skill dtos
+     * @return the list
+     */
+    public static List<Skill> listToDomain(List<SkillDto> skillDtos) {
         List<Skill> skillList = new ArrayList<>();
-        for (SkillDto dto : skillDtos){
+        for (SkillDto dto : skillDtos) {
             Skill skill = toDomain(dto);
             skillList.add(skill);
         }
-      return skillList;
+        return skillList;
     }
 }

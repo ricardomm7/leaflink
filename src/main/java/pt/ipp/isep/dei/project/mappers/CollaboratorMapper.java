@@ -18,11 +18,10 @@ public class CollaboratorMapper {
      * @return the collaborator dto
      */
     public static CollaboratorDto toDto(Collaborator collaborator) {
-        CollaboratorDto cDto = new CollaboratorDto(collaborator.getName(), collaborator.getBirthdate(), collaborator.getContactMobile(),
+        return new CollaboratorDto(collaborator.getName(), collaborator.getBirthdate(), collaborator.getContactMobile(),
                 collaborator.getTaxpayerNumber(), collaborator.getEmail(), collaborator.getAddress().getAddress(), collaborator.getAddress().getZipCode(),
                 collaborator.getAddress().getCity(), collaborator.getDocumentType(), collaborator.getIdentificationNumber(), collaborator.getAdmissionDate(),
                 collaborator.getJob());
-        return cDto;
     }
 
 
@@ -33,16 +32,15 @@ public class CollaboratorMapper {
      * @return the collaborator
      */
     public static Collaborator toDomain(CollaboratorDto collaboratorDto) {
-        Collaborator collaborator = new Collaborator(collaboratorDto.getName(), collaboratorDto.getBirthdate(), collaboratorDto.getContactMobile(),
+        return new Collaborator(collaboratorDto.getName(), collaboratorDto.getBirthdate(), collaboratorDto.getContactMobile(),
                 collaboratorDto.getTaxpayerNumber(), collaboratorDto.getEmail(), collaboratorDto.getAddress().getAddress(), collaboratorDto.getAddress().getZipCode(),
                 collaboratorDto.getAddress().getCity(), collaboratorDto.getDocumentType(), collaboratorDto.getIdentificationNumber(), collaboratorDto.getAdmissionDate(),
                 collaboratorDto.getJob());
-        return collaborator;
     }
 
-    public static List<CollaboratorDto> toDtoList(List<Collaborator> collaboratorList){
+    public static List<CollaboratorDto> toDtoList(List<Collaborator> collaboratorList) {
         List<CollaboratorDto> collaboratorsDto = new ArrayList<>();
-        for (Collaborator collaborator : collaboratorList){
+        for (Collaborator collaborator : collaboratorList) {
             CollaboratorDto collDto = CollaboratorMapper.toDto(collaborator);
 
             collaboratorsDto.add(collDto);

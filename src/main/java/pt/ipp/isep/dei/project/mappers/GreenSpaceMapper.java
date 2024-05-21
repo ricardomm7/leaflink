@@ -16,8 +16,7 @@ public class GreenSpaceMapper {
      * @return the green space dto
      */
     public GreenSpaceDto toDto(GreenSpace greenSpace) {
-        GreenSpaceDto gs = new GreenSpaceDto(greenSpace.getName(), greenSpace.getType(), greenSpace.getArea(), greenSpace.getManager(), greenSpace.getAddress().getAddress(), greenSpace.getAddress().getCity(), greenSpace.getAddress().getZipCode());
-        return gs;
+        return new GreenSpaceDto(greenSpace.getName(), greenSpace.getType(), greenSpace.getArea(), greenSpace.getManager(), greenSpace.getAddress().getAddress(), greenSpace.getAddress().getCity(), greenSpace.getAddress().getZipCode());
     }
 
     /**
@@ -27,7 +26,6 @@ public class GreenSpaceMapper {
      * @return the green space
      */
     public static GreenSpace toDomain(GreenSpaceDto greenSpaceDto) {
-        GreenSpace gs = new GreenSpace(greenSpaceDto.getName(), greenSpaceDto.getType(), greenSpaceDto.getArea(), greenSpaceDto.getManager(), new Address(greenSpaceDto.getAddress(), greenSpaceDto.getCity(), greenSpaceDto.getZipCode()));
-        return gs;
+        return new GreenSpace(greenSpaceDto.getName(), greenSpaceDto.getType(), greenSpaceDto.getArea(), greenSpaceDto.getManager(), new Address(greenSpaceDto.getAddress(), greenSpaceDto.getCity(), greenSpaceDto.getZipCode()));
     }
 }

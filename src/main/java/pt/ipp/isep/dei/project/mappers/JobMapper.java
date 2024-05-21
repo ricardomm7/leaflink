@@ -3,6 +3,9 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.dto.JobDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * The type Job mapper.
@@ -16,8 +19,7 @@ public class JobMapper {
      * @return the job dto
      */
     public static JobDto toDto(Job job) {
-        JobDto jb = new JobDto(job.getTitle());
-        return jb;
+        return new JobDto(job.getTitle());
     }
 
     /**
@@ -27,7 +29,21 @@ public class JobMapper {
      * @return the job
      */
     public static Job toDomain(JobDto jobdto) {
-        Job jb = new Job(jobdto.getTitle());
-        return jb;
+        return new Job(jobdto.getTitle());
+    }
+
+    /**
+     * List to dto list.
+     *
+     * @param j the j
+     * @return the list
+     */
+    public static List<JobDto> listToDto(List<Job> j) {
+        List<JobDto> u = new ArrayList<>();
+        for (Job l : j) {
+            JobDto k = JobMapper.toDto(l);
+            u.add(k);
+        }
+        return u;
     }
 }

@@ -57,7 +57,7 @@ public class AssignSkillController {
     public List<SkillDto> getSkillDtoList() {
         List<SkillDto> skillsDtoList = new ArrayList<>();
 
-        for (Skill skill: skillRepository.getSkillList()) {
+        for (Skill skill : skillRepository.getSkillList()) {
             SkillDto skillDto = SkillMapper.toDto(skill);
 
             skillsDtoList.add(skillDto);

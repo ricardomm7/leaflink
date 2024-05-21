@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.AssignSkillController;
-import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 
@@ -66,7 +64,7 @@ public class AssignSkillUI implements Runnable {
                 System.out.println("Invalid Selection. Please select a valid skill index");
                 continue;
             }
-        SkillDto selectedSkill = skillDtoList.get(skillIndex - 1);
+            SkillDto selectedSkill = skillDtoList.get(skillIndex - 1);
 
             if (selectedSkillsIds.contains(selectedSkill.getDesignation())) {
                 System.out.println("The selected skill has already been assigned. Please select another skill.");

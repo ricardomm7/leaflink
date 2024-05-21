@@ -63,12 +63,7 @@ public class JobRepository {
      * @return a list of jobs
      */
     public List<JobDto> getJobList() {
-        List<JobDto> u = new ArrayList<>();
-        for (Job j : jobList) {
-            JobDto k = JobMapper.toDto(j);
-            u.add(k);
-        }
-        return u;
+        return JobMapper.listToDto(jobList);
     }
 }
 

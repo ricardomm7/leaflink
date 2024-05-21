@@ -6,12 +6,10 @@ import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 public class MaintenanceMapper {
 
     public static MaintenanceDto toDto(Maintenance m) {
-        MaintenanceDto mntn = new MaintenanceDto(m.getVehiclePlate(), m.getDate(), m.getKm());
-        return mntn;
+        return new MaintenanceDto(m.getVehiclePlate(), m.getDate(), m.getKm());
     }
 
     public static Maintenance toDomain(MaintenanceDto m) {
-        Maintenance m1 = new Maintenance(m.getVehiclePlate(), m.getDate(), m.getKm());
-        return m1;
+        return new Maintenance(m.getVehiclePlate(), m.getDate(), m.getKm());
     }
 }

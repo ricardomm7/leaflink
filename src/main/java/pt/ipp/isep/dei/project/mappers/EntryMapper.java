@@ -23,8 +23,7 @@ public class EntryMapper {
      */
     public static EntryDto toDto(Entry entry) {
         GreenSpaceDto greenSpaceDto = greenSpaceMapper.toDto(entry.getGreenSpace());
-        EntryDto e = new EntryDto(greenSpaceDto, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
-        return e;
+        return new EntryDto(greenSpaceDto, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
     }
 
     /**
@@ -35,7 +34,6 @@ public class EntryMapper {
      */
     public static Entry toDomain(EntryDto entry) {
         GreenSpace greenSpace = GreenSpaceMapper.toDomain(entry.getGreenSpaceDto());
-        Entry e = new Entry(greenSpace, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
-        return e;
+        return new Entry(greenSpace, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
     }
 }
