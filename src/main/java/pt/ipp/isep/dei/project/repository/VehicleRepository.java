@@ -27,18 +27,19 @@ public class VehicleRepository {
      *
      * @return the vehicle list
      */
-    public List<Vehicle> getVehicleList() {
-        return new ArrayList<>(vehicleList);
+    public List<VehicleDto> getVehicleList() {
+        return VehicleMapper.toDtoList(vehicleList);
     }
 
 
     /**
-     * Register vehicle boolean.
+     * Register vehicle from a vehicle DTO object.
      *
-     * @param vehicle the vehicle
+     * @param vehicle the vehicle Dto object
      * @return the boolean
      */
     public Boolean registerVehicle(Vehicle vehicle) {
+
 
         if (vehicle.validateVehicle()) {
             addVehicle(vehicle);
@@ -80,7 +81,7 @@ public class VehicleRepository {
         }
 
         // Verify existing vehicle
-        for (Vehicle vehicle : getVehicleList()) {
+        for (VehicleDto vehicle : getVehicleList()) {
             if (vin.equalsIgnoreCase(vehicle.getVIN()) || vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate())) {
                 return true;
             }
@@ -120,6 +121,7 @@ public class VehicleRepository {
 
 
             if (lastMaintenanceKm == -1 || currentKm >= nextMaintenanceKm * 0.95) {
+
                 vehiclesNeedingMaintenance.add(VehicleMapper.toDto(vehicle));
             }
         }

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.mappers.SkillMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +59,12 @@ public class SkillRepository {
     }
 
     /**
-     * Retrieves a copy of the skill list.
+     * Retrieves a skillDto list.
      *
-     * @return a list of skills.
+     * @return a list of skillsDto.
      */
-    public List<Skill> getSkillList() {
-        return new ArrayList<>(skillList);
+    public List<SkillDto> getSkillDtoList() {
+
+        return SkillMapper.ListToDto(skillList);
     }
 }

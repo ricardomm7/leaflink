@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.dto.TeamDto;
+import pt.ipp.isep.dei.project.mappers.TeamMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,10 @@ public class TeamRepository {
     /**
      * Adds a team to the repository.
      *
-     * @param team The team to be added.
+     * @param teamDto The team to be added.
      */
-    public void addTeam(Team team) {
+    public void addTeam(TeamDto teamDto) {
+        Team team = TeamMapper.toDomain(teamDto);
         teamList.add(team);
     }
 
@@ -33,7 +36,7 @@ public class TeamRepository {
      *
      * @return A new list containing all teams stored in the repository.
      */
-    public List<Team> getTeamList() {
-        return new ArrayList<>(teamList);
+    public List<TeamDto> getTeamDtoList() {
+        return TeamMapper.ListToDto(teamList);
     }
 }

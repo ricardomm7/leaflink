@@ -2,8 +2,10 @@ package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.dto.TeamDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,23 +30,23 @@ public class CreateTeamUI implements Runnable {
      * Runs the user interface for creating teams.
      */
     public void run() {
-        List<Skill> skills = createTeamController.getSkills();
-        if (skills.isEmpty()) {
+        List<SkillDto> skillsDto = createTeamController.getSkillsDto();
+        if (skillsDto.isEmpty()) {
             System.out.println("No skills available. Exiting.");
             return;
         }
         System.out.println("Available skills:");
-        for (int i = 0; i < skills.size(); i++) {
-            System.out.println((i + 1) + ". " + skills.get(i).getDesignation());
+        for (int i = 0; i < skillsDto.size(); i++) {
+            System.out.println((i + 1) + ". " + skillsDto.get(i).getDesignation());
         }
-        List<Skill> selectedSkills = getSelectedSkillsFromUser(skills);
+        List<SkillDto> selectedSkills = getSelectedSkillsFromUser(skillsDto);
         if (selectedSkills.isEmpty()) {
             System.out.println("No skills selected. Exiting.");
             return;
         }
         int minTeamSize = getMinTeamSizeFromUser();
         int maxTeamSize = getMaxTeamSizeFromUser();
-        List<Collaborator> collaborators = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
+        List<CollaboratorDto> collaborators = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
         if (collaborators.isEmpty()) {
             System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
             if (promptToCreateOwnTeam()) {
@@ -99,18 +101,18 @@ public class CreateTeamUI implements Runnable {
     /**
      * Prompts the user to select skills from the available list and returns the selected skills.
      *
-     * @param skills The list of available skills.
+     * @param skillsDto The list of available skills Dto.
      * @return The list of selected skills.
      */
-    private List<Skill> getSelectedSkillsFromUser(List<Skill> skills) {
-        List<Skill> selectedSkills = new ArrayList<>();
+    private List<SkillDto> getSelectedSkillsFromUser(List<SkillDto> skillsDto) {
+        List<SkillDto> selectedSkills = new ArrayList<>();
         System.out.print("Enter the numbers of the selected skills (comma-separated): ");
         String input = scanner.nextLine();
         String[] skillNumbers = input.split(",");
         for (String skillNumber : skillNumbers) {
             int index = Integer.parseInt(skillNumber.trim()) - 1;
-            if (index >= 0 && index < skills.size()) {
-                selectedSkills.add(skills.get(index));
+            if (index >= 0 && index < skillsDto.size()) {
+                selectedSkills.add(skillsDto.get(index));
             } else {
                 System.out.println("Invalid skill number: " + skillNumber);
             }
@@ -145,8 +147,8 @@ public class CreateTeamUI implements Runnable {
      *
      * @return The list of manually selected collaborators.
      */
-    private List<Collaborator> selectCollaboratorsManually() {
-        List<Collaborator> collaboratorList = createTeamController.getCollaboratorList();
+    private List<CollaboratorDto> selectCollaboratorsManually() {
+        List<CollaboratorDto> collaboratorList = createTeamController.getCollaboratorList();
         if (collaboratorList.isEmpty()) {
             System.out.println("No collaborators available. Exiting.");
             return new ArrayList<>();
@@ -155,7 +157,7 @@ public class CreateTeamUI implements Runnable {
         for (int i = 0; i < collaboratorList.size(); i++) {
             System.out.println((i + 1) + ". " + collaboratorList.get(i).getName());
         }
-        List<Collaborator> selectedCollaborators = new ArrayList<>();
+        List<CollaboratorDto> selectedCollaborators = new ArrayList<>();
         System.out.print("Enter the numbers of the selected collaborators (comma-separated): ");
         String input = scanner.nextLine();
         String[] collaboratorNumbers = input.split(",");
@@ -173,10 +175,10 @@ public class CreateTeamUI implements Runnable {
     /**
      * Saves the selected team of collaborators.
      *
-     * @param collaborators The list of collaborators to be saved as a team.
+     * @param collaboratorsDto The list of collaborators to be saved as a team.
      */
-    private void saveTeam(List<Collaborator> collaborators) {
-        createTeamController.saveTeam(collaborators);
+    private void saveTeam(List<CollaboratorDto> collaboratorsDto) {
+        createTeamController.saveTeam(collaboratorsDto);
         System.out.println("Team saved successfully.");
     }
 
@@ -184,16 +186,16 @@ public class CreateTeamUI implements Runnable {
      * Displays the list of saved teams.
      */
     private void displaySavedTeams() {
-        List<Team> savedTeams = createTeamController.getSavedTeams();
+        List<TeamDto> savedTeams = createTeamController.getSavedTeams();
         if (savedTeams.isEmpty()) {
             System.out.println("No teams saved yet.");
         } else {
             System.out.println("Saved Teams:");
             for (int i = 0; i < savedTeams.size(); i++) {
-                Team team = savedTeams.get(i);
+                TeamDto team = savedTeams.get(i);
                 System.out.println("Team " + (i + 1) + ":");
                 System.out.println("Skills: " + team.getSkills());
-                System.out.println("Collaborators: " + team.getCollaborators());
+                System.out.println("Collaborators: " + team.getCollaboratorsDtoList());
                 System.out.println("Minimum Team Size: " + team.getMinTeamSize());
                 System.out.println("Maximum Team Size: " + team.getMaxTeamSize());
                 System.out.println("--------------------");

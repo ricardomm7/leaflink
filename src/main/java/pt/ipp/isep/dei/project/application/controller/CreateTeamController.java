@@ -3,12 +3,18 @@ package pt.ipp.isep.dei.project.application.controller;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.dto.TeamDto;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
+import pt.ipp.isep.dei.project.mappers.SkillMapper;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -36,11 +42,11 @@ public class CreateTeamController {
      *
      * @return the list of skills
      */
-    public List<Skill> getSkills() {
-        return skillRepository.getSkillList();
+    public List<SkillDto> getSkillsDto() {
+        return skillRepository.getSkillDtoList();
     }
 
-    public List<Collaborator> getCollaboratorList() {
+    public List<CollaboratorDto> getCollaboratorList() {
         return collaboratorRepository.getCollaboratorList();
     }
 
@@ -52,25 +58,25 @@ public class CreateTeamController {
      * @param maxTeamSize    The maximum size of the team.
      * @return A list of selected collaborators for the team, or an empty list if no suitable team can be formed.
      */
-    public List<Collaborator> generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
-        List<Collaborator> allCollaborators = collaboratorRepository.getCollaboratorList();
-        List<Collaborator> selectedCollaborators = new ArrayList<>();
-        List<Skill> combinedSkills = new ArrayList<>();
+    public List<CollaboratorDto> generateProposal(List<SkillDto> requiredSkills, int minTeamSize, int maxTeamSize) {
+        List<CollaboratorDto> allCollaborators = collaboratorRepository.getCollaboratorList();
+        List<CollaboratorDto> selectedCollaboratorsDto = new ArrayList<>();
+        List<SkillDto> combinedSkillsDto = new ArrayList<>();
 
-        for (Collaborator collaborator : allCollaborators) {
-            if (isCollaboratorAssignedToTeam(collaborator)) {
+        for (CollaboratorDto collDto : allCollaborators) {
+            if (isCollaboratorAssignedToTeam(collDto)) {
                 continue;
             }
-            List<Skill> collaboratorSkills = collaborator.getSkills();
-            for (Skill skill : collaboratorSkills) {
-                if (!combinedSkills.contains(skill)) {
-                    combinedSkills.add(skill);
+            List<SkillDto> collaboratorSkillsDto = collDto.getSkills();
+            for (SkillDto skillDto : collaboratorSkillsDto) {
+                if (!combinedSkillsDto.contains(skillDto)) {
+                    combinedSkillsDto.add(skillDto);
                 }
             }
-            selectedCollaborators.add(collaborator);
-            if (combinedSkills.containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
-                teamRepository.addTeam(new Team(requiredSkills, selectedCollaborators, minTeamSize, maxTeamSize));
-                return selectedCollaborators;
+            selectedCollaboratorsDto.add(collDto);
+            if (new HashSet<>(combinedSkillsDto).containsAll(requiredSkills) && selectedCollaboratorsDto.size() >= minTeamSize) {
+                teamRepository.addTeam(new TeamDto(SkillMapper.listToDomain(requiredSkills), CollaboratorMapper.toDomainList(selectedCollaboratorsDto), minTeamSize, maxTeamSize));
+                return selectedCollaboratorsDto;
             }
         }
 
@@ -83,10 +89,10 @@ public class CreateTeamController {
      * @param collaborator The collaborator to check.
      * @return true if the collaborator is already assigned to a team, false otherwise.
      */
-    private boolean isCollaboratorAssignedToTeam(Collaborator collaborator) {
-        List<Team> teamList = teamRepository.getTeamList();
-        for (Team team : teamList) {
-            if (team.getCollaborators().contains(collaborator)) {
+    private boolean isCollaboratorAssignedToTeam(CollaboratorDto collaborator) {
+        List<TeamDto> teamListDto = teamRepository.getTeamDtoList();
+        for (TeamDto teamDto : teamListDto) {
+            if (teamDto.getCollaboratorsDtoList().contains(collaborator)) {
                 return true;
             }
         }
@@ -96,10 +102,10 @@ public class CreateTeamController {
     /**
      * Saves the team of collaborators.
      *
-     * @param allCollaborators The list of collaborators to be saved as a team.
+     * @param allCollaboratorsDto The list of collaborators to be saved as a team.
      */
-    public void saveTeam(List<Collaborator> allCollaborators) {
-        Team team = new Team(allCollaborators);
+    public void saveTeam(List<CollaboratorDto> allCollaboratorsDto) {
+        TeamDto team = new TeamDto(CollaboratorMapper.toDomainList(allCollaboratorsDto));
         teamRepository.addTeam(team);
     }
 
@@ -108,8 +114,8 @@ public class CreateTeamController {
      *
      * @return The list of saved teams.
      */
-    public List<Team> getSavedTeams() {
-        return teamRepository.getTeamList();
+    public List<TeamDto> getSavedTeams() {
+        return teamRepository.getTeamDtoList();
     }
 
 }

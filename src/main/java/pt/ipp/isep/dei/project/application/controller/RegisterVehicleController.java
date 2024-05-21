@@ -32,8 +32,8 @@ public class RegisterVehicleController {
     public boolean registerVehicle(VehicleDto vehicleDto) {
 
         if (!vehicleRepository.verifyExistingVehicles(vehicleDto.getVIN(), vehicleDto.getVehiclePlate())) {
-
             Vehicle vehicle = VehicleMapper.toDomain(vehicleDto);
+
             return vehicleRepository.registerVehicle(vehicle);
 
         }

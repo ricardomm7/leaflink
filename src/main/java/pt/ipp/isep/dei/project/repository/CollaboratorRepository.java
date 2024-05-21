@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +53,8 @@ public class CollaboratorRepository {
      *
      * @return the list of collaborators
      */
-    public List<Collaborator> getCollaboratorList() {
-        return new ArrayList<>(collaboratorList);
+    public List<CollaboratorDto> getCollaboratorList() {
+        return CollaboratorMapper.toDtoList(collaboratorList);
     }
 
     /**

@@ -3,6 +3,9 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VehicleMapper {
 
     /**
@@ -27,5 +30,16 @@ public class VehicleMapper {
         return new Vehicle(vehicleDto.getVIN(), vehicleDto.getBrand(), vehicleDto.getModel(), vehicleDto.getType(),
                 vehicleDto.getRegistrationDate(), vehicleDto.getVehiclePlate(), vehicleDto.getTareWeight(), vehicleDto.getGrossWeight(),
                 vehicleDto.getCurrentKm(), vehicleDto.getAcquisitionDate(), vehicleDto.getMaintenanceFrequency());
+    }
+
+    public static List<VehicleDto> toDtoList(List<Vehicle> vehicleList) {
+        List<VehicleDto> result = new ArrayList<>();
+        for (Vehicle vehicle : vehicleList) {
+            VehicleDto vehicleDto = VehicleMapper.toDto(vehicle);
+
+            result.add(vehicleDto);
+        }
+
+        return result;
     }
 }

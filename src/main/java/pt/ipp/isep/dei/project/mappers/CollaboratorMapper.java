@@ -47,4 +47,15 @@ public class CollaboratorMapper {
         }
         return collaboratorsDto;
     }
+
+    public static List<Collaborator> toDomainList(List<CollaboratorDto> collaboratorList) {
+        List<Collaborator> collaborators = new ArrayList<>();
+        for (CollaboratorDto collDto : collaboratorList) {
+            Collaborator coll = CollaboratorMapper.toDomain(collDto);
+
+            collaborators.add(coll);
+        }
+        return collaborators;
+    }
+
 }

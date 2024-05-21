@@ -36,11 +36,7 @@ public class CreateSkillController {
     }
 
     public List<SkillDto> getSkillsDto() {
-        List<Skill> skills = skillRepository.getSkillList();
-        List<SkillDto> listToReturn = new LinkedList<>();
-        for (Skill s : skills) {
-            listToReturn.add(SkillMapper.toDto(s));
-        }
-        return listToReturn;
+
+        return skillRepository.getSkillDtoList();
     }
 }

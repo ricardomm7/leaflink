@@ -37,34 +37,22 @@ public class AssignSkillController {
      *
      * @return the list of collaborators
      */
-    public List<Collaborator> getCollaboratorList() {
+    public List<CollaboratorDto> getCollaboratorDtoList() {
         return collaboratorRepository.getCollaboratorList();
     }
 
-    public List<CollaboratorDto> getCollaboratorDtoList() {
-        return CollaboratorMapper.toDtoList(getCollaboratorList());
-    }
+
 
     /**
-     * Retrieves the list of skills
+     * Retrieves the list of skillsDto
      *
-     * @return the list of skills
+     * @return the list of skillsDto
      */
-    public List<Skill> getSkillList() {
-        return skillRepository.getSkillList();
-    }
-
     public List<SkillDto> getSkillDtoList() {
-        List<SkillDto> skillsDtoList = new ArrayList<>();
-
-        for (Skill skill : skillRepository.getSkillList()) {
-            SkillDto skillDto = SkillMapper.toDto(skill);
-
-            skillsDtoList.add(skillDto);
-        }
-
-        return skillsDtoList;
+        return skillRepository.getSkillDtoList();
     }
+
+
 
     /**
      * Assigns one or more skills to a collaborator.
