@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+
 import java.util.Objects;
 
 /**
@@ -118,11 +120,10 @@ public class Entry {
 
     @Override
     public String toString() {
-        return "Entry{" +
-                "greenSpace=" + greenSpace +
-                ", description='" + description + '\'' +
-                ", degreeOfUrgency=" + degreeOfUrgency +
-                ", duration='" + duration + '\'' +
-                '}';
+        return "Entry" +
+                "Green Space= " + greenSpace +
+                "Description= " + description +
+                "Degree of Urgency= " + degreeOfUrgency +
+                "Duration= " + duration;
     }
 }

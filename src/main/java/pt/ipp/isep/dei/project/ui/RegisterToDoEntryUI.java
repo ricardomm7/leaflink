@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.ui;
 
+import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
 import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
@@ -54,7 +55,8 @@ public class RegisterToDoEntryUI implements Runnable {
             System.out.println("\nDo you want to register this Entry? (Y/N)");
             String decision = sc.nextLine();
             if (decision.trim().equalsIgnoreCase("Y")) {
-                controller.createNewEntry(greenSpaceDto, description,urg,duration);
+                EntryDto entryDto = new EntryDto(greenSpaceDto,description,urg,duration);
+                controller.createNewEntry(entryDto);
                 System.out.println("Green space registered successfully!");
             } else {
                 System.out.println("Operation cancelled!");

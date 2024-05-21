@@ -1,11 +1,15 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.domain.Entry;
+import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
+import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
@@ -20,6 +24,7 @@ public class RegisterToDoEntryController {
     private final Repositories repositories;
     private final GreenSpaceRepository greenSpaceRepository;
     private final GreenSpaceMapper greenSpaceMapper = new GreenSpaceMapper();
+    private final EntryRepository entryRepository;
 
     /**
      * Constructs a new RegisterGreenSpaceController object.
@@ -28,6 +33,7 @@ public class RegisterToDoEntryController {
     public RegisterToDoEntryController() {
         repositories = Repositories.getInstance();
         greenSpaceRepository = repositories.getGreenSpaceRepository();
+        entryRepository = repositories.getEntryRepository();
     }
 
     /**
@@ -54,7 +60,9 @@ public class RegisterToDoEntryController {
      * @param degreeOfUrgency the degree of urgency
      * @param duration        the duration
      */
-    public void createNewEntry(GreenSpaceDto greenSpace, String description, DegreeOfUrgency degreeOfUrgency, String duration) {
-        //EntryRepository.create(greenSpace, description,degreeOfUrgency,duration));
+    public void createNewEntry(EntryDto entryDto) {
+        Entry entry = EntryMapper.toDomain(entryDto);
+        entryRepository.create(entry);
+
     }
 }

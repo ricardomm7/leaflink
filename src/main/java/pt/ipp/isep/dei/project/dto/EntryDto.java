@@ -119,11 +119,10 @@ public class EntryDto {
 
     @Override
     public String toString() {
-        return "EntryDto{" +
-                "greenSpaceDto=" + greenSpaceDto +
-                ", description='" + description + '\'' +
-                ", degreeOfUrgency=" + degreeOfUrgency +
-                ", duration='" + duration + '\'' +
-                '}';
+        return "Entry:" +
+                "Green Space= " + greenSpaceDto +
+                "Description= " + description +
+                "Degree of Urgency= " + degreeOfUrgency +
+                "Duration= " + duration;
     }
 }

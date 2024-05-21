@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.CreateSkillController;
+import pt.ipp.isep.dei.project.dto.SkillDto;
 
 import java.util.Scanner;
 
@@ -22,7 +23,8 @@ public class CreateSkillUI implements Runnable {
         System.out.println("You want to create a skill with the name " + designation + "? (Y/N)");
         String decis = sc.nextLine();
         if (decis.trim().equals("Y")) {
-            jc.createSkill(designation);
+            SkillDto skillDto = new SkillDto(designation);
+            jc.createSkill(skillDto);
             System.out.println("Operation successfully completed!");
         } else {
             System.out.println("Operation cancelled!");

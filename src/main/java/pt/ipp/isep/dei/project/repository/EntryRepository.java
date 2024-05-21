@@ -1,8 +1,7 @@
 package pt.ipp.isep.dei.project.repository;
 
-import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
-import pt.ipp.isep.dei.project.domain.Entry;
-import pt.ipp.isep.dei.project.domain.GreenSpace;
+import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,7 @@ public class EntryRepository {
      * @param degreeOfUrgency the degree of urgency
      * @param duration        the duration
      */
-    public void create(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, String duration) {
-        Entry g = new Entry(greenSpace, description, degreeOfUrgency, duration);
+    public void create(Entry g) {
         if (checkForDuplicates(g)) {
             addEntry(g);
         } else {
