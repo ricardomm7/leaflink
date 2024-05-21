@@ -1,6 +1,9 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.domain.VehicleType;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
@@ -24,29 +27,17 @@ public class RegisterVehicleController {
 
 
     /**
-     * Register the vehicle with all verifications.
+     * Register vehicle from a vehicle DTO.
      *
-     * @param vin                  the vin
-     * @param brand                the brand
-     * @param model                the model
-     * @param type                 the type
-     * @param vehiclePlate         the vehicle plate
-     * @param tareWeight           the tare weight
-     * @param grossWeight          the gross weight
-     * @param currentKm            the current km
-     * @param registrationDate     the registration date
-     * @param acquisitionDate      the acquisition date
-     * @param maintenanceFrequency the maintenance frequency
+     * @param vehicleDto the vehicle dto
      * @return the boolean
      */
-    public boolean registerVehicle(String vin, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight,
-                                   double grossWeight, int currentKm, LocalDate acquisitionDate,
-                                   int maintenanceFrequency) {
+    public boolean registerVehicle(VehicleDto vehicleDto) {
 
-        if (!vehicleRepository.verifyExistingVehicles(vin, vehiclePlate)) {
+        if (!vehicleRepository.verifyExistingVehicles(vehicleDto.getVIN(), vehicleDto.getVehiclePlate())) {
 
-            return vehicleRepository.registerVehicle(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight,
-                    currentKm, acquisitionDate, maintenanceFrequency);
+            Vehicle vehicle = VehicleMapper.toDomain(vehicleDto);
+            return vehicleRepository.registerVehicle(vehicle);
 
         }
 

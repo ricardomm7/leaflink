@@ -52,7 +52,7 @@ public class VehicleRepository {
                                    String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate,
                                    int maintenanceFrequency) {
 
-        Vehicle vehicle = new Vehicle(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight,
+        Vehicle vehicle = new Vehicle(vin, brand, model, type,  registrationDate, vehiclePlate, tareWeight, grossWeight,
                 currentKm, acquisitionDate, maintenanceFrequency);
 
         if (vehicle.validateVehicle()) {

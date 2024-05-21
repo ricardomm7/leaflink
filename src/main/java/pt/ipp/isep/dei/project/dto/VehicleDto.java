@@ -1,17 +1,13 @@
-package pt.ipp.isep.dei.project.domain;
+package pt.ipp.isep.dei.project.dto;
 
-
+import pt.ipp.isep.dei.project.domain.Vehicle;
+import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * The Vehicle class represents the object Vehicle.
- * It holds information such as VIN, brand, model, type, plate,tare Weight, gross weight, currently kilometer, registration date,
- * acquisition date and maintenance frequency.
- */
-public class Vehicle {
+public class VehicleDto {
     private String VIN;
     private String brand;
     private String model;
@@ -249,7 +245,7 @@ public class Vehicle {
     }
 
     /**
-     * Instantiates a new Vehicle class.
+     * Instantiates a new Vehicle DTO class.
      *
      * @param VIN                  the vin of vehicle
      * @param brand                the brand of vehicle
@@ -263,7 +259,7 @@ public class Vehicle {
      * @param acquisitionDate      the acquisition date of vehicle
      * @param maintenanceFrequency the maintenance frequency of vehicle
      */
-    public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
+    public VehicleDto(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
                    int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
 
         this.VIN = VIN;
@@ -316,7 +312,7 @@ public class Vehicle {
         if (tareWeight <= 0 || grossWeight <= 0 || currentKm < 0 || maintenanceFrequency <= 0) {
             return false;
         }
-        if (acquisitionDate.isAfter(LocalDate.now()) || registrationDate.isAfter(LocalDate.now())) {
+        if (acquisitionDate.isAfter(java.time.LocalDate.now()) || registrationDate.isAfter(java.time.LocalDate.now())) {
             return false;
         }
 
@@ -328,10 +324,10 @@ public class Vehicle {
      *
      * @param date
      */
-    private boolean validateDate(LocalDate date) {
-        if (date.isAfter(LocalDate.now())) {
+    private boolean validateDate(java.time.LocalDate date) {
+        if (date.isAfter(java.time.LocalDate.now())) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            throw new RegisterVehicleUI.InvalidDateException("Date must be before " + LocalDate.now().format(formatter));
+            throw new RegisterVehicleUI.InvalidDateException("Date must be before " + java.time.LocalDate.now().format(formatter));
         }
         return true;
     }
@@ -348,4 +344,6 @@ public class Vehicle {
     public int hashCode() {
         return VIN.hashCode();
     }
+
 }
+

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
 import pt.ipp.isep.dei.project.domain.VehicleType;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -83,8 +84,11 @@ public class RegisterVehicleUI implements Runnable {
                 String confirmation = scanner.nextLine();
 
                 if (confirmation.equalsIgnoreCase("Y")) {
-                    if (controller.registerVehicle(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight,
-                            currentKm, acquisitionDate, maintenanceFrequency)) {
+
+                    VehicleDto vehicleDto = new VehicleDto(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight,
+                            currentKm, acquisitionDate, maintenanceFrequency);
+
+                    if (controller.registerVehicle(vehicleDto)) {
                         System.out.println("Vehicle registered successfully!");
                         flag = true;
                     } else {
