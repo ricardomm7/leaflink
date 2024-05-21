@@ -85,6 +85,9 @@ public class MaintenanceRepository {
                     int nextKm = lastKm + freq;
 
                     if (currKm >= nextKm * 0.95) {
+                        if (currKm > nextKm){
+                            nextKm = currKm;
+                        }
                         hasValidEntry = true;
                         String plate = vehicle.getVehiclePlate();
                         String brand = vehicle.getBrand();
