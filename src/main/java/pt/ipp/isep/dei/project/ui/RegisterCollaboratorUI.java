@@ -2,9 +2,8 @@ package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
 import pt.ipp.isep.dei.project.domain.DocumentType;
-import pt.ipp.isep.dei.project.domain.Job;
-import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.mappers.JobMapper;
 
 import java.time.LocalDate;

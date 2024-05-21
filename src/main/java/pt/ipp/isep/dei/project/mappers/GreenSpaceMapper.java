@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.project.mappers;
 
-import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
 /**
  * The type Green space mapper.
@@ -26,8 +26,8 @@ public class GreenSpaceMapper {
      * @param greenSpaceDto the green space dto
      * @return the green space
      */
-    public static GreenSpace toDomain(GreenSpaceDto greenSpaceDto){
-        GreenSpace gs = new GreenSpace(greenSpaceDto.getName(), greenSpaceDto.getType(), greenSpaceDto.getArea(), greenSpaceDto.getManager(),new Address(greenSpaceDto.getAddress(), greenSpaceDto.getCity(), greenSpaceDto.getZipCode()));
+    public static GreenSpace toDomain(GreenSpaceDto greenSpaceDto) {
+        GreenSpace gs = new GreenSpace(greenSpaceDto.getName(), greenSpaceDto.getType(), greenSpaceDto.getArea(), greenSpaceDto.getManager(), new Address(greenSpaceDto.getAddress(), greenSpaceDto.getCity(), greenSpaceDto.getZipCode()));
         return gs;
     }
 }

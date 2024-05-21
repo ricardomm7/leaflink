@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
-import pt.ipp.isep.dei.project.domain.Job;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,8 +5,6 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The RegisterVehicleController class manages the registration of a vehicle within the application.

@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.project.mappers;
 
-import pt.ipp.isep.dei.project.dto.EntryDto;
-import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.domain.Entry;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
+import pt.ipp.isep.dei.project.dto.EntryDto;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
 /**
  * The type Entry mapper.
@@ -21,9 +21,9 @@ public class EntryMapper {
      * @param entry the entry
      * @return the entry dto
      */
-    public static EntryDto toDto(Entry entry){
+    public static EntryDto toDto(Entry entry) {
         GreenSpaceDto greenSpaceDto = greenSpaceMapper.toDto(entry.getGreenSpace());
-        EntryDto e = new EntryDto(greenSpaceDto,entry.getDescription(),entry.getDegreeOfUrgency(), entry.getDuration());
+        EntryDto e = new EntryDto(greenSpaceDto, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
         return e;
     }
 
@@ -33,9 +33,9 @@ public class EntryMapper {
      * @param entry the entry
      * @return the entry
      */
-    public static Entry toDomain(EntryDto entry){
+    public static Entry toDomain(EntryDto entry) {
         GreenSpace greenSpace = GreenSpaceMapper.toDomain(entry.getGreenSpaceDto());
-        Entry e = new Entry(greenSpace,entry.getDescription(),entry.getDegreeOfUrgency(),entry.getDuration());
+        Entry e = new Entry(greenSpace, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
         return e;
     }
 }

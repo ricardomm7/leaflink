@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.project.domain;
 
-import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
-
 import java.util.Objects;
 
 /**

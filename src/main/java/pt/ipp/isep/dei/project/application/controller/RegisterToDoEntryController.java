@@ -1,14 +1,13 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.Entry;
+import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
-import pt.ipp.isep.dei.project.application.session.ApplicationSession;
-import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
-import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -41,12 +40,12 @@ public class RegisterToDoEntryController {
      *
      * @return the list
      */
-    public List<GreenSpaceDto> getGreenSpacesDto(){
+    public List<GreenSpaceDto> getGreenSpacesDto() {
         List<GreenSpaceDto> listToReturn = new LinkedList<>();
         List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaceList();
         UserSession manager = ApplicationSession.getInstance().getCurrentSession();
-        for(GreenSpace gs : greenSpaces){
-            if(manager.getUserEmail().equals(gs.getManager().getUserEmail()))
+        for (GreenSpace gs : greenSpaces) {
+            if (manager.getUserEmail().equals(gs.getManager().getUserEmail()))
                 listToReturn.add(greenSpaceMapper.toDto(gs));
         }
         return listToReturn;

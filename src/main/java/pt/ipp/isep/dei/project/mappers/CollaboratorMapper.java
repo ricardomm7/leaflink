@@ -1,9 +1,7 @@
 package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
-import pt.ipp.isep.dei.project.dto.JobDto;
 
 /**
  * The type Collaborator mapper.

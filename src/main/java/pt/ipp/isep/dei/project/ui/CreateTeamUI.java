@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

@@ -287,7 +287,7 @@ public class Vehicle {
      * @return boolean (True if it is valid / False if it is invalid)
      */
     public boolean validateVehicle() {
-        if (!brand.matches("[a-zA-Z0-9]+") || !model.matches("[a-zA-Z0-9]+") ){
+        if (!brand.matches("[a-zA-Z0-9]+") || !model.matches("[a-zA-Z0-9]+")) {
             return false;
         }
         if (VIN == null || !VIN.matches("[a-zA-Z0-9]{17}+")) {
@@ -325,10 +325,11 @@ public class Vehicle {
 
     /**
      * Validates the date parameter. It must exist.
+     *
      * @param date
      */
     private boolean validateDate(LocalDate date) {
-        if (date.isAfter(LocalDate.now())){
+        if (date.isAfter(LocalDate.now())) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             throw new RegisterVehicleUI.InvalidDateException("Date must be before " + LocalDate.now().format(formatter));
         }

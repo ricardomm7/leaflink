@@ -9,13 +9,13 @@ import java.util.Objects;
  */
 public class EntryDto {
 
-   private GreenSpaceDto greenSpaceDto;
+    private GreenSpaceDto greenSpaceDto;
 
-   private String description;
+    private String description;
 
-   private DegreeOfUrgency degreeOfUrgency;
+    private DegreeOfUrgency degreeOfUrgency;
 
-   private String duration;
+    private String duration;
 
     /**
      * Instantiates a new Entry dto.

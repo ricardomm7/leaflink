@@ -102,6 +102,7 @@ public class CreateTeamController {
         Team team = new Team(allCollaborators);
         teamRepository.addTeam(team);
     }
+
     /**
      * Retrieves the list of saved teams.
      *

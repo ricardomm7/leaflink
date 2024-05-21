@@ -64,6 +64,7 @@ public class GreenSpace {
     public String getName() {
         return name;
     }
+
     /**
      * Retrieves the address of the green space.
      *

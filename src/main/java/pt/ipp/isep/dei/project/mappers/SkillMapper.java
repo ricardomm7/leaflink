@@ -14,9 +14,9 @@ public class SkillMapper {
      * @param skill the skill
      * @return the skill dto
      */
-    public static SkillDto toDto (Skill skill){
-      SkillDto s = new SkillDto(skill.getDesignation());
-      return s;
+    public static SkillDto toDto(Skill skill) {
+        SkillDto s = new SkillDto(skill.getDesignation());
+        return s;
     }
 
     /**
@@ -25,8 +25,8 @@ public class SkillMapper {
      * @param skill the skill
      * @return the skill
      */
-    public static Skill toDomain (SkillDto skill){
-      Skill s = new Skill(skill.getDesignation());
-      return s;
+    public static Skill toDomain(SkillDto skill) {
+        Skill s = new Skill(skill.getDesignation());
+        return s;
     }
 }

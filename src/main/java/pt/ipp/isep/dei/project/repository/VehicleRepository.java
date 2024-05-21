@@ -52,7 +52,7 @@ public class VehicleRepository {
                                    String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate,
                                    int maintenanceFrequency) {
 
-        Vehicle vehicle = new Vehicle(vin, brand, model, type,  registrationDate, vehiclePlate, tareWeight, grossWeight,
+        Vehicle vehicle = new Vehicle(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight,
                 currentKm, acquisitionDate, maintenanceFrequency);
 
         if (vehicle.validateVehicle()) {
@@ -134,7 +134,7 @@ public class VehicleRepository {
             double nextMaintenanceKm = lastMaintenanceKm + maintenanceFrequency;
 
 
-            if (lastMaintenanceKm == -1 || currentKm >= nextMaintenanceKm * 0.95 ) {
+            if (lastMaintenanceKm == -1 || currentKm >= nextMaintenanceKm * 0.95) {
                 vehiclesNeedingMaintenance.add(vehicle);
             }
         }

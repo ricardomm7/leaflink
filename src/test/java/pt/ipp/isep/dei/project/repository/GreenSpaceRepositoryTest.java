@@ -9,7 +9,8 @@ import pt.isep.lei.esoft.auth.domain.model.Email;
 import pt.isep.lei.esoft.auth.domain.model.Password;
 import pt.isep.lei.esoft.auth.domain.model.User;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GreenSpaceRepositoryTest {
 
@@ -22,7 +23,7 @@ class GreenSpaceRepositoryTest {
 
     @Test
     void testCreate_AddGreenSpace() {
-        UserSession manager = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("a@a.com"), new Password("abcd"),"Ana")));
+        UserSession manager = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("a@a.com"), new Password("abcd"), "Ana")));
         Address address = new Address("Street", "City", "4444-555");
 
         repository.create("Park", GreenSpaceType.LARGE_SIZED_PARK, 10.5, manager, address);
@@ -32,7 +33,7 @@ class GreenSpaceRepositoryTest {
 
     @Test
     void testCreate_DuplicateName() {
-        UserSession manager = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("a@a.com"), new Password("abcd"),"Ana")));
+        UserSession manager = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("a@a.com"), new Password("abcd"), "Ana")));
         Address address = new Address("Street", "City", "5555-478");
 
         repository.create("Park", GreenSpaceType.LARGE_SIZED_PARK, 10.5, manager, address);

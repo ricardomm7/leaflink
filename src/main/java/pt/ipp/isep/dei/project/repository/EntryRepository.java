@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.repository;
 
-import pt.ipp.isep.dei.project.domain.*;
-import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.domain.Entry;
 
 import java.util.ArrayList;
 import java.util.List;

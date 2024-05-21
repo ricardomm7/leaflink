@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.domain.Skill;
-import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.mappers.SkillMapper;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -32,14 +31,14 @@ public class CreateSkillController {
      * @param skillDto the designation of the skill to be created.
      */
     public void createSkill(SkillDto skillDto) {
-        Skill skill= SkillMapper.toDomain(skillDto);
+        Skill skill = SkillMapper.toDomain(skillDto);
         skillRepository.createSkill(skill);
     }
 
-    public List<SkillDto> getSkillsDto(){
+    public List<SkillDto> getSkillsDto() {
         List<Skill> skills = skillRepository.getSkillList();
         List<SkillDto> listToReturn = new LinkedList<>();
-        for(Skill s : skills){
+        for (Skill s : skills) {
             listToReturn.add(SkillMapper.toDto(s));
         }
         return listToReturn;

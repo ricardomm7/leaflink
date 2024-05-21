@@ -1,12 +1,8 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.DocumentType;
-import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
-import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
