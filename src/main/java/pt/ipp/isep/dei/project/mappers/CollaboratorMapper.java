@@ -3,6 +3,9 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The type Collaborator mapper.
  */
@@ -35,5 +38,15 @@ public class CollaboratorMapper {
                 collaboratorDto.getAddress().getCity(), collaboratorDto.getDocumentType(), collaboratorDto.getIdentificationNumber(), collaboratorDto.getAdmissionDate(),
                 collaboratorDto.getJob());
         return collaborator;
+    }
+
+    public static List<CollaboratorDto> toDtoList(List<Collaborator> collaboratorList){
+        List<CollaboratorDto> collaboratorsDto = new ArrayList<>();
+        for (Collaborator collaborator : collaboratorList){
+            CollaboratorDto collDto = CollaboratorMapper.toDto(collaborator);
+
+            collaboratorsDto.add(collDto);
+        }
+        return collaboratorsDto;
     }
 }
