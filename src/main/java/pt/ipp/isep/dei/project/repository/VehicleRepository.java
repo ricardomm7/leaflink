@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.repository;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.domain.VehicleType;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,27 +34,12 @@ public class VehicleRepository {
 
 
     /**
-     * Register vehicle .
+     * Register vehicle boolean.
      *
-     * @param vin                  the vin
-     * @param brand                the brand
-     * @param model                the model
-     * @param type                 the type
-     * @param vehiclePlate         the vehicle plate
-     * @param tareWeight           the tare weight
-     * @param grossWeight          the gross weight
-     * @param currentKm            the current km
-     * @param registrationDate     the registration date
-     * @param acquisitionDate      the acquisition date
-     * @param maintenanceFrequency the maintenance frequency
-     * @return the boolean (True if successful / False otherwise)
+     * @param vehicle the vehicle
+     * @return the boolean
      */
-    public Boolean registerVehicle(String vin, String brand, String model, VehicleType type, LocalDate registrationDate,
-                                   String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate,
-                                   int maintenanceFrequency) {
-
-        Vehicle vehicle = new Vehicle(vin, brand, model, type,  registrationDate, vehiclePlate, tareWeight, grossWeight,
-                currentKm, acquisitionDate, maintenanceFrequency);
+    public Boolean registerVehicle(Vehicle vehicle) {
 
         if (vehicle.validateVehicle()) {
             addVehicle(vehicle);

@@ -6,9 +6,11 @@ import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 import pt.ipp.isep.dei.project.mappers.JobMapper;
 import pt.ipp.isep.dei.project.mappers.SkillMapper;
+import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.*;
 
 import java.time.LocalDate;
@@ -37,32 +39,32 @@ public class Bootstrap implements Runnable {
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
 
         // Example 1
-        vehicleRepository.registerVehicle("VIN12345678901234", "Toyota", "Corolla", VehicleType.CAR, LocalDate.of(2013, 3, 15), "12AB12", 1500.0, 2000.0,
-                50000, LocalDate.of(2023, 3, 12), 10000);
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(new VehicleDto("VIN12345678901234", "Toyota", "Corolla", VehicleType.CAR, LocalDate.of(2013, 3, 15), "12AB12", 1500.0, 2000.0,
+                50000, LocalDate.of(2023, 3, 12), 10000)));
 
         // Example 2
-        vehicleRepository.registerVehicle("VIN56789012345678", "Ford", "Fiesta", VehicleType.CAR, LocalDate.of(2010, 10, 10), "56CD56", 1200.0, 1800.0,
-                40000, LocalDate.of(2020, 9, 30), 8000);
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(new VehicleDto("VIN56789012345678", "Ford", "Fiesta", VehicleType.CAR, LocalDate.of(2010, 10, 10), "56CD56", 1200.0, 1800.0,
+                40000, LocalDate.of(2020, 9, 30), 8000)));
 
         // Example 3
-        vehicleRepository.registerVehicle("VIN90123456789012", "Volkswagen", "Golf", VehicleType.CAR, LocalDate.of(2000, 10, 22), "9012EF", 1400.0, 2100.0,
-                60000, LocalDate.of(2010, 10, 1), 12000);
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(new VehicleDto("VIU1qasw23edfr45t", "Volkswagen", "Golf", VehicleType.CAR, LocalDate.of(2000, 10, 22), "9012EF", 1400.0, 2100.0,
+                60000, LocalDate.of(2010, 10, 1), 12000)));
 
         // Example 4: Utility Truck for Landscaping Equipment
-        vehicleRepository.registerVehicle("VLN56789012345678", "Chevrolet", "Silverado", VehicleType.CAR, LocalDate.of(2019, 8, 20), "46CD56", 2800.0, 4000.0,
-                90000, LocalDate.of(2024, 8, 19), 25000);
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(new VehicleDto("VLN56789012345678", "Chevrolet", "Silverado", VehicleType.CAR, LocalDate.of(2019, 8, 20), "46CD56", 2800.0, 4000.0,
+                90000, LocalDate.of(2024, 8, 19), 25000)));
 
         // Example 5: Ford F-250 for Heavy Duty Landscaping
-        vehicleRepository.registerVehicle("VIN90123456789012", "Ford", "F-250", VehicleType.CAR, LocalDate.of(2018, 10, 10), "90EF90", 3200.0, 5000.0,
-                120000, LocalDate.of(2024, 10, 9), 30000);
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(new VehicleDto("VIN90123456789012", "Ford", "F-250", VehicleType.CAR, LocalDate.of(2018, 10, 10), "90EF90", 3200.0, 5000.0,
+                120000, LocalDate.of(2024, 10, 9), 30000)));
 
         // Example 6: Isuzu NQR for Commercial Landscaping
-        vehicleRepository.registerVehicle("VIN23456789012345", "Isuzu", "NQR", VehicleType.CAR, LocalDate.of(2016, 6, 25), "23GH12", 3500.0, 6000.0,
-                150000, LocalDate.of(2024, 6, 24), 35000);
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(new VehicleDto("VIN23456789012345", "Isuzu", "NQR", VehicleType.CAR, LocalDate.of(2016, 6, 25), "23GH12", 3500.0, 6000.0,
+                150000, LocalDate.of(2024, 6, 24), 35000)));
 
         // Example 7: Mitsubishi Fuso Canter for Green Waste Collection
-        vehicleRepository.registerVehicle("VIN67890123456789", "Mitsubishi", "Fuso Canter", VehicleType.CAR, LocalDate.of(2017, 7, 30), "67IJ76", 4000.0, 7000.0,
-                180000, LocalDate.of(2024, 7, 29), 40000);
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(new VehicleDto("VIN67890123456789", "Mitsubishi", "Fuso Canter", VehicleType.CAR, LocalDate.of(2017, 7, 30), "67IJ76", 4000.0, 7000.0,
+                180000, LocalDate.of(2024, 7, 29), 40000)));
     }
 
     private void addMaintenance() {
