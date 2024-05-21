@@ -32,6 +32,7 @@ class VehicleRepositoryTest {
         assertTrue(result.contains(vehicle2));
     }
 
+
     // Returns a new list instance, not a reference to the original list
     @Test
     public void test_returns_new_list_instance() {

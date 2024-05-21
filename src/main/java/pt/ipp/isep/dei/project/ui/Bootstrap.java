@@ -3,6 +3,12 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.VehicleType;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.JobDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
+import pt.ipp.isep.dei.project.mappers.JobMapper;
+import pt.ipp.isep.dei.project.mappers.SkillMapper;
 import pt.ipp.isep.dei.project.repository.*;
 
 import java.time.LocalDate;
@@ -82,53 +88,53 @@ public class Bootstrap implements Runnable {
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
 
         // Example 1
-        skillRepository.createSkill("Class A Driving Licence");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Class A Driving Licence")));
 
-        skillRepository.createSkill("Class B Driving Licence");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Class B Driving Licence")));
 
-        skillRepository.createSkill("Class C Driving Licence");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Class C Driving Licence")));
 
-        skillRepository.createSkill("Operation of Landscaping Machinery");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Operation of Landscaping Machinery")));
 
-        skillRepository.createSkill("Irrigation System Installation and Maintenance");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Irrigation System Installation and Maintenance")));
 
-        skillRepository.createSkill("Pruning and Trimming Techniques");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Pruning and Trimming Techniques")));
 
-        skillRepository.createSkill("Soil Testing and Analysis");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Soil Testing and Analysis")));
 
-        skillRepository.createSkill("Pest and Weed Control");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Pest and Weed Control")));
 
-        skillRepository.createSkill("Hardscape Installation");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Hardscape Installation")));
 
-        skillRepository.createSkill("Tree Planting and Care");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Tree Planting and Care")));
 
-        skillRepository.createSkill("Safety Procedures for Green Space Maintenance");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Safety Procedures for Green Space Maintenance")));
 
-        skillRepository.createSkill("Seasonal Planting and Maintenance");
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto("Seasonal Planting and Maintenance")));
     }
 
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
-        jobRepository.createJob("Manager");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Manager")));
 
-        jobRepository.createJob("Heavy Equipment Operator");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Heavy Equipment Operator")));
 
-        jobRepository.createJob("Landscaping Technician");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Landscaping Technician")));
 
-        jobRepository.createJob("Irrigation Technician");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Irrigation Technician")));
 
-        jobRepository.createJob("Arborist");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Arborist")));
 
-        jobRepository.createJob("Pest Control Technician");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Pest Control Technician")));
 
-        jobRepository.createJob("Driver");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Driver")));
 
-        jobRepository.createJob("Gardener");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Gardener")));
 
-        jobRepository.createJob("Plumber");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Plumber")));
 
-        jobRepository.createJob("Machine Operator");
+        jobRepository.createJob(JobMapper.toDomain(new JobDto("Machine Operator")));
     }
 
     private void addCollaborators() {
@@ -136,34 +142,34 @@ public class Bootstrap implements Runnable {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
         // Example 1
-        collaboratorRepository.create("Bob Smith", LocalDate.of(2000, 9, 30), 987654321,
+        collaboratorRepository.create(CollaboratorMapper.toDomain(new CollaboratorDto("Bob Smith", LocalDate.of(2000, 9, 30), 987654321,
                 123456789, "bob.smith@example.com", "5678 Oak Street", "6789-100",
                 "Shelbyville", DocumentType.PASSPORT, "CD2345678", LocalDate.of(2021, 9, 30),
-                jobRepository.getJobList().get(0));
+                JobMapper.toDomain(jobRepository.getJobList().get(0)))));
 
         // Example 2
-        collaboratorRepository.create("Alice Johnson", LocalDate.of(2000, 9, 30), 123456789,
+        collaboratorRepository.create(CollaboratorMapper.toDomain(new CollaboratorDto("Alice Johnson", LocalDate.of(2000, 9, 30), 123456789,
                 987654321, "alice.johnson@example.com", "1234 Elm Street", "1234-125",
                 "Springfield", DocumentType.PASSPORT, "AB1234567", LocalDate.of(2021, 9, 30),
-                jobRepository.getJobList().get(1));
+                JobMapper.toDomain(jobRepository.getJobList().get(1)))));
 
         // Example 3
-        collaboratorRepository.create("Charlie Brown", LocalDate.of(2000, 9, 30), 234567891,
+        collaboratorRepository.create(CollaboratorMapper.toDomain(new CollaboratorDto("Charlie Brown", LocalDate.of(2000, 9, 30), 234567891,
                 876543219, "charlie.brown@example.com", "3456 Maple Street", "2345-226",
                 "Centerville", DocumentType.PASSPORT, "EF3456789", LocalDate.of(2021, 9, 30),
-                jobRepository.getJobList().get(2));
+                JobMapper.toDomain(jobRepository.getJobList().get(2)))));
 
         // Example 4
-        collaboratorRepository.create("Diana Prince", LocalDate.of(2000, 9, 30), 345678912,
+        collaboratorRepository.create(CollaboratorMapper.toDomain(new CollaboratorDto("Diana Prince", LocalDate.of(2000, 9, 30), 345678912,
                 765432198, "diana.prince@example.com", "4567 Birch Street", "3456-987",
                 "Metro City", DocumentType.PASSPORT, "GH4567890", LocalDate.of(2021, 9, 30),
-                jobRepository.getJobList().get(3));
+                JobMapper.toDomain(jobRepository.getJobList().get(3)))));
 
         // Example 5
-        collaboratorRepository.create("Edward Scissorhands", LocalDate.of(2000, 9, 30), 456789123,
+        collaboratorRepository.create(CollaboratorMapper.toDomain(new CollaboratorDto("Edward Scissorhands", LocalDate.of(2000, 9, 30), 456789123,
                 654321987, "edward.scissorhands@example.com", "5678 Pine Street", "4567-908",
                 "Suburbia", DocumentType.PASSPORT, "IJ5678901", LocalDate.of(2021, 9, 30),
-                jobRepository.getJobList().get(4));
+                JobMapper.toDomain(jobRepository.getJobList().get(4)))));
     }
 
 

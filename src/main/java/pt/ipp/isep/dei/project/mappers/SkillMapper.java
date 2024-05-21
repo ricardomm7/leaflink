@@ -9,11 +9,6 @@ import pt.ipp.isep.dei.project.dto.SkillDto;
 public class SkillMapper {
 
     /**
-     * The Skill mapper.
-     */
-    static SkillMapper skillMapper= new SkillMapper();
-
-    /**
      * To dto skill dto.
      *
      * @param skill the skill

@@ -5,6 +5,10 @@ import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
+import pt.ipp.isep.dei.project.mappers.SkillMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,10 +37,10 @@ public class CollaboratorRepositoryTest {
         Job job = new Job("Software Engineer");
 
         // Create and add first collaborator
-        repository.create(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
+        repository.create(CollaboratorMapper.toDomain(new CollaboratorDto(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job)));
 
         // Try to create and add a second collaborator with the same taxpayer number
-        repository.create("Jane Doe", birthdate, contactMobile, taxpayerNumber, "jane.doe@example.com", address, zipCode, city, documentType, "456DEF", admissionDate, job);
+        repository.create(CollaboratorMapper.toDomain(new CollaboratorDto("Jane Doe", birthdate, contactMobile, taxpayerNumber, "jane.doe@example.com", address, zipCode, city, documentType, "456DEF", admissionDate, job)));
 
         // Ensure that the second collaborator is not added to the list
         List<Collaborator> collaboratorList = repository.getCollaboratorList();
@@ -65,16 +69,16 @@ public class CollaboratorRepositoryTest {
         Job job = new Job("Software Engineer");
 
         // Create and add a collaborator
-        repository.create(collaboratorName, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job);
+        repository.create(CollaboratorMapper.toDomain(new CollaboratorDto(collaboratorName, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, job)));
 
         // Create and add some skills
         Skill skill1 = new Skill("Technician");
         Skill skill2 = new Skill("Plumber");
         Skill skill3 = new Skill("Tree Pruner");
 
-        skillRepository.createSkill(skill1.getDesignation());
-        skillRepository.createSkill(skill2.getDesignation());
-        skillRepository.createSkill(skill3.getDesignation());
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto(skill1.getDesignation())));
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto(skill2.getDesignation())));
+        skillRepository.createSkill(SkillMapper.toDomain(new SkillDto(skill3.getDesignation())));
 
         Collaborator collaborator = repository.getCollaboratorList().get(0);
 
