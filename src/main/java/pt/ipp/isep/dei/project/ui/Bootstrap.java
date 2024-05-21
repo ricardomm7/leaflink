@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.repository.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Bootstrap implements Runnable {
 

@@ -88,7 +88,7 @@ public class Collaborator {
         if (verifyBirth(birthdate)) {
             this.birthdate = birthdate;
         } else {
-            throw new IllegalArgumentException("The collaborator must be at least 18 years old.");
+            throw new IllegalArgumentException("The collaborator birthdate mustn't be today or future.");
         }
     }
 
@@ -252,7 +252,7 @@ public class Collaborator {
         LocalDate today = LocalDate.now();
 
         // Verifica se a data não é a de hoje ou futura
-        return date.isAfter(today);
+        return !date.isAfter(today);
     }
 
     /**

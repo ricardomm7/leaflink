@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,12 +48,6 @@ class TeamTest {
         Team team = new Team(new ArrayList<>(), new ArrayList<>(), 3, 5);
 
         assertEquals(5, team.getMaxTeamSize());
-    }
-
-    private Date getDate(int year, int month, int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-        return calendar.getTime();
     }
 
 }
