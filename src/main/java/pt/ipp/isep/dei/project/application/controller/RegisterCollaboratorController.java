@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
+import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.JobRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -52,7 +53,7 @@ public class RegisterCollaboratorController {
      *
      * @return the list of available job positions
      */
-    public List<Job> getJobs() {
+    public List<JobDto> getJobs() {
         return jobRepository.getJobList();
     }
 }

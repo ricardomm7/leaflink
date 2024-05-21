@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
+import pt.ipp.isep.dei.project.dto.JobDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -64,19 +65,18 @@ public class RegisterCollaboratorUI implements Runnable {
         sc.nextLine(); // consume the newline character
 
         System.out.println("Select a collaborator's job title:");
-        List<Job> jobTitles = rc.getJobs();
+        List<JobDto> jobTitles = rc.getJobs();
         for (int i = 0; i < jobTitles.size(); i++) {
             System.out.println((i + 1) + ". " + jobTitles.get(i).getTitle());
         }
-        // Prompt user to select a job title
+
         int jobIndex = sc.nextInt();
-        sc.nextLine(); // consume the newline character
-        // Ensure the selected index is valid
+        sc.nextLine();
         if (jobIndex < 1 || jobIndex > jobTitles.size()) {
             System.out.println("Invalid selection. Please select a valid index.");
             return;
         }
-        Job job = jobTitles.get(jobIndex - 1);
+        JobDto jobDTO = jobTitles.get(jobIndex - 1);
 
         // Display all entered information for confirmation
         System.out.println("\nPlease review the entered information:");
@@ -91,7 +91,7 @@ public class RegisterCollaboratorUI implements Runnable {
         System.out.println("Identification Number: " + identificationNumber);
         System.out.println("Admission Date: " + admissionDate1);
         System.out.println("Taxpayer Number: " + taxpayerNumber);
-        System.out.println("Job Title: " + job.getTitle());
+        System.out.println("Job Title: " + jobDTO.getTitle());
 
         // Confirm registration
         System.out.println("\nDo you want to register this collaborator? (Y/N)");

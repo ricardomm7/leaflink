@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Job;
+import pt.ipp.isep.dei.project.dto.JobDto;
+import pt.ipp.isep.dei.project.mappers.JobMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +62,13 @@ public class JobRepository {
      *
      * @return a list of jobs
      */
-    public List<Job> getJobList() {
-        return new ArrayList<>(jobList);
+    public List<JobDto> getJobList() {
+        List<JobDto> u = new ArrayList<>();
+        for (Job j : jobList) {
+            JobDto k = JobMapper.toDto(j);
+            u.add(k);
+        }
+        return u;
     }
 }
 
