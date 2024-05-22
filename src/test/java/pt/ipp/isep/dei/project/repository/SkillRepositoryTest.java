@@ -18,7 +18,7 @@ public class SkillRepositoryTest {
         String designation = "Programming";
 
         repository.createSkill(SkillMapper.toDomain(new SkillDto(designation)));
-        List<Skill> skillList = repository.getSkillList();
+        List<SkillDto> skillList = repository.getSkillDtoList();
 
         assertEquals(1, skillList.size());
         assertEquals(designation, skillList.get(0).getDesignation());
@@ -42,7 +42,7 @@ public class SkillRepositoryTest {
 
         repository.createSkill(SkillMapper.toDomain(new SkillDto(designation1)));
         repository.createSkill(SkillMapper.toDomain(new SkillDto(designation2)));
-        List<Skill> skillList = repository.getSkillList();
+        List<SkillDto> skillList = repository.getSkillDtoList();
 
         assertEquals(2, skillList.size());
         assertEquals(designation1, skillList.get(0).getDesignation());

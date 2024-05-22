@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.project.repository;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.dto.TeamDto;
+import pt.ipp.isep.dei.project.mappers.TeamMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,11 @@ class TeamRepositoryTest {
 
         TeamRepository teamRepository = new TeamRepository();
 
-        teamRepository.addTeam(team);
+        teamRepository.addTeam(TeamMapper.toDto(team));
 
-        List<Team> teamList = teamRepository.getTeamList();
+        List<TeamDto> teamList = teamRepository.getTeamDtoList();
 
-        assertTrue(teamList.contains(team));
+        assertTrue(teamList.contains(TeamMapper.toDto(team)));
     }
 
     @Test
@@ -28,16 +30,16 @@ class TeamRepositoryTest {
 
         TeamRepository teamRepository = new TeamRepository();
 
-        List<Team> initialTeamList = teamRepository.getTeamList();
+        List<TeamDto> initialTeamList = teamRepository.getTeamDtoList();
 
         assertTrue(initialTeamList.isEmpty());
 
         Team team = new Team(new ArrayList<>(), new ArrayList<>(), 3, 5);
 
-        teamRepository.addTeam(team);
+        teamRepository.addTeam(TeamMapper.toDto(team));
 
-        List<Team> updatedTeamList = teamRepository.getTeamList();
+        List<TeamDto> updatedTeamList = teamRepository.getTeamDtoList();
 
-        assertTrue(updatedTeamList.contains(team));
+        assertTrue(updatedTeamList.contains(TeamMapper.toDto(team)));
     }
 }

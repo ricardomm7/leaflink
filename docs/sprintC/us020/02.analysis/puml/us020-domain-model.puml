@@ -16,8 +16,14 @@ name
 type
 size
 manager
-address
+
 }
 
+class Address {
+address
+city
+zipCode
+}
 
+GreenSpace"1" -"1" Address : > has
 @enduml

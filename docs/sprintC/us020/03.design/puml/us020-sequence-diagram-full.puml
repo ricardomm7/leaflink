@@ -22,7 +22,16 @@ activate GSM
     activate UI
 
         UI -> CTRL** : create
-
+activate CTRL
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+RepositorySingleton --> CTRL : repositories
+deactivate RepositorySingleton
+CTRL -> PLAT : getGreenSpaceRepository()
+activate PLAT
+PLAT -->  CTRL: greenSpaceRepository
+deactivate PLAT
+deactivate CTRL
         UI --> GSM : requests data (name, type, area, manager, \naddress (street, zip-code, city))
         deactivate UI
 GSM -> UI : the user enters and selects the data
@@ -34,26 +43,30 @@ activate UI
 UI -> CTRL : createNewGS(name, type, area, manager, \naddress (street, zip-code, city))
 deactivate UI
 activate CTRL
-CTRL -> RepositorySingleton : getInstance()
-activate RepositorySingleton
-RepositorySingleton --> CTRL : repositories
-deactivate RepositorySingleton
-CTRL -> PLAT : getGreenSpaceRepository()
-activate PLAT
-PLAT -->  CTRL: greenSpaceRepository
-deactivate PLAT
 CTRL -> gsrepo : createNewGS(name, type, area, manager, address)
 deactivate CTRL
 activate gsrepo
 gsrepo -> GS** : create(name, type, area, manager, address)
+
 activate GS
-GS -> GS : verifyFilled(greenSpace)
+GS -> GS : setArea(area)
 activate GS
-GS--> GS
+GS --> GS
 deactivate GS
+
+GS -> GS : setName(area)
+activate GS
+GS --> GS
+deactivate GS
+
+GS -> GS : this.type = type
+
+GS -> GS : this.manager = manager
+GS -> GS : this.address = address
+
 GS --> gsrepo : greenSpace
 deactivate GS
-gsrepo -> gsrepo : verify duplicates by name
+gsrepo -> gsrepo : checkForDuplicates(greenSpace)
 activate gsrepo
 gsrepo -> gsrepo : addGreenSpace(greenSpace)
 activate gsrepo
@@ -61,7 +74,7 @@ gsrepo-->gsrepo
 deactivate gsrepo
 gsrepo-->gsrepo
 deactivate gsrepo
-gsrepo --> CTRL : greenSpace
+gsrepo --> CTRL : success
 deactivate gsrepo
 activate CTRL
 CTRL --> UI : success

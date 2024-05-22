@@ -26,12 +26,12 @@ class VehicleRepositoryTest {
         vehicleRepository.addVehicle(vehicle2);
 
         // Act
-        List<Vehicle> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = vehicleRepository.getVehicleList();
 
         // Assert
         assertEquals(2, result.size());
-        assertTrue(result.contains(vehicle1));
-        assertTrue(result.contains(vehicle2));
+        assertTrue(result.contains(VehicleMapper.toDto(vehicle1)));
+        assertTrue(result.contains(VehicleMapper.toDto(vehicle2)));
     }
 
     // Returns a new list instance, not a reference to the original list
@@ -41,7 +41,7 @@ class VehicleRepositoryTest {
         VehicleRepository vehicleRepository = new VehicleRepository();
 
         // Act
-        List<Vehicle> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = vehicleRepository.getVehicleList();
 
         // Assert
         assertNotSame(vehicleRepository.getVehicleList(), result);
@@ -56,8 +56,8 @@ class VehicleRepositoryTest {
         vehicleRepository.addVehicle(vehicle1);
 
         // Act
-        List<Vehicle> result = vehicleRepository.getVehicleList();
-        result.add(new Vehicle("VIN1234fdhbgtedxs", "Brand2", "Model2", VehicleType.CAR, LocalDate.of(2023, 10, 12), "AA23WQ", 1500.0, 2500.0, 7000, LocalDate.of(2024, 1, 12), 12000));
+        List<VehicleDto> result = vehicleRepository.getVehicleList();
+        result.add(VehicleMapper.toDto(new Vehicle("VIN1234fdhbgtedxs", "Brand2", "Model2", VehicleType.CAR, LocalDate.of(2023, 10, 12), "AA23WQ", 1500.0, 2500.0, 7000, LocalDate.of(2024, 1, 12), 12000)));
 
         // Assert
         assertEquals(1, vehicleRepository.getVehicleList().size());
@@ -72,11 +72,11 @@ class VehicleRepositoryTest {
 
         // Act
         vehicleRepository.addVehicle(vehicle);
-        List<Vehicle> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = vehicleRepository.getVehicleList();
 
         // Assert
         assertEquals(1, result.size());
-        assertTrue(result.contains(vehicle));
+        assertTrue(result.contains(VehicleMapper.toDto(vehicle)));
     }
 
     // add a vehicle with invalid params to the repository and verify that it is added

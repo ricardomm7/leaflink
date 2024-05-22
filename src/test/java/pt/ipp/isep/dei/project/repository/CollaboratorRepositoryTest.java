@@ -43,9 +43,9 @@ public class CollaboratorRepositoryTest {
         repository.create(CollaboratorMapper.toDomain(new CollaboratorDto("Jane Doe", birthdate, contactMobile, taxpayerNumber, "jane.doe@example.com", address, zipCode, city, documentType, "456DEF", admissionDate, job)));
 
         // Ensure that the second collaborator is not added to the list
-        List<Collaborator> collaboratorList = repository.getCollaboratorList();
+        List<CollaboratorDto> collaboratorList = repository.getCollaboratorList();
         assertEquals(1, collaboratorList.size());
-        assertFalse(collaboratorList.contains(new Collaborator("Jane Doe", birthdate, contactMobile, taxpayerNumber, "jane.doe@example.com", address, zipCode, city, documentType, "456DEF", admissionDate, job)));
+        assertFalse(collaboratorList.contains(new CollaboratorDto("Jane Doe", birthdate, contactMobile, taxpayerNumber, "jane.doe@example.com", address, zipCode, city, documentType, "456DEF", admissionDate, job)));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class CollaboratorRepositoryTest {
         skillRepository.createSkill(SkillMapper.toDomain(new SkillDto(skill2.getDesignation())));
         skillRepository.createSkill(SkillMapper.toDomain(new SkillDto(skill3.getDesignation())));
 
-        Collaborator collaborator = repository.getCollaboratorList().get(0);
+        CollaboratorDto collaborator = repository.getCollaboratorList().get(0);
 
         List<Skill> skills = new ArrayList<>();
         skills.add(skill1);
@@ -88,14 +88,14 @@ public class CollaboratorRepositoryTest {
         skills.add(skill3);
 
         // Act
-        repository.assignSkills(collaborator, skills);
+        repository.assignSkills(CollaboratorMapper.toDomain(collaborator), skills);
 
         // Assert
-        List<Skill> assignedSkills = collaborator.getSkills();
+        List<SkillDto> assignedSkills = collaborator.getSkills();
         assertEquals(3, assignedSkills.size());
-        assertTrue(assignedSkills.contains(skill1));
-        assertTrue(assignedSkills.contains(skill2));
-        assertTrue(assignedSkills.contains(skill3));
+        assertTrue(assignedSkills.contains(SkillMapper.toDto(skill1)));
+        assertTrue(assignedSkills.contains(SkillMapper.toDto(skill2)));
+        assertTrue(assignedSkills.contains(SkillMapper.toDto(skill3)));
     }
 
 }

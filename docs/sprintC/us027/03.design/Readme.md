@@ -42,22 +42,6 @@ This diagram shows the full sequence of interactions between the classes involve
 
 ![Sequence Diagram - Full](svg/us027-sequence-diagram-full.svg)
 
-### Split Diagrams
-
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
-
-It uses Interaction Occurrence (a.k.a. Interaction Use).
-
-![Sequence Diagram - split](svg/us027-sequence-diagram-split.svg)
-
-**Get Green Space Repository Partial SD**
-
-![Sequence Diagram - Partial - Get Vehicle Repository](svg/us027-sequence-diagram-partial-get-green-space-repository.svg)
-
-**Get Green Space Repository Partial SD**
-
-![Sequence Diagram - Partial - Get Vehicle Repository](svg/us027-sequence-diagram-partial-get-green-spaces-list.svg)
-
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us027-class-diagram.svg)
