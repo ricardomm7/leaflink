@@ -34,7 +34,7 @@ activate VFM
     VFM -> UI: confirms Data
     activate UI
 
-        UI -> CTRL : submit vehicle data
+        UI -> CTRL : registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
         deactivate UI
         activate CTRL
 

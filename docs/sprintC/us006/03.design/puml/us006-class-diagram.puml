@@ -5,9 +5,6 @@ skinparam line type polyline
 'left to right direction
 
     class RegisterVehicleUI {
-        - controller : RegisterVehicleController
-        + RegisterVehicleUI()
-        + registerVehicle() : void
     }
 
     class RegisterVehicleController {

@@ -4,9 +4,6 @@ skinparam shadowing false
 skinparam line type polyline
 
 class ListMaintenanceUI{
-    - controller : ListMaintenanceController
-    + ListMaintenanceUI()
-    + listVehiclesNeedingMaintenance() void
 }
 
 class ListMaintenanceController {

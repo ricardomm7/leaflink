@@ -67,7 +67,6 @@ class Model{
 class VehicleCheckup{
     date
     currentKm
-    vehiclePlate
 }
 
 class ReportIssues{

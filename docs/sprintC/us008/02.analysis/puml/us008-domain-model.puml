@@ -13,7 +13,6 @@ hide methods
 class VehicleCheckup {
     date
     currentKm
-    vehiclePlate
 }
 
 class Vehicle {
