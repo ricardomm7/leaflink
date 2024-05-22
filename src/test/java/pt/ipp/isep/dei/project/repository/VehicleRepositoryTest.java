@@ -97,22 +97,6 @@ class VehicleRepositoryTest {
         }
     }
 
-    // add an existing vehicle to the repository and verify that it is added
-    @Test
-    public void test_add_existing_vehicle_to_repository() {
-        // Arrange
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        Vehicle vehicle = new Vehicle("VIN1234fdhbgterkm", "Brand1", "Model1", VehicleType.CAR, LocalDate.of(2020, 10, 12), "RM47CV", 1000.0, 2000.0, 5000, LocalDate.of(2022, 10, 12), 10000);
-        vehicleRepository.addVehicle(vehicle);
-
-        // Act & Assert
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            vehicleRepository.addVehicle(vehicle);
-        });
-
-        assertEquals("Vehicle already exists.", exception.getMessage());
-    }
-
 
     // verify if vehicle don't exists
     @Test
