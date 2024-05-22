@@ -39,8 +39,6 @@ public class VehicleRepository {
      * @return the boolean
      */
     public Boolean registerVehicle(Vehicle vehicle) {
-
-
         if (vehicle.validateVehicle()) {
             addVehicle(vehicle);
             return true;
@@ -57,7 +55,7 @@ public class VehicleRepository {
         if (!vehicle.validateVehicle()) {
             throw new IllegalArgumentException("Invalid vehicle.");
         }
-        if (getVehicleList().contains(vehicle)) {
+        if (getVehicleList().contains(VehicleMapper.toDto(vehicle))) {
             throw new IllegalArgumentException("Vehicle already exists.");
         }
         vehicleList.add(vehicle);
