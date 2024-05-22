@@ -21,6 +21,21 @@ activate VFM
     activate UI
 
         UI -> CTRL** : create
+        activate CTRL
+
+            CTRL -> RepositorySingleton: getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT: getVehicleRepository()
+            activate PLAT
+
+            PLAT --> CTRL: vehicleRepository
+            deactivate PLAT
+
+        deactivate CTRL
 
         UI --> VFM : requests vehicle data (VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
         deactivate UI
@@ -38,17 +53,7 @@ activate VFM
         deactivate UI
         activate CTRL
 
-            CTRL -> RepositorySingleton: getInstance()
-            activate RepositorySingleton
 
-            RepositorySingleton --> CTRL: repositories
-            deactivate RepositorySingleton
-
-            CTRL -> PLAT: getVehicleRepository()
-            activate PLAT
-
-            PLAT --> CTRL: VehicleRepository
-            deactivate PLAT
 
         CTRL -> VehicleRepository : registerVehicle(VIN, Brand, Model, Type, Vehicle Plate, Tare Weight, \nGross Weight, Current Km, Registration date, Acquisition Date, Maintenance Frequency)
         deactivate CTRL

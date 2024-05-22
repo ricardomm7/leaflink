@@ -13,13 +13,17 @@ import java.util.List;
  * to get vehicle-related information.
  */
 public class ListMaintenanceController {
-    private VehicleRepository vehicleRepository;
-    private MaintenanceRepository maintenanceRepository;
+    private final VehicleRepository vehicleRepository;
+    private final MaintenanceRepository maintenanceRepository;
 
     /**
      * Instantiates a new List maintenance controller.
      */
     public ListMaintenanceController() {
+        Repositories repositories = Repositories.getInstance();
+         vehicleRepository = repositories.getVehicleRepository();
+         maintenanceRepository = repositories.getMaintenanceRepository();
+
     }
 
     /**
@@ -39,9 +43,7 @@ public class ListMaintenanceController {
      * @return The list of vehicles needing maintenance
      */
     public List<VehicleDto> getVehiclesNeedingMaintenanceList() {
-        Repositories repositories = Repositories.getInstance();
-        VehicleRepository vehicleRepository = repositories.getVehicleRepository();
-        MaintenanceRepository maintenanceRepository = repositories.getMaintenanceRepository();
+
 
         return vehicleRepository.getVehiclesNeedingMaintenanceList(maintenanceRepository.getMaintenanceList());
     }
@@ -52,8 +54,6 @@ public class ListMaintenanceController {
      * @return the string
      */
     public String createMaintenanceReport(List<VehicleDto> vehicles) {
-        Repositories repositories = Repositories.getInstance();
-        MaintenanceRepository maintenanceRepository = repositories.getMaintenanceRepository();
         return maintenanceRepository.createMaintenanceReport(vehicles);
     }
 

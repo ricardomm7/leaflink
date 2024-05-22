@@ -25,7 +25,7 @@ activate CLB
 
         UI -> CTRL** : create
         deactivate UI
-        activate CTRL
+                activate CTRL
 
             CTRL -> RepositorySingleton: getInstance()
             activate RepositorySingleton

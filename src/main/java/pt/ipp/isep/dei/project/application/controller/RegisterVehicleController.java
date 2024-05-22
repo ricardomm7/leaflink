@@ -11,14 +11,15 @@ import pt.ipp.isep.dei.project.repository.VehicleRepository;
  * It interacts with the RegisterVehicleUI and with VehicleRepository to store vehicle-related information.
  */
 public class RegisterVehicleController {
-    private  Repositories repositories;
-    private  VehicleRepository vehicleRepository;
+    private Repositories repositories;
+    private final VehicleRepository vehicleRepository;
 
     /**
      * Instantiates a new Register vehicle controller.
      */
     public RegisterVehicleController() {
-
+        Repositories repositories = Repositories.getInstance();
+        vehicleRepository = repositories.getVehicleRepository();
     }
 
 
@@ -29,8 +30,7 @@ public class RegisterVehicleController {
      * @return the boolean
      */
     public boolean registerVehicle(VehicleDto vehicleDto) {
-        Repositories repositories = Repositories.getInstance();
-        VehicleRepository vehicleRepository = repositories.getVehicleRepository();
+
 
         if (!vehicleRepository.verifyExistingVehicles(vehicleDto.getVIN(), vehicleDto.getVehiclePlate())) {
             Vehicle vehicle = VehicleMapper.toDomain(vehicleDto);
