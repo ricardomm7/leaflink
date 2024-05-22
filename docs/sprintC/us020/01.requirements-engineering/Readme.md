@@ -42,6 +42,14 @@ As a Green Space Manager (GSM), I want to register a green space (garden, medium
 > 
 > **Answer:** The classification is not automatic, it's up to GSM decide about it.
 
+> **Question:** When creating a green space, is the gsm logged into the system considered the manager of that greenspace or does the gsm have to choose a manager?
+> 
+> **Answer:** In this proof of concept you can consider that the gsm creating the green space is the manager.
+
+> **Question:** Can two different green spaces have the same address?
+> 
+> **Answer:** No.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All attributes must be filled with a valid form.

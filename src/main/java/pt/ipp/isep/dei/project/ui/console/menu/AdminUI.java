@@ -27,6 +27,10 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("List Vehicles Needing Maintenance", new ListMaintenanceUI()));
         options.add(new MenuItem("Calculate the minimum cost Irrigation Route", new WaterIrrigationUI()));
         options.add(new MenuItem("Run Tests for time about Kruskal", new RunTestsUI()));
+        options.add(new MenuItem("Create a new Green Space", new RegisterGreenSpaceUI()));
+        options.add(new MenuItem("Add entry to To-Do List", new RegisterToDoEntryUI()));
+        options.add(new MenuItem("List green spaces managed by a specific GSM", new ListGreenSpacesUI()));
+
 
 
         int option = 0;

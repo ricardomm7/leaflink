@@ -69,4 +69,27 @@ public class GreenSpaceRepository {
         return new ArrayList<>(greenSpaceList);
     }
 
+    public List<GreenSpace> getOrganizedList(String algorithm, UserSession loggedUser) {
+        List<GreenSpace> l = matchWithLoggedUser(loggedUser);
+        if (!verifyEmptyList(l)) {
+            //FALTA AQUI O MÉTODO PARA ORDENAR A LISTA (BUSCAR DE FORA)
+            return l;
+        } else {
+            throw new IllegalArgumentException("The matched list is empty.");
+        }
+    }
+
+    private boolean verifyEmptyList(List<GreenSpace> listMatched) {
+        return listMatched.isEmpty();
+    }
+
+    private List<GreenSpace> matchWithLoggedUser(UserSession loggedUser) {
+        List<GreenSpace> u = new ArrayList<>();
+        for (GreenSpace g : greenSpaceList) {
+            if (g.getManager().getUserEmail().equalsIgnoreCase(loggedUser.getUserEmail())) {
+                u.add(g);
+            }
+        }
+        return u;
+    }
 }

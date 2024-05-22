@@ -15,7 +15,7 @@ skinparam line type polyline
         - greenSpaceRepository : GreenSpaceRepository
 
         + ListGreenSpacesController()
-        +getList(algorithm, loggedUser)
+        +getList(algorithm, loggedUser) : List<GreenSpace>
     }
 
     class Repositories {
@@ -30,9 +30,9 @@ skinparam line type polyline
         - greenSpaceList : List<GreenSpace>
         + GreenSpaceRepository()
         + getOrganizedList(algorithm, loggedUser) : List<GreenSpace>
-        - verifyEmptyList() : Boolean
+        - verifyEmptyList(listMatched : List<GreenSpace>) : Boolean
         - matchWithLoggedUser(loggedUser) : List<GreenSpace>
-        - organizeList(algorithm) : void
+        - organizeList(algorithm, listMatched : List<GreenSpace>) : void
     }
 
     class GreenSpace {

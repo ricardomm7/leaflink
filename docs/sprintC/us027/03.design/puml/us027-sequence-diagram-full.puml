@@ -19,13 +19,7 @@ activate GSM
 GSM -> UI : asks to list all green spaces managed by him
 activate UI
 UI -> CTRL** : create
-UI --> GSM : requests the sorting algorithm
-GSM -> UI : selects the sorting algorithm
-UI -> CTRL : getOrganizedList(algorithm, loggedUser)
-
-deactivate UI
 activate CTRL
-
 CTRL -> RepositorySingleton : getInstance()
 activate RepositorySingleton
 RepositorySingleton --> CTRL : repositories
@@ -33,8 +27,17 @@ deactivate RepositorySingleton
 CTRL -> PLAT : getGreenSpaceRepository()
 activate PLAT
 PLAT -->  CTRL: greenSpaceRepository
+deactivate CTRL
+
 deactivate PLAT
-CTRL -> GreenSpaceRepo : getList(algorithm, loggedUser)
+UI --> GSM : requests the sorting algorithm
+GSM -> UI : selects the sorting algorithm
+UI -> CTRL : getOrganizedList(algorithm, loggedUser)
+deactivate UI
+activate CTRL
+
+
+CTRL -> GreenSpaceRepo : getOrgList(algorithm, loggedUser)
 deactivate CTRL
 
 activate GreenSpaceRepo
@@ -42,9 +45,9 @@ GreenSpaceRepo -> GreenSpaceRepo : getOrganizedList(algorithm, loggedUser)
 activate GreenSpaceRepo
 GreenSpaceRepo -> GreenSpaceRepo : matchWithLoggedUser(loggedUser)
 activate GreenSpaceRepo
-GreenSpaceRepo -> GreenSpaceRepo : verifies if the list has any entry
+GreenSpaceRepo -> GreenSpaceRepo : verifyEmptyList(listMatched)
 activate GreenSpaceRepo
-GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm)
+GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm, listMatched)
 GreenSpaceRepo --> GreenSpaceRepo
 deactivate GreenSpaceRepo
 GreenSpaceRepo --> GreenSpaceRepo
