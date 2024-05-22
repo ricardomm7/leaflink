@@ -45,15 +45,17 @@ GreenSpaceRepo -> GreenSpaceRepo : getOrganizedList(algorithm, loggedUser)
 activate GreenSpaceRepo
 GreenSpaceRepo -> GreenSpaceRepo : matchWithLoggedUser(loggedUser)
 activate GreenSpaceRepo
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
 GreenSpaceRepo -> GreenSpaceRepo : verifyEmptyList(listMatched)
 activate GreenSpaceRepo
+
 GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm, listMatched)
 GreenSpaceRepo --> GreenSpaceRepo
 deactivate GreenSpaceRepo
 GreenSpaceRepo --> GreenSpaceRepo
 deactivate GreenSpaceRepo
-GreenSpaceRepo --> GreenSpaceRepo
-deactivate GreenSpaceRepo
+
 GreenSpaceRepo --> CTRL:list
 deactivate GreenSpaceRepo
 activate CTRL
