@@ -32,7 +32,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 * **AC2:** Every collaborator must have an associated job.
 * **AC3:** Name, birthdate, admission date, address, mobile number, e-mail, taxpayer number, ID doc type, and respective number should be provided by the HRM. The taxpayer identification number and the citizen card number should be valid.
 * **AC4:** There must be, at least, a difference of 18 years between the birthdate and the admission date (must be an adult).
-* **AC5:** The minimum age for employees is 18.
+* **AC5:** The birthdate can't be today or future.
 * **AC6:** The date of admission must be more recent than the date of birth.
 
 ### 1.4. Found out Dependencies

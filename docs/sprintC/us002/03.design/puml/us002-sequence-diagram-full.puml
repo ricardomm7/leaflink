@@ -20,6 +20,17 @@ Employee -> UI : asks to create a new job
 activate UI
 
 UI -> CTRL** : create
+activate CTRL
+CTRL -> GlobRepo : getInstance()
+activate GlobRepo
+GlobRepo --> CTRL : repositories
+deactivate GlobRepo
+
+CTRL -> PLAT : getJobRepository()
+activate PLAT
+PLAT -->  CTRL: jobRepository
+deactivate CTRL
+deactivate PLAT
 
 UI --> Employee : requests data (job title)
 deactivate UI
@@ -36,46 +47,41 @@ activate UI
 UI -> CTRL : createJob(title)
 deactivate UI
 activate CTRL
-CTRL -> GlobRepo : getInstance()
-activate GlobRepo
-GlobRepo --> CTRL : repositories
-deactivate GlobRepo
-
-CTRL -> PLAT : getJobRepository()
-activate PLAT
-PLAT -->  CTRL: jobRepository
-deactivate PLAT
 
 CTRL -> jobRepository : createJob(title)
 deactivate CTRL
 activate jobRepository
 
-    jobRepository -> Job** : create(title)
-    deactivate jobRepository
-
+    jobRepository -> Job** : createJob(title)
         activate Job
-
-    Job -> Job : verifyFilled(job)
+        Job -> Job : setTitle(title)
+activate Job
+    Job -> Job : verifyFilled(title)
         activate Job
-        Job -> Job : verifySpecialCharacters(job)
+        Job -> Job : verifySpecialCharacters(title)
         activate Job
         Job --> Job
         deactivate Job
     Job --> Job
     deactivate Job
+    Job --> Job
+    deactivate Job
+
     'Job -> Job : addJob(job)
     Job --> jobRepository : job
-    deactivate Job
-    activate jobRepository
 
-    jobRepository -> jobRepository : check for duplicates
+    deactivate Job
+
+    jobRepository -> jobRepository : checkForDuplicates(job : Job)
     activate jobRepository
+        jobRepository -> jobRepository: addJob(job)
+activate jobRepository
     jobRepository --> jobRepository
     deactivate jobRepository
 
-    jobRepository -> jobRepository: addJob(job)
-    deactivate Job
-jobRepository --> CTRL : job
+jobRepository --> jobRepository
+    deactivate jobRepository
+jobRepository --> CTRL : success
 deactivate jobRepository
 activate CTRL
 deactivate jobRepository

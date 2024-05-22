@@ -23,16 +23,6 @@ HRM -> UI : asks to create a new collaborator
 activate UI
 
 UI -> CTRL** : create
-
-UI --> HRM : requests data (collaborator personal information)
-deactivate UI
-
-HRM -> UI : types requested data
-activate UI
-
-UI -> CTRL: get job List
-deactivate UI
-
 activate CTRL
 CTRL -> GlobRepo : getInstance()
 activate GlobRepo
@@ -42,11 +32,27 @@ CTRL -> PLAT : getJobRepository()
 activate PLAT
 PLAT -->  CTRL: jobRepository
 deactivate PLAT
-CTRL -> jobRepository : getJobs()
+CTRL -> PLAT : getCollaboratorRepository()
+activate PLAT
+PLAT -->  CTRL: collaboratorRepository
+deactivate PLAT
+deactivate CTRL
+
+UI --> HRM : requests data (collaborator personal information)
+deactivate UI
+
+HRM -> UI : types requested data
+activate UI
+
+UI -> CTRL: getJobs()
+deactivate UI
+
+activate CTRL
+CTRL -> jobRepository : getJobList()
 activate jobRepository
 jobRepository --> CTRL : jobsList
 deactivate jobRepository
-CTRL -->UI : job List
+CTRL -->UI : jobsList
 deactivate CTRL
 activate UI
 
@@ -63,77 +69,138 @@ deactivate UI
 HRM -> UI: confirms the data
 activate UI
 
-UI -> CTRL : create collaborator
+UI -> CTRL : createCLB(collDto : CollaboratorDto)
 
 deactivate UI
 activate CTRL
 
-CTRL -> GlobRepo : getInstance()
-activate GlobRepo
-GlobRepo --> CTRL : repositories
-deactivate GlobRepo
-CTRL -> PLAT : getCollaboratorRepository()
-activate PLAT
-PLAT -->  CTRL: collaboratorRepository
-deactivate PLAT
+
 
 CTRL -> CLBREP : createCLB(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, job, taxpayerNumber)
 deactivate CTRL
 
 activate CLBREP
 CLBREP->CLB** : create(name, birthdate, contactMobile, email, address, zipCode,\n city, documentType, identificationNumber, admissionDate, job, taxpayerNumber)
-deactivate CLBREP
+activate CLB
+CLB -> CLB : setName(name)
 activate CLB
 CLB -> CLB : verifyFilled(collaborator)
 activate CLB
-CLB -> CLB : verifyNineDigits(collaborator)
+CLB -> CLB : containsSpecialCharacters(name)
 activate CLB
-CLB -> CLB : verifyEmail(collaborator)
-activate CLB
-CLB -> CLB : verifyBirth(collaborator)
-activate CLB
-CLB -> CLB : verifyAdmissionDate(collaborator)
-activate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
 
-CLB -> CLB : verifyIdentificationNumber(collaborator)
+
+CLB -> CLB : setBirthdate(birthdate)
 activate CLB
+CLB -> CLB : verifyBirth(birthdate)
+activate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+
+
+CLB -> CLB : setContactMobile(contactMobile)
+activate CLB
+CLB -> CLB : verifyNineDigits(contactMobile)
+activate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+
+
+CLB -> CLB : setEmail(email)
+activate CLB
+CLB -> CLB : verifyEmail(email)
+activate CLB
+CLB --> CLB
+deactivate CLB
+CLB --> CLB
+deactivate CLB
+
 CLB -> Address** : setAddress(address, city, zipCode)
 activate Address
-Address -> Address : Address(address, city, zipCode)
-
-Address -> Address : verifyZipCode(collaborator)
+Address -> Address : setZipcode(zipCode)
+activate Address
+Address -> Address : verifyZipCode(zipCode)
 activate Address
 Address --> Address
 deactivate Address
-Address --> CLB : address
+Address --> Address
 deactivate Address
+
+Address -> Address : setCity(city)
+activate Address
+Address --> Address
+deactivate Address
+
+Address -> Address : setAddress(address)
+activate Address
+Address --> Address
+deactivate Address
+
+Address --> CLB : success
+
+deactivate Address
+
+CLB -> CLB : this.documentType = documentType
+
+CLB -> CLB : setIdentificationNumber(identificationNumber)
+activate CLB
+CLB -> CLB : verifyIdentificationNumber(identificationNumber)
+activate CLB
 CLB --> CLB
+deactivate CLB
+CLB-->CLB
 deactivate CLB
 
+
+CLB -> CLB : setAdmissionDate(admissionDate)
+activate CLB
+CLB -> CLB : verifyAdmissionDate(admissionDate)
+activate CLB
 CLB --> CLB
 deactivate CLB
-CLB --> CLB
-deactivate CLB
-CLB --> CLB
-deactivate CLB
-CLB --> CLB
-deactivate CLB
-CLB --> CLB
+CLB-->CLB
 deactivate CLB
 
+
+CLB -> CLB : setTaxPayerNumber(taxpayerNumber)
+activate CLB
+CLB -> CLB : verifyNineDigits(taxpayerNumber)
+activate CLB
+CLB --> CLB
+deactivate CLB
+CLB-->CLB
+deactivate CLB
+
+CLB -> CLB : setJob(job)
+activate CLB
+CLB --> CLB
+deactivate CLB
 
 
 CLB -->CLBREP : collaborator
 deactivate CLB
-activate CLBREP
 
 CLBREP -> CLBREP : check for duplicates (taxpayerNumber)
 activate CLBREP
+CLBREP -> CLBREP: addCollaborator(collaborator)
+activate CLBREP
+CLBREP --> CLBREP
+deactivate CLBREP
 CLBREP --> CLBREP
 deactivate CLBREP
 
-CLBREP -> CLBREP: addCollaborator(collaborator)
-CLBREP --> CTRL : collaborator
+
+CLBREP --> CTRL : success
 deactivate CLBREP
 activate CTRL
 

@@ -7,7 +7,7 @@ skinparam linetype polyline
 
 class RegisterCollaboratorUI {
 +registerCollaborator() : void
--parseDate : Date
+-parseDate : LocalDate
 }
 
 class RegisterCollaboratorController {
@@ -34,15 +34,16 @@ class CollaboratorRepository {
     -collaboratorList : List<Collaborator>
     +CollaboratorRepository()
     + create(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : DocumentType, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
-    + checkForDuplicates() : void
+    + checkForDuplicates() : boolean
     + addCollaborator(collaborator) : void
     + getCollaboratorList() : List<Collaborator>
     + assignSkills() : void
 }
 
 class JobRepository {
-    +createJob(title : String) : Job
-    +checkForDuplicates() : void
+-jobList : List<Job>
+    +createJob(title : String) : void
+    +checkForDuplicates() : boolean
     +addJob(job) : void
     +getJobList() : List<Job>
 }
@@ -90,6 +91,7 @@ class Address {
     +getAddress() : String
     +getCity() : String
     +getZipCode() : String
+    -verifyZipCode() : boolean
 }
 
 class Job {
@@ -97,8 +99,8 @@ class Job {
     + Job(title : String)
     + setTitle() : void
     + getTitle() : String
-    +verifyFilled(job : Job) : void
-    +verifySpecialCharacters(job : Job) : void
+    -verifyFilled(job : Job) : boolean
+    -verifySpecialCharacters(job : Job) : boolean
 }
 
 enum DocumentType{

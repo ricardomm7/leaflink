@@ -10,7 +10,7 @@ class CreateJobUI {
 }
 
 class CreateJobController {
--jobRepository
+-jobRepository : JobRepository
     +createJob(title : String) : void
     +CreateJobController()
     '+getJobRepository() : JobRepository
@@ -26,8 +26,9 @@ class Repositories {
 
 class JobRepository {
 -jobList : List<Job>
-    +createJob(title : String) : Job
-    +checkForDuplicates() : void
++JobRepository()
+    +createJob(title : String) : void
+    +checkForDuplicates() : boolean
     +addJob(job) : void
     +getJobList() : List<Job>
 }
@@ -35,16 +36,16 @@ class JobRepository {
 class Job {
     - title : String
     + Job(title : String)
-    + setTitle() : void
+    + setTitle(title : String) : void
     + getTitle() : String
-    +verifyFilled(job : Job) : void
-    +verifySpecialCharacters(job : Job) : void
+    +verifyFilled(title : String) : boolean
+    +verifySpecialCharacters(title : String) : boolean
 }
 
 CreateJobUI ..> CreateJobController
 Repositories --> "1" JobRepository : jobRepository
 Repositories --> Repositories : instance
-JobRepository --> "*" Job : jobs
+JobRepository --> "*" Job
 CreateJobController ..> Repositories : repositories
 CreateJobController ..> JobRepository : jobRepository
 

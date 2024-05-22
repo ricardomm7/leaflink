@@ -49,10 +49,9 @@ As a Human Resources Manager (HRM), I want to register a job that a collaborator
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The job field must be filled in.
-* **AC2:** A job name can’t have special characters or digits.
-* **AC3:** If a job is created with the same name as an existing job, the system should show an information window
-  and reject the job.
+* **AC1:** The job title must be filled in.
+* **AC2:** A job title can’t have special characters or digits.
+* **AC3:** If you try to create a job with the same title as an existing job, the system should display an information window and reject the job.
 
 ### 1.4. Found out Dependencies
 
