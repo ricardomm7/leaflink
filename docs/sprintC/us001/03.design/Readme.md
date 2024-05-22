@@ -14,7 +14,7 @@ _**Note that SSD - Alternative One is adopted.**_
 | Step 3  		     | 	... instantiating  the skill?                | skillRepository       | Information Expert, High Cohesion and Low Coupling:                                                           |
 | Step 4  		     | 	... validating all data (global validation)? | skillRepository       | Information Expert:                                                                                           | 
 |                | ... validating all data (local validation)    | Skill                 | Information Expert:                                                                                           |
-| Step 5  		     | 	... informing operation success?             | CreateSkillUI         | Is responsible for user interactions.                                                                         | 
+| Step 5  		     | 	... informing operation success?             | CreateSkillUI         | Pure Fabrication: Is responsible for user interactions.                                                                         | 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
