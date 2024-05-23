@@ -20,12 +20,8 @@ public class JobRepository {
         jobList = new ArrayList<>();
     }
 
-    /**
-     * Add a new Job, with the specified title, to the job list if it's not a duplicate.
-     *
-     * @param j the job created.
-     */
-    public void createJob(Job j) {
+    public void createJob(JobDto dto) {
+        Job j = JobMapper.toDomain(dto);
         if (checkForDuplicates(j)) {
             addJob(j);
         } else {

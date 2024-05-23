@@ -14,7 +14,9 @@ participant ":RegisterGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as gsrepo
-participant ":GreenSpace" as GS
+participant ":GreenSpaceMapper" as GSMP
+participant "greenSpace\n:GreenSpace" as GS
+participant "greenSpaceDto\n:GreenSpaceDto" as DTO
 
 activate GSM
 
@@ -40,32 +42,50 @@ UI-> GSM : shows data and requests confirmation
 deactivate UI
 GSM -> UI: user confirms
 activate UI
-UI -> CTRL : createNewGS(name, type, area, manager, \naddress)
+
+UI->DTO** : GreenSpaceDto(name, type, area, manager, street, zipCode, city)
+activate DTO
+DTO -> DTO : this.name = name
+DTO -> DTO : this.type = type
+DTO -> DTO : this.area = area
+DTO -> DTO : this.manager = manager
+DTO -> DTO : this.address = address
+DTO -> DTO : this.city = city
+DTO -> DTO : this.zipCode = zipCode
+DTO --> UI : greenSpaceDto
+deactivate DTO
+
+UI -> CTRL : createNewGS(greenSpaceDto)
 deactivate UI
 activate CTRL
-CTRL -> gsrepo : createNewGS(name, type, area, manager, address)
+CTRL -> gsrepo : createNewGS(greenSpaceDto)
 deactivate CTRL
 activate gsrepo
-gsrepo -> GS** : create(name, type, area, manager, address)
+gsrepo -> GSMP : toDomain(greenSpaceDto)
+activate GSMP
+
+GSMP -> GS** : create
 
 activate GS
-GS -> GS : setArea(area)
-activate GS
-GS --> GS
-deactivate GS
-
-GS -> GS : setName(area)
+GS -> GS : setArea(greenSpaceDto.getArea)
 activate GS
 GS --> GS
 deactivate GS
 
-GS -> GS : this.type = type
-
-GS -> GS : this.manager = manager
-GS -> GS : this.address = address
-
-GS --> gsrepo : greenSpace
+GS -> GS : setName(greenSpaceDto.getName)
+activate GS
+GS --> GS
 deactivate GS
+
+GS -> GS : this.type = greenSpaceDto.getType
+
+GS -> GS : this.manager = greenSpaceDto.getManager
+GS -> GS : this.address = greenSpaceDto.getAddress
+
+GS --> GSMP : greenSpace
+deactivate GS
+GSMP --> gsrepo : greenSpace
+deactivate GSMP
 gsrepo -> gsrepo : checkForDuplicates(greenSpace)
 activate gsrepo
 gsrepo -> gsrepo : addGreenSpace(greenSpace)

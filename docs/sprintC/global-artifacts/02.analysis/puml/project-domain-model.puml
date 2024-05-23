@@ -174,13 +174,13 @@ Model "1..*" -- "1" Brand : has <
 
 Collaborator "1" -- "1..*" Document : has >
 
-Job "*" -- "1..*" Collaborator : assign to >
+Job "1" -- "1..*" Collaborator : assign to >
 
 Skill "*" -- "1..*" Collaborator : assign to >
 
 Team "1..*" -- "1..*" Skill : needs >
 
-Team "1" -- "1..*" Collaborator : has >
+Team "*" -- "1..*" Collaborator : has >
 
 Vehicle "1" -- "*" VehicleCheckup : has >
 

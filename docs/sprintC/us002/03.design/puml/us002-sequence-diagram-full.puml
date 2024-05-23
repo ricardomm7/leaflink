@@ -11,8 +11,8 @@ participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
-participant "jobRepository:\nJobRepository" as jobRepository
-participant ":Job" as Job
+participant "jobRepository\n:JobRepository" as jobRepository
+participant "job\n:Job" as Job
 
 activate Employee
 

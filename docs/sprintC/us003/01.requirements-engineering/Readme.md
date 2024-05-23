@@ -10,7 +10,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 **From the specifications document:**
 
->   Each  collaborator is characterized by a name, a birthdate, admission date, an address, contact (email and phone number), an identification document and its identification number, and the Tax Payer number.
+> Each  collaborator is characterized by a name, a birthdate, admission date, an address, contact (email and phone number), an identification document and its identification number, and the Tax Payer number.
 
 **From the client clarifications:**
 

@@ -12,8 +12,8 @@ participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository:\nCollaboratorRepository" as CLBREP
 participant "jobRepository:\nJobRepository" as jobRepository
-participant ":Collaborator" as CLB
-participant ":Address" as Address
+participant "collaborator\n:Collaborator" as CLB
+participant "address\n:Address" as Address
 
 
 
@@ -146,7 +146,7 @@ activate Address
 Address --> Address
 deactivate Address
 
-Address --> CLB : success
+Address --> CLB : address
 
 deactivate Address
 
@@ -190,7 +190,7 @@ deactivate CLB
 CLB -->CLBREP : collaborator
 deactivate CLB
 
-CLBREP -> CLBREP : check for duplicates (taxpayerNumber)
+CLBREP -> CLBREP : checkForDuplicates(collaborator : Collaborator)
 activate CLBREP
 CLBREP -> CLBREP: addCollaborator(collaborator)
 activate CLBREP

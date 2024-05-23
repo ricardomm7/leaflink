@@ -235,29 +235,29 @@ public class RegisterVehicleUI implements Runnable {
         return types[choice - 1];
     }
 
-private static boolean confirmVehicleData(VehicleDto vehicleDto) {
-    System.out.println("\nConfirm Vehicle Data:");
-    System.out.println("VIN: " + vehicleDto.getVIN());
-    System.out.println("Brand: " + vehicleDto.getBrand());
-    System.out.println("Model: " + vehicleDto.getModel());
-    System.out.println("Vehicle Type: " + vehicleDto.getType());
-    System.out.println("Vehicle Plate: " + vehicleDto.getVehiclePlate());
-    System.out.println("Tare Weight: " + vehicleDto.getTareWeight());
-    System.out.println("Gross Weight: " + vehicleDto.getGrossWeight());
-    System.out.println("Current Kilometers: " + vehicleDto.getCurrentKm());
-    System.out.println("Registration Date: " + formatDate(vehicleDto.getRegistrationDate()));
-    System.out.println("Acquisition Date: " + formatDate(vehicleDto.getAcquisitionDate()));
-    System.out.println("Maintenance Frequency: " + vehicleDto.getMaintenanceFrequency());
+    private static boolean confirmVehicleData(VehicleDto vehicleDto) {
+        System.out.println("\nConfirm Vehicle Data:");
+        System.out.println("VIN: " + vehicleDto.getVIN());
+        System.out.println("Brand: " + vehicleDto.getBrand());
+        System.out.println("Model: " + vehicleDto.getModel());
+        System.out.println("Vehicle Type: " + vehicleDto.getType());
+        System.out.println("Vehicle Plate: " + vehicleDto.getVehiclePlate());
+        System.out.println("Tare Weight: " + vehicleDto.getTareWeight());
+        System.out.println("Gross Weight: " + vehicleDto.getGrossWeight());
+        System.out.println("Current Kilometers: " + vehicleDto.getCurrentKm());
+        System.out.println("Registration Date: " + formatDate(vehicleDto.getRegistrationDate()));
+        System.out.println("Acquisition Date: " + formatDate(vehicleDto.getAcquisitionDate()));
+        System.out.println("Maintenance Frequency: " + vehicleDto.getMaintenanceFrequency());
 
-    System.out.print("\nType 'Y' to confirm data: ");
-    String confirmation = scanner.nextLine();
-    return confirmation.equalsIgnoreCase("Y");
-}
+        System.out.print("\nType 'Y' to confirm data: ");
+        String confirmation = scanner.nextLine();
+        return confirmation.equalsIgnoreCase("Y");
+    }
 
-private static String formatDate(LocalDate date) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    return date.format(formatter);
-}
+    private static String formatDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(formatter);
+    }
 
 
     private static boolean validateVin(String vin) {

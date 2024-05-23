@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.project.repository;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
-import pt.ipp.isep.dei.project.mappers.MaintenanceMapper;
 
 import java.time.LocalDate;
 import java.util.List;

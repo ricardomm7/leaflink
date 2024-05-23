@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
-import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
@@ -23,7 +22,7 @@ public class RegisterGreenSpaceController {
     }
 
     public void createNewGS(GreenSpaceDto g1) {
-        greenSpaceRepository.create(GreenSpaceMapper.toDomain(g1));
+        greenSpaceRepository.create(g1);
     }
 
 }

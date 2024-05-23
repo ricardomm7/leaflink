@@ -7,7 +7,10 @@ import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.dto.*;
-import pt.ipp.isep.dei.project.mappers.*;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
+import pt.ipp.isep.dei.project.mappers.JobMapper;
+import pt.ipp.isep.dei.project.mappers.SkillMapper;
+import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 import pt.isep.lei.esoft.auth.domain.model.Password;
@@ -117,25 +120,25 @@ public class Bootstrap implements Runnable {
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Manager")));
+        jobRepository.createJob(new JobDto("Manager"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Heavy Equipment Operator")));
+        jobRepository.createJob(new JobDto("Heavy Equipment Operator"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Landscaping Technician")));
+        jobRepository.createJob(new JobDto("Landscaping Technician"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Irrigation Technician")));
+        jobRepository.createJob(new JobDto("Irrigation Technician"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Arborist")));
+        jobRepository.createJob(new JobDto("Arborist"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Pest Control Technician")));
+        jobRepository.createJob(new JobDto("Pest Control Technician"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Driver")));
+        jobRepository.createJob(new JobDto("Driver"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Gardener")));
+        jobRepository.createJob(new JobDto("Gardener"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Plumber")));
+        jobRepository.createJob(new JobDto("Plumber"));
 
-        jobRepository.createJob(JobMapper.toDomain(new JobDto("Machine Operator")));
+        jobRepository.createJob(new JobDto("Machine Operator"));
     }
 
     private void addCollaborators() {
@@ -180,19 +183,19 @@ public class Bootstrap implements Runnable {
         UserSession managerSession = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(email, password, "Green Space Manager")));
         Address address = new Address("Santa Acácia", "Uriunda", "5555-999");
 
-        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Alameda", GreenSpaceType.MEDIUM_SIZED_PARK, 78876, managerSession, address.getAddress(), address.getCity(), address.getZipCode())));
+        greenSpaceRepository.create(new GreenSpaceDto("Alameda", GreenSpaceType.MEDIUM_SIZED_PARK, 78876, managerSession, address.getAddress(), address.getCity(), address.getZipCode()));
 
         Address address2 = new Address("Rua das Flores", "Florina", "1234-567");
-        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Jardim das Flores", GreenSpaceType.GARDEN, 5000, managerSession, address2.getAddress(), address2.getCity(), address2.getZipCode())));
+        greenSpaceRepository.create(new GreenSpaceDto("Jardim das Flores", GreenSpaceType.GARDEN, 5000, managerSession, address2.getAddress(), address2.getCity(), address2.getZipCode()));
 
         Address address3 = new Address("Avenida Central", "Centro", "8901-234");
-        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Parque Central", GreenSpaceType.LARGE_SIZED_PARK, 150000, managerSession, address3.getAddress(), address3.getCity(), address3.getZipCode())));
+        greenSpaceRepository.create(new GreenSpaceDto("Parque Central", GreenSpaceType.LARGE_SIZED_PARK, 150000, managerSession, address3.getAddress(), address3.getCity(), address3.getZipCode()));
 
         Address address4 = new Address("Estrada Verde", "Verde", "5678-901");
-        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Bosque Verde", GreenSpaceType.MEDIUM_SIZED_PARK, 250000, managerSession, address4.getAddress(), address4.getCity(), address4.getZipCode())));
+        greenSpaceRepository.create(new GreenSpaceDto("Bosque Verde", GreenSpaceType.MEDIUM_SIZED_PARK, 250000, managerSession, address4.getAddress(), address4.getCity(), address4.getZipCode()));
 
         Address address5 = new Address("Praça Azul", "Azulina", "2345-678");
-        greenSpaceRepository.create((GreenSpaceMapper.toDomain(new GreenSpaceDto("Praça Azul", GreenSpaceType.GARDEN, 20000, managerSession, address5.getAddress(), address5.getCity(), address5.getZipCode()))));
+        greenSpaceRepository.create(new GreenSpaceDto("Praça Azul", GreenSpaceType.GARDEN, 20000, managerSession, address5.getAddress(), address5.getCity(), address5.getZipCode()));
     }
 
     private void addUsers() {
