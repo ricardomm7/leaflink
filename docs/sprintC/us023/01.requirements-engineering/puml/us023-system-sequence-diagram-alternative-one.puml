@@ -3,38 +3,38 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+title System Sequence Diagram (SSD) - US023
 
 autonumber
 
-actor "VFM" as VFM
+actor "GSM" as GSM
 participant ":System" as System
 
-activate VFM
+activate GSM
 
-    VFM -> System : asks to assign a Team to an entry in the Agenda.
+    GSM -> System : asks to assign a Team to an entry in the Agenda.
     activate System
 
-        System --> VFM : shows teams and asks to select one.
+        System --> GSM : shows teams and asks to select one.
     deactivate System
 
-    VFM -> System : selects team
+    GSM -> System : selects team
 
     activate System
 
-        System --> VFM : shows the entries in the agenda and asks to select one
+        System --> GSM : shows the entries in the agenda and asks to select one
     deactivate System
 
-    VFM -> System : select the entry
+    GSM -> System : select the entry
     activate System
 
-        System --> VFM : shows all data and requests confirmation
+        System --> GSM : shows all data and requests confirmation
     deactivate System
 
-    VFM -> System : confirms
+    GSM -> System : confirms
     activate System
 
-        System --> VFM :  displays success message (Team assigned successfully)
+        System --> GSM :  displays success message (Team assigned successfully)
     deactivate System
 
 @enduml
