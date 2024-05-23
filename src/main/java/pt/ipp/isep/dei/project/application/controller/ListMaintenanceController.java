@@ -31,7 +31,6 @@ public class ListMaintenanceController {
      * Generate maintenance report.
      */
     public void GenerateMaintenanceReport() {
-        ;
         List<VehicleDto> vehicleDtosNeedingMaintenance = getVehiclesNeedingMaintenanceList();
         createMaintenanceReport(vehicleDtosNeedingMaintenance);
 

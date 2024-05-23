@@ -3,11 +3,9 @@ package pt.ipp.isep.dei.project.application.controller;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.Entry;
-import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.mappers.EntryMapper;
-import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -22,7 +20,6 @@ public class RegisterToDoEntryController {
 
     private final Repositories repositories;
     private final GreenSpaceRepository greenSpaceRepository;
-    private final GreenSpaceMapper greenSpaceMapper = new GreenSpaceMapper();
     private final EntryRepository entryRepository;
 
     /**
@@ -42,23 +39,15 @@ public class RegisterToDoEntryController {
      */
     public List<GreenSpaceDto> getGreenSpacesDto() {
         List<GreenSpaceDto> listToReturn = new LinkedList<>();
-        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaceList();
+        List<GreenSpaceDto> greenSpaces = greenSpaceRepository.getGreenSpaceList();
         UserSession manager = ApplicationSession.getInstance().getCurrentSession();
-        for (GreenSpace gs : greenSpaces) {
+        for (GreenSpaceDto gs : greenSpaces) {
             if (manager.getUserEmail().equals(gs.getManager().getUserEmail()))
-                listToReturn.add(greenSpaceMapper.toDto(gs));
+                listToReturn.add(gs);
         }
         return listToReturn;
     }
 
-    /**
-     * Create new entry.
-     *
-     * @param greenSpace      the green space
-     * @param description     the description
-     * @param degreeOfUrgency the degree of urgency
-     * @param duration        the duration
-     */
     public void createNewEntry(EntryDto entryDto) {
         Entry entry = EntryMapper.toDomain(entryDto);
         entryRepository.create(entry);

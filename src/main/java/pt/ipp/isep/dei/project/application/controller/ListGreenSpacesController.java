@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.GreenSpace;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
@@ -16,7 +16,7 @@ public class ListGreenSpacesController {
         this.greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
 
-    public List<GreenSpace> getList(String algorithm, UserSession loggedUser) {
+    public List<GreenSpaceDto> getList(String algorithm, UserSession loggedUser) {
         return greenSpaceRepository.getOrganizedList(algorithm, loggedUser);
     }
 }

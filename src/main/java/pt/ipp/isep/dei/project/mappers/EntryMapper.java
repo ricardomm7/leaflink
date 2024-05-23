@@ -11,18 +11,13 @@ import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 public class EntryMapper {
 
     /**
-     * The Green space mapper.
-     */
-    static GreenSpaceMapper greenSpaceMapper = new GreenSpaceMapper();
-
-    /**
      * To dto entry dto.
      *
      * @param entry the entry
      * @return the entry dto
      */
     public static EntryDto toDto(Entry entry) {
-        GreenSpaceDto greenSpaceDto = greenSpaceMapper.toDto(entry.getGreenSpace());
+        GreenSpaceDto greenSpaceDto = GreenSpaceMapper.toDto(entry.getGreenSpace());
         return new EntryDto(greenSpaceDto, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
     }
 

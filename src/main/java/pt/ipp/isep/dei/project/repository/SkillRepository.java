@@ -64,7 +64,6 @@ public class SkillRepository {
      * @return a list of skillsDto.
      */
     public List<SkillDto> getSkillDtoList() {
-
         return SkillMapper.ListToDto(skillList);
     }
 }

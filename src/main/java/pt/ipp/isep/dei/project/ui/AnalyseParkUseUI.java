@@ -26,8 +26,7 @@ public class AnalyseParkUseUI implements Runnable {
     public void uploadFile() {
         System.out.print("Enter the file path: ");
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        this.filepath = input;
+        this.filepath = sc.nextLine();
     }
 
     /**

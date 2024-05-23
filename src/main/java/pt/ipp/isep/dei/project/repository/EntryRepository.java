@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Entry;
+import pt.ipp.isep.dei.project.dto.EntryDto;
+import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +21,6 @@ public class EntryRepository {
         entryList = new ArrayList<>();
     }
 
-    /**
-     * Create.
-     *
-     * @param greenSpace      the green space
-     * @param description     the description
-     * @param degreeOfUrgency the degree of urgency
-     * @param duration        the duration
-     */
     public void create(Entry g) {
         if (checkForDuplicates(g)) {
             addEntry(g);
@@ -53,7 +47,11 @@ public class EntryRepository {
      *
      * @return the entry list
      */
-    public List<Entry> getEntryList() {
-        return entryList;
+    public List<EntryDto> getEntryList() {
+        List<EntryDto> r = new ArrayList<>();
+        for (Entry e : entryList) {
+            r.add(new EntryDto(GreenSpaceMapper.toDto(e.getGreenSpace()), e.getDescription(), e.getDegreeOfUrgency(), e.getDuration()));
+        }
+        return r;
     }
 }

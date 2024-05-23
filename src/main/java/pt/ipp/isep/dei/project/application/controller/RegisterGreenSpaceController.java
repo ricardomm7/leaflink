@@ -22,18 +22,6 @@ public class RegisterGreenSpaceController {
         greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
 
-    /**
-     * Creates a new green space with the provided information.
-     * If the input is valid, adds the green space to the repository.
-     *
-     * @param name    the name of the green space
-     * @param type    the type of the green space
-     * @param area    the area of the green space
-     * @param manager the user session of the manager
-     * @param street  the street of the green space address
-     * @param zipcode the ZIP code of the green space address
-     * @param city    the city of the green space address
-     */
     public void createNewGS(GreenSpaceDto g1) {
         greenSpaceRepository.create(GreenSpaceMapper.toDomain(g1));
     }

@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +22,6 @@ public class GreenSpaceRepository {
         greenSpaceList = new ArrayList<>();
     }
 
-    /**
-     * Creates a new green space and adds it to the repository if it does not already exist.
-     *
-     * @param name    the name of the green space
-     * @param type    the type of the green space
-     * @param area    the area of the green space in hectares
-     * @param manager the manager of the green space
-     * @param address the address of the green space
-     * @throws IllegalArgumentException if a green space with the same name already exists
-     */
     public void create(GreenSpace g) {
         if (checkForDuplicates(g)) {
             addGreenSpace(g);
@@ -62,15 +54,15 @@ public class GreenSpaceRepository {
         return true;
     }
 
-    public List<GreenSpace> getGreenSpaceList() {
-        return new ArrayList<>(greenSpaceList);
+    public List<GreenSpaceDto> getGreenSpaceList() {
+        return GreenSpaceMapper.toDtoList(greenSpaceList);
     }
 
-    public List<GreenSpace> getOrganizedList(String algorithm, UserSession loggedUser) {
+    public List<GreenSpaceDto> getOrganizedList(String algorithm, UserSession loggedUser) {
         List<GreenSpace> l = matchWithLoggedUser(loggedUser);
         if (!verifyEmptyList(l)) {
             //FALTA AQUI O MÉTODO PARA ORDENAR A LISTA (BUSCAR DE FORA)
-            return l;
+            return GreenSpaceMapper.toDtoList(l);
         } else {
             throw new IllegalArgumentException("The matched list is empty.");
         }

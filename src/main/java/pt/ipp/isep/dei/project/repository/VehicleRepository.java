@@ -38,7 +38,7 @@ public class VehicleRepository {
      * @param vehicle the vehicle Dto object
      * @return the boolean
      */
-    public Boolean registerVehicle(Vehicle vehicle) {
+    public boolean registerVehicle(Vehicle vehicle) {
         if (vehicle.validateVehicle()) {
             addVehicle(vehicle);
             return true;

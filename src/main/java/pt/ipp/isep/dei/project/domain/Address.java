@@ -99,4 +99,9 @@ public class Address {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return this.address + ", " + this.city + " (" + this.zipCode + ")";
+    }
 }

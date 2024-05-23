@@ -42,7 +42,7 @@ public class MaintenanceRepository {
      *
      * @param maintenance the maintenance
      */
-    public void addMaintenance(Maintenance maintenance) {
+    private void addMaintenance(Maintenance maintenance) {
         this.maintenanceList.add(maintenance);
     }
 
@@ -52,12 +52,7 @@ public class MaintenanceRepository {
      * @return the maintenance list
      */
     public List<MaintenanceDto> getMaintenanceList() {
-        List<MaintenanceDto> u = new ArrayList<>();
-        for (Maintenance j : maintenanceList) {
-            MaintenanceDto k = MaintenanceMapper.toDto(j);
-            u.add(k);
-        }
-        return u;
+        return MaintenanceMapper.toDtoList(maintenanceList);
     }
 
     /**
@@ -68,9 +63,6 @@ public class MaintenanceRepository {
      */
     public String createMaintenanceReport(List<VehicleDto> vehicleDtoList) {
         return maintenanceReport.createReport(vehicleDtoList, getMaintenanceList());
-
     }
-
-
 }
 
