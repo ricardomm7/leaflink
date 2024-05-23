@@ -14,6 +14,8 @@ participant ":ListGreenSpacesController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
+participant ":GreenSpaceMapper" as mapper
+participant "greenSpaceDto\n:GreenSpaceDto" as dto
 
 activate GSM
 GSM -> UI : asks to list all green spaces managed by him
@@ -51,6 +53,22 @@ GreenSpaceRepo -> GreenSpaceRepo : verifyEmptyList(listMatched)
 activate GreenSpaceRepo
 
 GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm, listMatched)
+activate GreenSpaceRepo
+GreenSpaceRepo -> mapper : toDtoList(listOrganized)
+activate mapper
+
+loop
+mapper -> dto** : create
+activate dto
+dto --> mapper : greenSpaceDto
+deactivate dto
+mapper -> mapper : list.add(greenSpaceDto)
+end loop
+
+mapper --> GreenSpaceRepo : list
+deactivate mapper
+GreenSpaceRepo --> GreenSpaceRepo
+deactivate GreenSpaceRepo
 GreenSpaceRepo --> GreenSpaceRepo
 deactivate GreenSpaceRepo
 GreenSpaceRepo --> GreenSpaceRepo
