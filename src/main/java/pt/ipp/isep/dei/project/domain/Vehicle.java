@@ -82,7 +82,7 @@ public class Vehicle {
      * @param model New model of the vehicle
      */
     public void setModel(String model) {
-    if (model == null || !model.matches("^[a-zA-Z0-9- /]+$")) {
+        if (model == null || !model.matches("^[a-zA-Z0-9- /]+$")) {
             throw new IllegalArgumentException("Model name must have only alphanumeric characters (letters and numbers).");
         }
         this.model = model;
@@ -281,7 +281,7 @@ public class Vehicle {
 
     }
 
-    public boolean registerVehicle(Vehicle vehicle){
+    public boolean registerVehicle(Vehicle vehicle) {
 
         return vehicle.validateVehicle();
     }

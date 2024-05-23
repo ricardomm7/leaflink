@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.repository;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.dto.JobDto;
-import pt.ipp.isep.dei.project.mappers.JobMapper;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ class JobRepositoryTest {
         String title = "Software Developer";
         JobDto j1 = new JobDto(title);
 
-        jobRepository.createJob(JobMapper.toDomain(j1));
+        jobRepository.createJob(j1);
 
         List<JobDto> jobList = jobRepository.getJobList();
 
@@ -31,11 +30,11 @@ class JobRepositoryTest {
         JobDto j1 = new JobDto(title);
 
         // Criar o trabalho pela primeira vez
-        jobRepository.createJob(JobMapper.toDomain(j1));
+        jobRepository.createJob(j1);
 
         // Tentar criar o mesmo trabalho novamente deve lançar uma exceção
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            jobRepository.createJob(JobMapper.toDomain(j1));
+            jobRepository.createJob(j1);
         });
 
         assertNotNull(thrown);
@@ -50,8 +49,8 @@ class JobRepositoryTest {
         JobDto j1 = new JobDto(title1);
         JobDto j2 = new JobDto(title2);
 
-        jobRepository.createJob(JobMapper.toDomain(j1));
-        jobRepository.createJob(JobMapper.toDomain(j2));
+        jobRepository.createJob(j1);
+        jobRepository.createJob(j2);
 
         List<JobDto> jobList = jobRepository.getJobList();
 

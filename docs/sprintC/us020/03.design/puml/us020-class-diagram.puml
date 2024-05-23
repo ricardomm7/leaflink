@@ -7,14 +7,14 @@ skinparam line type polyline
     class RegisterGreenSpaceUI {
         - controller : RegisterGreenSpaceController
         + RegisterGreenSpaceUI()
-        + createNewGS(name : String, type : String, area : Double, street : String, zipcode : String, city : String, manager : UserSession) : void
+        + createNewGS() : void
         '- parseAddress(street : String, zipcode : String, city : String) : Address
     }
 
     class RegisterGreenSpaceController {
         - repositories: Repositories
         - greenSpaceRepository : GreenSpaceRepository
-        + createNewGS(name : String, type : String, area : Double, street : String, zipcode : String, city : String, manager : UserSession) : void
+        + createNewGS(greenSpaceDto : GreenSpaceDto) : void
         + RegisterGreenSpaceController()
     }
 
@@ -28,21 +28,42 @@ skinparam line type polyline
 
     class GreenSpaceRepository {
         - greenSpaceList : List<GreenSpace>
-
         + GreenSpaceRepository()
-        + create(name : String, type : String, area : Double, address : Address, manager : UserSession) : void
-        + addGreenSpace(greenSpace: GreenSpace) : void
-        + verifyDuplicates(greenSpace: GreenSpace) : Boolean
+        + create(greenSpaceDto : GreenSpaceDto) : void
+        - addGreenSpace(greenSpace : GreenSpace) : void
+        - verifyDuplicates(greenSpace : GreenSpace) : Boolean
     }
 
     class GreenSpace {
         - name : String
-        - type : String
+        - type : GreenSpaceType
         - area : Double
-        - manager : Collaborator
+        - manager : UserSession
         - address : Address
         + GreenSpace(name : String, type : String, area : Double, address : Address, manager : UserSession)
         + verifyFilled(greenSpace: GreenSpace) : Boolean
+    }
+
+    class GreenSpaceDto{
+        - name : String
+        - type : GreenSpaceType
+        - area : Double
+        - manager : UserSession
+        - address : String
+        - city : String
+        - zipCode : String
+        + getName() : String
+        + getType() : GreenSpaceType
+        + getArea() : Double
+        + getManager() : UserSession
+        + getAddress() : String
+        + getCity() : String
+        + getZipCode() : String
+    }
+
+    class GreenSpaceMapper{
+        +toDto(greenSpace : GreenSpace) : GreenSpaceDto
+        +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
     }
 
 RegisterGreenSpaceUI ..> RegisterGreenSpaceController
@@ -51,5 +72,9 @@ Repositories --> Repositories: instance
 RegisterGreenSpaceController ..> GreenSpaceRepository: greenSpaceRepository
 Repositories --> "1"GreenSpaceRepository: greenSpaceRepository
 GreenSpaceRepository -->"*" GreenSpace: greenSpaceRepository
+RegisterGreenSpaceUI ..> GreenSpaceDto
+GreenSpaceRepository ..> GreenSpaceMapper
+GreenSpaceMapper ..> GreenSpace
+GreenSpaceMapper ..> GreenSpaceDto
 
 @enduml

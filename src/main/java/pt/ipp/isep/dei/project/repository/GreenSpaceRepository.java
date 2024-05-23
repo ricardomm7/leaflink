@@ -22,7 +22,8 @@ public class GreenSpaceRepository {
         greenSpaceList = new ArrayList<>();
     }
 
-    public void create(GreenSpace g) {
+    public void create(GreenSpaceDto d) {
+        GreenSpace g = GreenSpaceMapper.toDomain(d);
         if (checkForDuplicates(g)) {
             addGreenSpace(g);
         } else {
