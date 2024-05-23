@@ -99,6 +99,7 @@ manager
 class Task {
     title
     description
+    duration
 
 }
 
@@ -219,7 +220,7 @@ Machine "*" -- "1" Brand: has >
 
 Entry "1" -- "1" Team : is assigned >
 
-Entry "1" -- "*" GardenTool : has >
+Entry "1" -- "*" GardenTool : needs >
 
 Entry "*" -- "1" GreenSpace: assigned to >
 
@@ -236,5 +237,7 @@ ToDoList "1" -- "1..*" Entry : has >
 Agenda "1" -- "1..*" Entry: has >
 
 Entry "1" -- "1" Task: is >
+
+Agenda "1" -- "1" GreenSpace : is assigned >
 
 @enduml

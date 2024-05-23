@@ -3,7 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-
 autonumber
 
 actor "CLB" as CLB
@@ -11,21 +10,21 @@ participant ":RecordEntryUI" as UI
 participant ":RecordEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "TeamRepository:\nTeamRepository" as TeamRepository
-participant ":Agenda" as Agenda
-participant ":toDoList" as ToDoList
-
+participant "entryRepository:\nEntryRepository" as EntryRepo
+participant "teamRepository:\nTeamRepository" as TeamRepo
+participant "agendaRepository:\nAgendaRepository" as AgendaRepo
+participant "toDoListRepository:\nToDoListRepository" as ToDoRepo
 participant "entry\n:Entry" as Entry
-
+participant "EntryMapper" as EntryMapper
 
 activate CLB
 
     CLB -> UI : asks to record a complete entry
     activate UI
 
-        UI -> CTRL** : create
+        UI -> CTRL : create
         deactivate UI
-                activate CTRL
+        activate CTRL
 
             CTRL -> RepositorySingleton: getInstance()
             activate RepositorySingleton
@@ -36,30 +35,71 @@ activate CLB
             CTRL -> PLAT : getTeamRepository()
             activate PLAT
 
-                PLAT --> CTRL: TeamRepository
+                PLAT --> CTRL: teamRepository
             deactivate PLAT
 
-            CTRL -> TeamRepository : getTasksOfCollaborator()
-            activate TeamRepository
+            CTRL -> PLAT : getEntryRepository()
+            activate PLAT
 
-                TeamRepository --> CTRL : ToDoList
-            deactivate TeamRepository
+                PLAT --> CTRL: entryRepository
+            deactivate PLAT
 
-            CTRL -> Agenda : verifyExistingTasks(taskList)
-            activate Agenda
+            CTRL -> PLAT : getAgendaRepository()
+            activate PLAT
 
-                Agenda --> CTRL : ToDoList
-            deactivate Agenda
+                PLAT --> CTRL: agendaRepository
+            deactivate PLAT
 
-            CTRL -> ToDoList : verifyExistingTasks(taskList)
-            activate ToDoList
+            CTRL -> PLAT : getToDoListRepository()
+            activate PLAT
 
-                ToDoList --> CTRL : ToDoList
-            deactivate ToDoList
+                PLAT --> CTRL: toDoListRepository
+            deactivate PLAT
 
-            CTRL --> UI : ToDoList
         deactivate CTRL
+
+        UI -> CTRL: getEntryOfCollaboratorList()
         activate UI
+        activate CTRL
+
+            CTRL -> TeamRepo: getEntriesAssignedToCollaborator(CLB)
+            activate TeamRepo
+
+                TeamRepo --> CTRL: entryList
+            deactivate TeamRepo
+
+            loop for each entry in entryList
+                CTRL -> EntryRepo: verifyEntryInAgenda(entry)
+                activate EntryRepo
+
+                    EntryRepo -> AgendaRepo: isInAgenda(entry)
+                    activate AgendaRepo
+
+                        AgendaRepo --> EntryRepo: inAgenda
+                    deactivate AgendaRepo
+
+                deactivate EntryRepo
+
+                CTRL -> EntryRepo: verifyEntryInToDoList(entry)
+                activate EntryRepo
+
+                    EntryRepo -> ToDoRepo: isInToDoList(entry)
+                    activate ToDoRepo
+
+                        ToDoRepo --> EntryRepo: inToDoList
+                    deactivate ToDoRepo
+
+                deactivate EntryRepo
+            end
+
+            CTRL -> EntryMapper : toDTO(entryList)
+            activate EntryMapper
+
+                EntryMapper --> CTRL : entryDTOList
+            deactivate EntryMapper
+
+            CTRL --> UI : entryDTOList
+        deactivate CTRL
 
         UI -> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
     deactivate UI
@@ -73,33 +113,37 @@ activate CLB
     CLB -> UI : confirms data
     activate UI
 
-        UI -> CTRL : submit data
+        UI -> CTRL : recordEntryCompletion(selectedEntryDTO)
         deactivate UI
         activate CTRL
 
-            CTRL -> TeamRepository : recordEntryCompletion(selectedEntry)
-            deactivate CTRL
-            activate TeamRepository
+            CTRL -> EntryMapper : toEntry(selectedEntryDTO)
+            activate EntryMapper
 
-                TeamRepository -> Entry : recordEntryCompletion(selectedEntry)
-                deactivate TeamRepository
+                EntryMapper --> CTRL : selectedEntry
+            deactivate EntryMapper
+
+            CTRL -> EntryRepo : recordEntryCompletion(selectedEntry, COMPLETED)
+            deactivate CTRL
+            activate EntryRepo
+
+                EntryRepo -> Entry : setStatus(COMPLETED)
+                deactivate EntryRepo
                 activate Entry
 
-                    Entry -> Entry : setStatus(complete)
-
-                Entry --> TeamRepository : success
+                Entry -> EntryRepo : success
                 deactivate Entry
-                activate TeamRepository
+                activate EntryRepo
 
-            TeamRepository --> CTRL : success
-            deactivate TeamRepository
+            EntryRepo --> CTRL : success
+            deactivate EntryRepo
             activate CTRL
 
             CTRL --> UI : success
         deactivate CTRL
         activate UI
 
-        UI --> CLB : displays success message (Entry record as completed)
+        UI --> CLB : displays a success message (Entry recorded as completed)
     deactivate UI
 
 @enduml

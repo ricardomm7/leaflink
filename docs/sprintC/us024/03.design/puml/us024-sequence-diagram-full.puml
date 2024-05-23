@@ -9,17 +9,20 @@ actor "GSM" as GSM
 participant ":PostponeAgendaEntryUI" as UI
 participant ":PostponeAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:EntryRepository" as EntryRepo
-participant ":Agenda" as Agenda
-participant ":TeamRepository" as TeamRepo
+participant "repositories\n:Repositories" as PLAT
+participant ":EntryRepository\n:entryRepository" as EntryRepo
+participant ":TeamRepository\n:teamRepository" as TeamRepo
 participant ":NotificationService" as NotificationService
+participant ":EntryMapper" as EntryMapper
+participant ":TeamMapper" as TeamMapper
+
 
 activate GSM
 
     GSM -> UI : asks to postpone an agenda entry
     activate UI
 
-        UI -> CTRL** : create
+        UI -> CTRL : create
         deactivate UI
         activate CTRL
 
@@ -29,21 +32,39 @@ activate GSM
                 RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
-            CTRL -> EntryRepo : getTaskRepository()
-            activate EntryRepo
+            CTRL -> PLAT : getTaskRepository()
+            activate PLAT
 
-                EntryRepo --> CTRL : entryRepository
-            deactivate EntryRepo
+                PLAT --> CTRL : entryRepository
+            deactivate PLAT
 
-            CTRL -> EntryRepo :getEntryList()
-            activate EntryRepo
+            CTRL -> PLAT : getTeamRepository()
+            activate PLAT
 
-            EntryRepo --> CTRL : entryList
-            deactivate EntryRepo
+            PLAT --> CTRL : teamRepository
+            deactivate PLAT
+             deactivate CTRL
 
-            CTRL --> UI : entry List
-        deactivate CTRL
+        deactivate UI
+
+        UI -> CTRL: getEntryList(GSM)
         activate UI
+        activate CTRL
+
+            CTRL -> EntryRepo: getEntryListByGSM(GSM)
+            activate EntryRepo
+
+            EntryRepo --> CTRL: entryList
+            deactivate EntryRepo
+
+            CTRL -> EntryMapper : toEntryDTOList(entryList)
+            activate EntryMapper
+
+            EntryMapper --> CTRL : entryDTOList
+            deactivate EntryMapper
+
+            CTRL --> UI : entryDTOList
+        deactivate CTRL
 
         UI -> GSM : shows the list of agenda entry and requests to select
     deactivate UI
@@ -57,43 +78,69 @@ activate GSM
     GSM -> UI : types new date
     activate UI
 
-        UI -> CTRL : submit new date
+    UI --> GSM : Shows all data and requests confirmation
+    deactivate UI
+
+    GSM -> UI: confirms data
+    activate UI
+
+        UI -> CTRL : postPoneEntry(entryDTO, newDate)
         deactivate UI
         activate CTRL
 
-            CTRL -> Agenda : postponeEntry(entry, newDate)
+            CTRL -> EntryMapper : toEntry(entryDTO)
+            activate EntryMapper
+
+            EntryMapper --> CTRL : entry
+            deactivate EntryMapper
+
+            CTRL -> EntryRepo : updateEntry(entry, newDate, POSTPONED)
             deactivate CTRL
-            activate Agenda
+            activate EntryRepo
 
-                Agenda -> Agenda : validateNewDate(newDate)
-                Agenda -> Agenda : updateEntryStatus(entry, POSTPONED)
-                Agenda -> Agenda : setNewDate(entry, newDate)
+                EntryRepo -> EntryRepo : validateNewDate(newDate)
+                EntryRepo -> EntryRepo : updateEntryStatus(entry, POSTPONED)
+                EntryRepo -> EntryRepo : setNewDate(entry, newDate)
 
-                Agenda --> CTRL :
-            deactivate Agenda
-            activate CTRL
+            EntryRepo -> TeamRepo : notifyTeam(entry, newDate)
+            deactivate EntryRepo
 
-            CTRL -> TeamRepo : notifyTeam(entry, newDate)
-            deactivate CTRL
-            activate TeamRepo
-
-                TeamRepo -> NotificationService : sendNotification(team, newDate)
-                deactivate TeamRepo
-                activate NotificationService
-
-                    NotificationService --> TeamRepo : success
-                deactivate NotificationService
+                deactivate EntryRepo
                 activate TeamRepo
 
-            TeamRepo --> CTRL : success
-            deactivate TeamRepo
-            activate CTRL
+                    TeamRepo -> TeamMapper : getTeamByEntry(entry)
+                    activate TeamMapper
 
-            CTRL --> UI : success
-        deactivate CTRL
-        activate UI
+                    TeamMapper --> TeamRepo : team
+                    deactivate TeamMapper
 
-        UI --> GSM : displays success message (Entry postponed successfully)
-    deactivate UI
+                    TeamRepo -> TeamMapper : getCollaboratorsList(team)
+                    activate TeamMapper
+
+                    TeamMapper --> TeamRepo : collaboratorsList
+                    deactivate TeamMapper
+
+                    TeamRepo -> NotificationService : sendNotification(collaboratorsList, newDate)
+                    deactivate TeamRepo
+                    activate NotificationService
+
+                        NotificationService --> TeamRepo : success
+                    deactivate NotificationService
+                    activate TeamRepo
+
+                TeamRepo --> EntryRepo : success
+                deactivate TeamRepo
+                activate EntryRepo
+
+        EntryRepo --> CTRL : success
+        deactivate EntryRepo
+        activate CTRL
+
+        CTRL --> UI : success
+    deactivate CTRL
+    activate UI
+
+    UI --> GSM : displays a success message (Entry postponed successfully)
+deactivate UI
 
 @enduml

@@ -28,7 +28,7 @@ activate CLB
     CLB -> System : confirms data
     activate System
 
-        System --> CLB :  displays success message (Entry record as completed)
+        System --> CLB :  displays a success message (Entry record as completed)
     deactivate System
 
 @enduml

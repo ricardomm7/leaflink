@@ -19,13 +19,13 @@
 > 
 > **Answer:** When postponing a task, the new predicated date for execution should be inserted.
 
-> **Question:** 
+> **Question:** The date you want to postpone in this US24 is the date referring to the "approximate expected duration" field when we registered the task?
 > 
-> **Answer:** 
+> **Answer:** No; sometimes, for various reasons (e.g. insufficient staff, faulty equipment or adverse weather conditions) a task has to be postponed to a new date; task duration is not directly related to this.
 
-> **Question:** 
+> **Question:** What is the input to postpone an entry? From my perspective the Green Spaces Manager only needs to select the entry and introduce the new date.
 > 
-> **Answer:** 
+> **Answer:** Yes, you are correct.
 
 > **Question:** 
 > 
@@ -43,10 +43,10 @@
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The entry must exist in the Agenda
-* **AC2:** The new date must be in the future and a valid calendar date.
+* **AC2:** The new date must be after that the previous date.
 * **AC3:** The postponement action should update the entry’s status to “Postponed”.
 * **AC4:** The system should notify the team assigned to the task about the postponement.
-* **AC5:** The postponement should not conflict with any existing planned tasks for the same team or equipment.
+* **AC5:** AC5: The system should check for the availability of the team and resources for the new date.
 
 ### 1.4. Found out Dependencies
 
@@ -58,10 +58,10 @@
 **Input Data:**
 
 * Typed data:
-    * New specific future date for the task
+    * New date
 	
 * Selected data:
-    * Task on the Agenda.
+    * Entry
 
 **Output Data:**
 

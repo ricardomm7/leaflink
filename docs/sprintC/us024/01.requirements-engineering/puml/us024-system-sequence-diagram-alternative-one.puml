@@ -29,13 +29,13 @@ activate GSM
 
     activate System
 
-        System --> GSM : shows new date and requests confirmation
+        System --> GSM : shows all data and requests confirmation
     deactivate System
 
-    GSM -> System : confirms new date
+    GSM -> System : confirms data
     activate System
 
-        System --> GSM : displays success message (Entry postponed successfully)
+        System --> GSM : displays a success message (Entry postponed successfully)
     deactivate System
 
 @enduml

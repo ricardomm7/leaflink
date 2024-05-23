@@ -11,6 +11,28 @@ hide circle
 hide methods
 
 
+class Collaborator {
+    name
+    birthdate
+    admissionDate
+    mobileNumber
+    e-mail
+    taxpayerNumber
+}
+
+class Team {
+    teamId
+    maxNumberElements
+    minNumberElements
+}
+
+class GreenSpace{
+name
+type
+size
+manager
+
+}
 
 class Entry {
     urgencyStatus
@@ -23,18 +45,25 @@ class Entry {
 class Task {
     title
     description
+    duration
 
 }
 
 class Agenda{
 }
 
-
-
-
-
 Agenda "1" -- "1..*" Entry: has >
 
 Entry "1" -- "1" Task: is >
+
+Entry "*" -- "1" GreenSpace : assigned to >
+
+Entry "1" -- "1" Team : is assigned >
+
+Team "1" -- "1..*" Collaborator : has >
+
+Agenda "1" -- "1" GreenSpace : is assigned >
+
+
 
 @enduml

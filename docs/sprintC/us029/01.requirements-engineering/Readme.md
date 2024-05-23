@@ -24,18 +24,21 @@ As a Collaborator, I want to record the completion of a task.
 >
 > **Answer:** Maybe if optional, not mandatory.
 
-> **Question:**
+> **Question:** The collaborator should be able to change the status of any task or only tasks assigned to him?
 >
-> **Answer:**
+> **Answer:** Yes.
 
-> **Question:**
+> **Question:** Does the task associated with the Agenda entry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
 >
-> **Answer:**
+> **Answer:** I suppose when a task goes to the Agenda, it leaves the To-Do list but maybe a different flow could be considered. 
 
-> **Question:** 
+> **Question:** Can an employee record more than one completed task at a time?
 > 
-> **Answer:**
+> **Answer:** It's a matter of UX/UI, each dev team can decide about it.
 
+> **Question:** As far as I understand, when a GSM wants to cancel a task or a Collaborator wants to record the completion of a task, the task just changes its status in the Agenda to "Canceled" or "Done", respectively
+> 
+> **Answer:** Yes.
 ### 1.3. Acceptance Criteria
 
 * **AC1** The task must exist in both the Agenda and the To-Do List before recording completion.
@@ -55,7 +58,7 @@ As a Collaborator, I want to record the completion of a task.
     * None.
 	
 * Selected data:
-    * Task
+    * Assign entry
 
 **Output Data:**
 
