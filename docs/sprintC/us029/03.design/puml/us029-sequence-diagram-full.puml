@@ -10,10 +10,8 @@ participant ":RecordEntryUI" as UI
 participant ":RecordEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "entryRepository:\nEntryRepository" as EntryRepo
-participant "teamRepository:\nTeamRepository" as TeamRepo
-participant "agendaRepository:\nAgendaRepository" as AgendaRepo
-participant "toDoListRepository:\nToDoListRepository" as ToDoRepo
+participant "entryRepository:\n:EntryRepository" as EntryRepo
+participant "teamRepository:\n:TeamRepository" as TeamRepo
 participant "entry\n:Entry" as Entry
 participant "EntryMapper" as EntryMapper
 
@@ -44,17 +42,6 @@ activate CLB
                 PLAT --> CTRL: entryRepository
             deactivate PLAT
 
-            CTRL -> PLAT : getAgendaRepository()
-            activate PLAT
-
-                PLAT --> CTRL: agendaRepository
-            deactivate PLAT
-
-            CTRL -> PLAT : getToDoListRepository()
-            activate PLAT
-
-                PLAT --> CTRL: toDoListRepository
-            deactivate PLAT
 
         deactivate CTRL
 
@@ -65,38 +52,9 @@ activate CLB
             CTRL -> TeamRepo: getEntriesAssignedToCollaborator(CLB)
             activate TeamRepo
 
-                TeamRepo --> CTRL: entryList
+                TeamRepo --> CTRL: entryDtoList
             deactivate TeamRepo
 
-            loop for each entry in entryList
-                CTRL -> EntryRepo: verifyEntryInAgenda(entry)
-                activate EntryRepo
-
-                    EntryRepo -> AgendaRepo: isInAgenda(entry)
-                    activate AgendaRepo
-
-                        AgendaRepo --> EntryRepo: inAgenda
-                    deactivate AgendaRepo
-
-                deactivate EntryRepo
-
-                CTRL -> EntryRepo: verifyEntryInToDoList(entry)
-                activate EntryRepo
-
-                    EntryRepo -> ToDoRepo: isInToDoList(entry)
-                    activate ToDoRepo
-
-                        ToDoRepo --> EntryRepo: inToDoList
-                    deactivate ToDoRepo
-
-                deactivate EntryRepo
-            end
-
-            CTRL -> EntryMapper : toDTO(entryList)
-            activate EntryMapper
-
-                EntryMapper --> CTRL : entryDTOList
-            deactivate EntryMapper
 
             CTRL --> UI : entryDTOList
         deactivate CTRL
