@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+class Agenda {
+
+}
+
+class Entry {
+    progressStatus
+    urgencyStatus
+    estimatedDate
+}
+
+class Team{
+    teamId
+    maxNumberElements
+    minNumberElements
+}
+
+class ToDoList{
+}
+
+
+Agenda "1" -- "1..*" Entry : has >
+
+Entry "1" -- "1" Team: is assigned >
+
+ToDoList "1" -- "1..*" Entry : has >
+
+@enduml
