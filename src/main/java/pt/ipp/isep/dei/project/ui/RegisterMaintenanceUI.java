@@ -39,7 +39,11 @@ public class RegisterMaintenanceUI implements Runnable {
         System.out.println("Insert the date of the maintenance (DD-MM-YYYY).");
         String date = sc.nextLine();
         LocalDate date1 = parseDate(date);
-        validateDate(date1);
+        try {
+            validateDate(date1);
+        } catch (RegisterVehicleUI.InvalidDateException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println("Insert the current Km of the vehicle.");
         int currentKm = sc.nextInt();
@@ -62,7 +66,7 @@ public class RegisterMaintenanceUI implements Runnable {
         }
     }
 
-    private void validateDate(LocalDate date) {
+    private void validateDate(LocalDate date) throws RegisterVehicleUI.InvalidDateException {
         if (date.isAfter(LocalDate.now())) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             throw new RegisterVehicleUI.InvalidDateException("Date must be before " + LocalDate.now().format(formatter));

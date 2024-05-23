@@ -78,7 +78,7 @@ activate VFM
             VEI --> VEI
             deactivate VEI
 
-            VEI --> VehicleRepository: vehicle
+            VEI --> VehicleRepository: success
             deactivate VEI
             activate VehicleRepository
 

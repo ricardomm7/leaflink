@@ -61,7 +61,7 @@ public class Vehicle {
      * @param brand New brand introduced for the vehicle
      */
     public void setBrand(String brand) {
-        if (brand == null || !brand.matches("[a-zA-Z0-9]+")) {
+        if (brand == null || !brand.matches("^[a-zA-Z0-9- /]+$")) {
             throw new IllegalArgumentException("Brand name must have only alphanumeric characters (letters and numbers).");
         }
         this.brand = brand;
@@ -82,7 +82,7 @@ public class Vehicle {
      * @param model New model of the vehicle
      */
     public void setModel(String model) {
-        if (model == null || !model.matches("[a-zA-Z0-9]+")) {
+    if (model == null || !model.matches("^[a-zA-Z0-9- /]+$")) {
             throw new IllegalArgumentException("Model name must have only alphanumeric characters (letters and numbers).");
         }
         this.model = model;
@@ -266,19 +266,24 @@ public class Vehicle {
     public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
                    int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
 
-        this.VIN = VIN;
-        this.brand = brand;
-        this.model = model;
-        this.type = type;
-        this.registrationDate = registrationDate;
-        this.vehiclePlate = vehiclePlate;
-        this.tareWeight = tareWeight;
-        this.grossWeight = grossWeight;
-        this.currentKm = currentKm;
-        this.acquisitionDate = acquisitionDate;
-        this.maintenanceFrequency = maintenanceFrequency;
+        setVIN(VIN);
+        setBrand(brand);
+        setModel(model);
+        setType(type);
+        setRegistrationDate(registrationDate);
+        setVehiclePlate(vehiclePlate);
+        setTareWeight(tareWeight);
+        setGrossWeight(grossWeight);
+        setCurrentKm(currentKm);
+        setAcquisitionDate(acquisitionDate);
+        setMaintenanceFrequency(maintenanceFrequency);
 
 
+    }
+
+    public boolean registerVehicle(Vehicle vehicle){
+
+        return vehicle.validateVehicle();
     }
 
     /**
@@ -286,7 +291,7 @@ public class Vehicle {
      *
      * @return boolean (True if it is valid / False if it is invalid)
      */
-    public boolean validateVehicle() {
+    private boolean validateVehicle() {
         if (!brand.matches("[a-zA-Z0-9]+") || !model.matches("[a-zA-Z0-9]+")) {
             return false;
         }
@@ -328,7 +333,7 @@ public class Vehicle {
      *
      * @param date
      */
-    private boolean validateDate(LocalDate date) {
+    private boolean validateDate(LocalDate date) throws RegisterVehicleUI.InvalidDateException {
         if (date.isAfter(LocalDate.now())) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             throw new RegisterVehicleUI.InvalidDateException("Date must be before " + LocalDate.now().format(formatter));

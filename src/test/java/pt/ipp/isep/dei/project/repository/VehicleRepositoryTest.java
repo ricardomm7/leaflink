@@ -22,8 +22,8 @@ class VehicleRepositoryTest {
         VehicleRepository vehicleRepository = new VehicleRepository();
         Vehicle vehicle1 = new Vehicle("vfgtrfesgt567kjuy", "Brand1", "Model1", VehicleType.CAR, LocalDate.of(2020, 10, 12), "AA00AA", 1000.0, 2000.0, 5000, LocalDate.of(2023, 10, 3), 10000);
         Vehicle vehicle2 = new Vehicle("VMj1234fdhbgterkm", "Brand2", "Model2", VehicleType.CAR, LocalDate.of(2020, 10, 3), "AA01AA", 1500.0, 2500.0, 7000, LocalDate.of(2024, 1, 12), 12000);
-        vehicleRepository.addVehicle(vehicle1);
-        vehicleRepository.addVehicle(vehicle2);
+        vehicleRepository.registerVehicle(vehicle1);
+        vehicleRepository.registerVehicle(vehicle2);
 
         // Act
         List<VehicleDto> result = vehicleRepository.getVehicleList();
@@ -53,7 +53,7 @@ class VehicleRepositoryTest {
         // Arrange
         VehicleRepository vehicleRepository = new VehicleRepository();
         Vehicle vehicle1 = new Vehicle("VIN1234fdhbgterkm", "Brand1", "Model1", VehicleType.CAR, LocalDate.of(2010, 10, 10), "12EW54", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000);
-        vehicleRepository.addVehicle(vehicle1);
+        vehicleRepository.registerVehicle(vehicle1);
 
         // Act
         List<VehicleDto> result = vehicleRepository.getVehicleList();
@@ -71,7 +71,7 @@ class VehicleRepositoryTest {
         Vehicle vehicle = new Vehicle("VIN1234fdhbgterkm", "Brand1", "Model1", VehicleType.CAR, LocalDate.of(2020, 10, 12), "AA21AA", 1000.0, 2000.0, 5000, LocalDate.of(2022, 10, 1), 10000);
 
         // Act
-        vehicleRepository.addVehicle(vehicle);
+        vehicleRepository.registerVehicle(vehicle);
         List<VehicleDto> result = vehicleRepository.getVehicleList();
 
         // Assert
@@ -88,7 +88,7 @@ class VehicleRepositoryTest {
 
         // Act
         try {
-            vehicleRepository.addVehicle(vehicle);
+            vehicleRepository.registerVehicle(vehicle);
 
             // Assert
             fail("Expected IllegalArgumentException to be thrown");
@@ -103,11 +103,11 @@ class VehicleRepositoryTest {
         // Arrange
         VehicleRepository vehicleRepository = new VehicleRepository();
         Vehicle vehicle = new Vehicle("VIN1234fdhbgterkm", "Brand1", "Model1", VehicleType.CAR, LocalDate.of(2020, 10, 12), "RM47CV", 1000.0, 2000.0, 5000, LocalDate.of(2022, 10, 12), 10000);
-        vehicleRepository.addVehicle(vehicle);
+        vehicleRepository.registerVehicle(vehicle);
 
         // Act & Assert
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            vehicleRepository.addVehicle(vehicle);
+            vehicleRepository.registerVehicle(vehicle);
         });
 
         assertEquals("Vehicle already exists.", exception.getMessage());
@@ -118,7 +118,7 @@ class VehicleRepositoryTest {
     @Test
     public void test_vehicle_dont_exists() {
         VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.addVehicle(new Vehicle("VINlkhgtrewt53fca", "Brand", "Model", VehicleType.CAR, LocalDate.of(2013, 12, 12), "13TG52", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000));
+        vehicleRepository.registerVehicle(new Vehicle("VINlkhgtrewt53fca", "Brand", "Model", VehicleType.CAR, LocalDate.of(2013, 12, 12), "13TG52", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000));
 
         boolean result = vehicleRepository.verifyExistingVehicles("VIN12345678901234", "PLATE0");
 
@@ -129,7 +129,7 @@ class VehicleRepositoryTest {
     @Test
     public void test_both_vin_and_vehicle_plate_not_null_and_correct_length() {
         VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.addVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2014, 10, 10), "12RM68", 1000.0, 2000.0, 5000, LocalDate.of(2022, 10, 10), 10000));
+        vehicleRepository.registerVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2014, 10, 10), "12RM68", 1000.0, 2000.0, 5000, LocalDate.of(2022, 10, 10), 10000));
 
         boolean result = vehicleRepository.verifyExistingVehicles("VIN12345678901234", "PLATE1");
 
@@ -140,7 +140,7 @@ class VehicleRepositoryTest {
     @Test
     public void test_vin_is_null() {
         VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.addVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2000, 1, 1), "2345LL", 1000.0, 2000.0, 5000, LocalDate.of(2021, 1, 1), 10000));
+        vehicleRepository.registerVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2000, 1, 1), "2345LL", 1000.0, 2000.0, 5000, LocalDate.of(2021, 1, 1), 10000));
 
         try {
             vehicleRepository.verifyExistingVehicles(null, "PLATE01");
@@ -154,7 +154,7 @@ class VehicleRepositoryTest {
     @Test
     public void test_vehicle_plate_is_null() {
         VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.addVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2011, 10, 10), "88II99", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 10), 10000));
+        vehicleRepository.registerVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2011, 10, 10), "88II99", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 10), 10000));
 
         try {
             vehicleRepository.verifyExistingVehicles("VIN12345678901234", null);
@@ -170,7 +170,7 @@ class VehicleRepositoryTest {
         VehicleRepository vehicleRepository = new VehicleRepository();
 
         try {
-            vehicleRepository.addVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2011, 10, 10), "ESII99", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 10), 10000));
+            vehicleRepository.registerVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2011, 10, 10), "ESII99", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 10), 10000));
             fail("Expected IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Invalid vehicle.", e.getMessage());
@@ -182,7 +182,7 @@ class VehicleRepositoryTest {
     public void test_invalid_vin_and_plate_length_throws_exception() {
         // Arrange
         VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.addVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2010, 10, 10), "22WW44", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000));
+        vehicleRepository.registerVehicle(new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2010, 10, 10), "22WW44", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000));
 
 
         // Act & Assert
@@ -298,13 +298,13 @@ class VehicleRepositoryTest {
 
         // Criação dos veículos
         VehicleDto vehicle1 = new VehicleDto("VIN1mnhgbvfcdsxdf", "Brand1", "Model1", VehicleType.CAR, LocalDate.of(2010, 10, 10), "01AA00", 1000.0, 2000.0, 20000, LocalDate.of(2020, 10, 1), 10000);
-        vehicleRepository.addVehicle(VehicleMapper.toDomain(vehicle1));
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(vehicle1));
 
         VehicleDto vehicle2 = new VehicleDto("VIN2kjuyhnbgvxdsc", "Brand2", "Model2", VehicleType.CAR, LocalDate.of(2011, 10, 10), "00AA01", 1500.0, 2500.0, 8000, LocalDate.of(2023, 10, 1), 10000);
-        vehicleRepository.addVehicle(VehicleMapper.toDomain(vehicle2));
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(vehicle2));
 
         VehicleDto vehicle3 = new VehicleDto("VIN3mnhjkloi87654", "Brand3", "Model3", VehicleType.CAR, LocalDate.of(2010, 10, 10), "00AA00", 1000.0, 2000.0, 100, LocalDate.of(2020, 10, 1), 7500);
-        vehicleRepository.addVehicle(VehicleMapper.toDomain(vehicle3));
+        vehicleRepository.registerVehicle(VehicleMapper.toDomain(vehicle3));
 
         // Adição das manutenções
         maintenanceRepository.createMaintenance("01AA00", LocalDate.of(2020, 10, 10), 2000);

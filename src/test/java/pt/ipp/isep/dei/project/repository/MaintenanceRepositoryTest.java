@@ -26,10 +26,9 @@ class MaintenanceRepositoryTest {
         // Arrange
         MaintenanceRepository maintenanceRepository = new MaintenanceRepository();
         MaintenanceDto maintenanceDto = new MaintenanceDto("ABC123", LocalDate.of(2023, 2, 20), 10000);
-        Maintenance maintenance = MaintenanceMapper.toDomain(maintenanceDto);
 
         // Act
-        maintenanceRepository.addMaintenance(maintenance);
+        maintenanceRepository.createMaintenance("ABC123", LocalDate.of(2023, 2, 20), 10000);
         List<MaintenanceDto> maintenanceList = maintenanceRepository.getMaintenanceList();
 
         // Assert

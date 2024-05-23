@@ -25,7 +25,7 @@ class VehicleTest {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
         Vehicle vehicle = new Vehicle("VIN12345678901234", "Brand!", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.validateVehicle());
+        assertFalse(vehicle.registerVehicle(vehicle));
     }
 
     // Create a new Vehicle object with invalid VIN, call validateVehicle() method, should return false
@@ -34,7 +34,7 @@ class VehicleTest {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
         Vehicle vehicle = new Vehicle("VIN1234567890123!", "Brand", "Model", VehicleType.UTILITY_VEHICLE, registrationDate, "CF44TG", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.validateVehicle());
+        assertFalse(vehicle.registerVehicle(vehicle));
     }
 
     // Calling validateVehicle() method with invalid parameters should return false
@@ -43,7 +43,7 @@ class VehicleTest {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
         Vehicle vehicle = new Vehicle("VIN1234567890123!4", "Brand", "Model", VehicleType.CAR, registrationDate, "Ade2@BC123", -1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.validateVehicle());
+        assertFalse(vehicle.registerVehicle(vehicle));
     }
 
     // Create a new Vehicle object with acquisitionDate before registrationDate, call validateVehicle() method, should return false
@@ -52,7 +52,7 @@ class VehicleTest {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2004, 1, 1);
         Vehicle vehicle = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "ABC123", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.validateVehicle());
+        assertFalse(vehicle.registerVehicle(vehicle));
     }
 
 
