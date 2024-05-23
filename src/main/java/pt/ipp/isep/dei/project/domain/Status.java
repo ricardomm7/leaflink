@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 public enum Status {
-        /**
+    /**
      * Pending status.
      */
     PENDING {
@@ -30,13 +30,17 @@ public enum Status {
      * The Postponed status.
      */
     POSTPONED {
-        public String toString() {return "Postponed";}
+        public String toString() {
+            return "Postponed";
+        }
     },
 
     /**
      * The Cancelled status.
      */
     CANCELLED {
-        public String toString() {return "Cancelled";}
+        public String toString() {
+            return "Cancelled";
+        }
     }
 }

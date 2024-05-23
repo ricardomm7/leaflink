@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.SkillDto;
-import pt.ipp.isep.dei.project.mappers.SkillMapper;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 
@@ -30,8 +28,7 @@ public class CreateSkillController {
      * @param skillDto the designation of the skill to be created.
      */
     public void createSkill(SkillDto skillDto) {
-        Skill skill = SkillMapper.toDomain(skillDto);
-        skillRepository.createSkill(skill);
+        skillRepository.createSkill(skillDto);
     }
 
     public List<SkillDto> getSkillsDto() {

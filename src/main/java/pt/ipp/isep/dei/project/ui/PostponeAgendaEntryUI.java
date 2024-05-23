@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.PostponeAgendaEntryController;
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.dto.EntryDto;
 
 import java.time.LocalDate;
@@ -17,12 +19,12 @@ public class PostponeAgendaEntryUI implements Runnable {
         postponeAgendaEntry();
     }
 
-    public PostponeAgendaEntryUI(){
+    public PostponeAgendaEntryUI() {
 
     }
+
     private static void postponeAgendaEntry() {
-        String gsmEmail = getGSMEmail();
-        List<EntryDto> entryList = controller.getEntryList(gsmEmail);
+        List<EntryDto> entryList = controller.getEntryList(getGSMLogged());
 
         if (entryList.isEmpty()) {
             System.out.println("No entries found for the GSM.");
@@ -61,9 +63,8 @@ public class PostponeAgendaEntryUI implements Runnable {
         }
     }
 
-    private static String getGSMEmail() {
-        // Lógica para obter o email do GSM logado
-        return "gsm@example.com"; // Exemplo de email do GSM
+    private static UserSession getGSMLogged() {
+        return ApplicationSession.getInstance().getCurrentSession();
     }
 
     private static EntryDto selectEntry(List<EntryDto> entryList) {

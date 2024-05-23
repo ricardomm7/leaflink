@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.Entry;
 import pt.ipp.isep.dei.project.domain.Status;
 import pt.ipp.isep.dei.project.dto.EntryDto;
@@ -9,7 +10,6 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PostponeAgendaEntryController {
@@ -24,11 +24,11 @@ public class PostponeAgendaEntryController {
         this.teamRepository = repositories.getTeamRepository();
     }
 
-public List<EntryDto> getEntryList(String gsmEmail) {
-    List<EntryDto> entryDtoList = entryRepository.getEntryListByGSM(gsmEmail);
+    public List<EntryDto> getEntryList(UserSession gsm) {
+        List<EntryDto> entryDtoList = entryRepository.getEntryListByGSM(gsm);
 
-    return entryDtoList;
-}
+        return entryDtoList;
+    }
 
 
     public boolean postponeEntry(EntryDto entryDto, LocalDate newDate) {

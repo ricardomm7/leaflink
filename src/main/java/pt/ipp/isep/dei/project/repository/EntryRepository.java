@@ -1,8 +1,10 @@
 package pt.ipp.isep.dei.project.repository;
 
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.Entry;
 import pt.ipp.isep.dei.project.domain.Status;
 import pt.ipp.isep.dei.project.dto.EntryDto;
+import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 
 import java.time.LocalDate;
@@ -23,7 +25,8 @@ public class EntryRepository {
         entryList = new ArrayList<>();
     }
 
-    public void create(Entry entry) {
+    public void create(EntryDto dto) {
+        Entry entry = EntryMapper.toDomain(dto);
         if (checkForDuplicates(entry)) {
             addEntry(entry);
         } else {
@@ -46,9 +49,14 @@ public class EntryRepository {
      * @param gsmEmail the gsm email
      * @return the entry list by gsm
      */
-    public List<Entry> getEntryListByGSM(String gsmEmail) {
-        // Lógica para obter a lista de entradas para o GSM específico
-        return entryList;
+    public List<EntryDto> getEntryListByGSM(UserSession gsm) {
+        List<EntryDto> z = new ArrayList<>();
+        for (Entry s : entryList) {
+            if (s.getGreenSpace().getManager().getUserEmail().equals(gsm.getUserEmail())) {
+                z.add(EntryMapper.toDto(s));
+            }
+        }
+        return z;
     }
 
     /**

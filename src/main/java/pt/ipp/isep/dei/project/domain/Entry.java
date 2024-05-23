@@ -52,7 +52,7 @@ public class Entry {
      * @param assignedVehicles
      * @param status
      */
-        public Entry(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, Team assignedTeam, List<Vehicle> assignedVehicles, Status status) {
+    public Entry(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, Team assignedTeam, List<Vehicle> assignedVehicles, Status status) {
         this.greenSpace = greenSpace;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
@@ -86,7 +86,10 @@ public class Entry {
      *
      * @return the estimated date
      */
-    public LocalDate getEstimatedDate() {return estimatedDate;}
+    public LocalDate getEstimatedDate() {
+        return estimatedDate;
+    }
+
     /**
      * Sets estimated date.
      *

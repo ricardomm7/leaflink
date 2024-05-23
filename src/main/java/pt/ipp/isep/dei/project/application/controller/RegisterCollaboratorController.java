@@ -1,9 +1,7 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.JobDto;
-import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.JobRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -35,9 +33,7 @@ public class RegisterCollaboratorController {
      * @param collDto the collaborator dto
      */
     public void createCLB(CollaboratorDto collDto) {
-
-        Collaborator collaborator = CollaboratorMapper.toDomain(collDto);
-        collaboratorRepository.create(collaborator);
+        collaboratorRepository.create(collDto);
 
     }
 

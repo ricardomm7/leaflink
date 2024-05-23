@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.repository;
 
 import org.junit.Test;
 import pt.ipp.isep.dei.project.dto.SkillDto;
-import pt.ipp.isep.dei.project.mappers.SkillMapper;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class SkillRepositoryTest {
         SkillRepository repository = new SkillRepository();
         String designation = "Programming";
 
-        repository.createSkill(SkillMapper.toDomain(new SkillDto(designation)));
+        repository.createSkill(new SkillDto(designation));
         List<SkillDto> skillList = repository.getSkillDtoList();
 
         assertEquals(1, skillList.size());
@@ -28,9 +27,9 @@ public class SkillRepositoryTest {
         SkillRepository repository = new SkillRepository();
         String designation = "Programming";
 
-        repository.createSkill(SkillMapper.toDomain(new SkillDto(designation)));
+        repository.createSkill(new SkillDto(designation));
 
-        assertThrows(IllegalArgumentException.class, () -> repository.createSkill(SkillMapper.toDomain(new SkillDto("Programming"))));
+        assertThrows(IllegalArgumentException.class, () -> repository.createSkill(new SkillDto("Programming")));
     }
 
     @Test
@@ -39,8 +38,8 @@ public class SkillRepositoryTest {
         String designation1 = "Programming";
         String designation2 = "Project Management";
 
-        repository.createSkill(SkillMapper.toDomain(new SkillDto(designation1)));
-        repository.createSkill(SkillMapper.toDomain(new SkillDto(designation2)));
+        repository.createSkill(new SkillDto(designation1));
+        repository.createSkill(new SkillDto(designation2));
         List<SkillDto> skillList = repository.getSkillDtoList();
 
         assertEquals(2, skillList.size());

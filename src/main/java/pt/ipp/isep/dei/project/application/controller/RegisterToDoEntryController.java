@@ -2,10 +2,8 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Entry;
 import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
-import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -49,8 +47,7 @@ public class RegisterToDoEntryController {
     }
 
     public void createNewEntry(EntryDto entryDto) {
-        Entry entry = EntryMapper.toDomain(entryDto);
-        entryRepository.create(entry);
+        entryRepository.create(entryDto);
 
     }
 }

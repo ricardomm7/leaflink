@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.dto;
 
-import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
+import pt.ipp.isep.dei.project.domain.Status;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -53,7 +54,7 @@ public class EntryDto {
      * @param assignedVehicles
      * @param status
      */
-        public EntryDto(GreenSpaceDto greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, TeamDto assignedTeam, List<VehicleDto> assignedVehicles, Status status) {
+    public EntryDto(GreenSpaceDto greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, TeamDto assignedTeam, List<VehicleDto> assignedVehicles, Status status) {
         this.greenSpaceDto = greenSpace;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
@@ -101,9 +102,13 @@ public class EntryDto {
         return duration;
     }
 
-    public LocalDate getEstimatedDate() {return estimatedDate;}
+    public LocalDate getEstimatedDate() {
+        return estimatedDate;
+    }
 
-    public Status getStatus() {return status;}
+    public Status getStatus() {
+        return status;
+    }
 
     @Override
     public boolean equals(Object o) {

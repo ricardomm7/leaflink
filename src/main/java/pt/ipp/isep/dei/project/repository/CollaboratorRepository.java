@@ -27,7 +27,8 @@ public class CollaboratorRepository {
      *
      * @param c the collaborator created.
      */
-    public void create(Collaborator c) {
+    public void create(CollaboratorDto dto) {
+        Collaborator c = CollaboratorMapper.toDomain(dto);
         if (checkForDuplicates(c)) {
             addCollaborator(c);
         }

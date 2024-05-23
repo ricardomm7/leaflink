@@ -38,9 +38,9 @@ public class VehicleRepository {
      * @param vehicle the vehicle Dto object
      * @return the boolean
      */
-    public boolean registerVehicle(Vehicle vehicle) {
+    public boolean registerVehicle(VehicleDto dto) {
+        Vehicle vehicle = VehicleMapper.toDomain(dto);
         if (!verifyExistingVehicles(vehicle.getVehiclePlate(), vehicle.getVIN())) {
-
             if (vehicle.registerVehicle(vehicle)) {
                 addVehicle(vehicle);
                 return true;

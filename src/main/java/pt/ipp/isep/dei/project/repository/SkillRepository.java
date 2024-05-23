@@ -26,7 +26,8 @@ public class SkillRepository {
      *
      * @param skill the skill created.
      */
-    public void createSkill(Skill skill) {
+    public void createSkill(SkillDto dto) {
+        Skill skill = SkillMapper.toDomain(dto);
         if (checkForDuplicates(skill)) {
             addSkill(skill);
         } else {

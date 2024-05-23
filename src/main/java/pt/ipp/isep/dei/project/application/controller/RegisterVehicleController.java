@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
-import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
@@ -30,15 +28,9 @@ public class RegisterVehicleController {
      * @return the boolean
      */
     public boolean registerVehicle(VehicleDto vehicleDto) {
-
-
         if (!vehicleRepository.verifyExistingVehicles(vehicleDto.getVIN(), vehicleDto.getVehiclePlate())) {
-            Vehicle vehicle = VehicleMapper.toDomain(vehicleDto);
-
-            return vehicleRepository.registerVehicle(vehicle);
-
+            return vehicleRepository.registerVehicle(vehicleDto);
         }
-
         return false;
     }
 
