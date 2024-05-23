@@ -19,7 +19,7 @@ public class SkillDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SkillDto skillDto = (SkillDto) o;
-        return Objects.equals(designation, skillDto.designation);
+        return (designation.equals(skillDto.designation));
     }
 
     @Override

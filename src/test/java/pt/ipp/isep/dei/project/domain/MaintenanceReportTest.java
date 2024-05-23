@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.domain;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MaintenanceReportTest {
     //create a list of Vehicle objects and call createMaintenanceReport method, then verify that the output is correct

@@ -40,7 +40,7 @@ UI-> GSM : shows data and requests confirmation
 deactivate UI
 GSM -> UI: user confirms
 activate UI
-UI -> CTRL : createNewGS(name, type, area, manager, \naddress (street, zip-code, city))
+UI -> CTRL : createNewGS(name, type, area, manager, \naddress)
 deactivate UI
 activate CTRL
 CTRL -> gsrepo : createNewGS(name, type, area, manager, address)

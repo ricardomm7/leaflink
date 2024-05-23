@@ -1,9 +1,7 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
-import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +30,7 @@ public class GreenSpaceRepository {
      * @param address the address of the green space
      * @throws IllegalArgumentException if a green space with the same name already exists
      */
-    public void create(String name, GreenSpaceType type, double area, UserSession manager, Address address) {
-        GreenSpace g = new GreenSpace(name, type, area, manager, address);
+    public void create(GreenSpace g) {
         if (checkForDuplicates(g)) {
             addGreenSpace(g);
         } else {

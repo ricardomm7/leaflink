@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.domain.MaintenanceReport;
-import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.MaintenanceMapper;
@@ -15,8 +14,8 @@ import java.util.List;
  * The MaintenanceRepository class manages the storage and retrieval of maintenance within the application.
  */
 public class MaintenanceRepository {
-    private  List<Maintenance> maintenanceList;
-    private  MaintenanceReport maintenanceReport;
+    private List<Maintenance> maintenanceList;
+    private MaintenanceReport maintenanceReport;
 
     /**
      * Instantiates a new Maintenance repository.
@@ -67,11 +66,10 @@ public class MaintenanceRepository {
      * @param vehicleDtoList the vehicle dto list
      * @return the string
      */
-    public String createMaintenanceReport(List<VehicleDto> vehicleDtoList){
+    public String createMaintenanceReport(List<VehicleDto> vehicleDtoList) {
         return maintenanceReport.createReport(vehicleDtoList, getMaintenanceList());
 
     }
-
 
 
 }

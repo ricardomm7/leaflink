@@ -32,7 +32,6 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("List green spaces managed by a specific GSM", new ListGreenSpacesUI()));
 
 
-
         int option = 0;
         do {
             option = Utils.showAndSelectIndex(options, "\n\n--- ADMIN MENU -------------------------");

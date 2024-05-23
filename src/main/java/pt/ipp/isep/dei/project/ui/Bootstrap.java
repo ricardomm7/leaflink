@@ -6,14 +6,8 @@ import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.domain.VehicleType;
-import pt.ipp.isep.dei.project.dto.CollaboratorDto;
-import pt.ipp.isep.dei.project.dto.JobDto;
-import pt.ipp.isep.dei.project.dto.SkillDto;
-import pt.ipp.isep.dei.project.dto.VehicleDto;
-import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
-import pt.ipp.isep.dei.project.mappers.JobMapper;
-import pt.ipp.isep.dei.project.mappers.SkillMapper;
-import pt.ipp.isep.dei.project.mappers.VehicleMapper;
+import pt.ipp.isep.dei.project.dto.*;
+import pt.ipp.isep.dei.project.mappers.*;
 import pt.ipp.isep.dei.project.repository.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 import pt.isep.lei.esoft.auth.domain.model.Password;
@@ -186,19 +180,19 @@ public class Bootstrap implements Runnable {
         UserSession managerSession = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(email, password, "Green Space Manager")));
         Address address = new Address("Santa Acácia", "Uriunda", "5555-999");
 
-        greenSpaceRepository.create("Alameda", GreenSpaceType.MEDIUM_SIZED_PARK, 78876, managerSession, address);
+        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Alameda", GreenSpaceType.MEDIUM_SIZED_PARK, 78876, managerSession, address.getAddress(), address.getCity(), address.getZipCode())));
 
         Address address2 = new Address("Rua das Flores", "Florina", "1234-567");
-        greenSpaceRepository.create("Jardim das Flores", GreenSpaceType.GARDEN, 5000, managerSession, address2);
+        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Jardim das Flores", GreenSpaceType.GARDEN, 5000, managerSession, address2.getAddress(), address2.getCity(), address2.getZipCode())));
 
         Address address3 = new Address("Avenida Central", "Centro", "8901-234");
-        greenSpaceRepository.create("Parque Central", GreenSpaceType.LARGE_SIZED_PARK, 150000, managerSession, address3);
+        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Parque Central", GreenSpaceType.LARGE_SIZED_PARK, 150000, managerSession, address3.getAddress(), address3.getCity(), address3.getZipCode())));
 
         Address address4 = new Address("Estrada Verde", "Verde", "5678-901");
-        greenSpaceRepository.create("Bosque Verde", GreenSpaceType.MEDIUM_SIZED_PARK, 250000, managerSession, address4);
+        greenSpaceRepository.create(GreenSpaceMapper.toDomain(new GreenSpaceDto("Bosque Verde", GreenSpaceType.MEDIUM_SIZED_PARK, 250000, managerSession, address4.getAddress(), address4.getCity(), address4.getZipCode())));
 
         Address address5 = new Address("Praça Azul", "Azulina", "2345-678");
-        greenSpaceRepository.create("Praça Azul", GreenSpaceType.GARDEN, 20000, managerSession, address5);
+        greenSpaceRepository.create((GreenSpaceMapper.toDomain(new GreenSpaceDto("Praça Azul", GreenSpaceType.GARDEN, 20000, managerSession, address5.getAddress(), address5.getCity(), address5.getZipCode()))));
     }
 
     private void addUsers() {
@@ -230,14 +224,4 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@this.app", "qam",
                 AuthenticationController.ROLE_QAM);
     }
-
-
-    /*private void addGreenSpaces(){
-        Set<UserRole> roles = new HashSet();
-        roles.add(new UserRole("GSM","GSM"));
-        UserSession manager = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("gsm@this.app"), new Password("gsm"), "Green Space Manager", AuthenticationController.ROLE_GSM )));
-        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
-        greenSpaceRepository.create("Jardim", GreenSpaceType.GARDEN, 23.4 ,manager,new Address("Rua Boda", "Porto", "4433-044"));
-
-    }*/
 }

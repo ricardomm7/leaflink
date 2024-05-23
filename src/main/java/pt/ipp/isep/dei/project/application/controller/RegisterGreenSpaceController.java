@@ -1,8 +1,7 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Address;
-import pt.ipp.isep.dei.project.domain.GreenSpaceType;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
@@ -35,19 +34,8 @@ public class RegisterGreenSpaceController {
      * @param zipcode the ZIP code of the green space address
      * @param city    the city of the green space address
      */
-    public void createNewGS(String name, GreenSpaceType type, double area, UserSession manager, String street, String zipcode, String city) {
-        greenSpaceRepository.create(name, type, area, manager, parseAddress(street, zipcode, city));
+    public void createNewGS(GreenSpaceDto g1) {
+        greenSpaceRepository.create(GreenSpaceMapper.toDomain(g1));
     }
 
-    /**
-     * Parses the provided address information and creates an Address object.
-     *
-     * @param street  the street of the address
-     * @param zipcode the ZIP code of the address
-     * @param city    the city of the address
-     * @return the Address object created from the provided information
-     */
-    private Address parseAddress(String street, String zipcode, String city) {
-        return new Address(street, city, zipcode);
-    }
 }

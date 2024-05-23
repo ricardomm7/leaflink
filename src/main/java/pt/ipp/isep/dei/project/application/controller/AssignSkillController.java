@@ -60,8 +60,6 @@ public class AssignSkillController {
     public void assignSkills(CollaboratorDto collaborator, List<SkillDto> skills) {
         Collaborator colb = CollaboratorMapper.toDomain(collaborator);
         List<Skill> skillsList = SkillMapper.listToDomain(skills);
-
-
         collaboratorRepository.assignSkills(colb, skillsList);
     }
 }

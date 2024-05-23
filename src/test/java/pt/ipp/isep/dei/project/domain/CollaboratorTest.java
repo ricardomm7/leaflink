@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,7 +70,10 @@ class CollaboratorTest {
     public void testAssignSkillsAndGetSkills() {
         Skill skill1 = new Skill("Java Programming");
         Skill skill2 = new Skill("Project Management");
-        collaborator.assignSkills(new Skill[]{skill1, skill2});
+        List<Skill> x = new ArrayList<>();
+        x.add(skill1);
+        x.add(skill2);
+        collaborator.assignSkills(x);
 
         List<Skill> assignedSkills = collaborator.getSkills();
 
@@ -81,7 +85,9 @@ class CollaboratorTest {
     @Test
     public void testAssignSkills_DuplicateSkills() {
         Skill skill1 = new Skill("Java Programming");
-        collaborator.assignSkills(new Skill[]{skill1, skill1});
+        List<Skill> x = new ArrayList<>();
+        x.add(skill1);
+        collaborator.assignSkills(x);
 
         List<Skill> assignedSkills = collaborator.getSkills();
 

@@ -319,7 +319,7 @@ public class Collaborator {
      *
      * @param selectedSkills the skills to be assigned.
      */
-    public void assignSkills(Skill[] selectedSkills) {
+    public void assignSkills(List<Skill> selectedSkills) {
         for (Skill skill : selectedSkills) {
             if (!skills.contains(skill)) {
                 skills.add(skill);

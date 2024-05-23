@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.project.repository;
 
 import org.junit.Test;
-import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.mappers.SkillMapper;
 

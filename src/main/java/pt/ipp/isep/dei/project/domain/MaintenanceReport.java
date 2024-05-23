@@ -61,7 +61,8 @@ public class MaintenanceReport {
         }
         return latestMaintenance;
     }
-        /**
+
+    /**
      * Get the last maintenance of a vehicle
      *
      * @param vehicle

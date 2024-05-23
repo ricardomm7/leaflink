@@ -21,8 +21,8 @@ public class ListMaintenanceController {
      */
     public ListMaintenanceController() {
         Repositories repositories = Repositories.getInstance();
-         vehicleRepository = repositories.getVehicleRepository();
-         maintenanceRepository = repositories.getMaintenanceRepository();
+        vehicleRepository = repositories.getVehicleRepository();
+        maintenanceRepository = repositories.getMaintenanceRepository();
 
     }
 

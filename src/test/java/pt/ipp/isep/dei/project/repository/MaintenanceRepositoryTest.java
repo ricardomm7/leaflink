@@ -2,16 +2,10 @@ package pt.ipp.isep.dei.project.repository;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.domain.Maintenance;
-import pt.ipp.isep.dei.project.domain.Vehicle;
-import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
-import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.MaintenanceMapper;
-import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,8 +46,6 @@ class MaintenanceRepositoryTest {
         assertEquals(1, maintenanceList.size());
         assertEquals("ABC123", maintenanceList.get(0).getVehiclePlate());
     }
-
-
 
 
     // Create a new Maintenance object with a null date and verify that an IllegalArgumentException is thrown

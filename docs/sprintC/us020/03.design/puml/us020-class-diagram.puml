@@ -8,6 +8,7 @@ skinparam line type polyline
         - controller : RegisterGreenSpaceController
         + RegisterGreenSpaceUI()
         + createNewGS(name : String, type : String, area : Double, street : String, zipcode : String, city : String, manager : UserSession) : void
+        '- parseAddress(street : String, zipcode : String, city : String) : Address
     }
 
     class RegisterGreenSpaceController {
@@ -15,7 +16,6 @@ skinparam line type polyline
         - greenSpaceRepository : GreenSpaceRepository
         + createNewGS(name : String, type : String, area : Double, street : String, zipcode : String, city : String, manager : UserSession) : void
         + RegisterGreenSpaceController()
-        - parseAddress(street : String, zipcode : String, city : String) : Address
     }
 
     class Repositories {

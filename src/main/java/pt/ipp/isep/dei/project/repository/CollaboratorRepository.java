@@ -73,8 +73,7 @@ public class CollaboratorRepository {
      * @param skills       The skills to be assigned.
      */
     public void assignSkills(Collaborator collaborator, List<Skill> skills) {
-
-        collaborator.assignSkills(skills.toArray(new Skill[0]));
+        collaborator.assignSkills(skills);
     }
 }
 

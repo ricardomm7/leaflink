@@ -21,7 +21,7 @@ public class CollaboratorMapper {
         return new CollaboratorDto(collaborator.getName(), collaborator.getBirthdate(), collaborator.getContactMobile(),
                 collaborator.getTaxpayerNumber(), collaborator.getEmail(), collaborator.getAddress().getAddress(), collaborator.getAddress().getZipCode(),
                 collaborator.getAddress().getCity(), collaborator.getDocumentType(), collaborator.getIdentificationNumber(), collaborator.getAdmissionDate(),
-                collaborator.getJob());
+                collaborator.getJob(), collaborator.getSkills());
     }
 
 

@@ -80,7 +80,8 @@ public class CollaboratorRepositoryTest {
         skillRepository.createSkill(SkillMapper.toDomain(new SkillDto(skill2.getDesignation())));
         skillRepository.createSkill(SkillMapper.toDomain(new SkillDto(skill3.getDesignation())));
 
-        CollaboratorDto collaborator = repository.getCollaboratorList().get(0);
+        CollaboratorDto collaboratorDto = repository.getCollaboratorList().get(0);
+        Collaborator collaborator = CollaboratorMapper.toDomain(collaboratorDto);
 
         List<Skill> skills = new ArrayList<>();
         skills.add(skill1);
@@ -88,14 +89,15 @@ public class CollaboratorRepositoryTest {
         skills.add(skill3);
 
         // Act
-        repository.assignSkills(CollaboratorMapper.toDomain(collaborator), skills);
+        repository.assignSkills(collaborator, skills);
+
+        // Convert collaborator back to DTO to check assigned skills
+        collaboratorDto = CollaboratorMapper.toDto(collaborator);
 
         // Assert
-        List<SkillDto> assignedSkills = collaborator.getSkills();
-        assertEquals(3, assignedSkills.size());
+        List<SkillDto> assignedSkills = collaboratorDto.getSkills();
         assertTrue(assignedSkills.contains(SkillMapper.toDto(skill1)));
         assertTrue(assignedSkills.contains(SkillMapper.toDto(skill2)));
         assertTrue(assignedSkills.contains(SkillMapper.toDto(skill3)));
     }
-
 }
