@@ -108,6 +108,14 @@ public class Entry {
         this.greenSpace = greenSpace;
     }
 
+    public Team getAssignedTeam() {
+        return assignedTeam;
+    }
+
+    public void setAssignedTeam(Team assignedTeam) {
+        this.assignedTeam = assignedTeam;
+    }
+
     /**
      * Gets description.
      *

@@ -34,11 +34,22 @@ public class EntryRepository {
         }
     }
 
+    /**
+     * Check for duplicates boolean.
+     *
+     * @param entry the entry
+     * @return the boolean
+     */
     private boolean checkForDuplicates(Entry entry) {
         return entryList.stream()
                 .noneMatch(e -> e.getDescription().equalsIgnoreCase(entry.getDescription()));
     }
 
+    /**
+     * Add entry.
+     *
+     * @param entry the entry
+     */
     private void addEntry(Entry entry) {
         entryList.add(entry);
     }
@@ -46,7 +57,7 @@ public class EntryRepository {
     /**
      * Gets entry list by GSM.
      *
-     * @param gsmEmail the gsm email
+     * @param gsm the gsm
      * @return the entry list by gsm
      */
     public List<EntryDto> getEntryListByGSM(UserSession gsm) {
@@ -59,8 +70,9 @@ public class EntryRepository {
         return z;
     }
 
+
     /**
-     * Update entry.
+     * Update entry boolean.
      *
      * @param entry     the entry
      * @param newDate   the new date
@@ -71,11 +83,19 @@ public class EntryRepository {
         if (validateNewDate(entry, newDate)) {
             updateEntryStatus(entry, newStatus);
             setNewDate(entry, newDate);
+
             return true;
         }
         return false;
     }
 
+    /**
+     * Validate new date boolean.
+     *
+     * @param entry   the entry
+     * @param newDate the new date
+     * @return the boolean
+     */
     private Boolean validateNewDate(Entry entry, LocalDate newDate) {
         if (newDate == null) {
             throw new IllegalArgumentException("New date cannot be null.");
@@ -85,10 +105,22 @@ public class EntryRepository {
         return true;
     }
 
+    /**
+     * Update entry status.
+     *
+     * @param entry     the entry
+     * @param newStatus the new status
+     */
     private void updateEntryStatus(Entry entry, Status newStatus) {
         entry.setStatus(newStatus);
     }
 
+    /**
+     * Sets new date.
+     *
+     * @param entry   the entry
+     * @param newDate the new date
+     */
     private void setNewDate(Entry entry, LocalDate newDate) {
         entry.setEstimatedDate(newDate);
     }
@@ -106,6 +138,8 @@ public class EntryRepository {
         return r;
     }
 }
+
+
 
 
 

@@ -42,12 +42,12 @@ public class PostponeAgendaEntryUI implements Runnable {
             return;
         }
 
-        LocalDate newDate = getValidDate("Enter the new date (yyyy-mm-dd)");
+        LocalDate newDate = getValidDate("Enter the new date (dd-mm-yyy)");
         if (newDate == null) {
             return;
         }
 
-        System.out.println("Postponing entry: " + selectedEntry.getDescription() + " to " + newDate);
+        System.out.println("Postponing entry: " + selectedEntry.getDescription() + " to " + formatDate(newDate));
         System.out.print("Confirm (y/n)? ");
         String confirmation = scanner.nextLine();
 
@@ -90,7 +90,7 @@ public class PostponeAgendaEntryUI implements Runnable {
                 date = parseDate(input);
                 isValid = true;
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date format. Please use yyyy-mm-dd");
+                System.out.println("Invalid date format. Please use dd/mm/yyyy");
                 isValid = false;
             }
         } while (!isValid);
@@ -98,8 +98,32 @@ public class PostponeAgendaEntryUI implements Runnable {
     }
 
     private static LocalDate parseDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(dateString, formatter);
+        // Remove espaços em branco
+        String cleanedDateString = dateString.replaceAll("\\s", "");
+
+        // Substitui vírgulas e hífens por barras
+        cleanedDateString = cleanedDateString.replace(',', '/').replace('-', '/');
+
+        // Padroniza o formato para DD/MM/YYYY, adicionando zeros à esquerda quando necessário
+        String[] parts = cleanedDateString.split("/");
+        if (parts.length != 3) {
+            throw new DateTimeParseException("Invalid date format. Please use dd/mm/yyyy or d/m/yyyy.", dateString, 0);
+        }
+
+        String day = parts[0].length() == 1 ? "0" + parts[0] : parts[0];
+        String month = parts[1].length() == 1 ? "0" + parts[1] : parts[1];
+        String year = parts[2];
+
+        String formattedDate = day + "/" + month + "/" + year;
+
+        // Usar o DateTimeFormatter padrão
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(formattedDate, formatter);
+    }
+
+    private static String formatDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(formatter);
     }
 
     @Override

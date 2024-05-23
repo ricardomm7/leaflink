@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Entry;
-import pt.ipp.isep.dei.project.domain.Status;
+import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.EntryDto;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -16,12 +17,10 @@ public class PostponeAgendaEntryController {
     private Repositories repositories;
 
     private final EntryRepository entryRepository;
-    private final TeamRepository teamRepository;
 
     public PostponeAgendaEntryController() {
         repositories = Repositories.getInstance();
         this.entryRepository = repositories.getEntryRepository();
-        this.teamRepository = repositories.getTeamRepository();
     }
 
     public List<EntryDto> getEntryList(UserSession gsm) {
@@ -33,7 +32,22 @@ public class PostponeAgendaEntryController {
 
     public boolean postponeEntry(EntryDto entryDto, LocalDate newDate) {
         Entry entry = convertToEntry(entryDto);
-        return entryRepository.updateEntry(entry, newDate, Status.POSTPONED);
+        boolean success = entryRepository.updateEntry(entry, newDate, Status.POSTPONED);
+        if (success) {
+            notifyTeam(entry, newDate);
+        }
+        return success;
+    }
+
+    private boolean notifyTeam(Entry entry, LocalDate newDate) {
+        boolean flag = false;
+
+        Team team = NotificationService.getTeamByEntry(entry);
+        List<Collaborator> collaboratorsList = NotificationService.getCollaboratorsList(team);
+        if (collaboratorsList != null) {
+            flag = NotificationService.notifyTeam(collaboratorsList,entry, newDate);
+        }
+        return flag;
     }
 
     private Entry convertToEntry(EntryDto entryDto) {

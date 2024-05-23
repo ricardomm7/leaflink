@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.project.ui.console.menu;
 
 
-import pt.ipp.isep.dei.project.ui.ListGreenSpacesUI;
-import pt.ipp.isep.dei.project.ui.RegisterGreenSpaceUI;
-import pt.ipp.isep.dei.project.ui.RegisterToDoEntryUI;
-import pt.ipp.isep.dei.project.ui.WaterIrrigationUI;
+import pt.ipp.isep.dei.project.ui.*;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -24,6 +21,7 @@ public class GsmUI implements Runnable {
         options.add(new MenuItem("Create a new Green Space", new RegisterGreenSpaceUI()));
         options.add(new MenuItem("Add entry to To-Do List", new RegisterToDoEntryUI()));
         options.add(new MenuItem("List green spaces managed by me", new ListGreenSpacesUI()));
+        options.add(new MenuItem("Postpone a Entry", new PostponeAgendaEntryUI()));
 
 
         int option = 0;

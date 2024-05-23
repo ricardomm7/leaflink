@@ -11,10 +11,8 @@ participant ":PostponeAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "entryRepository\n:EntryRepository" as EntryRepo
-participant "teamRepository\n:TeamRepository" as TeamRepo
 participant ":NotificationService" as NotificationService
 participant ":EntryMapper" as EntryMapper
-participant ":CollaboratorMapper" as CollaboratorMapper
 
 
 activate GSM
@@ -38,11 +36,6 @@ activate GSM
                 PLAT --> CTRL : entryRepository
             deactivate PLAT
 
-            CTRL -> PLAT : getTeamRepository()
-            activate PLAT
-
-            PLAT --> CTRL : teamRepository
-            deactivate PLAT
              deactivate CTRL
 
         deactivate UI
@@ -98,44 +91,34 @@ activate GSM
                 EntryRepo -> EntryRepo : updateEntryStatus(entry, POSTPONED)
                 EntryRepo -> EntryRepo : setNewDate(entry, newDate)
 
-            EntryRepo -> TeamRepo : notifyTeam(entry, newDate)
+            EntryRepo --> CTRL : success
             deactivate EntryRepo
+            activate CTRL
 
-                deactivate EntryRepo
-                activate TeamRepo
+            CTRL -> NotificationService : notifyTeam(entry, newDate)
+            deactivate CTRL
+            activate NotificationService
 
-                    TeamRepo -> TeamRepo : getTeamByEntry(entry)
-                    activate TeamRepo
+                NotificationService -> NotificationService : getTeamByEntry(entry)
+                activate NotificationService
 
-                    TeamRepo --> TeamRepo : teamDto
-                    deactivate TeamRepo
+                NotificationService --> NotificationService : teamD
+                deactivate NotificationService
 
-                    TeamRepo -> TeamRepo : getCollaboratorsList(teamDto)
-                    activate TeamRepo
+                NotificationService -> NotificationService : getCollaboratorsList(team)
+                activate NotificationService
 
-                    TeamRepo --> TeamRepo : collaboratorsDtoList
-                    deactivate TeamRepo
+                NotificationService --> NotificationService : collaboratorsList
+                deactivate NotificationService
 
-                    TeamRepo -> CollaboratorMapper : toDomainList(collaboratorsDtoList)
-                    activate CollaboratorMapper
+                NotificationService -> NotificationService : notifyTeam(collaboratorsList, entry, newDate)
+                activate NotificationService
 
-                    CollaboratorMapper --> TeamRepo : collaboratorsList
-                    deactivate CollaboratorMapper
+                NotificationService --> NotificationService : success
+                deactivate NotificationService
 
-                    TeamRepo -> NotificationService : sendNotification(collaboratorsList, newDate)
-                    deactivate TeamRepo
-                    activate NotificationService
-
-                        NotificationService --> TeamRepo : success
-                    deactivate NotificationService
-                    activate TeamRepo
-
-                TeamRepo --> EntryRepo : success
-                deactivate TeamRepo
-                activate EntryRepo
-
-        EntryRepo --> CTRL : success
-        deactivate EntryRepo
+                NotificationService --> CTRL : success
+                deactivate NotificationService
         activate CTRL
 
         CTRL --> UI : success

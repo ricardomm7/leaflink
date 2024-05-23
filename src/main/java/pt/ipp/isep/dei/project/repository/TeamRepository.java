@@ -1,9 +1,12 @@
 package pt.ipp.isep.dei.project.repository;
 
+import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.Entry;
 import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.TeamDto;
 import pt.ipp.isep.dei.project.mappers.TeamMapper;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,4 +42,6 @@ public class TeamRepository {
     public List<TeamDto> getTeamDtoList() {
         return TeamMapper.ListToDto(teamList);
     }
+
+
 }
