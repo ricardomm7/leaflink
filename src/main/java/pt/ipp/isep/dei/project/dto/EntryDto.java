@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.project.dto;
 
-import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
+import pt.ipp.isep.dei.project.domain.*;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,7 +17,15 @@ public class EntryDto {
 
     private DegreeOfUrgency degreeOfUrgency;
 
-    private String duration;
+    private int duration;
+
+    private LocalDate estimatedDate;
+
+    private TeamDto assignedTeam;
+
+    private List<VehicleDto> assignedVehicles;
+
+    private Status status;
 
     /**
      * Instantiates a new Entry dto.
@@ -25,11 +35,33 @@ public class EntryDto {
      * @param degreeOfUrgency the degree of urgency
      * @param duration        the duration
      */
-    public EntryDto(GreenSpaceDto greenSpaceDto, String description, DegreeOfUrgency degreeOfUrgency, String duration) {
+    public EntryDto(GreenSpaceDto greenSpaceDto, String description, DegreeOfUrgency degreeOfUrgency, int duration) {
         this.greenSpaceDto = greenSpaceDto;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
         this.duration = duration;
+    }
+
+    /**
+     * Instantiates a new EntryDto to Agenda;
+     *
+     * @param greenSpace
+     * @param description
+     * @param degreeOfUrgency
+     * @param duration
+     * @param assignedTeam
+     * @param assignedVehicles
+     * @param status
+     */
+        public EntryDto(GreenSpaceDto greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, TeamDto assignedTeam, List<VehicleDto> assignedVehicles, Status status) {
+        this.greenSpaceDto = greenSpace;
+        this.description = description;
+        this.degreeOfUrgency = degreeOfUrgency;
+        this.duration = duration;
+        this.estimatedDate = estimatedDate;
+        this.assignedTeam = assignedTeam;
+        this.assignedVehicles = assignedVehicles;
+        this.status = status;
     }
 
     /**
@@ -65,10 +97,13 @@ public class EntryDto {
      *
      * @return the duration
      */
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
+    public LocalDate getEstimatedDate() {return estimatedDate;}
+
+    public Status getStatus() {return status;}
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,22 +15,52 @@ public class Entry {
 
     private DegreeOfUrgency degreeOfUrgency;
 
-    private String duration;
+    private int duration;
+
+    private LocalDate estimatedDate;
+
+    private Team assignedTeam;
+
+    private List<Vehicle> assignedVehicles;
+
+    private Status status;
 
 
     /**
-     * Instantiates a new Entry.
+     * Instantiates a new Entry to ToDoList.
      *
      * @param greenSpace      the green space
      * @param description     the description
      * @param degreeOfUrgency the degree of urgency
      * @param duration        the duration
      */
-    public Entry(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, String duration) {
+    public Entry(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration) {
         this.greenSpace = greenSpace;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
         this.duration = duration;
+    }
+
+    /**
+     * Instantiates a new Entry to Agenda;
+     *
+     * @param greenSpace
+     * @param description
+     * @param degreeOfUrgency
+     * @param duration
+     * @param assignedTeam
+     * @param assignedVehicles
+     * @param status
+     */
+        public Entry(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, Team assignedTeam, List<Vehicle> assignedVehicles, Status status) {
+        this.greenSpace = greenSpace;
+        this.description = description;
+        this.degreeOfUrgency = degreeOfUrgency;
+        this.duration = duration;
+        this.estimatedDate = estimatedDate;
+        this.assignedTeam = assignedTeam;
+        this.assignedVehicles = assignedVehicles;
+        this.status = status;
     }
 
     /**
@@ -38,6 +70,30 @@ public class Entry {
      */
     public GreenSpace getGreenSpace() {
         return greenSpace;
+    }
+
+    /**
+     * Sets status.
+     *
+     * @param status the status
+     */
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    /**
+     * Gets estimated date.
+     *
+     * @return the estimated date
+     */
+    public LocalDate getEstimatedDate() {return estimatedDate;}
+    /**
+     * Sets estimated date.
+     *
+     * @param estimatedDate the estimated date
+     */
+    public void setEstimatedDate(LocalDate estimatedDate) {
+        this.estimatedDate = estimatedDate;
     }
 
     /**
@@ -90,7 +146,7 @@ public class Entry {
      *
      * @return the duration
      */
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
@@ -99,7 +155,7 @@ public class Entry {
      *
      * @param duration the duration
      */
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

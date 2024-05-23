@@ -49,8 +49,8 @@ public class RegisterToDoEntryUI implements Runnable {
             DegreeOfUrgency urg = dgUrg[sc.nextInt() - 1];
             sc.nextLine();
 
-            System.out.println("Entry entry duration: ");
-            String duration = sc.nextLine();
+            System.out.println("Entry entry duration (in days / hours): ");
+            int duration = Integer.parseInt(sc.nextLine());
 
             System.out.println("\nDo you want to register this Entry? (Y/N)");
             String decision = sc.nextLine();

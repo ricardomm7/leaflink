@@ -10,11 +10,11 @@ participant ":PostponeAgendaEntryUI" as UI
 participant ":PostponeAgendaEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant ":EntryRepository\n:entryRepository" as EntryRepo
-participant ":TeamRepository\n:teamRepository" as TeamRepo
+participant "entryRepository\n:EntryRepository" as EntryRepo
+participant "teamRepository\n:TeamRepository" as TeamRepo
 participant ":NotificationService" as NotificationService
 participant ":EntryMapper" as EntryMapper
-participant ":TeamMapper" as TeamMapper
+participant ":CollaboratorMapper" as CollaboratorMapper
 
 
 activate GSM
@@ -22,7 +22,7 @@ activate GSM
     GSM -> UI : asks to postpone an agenda entry
     activate UI
 
-        UI -> CTRL : create
+        UI -> CTRL **: create
         deactivate UI
         activate CTRL
 
@@ -51,17 +51,12 @@ activate GSM
         activate UI
         activate CTRL
 
-            CTRL -> EntryRepo: getEntryListByGSM(GSM)
+            CTRL -> EntryRepo: getEntryDtoListByGSM(GSM)
             activate EntryRepo
 
-            EntryRepo --> CTRL: entryList
+
+            EntryRepo --> CTRL : entryDTOList
             deactivate EntryRepo
-
-            CTRL -> EntryMapper : toEntryDTOList(entryList)
-            activate EntryMapper
-
-            EntryMapper --> CTRL : entryDTOList
-            deactivate EntryMapper
 
             CTRL --> UI : entryDTOList
         deactivate CTRL
@@ -88,15 +83,16 @@ activate GSM
         deactivate UI
         activate CTRL
 
-            CTRL -> EntryMapper : toEntry(entryDTO)
-            activate EntryMapper
 
-            EntryMapper --> CTRL : entry
-            deactivate EntryMapper
-
-            CTRL -> EntryRepo : updateEntry(entry, newDate, POSTPONED)
+            CTRL -> EntryRepo : updateEntry(entryDto, newDate, POSTPONED)
             deactivate CTRL
             activate EntryRepo
+
+            EntryRepo -> EntryMapper : toDomain(entryDTO)
+            activate EntryMapper
+
+            EntryMapper --> EntryRepo : entry
+            deactivate EntryMapper
 
                 EntryRepo -> EntryRepo : validateNewDate(newDate)
                 EntryRepo -> EntryRepo : updateEntryStatus(entry, POSTPONED)
@@ -108,17 +104,23 @@ activate GSM
                 deactivate EntryRepo
                 activate TeamRepo
 
-                    TeamRepo -> TeamMapper : getTeamByEntry(entry)
-                    activate TeamMapper
+                    TeamRepo -> TeamRepo : getTeamByEntry(entry)
+                    activate TeamRepo
 
-                    TeamMapper --> TeamRepo : team
-                    deactivate TeamMapper
+                    TeamRepo --> TeamRepo : teamDto
+                    deactivate TeamRepo
 
-                    TeamRepo -> TeamMapper : getCollaboratorsList(team)
-                    activate TeamMapper
+                    TeamRepo -> TeamRepo : getCollaboratorsList(teamDto)
+                    activate TeamRepo
 
-                    TeamMapper --> TeamRepo : collaboratorsList
-                    deactivate TeamMapper
+                    TeamRepo --> TeamRepo : collaboratorsDtoList
+                    deactivate TeamRepo
+
+                    TeamRepo -> CollaboratorMapper : toDomainList(collaboratorsDtoList)
+                    activate CollaboratorMapper
+
+                    CollaboratorMapper --> TeamRepo : collaboratorsList
+                    deactivate CollaboratorMapper
 
                     TeamRepo -> NotificationService : sendNotification(collaboratorsList, newDate)
                     deactivate TeamRepo
