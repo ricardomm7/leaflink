@@ -31,8 +31,8 @@ public class MaintenanceRepository {
      * @param maintenanceDto the maintenance dto
      */
     public void createMaintenance(MaintenanceDto maintenanceDto) {
-        Maintenance maintenance = new Maintenance(maintenanceDto);
-        addMaintenance(maintenance);
+        Maintenance m = MaintenanceMapper.toDomain(maintenanceDto);
+        addMaintenance(m);
     }
 
     /**
