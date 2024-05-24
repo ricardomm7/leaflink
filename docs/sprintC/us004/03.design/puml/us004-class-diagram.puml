@@ -31,7 +31,6 @@ class CollaboratorRepository {
     + checkForDuplicates() : void
     + addCollaborator(collaborator) : void
     + getCollaboratorList() : List<Collaborator>
-    + assignSkills() : void
 }
 
 class SkillRepository {
@@ -39,6 +38,7 @@ class SkillRepository {
      + createSkill(designation : String) : Skill
      + checkForDuplicates() : void
      + addSkill(skill): void
+     + getSkillList() : List<Skill>
 }
 
 class Collaborator {
@@ -49,6 +49,7 @@ class Collaborator {
     - admissionDate : Date
     - job : Job
     - taxpayerNumber : int
+    - skills : List<Skill>
     + Collaborator(name : String, birthdate : Date, contactMobile : String,\nemail : String, address : String, zipCode : String, city : String,\ndocumentType : String, identificationNumber : String, \nadmissionDate : Date, taxpayerNumber : int, job : Job)
     + verifyFilled(collaborator) : boolean
     + verifyNineDigits(collaborator) : boolean
@@ -74,18 +75,8 @@ class Collaborator {
     +getTaxpayerNumber() : int
     +getName() : String
     +getBirthdate() : Date
-}
-
-class Address {
-    -address : String
-    -city : String
-    -zipcode : String
-    +setAddress() : void
-    +setCity() : void
-    +setZipCode() : void
-    +getAddress() : String
-    +getCity() : String
-    +getZipCode() : String
+    +getSkills() : String
+    +AssignSkills(List<Skill> selectedSkills) : void
 }
 
 class Skill {
@@ -104,7 +95,6 @@ AssignSkillController ..> CollaboratorRepository : collaboratorRepository
 AssignSkillController ..> SkillRepository : skillRepository
 CollaboratorRepository --> "*" Collaborator : collaborators
 SkillRepository --> "*" Skill : skill
-Collaborator --> "1" Address : has
 
 
 @enduml

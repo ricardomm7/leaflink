@@ -20,7 +20,7 @@ HRM -> UI : asks to assign skills to a collaborator
 activate UI
 UI -> CTRL** : create
 
-UI -> CTRL: get collaboratorList
+UI -> CTRL: getCollaboratorList
 activate CTRL
 
 CTRL -> GlobRepo : getInstance()
@@ -70,11 +70,15 @@ CTRL --> UI : skillList
 deactivate CTRL
 activate UI
 
-UI --> HRM : shows the list of skills and requests to select one
-deactivate UI
+loop
 
-HRM -> UI : select a skill
-activate UI
+    UI --> HRM : shows the list of skills and requests to select one or more
+    deactivate UI
+
+    HRM -> UI : select one or more skills
+    activate UI
+
+end loop
 
 UI --> HRM: shows all data and requests confirmation
 deactivate UI

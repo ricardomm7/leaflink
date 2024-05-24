@@ -21,10 +21,10 @@ activate HRM
     HRM -> System : selects a collaborator
     activate System
 
-        System --> HRM : shows the list of skills and requests to select one
+        System --> HRM : shows the list of skills and requests to select one or more
     deactivate System
 
-    HRM -> System : selects a skill
+    HRM -> System : selects one or more skills
     activate System
 
         System --> HRM : shows all data and requests confirmation
@@ -33,6 +33,6 @@ activate HRM
     HRM -> System : confirms data
     activate System
 
-        System --> HRM : shows success message (skill assigns successfully)
+        System --> HRM : shows success message (skill(s) assigned successfully)
     deactivate System
 @enduml
