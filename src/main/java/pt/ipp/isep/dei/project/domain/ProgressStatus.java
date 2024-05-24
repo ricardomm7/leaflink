@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.project.domain;
 
-public enum Status {
+public enum ProgressStatus {
     /**
      * Pending status.
      */

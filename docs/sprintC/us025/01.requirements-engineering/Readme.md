@@ -11,7 +11,7 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
 
 **From the specifications document:**
 
-> The person who cancels the entries in the Agenda is the GSM, and the entry status is updated in the system.
+> The person who cancels the entries in the Agenda is the GSM, and the entry progressStatus is updated in the system.
 > A canceled task should not be deleted but rather change its state.
 
 **From the client clarifications:**
@@ -24,7 +24,7 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
 >
 > **Answer:** No.
 
-> **Question:** As far as I understand, when a GSM wants to cancel a task or a Collaborator wants to record the completion of a task, the task just changes its status in the Agenda to "Canceled" or "Done", respectively. Correct?
+> **Question:** As far as I understand, when a GSM wants to cancel a task or a Collaborator wants to record the completion of a task, the task just changes its progressStatus in the Agenda to "Canceled" or "Done", respectively. Correct?
 >
 > **Answer:** Yes
 

@@ -10,8 +10,8 @@ participant ":AddAgendaEntryUI" as UI
 participant ":AddAgendaEntryController" as CTRL
 participant ":Repositories" as GlobRepo
 participant "repositories\n:Repositories" as PLAT
-participant "toDoRepository:\nToDoRepository" as TODOREP
-participant "agendaRepository:\nAgendaRepository" as AGENDREP
+participant "toDoRepository\n:ToDoRepository" as TODOREP
+participant "agendaRepository\n:AgendaRepository" as AGENDREP
 
 activate GSM
 GSM -> UI : requests to add a new entry in the Agenda

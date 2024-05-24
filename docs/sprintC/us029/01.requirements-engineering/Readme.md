@@ -16,15 +16,15 @@ As a Collaborator, I want to record the completion of a task.
 
 **From the client clarifications:**
 
-> **Question:** The collaborator can see what type of entry's? Like what status can he filter? Can he see canceled Entry's?
+> **Question:** The collaborator can see what type of entry's? Like what progressStatus can he filter? Can he see canceled Entry's?
 >
-> **Answer:** The ones assigned to him. He can filter by the different values the status of the status, like planned, executed, canceled ...
+> **Answer:** The ones assigned to him. He can filter by the different values the progressStatus of the progressStatus, like planned, executed, canceled ...
 
 > **Question:** When a collaborator records a task, it should be asked for any observations regarding the completed task?
 >
 > **Answer:** Maybe if optional, not mandatory.
 
-> **Question:** The collaborator should be able to change the status of any task or only tasks assigned to him?
+> **Question:** The collaborator should be able to change the progressStatus of any task or only tasks assigned to him?
 >
 > **Answer:** Yes.
 
@@ -36,7 +36,7 @@ As a Collaborator, I want to record the completion of a task.
 > 
 > **Answer:** It's a matter of UX/UI, each dev team can decide about it.
 
-> **Question:** As far as I understand, when a GSM wants to cancel a task or a Collaborator wants to record the completion of a task, the task just changes its status in the Agenda to "Canceled" or "Done", respectively
+> **Question:** As far as I understand, when a GSM wants to cancel a task or a Collaborator wants to record the completion of a task, the task just changes its progressStatus in the Agenda to "Canceled" or "Done", respectively
 > 
 > **Answer:** Yes.
 ### 1.3. Acceptance Criteria

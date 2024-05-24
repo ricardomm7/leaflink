@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.project.dto;
 
 import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
-import pt.ipp.isep.dei.project.domain.Status;
+import pt.ipp.isep.dei.project.domain.ProgressStatus;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,7 +26,7 @@ public class EntryDto {
 
     private List<VehicleDto> assignedVehicles;
 
-    private Status status;
+    private ProgressStatus progressStatus;
 
     /**
      * Instantiates a new Entry dto.
@@ -52,9 +52,9 @@ public class EntryDto {
      * @param duration
      * @param assignedTeam
      * @param assignedVehicles
-     * @param status
+     * @param progressStatus
      */
-    public EntryDto(GreenSpaceDto greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, TeamDto assignedTeam, List<VehicleDto> assignedVehicles, Status status) {
+    public EntryDto(GreenSpaceDto greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, TeamDto assignedTeam, List<VehicleDto> assignedVehicles, ProgressStatus progressStatus) {
         this.greenSpaceDto = greenSpace;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
@@ -62,7 +62,7 @@ public class EntryDto {
         this.estimatedDate = estimatedDate;
         this.assignedTeam = assignedTeam;
         this.assignedVehicles = assignedVehicles;
-        this.status = status;
+        this.progressStatus = progressStatus;
     }
 
     /**
@@ -106,8 +106,8 @@ public class EntryDto {
         return estimatedDate;
     }
 
-    public Status getStatus() {
-        return status;
+    public ProgressStatus getStatus() {
+        return progressStatus;
     }
 
     @Override

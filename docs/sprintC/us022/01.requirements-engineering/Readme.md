@@ -17,7 +17,7 @@ As a Green Space Manager (GSM), I want to add a new entry in the Agenda.
  
 **From the client clarifications:**
 
-> **Question:**  When a new entry is added to the Agenda, the status of that task will be, by default, set to "planned"?
+> **Question:**  When a new entry is added to the Agenda, the progressStatus of that task will be, by default, set to "planned"?
 > 
 > **Answer:** Correct.
 > 

@@ -18,9 +18,8 @@ class Job {
 }
 
 class Entry {
+    startingDate
     progressStatus
-    urgencyStatus
-    estimatedDate
 }
 
 class Collaborator {
@@ -100,6 +99,7 @@ class Task {
     title
     description
     duration
+    urgencyStatus
 
 }
 
