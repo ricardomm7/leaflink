@@ -21,9 +21,8 @@ import java.time.LocalDate;
  */
 public class Bootstrap implements Runnable {
 
-    private Repositories repo;
+    private Repositories repositories;
 
-    //Add some task categories to the repository as bootstrap
     public void run() {
         deserializeAll();
 
@@ -39,26 +38,20 @@ public class Bootstrap implements Runnable {
     }
 
     private void serializeAll() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("serial/repos.dnd");
-            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
-            outStream.writeObject(repo);
-            outStream.close();
-            fileOut.close();
+        try (FileOutputStream fileOut = new FileOutputStream("serial/repos.dnd");
+             ObjectOutputStream outStream = new ObjectOutputStream(fileOut)) {
+            outStream.writeObject(repositories);
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
     private void deserializeAll() {
-        try {
-            FileInputStream fileIn = new FileInputStream("serial/repos.dnd");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            repo = (Repositories) in.readObject();
-            in.close();
-            fileIn.close();
+        try (FileInputStream fileIn = new FileInputStream("serial/repos.dnd");
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            repositories = (Repositories) in.readObject();
         } catch (FileNotFoundException e) {
-            repo = new Repositories();
+            repositories = new Repositories();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -68,7 +61,7 @@ public class Bootstrap implements Runnable {
      * Add vehicles.
      */
     public void addVehicles() {
-        VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
+        VehicleRepository vehicleRepository =repositories.getVehicleRepository();
 
         // Example 1
         vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Toyota", "Corolla", VehicleType.CAR, LocalDate.of(2013, 3, 15), "12AB12", 1500.0, 2000.0,
@@ -100,7 +93,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addMaintenance() {
-        MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
+        MaintenanceRepository maintenanceRepository = repositories.getMaintenanceRepository();
 
         // Example 1: Maintenance for Ford Transit
         maintenanceRepository.createMaintenance(new MaintenanceDto("12AB12", LocalDate.of(2024, 6, 10), 25000));
@@ -119,7 +112,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addSkills() {
-        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+        SkillRepository skillRepository = repositories.getSkillRepository();
 
         // Example 1
         skillRepository.createSkill(new SkillDto("Class A Driving Licence"));
@@ -148,7 +141,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addJobs() {
-        JobRepository jobRepository = Repositories.getInstance().getJobRepository();
+        JobRepository jobRepository = repositories.getJobRepository();
 
         jobRepository.createJob(new JobDto("Manager"));
 
@@ -172,8 +165,8 @@ public class Bootstrap implements Runnable {
     }
 
     private void addCollaborators() {
-        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        JobRepository jobRepository = Repositories.getInstance().getJobRepository();
+        CollaboratorRepository collaboratorRepository = repositories.getCollaboratorRepository();
+        JobRepository jobRepository = repositories.getJobRepository();
 
         // Example 1
         collaboratorRepository.create(new CollaboratorDto("Bob Smith", LocalDate.of(2000, 9, 30), 987654321,
@@ -207,7 +200,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addGreenSpaces() {
-        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+        GreenSpaceRepository greenSpaceRepository = repositories.getGreenSpaceRepository();
         Email email = new Email("gsm@this.app");
         Password password = new Password("gsm");
         UserSession managerSession = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(email, password, "Green Space Manager")));
