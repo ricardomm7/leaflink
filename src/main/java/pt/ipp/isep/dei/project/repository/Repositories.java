@@ -15,7 +15,7 @@ public class Repositories implements Serializable {
     private final SkillRepository skillRepository;
     private final TeamRepository teamRepository;
     private final GreenSpaceRepository greenSpaceRepository;
-    private final transient AuthenticationRepository authenticationRepository;
+    private static transient AuthenticationRepository authenticationRepository;
     private final EntryRepository registerToDoEntryRepository;
 
     /**
@@ -47,6 +47,14 @@ public class Repositories implements Serializable {
         }
         return instance;
     }
+
+    public static void setInstance(Repositories newInstance) {
+        instance = newInstance;
+
+        //this has to be removed but without a solution stay here
+        Repositories.authenticationRepository = new AuthenticationRepository();
+    }
+
 
     /**
      * Retrieves the CollaboratorRepository.

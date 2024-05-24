@@ -22,7 +22,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Bootstrap bootstrap = new Bootstrap();
+        bootstrap.deserializeAll();
         bootstrap.run();
         launch(args);
+        bootstrap.serializeAll();
     }
 }

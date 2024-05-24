@@ -11,7 +11,7 @@ public class GreenSpace implements Serializable {
     private String name;
     private GreenSpaceType type;
     private double area;
-    private UserSession manager;
+    private transient UserSession manager;
     private Address address;
 
     /**

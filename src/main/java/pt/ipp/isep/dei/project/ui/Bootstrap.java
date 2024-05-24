@@ -21,47 +21,49 @@ import java.time.LocalDate;
  */
 public class Bootstrap implements Runnable {
 
-    private Repositories repositories;
-
     public void run() {
-        deserializeAll();
-
         addUsers();
-        addSkills();
-        addJobs();
-        addVehicles();
-        addCollaborators();
-        addMaintenance();
-        addGreenSpaces();
-
-        serializeAll();
+        //addSkills();
+        //addJobs();
+        //addVehicles();
+        //addCollaborators();
+        //addMaintenance();
+        //addGreenSpaces();
     }
 
-    private void serializeAll() {
-        try (FileOutputStream fileOut = new FileOutputStream("serial/repos.dnd");
-             ObjectOutputStream outStream = new ObjectOutputStream(fileOut)) {
-            outStream.writeObject(repositories);
+    public void serializeAll() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("serial/repos.dnd");
+            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
+            outStream.writeObject(Repositories.getInstance());
+            outStream.close();
+            fileOut.close();
         } catch (IOException i) {
-            i.printStackTrace();
+            System.out.println("Error saving all the data " + i.getMessage());
         }
     }
 
-    private void deserializeAll() {
-        try (FileInputStream fileIn = new FileInputStream("serial/repos.dnd");
-             ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            repositories = (Repositories) in.readObject();
+    public void deserializeAll() {
+        try {
+            FileInputStream fileIn = new FileInputStream("serial/repos.dnd");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Repositories instance = (Repositories) in.readObject();
+            Repositories.setInstance(instance);
+            in.close();
+            fileIn.close();
         } catch (FileNotFoundException e) {
-            repositories = new Repositories();
+            Repositories.setInstance(new Repositories());
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Error loading all the data " + e.getMessage());
         }
     }
+
 
     /**
      * Add vehicles.
      */
     public void addVehicles() {
-        VehicleRepository vehicleRepository =repositories.getVehicleRepository();
+        VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
 
         // Example 1
         vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Toyota", "Corolla", VehicleType.CAR, LocalDate.of(2013, 3, 15), "12AB12", 1500.0, 2000.0,
@@ -93,7 +95,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addMaintenance() {
-        MaintenanceRepository maintenanceRepository = repositories.getMaintenanceRepository();
+        MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
 
         // Example 1: Maintenance for Ford Transit
         maintenanceRepository.createMaintenance(new MaintenanceDto("12AB12", LocalDate.of(2024, 6, 10), 25000));
@@ -112,7 +114,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addSkills() {
-        SkillRepository skillRepository = repositories.getSkillRepository();
+        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
 
         // Example 1
         skillRepository.createSkill(new SkillDto("Class A Driving Licence"));
@@ -141,7 +143,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addJobs() {
-        JobRepository jobRepository = repositories.getJobRepository();
+        JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
         jobRepository.createJob(new JobDto("Manager"));
 
@@ -165,8 +167,8 @@ public class Bootstrap implements Runnable {
     }
 
     private void addCollaborators() {
-        CollaboratorRepository collaboratorRepository = repositories.getCollaboratorRepository();
-        JobRepository jobRepository = repositories.getJobRepository();
+        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+        JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
         // Example 1
         collaboratorRepository.create(new CollaboratorDto("Bob Smith", LocalDate.of(2000, 9, 30), 987654321,
@@ -200,7 +202,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addGreenSpaces() {
-        GreenSpaceRepository greenSpaceRepository = repositories.getGreenSpaceRepository();
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
         Email email = new Email("gsm@this.app");
         Password password = new Password("gsm");
         UserSession managerSession = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(email, password, "Green Space Manager")));
