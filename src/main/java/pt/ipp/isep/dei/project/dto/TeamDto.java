@@ -3,9 +3,10 @@ package pt.ipp.isep.dei.project.dto;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TeamDto {
+public class TeamDto implements Serializable {
     private final List<Skill> skills;
     private final int minTeamSize;
     private final int maxTeamSize;

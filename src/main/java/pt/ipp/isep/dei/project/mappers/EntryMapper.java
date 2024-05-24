@@ -5,10 +5,12 @@ import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
+import java.io.Serializable;
+
 /**
  * The type Entry mapper.
  */
-public class EntryMapper {
+public class EntryMapper implements Serializable {
 
     /**
      * To dto entry dto.
@@ -18,7 +20,7 @@ public class EntryMapper {
      */
     public static EntryDto toDto(Entry entry) {
         GreenSpaceDto greenSpaceDto = GreenSpaceMapper.toDto(entry.getGreenSpace());
-        return new EntryDto(greenSpaceDto, entry.getDescription(), entry.g, entry.getDuration());
+        return new EntryDto(greenSpaceDto, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
     }
 
     /**

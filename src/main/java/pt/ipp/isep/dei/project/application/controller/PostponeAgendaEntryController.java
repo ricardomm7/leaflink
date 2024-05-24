@@ -42,7 +42,7 @@ public class PostponeAgendaEntryController {
         Team team = NotificationService.getTeamByEntry(entry);
         List<Collaborator> collaboratorsList = NotificationService.getCollaboratorsList(team);
         if (collaboratorsList != null) {
-            flag = NotificationService.notifyTeam(collaboratorsList,entry, newDate);
+            flag = NotificationService.notifyTeam(collaboratorsList, entry, newDate);
         }
         return flag;
     }

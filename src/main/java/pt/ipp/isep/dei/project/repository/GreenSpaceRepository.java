@@ -5,13 +5,14 @@ import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class represents a repository for storing green spaces.
  */
-public class GreenSpaceRepository {
+public class GreenSpaceRepository implements Serializable {
 
     private final List<GreenSpace> greenSpaceList;
 

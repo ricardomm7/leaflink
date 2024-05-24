@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
+
 /**
  * The enum Green space type.
  */
-public enum GreenSpaceType {
+public enum GreenSpaceType implements Serializable {
     /**
      * The Garden.
      */

@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.project.repository;
 
+import java.io.Serializable;
+
 /**
  * This class represents a singleton instance providing access to various repositories.
  */
-public class Repositories {
+public class Repositories implements Serializable {
 
     private static Repositories instance;
     private final VehicleRepository vehicleRepository;
@@ -13,13 +15,13 @@ public class Repositories {
     private final SkillRepository skillRepository;
     private final TeamRepository teamRepository;
     private final GreenSpaceRepository greenSpaceRepository;
-    private final AuthenticationRepository authenticationRepository;
+    private final transient AuthenticationRepository authenticationRepository;
     private final EntryRepository registerToDoEntryRepository;
 
     /**
      * Constructs a new Repositories object initializing all repositories.
      */
-    private Repositories() {
+    public Repositories() {
         vehicleRepository = new VehicleRepository();
         collaboratorRepository = new CollaboratorRepository();
         jobRepository = new JobRepository();

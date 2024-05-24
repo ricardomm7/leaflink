@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Objects;
  * It holds information such as name, birthdate, contact details, taxpayer number, email, address, identification number,
  * admission date, and job.
  */
-public class CollaboratorDto {
+public class CollaboratorDto implements Serializable {
     private String name;
     private LocalDate birthdate;
     private int contactMobile;

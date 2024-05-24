@@ -3,12 +3,13 @@ package pt.ipp.isep.dei.project.dto;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * The type Green space dto.
  */
-public class GreenSpaceDto {
+public class GreenSpaceDto implements Serializable {
 
     private String name;
     private GreenSpaceType type;

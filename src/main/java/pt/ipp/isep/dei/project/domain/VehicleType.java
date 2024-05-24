@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
+
 /**
  * Enum representing different types of vehicles.
  */
-public enum VehicleType {
+public enum VehicleType implements Serializable {
     CAR {
         public String toString() {
             return "Car";

@@ -3,10 +3,11 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VehicleMapper {
+public class VehicleMapper implements Serializable {
 
     /**
      * To dto Vehicle dto.

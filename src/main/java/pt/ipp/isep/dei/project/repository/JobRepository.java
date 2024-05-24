@@ -4,13 +4,14 @@ import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.mappers.JobMapper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The JobRepository class manages the storage and retrieval of job positions within the application.
  */
-public class JobRepository {
+public class JobRepository implements Serializable {
     private final List<Job> jobList;
 
     /**

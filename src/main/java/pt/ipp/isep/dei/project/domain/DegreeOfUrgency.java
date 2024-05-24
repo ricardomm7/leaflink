@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
+
 /**
  * The enum Degree of urgency.
  */
-public enum DegreeOfUrgency {
+public enum DegreeOfUrgency implements Serializable {
 
     /**
      * The High.

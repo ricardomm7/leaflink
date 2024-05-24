@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
+
 /**
  * Enum representing different types of identification for a person.
  */
-public enum DocumentType {
+public enum DocumentType implements Serializable {
     /**
      * The Citizen card.
      */

@@ -13,6 +13,7 @@ import pt.isep.lei.esoft.auth.domain.model.Email;
 import pt.isep.lei.esoft.auth.domain.model.Password;
 import pt.isep.lei.esoft.auth.domain.model.User;
 
+import java.io.*;
 import java.time.LocalDate;
 
 /**
@@ -20,8 +21,12 @@ import java.time.LocalDate;
  */
 public class Bootstrap implements Runnable {
 
+    private Repositories repo;
+
     //Add some task categories to the repository as bootstrap
     public void run() {
+        deserializeAll();
+
         addUsers();
         addSkills();
         addJobs();
@@ -29,6 +34,34 @@ public class Bootstrap implements Runnable {
         addCollaborators();
         addMaintenance();
         addGreenSpaces();
+
+        serializeAll();
+    }
+
+    private void serializeAll() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("serial/repos.dnd");
+            ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
+            outStream.writeObject(repo);
+            outStream.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    private void deserializeAll() {
+        try {
+            FileInputStream fileIn = new FileInputStream("serial/repos.dnd");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            repo = (Repositories) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException e) {
+            repo = new Repositories();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -3,10 +3,11 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaintenanceMapper {
+public class MaintenanceMapper implements Serializable {
 
     public static MaintenanceDto toDto(Maintenance m) {
         return new MaintenanceDto(m.getVehiclePlate(), m.getDate(), m.getKm());

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.domain;
 
-public class Route {
+import java.io.Serializable;
+
+public class Route implements Serializable {
     private final Point startPoint;
     private final Point endPoint;
     private final double cost;

@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.project.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class MaintenanceDto {
+public class MaintenanceDto implements Serializable {
     private String vehiclePlate;
     private LocalDate date;
     private int km;

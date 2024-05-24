@@ -3,10 +3,12 @@ package pt.ipp.isep.dei.project.repository;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
+import java.io.Serializable;
+
 /**
  * The type Authentication repository.
  */
-public class AuthenticationRepository {
+public class AuthenticationRepository implements Serializable {
     private final AuthFacade authenticationFacade;
 
     /**

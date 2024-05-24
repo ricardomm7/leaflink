@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.dto.JobDto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * The type Job mapper.
  */
-public class JobMapper {
+public class JobMapper implements Serializable {
 
     /**
      * To dto job dto.

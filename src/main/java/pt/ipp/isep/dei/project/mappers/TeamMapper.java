@@ -3,10 +3,11 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.TeamDto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamMapper {
+public class TeamMapper implements Serializable {
 
     public static TeamDto toDto(Team team) {
         return new TeamDto(team.getSkills(), team.getCollaborators(), team.getMinTeamSize(), team.getMaxTeamSize());

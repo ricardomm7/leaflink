@@ -1,12 +1,13 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
  * The Job class represents a job position within an organization.
  * It holds information about the job title.
  */
-public class Job {
+public class Job implements Serializable {
     private String title;
 
     /**

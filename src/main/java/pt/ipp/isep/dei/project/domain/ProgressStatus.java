@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.domain;
 
-public enum ProgressStatus {
+import java.io.Serializable;
+
+public enum ProgressStatus implements Serializable {
     /**
      * Pending status.
      */

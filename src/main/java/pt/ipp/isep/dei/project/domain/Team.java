@@ -1,12 +1,13 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * The Team class represents a team composed of collaborators with specific skills and team size constraints.
  * It holds information such as the required skills, collaborators, minimum team size, and maximum team size.
  */
-public class Team {
+public class Team implements Serializable {
     private final List<Skill> skills;
     private final int minTeamSize;
     private final int maxTeamSize;

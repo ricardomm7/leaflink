@@ -4,13 +4,14 @@ import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The type Green space mapper.
  */
-public class GreenSpaceMapper {
+public class GreenSpaceMapper implements Serializable {
 
     /**
      * To dto green space dto.

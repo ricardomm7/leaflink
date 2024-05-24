@@ -4,6 +4,7 @@ package pt.ipp.isep.dei.project.domain;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -11,7 +12,7 @@ import java.util.List;
  * The Maintenance class represents the object maintenance (Check-up).
  * It holds information such as vehicle plate, date and kilometers (at the moment of the maintenance).
  */
-public class MaintenanceReport {
+public class MaintenanceReport implements Serializable {
     public String createReport(List<VehicleDto> vehicleDtoList, List<MaintenanceDto> maintenanceDtoList) {
         StringBuilder reportBuilder = new StringBuilder();
         boolean hasValidEntry = false;

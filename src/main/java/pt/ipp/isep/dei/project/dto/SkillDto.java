@@ -1,11 +1,12 @@
 package pt.ipp.isep.dei.project.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * The type Skill dto.
  */
-public class SkillDto {
+public class SkillDto implements Serializable {
 
     private String designation;
 

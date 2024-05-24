@@ -6,14 +6,14 @@ import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.MaintenanceMapper;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The MaintenanceRepository class manages the storage and retrieval of maintenance within the application.
  */
-public class MaintenanceRepository {
+public class MaintenanceRepository implements Serializable {
     private List<Maintenance> maintenanceList;
     private MaintenanceReport maintenanceReport;
 

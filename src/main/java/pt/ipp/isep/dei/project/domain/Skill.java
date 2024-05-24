@@ -1,11 +1,12 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
  * This class represents a skill.
  */
-public class Skill {
+public class Skill implements Serializable {
     private String designation;
 
     /**

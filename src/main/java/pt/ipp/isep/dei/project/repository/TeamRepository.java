@@ -1,19 +1,17 @@
 package pt.ipp.isep.dei.project.repository;
 
-import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.Entry;
 import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.TeamDto;
 import pt.ipp.isep.dei.project.mappers.TeamMapper;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Repository class for managing teams.
  */
-public class TeamRepository {
+public class TeamRepository implements Serializable {
 
     private final List<Team> teamList;
 

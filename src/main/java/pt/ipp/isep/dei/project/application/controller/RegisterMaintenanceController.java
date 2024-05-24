@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class RegisterMaintenanceController {
      *
      * @param maintenanceDto the maintenance dto
      */
-    public void createMaintenance(MaintenanceDto maintenanceDto){
+    public void createMaintenance(MaintenanceDto maintenanceDto) {
         maintenanceRepository.createMaintenance(maintenanceDto);
     }
 

@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ import java.util.Objects;
  * The Maintenance class represents the object maintenance (Check-up).
  * It holds information such as vehicle plate, date and kilometers (at the moment of the maintenance).
  */
-public class Maintenance {
+public class Maintenance implements Serializable {
     private final String vehiclePlate;
     private final LocalDate date;
     private final int km;

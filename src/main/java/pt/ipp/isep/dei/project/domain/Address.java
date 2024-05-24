@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
+
 /**
  * This class represents an address.
  */
-public class Address {
+public class Address implements Serializable {
     private String address;
     private String city;
     private String zipCode;

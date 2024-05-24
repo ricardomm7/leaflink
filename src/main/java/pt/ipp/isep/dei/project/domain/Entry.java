@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -7,7 +8,7 @@ import java.util.Objects;
 /**
  * The type Entry.
  */
-public class Entry {
+public class Entry implements Serializable {
 
     private GreenSpace greenSpace;
 

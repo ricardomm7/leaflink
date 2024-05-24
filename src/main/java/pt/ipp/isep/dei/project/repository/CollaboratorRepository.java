@@ -5,13 +5,14 @@ import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The CollaboratorRepository class manages the storage and retrieval of collaborators within the application.
  */
-public class CollaboratorRepository {
+public class CollaboratorRepository implements Serializable {
     private final List<Collaborator> collaboratorList;
 
     /**

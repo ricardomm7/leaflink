@@ -3,13 +3,14 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The type Collaborator mapper.
  */
-public class CollaboratorMapper {
+public class CollaboratorMapper implements Serializable {
 
     /**
      * To dto collaborator dto.

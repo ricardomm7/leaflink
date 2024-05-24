@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.domain;
 
 import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * It holds information such as VIN, brand, model, type, plate,tare Weight, gross weight, currently kilometer, registration date,
  * acquisition date and maintenance frequency.
  */
-public class Vehicle {
+public class Vehicle implements Serializable {
     private String VIN;
     private String brand;
     private String model;

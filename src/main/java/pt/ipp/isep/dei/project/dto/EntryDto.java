@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.dto;
 import pt.ipp.isep.dei.project.domain.DegreeOfUrgency;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +11,7 @@ import java.util.Objects;
 /**
  * The type Entry dto.
  */
-public class EntryDto {
+public class EntryDto implements Serializable {
 
     private GreenSpaceDto greenSpaceDto;
 

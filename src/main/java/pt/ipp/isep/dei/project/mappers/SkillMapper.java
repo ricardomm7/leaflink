@@ -3,13 +3,14 @@ package pt.ipp.isep.dei.project.mappers;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The type Skill mapper.
  */
-public class SkillMapper {
+public class SkillMapper implements Serializable {
 
     /**
      * To dto skill dto.

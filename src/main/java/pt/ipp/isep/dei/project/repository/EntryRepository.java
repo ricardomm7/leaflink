@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * The type Entry repository.
  */
-public class EntryRepository {
+public class EntryRepository implements Serializable {
 
     private final List<Entry> entryList;
 
@@ -74,8 +75,8 @@ public class EntryRepository {
     /**
      * Update entry boolean.
      *
-     * @param entry     the entry
-     * @param newDate   the new date
+     * @param entry             the entry
+     * @param newDate           the new date
      * @param newProgressStatus the new status
      * @return true if the update was successful, false otherwise
      */
@@ -108,7 +109,7 @@ public class EntryRepository {
     /**
      * Update entry status.
      *
-     * @param entry     the entry
+     * @param entry             the entry
      * @param newProgressStatus the new status
      */
     private void updateEntryStatus(Entry entry, ProgressStatus newProgressStatus) {
@@ -133,7 +134,7 @@ public class EntryRepository {
     public List<EntryDto> getEntryList() {
         List<EntryDto> r = new ArrayList<>();
         for (Entry e : entryList) {
-            r.add(new EntryDto(GreenSpaceMapper.toDto(e.getGreenSpace()), e.getDescription(), e.getProgessStatus(), e.getDuration()));
+            r.add(new EntryDto(GreenSpaceMapper.toDto(e.getGreenSpace()), e.getDescription(), e.getDegreeOfUrgency(), e.getDuration()));
         }
         return r;
     }

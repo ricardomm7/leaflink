@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * The VehicleRepository class manages the storage and retrieval of Vehicles within the application.
  */
-public class VehicleRepository {
+public class VehicleRepository implements Serializable {
     private final List<Vehicle> vehicleList;
 
     /**

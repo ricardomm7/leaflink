@@ -4,13 +4,14 @@ import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.mappers.SkillMapper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class represents a repository for storing skills.
  */
-public class SkillRepository {
+public class SkillRepository implements Serializable {
 
     private final List<Skill> skillList;
 

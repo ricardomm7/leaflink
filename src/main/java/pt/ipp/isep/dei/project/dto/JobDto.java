@@ -1,10 +1,12 @@
 package pt.ipp.isep.dei.project.dto;
 
 
+import java.io.Serializable;
+
 /**
  * The type Job dto.
  */
-public class JobDto {
+public class JobDto implements Serializable {
     private String title;
 
     /**

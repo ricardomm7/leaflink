@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
  * It holds information such as name, birthdate, contact details, taxpayer number, email, address, identification number,
  * admission date, and job.
  */
-public class Collaborator {
+public class Collaborator implements Serializable {
     private String name;
     private LocalDate birthdate;
     private int contactMobile;

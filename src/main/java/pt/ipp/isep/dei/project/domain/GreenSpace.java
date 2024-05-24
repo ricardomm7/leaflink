@@ -2,10 +2,12 @@ package pt.ipp.isep.dei.project.domain;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 
+import java.io.Serializable;
+
 /**
  * Represents a green space with a name, type, area, manager, and address.
  */
-public class GreenSpace {
+public class GreenSpace implements Serializable {
     private String name;
     private GreenSpaceType type;
     private double area;
