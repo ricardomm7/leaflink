@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.Entry;
-import pt.ipp.isep.dei.project.domain.Status;
+import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.dto.EntryDto;
 import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
@@ -76,12 +76,12 @@ public class EntryRepository {
      *
      * @param entry     the entry
      * @param newDate   the new date
-     * @param newStatus the new status
+     * @param newProgressStatus the new status
      * @return true if the update was successful, false otherwise
      */
-    public boolean updateEntry(Entry entry, LocalDate newDate, Status newStatus) {
+    public boolean updateEntry(Entry entry, LocalDate newDate, ProgressStatus newProgressStatus) {
         if (validateNewDate(entry, newDate)) {
-            updateEntryStatus(entry, newStatus);
+            updateEntryStatus(entry, newProgressStatus);
             setNewDate(entry, newDate);
 
             return true;
@@ -109,10 +109,10 @@ public class EntryRepository {
      * Update entry status.
      *
      * @param entry     the entry
-     * @param newStatus the new status
+     * @param newProgressStatus the new status
      */
-    private void updateEntryStatus(Entry entry, Status newStatus) {
-        entry.setStatus(newStatus);
+    private void updateEntryStatus(Entry entry, ProgressStatus newProgressStatus) {
+        entry.setStatus(newProgressStatus);
     }
 
     /**
@@ -133,7 +133,7 @@ public class EntryRepository {
     public List<EntryDto> getEntryList() {
         List<EntryDto> r = new ArrayList<>();
         for (Entry e : entryList) {
-            r.add(new EntryDto(GreenSpaceMapper.toDto(e.getGreenSpace()), e.getDescription(), e.getDegreeOfUrgency(), e.getDuration()));
+            r.add(new EntryDto(GreenSpaceMapper.toDto(e.getGreenSpace()), e.getDescription(), e.getProgessStatus(), e.getDuration()));
         }
         return r;
     }

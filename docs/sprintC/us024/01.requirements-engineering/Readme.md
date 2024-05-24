@@ -11,7 +11,7 @@
 **From the specifications document:**
 
 > The Agenda is made up of entries that relate to a task (which was previously in the To-Do List), the team that will 
-> carry out the task, the vehicles/equipment assigned to the task, expected duration, and the status (Planned, Postponed, Canceled, Done).
+> carry out the task, the vehicles/equipment assigned to the task, expected duration, and the progressStatus (Planned, Postponed, Canceled, Done).
 
 **From the client clarifications:**
 
@@ -44,7 +44,7 @@
 
 * **AC1:** The entry must exist in the Agenda
 * **AC2:** The new date must be after that the previous date.
-* **AC3:** The postponement action should update the entry’s status to “Postponed”.
+* **AC3:** The postponement action should update the entry’s progressStatus to “Postponed”.
 * **AC4:** The system should notify the team assigned to the task about the postponement.
 * **AC5:** AC5: The system should check for the availability of the team and resources for the new date.
 

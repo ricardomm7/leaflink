@@ -2,13 +2,10 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.*;
-import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.EntryDto;
-import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 import pt.ipp.isep.dei.project.mappers.EntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
-import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,7 +29,7 @@ public class PostponeAgendaEntryController {
 
     public boolean postponeEntry(EntryDto entryDto, LocalDate newDate) {
         Entry entry = convertToEntry(entryDto);
-        boolean success = entryRepository.updateEntry(entry, newDate, Status.POSTPONED);
+        boolean success = entryRepository.updateEntry(entry, newDate, ProgressStatus.POSTPONED);
         if (success) {
             notifyTeam(entry, newDate);
         }

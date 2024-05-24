@@ -18,7 +18,7 @@ public class EntryMapper {
      */
     public static EntryDto toDto(Entry entry) {
         GreenSpaceDto greenSpaceDto = GreenSpaceMapper.toDto(entry.getGreenSpace());
-        return new EntryDto(greenSpaceDto, entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDuration());
+        return new EntryDto(greenSpaceDto, entry.getDescription(), entry.g, entry.getDuration());
     }
 
     /**

@@ -23,7 +23,7 @@ public class Entry {
 
     private List<Vehicle> assignedVehicles;
 
-    private Status status;
+    private ProgressStatus status;
 
 
     /**
@@ -52,7 +52,7 @@ public class Entry {
      * @param assignedVehicles
      * @param status
      */
-    public Entry(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, Team assignedTeam, List<Vehicle> assignedVehicles, Status status) {
+    public Entry(GreenSpace greenSpace, String description, DegreeOfUrgency degreeOfUrgency, int duration, LocalDate estimatedDate, Team assignedTeam, List<Vehicle> assignedVehicles, ProgressStatus status) {
         this.greenSpace = greenSpace;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
@@ -77,7 +77,7 @@ public class Entry {
      *
      * @param status the status
      */
-    public void setStatus(Status status) {
+    public void setStatus(ProgressStatus status) {
         this.status = status;
     }
 

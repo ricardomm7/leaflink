@@ -19,7 +19,7 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... retrieve tasks assigned to collaborator? | TeamRepository        | Information Expert: TeamRepository performs global validation, adhering to the Protected Variation pattern by encapsulating data access.                                    |
 |                | ... verify existing tasks?                   | Agenda                | Pure Fabrication: Agenda verifies the existence of entries, ensuring data integrity and adhering to the Creator pattern.                                                    |
 |                | ... register task completion?                | TeamRepository        | Creator: TeamRepository directly manages the process of recording task completion, encapsulating the logic for managing tasks.                                              | 
-|                | ... update task status?                      | Entry                 | Information Expert: Task updates its own status upon completion, adhering to the Information Expert pattern by encapsulating its own state management.                      | 
+|                | ... update task progressStatus?                      | Entry                 | Information Expert: Task updates its own progressStatus upon completion, adhering to the Information Expert pattern by encapsulating its own state management.                      | 
 | Step 6         | ... informing operation success?             | RecordEntryUI         | Pure Fabrication: RecordTaskUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.            | 
 
 
