@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.domain;
 
 
+import pt.ipp.isep.dei.project.dto.MaintenanceDto;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,23 +18,21 @@ public class Maintenance {
     /**
      * Instantiates a new Maintenance with verifications and exceptions.
      *
-     * @param vehiclePlate the vehicle plate
-     * @param date         the date
-     * @param kilometers   the kilometers
+     * @param maintenanceDto the maintenance dto
      */
-    public Maintenance(String vehiclePlate, LocalDate date, int kilometers) {
-        if (kilometers < 0) {
+    public Maintenance(MaintenanceDto maintenanceDto) {
+        if (maintenanceDto.getKm() < 0) {
             throw new IllegalArgumentException("Kilometers cannot be negative");
         }
-        if (date == null) {
+        if (maintenanceDto.getDate() == null) {
             throw new IllegalArgumentException("Date cannot be null");
         }
-        if (vehiclePlate == null || vehiclePlate.isEmpty() || !vehiclePlate.matches("[a-zA-Z0-9]+")) {
+        if (maintenanceDto.getVehiclePlate() == null || maintenanceDto.getVehiclePlate().isEmpty() || !maintenanceDto.getVehiclePlate().matches("[a-zA-Z0-9]+")) {
             throw new IllegalArgumentException("Vehicle plate cannot be null or empty");
         }
-        this.vehiclePlate = vehiclePlate;
-        this.date = date;
-        this.km = kilometers;
+        this.vehiclePlate = maintenanceDto.getVehiclePlate();
+        this.date = maintenanceDto.getDate();
+        this.km = maintenanceDto.getKm();
     }
 
     /**

@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
+import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -59,7 +60,8 @@ public class RegisterMaintenanceUI implements Runnable {
         System.out.println("\nDo you want to register this maintenance? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            controller.createMaintenance(plate, date1, currentKm);
+            MaintenanceDto maintenanceDto = new MaintenanceDto(plate, date1, currentKm);
+            controller.createMaintenance(maintenanceDto);
             System.out.println("Maintenance successfully registered!");
         } else {
             System.out.println("Operation cancelled!");

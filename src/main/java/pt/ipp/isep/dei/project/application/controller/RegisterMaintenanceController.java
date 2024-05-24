@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
@@ -28,12 +29,10 @@ public class RegisterMaintenanceController {
     /**
      * Creates a new maintenance record for the vehicle with the specified plate.
      *
-     * @param plate           the plate of the vehicle.
-     * @param maintenanceDate the date of the maintenance.
-     * @param kilometers      the kilometers of the vehicle at the time of maintenance.
+     * @param maintenanceDto the maintenance dto
      */
-    public void createMaintenance(String plate, LocalDate maintenanceDate, int kilometers) {
-        maintenanceRepository.createMaintenance(plate, maintenanceDate, kilometers);
+    public void createMaintenance(MaintenanceDto maintenanceDto){
+        maintenanceRepository.createMaintenance(maintenanceDto);
     }
 
     /**

@@ -28,12 +28,10 @@ public class MaintenanceRepository {
     /**
      * Create maintenance.
      *
-     * @param plate     the plate
-     * @param date      the date
-     * @param currentKm the current km
+     * @param maintenanceDto the maintenance dto
      */
-    public void createMaintenance(String plate, LocalDate date, int currentKm) {
-        Maintenance maintenance = new Maintenance(plate, date, currentKm);
+    public void createMaintenance(MaintenanceDto maintenanceDto) {
+        Maintenance maintenance = new Maintenance(maintenanceDto);
         addMaintenance(maintenance);
     }
 
