@@ -35,7 +35,7 @@ activate GSM
     GSM -> System : confirms data
     activate System
 
-        System --> GSM : displays success message (Task added to the Agenda successfully)
+        System --> GSM : displays success message (Entry added to the Agenda successfully)
     deactivate System
 
 @enduml
