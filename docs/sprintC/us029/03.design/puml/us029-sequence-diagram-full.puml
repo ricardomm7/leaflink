@@ -12,15 +12,17 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "entryRepository:\n:EntryRepository" as EntryRepo
 participant "teamRepository:\n:TeamRepository" as TeamRepo
-participant "entry\n:Entry" as Entry
 participant "EntryMapper" as EntryMapper
+participant "entryDto\n:EntryDto" as EntryDto
+participant "entry\n:Entry" as Entry
+
 
 activate CLB
 
     CLB -> UI : asks to record a complete entry
     activate UI
 
-        UI -> CTRL : create
+        UI -> CTRL** : create
         deactivate UI
         activate CTRL
 
@@ -50,13 +52,27 @@ activate CLB
         activate CTRL
 
             CTRL -> TeamRepo: getEntriesAssignedToCollaborator(CLB)
+            deactivate CTRL
             activate TeamRepo
 
+            loop
+                TeamRepo --> EntryMapper: toDto(entry)
+                activate EntryMapper
+
+                    EntryMapper -> EntryDto** : create
+                    activate EntryDto
+
+                    EntryDto --> EntryMapper : entryDto
+                    deactivate EntryDto
+
+                EntryMapper --> TeamRepo: entryDto
+                deactivate EntryMapper
+            end
                 TeamRepo --> CTRL: entryDtoList
             deactivate TeamRepo
+        activate CTRL
 
-
-            CTRL --> UI : entryDTOList
+        CTRL --> UI : entryDTOList
         deactivate CTRL
 
         UI -> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
@@ -77,6 +93,12 @@ activate CLB
 
             CTRL -> EntryMapper : toEntry(selectedEntryDTO)
             activate EntryMapper
+
+                EntryMapper -> Entry** : create
+                activate Entry
+
+                Entry --> EntryMapper : entry
+                deactivate Entry
 
                 EntryMapper --> CTRL : selectedEntry
             deactivate EntryMapper

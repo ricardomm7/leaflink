@@ -13,6 +13,9 @@ participant "repositories\n:Repositories" as PLAT
 participant "entryRepository\n:EntryRepository" as EntryRepo
 participant ":NotificationService" as NotificationService
 participant ":EntryMapper" as EntryMapper
+participant "entryDto\n:EntryDto" as EntryDto
+participant "entry\n:Entry" as Entry
+
 
 
 activate GSM
@@ -45,11 +48,27 @@ activate GSM
         activate CTRL
 
             CTRL -> EntryRepo: getEntryDtoListByGSM(GSM)
+            deactivate CTRL
             activate EntryRepo
 
+            loop
+
+            EntryRepo -> EntryMapper : toDto(entry)
+            activate EntryMapper
+
+                EntryMapper -> EntryDto** : create
+                activate EntryDto
+
+                EntryDto --> EntryMapper : entryDTO
+                deactivate EntryDto
+
+            EntryMapper --> EntryRepo : entryDTO
+            deactivate EntryMapper
+            end
 
             EntryRepo --> CTRL : entryDTOList
             deactivate EntryRepo
+            activate CTRL
 
             CTRL --> UI : entryDTOList
         deactivate CTRL
@@ -83,6 +102,14 @@ activate GSM
 
             EntryRepo -> EntryMapper : toDomain(entryDTO)
             activate EntryMapper
+
+
+                EntryMapper -> Entry** : create
+                activate Entry
+
+                Entry --> EntryMapper : entry
+                deactivate Entry
+
 
             EntryMapper --> EntryRepo : entry
             deactivate EntryMapper
