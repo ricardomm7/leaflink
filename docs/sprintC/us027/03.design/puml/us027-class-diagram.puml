@@ -3,13 +3,14 @@ skinparam shadowing false
 skinparam line type polyline
 
 'left to right direction
-
+package UI{
     class ListGreenSpacesUI {
         - controller : ListGreenSpacesController
         + ListGreenSpacesUI()
         + getOrganizedList(algorithm, loggedUser) : List<GreenSpace>
     }
-
+}
+package CONTROLLER {
     class ListGreenSpacesController {
         - repositories: Repositories
         - greenSpaceRepository : GreenSpaceRepository
@@ -17,7 +18,9 @@ skinparam line type polyline
         + ListGreenSpacesController()
         +getList(algorithm, loggedUser) : List<GreenSpace>
     }
-
+}
+package DOMAIN{
+package REPOSITORY{
     class Repositories {
         - instance : Repositories
         - greenSpaceRepository : GreenSpaceRepository
@@ -29,12 +32,13 @@ skinparam line type polyline
     class GreenSpaceRepository {
         - greenSpaceList : List<GreenSpace>
         + GreenSpaceRepository()
-        + getOrganizedList(algorithm, loggedUser) : List<GreenSpace>
+        + getOrganizedList(algorithm, loggedUser) : List<GreenSpaceDto>
         - verifyEmptyList(listMatched : List<GreenSpace>) : Boolean
         - matchWithLoggedUser(loggedUser) : List<GreenSpace>
         - organizeList(algorithm, listMatched : List<GreenSpace>) : void
     }
-
+    }
+package MODEL{
     class GreenSpace {
         - name : String
         - size : Double
@@ -42,6 +46,31 @@ skinparam line type polyline
         + getManager() : Collaborator
         + getSize() : Double
     }
+    }
+    package DTO{
+        class GreenSpaceDto{
+            - name : String
+            - type : GreenSpaceType
+            - area : Double
+            - manager : UserSession
+            - address : String
+            - city : String
+            - zipCode : String
+            + getName() : String
+            + getType() : GreenSpaceType
+            + getArea() : Double
+            + getManager() : UserSession
+            + getAddress() : String
+            + getCity() : String
+            + getZipCode() : String
+        }
+
+        class GreenSpaceMapper{
+            +toDto(greenSpace : GreenSpace) : GreenSpaceDto
+            +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
+        }
+        }
+}
 
 ListGreenSpacesUI ..> ListGreenSpacesController
 ListGreenSpacesController ..> Repositories: repositories
@@ -49,5 +78,7 @@ Repositories --> Repositories: instance
 ListGreenSpacesController ..> GreenSpaceRepository: greenSpaceRepository
 Repositories --> "1"GreenSpaceRepository: greenSpaceRepository
 GreenSpaceRepository -->"*" GreenSpace
+GreenSpaceRepository ..> GreenSpaceMapper : toDto
+GreenSpaceMapper ..> GreenSpaceDto
 
 @enduml

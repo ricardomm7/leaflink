@@ -3,21 +3,26 @@ skinparam shadowing false
 skinparam line type polyline
 
 'left to right direction
-
+package UI {
     class RegisterGreenSpaceUI {
         - controller : RegisterGreenSpaceController
         + RegisterGreenSpaceUI()
         + createNewGS() : void
         '- parseAddress(street : String, zipcode : String, city : String) : Address
     }
+}
 
+package CONTROLLER {
     class RegisterGreenSpaceController {
         - repositories: Repositories
         - greenSpaceRepository : GreenSpaceRepository
         + createNewGS(greenSpaceDto : GreenSpaceDto) : void
         + RegisterGreenSpaceController()
     }
+}
 
+package DOMAIN {
+package REPOSITORY {
     class Repositories {
         - instance : Repositories
         - greenSpaceRepository : GreenSpaceRepository
@@ -33,7 +38,8 @@ skinparam line type polyline
         - addGreenSpace(greenSpace : GreenSpace) : void
         - verifyDuplicates(greenSpace : GreenSpace) : Boolean
     }
-
+    }
+package MODEL{
     class GreenSpace {
         - name : String
         - type : GreenSpaceType
@@ -43,7 +49,8 @@ skinparam line type polyline
         + GreenSpace(name : String, type : String, area : Double, address : Address, manager : UserSession)
         + verifyFilled(greenSpace: GreenSpace) : Boolean
     }
-
+}
+package DTO{
     class GreenSpaceDto{
         - name : String
         - type : GreenSpaceType
@@ -65,6 +72,8 @@ skinparam line type polyline
         +toDto(greenSpace : GreenSpace) : GreenSpaceDto
         +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
     }
+    }
+}
 
 RegisterGreenSpaceUI ..> RegisterGreenSpaceController
 RegisterGreenSpaceController ..> Repositories: repositories

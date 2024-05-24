@@ -21,12 +21,6 @@ public class CollaboratorRepository {
         collaboratorList = new ArrayList<>();
     }
 
-
-    /**
-     * Add the collaborator created, with all attributes, to the collaborators list if's not a duplicate..
-     *
-     * @param c the collaborator created.
-     */
     public void create(CollaboratorDto dto) {
         Collaborator c = CollaboratorMapper.toDomain(dto);
         if (checkForDuplicates(c)) {
