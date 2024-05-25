@@ -145,7 +145,7 @@ public class EntryRepository implements Serializable {
         return r;
     }
 
-        public boolean recordToDoEntryCompletion(AgendaEntry entry, ProgressStatus status) {
+    public boolean recordToDoEntryCompletion(AgendaEntry entry, ProgressStatus status) {
         if (entry != null && status == ProgressStatus.COMPLETED) {
             entry.setProgressStatus(status);
             return true;

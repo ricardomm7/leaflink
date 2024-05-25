@@ -32,7 +32,8 @@ public class ToDoEntryMapper implements Serializable {
                 greenSpace
         );
     }
-        public static List<ToDoEntryDto> toDtoList(List<ToDoEntry> entries) {
+
+    public static List<ToDoEntryDto> toDtoList(List<ToDoEntry> entries) {
         List<ToDoEntryDto> dtos = new ArrayList<>();
         for (ToDoEntry entry : entries) {
             dtos.add(toDto(entry));
