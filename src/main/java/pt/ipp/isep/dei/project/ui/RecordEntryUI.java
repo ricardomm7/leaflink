@@ -7,14 +7,15 @@ import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
 import java.util.List;
 
-public class RecordEntryUI {
+public class RecordEntryUI implements Runnable {
     private RecordEntryController controller;
+    private UserSession collaborator;
 
     public RecordEntryUI() {
         controller = new RecordEntryController();
     }
 
-    public void askToRecordCompleteToDoEntry(UserSession collaborator) {
+    public void RecordCompleteEntry() {
         List<AgendaEntryDto> assignedEntries = controller.getAgendaEntryOfCollaboratorList(collaborator);
         AgendaEntryDto selectedEntry = selectEntryFromList(assignedEntries);
 
@@ -57,5 +58,11 @@ public class RecordEntryUI {
 
     private void displayErrorMessage(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void run() {
+        RecordCompleteEntry();
+
     }
 }
