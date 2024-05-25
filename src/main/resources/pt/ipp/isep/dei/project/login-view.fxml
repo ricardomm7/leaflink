@@ -20,13 +20,15 @@
             </padding>
             <children>
                 <TextField fx:id="usernameField" prefHeight="47.0" prefWidth="301.0" promptText="E-Mail"
-                           styleClass="text-field-custom" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                           styleClass="text-field-custom" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                           onKeyPressed="#handleUsernameFieldKeyPressed">
                     <font>
                         <Font name="Arial" size="15.0"/>
                     </font>
                 </TextField>
                 <PasswordField fx:id="passwordField" prefHeight="47.0" prefWidth="301.0" promptText="Password"
-                               styleClass="text-field-custom" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                               styleClass="text-field-custom" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                               onKeyPressed="#handlePasswordFieldKeyPressed">
                     <font>
                         <Font name="Arial" size="15.0"/>
                     </font>

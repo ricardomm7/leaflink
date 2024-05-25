@@ -1,11 +1,13 @@
 package pt.ipp.isep.dei.project.ui.gui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.project.ui.console.menu.*;
@@ -27,15 +29,17 @@ public class AuthenticationGUI {
     @FXML
     private PasswordField passwordField;
 
+    @FXML
+    private Button loginButton;
+
     private final AuthenticationController ctrl = new AuthenticationController();
 
     /**
      * Handle login button action.
      *
-     * @param event the event
      */
     @FXML
-    void handleLoginButtonAction(ActionEvent event) {
+    void handleLoginButtonAction() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -45,6 +49,20 @@ public class AuthenticationGUI {
             redirectToRoleUI();
         } else {
             showAlert("Login Failed", "Invalid UserId and/or Password.");
+        }
+    }
+
+    @FXML
+    private void handleUsernameFieldKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            passwordField.requestFocus();
+        }
+    }
+
+    @FXML
+    private void handlePasswordFieldKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            handleLoginButtonAction();
         }
     }
 
