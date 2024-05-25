@@ -62,11 +62,11 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 **Get Entry List SD**
 
-![Sequence Diagram - Partial - Get Entry List](svg/us029-sequence-diagram-partial-get-entry-list.svg)
+![Sequence Diagram - Partial - Get Entry List](svg/us029-sequence-diagram-partial-get-toDoEntry-list.svg)
 
 **Record Entry Completion**
 
-![Sequence Diagram - Partial - Record Entry Completion](svg/us029-sequence-diagram-partial-record-entry-completion.svg)
+![Sequence Diagram - Partial - Record Entry Completion](svg/us029-sequence-diagram-partial-record-toDoEntry-completion.svg)
 
 ## 3.3. Class Diagram (CD)
 

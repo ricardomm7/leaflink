@@ -1,17 +1,17 @@
-# US025 - Cancel an entry in the Agenda
+# US025 - Cancel an toDoEntry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
+As a Green Space Manager (GSM), I want to cancel an toDoEntry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
-> The person who cancels the entries in the Agenda is the GSM, and the entry progressStatus is updated in the system.
+> The person who cancels the entries in the Agenda is the GSM, and the toDoEntry progressStatus is updated in the system.
 > A canceled task should not be deleted but rather change its state.
 
 **From the client clarifications:**
@@ -28,7 +28,7 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
 >
 > **Answer:** Yes
 
-> **Question:** Does the task associated with the Agenda entry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
+> **Question:** Does the task associated with the Agenda toDoEntry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
 >
 > **Answer:** I suppose when a task goes to the Agenda, it leaves the To-Do list but maybe a different flow could be considered.
 
@@ -38,13 +38,13 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The entry must exist in the Agenda
+* **AC1:** The toDoEntry must exist in the Agenda
 * **AC1:** A canceled task should not be deleted but rather change its state to "canceled."
 * **AC2:** The system should notify all team members assigned to the task about the cancellation.
 
 ### 1.4. Found out Dependencies
 
-* US022 - Add a new entry in the Agenda: An entry must exist in the agenda first in order to be cancelled.
+* US022 - Add a new toDoEntry in the Agenda: An toDoEntry must exist in the agenda first in order to be cancelled.
 * US023 - Assign a Team to an Entry in the Agenda: Team members need to be notified upon task cancellation.
 
 ### 1.5 Input and Output Data

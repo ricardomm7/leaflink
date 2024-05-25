@@ -2,8 +2,8 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.*;
-import pt.ipp.isep.dei.project.dto.EntryDto;
-import pt.ipp.isep.dei.project.mappers.EntryMapper;
+import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
+import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
@@ -20,39 +20,39 @@ public class PostponeAgendaEntryController {
         this.entryRepository = repositories.getEntryRepository();
     }
 
-    public List<EntryDto> getEntryList(UserSession gsm) {
-        List<EntryDto> entryDtoList = entryRepository.getEntryListByGSM(gsm);
+    public List<AgendaEntryDto> getEntryList(UserSession gsm) {
+        List<AgendaEntryDto> agendaEntryDtoDtoList = entryRepository.getAgendaEntryListByGSM(gsm);
 
-        return entryDtoList;
+        return agendaEntryDtoDtoList;
     }
 
 
-    public boolean postponeEntry(EntryDto entryDto, LocalDate newDate) {
-        Entry entry = convertToEntry(entryDto);
-        boolean success = entryRepository.updateEntry(entry, newDate, ProgressStatus.POSTPONED);
+    public boolean postponeEntry(AgendaEntryDto agendaEntryDto, LocalDate newDate) {
+        boolean success = entryRepository.updateAgendaEntry(agendaEntryDto, newDate, ProgressStatus.POSTPONED);
         if (success) {
-            notifyTeam(entry, newDate);
+            notifyTeam(agendaEntryDto, newDate);
         }
         return success;
     }
 
-    private boolean notifyTeam(Entry entry, LocalDate newDate) {
+    private boolean notifyTeam(AgendaEntryDto agendaEntryDto, LocalDate newDate) {
         boolean flag = false;
+        AgendaEntry agendaEntry = convertToAgendaEntry(agendaEntryDto);
 
-        Team team = NotificationService.getTeamByEntry(entry);
+        Team team = NotificationService.getTeamByEntry(agendaEntry);
         List<Collaborator> collaboratorsList = NotificationService.getCollaboratorsList(team);
         if (collaboratorsList != null) {
-            flag = NotificationService.notifyTeam(collaboratorsList, entry, newDate);
+            flag = NotificationService.notifyTeam(collaboratorsList, agendaEntry, newDate);
         }
         return flag;
     }
 
-    private Entry convertToEntry(EntryDto entryDto) {
-        return EntryMapper.toDomain(entryDto);
+    private AgendaEntry convertToAgendaEntry(AgendaEntryDto agendaEntryDto) {
+        return AgendaEntryMapper.toDomain(agendaEntryDto);
     }
 
-    private EntryDto convertToEntryDto(Entry entry) {
-        return EntryMapper.toDto(entry);
+    private AgendaEntryDto convertToAgendaEntryDto(pt.ipp.isep.dei.project.domain.AgendaEntry agendaEntry) {
+        return AgendaEntryMapper.toDto(agendaEntry);
     }
 
 }

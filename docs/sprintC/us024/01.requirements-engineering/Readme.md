@@ -1,10 +1,10 @@
-# US024 - Postpone an entry in the Agenda to a future date
+# US024 - Postpone an toDoEntry in the Agenda to a future date
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-> As a Green Space Manager (GSM), I want to Postpone an entry in the Agenda to a specific future date.
+> As a Green Space Manager (GSM), I want to Postpone an toDoEntry in the Agenda to a specific future date.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -23,7 +23,7 @@
 > 
 > **Answer:** No; sometimes, for various reasons (e.g. insufficient staff, faulty equipment or adverse weather conditions) a task has to be postponed to a new date; task duration is not directly related to this.
 
-> **Question:** What is the input to postpone an entry? From my perspective the Green Spaces Manager only needs to select the entry and introduce the new date.
+> **Question:** What is the input to postpone an toDoEntry? From my perspective the Green Spaces Manager only needs to select the toDoEntry and introduce the new date.
 > 
 > **Answer:** Yes, you are correct.
 
@@ -42,16 +42,16 @@
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The entry must exist in the Agenda
+* **AC1:** The toDoEntry must exist in the Agenda
 * **AC2:** The new date must be after that the previous date.
-* **AC3:** The postponement action should update the entry’s progressStatus to “Postponed”.
+* **AC3:** The postponement action should update the toDoEntry’s progressStatus to “Postponed”.
 * **AC4:** The system should notify the team assigned to the task about the postponement.
 * **AC5:** AC5: The system should check for the availability of the team and resources for the new date.
 
 ### 1.4. Found out Dependencies
 
-* US22: Adding a new entry in the Agenda
-* US23: Assigning a team to an entry in the Agenda.
+* US22: Adding a new toDoEntry in the Agenda
+* US23: Assigning a team to an toDoEntry in the Agenda.
 
 ### 1.5 Input and Output Data
 
@@ -78,4 +78,4 @@
 
 ### 1.7 Other Relevant Remarks
 
-* Implement appropriate permissions and access controls to restrict the ability to Postpone an entry to authorized GSM users only.
+* Implement appropriate permissions and access controls to restrict the ability to Postpone an toDoEntry to authorized GSM users only.

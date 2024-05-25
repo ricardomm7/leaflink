@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.PostponeAgendaEntryController;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.dto.EntryDto;
+import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +24,7 @@ public class PostponeAgendaEntryUI implements Runnable {
     }
 
     private static void postponeAgendaEntry() {
-        List<EntryDto> entryList = controller.getEntryList(getGSMLogged());
+        List<AgendaEntryDto> entryList = controller.getEntryList(getGSMLogged());
 
         if (entryList.isEmpty()) {
             System.out.println("No entries found for the GSM.");
@@ -33,11 +33,11 @@ public class PostponeAgendaEntryUI implements Runnable {
 
         System.out.println("List of entries:");
         for (int i = 0; i < entryList.size(); i++) {
-            EntryDto entry = entryList.get(i);
+            AgendaEntryDto entry = entryList.get(i);
             System.out.println((i + 1) + ". " + entry.getDescription());
         }
 
-        EntryDto selectedEntry = selectEntry(entryList);
+        AgendaEntryDto selectedEntry = selectEntry(entryList);
         if (selectedEntry == null) {
             return;
         }
@@ -54,7 +54,7 @@ public class PostponeAgendaEntryUI implements Runnable {
         if (confirmation.equalsIgnoreCase("y")) {
             boolean success = controller.postponeEntry(selectedEntry, newDate);
             if (success) {
-                System.out.println("Entry postponed successfully.");
+                System.out.println("ToDoEntry postponed successfully.");
             } else {
                 System.out.println("Failed to postpone the entry.");
             }
@@ -67,7 +67,7 @@ public class PostponeAgendaEntryUI implements Runnable {
         return ApplicationSession.getInstance().getCurrentSession();
     }
 
-    private static EntryDto selectEntry(List<EntryDto> entryList) {
+    private static AgendaEntryDto selectEntry(List<AgendaEntryDto> entryList) {
         System.out.print("Select an entry to postpone (enter the number): ");
         int entryIndex = scanner.nextInt() - 1;
         scanner.nextLine(); // Consume the newline character
@@ -105,6 +105,14 @@ public class PostponeAgendaEntryUI implements Runnable {
         cleanedDateString = cleanedDateString.replace(',', '/').replace('-', '/');
 
         // Padroniza o formato para DD/MM/YYYY, adicionando zeros à esquerda quando necessário
+        String formattedDate = getFormattedDate(dateString, cleanedDateString);
+
+        // Usar o DateTimeFormatter padrão
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(formattedDate, formatter);
+    }
+
+    private static String getFormattedDate(String dateString, String cleanedDateString) {
         String[] parts = cleanedDateString.split("/");
         if (parts.length != 3) {
             throw new DateTimeParseException("Invalid date format. Please use dd/mm/yyyy or d/m/yyyy.", dateString, 0);
@@ -115,10 +123,7 @@ public class PostponeAgendaEntryUI implements Runnable {
         String year = parts[2];
 
         String formattedDate = day + "/" + month + "/" + year;
-
-        // Usar o DateTimeFormatter padrão
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return LocalDate.parse(formattedDate, formatter);
+        return formattedDate;
     }
 
     private static String formatDate(LocalDate date) {

@@ -16,7 +16,7 @@ As a Collaborator, I want to record the completion of a task.
 
 **From the client clarifications:**
 
-> **Question:** The collaborator can see what type of entry's? Like what progressStatus can he filter? Can he see canceled Entry's?
+> **Question:** The collaborator can see what type of toDoEntry's? Like what progressStatus can he filter? Can he see canceled Entry's?
 >
 > **Answer:** The ones assigned to him. He can filter by the different values the progressStatus of the progressStatus, like planned, executed, canceled ...
 
@@ -28,7 +28,7 @@ As a Collaborator, I want to record the completion of a task.
 >
 > **Answer:** Yes.
 
-> **Question:** Does the task associated with the Agenda entry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
+> **Question:** Does the task associated with the Agenda toDoEntry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
 >
 > **Answer:** I suppose when a task goes to the Agenda, it leaves the To-Do list but maybe a different flow could be considered. 
 
@@ -46,9 +46,9 @@ As a Collaborator, I want to record the completion of a task.
 
 ### 1.4. Found out Dependencies
 
-* User Story US021 - Add a new entry to the To-Do List.
+* User Story US021 - Add a new toDoEntry to the To-Do List.
 
-* User Story US022 - Add a new entry in the Agenda.
+* User Story US022 - Add a new toDoEntry in the Agenda.
 
 ### 1.5 Input and Output Data
 
@@ -58,7 +58,7 @@ As a Collaborator, I want to record the completion of a task.
     * None.
 	
 * Selected data:
-    * Assign entry
+    * Assign toDoEntry
 
 **Output Data:**
 

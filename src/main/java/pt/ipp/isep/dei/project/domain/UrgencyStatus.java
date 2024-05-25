@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * The enum Degree of urgency.
  */
-public enum DegreeOfUrgency implements Serializable {
+public enum UrgencyStatus implements Serializable {
 
     /**
      * The High.

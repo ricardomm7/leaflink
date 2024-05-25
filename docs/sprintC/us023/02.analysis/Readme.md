@@ -1,4 +1,4 @@
-# US023 - Assign a Team to an entry in the Agenda
+# US023 - Assign a Team to an toDoEntry in the Agenda
 
 ## 2. Analysis
 

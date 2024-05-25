@@ -1,4 +1,4 @@
-# US024 - Postpone an entry in the Agenda to a future date
+# US024 - Postpone an toDoEntry in the Agenda to a future date
 
 ## 3. Design - User Story Realization 
 
@@ -12,7 +12,7 @@ _**Note that SSD - Alternative One is adopted.**_
 | Step 1         | ... interacting with the actor?             | PostponeAgendaEntryUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction. |
 |                | ... coordinating the US?                    | PostponeAgendaEntryController | Controller: PostponeAgendaEntryController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                        |
 |                | ... getting task repository?                | Repositories                  | Pure Fabrication: Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic. |
-| Step 2         | ... show the task list?                     | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI displays the entry list, promoting low coupling by separating UI logic from domain logic.                                          |
+| Step 2         | ... show the task list?                     | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI displays the toDoEntry list, promoting low coupling by separating UI logic from domain logic.                                          |
 | Step 3         | ... selecting a task?                       | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI handles the user selection of tasks, maintaining low coupling and high cohesion by managing UI interactions.                       |
 | Step 4         | ... requesting new date for the task?       | PostponeAgendaEntryUI         | Pure Fabrication: PostponeAgendaEntryUI requests the new date from the user, ensuring separation of concerns between UI and business logic.                                |
 | Step 5         | ... submitting the new date?                | PostponeAgendaEntryController | Controller: PostponeAgendaEntryController handles the submission of the new date, coordinating the process and applying the Controller pattern.                            |
@@ -63,11 +63,11 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 **Get Entry List Partial SD**
 
-![Sequence Diagram - Partial - Get Entry List](svg/us024-sequence-diagram-partial-get-entry-list.svg)
+![Sequence Diagram - Partial - Get Entry List](svg/us024-sequence-diagram-partial-get-toDoEntry-list.svg)
 
 **Postpone an Entry in Agenda Partial SD**
 
-![Sequence Diagram - Partial - Postpone an Entry in Agenda](svg/us024-sequence-diagram-partial-postpone-a-entry-in-agenda.svg)
+![Sequence Diagram - Partial - Postpone an Entry in Agenda](svg/us024-sequence-diagram-partial-postpone-a-toDoEntry-in-agenda.svg)
 
 **Notify Team**
 

@@ -1,4 +1,4 @@
-# US024 - Postpone an entry in the Agenda to a future date 
+# US024 - Postpone an toDoEntry in the Agenda to a future date 
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 

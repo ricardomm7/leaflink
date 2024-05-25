@@ -1,11 +1,13 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Entry;
+import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
-import pt.ipp.isep.dei.project.dto.EntryDto;
-import pt.ipp.isep.dei.project.mappers.EntryMapper;
-import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
+import pt.ipp.isep.dei.project.domain.ToDoEntry;
+import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
+import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
+import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
+import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,46 +15,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Entry repository.
+ * The type ToDoEntry repository.
  */
 public class EntryRepository implements Serializable {
 
-    private final List<Entry> entryList;
+    private final List<ToDoEntry> toDoEntryList;
+    private final List<AgendaEntryDto> agendaEntryDtoList;
 
     /**
-     * Instantiates a new Entry repository.
+     * Instantiates a new ToDoEntry repository.
      */
     public EntryRepository() {
-        entryList = new ArrayList<>();
+        agendaEntryDtoList = new ArrayList<>();
+        toDoEntryList = new ArrayList<>();
     }
 
-    public void create(EntryDto dto) {
-        Entry entry = EntryMapper.toDomain(dto);
-        if (checkForDuplicates(entry)) {
-            addEntry(entry);
+    public void create(ToDoEntryDto dto) {
+        ToDoEntry toDoEntry = ToDoEntryMapper.toDomain(dto);
+        if (checkForDuplicates(toDoEntry)) {
+            addEntry(toDoEntry);
         } else {
-            throw new IllegalArgumentException("There is already an entry with the same description.");
+            throw new IllegalArgumentException("There is already an toDoEntry with the same description.");
         }
     }
 
     /**
      * Check for duplicates boolean.
      *
-     * @param entry the entry
+     * @param toDoEntry the toDoEntry
      * @return the boolean
      */
-    private boolean checkForDuplicates(Entry entry) {
-        return entryList.stream()
-                .noneMatch(e -> e.getDescription().equalsIgnoreCase(entry.getDescription()));
+    private boolean checkForDuplicates(ToDoEntry toDoEntry) {
+        return toDoEntryList.stream()
+                .noneMatch(e -> e.getDescription().equalsIgnoreCase(toDoEntry.getDescription()));
     }
 
     /**
-     * Add entry.
+     * Add toDoEntry.
      *
-     * @param entry the entry
+     * @param toDoEntry the toDoEntry
      */
-    private void addEntry(Entry entry) {
-        entryList.add(entry);
+    private void addEntry(ToDoEntry toDoEntry) {
+        toDoEntryList.add(toDoEntry);
     }
 
     /**
@@ -61,29 +65,23 @@ public class EntryRepository implements Serializable {
      * @param gsm the gsm
      * @return the entry list by gsm
      */
-    public List<EntryDto> getEntryListByGSM(UserSession gsm) {
-        List<EntryDto> z = new ArrayList<>();
-        for (Entry s : entryList) {
+    public List<AgendaEntryDto> getAgendaEntryListByGSM(UserSession gsm) {
+        List<AgendaEntryDto> z = new ArrayList<>();
+        for (AgendaEntryDto s : getAgendaEntryList()) {
             if (s.getGreenSpace().getManager().getUserEmail().equals(gsm.getUserEmail())) {
-                z.add(EntryMapper.toDto(s));
+                z.add(s);
             }
         }
         return z;
     }
 
 
-    /**
-     * Update entry boolean.
-     *
-     * @param entry             the entry
-     * @param newDate           the new date
-     * @param newProgressStatus the new status
-     * @return true if the update was successful, false otherwise
-     */
-    public boolean updateEntry(Entry entry, LocalDate newDate, ProgressStatus newProgressStatus) {
-        if (validateNewDate(entry, newDate)) {
-            updateEntryStatus(entry, newProgressStatus);
-            setNewDate(entry, newDate);
+
+    public boolean updateAgendaEntry(AgendaEntryDto agendaEntrydto, LocalDate newDate, ProgressStatus newProgressStatus) {
+        AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntrydto);
+        if (validateNewDate(agendaEntry, newDate)) {
+            updateEntryStatus(agendaEntry, newProgressStatus);
+            setNewDate(agendaEntry, newDate);
 
             return true;
         }
@@ -93,37 +91,37 @@ public class EntryRepository implements Serializable {
     /**
      * Validate new date boolean.
      *
-     * @param entry   the entry
-     * @param newDate the new date
+     * @param agendaEntryDto the toDoEntry
+     * @param newDate        the new date
      * @return the boolean
      */
-    private Boolean validateNewDate(Entry entry, LocalDate newDate) {
+    private Boolean validateNewDate(AgendaEntry agendaEntryDto, LocalDate newDate) {
         if (newDate == null) {
             throw new IllegalArgumentException("New date cannot be null.");
-        } else if (newDate.isBefore(entry.getEstimatedDate())) {
+        } else if (newDate.isBefore(agendaEntryDto.getStartingDate())) {
             throw new IllegalArgumentException("New date must be after the current estimated date.");
         }
         return true;
     }
 
     /**
-     * Update entry status.
+     * Update toDoEntry status.
      *
-     * @param entry             the entry
+     * @param agendaEntry       the toDoEntry
      * @param newProgressStatus the new status
      */
-    private void updateEntryStatus(Entry entry, ProgressStatus newProgressStatus) {
-        entry.setStatus(newProgressStatus);
+    private void updateEntryStatus(pt.ipp.isep.dei.project.domain.AgendaEntry agendaEntry, ProgressStatus newProgressStatus) {
+        agendaEntry.setProgressStatus(newProgressStatus);
     }
 
     /**
      * Sets new date.
      *
-     * @param entry   the entry
-     * @param newDate the new date
+     * @param agendaEntry the toDoEntry
+     * @param newDate     the new date
      */
-    private void setNewDate(Entry entry, LocalDate newDate) {
-        entry.setEstimatedDate(newDate);
+    private void setNewDate(pt.ipp.isep.dei.project.domain.AgendaEntry agendaEntry, LocalDate newDate) {
+        agendaEntry.setStartingDate(newDate);
     }
 
     /**
@@ -131,10 +129,10 @@ public class EntryRepository implements Serializable {
      *
      * @return the entry list
      */
-    public List<EntryDto> getEntryList() {
-        List<EntryDto> r = new ArrayList<>();
-        for (Entry e : entryList) {
-            r.add(new EntryDto(GreenSpaceMapper.toDto(e.getGreenSpace()), e.getDescription(), e.getDegreeOfUrgency(), e.getDuration()));
+    public List<AgendaEntryDto> getAgendaEntryList() {
+        List<AgendaEntryDto> r = new ArrayList<>();
+        for (AgendaEntryDto e : agendaEntryDtoList) {
+            r.add(new AgendaEntryDto(e.getTitle(), e.getDescription(), e.getDuration(), e.getUrgencyStatus(), e.getGreenSpace(), e.getStartingDate(), e.getProgressStatus()));
         }
         return r;
     }
