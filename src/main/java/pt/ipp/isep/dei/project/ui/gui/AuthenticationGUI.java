@@ -97,6 +97,8 @@ public class AuthenticationGUI {
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_QAM, new QamUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_COLLAB, new ClbUI()));
+
 
 
         //TODO: Complete with other user roles and related RoleUI

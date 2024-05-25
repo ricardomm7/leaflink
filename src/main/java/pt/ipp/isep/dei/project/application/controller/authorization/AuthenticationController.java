@@ -20,7 +20,7 @@ public class AuthenticationController {
     /**
      * The constant ROLE_COLLAB.
      */
-    public static final String ROLE_COLLAB = "COLLAB";
+    public static final String ROLE_COLLAB = "COLLABORATOR";
     /**
      * The constant ROLE_VFM.
      */
