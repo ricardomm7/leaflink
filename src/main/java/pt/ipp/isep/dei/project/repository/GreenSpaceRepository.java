@@ -68,6 +68,7 @@ public class GreenSpaceRepository implements Serializable {
         } else {
             throw new IllegalArgumentException("The matched list is empty.");
         }
+
     }
 
     private boolean verifyEmptyList(List<GreenSpace> listMatched) {
@@ -77,7 +78,7 @@ public class GreenSpaceRepository implements Serializable {
     private List<GreenSpace> matchWithLoggedUser(UserSession loggedUser) {
         List<GreenSpace> u = new ArrayList<>();
         for (GreenSpace g : greenSpaceList) {
-            if (g.getManager().getUserEmail().equalsIgnoreCase(loggedUser.getUserEmail())) {
+            if (g.getManager() != null && g.getManager().getUserEmail().equalsIgnoreCase(loggedUser.getUserEmail())) {
                 u.add(g);
             }
         }

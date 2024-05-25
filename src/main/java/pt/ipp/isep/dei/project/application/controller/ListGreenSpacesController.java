@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListGreenSpacesController {
@@ -17,6 +18,12 @@ public class ListGreenSpacesController {
     }
 
     public List<GreenSpaceDto> getList(String algorithm, UserSession loggedUser) {
-        return greenSpaceRepository.getOrganizedList(algorithm, loggedUser);
+        try {
+            return greenSpaceRepository.getOrganizedList(algorithm, loggedUser);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Não há espaços verdes associados ao usuário logado.");
+            return new ArrayList<>();
+        }
     }
+
 }

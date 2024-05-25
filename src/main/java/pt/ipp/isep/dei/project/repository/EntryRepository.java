@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.project.domain.ToDoEntry;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
+import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 
 import java.io.Serializable;
@@ -134,6 +135,22 @@ public class EntryRepository implements Serializable {
             r.add(new AgendaEntryDto(e.getTitle(), e.getDescription(), e.getDuration(), e.getUrgencyStatus(), e.getGreenSpace(), e.getStartingDate(), e.getProgressStatus()));
         }
         return r;
+    }
+
+    public List<ToDoEntryDto> getToDoEntryList() {
+        List<ToDoEntryDto> r = new ArrayList<>();
+        for (ToDoEntry e : toDoEntryList) {
+            r.add(new ToDoEntryDto(e.getTitle(), e.getDescription(), e.getDuration(), e.getUrgencyStatus(), GreenSpaceMapper.toDto(e.getGreenSpace())));
+        }
+        return r;
+    }
+
+        public boolean recordToDoEntryCompletion(AgendaEntry entry, ProgressStatus status) {
+        if (entry != null && status == ProgressStatus.COMPLETED) {
+            entry.setProgressStatus(status);
+            return true;
+        }
+        return false;
     }
 }
 

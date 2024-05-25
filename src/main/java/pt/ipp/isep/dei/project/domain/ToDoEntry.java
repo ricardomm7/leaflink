@@ -38,7 +38,7 @@ public class ToDoEntry implements Serializable {
         this.duration = duration;
     }
 
-    public UrgencyStatus getDegreeOfUrgency() {
+    public UrgencyStatus getUrgencyStatus() {
         return urgencyStatus;
     }
 

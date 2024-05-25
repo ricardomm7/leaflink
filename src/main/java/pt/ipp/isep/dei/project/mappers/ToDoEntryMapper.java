@@ -6,6 +6,8 @@ import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoEntryMapper implements Serializable {
 
@@ -15,7 +17,7 @@ public class ToDoEntryMapper implements Serializable {
                 toDoEntry.getTitle(),
                 toDoEntry.getDescription(),
                 toDoEntry.getDuration(),
-                toDoEntry.getDegreeOfUrgency(),
+                toDoEntry.getUrgencyStatus(),
                 greenSpaceDto
         );
     }
@@ -29,5 +31,12 @@ public class ToDoEntryMapper implements Serializable {
                 toDoEntryDto.getUrgencyStatus(),
                 greenSpace
         );
+    }
+        public static List<ToDoEntryDto> toDtoList(List<ToDoEntry> entries) {
+        List<ToDoEntryDto> dtos = new ArrayList<>();
+        for (ToDoEntry entry : entries) {
+            dtos.add(toDto(entry));
+        }
+        return dtos;
     }
 }

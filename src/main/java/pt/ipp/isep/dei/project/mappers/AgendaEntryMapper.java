@@ -18,7 +18,7 @@ public class AgendaEntryMapper implements Serializable {
 
     public static AgendaEntryDto toDto(AgendaEntry agendaEntry) {
         return new AgendaEntryDto(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(),
-                agendaEntry.getDegreeOfUrgency(), GreenSpaceMapper.toDto(agendaEntry.getGreenSpace()), agendaEntry.getStartingDate(), agendaEntry.getProgressStatus());
+                agendaEntry.getUrgencyStatus(), GreenSpaceMapper.toDto(agendaEntry.getGreenSpace()), agendaEntry.getStartingDate(), agendaEntry.getProgressStatus());
     }
 
 

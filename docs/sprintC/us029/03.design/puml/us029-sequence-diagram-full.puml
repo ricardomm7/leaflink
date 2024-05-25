@@ -12,14 +12,14 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "entryRepository:\n:EntryRepository" as EntryRepo
 participant "teamRepository:\n:TeamRepository" as TeamRepo
-participant "ToDoEntryMapper" as EntryMapper
-participant "toDoEntryDto\n:ToDoEntryDto" as EntryDto
-participant "toDoEntry\n:ToDoEntry" as ToDoEntry
+participant "AgendaEntryMapper" as EntryMapper
+participant "agendaEntryDto\n:AgendaEntryDto" as EntryDto
+participant "agendaEntry\n:AgendaEntry" as AgendaEntry
 
 
 activate CLB
 
-    CLB -> UI : asks to record a complete toDoEntry
+    CLB -> UI : asks to record a complete entry
     activate UI
 
         UI -> CTRL** : create
@@ -51,34 +51,40 @@ activate CLB
         activate UI
         activate CTRL
 
-            CTRL -> TeamRepo: getToDoEntriesAssignedToCollaborator(CLB)
+            CTRL -> EntryRepo: getAgendaEntriesList()
+            activate EntryRepo
+
+            EntryRepo --> CTRL: agendaEntryList
+            deactivate EntryRepo
+
+            CTRL -> TeamRepo: getAgendaEntriesAssignedToCollaborator(CLB)
             deactivate CTRL
             activate TeamRepo
 
             loop
-                TeamRepo --> EntryMapper: toDto(toDoEntry)
+                TeamRepo --> EntryMapper: toDto(agendaEntry)
                 activate EntryMapper
 
                     EntryMapper -> EntryDto** : create
                     activate EntryDto
 
-                    EntryDto --> EntryMapper : toDoEntryDto
+                    EntryDto --> EntryMapper : agendaEntryDto
                     deactivate EntryDto
 
-                EntryMapper --> TeamRepo: toDoEntryDto
+                EntryMapper --> TeamRepo: agendaEntryDto
                 deactivate EntryMapper
             end
-                TeamRepo --> CTRL: toDoEntryDtoList
+                TeamRepo --> CTRL: agendaEntryDtoList
             deactivate TeamRepo
         activate CTRL
 
-        CTRL --> UI : toDoEntryDtoList
+        CTRL --> UI : agendaEntryDtoList
         deactivate CTRL
 
         UI -> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
     deactivate UI
 
-    CLB -> UI : select an assigned toDoEntry
+    CLB -> UI : select an assigned entry
     activate UI
 
         UI --> CLB : show entry and requests confirmation
@@ -87,32 +93,32 @@ activate CLB
     CLB -> UI : confirms data
     activate UI
 
-        UI -> CTRL : recordEntryCompletion(selectedToDoEntryDto)
+        UI -> CTRL : recordEntryCompletion(selectedAgendaEntryDto)
         deactivate UI
         activate CTRL
 
-            CTRL -> EntryMapper : toDomain(selectedToDoEntryDto)
+            CTRL -> EntryMapper : toDomain(selectedAgendaEntryDto)
             activate EntryMapper
 
-                EntryMapper -> ToDoEntry** : create
-                activate ToDoEntry
+                EntryMapper -> AgendaEntry** : create
+                activate AgendaEntry
 
-                ToDoEntry --> EntryMapper : toDoEntry
-                deactivate ToDoEntry
+                AgendaEntry --> EntryMapper : agendaEntry
+                deactivate AgendaEntry
 
-                EntryMapper --> CTRL : toDoEntry
+                EntryMapper --> CTRL : agendaEntry
             deactivate EntryMapper
 
-            CTRL -> EntryRepo : recordToDoEntryCompletion(toDoEntry, COMPLETED)
+            CTRL -> EntryRepo : recordAgendaEntryCompletion(agendaEntry, COMPLETED)
             deactivate CTRL
             activate EntryRepo
 
-                EntryRepo -> ToDoEntry : setStatus(COMPLETED)
+                EntryRepo -> AgendaEntry : setStatus(COMPLETED)
                 deactivate EntryRepo
-                activate ToDoEntry
+                activate AgendaEntry
 
-                ToDoEntry -> EntryRepo : success
-                deactivate ToDoEntry
+                AgendaEntry -> EntryRepo : success
+                deactivate AgendaEntry
                 activate EntryRepo
 
             EntryRepo --> CTRL : success

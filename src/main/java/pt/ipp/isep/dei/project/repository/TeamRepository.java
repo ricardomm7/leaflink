@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.project.repository;
 
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
 import pt.ipp.isep.dei.project.mappers.TeamMapper;
 
@@ -41,5 +43,16 @@ public class TeamRepository implements Serializable {
         return TeamMapper.ListToDto(teamList);
     }
 
+        public List<AgendaEntryDto> getToDoEntriesAssignedToCollaborator(UserSession collaborator, List<AgendaEntryDto> agendaEntryDtoList) {
+        List<AgendaEntryDto> assignedEntries = new ArrayList<>();
+        for (AgendaEntryDto toDoEntryDto : agendaEntryDtoList) {
+            for (Team team : teamList) {
+                if (team.getCollaborators().equals(collaborator)) {
+                    assignedEntries.add(toDoEntryDto);
+                }
+            }
+        }
+        return assignedEntries;
+    }
 
 }
