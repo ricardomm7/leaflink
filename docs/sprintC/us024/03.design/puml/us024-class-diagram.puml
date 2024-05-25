@@ -1,63 +1,97 @@
 @startuml
 skinparam shadowing false
 skinparam line type polyline
-
 'left to right direction
-
-    class RegisterVehicleUI {
-        - controller : RegisterVehicleController
-        + RegisterVehicleUI()
-        + registerVehicle() : void
+package UI {
+    class PostponeAgendaEntryUI {
     }
+}
 
-    class RegisterVehicleController {
+package CONTROLLER {
+    class PostponeAgendaEntryController {
         - repositories: Repositories
-        - vehicleRepository : VehicleRepository
+        - entryRepository: EntryRepository
+        + PostponeAgendaEntryController()
+        + getAgendaEntryList(gsm: UserSession): List<AgendaEntryDto>
+        + postponeEntry(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
+        - convertToAgendaEntry(agendaEntryDto: AgendaEntryDto): AgendaEntry
+        - notifyTeam(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
+    }
+}
 
-        + RegisterVehicleController()
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
+package DOMAIN {
+    package REPOSITORY {
+        class Repositories {
+            - instance: Repositories
+            - entryRepository: EntryRepository
+            - Repositories()
+            + getInstance(): Repositories
+            + getEntryRepository(): EntryRepository
+        }
+
+        class EntryRepository {
+            - agendaEntryList: List<AgendaEntry>
+            + EntryRepository()
+            + getAgendaEntryListByGSM(gsm: UserSession): List<AgendaEntryDto>
+            + updateAgendaEntry(agendaEntryDto: AgendaEntryDto, newDate: LocalDate, newProgressStatus: ProgressStatus): boolean
+        }
     }
 
-    class Repositories {
-        - instance : Repositories
-        - vehicleRepository : VehicleRepository
-        - Repositories()
-        + getInstance() : Repositories
-        + getVehicleRepository() : VehicleRepository
+    package DTO {
+        class AgendaEntryMapper {
+            + toDto(agendaEntry: AgendaEntry): AgendaEntryDto
+            + toDomain(agendaEntryDto: AgendaEntryDto): AgendaEntry
+        }
+
+        class AgendaEntryDto {
+            - title: String
+            - description: String
+            - duration: int
+            - urgencyStatus: UrgencyStatus
+            - greenSpace: GreenSpaceDto
+            - startingDate: LocalDate
+            - progressStatus: ProgressStatus
+            + AgendaEntryDto(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpaceDto, startingDate: LocalDate, progressStatus: ProgressStatus)
+            + getTitle(): String
+            + getDescription(): String
+            + getDuration(): int
+            + getUrgencyStatus(): UrgencyStatus
+            + getGreenSpace(): GreenSpaceDto
+            + getStartingDate(): LocalDate
+            + getProgressStatus(): ProgressStatus
+        }
     }
 
-    class VehicleRepository {
-        - vehicleList : List<Vehicle>
+    package MODEL {
+        class AgendaEntry {
+            - title: String
+            - description: String
+            - duration: int
+            - urgencyStatus: UrgencyStatus
+            - greenSpace: GreenSpace
+            - startingDate: LocalDate
+            - progressStatus: ProgressStatus
+            + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
+            + setProgressStatus(status: ProgressStatus): void
+            + setStartingDate(date: LocalDate): void
+        }
 
-        + VehicleRepository()
-        + getVehicleList () : List<Vehicles>
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
-        + addVehicle(vehicle: Vehicle) : void
-        + verifyExistingVehicle(VIN: String, VehiclePlate: String) : Boolean
+        class NotificationService {
+            + getTeamByEntry(agendaEntry: AgendaEntry): Team
+            + getCollaboratorsList(team: Team): List<Collaborator>
+            + notifyTeam(collaboratorsList: List<Collaborator>, agendaEntry: AgendaEntry, newDate: LocalDate): boolean
+        }
     }
+}
 
-    class Vehicle {
-        - VIN : String
-        - brand : String
-        - model : String
-        - type : String
-        - vehiclePlate : String
-        - tareWeight : double
-        - grossWeight : double
-        - currentKm : int
-        - registrationDate: Date
-        - acquisitionDate : Date
-        - maintenanceFrequency : int
-
-        + Vehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int)
-        + validateVehicle(vehicle: Vehicle) : Boolean
-    }
-
-RegisterVehicleUI ..> RegisterVehicleController
-RegisterVehicleController ..> Repositories: repositories
+PostponeAgendaEntryUI ..> PostponeAgendaEntryController
+PostponeAgendaEntryController ..> Repositories
 Repositories --> Repositories: instance
-RegisterVehicleController ..> VehicleRepository: vehicleRepository
-Repositories --> "1"VehicleRepository: vehicleRepository
-VehicleRepository -->"*" Vehicle: vehicle
+PostponeAgendaEntryController ..> EntryRepository
+Repositories --> EntryRepository
+EntryRepository --> "*" AgendaEntry
+AgendaEntryMapper ..> AgendaEntryDto
+AgendaEntryMapper ..> AgendaEntry
+PostponeAgendaEntryController ..> NotificationService
 
 @enduml

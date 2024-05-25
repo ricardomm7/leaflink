@@ -24,11 +24,11 @@ public class RecordEntryController {
 
     public List<AgendaEntryDto> getAgendaEntryOfCollaboratorList(UserSession collaborator) {
         List<AgendaEntryDto> agendaEntryList = entryRepository.getAgendaEntryList();
-        return teamRepository.getToDoEntriesAssignedToCollaborator(collaborator, agendaEntryList);
+        return teamRepository.getAgendaEntriesAssignedToCollaborator(collaborator, agendaEntryList);
     }
 
     public boolean recordEntryCompletion(AgendaEntryDto agendaEntryDto) {
         AgendaEntry entry = AgendaEntryMapper.toDomain(agendaEntryDto);
-        return entryRepository.recordToDoEntryCompletion(entry, ProgressStatus.COMPLETED);
+        return entryRepository.recordAgendaEntryCompletion(entry, ProgressStatus.COMPLETED);
     }
 }

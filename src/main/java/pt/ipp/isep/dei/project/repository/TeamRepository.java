@@ -43,7 +43,7 @@ public class TeamRepository implements Serializable {
         return TeamMapper.ListToDto(teamList);
     }
 
-    public List<AgendaEntryDto> getToDoEntriesAssignedToCollaborator(UserSession collaborator, List<AgendaEntryDto> agendaEntryDtoList) {
+    public List<AgendaEntryDto> getAgendaEntriesAssignedToCollaborator(UserSession collaborator, List<AgendaEntryDto> agendaEntryDtoList) {
         List<AgendaEntryDto> assignedEntries = new ArrayList<>();
         for (AgendaEntryDto toDoEntryDto : agendaEntryDtoList) {
             for (Team team : teamList) {
