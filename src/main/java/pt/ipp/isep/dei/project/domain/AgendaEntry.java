@@ -23,7 +23,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         return assignedVehicles;
     }
 
-    public void setAssignedVehicles(List<Vehicle>assignedVehicles) {
+    public void setAssignedVehicles(List<Vehicle> assignedVehicles) {
         this.assignedVehicles = assignedVehicles;
     }
 

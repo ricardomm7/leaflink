@@ -9,9 +9,10 @@ public class AgendaEntryMapper implements Serializable {
 
     public AgendaEntryMapper() {
     }
-    public static AgendaEntry toDomain(AgendaEntryDto agendaEntryDto){
+
+    public static AgendaEntry toDomain(AgendaEntryDto agendaEntryDto) {
         return new AgendaEntry(agendaEntryDto.getTitle(), agendaEntryDto.getDescription(), agendaEntryDto.getDuration(),
-                agendaEntryDto.getUrgencyStatus(), GreenSpaceMapper.toDomain(agendaEntryDto.getGreenSpace()),agendaEntryDto.getStartingDate(),agendaEntryDto.getProgressStatus());
+                agendaEntryDto.getUrgencyStatus(), GreenSpaceMapper.toDomain(agendaEntryDto.getGreenSpace()), agendaEntryDto.getStartingDate(), agendaEntryDto.getProgressStatus());
 
     }
 

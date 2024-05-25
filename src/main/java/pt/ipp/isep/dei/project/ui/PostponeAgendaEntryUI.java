@@ -25,15 +25,6 @@ public class PostponeAgendaEntryUI implements Runnable {
     private static final PostponeAgendaEntryController controller = new PostponeAgendaEntryController();
 
     /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        postponeAgendaEntry();
-    }
-
-    /**
      * Instantiates a new Postpone agenda entry ui.
      */
     public PostponeAgendaEntryUI() {

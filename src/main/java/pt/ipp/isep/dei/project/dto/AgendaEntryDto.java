@@ -19,7 +19,7 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
     private List<VehicleDto> assignedVehicles;
 
     public AgendaEntryDto(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpaceDto greenSpace, LocalDate startingDate, ProgressStatus progressStatus, TeamDto assignedTeam, List<VehicleDto> assignedVehicles) {
-        super(title, description, duration,urgencyStatus, greenSpace);
+        super(title, description, duration, urgencyStatus, greenSpace);
         this.greenSpace = greenSpace;
         this.startingDate = startingDate;
         this.progressStatus = progressStatus;
@@ -27,8 +27,8 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
         this.assignedVehicles = assignedVehicles;
     }
 
-        public AgendaEntryDto(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpaceDto greenSpace, LocalDate startingDate, ProgressStatus progressStatus) {
-        super(title, description, duration,urgencyStatus, greenSpace);
+    public AgendaEntryDto(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpaceDto greenSpace, LocalDate startingDate, ProgressStatus progressStatus) {
+        super(title, description, duration, urgencyStatus, greenSpace);
         this.greenSpace = greenSpace;
         this.startingDate = startingDate;
         this.progressStatus = progressStatus;

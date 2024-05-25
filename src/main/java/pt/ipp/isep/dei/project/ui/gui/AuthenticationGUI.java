@@ -36,7 +36,6 @@ public class AuthenticationGUI {
 
     /**
      * Handle login button action.
-     *
      */
     @FXML
     void handleLoginButtonAction() {

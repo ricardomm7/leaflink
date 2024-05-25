@@ -17,7 +17,7 @@ public class NotificationService {
         return team.getCollaborators();
     }
 
-public static boolean notifyTeam(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
+    public static boolean notifyTeam(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
         List<String> emails = new ArrayList<>();
         for (Collaborator collaborator : collaborators) {
             emails.add(collaborator.getEmail());
@@ -52,6 +52,7 @@ public static boolean notifyTeam(List<Collaborator> collaborators, ToDoEntry toD
             return false;
         }
     }
+
     private static String buildEmailBody(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
         StringBuilder emailBuilder = new StringBuilder();
 

@@ -59,7 +59,7 @@ public class RegisterToDoEntryUI implements Runnable {
             System.out.println("\nDo you want to register this ToDoEntry? (Y/N)");
             String decision = sc.nextLine();
             if (decision.trim().equalsIgnoreCase("Y")) {
-                ToDoEntryDto toDoEntryDto = new ToDoEntryDto(title, description,duration, urg, greenSpaceDto);
+                ToDoEntryDto toDoEntryDto = new ToDoEntryDto(title, description, duration, urg, greenSpaceDto);
                 controller.createNewToDoEntry(toDoEntryDto);
                 System.out.println("Green space registered successfully!");
             } else {

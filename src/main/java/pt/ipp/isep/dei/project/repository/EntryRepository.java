@@ -76,7 +76,6 @@ public class EntryRepository implements Serializable {
     }
 
 
-
     public boolean updateAgendaEntry(AgendaEntryDto agendaEntrydto, LocalDate newDate, ProgressStatus newProgressStatus) {
         AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntrydto);
         if (validateNewDate(agendaEntry, newDate)) {
