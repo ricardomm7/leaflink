@@ -15,46 +15,41 @@ public class ApplicationSession {
     private final AuthenticationRepository authenticationRepository;
     private static final String CONFIGURATION_FILENAME = "src/main/resources/config.properties";
     private static final String COMPANY_DESIGNATION = "Company.Designation";
+    private static final String SORTALGORITHM_CLASSNAME = "sorting.algorithm";
+
+    private Properties properties;
 
     private ApplicationSession() {
         this.authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
-        Properties props = getProperties();
+        properties = loadProperties();
     }
 
-    /**
-     * Gets current session.
-     *
-     * @return the current session
-     */
     public UserSession getCurrentSession() {
         pt.isep.lei.esoft.auth.UserSession userSession = this.authenticationRepository.getCurrentUserSession();
         return new UserSession(userSession);
     }
 
-    private Properties getProperties() {
+    private Properties loadProperties() {
         Properties props = new Properties();
 
         // Add default properties and values
         props.setProperty(COMPANY_DESIGNATION, "MusgoSublime");
 
         // Read configured values
-        try {
-            InputStream in = new FileInputStream(CONFIGURATION_FILENAME);
+        try (InputStream in = new FileInputStream(CONFIGURATION_FILENAME)) {
             props.load(in);
-            in.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         return props;
     }
 
+    public String getSortAlgorithmClassName() {
+        return properties.getProperty(SORTALGORITHM_CLASSNAME);
+    }
+
     private static ApplicationSession singleton = null;
 
-    /**
-     * Gets instance.
-     *
-     * @return the instance
-     */
     public static ApplicationSession getInstance() {
         if (singleton == null) {
             synchronized (ApplicationSession.class) {

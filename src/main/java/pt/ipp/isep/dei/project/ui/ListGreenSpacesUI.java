@@ -6,11 +6,9 @@ import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class ListGreenSpacesUI implements Runnable {
     private final ListGreenSpacesController controller;
-    private static final Scanner sc = new Scanner(System.in);
 
 
     public ListGreenSpacesUI() {
@@ -18,11 +16,10 @@ public class ListGreenSpacesUI implements Runnable {
     }
 
     public void getOrganizedList() {
-        //System.out.println("Select the sorting algorithm from the existing ones:");
         UserSession loggedUser = ApplicationSession.getInstance().getCurrentSession();
-        List<GreenSpaceDto> u = controller.getList("a", loggedUser);
+        List<GreenSpaceDto> u = controller.getList(loggedUser);
         for (GreenSpaceDto w : u) {
-            System.out.println("Name: " + w.getName() + " | Area: " + w.getArea() + " | Address: " + w.getAddress());
+            System.out.println("Name: " + w.getName() + " | Area: " + w.getArea() + " | Address: " + w.getAddress() + " | Type: " + w.getType().toString());
         }
     }
 

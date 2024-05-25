@@ -17,12 +17,14 @@ public class ListGreenSpacesController {
         this.greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
 
-    public List<GreenSpaceDto> getList(String algorithm, UserSession loggedUser) {
+    public List<GreenSpaceDto> getList(UserSession loggedUser) {
         try {
-            return greenSpaceRepository.getOrganizedList(algorithm, loggedUser);
+            return greenSpaceRepository.getOrganizedList(loggedUser);
         } catch (IllegalArgumentException e) {
-            System.out.println("Não há espaços verdes associados ao usuário logado.");
+            System.out.println("There are no green spaces associated with the logged-in user.");
             return new ArrayList<>();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            throw new RuntimeException(e);
         }
     }
 
