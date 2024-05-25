@@ -62,13 +62,13 @@ public class EntryRepository implements Serializable {
     /**
      * Gets entry list by GSM.
      *
-     * @param gsm the gsm
+     * @param GSM the gsm
      * @return the entry list by gsm
      */
-    public List<AgendaEntryDto> getAgendaEntryListByGSM(UserSession gsm) {
+    public List<AgendaEntryDto> getAgendaEntryListByGSM(UserSession GSM) {
         List<AgendaEntryDto> z = new ArrayList<>();
         for (AgendaEntryDto s : getAgendaEntryList()) {
-            if (s.getGreenSpace().getManager().getUserEmail().equals(gsm.getUserEmail())) {
+            if (s.getGreenSpace().getManager().getUserEmail().equals(GSM.getUserEmail())) {
                 z.add(s);
             }
         }

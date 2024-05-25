@@ -12,14 +12,14 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "entryRepository:\n:EntryRepository" as EntryRepo
 participant "teamRepository:\n:TeamRepository" as TeamRepo
-participant "EntryMapper" as EntryMapper
-participant "entryDto\n:EntryDto" as EntryDto
-participant "entry\n:Entry" as Entry
+participant "ToDoEntryMapper" as EntryMapper
+participant "toDoEntryDto\n:ToDoEntryDto" as EntryDto
+participant "toDoEntry\n:ToDoEntry" as ToDoEntry
 
 
 activate CLB
 
-    CLB -> UI : asks to record a complete entry
+    CLB -> UI : asks to record a complete toDoEntry
     activate UI
 
         UI -> CTRL** : create
@@ -47,38 +47,38 @@ activate CLB
 
         deactivate CTRL
 
-        UI -> CTRL: getEntryOfCollaboratorList()
+        UI -> CTRL: getToDoEntryOfCollaboratorList()
         activate UI
         activate CTRL
 
-            CTRL -> TeamRepo: getEntriesAssignedToCollaborator(CLB)
+            CTRL -> TeamRepo: getToDoEntriesAssignedToCollaborator(CLB)
             deactivate CTRL
             activate TeamRepo
 
             loop
-                TeamRepo --> EntryMapper: toDto(entry)
+                TeamRepo --> EntryMapper: toDto(toDoEntry)
                 activate EntryMapper
 
                     EntryMapper -> EntryDto** : create
                     activate EntryDto
 
-                    EntryDto --> EntryMapper : entryDto
+                    EntryDto --> EntryMapper : toDoEntryDto
                     deactivate EntryDto
 
-                EntryMapper --> TeamRepo: entryDto
+                EntryMapper --> TeamRepo: toDoEntryDto
                 deactivate EntryMapper
             end
-                TeamRepo --> CTRL: entryDtoList
+                TeamRepo --> CTRL: toDoEntryDtoList
             deactivate TeamRepo
         activate CTRL
 
-        CTRL --> UI : entryDTOList
+        CTRL --> UI : toDoEntryDtoList
         deactivate CTRL
 
         UI -> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
     deactivate UI
 
-    CLB -> UI : select an assigned entry
+    CLB -> UI : select an assigned toDoEntry
     activate UI
 
         UI --> CLB : show entry and requests confirmation
@@ -87,32 +87,32 @@ activate CLB
     CLB -> UI : confirms data
     activate UI
 
-        UI -> CTRL : recordEntryCompletion(selectedEntryDTO)
+        UI -> CTRL : recordEntryCompletion(selectedToDoEntryDto)
         deactivate UI
         activate CTRL
 
-            CTRL -> EntryMapper : toEntry(selectedEntryDTO)
+            CTRL -> EntryMapper : toDomain(selectedToDoEntryDto)
             activate EntryMapper
 
-                EntryMapper -> Entry** : create
-                activate Entry
+                EntryMapper -> ToDoEntry** : create
+                activate ToDoEntry
 
-                Entry --> EntryMapper : entry
-                deactivate Entry
+                ToDoEntry --> EntryMapper : toDoEntry
+                deactivate ToDoEntry
 
-                EntryMapper --> CTRL : selectedEntry
+                EntryMapper --> CTRL : toDoEntry
             deactivate EntryMapper
 
-            CTRL -> EntryRepo : recordEntryCompletion(selectedEntry, COMPLETED)
+            CTRL -> EntryRepo : recordToDoEntryCompletion(toDoEntry, COMPLETED)
             deactivate CTRL
             activate EntryRepo
 
-                EntryRepo -> Entry : setStatus(COMPLETED)
+                EntryRepo -> ToDoEntry : setStatus(COMPLETED)
                 deactivate EntryRepo
-                activate Entry
+                activate ToDoEntry
 
-                Entry -> EntryRepo : success
-                deactivate Entry
+                ToDoEntry -> EntryRepo : success
+                deactivate ToDoEntry
                 activate EntryRepo
 
             EntryRepo --> CTRL : success
@@ -123,7 +123,7 @@ activate CLB
         deactivate CTRL
         activate UI
 
-        UI --> CLB : displays a success message (Entry recorded as completed)
+        UI --> CLB : displays a success message (toDoEntry recorded as completed)
     deactivate UI
 
 @enduml

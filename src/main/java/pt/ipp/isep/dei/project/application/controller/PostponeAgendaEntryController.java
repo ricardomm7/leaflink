@@ -20,8 +20,8 @@ public class PostponeAgendaEntryController {
         this.entryRepository = repositories.getEntryRepository();
     }
 
-    public List<AgendaEntryDto> getEntryList(UserSession gsm) {
-        List<AgendaEntryDto> agendaEntryDtoDtoList = entryRepository.getAgendaEntryListByGSM(gsm);
+    public List<AgendaEntryDto> getAgendaEntryList(UserSession GSM) {
+        List<AgendaEntryDto> agendaEntryDtoDtoList = entryRepository.getAgendaEntryListByGSM(GSM);
 
         return agendaEntryDtoDtoList;
     }
@@ -51,7 +51,7 @@ public class PostponeAgendaEntryController {
         return AgendaEntryMapper.toDomain(agendaEntryDto);
     }
 
-    private AgendaEntryDto convertToAgendaEntryDto(pt.ipp.isep.dei.project.domain.AgendaEntry agendaEntry) {
+    private AgendaEntryDto convertToAgendaEntryDto(AgendaEntry agendaEntry) {
         return AgendaEntryMapper.toDto(agendaEntry);
     }
 
