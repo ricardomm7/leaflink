@@ -12,7 +12,7 @@ hide methods
 
 
 
-class Entry {
+class AgendaEntry {
     urgencyStatus
     estimatedDate
     progressStatus
@@ -20,21 +20,27 @@ class Entry {
 }
 
 
-class Task {
+class ToDoEntry {
     title
     description
+    duration
 
 }
 
 class Agenda{
 }
 
+class GreenSpace{
+name
+type
+size
+manager
 
+}
+Agenda "1" -- "1..*" AgendaEntry: has >
 
+AgendaEntry "1" -- "1" ToDoEntry: is >
 
-
-Agenda "1" -- "1..*" Entry: has >
-
-Entry "1" -- "1" Task: is >
+ToDoEntry "1..*" -- "1" GreenSpace: assigned to >
 
 @enduml
