@@ -71,5 +71,15 @@ public class CollaboratorRepository implements Serializable {
     public void assignSkills(Collaborator collaborator, List<Skill> skills) {
         collaborator.assignSkills(skills);
     }
+
+    public void updateCollaborator(Collaborator collaborator) {
+        // Find the collaborator in the list and update it
+        for (int i = 0; i < collaboratorList.size(); i++) {
+            if (collaboratorList.get(i).getTaxpayerNumber() == collaborator.getTaxpayerNumber()) {
+                collaboratorList.set(i, collaborator);
+                return;
+            }
+        }
+    }
 }
 

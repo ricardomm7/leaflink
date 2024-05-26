@@ -61,5 +61,8 @@ public class AssignSkillController {
         Collaborator colb = CollaboratorMapper.toDomain(collaborator);
         List<Skill> skillsList = SkillMapper.listToDomain(skills);
         collaboratorRepository.assignSkills(colb, skillsList);
+        collaboratorRepository.updateCollaborator(colb); // Update the collaborator in the repository
     }
+
+
 }
