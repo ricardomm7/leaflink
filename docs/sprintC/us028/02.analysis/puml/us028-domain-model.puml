@@ -10,27 +10,12 @@ hide circle
 hide methods
 
 
-class Taskçç
+class Task
  {
-vin
-vehiclePlate
-tareWeight
-grossWeight
-currentKm
-registrationDate
-acquisitionDate
-maintenanceFrequency
-type
+    title
+    description
+    duration
+    urgencyStatus
 }
 
-class Brand {
-    designation
-}
-
-class Model {
-    designation
-}
-
-Vehicle "1..*" - "1" Brand : has >
-Model "1..*" -"1" Brand: has <
 @enduml
