@@ -46,7 +46,7 @@ public class GreenSpaceRepository implements Serializable {
     }
 
     public List<GreenSpaceDto> getOrganizedList(UserSession loggedUser) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        List<GreenSpace> l = matchWithLoggedUser(loggedUser);
+        List<GreenSpace> listMatched = matchWithLoggedUser(loggedUser);
 
         // Get the sorting algorithm class name from ApplicationSession
         String algorithmClassName = ApplicationSession.getInstance().getSortAlgorithmClassName();
@@ -55,9 +55,9 @@ public class GreenSpaceRepository implements Serializable {
         Class<?> algorithmClass = Class.forName(algorithmClassName);
         SortAlgorithms sorter = (SortAlgorithms) algorithmClass.newInstance();
 
-        if (!verifyEmptyList(l)) {
-            l = sorter.sort(l);
-            return GreenSpaceMapper.toDtoList(l);
+        if (!verifyEmptyList(listMatched)) {
+            listMatched = sorter.sort(listMatched);
+            return GreenSpaceMapper.toDtoList(listMatched);
         } else {
             throw new IllegalArgumentException("The matched list is empty.");
         }

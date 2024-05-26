@@ -16,6 +16,10 @@ participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
 participant ":GreenSpaceMapper" as mapper
 participant "greenSpaceDto\n:GreenSpaceDto" as dto
+participant ":ApplicationSession" as ApplicationSession
+participant "applicationSession\n:ApplicationSession" as applicationSession
+participant ":Class" as Class
+participant "sorter\n:SortAlgorithms" as SortAlgorithms
 
 activate GSM
 GSM -> UI : asks to list all green spaces managed by him
@@ -34,25 +38,43 @@ deactivate CTRL
 deactivate PLAT
 UI --> GSM : requests the sorting algorithm
 GSM -> UI : selects the sorting algorithm
-UI -> CTRL : getOrganizedList(algorithm, loggedUser)
+UI -> CTRL : getOrganizedList(loggedUser)
 deactivate UI
 activate CTRL
 
 
-CTRL -> GreenSpaceRepo : getOrgList(algorithm, loggedUser)
+CTRL -> GreenSpaceRepo : getOrgList(loggedUser)
 deactivate CTRL
 
 activate GreenSpaceRepo
-GreenSpaceRepo -> GreenSpaceRepo : getOrganizedList(algorithm, loggedUser)
+GreenSpaceRepo -> GreenSpaceRepo : getOrganizedList(loggedUser)
 activate GreenSpaceRepo
 GreenSpaceRepo -> GreenSpaceRepo : matchWithLoggedUser(loggedUser)
 activate GreenSpaceRepo
 GreenSpaceRepo --> GreenSpaceRepo
 deactivate GreenSpaceRepo
+
+GreenSpaceRepo -> ApplicationSession : getInstance()
+activate ApplicationSession
+ApplicationSession --> GreenSpaceRepo : applicationSession
+deactivate ApplicationSession
+GreenSpaceRepo -> applicationSession : getSortAlgorithmClassName()
+activate applicationSession
+applicationSession --> GreenSpaceRepo : algorithmClassName
+deactivate applicationSession
+
+GreenSpaceRepo -> Class : forName(algorithmClassName)
+activate Class
+Class --> GreenSpaceRepo : Class<?>
+deactivate Class
+
+GreenSpaceRepo -> SortAlgorithms** : newInstance()
+
+
 GreenSpaceRepo -> GreenSpaceRepo : verifyEmptyList(listMatched)
 activate GreenSpaceRepo
 
-GreenSpaceRepo -> GreenSpaceRepo : organizeList(algorithm, listMatched)
+GreenSpaceRepo -> GreenSpaceRepo : sorter.sort(listMatched)
 activate GreenSpaceRepo
 GreenSpaceRepo -> mapper : toDtoList(listOrganized)
 activate mapper
