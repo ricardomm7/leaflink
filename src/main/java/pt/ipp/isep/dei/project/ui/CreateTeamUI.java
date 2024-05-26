@@ -54,8 +54,22 @@ public class CreateTeamUI implements Runnable {
                 return;
             }
         }
+        displayProposal(collaborators);
         if (!confirmTeam()) {
-            collaborators = selectCollaboratorsManually();
+            if (promptToCreateOwnTeam()) {
+                collaborators = selectCollaboratorsManually();
+            }
+        }
+
+        if (!validateCollaboratorsSkills(collaborators, selectedSkills)) {
+            System.out.println("Warning: The selected collaborators don't have the required skills. Proceed anyway? (Y/N)");
+            if (!scanner.nextLine().equalsIgnoreCase("Y")) {
+                collaborators = selectCollaboratorsManually();
+                if (!validateCollaboratorsSkills(collaborators, selectedSkills)) {
+                    System.out.println("Please select collaborators with the required skills.");
+                    return;
+                }
+            }
         }
 
         saveTeam(collaborators);
@@ -67,11 +81,25 @@ public class CreateTeamUI implements Runnable {
      * @return The minimum team size entered by the user.
      */
     private int getMinTeamSizeFromUser() {
-        System.out.print("Enter minimum team size: ");
-        int minTeamSize = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
+        int minTeamSize;
+        while (true) {
+            System.out.print("Enter minimum team size: ");
+            if (scanner.hasNextInt()) {
+                minTeamSize = scanner.nextInt();
+                scanner.nextLine(); // Consume newline character
+                if (minTeamSize > 0) {
+                    break;
+                } else {
+                    System.out.println("Minimum team size must be greater than zero.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.next(); // Clear invalid input
+            }
+        }
         return minTeamSize;
     }
+
 
     /**
      * Prompts the user to enter the maximum team size and returns the entered value.
@@ -79,23 +107,75 @@ public class CreateTeamUI implements Runnable {
      * @return The maximum team size entered by the user.
      */
     private int getMaxTeamSizeFromUser() {
-        System.out.print("Enter maximum team size: ");
-        int maxTeamSize = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
+        int maxTeamSize;
+        while (true) {
+            System.out.print("Enter maximum team size: ");
+            if (scanner.hasNextInt()) {
+                maxTeamSize = scanner.nextInt();
+                scanner.nextLine(); // Consume newline character
+                if (maxTeamSize > 0) {
+                    break;
+                } else {
+                    System.out.println("Maximum team size must be greater than zero.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.next(); // Clear invalid input
+            }
+        }
         return maxTeamSize;
     }
+
 
     /**
      * Displays the proposal of collaborators for the team.
      *
      * @param collaborators The list of collaborators proposed for the team.
      */
-    private void displayProposal(List<Collaborator> collaborators) {
+    private void displayProposal(List<CollaboratorDto> collaborators) {
         System.out.println("Generated Team Proposal:");
-        for (Collaborator collaborator : collaborators) {
+        for (CollaboratorDto collaborator : collaborators) {
             System.out.println(collaborator.getName());
         }
     }
+
+    /**
+     * Displays the collaborators and their respective skills.
+     *
+     * @param collaborators The list of collaborators.
+     */
+    private void displayCollaboratorsAndSkills(List<CollaboratorDto> collaborators) {
+        System.out.println("Collaborators and Skills:");
+        for (CollaboratorDto collaborator : collaborators) {
+            System.out.println("Collaborator: " + collaborator.getName());
+            System.out.println("Skills:");
+            for (SkillDto skill : collaborator.getSkills()) {
+                System.out.println("- " + skill.getDesignation());
+            }
+        }
+    }
+
+    /**
+     * Validates if the selected collaborators have the required skills for the team.
+     *
+     * @param collaborators The list of selected collaborators.
+     * @param skills        The list of required skills for the team.
+     * @return true if the majority of selected collaborators have the required skills, false otherwise.
+     */
+    private boolean validateCollaboratorsSkills(List<CollaboratorDto> collaborators, List<SkillDto> skills) {
+        int missingSkillsCount = 0;
+        for (CollaboratorDto collaborator : collaborators) {
+            List<SkillDto> collaboratorSkills = collaborator.getSkills();
+            for (SkillDto requiredSkill : skills) {
+                if (!collaboratorSkills.contains(requiredSkill)) {
+                    missingSkillsCount++;
+                }
+            }
+        }
+        // Return true if the majority of collaborators have the required skills
+        return missingSkillsCount <= (collaborators.size() / 2);
+    }
+
 
     /**
      * Prompts the user to select skills from the available list and returns the selected skills.
@@ -154,7 +234,12 @@ public class CreateTeamUI implements Runnable {
         }
         System.out.println("Available collaborators:");
         for (int i = 0; i < collaboratorList.size(); i++) {
-            System.out.println((i + 1) + ". " + collaboratorList.get(i).getName());
+            CollaboratorDto collaborator = collaboratorList.get(i);
+            System.out.println((i + 1) + ". " + collaborator.getName());
+            System.out.println("   Skills:");
+            for (SkillDto skill : collaborator.getSkills()) {
+                System.out.println("   - " + skill.getDesignation());
+            }
         }
         List<CollaboratorDto> selectedCollaborators = new ArrayList<>();
         System.out.print("Enter the numbers of the selected collaborators (comma-separated): ");
