@@ -1,69 +1,97 @@
 @startuml
-skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype polyline
-
-class CancelAgendaEntryUI {
+skinparam line type polyline
+'left to right direction
+package UI {
+    class PostponeAgendaEntryUI {
+    }
 }
 
-class CancelAgendaEntryController {
-    - agendaRepository : AgendaRepository
-    - teamRepository : TeamRepository
-    + cancelAgendaEntry(agendaEntry : AgendaEntry, reason : String) : void
-    + getAgendaList() : List<AgendaEntry>
-    + getTeamForEntry(agendaEntry : AgendaEntry) : Team
+package CONTROLLER {
+    class CancelAgendaEntryController {
+        - repositories: Repositories
+        - entryRepository: EntryRepository
+        + CancelAgendaEntryController()
+        + getAgendaEntryList(gsm: UserSession): List<AgendaEntryDto>
+        + cancelEntry(agendaEntryDto: AgendaEntryDto): boolean
+        - convertToAgendaEntry(agendaEntryDto: AgendaEntryDto): AgendaEntry
+        - notifyTeam(agendaEntryDto: AgendaEntryDto): boolean
+    }
 }
 
-class Repositories {
-    - instance : Repositories
-    - Repositories()
-    - agendaRepository : AgendaRepository
-    - teamRepository : TeamRepository
-    + getInstance() : Repositories
-    + getAgendaRepository() : AgendaRepository
-    + getTeamRepository() : TeamRepository
+package DOMAIN {
+    package REPOSITORY {
+        class Repositories {
+            - instance: Repositories
+            - entryRepository: EntryRepository
+            - Repositories()
+            + getInstance(): Repositories
+            + getEntryRepository(): EntryRepository
+        }
+
+        class EntryRepository {
+            - agendaEntryList: List<AgendaEntry>
+            + EntryRepository()
+            + getAgendaEntryListByGSM(gsm: UserSession): List<AgendaEntryDto>
+            + updateAgendaEntry(agendaEntryDto: AgendaEntryDto, newProgressStatus: ProgressStatus): boolean
+        }
+    }
+
+    package DTO {
+        class AgendaEntryMapper {
+            + toDto(agendaEntry: AgendaEntry): AgendaEntryDto
+            + toDomain(agendaEntryDto: AgendaEntryDto): AgendaEntry
+        }
+
+        class AgendaEntryDto {
+            - title: String
+            - description: String
+            - duration: int
+            - urgencyStatus: UrgencyStatus
+            - greenSpace: GreenSpaceDto
+            - startingDate: LocalDate
+            - progressStatus: ProgressStatus
+            + AgendaEntryDto(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpaceDto, startingDate: LocalDate, progressStatus: ProgressStatus)
+            + getTitle(): String
+            + getDescription(): String
+            + getDuration(): int
+            + getUrgencyStatus(): UrgencyStatus
+            + getGreenSpace(): GreenSpaceDto
+            + getStartingDate(): LocalDate
+            + getProgressStatus(): ProgressStatus
+        }
+    }
+
+    package MODEL {
+        class AgendaEntry {
+            - title: String
+            - description: String
+            - duration: int
+            - urgencyStatus: UrgencyStatus
+            - greenSpace: GreenSpace
+            - startingDate: LocalDate
+            - progressStatus: ProgressStatus
+            + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
+            + setProgressStatus(status: ProgressStatus): void
+            + setStartingDate(date: LocalDate): void
+        }
+
+        class NotificationService {
+            + getTeamByEntry(agendaEntry: AgendaEntry): Team
+            + getCollaboratorsList(team: Team): List<Collaborator>
+            + notifyTeam(collaboratorsList: List<Collaborator>, agendaEntry: AgendaEntry): boolean
+        }
+    }
 }
 
-class AgendaRepository {
-    - agendaEntries : List<AgendaEntry>
-    + createAgendaEntry(status : String, startDate : Date) : AgendaEntry
-    + cancelAgendaEntry(agendaEntry : AgendaEntry, reason : String) : void
-    + checkForDuplicates() : void
-    + addAgendaEntry(agendaEntry : AgendaEntry) : void
-    + getAgendaList() : List<AgendaEntry>
-}
-
-class TeamRepository {
-    - teamList : List<Team>
-    + createTeam(name : String, members : List<Collaborator>) : Team
-    + checkForDuplicates() : void
-    + addTeam(team : Team) : void
-    + getTeamForEntry(agendaEntry : AgendaEntry) : Team
-    + notifyCancellation(agendaEntry : AgendaEntry) : void
-}
-
-class AgendaEntry {
-    - agendaEntryID : String
-    - status : String
-    - startDate : Date
-    - reasonForCancellation : String
-}
-
-class Team {
-    - teamID : String
-    - name : String
-    - members : List<Collaborator>
-}
-
-CancelAgendaEntryUI ..> CancelAgendaEntryController
-CancelAgendaEntryController ..> Repositories : repositories
-Repositories --> Repositories : instance
-Repositories --> "1" AgendaRepository : agendaRepository
-Repositories --> "1" TeamRepository : teamRepository
-CancelAgendaEntryController ..> AgendaRepository : agendaRepository
-CancelAgendaEntryController ..> TeamRepository : teamRepository
-AgendaRepository --> "*" AgendaEntry : agendaEntries
-TeamRepository --> "*" Team : teamList
-
+PostponeAgendaEntryUI ..> CancelAgendaEntryController
+CancelAgendaEntryController ..> Repositories
+Repositories --> Repositories: instance
+CancelAgendaEntryController ..> EntryRepository
+Repositories --> EntryRepository
+EntryRepository --> "*" AgendaEntry
+AgendaEntryMapper ..> AgendaEntryDto
+AgendaEntryMapper ..> AgendaEntry
+CancelAgendaEntryController ..> NotificationService
 
 @enduml
