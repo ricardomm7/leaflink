@@ -7,7 +7,7 @@ package UI{
     class ListGreenSpacesUI {
         - controller : ListGreenSpacesController
         + ListGreenSpacesUI()
-        + getOrganizedList(algorithm, loggedUser) : List<GreenSpace>
+        + getOrganizedList(loggedUser) : List<GreenSpace>
     }
 }
 package CONTROLLER {
@@ -16,7 +16,7 @@ package CONTROLLER {
         - greenSpaceRepository : GreenSpaceRepository
 
         + ListGreenSpacesController()
-        +getList(algorithm, loggedUser) : List<GreenSpace>
+        +getList(loggedUser) : List<GreenSpace>
     }
 }
 package DOMAIN{
@@ -32,10 +32,10 @@ package REPOSITORY{
     class GreenSpaceRepository {
         - greenSpaceList : List<GreenSpace>
         + GreenSpaceRepository()
-        + getOrganizedList(algorithm, loggedUser) : List<GreenSpaceDto>
+        + getOrganizedList(loggedUser) : List<GreenSpaceDto>
         - verifyEmptyList(listMatched : List<GreenSpace>) : Boolean
         - matchWithLoggedUser(loggedUser) : List<GreenSpace>
-        - organizeList(algorithm, listMatched : List<GreenSpace>) : void
+        - organizeList(listMatched : List<GreenSpace>) : void
     }
     }
 package MODEL{
@@ -69,7 +69,21 @@ package MODEL{
             +toDto(greenSpace : GreenSpace) : GreenSpaceDto
             +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
         }
-        }
+    }
+    }
+    package EXTERNAL{
+    interface SortAlgorithms{
+    +sort(g : List<GreenSpace>) : List<GreenSpace>
+    }
+    class SortByAscending{
+    +sort(g : List<GreenSpace>) : List<GreenSpace>
+    }
+    class SortByDescending{
+        +sort(g : List<GreenSpace>) : List<GreenSpace>
+    }
+    class SortByType{
+        +sort(g : List<GreenSpace>) : List<GreenSpace>
+    }
 }
 
 ListGreenSpacesUI ..> ListGreenSpacesController
@@ -80,5 +94,10 @@ Repositories --> "1"GreenSpaceRepository: greenSpaceRepository
 GreenSpaceRepository -->"*" GreenSpace
 GreenSpaceRepository ..> GreenSpaceMapper : toDto
 GreenSpaceMapper ..> GreenSpaceDto
+GreenSpaceRepository ..> SortAlgorithms : uses
+SortAlgorithms --> SortByAscending : is implemented
+SortAlgorithms --> SortByDescending : is implemented
+SortAlgorithms --> SortByType : is implemented
+
 
 @enduml

@@ -16,7 +16,8 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... having all the repositories?              | Repositories              | Information Expert, High cohesion, Low coupling.                                        |
 |                | ... creating the Green Spaces List?           | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... verifying if the generated list is empty? | GreenSpaceRepository      | Information Expert.                                                                     |
-|                | ... organizing the list?                      | GreenSpaceRepository      | Information Expert.                                                                     |
+|                | ... having the list to organize?              | GreenSpaceRepository      | Information Expert.                                                                     |
+|                | ... organizing the list of green spaces?      | SortAlgorithms            | Protected Variations.                                                                   |
 | Step 4         | ... showing the created list?                 | RegisterVehicleUI         | Pure Fabrication.                                                                       |
 ### Systematization ##
 
@@ -31,6 +32,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 * ListGreenSpacesUI
 * ListGreenSpacesController
 * GreenSpaceRepository
+* SortAlgorithms
 
 ## 3.2. Sequence Diagram (SD)
 
