@@ -1,0 +1,83 @@
+@startuml
+skinparam shadowing false
+skinparam line type polyline
+
+class ListEntrySpaceUI {
+}
+
+class ListEntryController {
+    - collaboratorRepository : CollaboratorRepository
+    - teamRepository : TeamRepository
+    - taskRepository : TaskRepository
+    - agenda : Agenda
+    + ListEntryController()
+    + getCollaboratorThoughEmail(email: String) : Collaborator
+    + getStatusList() : List<String>
+    + getTaskList(collaborator: Collaborator, dateI: Date, dateF: Date, typeStatus: String) : List<Task>
+}
+
+class Repositories {
+    - instance : Repositories
+    - collaboratorRepository : CollaboratorRepository
+    - teamRepository : TeamRepository
+    - taskRepository : TaskRepository
+    + getInstance() : Repositories
+    + getCollaboratorRepository() : CollaboratorRepository
+    + getTeamRepository() : TeamRepository
+    + getTaskRepository() : TaskRepository
+    + getAgenda() : Agenda
+}
+
+class CollaboratorRepository {
+    + getCollaboratorThoughEmail(email: String) : Collaborator
+}
+
+class TeamRepository {
+    + getTeamsThoughCollaborator(collaborator: Collaborator) : List<Team>
+}
+
+class Agenda {
+    + getCollaboratorAgendaEntries(taskList: List<Task>) : List<AgendaEntries>
+}
+
+class EntryMapper {
+    + toDTOList(listEntries: List<AgendaEntries>) : List<EntryDto>
+}
+
+class Collaborator {
+}
+
+class Team {
+}
+
+class AgendaEntries {
+}
+
+class EntryDto {
+}
+
+
+
+ListEntrySpaceUI ..> ListEntryController
+
+ListEntryController ..> EntryMapper
+ListEntryController ..> Repositories: repositories
+Repositories --> Repositories: instance
+ListEntryController ..> CollaboratorRepository
+ListEntryController ..> TeamRepository
+ListEntryController ..> Agenda
+Repositories --> "1" CollaboratorRepository
+Repositories --> "1" TeamRepository
+Repositories --> "1" Agenda
+
+Agenda --> AgendaEntries
+
+AgendaEntries --> Entry
+EntryMapper ..> EntryDto
+EntryMapper ..> Entry
+TeamRepository --> Team
+
+Team ..> Collaborator
+CollaboratorRepository --> Collaborator
+@enduml
+

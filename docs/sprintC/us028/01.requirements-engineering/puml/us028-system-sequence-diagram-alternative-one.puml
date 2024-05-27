@@ -3,18 +3,18 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+title System Sequence Diagram (SSD) - US028
 
 autonumber
 
-actor "VFM" as VFM
+actor "CLB" as CLB
 participant ":System" as System
 
-activate VFM
+activate CLB
 
-    VFM -> System : asks to consult the tasks assigned to himself
+    CLB -> System : asks to consult the entry assigned to himself
     activate System
 
-        System --> VFM : displays greens spaces sorted by date
+        System --> CLB : displays greens spaces sorted by date
     deactivate System
 @enduml

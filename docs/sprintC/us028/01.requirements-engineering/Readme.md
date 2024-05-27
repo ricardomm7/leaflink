@@ -1,11 +1,11 @@
-# US028 - List the tasks assigned to myself
+# US028 - List the entrys assigned to myself
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Collaborator, I wish to consult the tasks assigned to me.
+As a Collaborator, I wish to consult the entrys assigned to me.
 
 ### 1.2. Customer Specifications and Clarifications 
 

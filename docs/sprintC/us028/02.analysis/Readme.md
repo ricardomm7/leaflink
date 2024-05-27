@@ -1,4 +1,4 @@
-# US028 - List the tasks assigned to myself
+# US028 - List the entry assigned to myself
 
 ## 2. Analysis
 

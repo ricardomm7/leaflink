@@ -10,7 +10,7 @@ hide circle
 hide methods
 
 
-class Task
+class Entry
  {
     title
     description
