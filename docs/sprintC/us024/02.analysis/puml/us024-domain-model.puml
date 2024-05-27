@@ -35,8 +35,7 @@ manager
 }
 
 class Entry {
-    urgencyStatus
-    estimatedDate
+    startingDate
     progressStatus
 
 }
@@ -46,6 +45,8 @@ class Task {
     title
     description
     duration
+    urgencyStatus
+
 
 }
 

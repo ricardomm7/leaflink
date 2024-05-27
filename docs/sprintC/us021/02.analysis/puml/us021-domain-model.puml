@@ -11,15 +11,17 @@ hide circle
 hide methods
 
 
-class Entry {
+class Task {
+    title
     description
-    degree of urgency
-    approximate expected duration
+    duration
+    urgencyStatus
+
 }
 
 class ToDoList {
-    tasks
+
 }
 
-ToDoList "1" -"1..*" Entry: is in <
+ToDoList "1" -"1..*" Task: has >
 @enduml

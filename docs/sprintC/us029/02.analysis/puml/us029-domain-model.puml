@@ -21,9 +21,18 @@ class Collaborator {
 }
 
 class Entry {
-    urgencyStatus
-    estimatedDate
+    startingDate
     progressStatus
+
+}
+
+
+class Task {
+    title
+    description
+    duration
+    urgencyStatus
+
 
 }
 
@@ -38,23 +47,15 @@ class Address{
     city
 }
 
-class Task {
-    title
-    description
-
-}
 
 class Agenda{
 }
 
-class ToDoList{
-}
+
 
 
 
 Agenda "1" -- "1..*" Entry: has >
-
-ToDoList "1" -- "1..*" Entry : has >
 
 Entry "1" -- "1" Task: is >
 
