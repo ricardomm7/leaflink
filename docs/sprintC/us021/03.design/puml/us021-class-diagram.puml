@@ -1,63 +1,64 @@
 @startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam line type polyline
 
-'left to right direction
+class AddNewEntryUI {
+}
 
-    class RegisterVehicleUI {
-        - controller : RegisterVehicleController
-        + RegisterVehicleUI()
-        + registerVehicle() : void
-    }
+class AddNewEntryController {
+    - greenSpaceRepository : GreenSpaceRepository
+    - entryRepository : EntryRepository
+    + AddNewEntryController()
+    + getGreenSpaceList() : List<GreenSpaceDTO>
+    + createEntry(greenSpace: GreenSpaceDTO, description: String, urgency: int, expectedDuration: int) : Entry
+}
 
-    class RegisterVehicleController {
-        - repositories: Repositories
-        - vehicleRepository : VehicleRepository
+class Repositories {
+    - instance : Repositories
+    - greenSpaceRepository : GreenSpaceRepository
+    - entryRepository : EntryRepository
+    + getInstance() : Repositories
+    + getGreenSpaceRepository() : GreenSpaceRepository
+    + getEntryRepository() : EntryRepository
+}
 
-        + RegisterVehicleController()
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
-    }
+class GreenSpaceRepository {
+    + getGreenSpaceList() : List<GreenSpaceDTO>
+}
 
-    class Repositories {
-        - instance : Repositories
-        - vehicleRepository : VehicleRepository
-        - Repositories()
-        + getInstance() : Repositories
-        + getVehicleRepository() : VehicleRepository
-    }
+class EntryRepository {
+    + createEntry(greenSpace: GreenSpaceDTO, description: String, urgency: int, expectedDuration: int) : Entry
+}
 
-    class VehicleRepository {
-        - vehicleList : List<Vehicle>
+class Entry {
+    - greenSpace : GreenSpaceDTO
+    - description : String
+    - urgency : int
+    - expectedDuration : int
+    + Entry(greenSpace: GreenSpaceDTO, description: String, urgency: int, expectedDuration: int)
+    + verifyFilled(description: String) : Boolean
+    + verifyDuration(expectedDuration: int) : Boolean
+}
 
-        + VehicleRepository()
-        + getVehicleList () : List<Vehicles>
-        + registerVehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int) : Boolean
-        + addVehicle(vehicle: Vehicle) : void
-        + verifyExistingVehicle(VIN: String, VehiclePlate: String) : Boolean
-    }
+class GreenSpaceDTO {
 
-    class Vehicle {
-        - VIN : String
-        - brand : String
-        - model : String
-        - type : String
-        - vehiclePlate : String
-        - tareWeight : double
-        - grossWeight : double
-        - currentKm : int
-        - registrationDate: Date
-        - acquisitionDate : Date
-        - maintenanceFrequency : int
+}
 
-        + Vehicle(VIN: String, brand: String, model: String, type: String, vehiclePlate: String, \ntareWeight: double, grossWeight: double, currentKm: int, registrationDate: Date, acquisitionDate: Date, maintenanceFrequency: int)
-        + validateVehicle(vehicle: Vehicle) : Boolean
-    }
+class GreenSpaceMapper {
+}
 
-RegisterVehicleUI ..> RegisterVehicleController
-RegisterVehicleController ..> Repositories: repositories
+AddNewEntryUI ..> AddNewEntryController
+
+AddNewEntryController ..> Repositories: repositories
 Repositories --> Repositories: instance
-RegisterVehicleController ..> VehicleRepository: vehicleRepository
-Repositories --> "1"VehicleRepository: vehicleRepository
-VehicleRepository -->"*" Vehicle: vehicle
+AddNewEntryController ..> GreenSpaceRepository
+AddNewEntryController ..> EntryRepository
+Repositories --> "1" GreenSpaceRepository
+Repositories --> "1" EntryRepository
+AddNewEntryController ..> GreenSpaceMapper
+
+GreenSpaceMapper ..> GreenSpaceDTO
+EntryRepository --> Entry
 
 @enduml
