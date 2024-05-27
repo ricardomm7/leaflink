@@ -74,7 +74,7 @@ As a Green Space Manager (GSM), I want to add a new toDoEntry in the Agenda.
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us022-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
