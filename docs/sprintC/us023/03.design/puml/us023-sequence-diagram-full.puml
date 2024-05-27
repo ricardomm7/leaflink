@@ -1,0 +1,109 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'title System Sequence Diagram (SSD) - US006
+
+autonumber
+
+actor "GSM" as GSM
+participant ":AssignTeamUI" as UI
+participant ":AssignTeamController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "teamRepository:\nTeamRepository" as TeamRepository
+participant "entryRepository\n:EntryRepository" as EntryRepository
+participant "agendaRepository\n:AgendaRepository" as AgendaRepository
+
+activate GSM
+
+    GSM -> UI : asks to assign a Team to an entry in the Agenda
+    activate UI
+
+        UI -> CTRL** : create
+        deactivate UI
+                activate CTRL
+
+                    CTRL -> RepositorySingleton : getInstance()
+                    activate RepositorySingleton
+
+                        RepositorySingleton --> CTRL : repositories
+                    deactivate RepositorySingleton
+
+                    CTRL -> PLAT : getEntryRepository()
+                    activate PLAT
+
+                        PLAT --> CTRL : entryRepository
+                    deactivate PLAT
+
+                     deactivate CTRL
+
+                deactivate UI
+
+        UI -> CTRL : getTeamsList()
+        activate UI
+        activate CTRL
+
+        CTRL -> TeamRepository : getTeamsList()
+        activate TeamRepository
+
+        TeamRepository -> CTRL : teamsList
+        deactivate TeamRepository
+
+        CTRL -> UI : teamsList
+        deactivate CTRL
+        deactivate UI
+
+        UI -> CTRL : getAgendaEntries()
+                activate UI
+                activate CTRL
+
+                CTRL -> EntryRepository : getAgendaEntries()
+                activate EntryRepository
+
+                EntryRepository -> CTRL : agendaEntriesList
+                deactivate EntryRepository
+
+                CTRL -> UI : agendaEntriesList
+                deactivate CTRL
+
+        UI --> GSM : shows teams and asks to select one
+        deactivate UI
+
+    GSM -> UI : selects team
+    activate UI
+
+    UI --> GSM : shows the entries in the agenda and asks to select one
+    deactivate UI
+
+    GSM -> UI: select the entry
+    activate UI
+
+    UI --> GSM : shows all data and requests confirmation
+    deactivate UI
+
+    GSM -> UI: confirms
+    activate UI
+
+        UI -> CTRL : assignTeam(Team, toDoEntry)
+        deactivate UI
+        activate CTRL
+
+        CTRL -> AgendaRepository : assignTeam(Team, toDoEntry)
+        activate AgendaRepository
+
+        AgendaRepository --> CTRL: success
+        deactivate AgendaRepository
+
+        CTRL --> UI : success
+        deactivate CTRL
+        activate UI
+
+    UI --> GSM : displays success message (Team assigned successfully)
+    deactivate UI
+
+deactivate GSM
+
+@enduml

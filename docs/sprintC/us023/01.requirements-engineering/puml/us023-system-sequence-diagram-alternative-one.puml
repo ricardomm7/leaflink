@@ -12,10 +12,10 @@ participant ":System" as System
 
 activate GSM
 
-    GSM -> System : asks to assign a Team to an entry in the Agenda.
+    GSM -> System : asks to assign a Team to an entry in the Agenda
     activate System
 
-        System --> GSM : shows teams and asks to select one.
+        System --> GSM : shows teams and asks to select one
     deactivate System
 
     GSM -> System : selects team
