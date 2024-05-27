@@ -22,7 +22,7 @@ activate GSM
 
     activate System
 
-        System --> GSM : shows vehicles and asks to select one.
+        System --> GSM : shows vehicles and asks to select one or more
     deactivate System
 
     GSM -> System : selects vehicles

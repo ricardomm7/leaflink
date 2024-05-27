@@ -1,0 +1,113 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US026
+
+autonumber
+
+actor "GSM" as GSM
+participant ":AssignVehiclesUI" as UI
+participant ":AssignVehiclesController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "entryRepository\n:EntryRepository" as EntryRepository
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "agendaRepository\n:AgendaRepository" as AgendaRepository
+
+activate GSM
+
+    GSM -> UI : asks to assign vehicles to an entry in the Agenda
+    activate UI
+
+        UI -> CTRL** : create
+        deactivate UI
+                activate CTRL
+
+                    CTRL -> RepositorySingleton : getInstance()
+                    activate RepositorySingleton
+
+                        RepositorySingleton --> CTRL : repositories
+                    deactivate RepositorySingleton
+
+                    CTRL -> PLAT : getEntryRepository()
+                    activate PLAT
+
+                        PLAT --> CTRL : entryRepository
+                    deactivate PLAT
+
+                     deactivate CTRL
+
+                deactivate UI
+
+        UI -> CTRL : getAgendaEntries()
+                activate UI
+                activate CTRL
+
+                CTRL -> EntryRepository : getAgendaEntries()
+                activate EntryRepository
+
+                EntryRepository -> CTRL : agendaEntriesList
+                deactivate EntryRepository
+
+                CTRL -> UI : agendaEntriesList
+                deactivate CTRL
+                deactivate UI
+
+        UI -> CTRL : getVehiclesList()
+                activate UI
+                activate CTRL
+
+                CTRL -> VehicleRepository : getVehiclesList()
+                activate VehicleRepository
+
+                VehicleRepository -> CTRL : vehiclesList
+                deactivate VehicleRepository
+
+                CTRL -> UI : vehiclesList
+                deactivate CTRL
+
+    UI --> GSM : shows the entries in the agenda and asks to select one
+        deactivate UI
+
+    GSM -> UI : select the entry
+    activate UI
+
+    loop
+
+    UI --> GSM : shows vehicles and asks to select one or more
+    deactivate UI
+
+    GSM -> UI: selects vehicles
+    activate UI
+
+    end loop
+
+    UI --> GSM : shows all data and requests confirmation
+    deactivate UI
+
+    GSM -> UI: confirms
+    activate UI
+
+        UI -> CTRL : assignVehicles(Vehicles[], toDoEntry)
+        deactivate UI
+        activate CTRL
+
+        CTRL -> AgendaRepository : assignVehicles(Vehicles[], toDoEntry)
+        activate AgendaRepository
+
+        AgendaRepository --> CTRL: success
+        deactivate AgendaRepository
+
+        CTRL --> UI : success
+        deactivate CTRL
+        activate UI
+
+    UI --> GSM : displays success message (Vehicles assigned successfully)
+    deactivate UI
+
+deactivate GSM
+
+@enduml
