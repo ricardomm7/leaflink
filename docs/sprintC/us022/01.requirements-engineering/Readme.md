@@ -36,6 +36,10 @@ As a Green Space Manager (GSM), I want to add a new toDoEntry in the Agenda.
 > **Question:** When we are registering an toDoEntry to the agenda, are the three inputs (selecting an existing task from the to-do list, starting date, and finishing date) sufficient?
 >
 > **Answer:** The starting date will be enough because the task already has the predicted duration.
+> 
+> **Question:** When a To-Do List entry is planned and moves to the Agenda, the status change from "Pending" to "Planned". Should this entry be removed from the To-Do List or just change status to "Planned" as it is on the Agenda?
+>
+> **Answer:** Changing the status in the To-Do list to Planned seems to be a good approach.
 
 
 

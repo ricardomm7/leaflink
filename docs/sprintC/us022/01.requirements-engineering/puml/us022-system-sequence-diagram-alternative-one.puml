@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US006
+title System Sequence Diagram (SSD) - US022
 
 autonumber
 
@@ -15,17 +15,24 @@ activate GSM
     GSM -> System : Request to add a new task in the Agenda
     activate System
 
-        System --> GSM : shows the To-do List and requests to select a task
+        System --> GSM : shows the To-do List and requests to select an entry
     deactivate System
 
-    GSM -> System : selects a task
+    GSM -> System : selects an entry
 
     activate System
 
-        System --> GSM : requests a starting date for the selected task
+        System --> GSM : requests a starting date for the selected entry
     deactivate System
 
     GSM -> System : types date
+
+    activate System
+
+        System --> GSM : requests to select the urgency status of the selected entry
+    deactivate System
+
+    GSM -> System : selects urgency status
 
     activate System
 

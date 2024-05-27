@@ -5,64 +5,129 @@ skinparam shadowing false
 
 autonumber
 
-participant "GSM" as GSM
+actor "GSM" as GSM
 participant ":AddAgendaEntryUI" as UI
 participant ":AddAgendaEntryController" as CTRL
-participant ":Repositories" as GlobRepo
+participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "toDoRepository\n:ToDoRepository" as TODOREP
-participant "agendaRepository\n:AgendaRepository" as AGENDREP
+participant "entryRepository\n:EntryRepository" as EntryRepo
+participant ":AgendaEntryMapper" as AgendaEntryMapper
+participant "agendaEntryDto\n:AgendaEntryDto" as AgendaEntryDto
+participant "agendaEntry\n:AgendaEntry" as AgendaEntry
+participant "toDoEntryDto\n:ToDoEntryDto" as ToDoEntryDto
 
 activate GSM
-GSM -> UI : requests to add a new entry in the Agenda
-activate UI
+
+    GSM -> UI : requests to add a new entry in the Agenda
+    activate UI
+
+        UI -> CTRL **: create
+        deactivate UI
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getEntryRepository()
+            activate PLAT
+
+                PLAT --> CTRL : entryRepository
+            deactivate PLAT
+
+             deactivate CTRL
+
+        deactivate UI
+
+        UI -> CTRL: getToDoEntryList(GSM)
+        activate UI
+        activate CTRL
+
+            CTRL -> EntryRepo: getToDoEntryListByGSM(GSM)
+            deactivate CTRL
+            activate EntryRepo
+
+            loop
+
+            EntryRepo -> AgendaEntryMapper : toDto(toDoEntry)
+            activate AgendaEntryMapper
+
+                AgendaEntryMapper -> ToDoEntryDto** : create
+                activate ToDoEntryDto
+
+                ToDoEntryDto --> AgendaEntryMapper : toDoEntryDTO
+                deactivate ToDoEntryDto
+
+            AgendaEntryMapper --> EntryRepo : toDoEntryDTO
+            deactivate AgendaEntryMapper
+            end
+
+            EntryRepo --> CTRL : toDoEntryDtoList
+            deactivate EntryRepo
+            activate CTRL
+
+            CTRL --> UI : toDoEntryDtoList
+        deactivate CTRL
+
+        UI -> GSM : shows the list of To-Do entries and requests to select one
+    deactivate UI
+
+    GSM -> UI : selects a To-Do entry
+    activate UI
+
+        UI --> GSM : requests starting date for the selected entry
+    deactivate UI
+
+    GSM -> UI : types starting date
+    activate UI
+
+         UI --> GSM : requests urgency status for the selected entry
+    deactivate UI
+
+    GSM -> UI : selects urgency status
+    activate UI
+
+    UI --> GSM : Shows all data and requests confirmation
+    deactivate UI
+
+    GSM -> UI: confirms data
+    activate UI
+
+        UI -> CTRL : addAgendaEntry(toDoEntryDto, startingDate, urgencyStatus)
+        deactivate UI
+        activate CTRL
 
 
-UI -> CTRL: get toDoList
-activate CTRL
+            CTRL -> EntryRepo : addAgendaEntry(toDoEntryDto, startingDate, urgencyStatus)
+            deactivate CTRL
+            activate EntryRepo
 
-CTRL -> GlobRepo : getInstance()
-activate GlobRepo
-GlobRepo --> CTRL : repositories
-deactivate GlobRepo
-CTRL -> PLAT : getToDoRepository()
-activate PLAT
-PLAT -->  CTRL: toDoRepository
-deactivate PLAT
+            EntryRepo -> AgendaEntryMapper : toDomain(toDoEntryDto)
+            activate AgendaEntryMapper
 
-CTRL -> TODOREP : getToDoList()
-activate TODOREP
-TODOREP --> CTRL : toDoList
-deactivate TODOREP
-CTRL --> UI : toDoList
-deactivate CTRL
-UI --> GSM : shows the list of To-Do entries and requests to select one
+                AgendaEntryMapper -> AgendaEntry** : create
+                activate AgendaEntry
+
+                AgendaEntry --> AgendaEntryMapper : agendaEntry
+                deactivate AgendaEntry
+
+            AgendaEntryMapper --> EntryRepo : agendaEntry
+            deactivate AgendaEntryMapper
+
+                EntryRepo -> EntryRepo : setStartingDate(agendaEntry, startingDate)
+                EntryRepo -> EntryRepo : updateEntryStatus(agendaEntry, urgencyStatus)
+
+            EntryRepo --> CTRL : success
+            deactivate EntryRepo
+            activate CTRL
+
+        CTRL --> UI : success
+    deactivate CTRL
+    activate UI
+
+    UI --> GSM : displays a success message (entry added successfully)
 deactivate UI
 
-GSM -> UI : selects a To-Do entry
-activate UI
-
-UI --> GSM: shows all data and requests confirmation
-deactivate UI
-
-GSM -> UI: confirms data
-activate UI
-
-UI -> CTRL : add agenda entry
-deactivate UI
-activate CTRL
-
-CTRL -> AGENDREP : addAgendaEntry(toDoEntry)
-deactivate CTRL
-
-activate AGENDREP
-AGENDREP --> CTRL : agendaEntry
-deactivate AGENDREP
-activate CTRL
-CTRL --> UI : success
-deactivate CTRL
-activate UI
-UI --> GSM : shows success message (entry added successfully)
-deactivate UI
-deactivate GSM
 @enduml

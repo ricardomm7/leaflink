@@ -1,4 +1,4 @@
-# US006 - Register a Vehicle 
+# US022 - Add a new toDoEntry in the Agenda 
 
 ## 3. Design - User Story Realization 
 
@@ -7,36 +7,39 @@
 _**Note that SSD - Alternative One is adopted.**_
 
 
-| Interaction ID | Question: Which class is responsible for...  | Answer                    | Justification (with patterns)                                                                                                                                                                 |
-|:---------------|:---------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?              | RegisterVehicleUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction.                    |
-|                | ... coordinating the US?                     | RegisterVehicleController | Controller: RegisterVehicleController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                                               |
-| Step 2         | ... display vehicle data input fields?       | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 3         | ... types vehicle data?                      | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 4         | ... confirms the user's input data?          | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI confirms the user's input data before proceeding with the registration process, ensuring data integrity and adhering to the Creator pattern.              |
-| Step 5         | ... handles the registration of the vehicle? | RegisterVehicleController | Controller: RegisterVehicleController manages the registration process, ensuring high cohesion and low coupling by encapsulating related functionality.                                       |
-|                | ... get VehicleRepository?                   | Repositories              | Pure Fabrication:  Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic.                   |
-|                | ... verify existing vehicle?                 | VehicleRepository         | Information Expert: VehicleRepository performs global validation, adhering to the Protected Variation pattern by encapsulating data access.                                                   |
-|                | ... register a vehicle?                      | VehicleRepository         | Creator: Vehicle is directly created by vehicleRepository, which encapsulates the logic for managing vehicles.                                                                                |
-|                | ... validating all data (local validation)?  | Vehicle                   | Information Expert: Vehicle performs local validation on its attributes, adhering to the Information Expert pattern by encapsulating its own data validation logic.                           | 
-|                | ... validating all data (global validation)? | VehicleRepository         | Information Expert: VehicleRepository performs global validation, following the Protected Variation pattern by encapsulating validation rules.                                                | 
-|                | ... stores vehicle registration data?        | VehicleRepository         | Repository Pattern: VehicleRepository is responsible for persisting and managing vehicle registration data, applying the Low Coupling pattern by decoupling data storage from business logic. |
-| Step 6         | ... informing operation success?             | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.                         | 
+| Interaction ID | Question: Which class is responsible for...                  | Answer                   | Justification (with patterns) |
+|:---------------|:-------------------------------------------------------------|:-------------------------|:------------------------------|
+| Step 1         | ... interacting with the actor?                              | AddAgendaEntryUI         | Pure Fabrication.             |
+|                | ... coordinating the US?                                     | AddAgendaEntryController | Controller.                   |
+| Step 2         | ... requesting data?                                         | AddAgendaEntryUI         | Pure Fabrication.             |
+| Steps 3  and 4 | ... receiving the data?                                      | AddAgendaEntryUI         | Pure Fabrication.             |
+|                | ... getting the entry repository?                            | Repositories             | Information Expert.           |
+|                | ... getting all the to do entries and return them as a list? | EntryRepository          | Information Expert.           |
+|                | ... showing the entries available for selection?             | AddAgendaEntryUI         | Pure Fabrication.             |
+|                | ... handling the user selecting an entry?                    | AddAgendaEntryUI         | Pure Fabrication.             |
+| Steps  5 and 6 | ... showing the urgency status available for selection?      | AddAgendaEntryUI         | Pure Fabrication.             |
+| Step 7         | ... handling the user selecting an urgency stattus?          | AddAgendaEntryUI         | Pure Fabrication.             |
+| Step 8         | ... showing the confirmation info?                           | AddAgendaEntryUI         | Pure Fabrication.             |
+| Step 9         | ... validating all data (local validation)?                  | Entry                    | Information Expert.           |
+|                | ... validating all data (global validation)?                 | EntryRepository          | Information Expert.           |
+|                | ... saving the new agenda entry?                             | EntryRepository          | Information Expert.           |
+| Step 10        | ... informing of operation success?                          | AddAgendaEntryUI         | Pure Fabrication.             |
 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Vehicle
+* Entry
+* Agenda
 
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
 * Repositories
-* RegisterVehicleUI
-* VehicleRepository
-* RegisterVehicleController
+* AddAgendaEntryUI
+* EntryRepository
+* AddAgendaEntryController
 
 
 
