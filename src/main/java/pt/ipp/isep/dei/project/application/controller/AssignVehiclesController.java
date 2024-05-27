@@ -24,7 +24,7 @@ public class AssignVehiclesController {
     }
 
     public List<VehicleDto> getVehicleList() {
-        return vehicleRepository.getVehicleList();
+        return vehicleRepository.getAvailableVehicleList();
     }
 
     public void setVehicleAvailability(int vehicleIndex, Boolean isAvailable) {

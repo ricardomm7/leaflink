@@ -41,10 +41,10 @@ class VehicleRepositoryTest {
         VehicleRepository vehicleRepository = new VehicleRepository();
 
         // Act
-        List<VehicleDto> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = vehicleRepository.getAvailableVehicleList();
 
         // Assert
-        assertNotSame(vehicleRepository.getVehicleList(), result);
+        assertNotSame(vehicleRepository.getAvailableVehicleList(), result);
     }
 
     // Does not modify the original list of vehicles in the repository
@@ -56,11 +56,11 @@ class VehicleRepositoryTest {
         vehicleRepository.registerVehicle(vehicle1);
 
         // Act
-        List<VehicleDto> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = vehicleRepository.getAvailableVehicleList();
         result.add(VehicleMapper.toDto(new Vehicle("VIN1234fdhbgtedxs", "Brand2", "Model2", VehicleType.CAR, LocalDate.of(2023, 10, 12), "AA23WQ", 1500.0, 2500.0, 7000, LocalDate.of(2024, 1, 12), 12000)));
 
         // Assert
-        assertEquals(1, vehicleRepository.getVehicleList().size());
+        assertEquals(1, vehicleRepository.getAvailableVehicleList().size());
     }
 
     // Add a vehicle to the repository and verify that it is added correctly
@@ -72,7 +72,7 @@ class VehicleRepositoryTest {
 
         // Act
         vehicleRepository.registerVehicle(vehicle);
-        List<VehicleDto> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = vehicleRepository.getAvailableVehicleList();
 
         // Assert
         assertEquals(1, result.size());
@@ -223,7 +223,7 @@ class VehicleRepositoryTest {
 
         // Assert
         assertTrue(result);
-        assertEquals(1, vehicleRepository.getVehicleList().size());
+        assertEquals(1, vehicleRepository.getAvailableVehicleList().size());
     }
 
 
@@ -250,7 +250,7 @@ class VehicleRepositoryTest {
 
         // Assert
         assertFalse(result);
-        assertEquals(0, vehicleRepository.getVehicleList().size());
+        assertEquals(0, vehicleRepository.getAvailableVehicleList().size());
     }
 
     // does not register a vehicle with an acquisition date before the registration date
@@ -274,7 +274,7 @@ class VehicleRepositoryTest {
                 currentKm, acquisitionDate, maintenanceFrequency));
 
         assertFalse(result);
-        assertEquals(0, vehicleRepository.getVehicleList().size());
+        assertEquals(0, vehicleRepository.getAvailableVehicleList().size());
     }
 
 
@@ -307,8 +307,8 @@ class VehicleRepositoryTest {
         vehicleRepository.registerVehicle(vehicle3);
 
         // Adição das manutenções
-        maintenanceRepository.createMaintenance("01AA00", LocalDate.of(2020, 10, 10), 2000);
-        maintenanceRepository.createMaintenance("00AA01", LocalDate.of(2023, 10, 10), 10000);
+        maintenanceRepository.createMaintenance(new MaintenanceDto("01AA00", LocalDate.of(2020, 10, 10), 2000));
+        maintenanceRepository.createMaintenance(new MaintenanceDto("00AA01", LocalDate.of(2023, 10, 10), 10000));
 
         // Act
         List<MaintenanceDto> maintenanceList = maintenanceRepository.getMaintenanceList();

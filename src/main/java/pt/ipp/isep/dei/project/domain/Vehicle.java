@@ -176,6 +176,10 @@ public class Vehicle implements Serializable {
         this.grossWeight = grossWeight;
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
     /**
      * Gets current km.
      *

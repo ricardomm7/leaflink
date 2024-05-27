@@ -32,27 +32,27 @@ public class AssignVehiclesUI implements Runnable {
 
         List<VehicleDto> vv = new ArrayList<>();
         boolean loop = true;
-        List<VehicleDto> b = controller.getVehicleList();
+        List<VehicleDto> availableVehicleList = controller.getVehicleList();
 
-        if (b.isEmpty()) {
+        if (availableVehicleList.isEmpty()) {
             throw new IllegalArgumentException("The vehicle list is empty.");
         }
 
         while (loop) {
             int o = 1;
-            for (VehicleDto d : b) {
+            for (VehicleDto d : availableVehicleList) {
                 System.out.println(o + d.toString());
                 o++;
             }
             System.out.println("Select a vehicle:");
             int index = sc.nextInt() - 1;
-            vv.add(b.get(index));
+            vv.add(availableVehicleList.get(index));
             controller.setVehicleAvailability(index, false);
             System.out.println("Do you want to select another vehicle? (Y/N)");
             String decision = sc.nextLine();
             loop = decision.trim().equalsIgnoreCase("Y");
         }
-        controller.updateEntryWithVehicles(entry, b);
+        controller.updateEntryWithVehicles(entry, availableVehicleList);
 
     }
 

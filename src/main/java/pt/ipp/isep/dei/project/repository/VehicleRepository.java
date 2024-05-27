@@ -23,22 +23,20 @@ public class VehicleRepository implements Serializable {
         vehicleList = new ArrayList<>();
     }
 
-    /**
-     * Gets vehicle list.
-     *
-     * @return the vehicle list
-     */
+    public List<VehicleDto> getAvailableVehicleList() {
+        List<Vehicle> availableVehicle = new ArrayList<>();
+        for (Vehicle v : vehicleList) {
+            if (v.isAvailable()) {
+                availableVehicle.add(v);
+            }
+        }
+        return VehicleMapper.toDtoList(availableVehicle);
+    }
+
     public List<VehicleDto> getVehicleList() {
         return VehicleMapper.toDtoList(vehicleList);
     }
 
-
-    /**
-     * Register vehicle from a vehicle DTO object.
-     *
-     * @param vehicle the vehicle Dto object
-     * @return the boolean
-     */
     public boolean registerVehicle(VehicleDto dto) {
         Vehicle vehicle = VehicleMapper.toDomain(dto);
         if (!verifyExistingVehicles(vehicle.getVehiclePlate(), vehicle.getVIN())) {
@@ -56,7 +54,7 @@ public class VehicleRepository implements Serializable {
      * @param vehicle The vehicle
      */
     private void addVehicle(Vehicle vehicle) {
-        if (getVehicleList().contains(VehicleMapper.toDto(vehicle))) {
+        if (getAvailableVehicleList().contains(VehicleMapper.toDto(vehicle))) {
             throw new IllegalArgumentException("Vehicle already exists.");
         }
         vehicleList.add(vehicle);
@@ -70,7 +68,7 @@ public class VehicleRepository implements Serializable {
      * @return the boolean (True if vehicle exists, False otherwise)
      */
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
-        for (VehicleDto vehicle : getVehicleList()) {
+        for (VehicleDto vehicle : getAvailableVehicleList()) {
             if (vin.equalsIgnoreCase(vehicle.getVIN()) || vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate())) {
                 return true;
             }
