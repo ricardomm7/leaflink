@@ -4,11 +4,14 @@ import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.ToDoEntry;
+import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
+import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -21,13 +24,13 @@ import java.util.List;
 public class EntryRepository implements Serializable {
 
     private final List<ToDoEntry> toDoEntryList;
-    private final List<AgendaEntryDto> agendaEntryDtoList;
+    private final List<AgendaEntry> agendaEntryList;
 
     /**
      * Instantiates a new ToDoEntry repository.
      */
     public EntryRepository() {
-        agendaEntryDtoList = new ArrayList<>();
+        agendaEntryList = new ArrayList<>();
         toDoEntryList = new ArrayList<>();
     }
 
@@ -76,6 +79,10 @@ public class EntryRepository implements Serializable {
         return z;
     }
 
+    public void updateVehiclesAgendaEntry(int entryIndex, List<VehicleDto> f) {
+        List<Vehicle> u = VehicleMapper.toDomainList(f);
+        agendaEntryList.get(entryIndex).setAssignedVehicles(u);
+    }
 
     public boolean updateAgendaEntry(AgendaEntryDto agendaEntrydto, LocalDate newDate, ProgressStatus newProgressStatus) {
         AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntrydto);
@@ -130,11 +137,7 @@ public class EntryRepository implements Serializable {
      * @return the entry list
      */
     public List<AgendaEntryDto> getAgendaEntryList() {
-        List<AgendaEntryDto> r = new ArrayList<>();
-        for (AgendaEntryDto e : agendaEntryDtoList) {
-            r.add(new AgendaEntryDto(e.getTitle(), e.getDescription(), e.getDuration(), e.getUrgencyStatus(), e.getGreenSpace(), e.getStartingDate(), e.getProgressStatus()));
-        }
-        return r;
+        return AgendaEntryMapper.toDtoList(agendaEntryList);
     }
 
     public List<ToDoEntryDto> getToDoEntryList() {

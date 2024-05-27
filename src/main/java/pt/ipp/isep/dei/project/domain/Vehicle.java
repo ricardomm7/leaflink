@@ -24,6 +24,7 @@ public class Vehicle implements Serializable {
     private int currentKm;
     private LocalDate acquisitionDate;
     private int maintenanceFrequency;
+    private boolean isAvailable;
 
 
     /**
@@ -115,6 +116,10 @@ public class Vehicle implements Serializable {
      */
     public String getVehiclePlate() {
         return vehiclePlate;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     /**
@@ -266,7 +271,7 @@ public class Vehicle implements Serializable {
      */
     public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
                    int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
-
+        this.isAvailable = true;
         setVIN(VIN);
         setBrand(brand);
         setModel(model);
@@ -278,8 +283,6 @@ public class Vehicle implements Serializable {
         setCurrentKm(currentKm);
         setAcquisitionDate(acquisitionDate);
         setMaintenanceFrequency(maintenanceFrequency);
-
-
     }
 
     public boolean registerVehicle(Vehicle vehicle) {

@@ -32,6 +32,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("List green spaces managed by a specific GSM", new ListGreenSpacesUI()));
         options.add(new MenuItem("Postpone a ToDoEntry", new PostponeAgendaEntryUI()));
         options.add(new MenuItem("Record a task competition", new RecordEntryUI()));
+        options.add(new MenuItem("Assign vehicles to agenda entry", new AssignVehiclesUI()));
 
 
         int option = 0;

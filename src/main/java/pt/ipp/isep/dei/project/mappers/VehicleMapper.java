@@ -43,4 +43,15 @@ public class VehicleMapper implements Serializable {
 
         return result;
     }
+
+    public static List<Vehicle> toDomainList(List<VehicleDto> vehicleList) {
+        List<Vehicle> result = new ArrayList<>();
+        for (VehicleDto vehicle : vehicleList) {
+            Vehicle vehicleDom = VehicleMapper.toDomain(vehicle);
+
+            result.add(vehicleDom);
+        }
+
+        return result;
+    }
 }

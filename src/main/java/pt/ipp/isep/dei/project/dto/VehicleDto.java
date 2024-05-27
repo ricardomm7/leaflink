@@ -170,6 +170,9 @@ public class VehicleDto implements Serializable {
         return VIN.hashCode();
     }
 
-
+    @Override
+    public String toString() {
+        return vehiclePlate + " | " + brand;
+    }
 }
 

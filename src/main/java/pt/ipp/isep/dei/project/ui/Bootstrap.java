@@ -2,10 +2,7 @@ package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Address;
-import pt.ipp.isep.dei.project.domain.DocumentType;
-import pt.ipp.isep.dei.project.domain.GreenSpaceType;
-import pt.ipp.isep.dei.project.domain.VehicleType;
+import pt.ipp.isep.dei.project.domain.*;
 import pt.ipp.isep.dei.project.dto.*;
 import pt.ipp.isep.dei.project.mappers.JobMapper;
 import pt.ipp.isep.dei.project.repository.*;
@@ -29,6 +26,7 @@ public class Bootstrap implements Runnable {
         //addCollaborators();
         //addMaintenance();
         //addGreenSpaces();
+        //addEntries();
     }
 
     public void serializeAll() {
@@ -111,6 +109,17 @@ public class Bootstrap implements Runnable {
 
         // Example 5: Maintenance for Mitsubishi Fuso Canter
         maintenanceRepository.createMaintenance(new MaintenanceDto("67IJ76", LocalDate.of(2024, 7, 1), 19000));
+    }
+
+    private void addEntries() {
+        EntryRepository entryRepository = Repositories.getInstance().getEntryRepository();
+
+        entryRepository.create(new ToDoEntryDto("Prunning trees", "machines required", 2, UrgencyStatus.LOW, new GreenSpaceDto("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("a@a.com"), new Password("password"), "User"))), "address", "city", "8888-000")));
+        entryRepository.create(new ToDoEntryDto("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("b@b.com"), new Password("password123"), "Admin"))), "123 Main St", "Metropolis", "1234-005")));
+        entryRepository.create(new ToDoEntryDto("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpaceDto("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("c@c.com"), new Password("pass123word"), "Manager"))), "456 Elm St", "Cityville", "5432-001")));
+        entryRepository.create(new ToDoEntryDto("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpaceDto("Community Garden", GreenSpaceType.GARDEN, 100, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("d@d.com"), new Password("password456"), "Volunteer"))), "789 Oak St", "Townsville", "6789-000")));
+        entryRepository.create(new ToDoEntryDto("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpaceDto("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("e@e.com"), new Password("pass456word"), "Supervisor"))), "101 Pine St", "Villageville", "1357-009")));
+        entryRepository.create(new ToDoEntryDto("Trimming bushes", "hedge trimmer needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Riverside Park", GreenSpaceType.MEDIUM_SIZED_PARK, 400, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("f@f.com"), new Password("password789"), "Gardener"))), "202 Cedar St", "Riverdale", "9753-001")));
     }
 
     private void addSkills() {

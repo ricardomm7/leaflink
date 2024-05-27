@@ -138,5 +138,8 @@ public class VehicleRepository implements Serializable {
         return lastMaintenanceKm;
     }
 
+    public void setVehicleAvailability(int vehicleIndex, Boolean isAvailable) {
+        vehicleList.get(vehicleIndex).setAvailable(isAvailable);
+    }
 }
 

@@ -4,7 +4,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US026
+'title System Sequence Diagram (SSD) - US026
 
 autonumber
 

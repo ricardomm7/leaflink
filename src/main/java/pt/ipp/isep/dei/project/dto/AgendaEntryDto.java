@@ -107,4 +107,9 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
     public void setUrgencyStatus(UrgencyStatus urgencyStatus) {
         this.urgencyStatus = urgencyStatus;
     }
+
+    @Override
+    public String toString() {
+        return this.title + " " + description;
+    }
 }
