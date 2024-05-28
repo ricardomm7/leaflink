@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.repository.JobRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
+import java.util.List;
+
 /**
  * The CreateJobController class manages the creation of job positions within the application.
  * It interacts with the JobRepository to store job-related information.
@@ -27,6 +29,24 @@ public class CreateJobController {
      */
     public void createJob(JobDto dto) {
         jobRepository.createJob(dto);
+    }
+
+    /**
+     * Gets job list.
+     *
+     * @return the job list
+     */
+    public List<JobDto> getJobList() {
+        return jobRepository.getJobList();
+    }
+
+    /**
+     * Remove job.
+     *
+     * @param index the index
+     */
+    public void removeJob(int index) {
+        jobRepository.removeJob(index);
     }
 }
 

@@ -4,8 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import pt.ipp.isep.dei.project.Main;
+import pt.ipp.isep.dei.project.application.controller.CreateJobController;
 import pt.ipp.isep.dei.project.application.controller.CreateSkillController;
+import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 
 import java.util.ArrayList;
@@ -14,18 +22,71 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CollaboratorsMenuGUI {
-    private final CreateSkillController jc = new CreateSkillController();
+    private final CreateSkillController skillC = new CreateSkillController();
+    private final CreateJobController jobC = new CreateJobController();
     private List<String> allSkills;
+    private List<String> allJobs;
 
-
-    @FXML
-    private Label functionNameLabel;
 
     @FXML
     private ListView<String> listViewSkills;
 
     @FXML
     private Button removeBtn;
+
+    @FXML
+    private ListView<String> listViewJobs;
+
+    @FXML
+    private TextField jobSearchTextArea;
+
+    @FXML
+    private Button removeBtnJob;
+
+
+    @FXML
+    void handleJobSearchBtn(ActionEvent event) {
+        String searchText = jobSearchTextArea.getText().toLowerCase();
+        List<String> filteredJobs = allJobs.stream()
+                .filter(job -> job.toLowerCase().contains(searchText))
+                .collect(Collectors.toList());
+        ObservableList<String> observableJobsList = FXCollections.observableArrayList(filteredJobs);
+        listViewJobs.setItems(observableJobsList);
+    }
+
+    @FXML
+    void handleJobAddBtn(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("New Job");
+        dialog.setHeaderText("Job Creation");
+        dialog.setContentText("Job designation: ");
+
+        Optional<String> result = dialog.showAndWait();
+
+        if (result.isPresent()) {
+            String jobDescription = result.get().trim();
+            if (!jobDescription.isEmpty()) {
+                jobC.createJob(new JobDto(jobDescription));
+                updateJobsList();
+            }
+        }
+    }
+
+    @FXML
+    void handelJobRemoveBtn(ActionEvent event) {
+        int selectedIndex = listViewJobs.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            jobC.removeJob(selectedIndex);
+            updateJobsList();
+        }
+    }
+
+    @FXML
+    void handleEnterSearchBarJob(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            handleJobSearchBtn(new ActionEvent());
+        }
+    }
 
     @FXML
     private TextField skillsSearchTextArea;
@@ -52,10 +113,16 @@ public class CollaboratorsMenuGUI {
         if (result.isPresent()) {
             String skillDescription = result.get().trim();
             if (!skillDescription.isEmpty()) {
-                jc.createSkill(new SkillDto(skillDescription));
-                allSkills.add(skillDescription);
+                skillC.createSkill(new SkillDto(skillDescription));
                 updateSkillsList();
             }
+        }
+    }
+
+    @FXML
+    void handleEnterSearchBar(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            handleSearchBtn(new ActionEvent());
         }
     }
 
@@ -63,7 +130,7 @@ public class CollaboratorsMenuGUI {
     void handelRemoveBtn(ActionEvent event) {
         int selectedIndex = listViewSkills.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            jc.removeSkill(selectedIndex);
+            skillC.removeSkill(selectedIndex);
             updateSkillsList();
         }
     }
@@ -75,7 +142,11 @@ public class CollaboratorsMenuGUI {
 
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de colaboradores (caso necessário)
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -109,7 +180,7 @@ public class CollaboratorsMenuGUI {
     }
 
     private void updateSkillsList() {
-        List<SkillDto> skillsListDto = jc.getSkillsDto();
+        List<SkillDto> skillsListDto = skillC.getSkillsDto();
         allSkills = new ArrayList<>();
         for (SkillDto s : skillsListDto) {
             allSkills.add(s.getDesignation());
@@ -118,12 +189,28 @@ public class CollaboratorsMenuGUI {
         listViewSkills.setItems(observableSkillsList);
     }
 
+    private void updateJobsList() {
+        List<JobDto> jobListDto = jobC.getJobList();
+        allJobs = new ArrayList<>();
+        for (JobDto s : jobListDto) {
+            allJobs.add(s.getTitle());
+        }
+        ObservableList<String> observableJobsList = FXCollections.observableArrayList(allJobs);
+        listViewJobs.setItems(observableJobsList);
+    }
+
     @FXML
     public void initialize() {
         updateSkillsList();
+        updateJobsList();
         listViewSkills.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             removeBtn.setDisable(newValue == null);
         });
         removeBtn.setDisable(true);
+
+        listViewJobs.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            removeBtnJob.setDisable(newValue == null);
+        });
+        removeBtnJob.setDisable(true);
     }
 }

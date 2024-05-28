@@ -68,4 +68,13 @@ public class JobRepository implements Serializable {
     public List<JobDto> getJobList() {
         return JobMapper.toDtoList(jobList);
     }
+
+    /**
+     * Remove job.
+     *
+     * @param index the index
+     */
+    public void removeJob(int index) {
+        jobList.remove(index);
+    }
 }

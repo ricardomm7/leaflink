@@ -31,11 +31,21 @@ public class CreateSkillController {
         skillRepository.createSkill(skillDto);
     }
 
+    /**
+     * Gets skills dto.
+     *
+     * @return the skills dto
+     */
     public List<SkillDto> getSkillsDto() {
         return skillRepository.getSkillDtoList();
     }
 
-    public void removeSkill(int index){
+    /**
+     * Remove skill.
+     *
+     * @param index the index
+     */
+    public void removeSkill(int index) {
         skillRepository.removeSkill(index);
     }
 }

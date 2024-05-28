@@ -19,7 +19,7 @@
     -fx-border-radius: 0;
     -fx-border-width: 1px;
     -fx-font-family: Arial;
-    -fx-font-size: 16;
+    -fx-font-size: 15;
     -fx-font-weight: bold;
     -fx-text-fill: #585858; /* Define a cor da fonte para azul */
 
@@ -191,4 +191,28 @@
     -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
     -fx-text-fill: white;
 }
+
+.tab-pane .tab-header-background {
+    -fx-background-color: white;
+}
+
+.tab {
+    -fx-background-radius: 5 5 0 0; /* Cantos arredondados na parte superior */
+    -fx-background-color: #797979; /* Cor de fundo */
+    -fx-border-color: transparent; /* Cor da borda transparente */
+    -fx-border-width: 0; /* Largura da borda zero para garantir que não haja borda visível */
+}
+
+
+.tab:selected{
+    -fx-background-color: #90be20;
+}
+
+.border-line{
+    -fx-border-width: 4px 0px 0px 0px; /* Borda esquerda maior quando pressionado */
+    -fx-border-color: #90be20;
+}
+
+
+
 

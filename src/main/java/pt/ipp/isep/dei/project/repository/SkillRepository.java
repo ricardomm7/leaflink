@@ -70,6 +70,11 @@ public class SkillRepository implements Serializable {
         return SkillMapper.ListToDto(skillList);
     }
 
+    /**
+     * Remove skill.
+     *
+     * @param index the index
+     */
     public void removeSkill(int index) {
         skillList.remove(index);
     }
