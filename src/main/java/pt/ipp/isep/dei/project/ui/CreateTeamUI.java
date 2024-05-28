@@ -44,7 +44,7 @@ public class CreateTeamUI implements Runnable {
             return;
         }
         int minTeamSize = getMinTeamSizeFromUser();
-        int maxTeamSize = getMaxTeamSizeFromUser();
+        int maxTeamSize = getMaxTeamSizeFromUser(minTeamSize);
         List<CollaboratorDto> collaborators = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
         if (collaborators.isEmpty()) {
             System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
@@ -106,17 +106,17 @@ public class CreateTeamUI implements Runnable {
      *
      * @return The maximum team size entered by the user.
      */
-    private int getMaxTeamSizeFromUser() {
+    private int getMaxTeamSizeFromUser(int minTeamSize) {
         int maxTeamSize;
         while (true) {
             System.out.print("Enter maximum team size: ");
             if (scanner.hasNextInt()) {
                 maxTeamSize = scanner.nextInt();
                 scanner.nextLine(); // Consume newline character
-                if (maxTeamSize > 0) {
+                if (maxTeamSize > minTeamSize) {
                     break;
                 } else {
-                    System.out.println("Maximum team size must be greater than zero.");
+                    System.out.println("Maximum team size must be greater than minimum team size.");
                 }
             } else {
                 System.out.println("Invalid input. Please enter a valid number.");
