@@ -6,13 +6,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * The Graphviz class provides methods to create and execute a Graphviz DOT file.
+ * This class allows for the creation of a graph in DOT format and then runs the Graphviz tool to generate an image.
+ */
 public abstract class Graphviz {
 
     /**
-     * Exectes the GraphViz process to generate a visualization of the graph.
+     * Executes the Graphviz tool to generate an image from a list of routes.
+     * This method creates a DOT file representing the graph and runs the Graphviz tool to generate an SVG image.
      *
-     * @param tree     the list of routes representing the graph
-     * @param filename the filename for the output image
+     * @param tree     the list of routes representing the graph.
+     * @param filename the name of the output file (without extension).
      */
     public static void execute(List<Route> tree, String filename) {
         try {
@@ -32,10 +37,11 @@ public abstract class Graphviz {
     }
 
     /**
-     * Writes the graph in DOT format to a temporary file
+     * Writes the graph in DOT format to a temporary file.
+     * This method creates a DOT file representing the graph from the list of routes provided.
      *
-     * @param tree the list of routes representing the graph
-     * @throws FileNotFoundException if the file to write is not found
+     * @param tree the list of routes representing the graph.
+     * @throws FileNotFoundException if the file cannot be created or written to.
      */
     private static void writeGraphvizDotFile(List<Route> tree) throws FileNotFoundException {
         PrintWriter pW = new PrintWriter(System.getProperty("user.dir") + File.separator + "/temp/temp_gv_file.dot");
@@ -44,7 +50,7 @@ public abstract class Graphviz {
                 "node [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
                 "edge [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
                 "layout=dot\n");
-        // Writes aeach route of the graph to the DOT FILE
+        // Writes each route of the graph to the DOT file
         for (Route r : tree) {
             pW.println(r.getStartPoint().getID() + " -- " + r.getEndPoint().getID() + " [label=\"" + r.getCost() + "\"]");
         }

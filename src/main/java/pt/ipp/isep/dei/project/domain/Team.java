@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * The Team class represents a team composed of collaborators with specific skills and team size constraints.
- * It holds information such as the required skills, collaborators, minimum team size, and maximum team size.
+ * The Team class represents a team of collaborators working together.
  */
 public class Team implements Serializable {
     private final List<Skill> skills;
@@ -14,9 +13,9 @@ public class Team implements Serializable {
     private final List<Collaborator> collaborators;
 
     /**
-     * Constructs a new Team with the given list of collaborators.
+     * Constructs a team with the given collaborators.
      *
-     * @param collaborators The list of collaborators.
+     * @param collaborators The list of collaborators in the team.
      */
     public Team(List<Collaborator> collaborators) {
         this.collaborators = collaborators;
@@ -26,54 +25,51 @@ public class Team implements Serializable {
     }
 
     /**
-     * Constructs a new Team object with the provided skills, collaborators, and team size constraints.
+     * Constructs a team with the given skills, collaborators, minimum and maximum team size.
      *
-     * @param skills        the required skills for the team
-     * @param collaborators the list of collaborators in the team
-     * @param minTeamSize   the minimum team size constraint
-     * @param maxTeamSize   the maximum team size constraint
+     * @param skills       The list of skills possessed by the team.
+     * @param collaborators The list of collaborators in the team.
+     * @param minTeamSize  The minimum size of the team.
+     * @param maxTeamSize  The maximum size of the team.
      */
-
     public Team(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize) {
         this.skills = skills;
         this.collaborators = collaborators;
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
-
     }
 
-
     /**
-     * Retrieves the required skills for the team.
+     * Gets the skills of the team.
      *
-     * @return the required skills for the team
+     * @return The list of skills possessed by the team.
      */
     public List<Skill> getSkills() {
         return skills;
     }
 
     /**
-     * Retrieves the list of collaborators in the team.
+     * Gets the collaborators in the team.
      *
-     * @return the list of collaborators in the team
+     * @return The list of collaborators in the team.
      */
     public List<Collaborator> getCollaborators() {
         return collaborators;
     }
 
     /**
-     * Retrieves the minimum team size constraint.
+     * Gets the minimum size of the team.
      *
-     * @return the minimum team size constraint
+     * @return The minimum size of the team.
      */
     public int getMinTeamSize() {
         return minTeamSize;
     }
 
     /**
-     * Retrieves the maximum team size constraint.
+     * Gets the maximum size of the team.
      *
-     * @return the maximum team size constraint
+     * @return The maximum size of the team.
      */
     public int getMaxTeamSize() {
         return maxTeamSize;

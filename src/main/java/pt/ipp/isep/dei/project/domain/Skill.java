@@ -4,15 +4,17 @@ import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
- * This class represents a skill.
+ * The Skill class represents a skill with a designation.
  */
 public class Skill implements Serializable {
+
+    // The designation of the skill
     private String designation;
 
     /**
-     * Constructs a new Skill object with the specified designation.
+     * Constructs a skill with the given designation.
      *
-     * @param designation the designation of the skill.
+     * @param designation The designation of the skill.
      */
     public Skill(String designation) {
         setDesignation(designation);
@@ -21,8 +23,8 @@ public class Skill implements Serializable {
     /**
      * Sets the designation of the skill.
      *
-     * @param designation the designation to set.
-     * @throws IllegalArgumentException if the skill designation is invalid.
+     * @param designation The designation of the skill.
+     * @throws IllegalArgumentException If the designation is invalid.
      */
     public void setDesignation(String designation) {
         if (!verifyFilled(designation) && verifySpecialCharacters(designation)) {
@@ -33,10 +35,10 @@ public class Skill implements Serializable {
     }
 
     /**
-     * Verifies if the designation contains special characters.
+     * Verifies if the given designation contains only alphanumeric characters and spaces.
      *
-     * @param designation the designation to verify.
-     * @return true if the designation contains only letters, numbers, or spaces, false otherwise.
+     * @param designation The designation to verify.
+     * @return True if the designation contains only alphanumeric characters and spaces, false otherwise.
      */
     private boolean verifySpecialCharacters(String designation) {
         String regex = "^[a-zA-Z0-9 ]+$";
@@ -44,10 +46,10 @@ public class Skill implements Serializable {
     }
 
     /**
-     * Verifies if the designation is filled.
+     * Verifies if the given designation is empty or consists only of whitespace characters.
      *
-     * @param designation the designation to verify.
-     * @return true if the designation is not empty after trimming, false otherwise.
+     * @param designation The designation to verify.
+     * @return True if the designation is empty or consists only of whitespace characters, false otherwise.
      */
     private boolean verifyFilled(String designation) {
         return designation.trim().isEmpty();
@@ -56,7 +58,7 @@ public class Skill implements Serializable {
     /**
      * Gets the designation of the skill.
      *
-     * @return the designation of the skill.
+     * @return The designation of the skill.
      */
     public String getDesignation() {
         return designation;

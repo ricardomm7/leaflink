@@ -1,26 +1,31 @@
 package pt.ipp.isep.dei.project.domain;
 
+/**
+ * The Point class represents a point in a graph, particularly a water point.
+ * It holds a unique identifier for the point.
+ */
 public class Point {
 
-    // The unique identifier of a point in the graph, that is a water point in the context of the graph
+    /**
+     * The unique identifier of the point.
+     */
     private final String ID;
 
     /**
-     * Returns the unique identifier of the point.
+     * Constructs a point with the given identifier.
      *
-     * @return the identifier of the point
+     * @param ID the unique identifier of the point
      */
-    public String getID() {
-        return ID;
+    public Point(String ID) {
+        this.ID = ID;
     }
 
     /**
-     * Constructs a Point object with the given identifier.
+     * Gets the unique identifier of the point.
      *
-     * @param nome the unique identifier of the point
+     * @return the unique identifier of the point
      */
-    public Point(String nome) {
-
-        this.ID = nome;
+    public String getID() {
+        return ID;
     }
 }

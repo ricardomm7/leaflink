@@ -8,22 +8,35 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * This class provides methods to import data from a CSV file, creates routes and writes MST routes to a new CSV file
+ * The ExternalCSV class provides methods for importing routes from a CSV file
+ * and exporting the minimum spanning tree (MST) to a CSV file.
+ * It also provides functionality to count the lines in the CSV file.
  */
 public class ExternalCSV {
 
-    // Path to the CSV file
+    /**
+     * Path to the CSV file.
+     */
     private final String CSVFilepath;
 
-    // List to store all routes from the CSV file
+    /**
+     * List to store all routes from the CSV file.
+     */
     private final List<Route> allRoutes = new ArrayList<>();
 
-    // Constructor to initialize the CSV file path
+    /**
+     * Constructor to initialize the CSV file path.
+     *
+     * @param CSVFilepath the path to the CSV file
+     */
     public ExternalCSV(String CSVFilepath) {
         this.CSVFilepath = CSVFilepath;
     }
 
-    // Method to import data from the CSV file and create routes
+    /**
+     * Method to import data from the CSV file and create routes.
+     * It reads the CSV file line by line, parses the data, and creates Route objects.
+     */
     public void importAndCreateRoutes() {
         try (Scanner scanner = new Scanner(new File(this.CSVFilepath))) {
             // Read each line from the CSV file
@@ -53,19 +66,19 @@ public class ExternalCSV {
     }
 
     /**
-     * Method to get all routes created from the CSV file
+     * Returns a list of all routes imported from the CSV file.
      *
-     * @return a copy of the list to prevent external modification
+     * @return a list of all routes
      */
     public List<Route> getAllRoutes() {
         return new ArrayList<>(this.allRoutes);
     }
 
     /**
-     * Writes the Minimum Spanning Tree (MST) routes to a CSV file
+     * Writes the minimum spanning tree (MST) to a CSV file.
      *
-     * @param minimumSpanningTree the list of routes forming the MST
-     * @param path                the file path to write the MST CSV file
+     * @param minimumSpanningTree the list of routes that form the MST
+     * @param path                the path where the CSV file will be saved
      */
     public static void writeMSTCSV(List<Route> minimumSpanningTree, String path) {
         try (PrintWriter pW = new PrintWriter(System.getProperty("user.dir") + File.separator + "/goOut/" + path + "_out.csv")) {
@@ -77,7 +90,6 @@ public class ExternalCSV {
             }
             pW.println();
             pW.println("Accumulated Cost: " + cost);
-            pW.close();
         } catch (IOException e) {
             // Handles IOException if unable to write the CSV file
             System.out.println("Error writing CSV MST: " + e.getMessage());
@@ -85,9 +97,9 @@ public class ExternalCSV {
     }
 
     /**
-     * Cpunts the total number of lines in the CSv file
+     * Counts the number of lines in the CSV file.
      *
-     * @return the number of lines in the CSv file
+     * @return the number of lines in the CSV file
      */
     public int countLines() {
         int lineCount = 0;
@@ -99,7 +111,7 @@ public class ExternalCSV {
                 lineCount++;
             }
         } catch (IOException e) {
-            // Handles IOException if unable to read the CSv file
+            // Handles IOException if unable to read the CSV file
             System.out.println("There was an error counting lines: " + e.getMessage());
         }
 

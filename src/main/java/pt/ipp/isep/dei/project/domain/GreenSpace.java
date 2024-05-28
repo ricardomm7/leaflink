@@ -5,7 +5,8 @@ import pt.ipp.isep.dei.project.application.session.UserSession;
 import java.io.Serializable;
 
 /**
- * Represents a green space with a name, type, area, manager, and address.
+ * The GreenSpace class represents a green space area managed by a user.
+ * It includes details such as the name, type, area, manager, and address of the green space.
  */
 public class GreenSpace implements Serializable {
     private String name;
@@ -15,14 +16,13 @@ public class GreenSpace implements Serializable {
     private Address address;
 
     /**
-     * Constructs a new GreenSpace with the specified name, type, area, manager, and address.
+     * Constructs a new GreenSpace with the specified details.
      *
-     * @param name    the name of the green space
-     * @param type    the type of the green space
-     * @param area    the area of the green space in hectares
-     * @param manager the manager of the green space
-     * @param address the address of the green space
-     * @throws IllegalArgumentException if the name is null or empty, or if the area is not greater than 0
+     * @param name    the name of the green space.
+     * @param type    the type of the green space.
+     * @param area    the area of the green space in hectares.
+     * @param manager the manager of the green space.
+     * @param address the address of the green space.
      */
     public GreenSpace(String name, GreenSpaceType type, double area, UserSession manager, Address address) {
         setArea(area);
@@ -35,8 +35,8 @@ public class GreenSpace implements Serializable {
     /**
      * Sets the name of the green space.
      *
-     * @param name the new name of the green space
-     * @throws IllegalArgumentException if the name is null or empty
+     * @param name the name of the green space.
+     * @throws IllegalArgumentException if the name is null or empty.
      */
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -48,8 +48,8 @@ public class GreenSpace implements Serializable {
     /**
      * Sets the area of the green space.
      *
-     * @param area the new area of the green space in hectares
-     * @throws IllegalArgumentException if the area is not greater than 0
+     * @param area the area of the green space in hectares.
+     * @throws IllegalArgumentException if the area is less than or equal to 0.
      */
     public void setArea(double area) {
         if (area <= 0) {
@@ -61,43 +61,43 @@ public class GreenSpace implements Serializable {
     /**
      * Gets the name of the green space.
      *
-     * @return the name of the green space
+     * @return the name of the green space.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Retrieves the address of the green space.
+     * Gets the address of the green space.
      *
-     * @return the address of the green space
+     * @return the address of the green space.
      */
     public Address getAddress() {
         return address;
     }
 
     /**
-     * Retrieves the type of the green space.
+     * Gets the type of the green space.
      *
-     * @return the type of the green space
+     * @return the type of the green space.
      */
     public GreenSpaceType getType() {
         return type;
     }
 
     /**
-     * Retrieves the area of the green space in square meters.
+     * Gets the area of the green space.
      *
-     * @return the area of the green space
+     * @return the area of the green space in hectares.
      */
     public double getArea() {
         return area;
     }
 
     /**
-     * Retrieves the manager of the green space.
+     * Gets the manager of the green space.
      *
-     * @return the user session of the manager
+     * @return the manager of the green space.
      */
     public UserSession getManager() {
         return manager;

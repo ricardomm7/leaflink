@@ -9,21 +9,25 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The type Register to do entry ui.
+ * The RegisterToDoEntryUI class provides a user interface for registering a ToDo entry.
+ * It interacts with the user through the console to gather information required to create a ToDo entry.
+ * Implements Runnable to allow the registration process to run on a separate thread if needed.
  */
 public class RegisterToDoEntryUI implements Runnable {
 
     private final RegisterToDoEntryController controller;
 
     /**
-     * Constructs a new RegisterGreenSpaceUI object.
+     * Constructs a new RegisterToDoEntryUI instance and initializes the controller.
      */
     public RegisterToDoEntryUI() {
         this.controller = new RegisterToDoEntryController();
     }
 
     /**
-     * Register to do entry.
+     * Registers a new ToDo entry by interacting with the user through the console.
+     * It collects the title, description, green space, urgency status, and duration from the user,
+     * and then attempts to register the ToDo entry using the controller.
      */
     public void registerToDoEntry() {
         Scanner sc = new Scanner(System.in);
@@ -43,7 +47,6 @@ public class RegisterToDoEntryUI implements Runnable {
             }
             int gsIndex = sc.nextInt();
             GreenSpaceDto greenSpaceDto = greenSpaceDtos.get(gsIndex - 1);
-
 
             System.out.println("Select degree of urgency: ");
             UrgencyStatus[] dgUrg = UrgencyStatus.values();
@@ -71,10 +74,12 @@ public class RegisterToDoEntryUI implements Runnable {
         } catch (Exception e) {
             System.err.println("An unexpected error occurred: " + e.getMessage());
         }
-
     }
 
-
+    /**
+     * Runs the registration process for a ToDo entry.
+     * This method is part of the Runnable interface and allows the registration process to be executed on a separate thread.
+     */
     @Override
     public void run() {
         registerToDoEntry();

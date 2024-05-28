@@ -3,32 +3,23 @@ package pt.ipp.isep.dei.project.domain;
 import java.io.Serializable;
 
 /**
- * The enum Degree of urgency.
+ * The UrgencyStatus enum represents different levels of urgency for tasks.
  */
 public enum UrgencyStatus implements Serializable {
 
-    /**
-     * The High.
-     */
     HIGH {
         public String toString() {
             return "High";
         }
     },
-    /**
-     * The Medium.
-     */
     MEDIUM {
         public String toString() {
             return "Medium";
         }
     },
-    /**
-     * The Low.
-     */
     LOW {
         public String toString() {
             return "Low";
         }
-    },
+    }
 }

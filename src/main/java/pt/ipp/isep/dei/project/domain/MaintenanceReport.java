@@ -1,18 +1,26 @@
 package pt.ipp.isep.dei.project.domain;
 
-
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
- * The Maintenance class represents the object maintenance (Check-up).
- * It holds information such as vehicle plate, date and kilometers (at the moment of the maintenance).
+ * The MaintenanceReport class is responsible for creating maintenance reports
+ * based on a list of vehicles and their respective maintenance records.
  */
 public class MaintenanceReport implements Serializable {
+
+    /**
+     * Creates a maintenance report based on the provided vehicle and maintenance lists.
+     * The report includes details such as vehicle plate, brand, model, current kilometers,
+     * maintenance frequency, last maintenance kilometers, and next maintenance kilometers.
+     *
+     * @param vehicleDtoList     the list of vehicle data transfer objects
+     * @param maintenanceDtoList the list of maintenance data transfer objects
+     * @return a formatted maintenance report as a String
+     */
     public String createReport(List<VehicleDto> vehicleDtoList, List<MaintenanceDto> maintenanceDtoList) {
         StringBuilder reportBuilder = new StringBuilder();
         boolean hasValidEntry = false;
@@ -49,10 +57,16 @@ public class MaintenanceReport implements Serializable {
         return reportBuilder.toString();
     }
 
+    /**
+     * Retrieves the latest maintenance record for the specified vehicle from the maintenance list.
+     *
+     * @param vehicle        the vehicle data transfer object
+     * @param maintenanceList the list of maintenance data transfer objects
+     * @return the latest maintenance data transfer object for the vehicle, or null if none found
+     */
     private static MaintenanceDto getLatestMaintenance(VehicleDto vehicle, List<MaintenanceDto> maintenanceList) {
         MaintenanceDto latestMaintenance = null;
 
-        // Find the latest maintenance for the vehicle
         for (MaintenanceDto maintenance : maintenanceList) {
             if (maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
                 if (latestMaintenance == null || maintenance.getDate().isAfter(latestMaintenance.getDate())) {
@@ -64,16 +78,15 @@ public class MaintenanceReport implements Serializable {
     }
 
     /**
-     * Get the last maintenance of a vehicle
+     * Retrieves the latest maintenance record for the specified vehicle from the maintenance list.
      *
-     * @param vehicle
-     * @param maintenanceList
-     * @return
+     * @param vehicle        the vehicle object
+     * @param maintenanceList the list of maintenance objects
+     * @return the latest maintenance object for the vehicle, or null if none found
      */
     private static Maintenance getMaintenance(Vehicle vehicle, List<Maintenance> maintenanceList) {
         Maintenance latestMaintenance = null;
 
-        // Find the latest maintenance for the vehicle
         for (Maintenance maintenance : maintenanceList) {
             if (maintenance.getVehiclePlate().equalsIgnoreCase(vehicle.getVehiclePlate())) {
                 if (latestMaintenance == null || maintenance.getDate().isAfter(latestMaintenance.getDate())) {

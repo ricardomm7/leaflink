@@ -3,19 +3,21 @@ package pt.ipp.isep.dei.project.domain;
 import java.io.Serializable;
 
 /**
- * This class represents an address.
+ * The Address class represents a physical address with street address, city, and zip code.
  */
 public class Address implements Serializable {
+
     private String address;
     private String city;
     private String zipCode;
 
     /**
-     * Constructs a new Address object with the specified address, city, and zip code.
+     * Constructs a new Address with the specified address, city, and zip code.
      *
-     * @param address the address.
-     * @param city    the city.
-     * @param zipCode the zip code.
+     * @param address the street address.
+     * @param city the city.
+     * @param zipCode the zip code, which must be in the format ####-###.
+     * @throws IllegalArgumentException if the zip code does not match the required format.
      */
     public Address(String address, String city, String zipCode) {
         setAddress(address);
@@ -26,8 +28,8 @@ public class Address implements Serializable {
     /**
      * Sets the zip code of the address.
      *
-     * @param zipCode the zip code to set.
-     * @throws IllegalArgumentException if the zip code format is invalid.
+     * @param zipCode the new zip code, which must be in the format ####-###.
+     * @throws IllegalArgumentException if the zip code does not match the required format.
      */
     public void setZipCode(String zipCode) {
         if (verifyZipCode(zipCode)) {
@@ -38,34 +40,34 @@ public class Address implements Serializable {
     }
 
     /**
-     * Sets the address.
+     * Sets the street address.
      *
-     * @param address the address to set.
+     * @param address the new street address.
      */
     public void setAddress(String address) {
         this.address = address;
     }
 
     /**
-     * Sets the city.
+     * Sets the city of the address.
      *
-     * @param city the city to set.
+     * @param city the new city.
      */
     public void setCity(String city) {
         this.city = city;
     }
 
     /**
-     * Gets the address.
+     * Gets the street address.
      *
-     * @return the address.
+     * @return the street address.
      */
     public String getAddress() {
         return address;
     }
 
     /**
-     * Gets the city.
+     * Gets the city of the address.
      *
      * @return the city.
      */
@@ -74,7 +76,7 @@ public class Address implements Serializable {
     }
 
     /**
-     * Gets the zip code.
+     * Gets the zip code of the address.
      *
      * @return the zip code.
      */
@@ -83,17 +85,15 @@ public class Address implements Serializable {
     }
 
     /**
-     * Verifies if the zip code has the correct format.
+     * Verifies if the zip code matches the required format ####-###.
      *
      * @param zipCode the zip code to verify.
-     * @return true if the zip code has the correct format, false otherwise.
+     * @return true if the zip code matches the required format, false otherwise.
      */
     private boolean verifyZipCode(String zipCode) {
-        // Verifies if the zip code has the correct length
         if (zipCode == null || zipCode.length() != 8 || zipCode.charAt(4) != '-') {
             return false;
         }
-        // Verifies if the characters in the correct positions are digits
         for (int i = 0; i < 8; i++) {
             if (i != 4 && !Character.isDigit(zipCode.charAt(i))) {
                 return false;
@@ -102,6 +102,11 @@ public class Address implements Serializable {
         return true;
     }
 
+    /**
+     * Returns a string representation of the address.
+     *
+     * @return a string representation of the address.
+     */
     @Override
     public String toString() {
         return this.address + ", " + this.city + " (" + this.zipCode + ")";

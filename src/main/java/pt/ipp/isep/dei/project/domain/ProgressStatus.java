@@ -2,25 +2,32 @@ package pt.ipp.isep.dei.project.domain;
 
 import java.io.Serializable;
 
+/**
+ * The ProgressStatus enum represents the progress status of an agenda entry.
+ * It includes the following status: PENDING, PLANED, COMPLETED, POSTPONED, and CANCELLED.
+ */
 public enum ProgressStatus implements Serializable {
+
     /**
-     * Pending status.
+     * Represents a pending status.
      */
     PENDING {
         public String toString() {
             return "Pending";
         }
     },
+
     /**
-     * The Planed status.
+     * Represents a planned status.
      */
     PLANED {
         public String toString() {
-            return "Planed";
+            return "Planned";
         }
     },
+
     /**
-     * The Completed status.
+     * Represents a completed status.
      */
     COMPLETED {
         public String toString() {
@@ -29,7 +36,7 @@ public enum ProgressStatus implements Serializable {
     },
 
     /**
-     * The Postponed status.
+     * Represents a postponed status.
      */
     POSTPONED {
         public String toString() {
@@ -38,7 +45,7 @@ public enum ProgressStatus implements Serializable {
     },
 
     /**
-     * The Cancelled status.
+     * Represents a cancelled status.
      */
     CANCELLED {
         public String toString() {

@@ -3,29 +3,33 @@ package pt.ipp.isep.dei.project.domain;
 import java.io.Serializable;
 
 /**
- * The enum Green space type.
+ * The GreenSpaceType enum represents different types of green spaces.
+ * Each enum constant has a specific string representation.
  */
 public enum GreenSpaceType implements Serializable {
     /**
-     * The Garden.
+     * Represents a garden type of green space.
      */
     GARDEN {
+        @Override
         public String toString() {
             return "Garden";
         }
     },
     /**
-     * The Medium sized park.
+     * Represents a medium-sized park type of green space.
      */
     MEDIUM_SIZED_PARK {
+        @Override
         public String toString() {
             return "Medium-Sized Park";
         }
     },
     /**
-     * The Large sized park.
+     * Represents a large-sized park type of green space.
      */
     LARGE_SIZED_PARK {
+        @Override
         public String toString() {
             return "Large-Sized Park";
         }

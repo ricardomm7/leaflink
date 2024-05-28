@@ -12,7 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The type Register to do entry controller.
+ * The RegisterToDoEntryController class is responsible for handling the logic related to registering ToDo entries.
+ * It interacts with the repositories to manage GreenSpaces and ToDo entries.
  */
 public class RegisterToDoEntryController {
 
@@ -21,8 +22,8 @@ public class RegisterToDoEntryController {
     private final EntryRepository entryRepository;
 
     /**
-     * Constructs a new RegisterGreenSpaceController object.
-     * Initializes the repositories and the greenSpaceRepository.
+     * Constructs a new RegisterToDoEntryController instance.
+     * Initializes the repositories required for managing GreenSpaces and ToDo entries.
      */
     public RegisterToDoEntryController() {
         repositories = Repositories.getInstance();
@@ -31,9 +32,9 @@ public class RegisterToDoEntryController {
     }
 
     /**
-     * Get green spaces dto list.
+     * Retrieves a list of GreenSpaceDto objects managed by the current user.
      *
-     * @return the list
+     * @return a list of GreenSpaceDto objects managed by the current user.
      */
     public List<GreenSpaceDto> getGreenSpacesDto() {
         List<GreenSpaceDto> listToReturn = new LinkedList<>();
@@ -46,8 +47,12 @@ public class RegisterToDoEntryController {
         return listToReturn;
     }
 
+    /**
+     * Creates a new ToDo entry by saving the provided ToDoEntryDto object.
+     *
+     * @param toDoEntryDto the ToDoEntryDto object to be saved.
+     */
     public void createNewToDoEntry(ToDoEntryDto toDoEntryDto) {
         entryRepository.create(toDoEntryDto);
-
     }
 }

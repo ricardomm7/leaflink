@@ -1,13 +1,13 @@
 package pt.ipp.isep.dei.project.domain;
 
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * The Maintenance class represents the object maintenance (Check-up).
- * It holds information such as vehicle plate, date and kilometers (at the moment of the maintenance).
+ * The Maintenance class represents a maintenance record for a vehicle,
+ * containing the vehicle's plate number, the date of the maintenance,
+ * and the current kilometers at the time of the maintenance.
  */
 public class Maintenance implements Serializable {
     private final String vehiclePlate;
@@ -15,9 +15,11 @@ public class Maintenance implements Serializable {
     private final int km;
 
     /**
-     * Instantiates a new Maintenance with verifications and exceptions.
+     * Constructs a new Maintenance object with the specified vehicle plate, date, and kilometers.
      *
-     * @param maintenanceDto the maintenance dto
+     * @param vehiclePlate the plate number of the vehicle
+     * @param date         the date of the maintenance
+     * @param currentKm    the kilometers at the time of the maintenance
      */
     public Maintenance(String vehiclePlate, LocalDate date, int currentKm) {
         this.vehiclePlate = vehiclePlate;
@@ -26,32 +28,40 @@ public class Maintenance implements Serializable {
     }
 
     /**
-     * Gets date.
+     * Gets the date of the maintenance.
      *
-     * @return the date
+     * @return the date of the maintenance
      */
     public LocalDate getDate() {
         return date;
     }
 
     /**
-     * Gets km.
+     * Gets the kilometers at the time of the maintenance.
      *
-     * @return the km
+     * @return the kilometers at the time of the maintenance
      */
     public int getKm() {
         return km;
     }
 
     /**
-     * Get vehicle plate string.
+     * Gets the plate number of the vehicle.
      *
-     * @return the string
+     * @return the plate number of the vehicle
      */
     public String getVehiclePlate() {
         return vehiclePlate;
     }
 
+    /**
+     * Compares this Maintenance object to the specified object. The result is true if and only if
+     * the argument is not null and is a Maintenance object that has the same vehicle plate,
+     * date, and kilometers as this object.
+     *
+     * @param o the object to compare this Maintenance object against
+     * @return true if the given object represents a Maintenance object equivalent to this maintenance, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,6 +72,11 @@ public class Maintenance implements Serializable {
                 Objects.equals(date, that.date);
     }
 
+    /**
+     * Returns a hash code value for this Maintenance object.
+     *
+     * @return a hash code value for this object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(vehiclePlate, date, km);

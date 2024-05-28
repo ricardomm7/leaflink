@@ -8,15 +8,41 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The NotificationService class is responsible for managing notifications to teams and collaborators
+ * about changes or updates to agenda entries and to-do entries.
+ */
 public class NotificationService {
+
+    /**
+     * Retrieves the team assigned to the specified agenda entry.
+     *
+     * @param agendaEntry the agenda entry
+     * @return the team assigned to the agenda entry
+     */
     public static Team getTeamByEntry(AgendaEntry agendaEntry) {
         return agendaEntry.getAssignedTeam();
     }
 
+    /**
+     * Retrieves the list of collaborators from the specified team.
+     *
+     * @param team the team
+     * @return the list of collaborators in the team
+     */
     public static List<Collaborator> getCollaboratorsList(Team team) {
         return team.getCollaborators();
     }
 
+    /**
+     * Notifies the team of collaborators about a postponed to-do entry by sending an email notification.
+     * The notification is written to a file in the "Notifications" directory.
+     *
+     * @param collaborators the list of collaborators to notify
+     * @param toDoEntry the to-do entry that has been postponed
+     * @param newDate the new date for the to-do entry
+     * @return true if the notification is successfully written to a file, false otherwise
+     */
     public static boolean notifyTeam(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
         List<String> emails = new ArrayList<>();
         for (Collaborator collaborator : collaborators) {
@@ -27,22 +53,22 @@ public class NotificationService {
         String body = buildEmailBody(collaborators, toDoEntry, newDate);
 
         try {
-            // Cria o diretório "Notifications" se não existir
+            // Creates the "Notifications" directory if it does not exist
             File directory = new File("Notifications");
             if (!directory.exists()) {
                 directory.mkdir();
             }
 
-            // Cria o arquivo de notificação
+            // Creates the notification file
             File file = new File(directory, subject + ".txt");
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
-            // Escreve o assunto e o corpo da mensagem no arquivo
+            // Writes the subject and body of the message to the file
             writer.write(subject);
             writer.newLine();
             writer.write(body);
 
-            // Fecha o arquivo
+            // Closes the file
             writer.close();
 
             System.out.println("Notificação escrita no arquivo: " + file.getAbsolutePath());
@@ -53,6 +79,14 @@ public class NotificationService {
         }
     }
 
+    /**
+     * Builds the body of the email notification to be sent to the collaborators.
+     *
+     * @param collaborators the list of collaborators to notify
+     * @param toDoEntry the to-do entry that has been postponed
+     * @param newDate the new date for the to-do entry
+     * @return the body of the email notification as a String
+     */
     private static String buildEmailBody(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
         StringBuilder emailBuilder = new StringBuilder();
 
@@ -71,7 +105,3 @@ public class NotificationService {
         return emailBuilder.toString();
     }
 }
-
-
-
-

@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
- * The Job class represents a job position within an organization.
- * It holds information about the job title.
+ * The Job class represents a job with a title.
+ * It ensures that the title is valid according to specified rules.
  */
 public class Job implements Serializable {
+
     private String title;
 
     /**
-     * Constructs a new Job object with the provided title.
+     * Constructs a Job with the specified title.
      *
      * @param title the title of the job
+     * @throws IllegalArgumentException if the title is invalid
      */
     public Job(String title) {
         setTitle(title);
@@ -22,8 +24,8 @@ public class Job implements Serializable {
     /**
      * Sets the title of the job.
      *
-     * @param title the title of the job
-     * @throws IllegalArgumentException if the title is empty, consists only of whitespace, or contains special characters
+     * @param title the new title of the job
+     * @throws IllegalArgumentException if the title is invalid
      */
     public void setTitle(String title) {
         if (!verifyFilled(title) && verifySpecialCharacters(title)) {
@@ -34,7 +36,7 @@ public class Job implements Serializable {
     }
 
     /**
-     * Retrieves the title of the job.
+     * Returns the title of the job.
      *
      * @return the title of the job
      */
@@ -43,10 +45,10 @@ public class Job implements Serializable {
     }
 
     /**
-     * Verifies if the title contains only alphanumeric characters and spaces.
+     * Verifies if the title contains only allowed characters.
      *
-     * @param title the title to verify
-     * @return true if the title contains only alphanumeric characters and spaces, false otherwise
+     * @param title the title to be verified
+     * @return true if the title contains only allowed characters, false otherwise
      */
     private boolean verifySpecialCharacters(String title) {
         String regex = "^[a-zA-Z0-9 ]+$";
@@ -54,10 +56,10 @@ public class Job implements Serializable {
     }
 
     /**
-     * Verifies if the title is filled.
+     * Verifies if the title is filled (not empty or only whitespace).
      *
-     * @param title the title to verify
-     * @return true if the title is not empty or consists only of whitespace, false otherwise
+     * @param title the title to be verified
+     * @return true if the title is empty or only whitespace, false otherwise
      */
     private boolean verifyFilled(String title) {
         return title.trim().isEmpty();

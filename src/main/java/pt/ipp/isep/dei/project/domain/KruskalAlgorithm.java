@@ -3,17 +3,8 @@ package pt.ipp.isep.dei.project.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This class implements the Kruskal's algorithm to find the Minimum Spanning Tree (MST) of a graph.
- */
 public class KruskalAlgorithm {
 
-    /**
-     * Finds the Minimum Spanning Tree (MST) using the Kruskal's algorithm.
-     *
-     * @param allRoutes The list of all routes in the graph.
-     * @return The list of routes forming the Minimum Spanning Tree (MST).
-     */
     public static List<Route> findMinimumSpanningTree(List<Route> allRoutes) {
         List<Route> mstRoutes = new ArrayList<>();
         bubbleSort(allRoutes);
@@ -34,11 +25,6 @@ public class KruskalAlgorithm {
         return mstRoutes;
     }
 
-    /**
-     * Sorts the list of routes by cost using the Bubble Sort algorithm.
-     *
-     * @param routes The list of routes to be sorted.
-     */
     private static void bubbleSort(List<Route> routes) {
         int n = routes.size();
         for (int i = 0; i < n - 1; i++) {
@@ -53,13 +39,6 @@ public class KruskalAlgorithm {
         }
     }
 
-    /**
-     * Finds the set to which a vertex belongs.
-     *
-     * @param pointID The ID of the vertex.
-     * @param sets    The list of sets.
-     * @return The index of the set containing the vertex.
-     */
     private static int findSet(String pointID, List<List<String>> sets) {
         for (int i = 0; i < sets.size(); i++) {
             List<String> set = sets.get(i);
@@ -75,13 +54,6 @@ public class KruskalAlgorithm {
         return sets.size() - 1;
     }
 
-    /**
-     * Unites two sets into one set.
-     *
-     * @param index1 The index of the first set.
-     * @param index2 The index of the second set.
-     * @param sets   The list of sets.
-     */
     private static void unionSets(int index1, int index2, List<List<String>> sets) {
         sets.get(index1).addAll(sets.get(index2));
         sets.remove(index2);
