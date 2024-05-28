@@ -1,4 +1,3 @@
-
 package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Skill;

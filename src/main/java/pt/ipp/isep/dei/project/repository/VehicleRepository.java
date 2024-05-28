@@ -1,4 +1,3 @@
-
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Vehicle;
@@ -80,7 +79,7 @@ public class VehicleRepository implements Serializable {
     /**
      * Verifies if a vehicle with the given VIN or license plate already exists in the repository.
      *
-     * @param vin         the VIN (Vehicle Identification Number) of the vehicle
+     * @param vin          the VIN (Vehicle Identification Number) of the vehicle
      * @param vehiclePlate the license plate of the vehicle
      * @return true if a vehicle with the given VIN or license plate exists, false otherwise
      */
@@ -133,7 +132,7 @@ public class VehicleRepository implements Serializable {
     /**
      * Gets the kilometer reading of the last maintenance for a given vehicle license plate.
      *
-     * @param vehiclePlate   the license plate of the vehicle
+     * @param vehiclePlate    the license plate of the vehicle
      * @param maintenanceList the list of MaintenanceDto objects
      * @return the kilometer reading of the last maintenance, or -1 if no maintenance record is found
      */

@@ -1,4 +1,3 @@
-
 package pt.ipp.isep.dei.project.dto;
 
 import java.io.Serializable;

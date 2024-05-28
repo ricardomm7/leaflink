@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.project.ui.console.menu.*;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
@@ -44,8 +45,15 @@ public class AuthenticationGUI {
 
         boolean success = doLogin(username, password);
         if (success) {
-            closeWindow();
-            redirectToRoleUI();
+            //closeWindow();
+            //redirectToRoleUI();
+
+            try {
+                Main.loadActivity("mainMenus/mainmenu.fxml", true, 1205, 880);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         } else {
             showAlert("Login Failed", "Invalid UserId and/or Password.");
         }
@@ -98,7 +106,6 @@ public class AuthenticationGUI {
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_QAM, new QamUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_COLLAB, new ClbUI()));
-
 
 
         //TODO: Complete with other user roles and related RoleUI

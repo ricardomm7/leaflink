@@ -1,4 +1,3 @@
-
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
@@ -79,9 +78,9 @@ public class GreenSpaceRepository implements Serializable {
      *
      * @param loggedUser the UserSession object representing the logged-in user
      * @return the organized list of GreenSpaceDto objects
-     * @throws ClassNotFoundException      if the sorting algorithm class is not found
-     * @throws InstantiationException      if an instance of the sorting algorithm class cannot be created
-     * @throws IllegalAccessException      if the sorting algorithm class or its null constructor is not accessible
+     * @throws ClassNotFoundException if the sorting algorithm class is not found
+     * @throws InstantiationException if an instance of the sorting algorithm class cannot be created
+     * @throws IllegalAccessException if the sorting algorithm class or its null constructor is not accessible
      */
     public List<GreenSpaceDto> getOrganizedList(UserSession loggedUser) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         List<GreenSpace> listMatched = matchWithLoggedUser(loggedUser);

@@ -27,10 +27,10 @@ public class Team implements Serializable {
     /**
      * Constructs a team with the given skills, collaborators, minimum and maximum team size.
      *
-     * @param skills       The list of skills possessed by the team.
+     * @param skills        The list of skills possessed by the team.
      * @param collaborators The list of collaborators in the team.
-     * @param minTeamSize  The minimum size of the team.
-     * @param maxTeamSize  The maximum size of the team.
+     * @param minTeamSize   The minimum size of the team.
+     * @param maxTeamSize   The maximum size of the team.
      */
     public Team(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize) {
         this.skills = skills;

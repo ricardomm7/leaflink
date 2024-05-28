@@ -1,4 +1,3 @@
-
 package pt.ipp.isep.dei.project.repository;
 
 import pt.isep.lei.esoft.auth.AuthFacade;

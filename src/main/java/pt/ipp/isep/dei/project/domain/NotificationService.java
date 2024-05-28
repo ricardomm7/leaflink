@@ -39,8 +39,8 @@ public class NotificationService {
      * The notification is written to a file in the "Notifications" directory.
      *
      * @param collaborators the list of collaborators to notify
-     * @param toDoEntry the to-do entry that has been postponed
-     * @param newDate the new date for the to-do entry
+     * @param toDoEntry     the to-do entry that has been postponed
+     * @param newDate       the new date for the to-do entry
      * @return true if the notification is successfully written to a file, false otherwise
      */
     public static boolean notifyTeam(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
@@ -83,8 +83,8 @@ public class NotificationService {
      * Builds the body of the email notification to be sent to the collaborators.
      *
      * @param collaborators the list of collaborators to notify
-     * @param toDoEntry the to-do entry that has been postponed
-     * @param newDate the new date for the to-do entry
+     * @param toDoEntry     the to-do entry that has been postponed
+     * @param newDate       the new date for the to-do entry
      * @return the body of the email notification as a String
      */
     private static String buildEmailBody(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {

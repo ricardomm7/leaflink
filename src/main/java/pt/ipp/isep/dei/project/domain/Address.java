@@ -15,7 +15,7 @@ public class Address implements Serializable {
      * Constructs a new Address with the specified address, city, and zip code.
      *
      * @param address the street address.
-     * @param city the city.
+     * @param city    the city.
      * @param zipCode the zip code, which must be in the format ####-###.
      * @throws IllegalArgumentException if the zip code does not match the required format.
      */

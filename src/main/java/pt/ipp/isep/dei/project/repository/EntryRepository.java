@@ -90,7 +90,7 @@ public class EntryRepository implements Serializable {
      * Updates the vehicles assigned to a specific AgendaEntry.
      *
      * @param entryIndex the index of the AgendaEntry to update.
-     * @param f the list of VehicleDto objects to assign.
+     * @param f          the list of VehicleDto objects to assign.
      */
     public void updateVehiclesAgendaEntry(int entryIndex, List<VehicleDto> f) {
         List<Vehicle> u = VehicleMapper.toDomainList(f);
@@ -100,8 +100,8 @@ public class EntryRepository implements Serializable {
     /**
      * Updates the date and progress status of an AgendaEntry.
      *
-     * @param agendaEntryDto the AgendaEntryDto to update.
-     * @param newDate the new date to set.
+     * @param agendaEntryDto    the AgendaEntryDto to update.
+     * @param newDate           the new date to set.
      * @param newProgressStatus the new progress status to set.
      * @return true if the update is successful, false otherwise.
      */
@@ -120,7 +120,7 @@ public class EntryRepository implements Serializable {
      * Validates the new date for an AgendaEntry.
      *
      * @param agendaEntry the AgendaEntry to validate.
-     * @param newDate the new date to validate.
+     * @param newDate     the new date to validate.
      * @return true if the new date is valid, false otherwise.
      * @throws IllegalArgumentException if the new date is null or before the current date.
      */
@@ -136,7 +136,7 @@ public class EntryRepository implements Serializable {
     /**
      * Updates the progress status of an AgendaEntry.
      *
-     * @param agendaEntry the AgendaEntry to update.
+     * @param agendaEntry       the AgendaEntry to update.
      * @param newProgressStatus the new progress status to set.
      */
     private void updateEntryStatus(AgendaEntry agendaEntry, ProgressStatus newProgressStatus) {
@@ -147,7 +147,7 @@ public class EntryRepository implements Serializable {
      * Sets a new date for an AgendaEntry.
      *
      * @param agendaEntry the AgendaEntry to update.
-     * @param newDate the new date to set.
+     * @param newDate     the new date to set.
      */
     private void setNewDate(AgendaEntry agendaEntry, LocalDate newDate) {
         agendaEntry.setStartingDate(newDate);
@@ -178,7 +178,7 @@ public class EntryRepository implements Serializable {
     /**
      * Records the completion of an AgendaEntry.
      *
-     * @param entry the AgendaEntry to update.
+     * @param entry  the AgendaEntry to update.
      * @param status the new progress status to set.
      * @return true if the entry is updated successfully, false otherwise.
      */

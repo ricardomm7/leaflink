@@ -18,12 +18,12 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
     /**
      * Constructs a new AgendaEntry with the specified details.
      *
-     * @param title the title of the AgendaEntry.
-     * @param description the description of the AgendaEntry.
-     * @param duration the duration of the AgendaEntry in hours.
-     * @param urgencyStatus the urgency status of the AgendaEntry.
-     * @param greenSpace the GreenSpace associated with the AgendaEntry.
-     * @param startingDate the starting date of the AgendaEntry.
+     * @param title          the title of the AgendaEntry.
+     * @param description    the description of the AgendaEntry.
+     * @param duration       the duration of the AgendaEntry in hours.
+     * @param urgencyStatus  the urgency status of the AgendaEntry.
+     * @param greenSpace     the GreenSpace associated with the AgendaEntry.
+     * @param startingDate   the starting date of the AgendaEntry.
      * @param progressStatus the progress status of the AgendaEntry.
      */
     public AgendaEntry(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpace greenSpace,

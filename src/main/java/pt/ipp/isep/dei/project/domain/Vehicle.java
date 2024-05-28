@@ -276,16 +276,16 @@ public class Vehicle implements Serializable {
     /**
      * Constructs a new Vehicle object with the provided parameters.
      *
-     * @param VIN                 The Vehicle Identification Number (VIN) of the vehicle.
-     * @param brand               The brand of the vehicle.
-     * @param model               The model of the vehicle.
-     * @param type                The type of the vehicle.
-     * @param registrationDate    The registration date of the vehicle.
-     * @param vehiclePlate        The vehicle plate of the vehicle.
-     * @param tareWeight          The tare weight of the vehicle.
-     * @param grossWeight         The gross weight of the vehicle.
-     * @param currentKm           The current kilometers of the vehicle.
-     * @param acquisitionDate     The acquisition date of the vehicle.
+     * @param VIN                  The Vehicle Identification Number (VIN) of the vehicle.
+     * @param brand                The brand of the vehicle.
+     * @param model                The model of the vehicle.
+     * @param type                 The type of the vehicle.
+     * @param registrationDate     The registration date of the vehicle.
+     * @param vehiclePlate         The vehicle plate of the vehicle.
+     * @param tareWeight           The tare weight of the vehicle.
+     * @param grossWeight          The gross weight of the vehicle.
+     * @param currentKm            The current kilometers of the vehicle.
+     * @param acquisitionDate      The acquisition date of the vehicle.
      * @param maintenanceFrequency The maintenance frequency of the vehicle.
      */
     public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,

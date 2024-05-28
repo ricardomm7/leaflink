@@ -8,18 +8,36 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.project.ui.Bootstrap;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 public class Main extends Application {
 
+    private static Stage appStage;
+
+    public static void loadActivity(String activity, boolean resizeable, double minWi, double minHe) throws IOException {
+        URL res = Main.class.getResource(activity);
+        System.out.println(res);
+        Parent root = new FXMLLoader(res).load();
+        Main.appStage.setMinWidth(minWi);
+        Main.appStage.setMinHeight(minHe);
+        Main.appStage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("icon.png"))));
+        Main.appStage.setResizable(resizeable);
+        Main.appStage.setScene(new Scene(root));
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Main.appStage = primaryStage;
+
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
-        primaryStage.setTitle("LeafLink");
-        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icon.png"))));
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        Main.appStage.setTitle("LeafLink");
+        Main.appStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icon.png"))));
+        Main.appStage.setScene(new Scene(root));
+        Main.appStage.setResizable(false);
+        Main.appStage.show();
     }
 
     public static void main(String[] args) {

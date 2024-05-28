@@ -60,7 +60,7 @@ public class MaintenanceReport implements Serializable {
     /**
      * Retrieves the latest maintenance record for the specified vehicle from the maintenance list.
      *
-     * @param vehicle        the vehicle data transfer object
+     * @param vehicle         the vehicle data transfer object
      * @param maintenanceList the list of maintenance data transfer objects
      * @return the latest maintenance data transfer object for the vehicle, or null if none found
      */
@@ -80,7 +80,7 @@ public class MaintenanceReport implements Serializable {
     /**
      * Retrieves the latest maintenance record for the specified vehicle from the maintenance list.
      *
-     * @param vehicle        the vehicle object
+     * @param vehicle         the vehicle object
      * @param maintenanceList the list of maintenance objects
      * @return the latest maintenance object for the vehicle, or null if none found
      */

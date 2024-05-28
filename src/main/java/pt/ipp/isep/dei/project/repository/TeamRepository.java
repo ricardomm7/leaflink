@@ -1,4 +1,3 @@
-
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
@@ -48,7 +47,7 @@ public class TeamRepository implements Serializable {
     /**
      * Gets the list of AgendaEntryDto objects assigned to a specific collaborator.
      *
-     * @param collaborator      the UserSession object representing the collaborator
+     * @param collaborator       the UserSession object representing the collaborator
      * @param agendaEntryDtoList the list of AgendaEntryDto objects to search
      * @return the list of AgendaEntryDto objects assigned to the collaborator
      */

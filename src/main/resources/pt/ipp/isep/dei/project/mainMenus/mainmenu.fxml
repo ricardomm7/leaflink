@@ -1,126 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.AdminGUI">
-   <left>
-      <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar" BorderPane.alignment="CENTER">
-        <items>
-          <ToggleButton fx:id="tasksBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Tasks">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="tasks-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="collabBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Collaborators">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="collab-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="teamsBrn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Teams">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="team-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="anlysBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Analysis">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="analysis-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="vehicleBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Vehicles">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="vehicles-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="routeBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Routes">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="routes-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="spacesBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Spaces">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="gs-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="usersBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Users">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="users-image">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-        </items>
-      </ToolBar>
-   </left>
-   <bottom>
-      <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot" BorderPane.alignment="CENTER">
-         <children>
-            <Label opacity="0.54" text="LEAFLINK | Green Space Management Software | FOURCORP | ISEP | 2024">
-               <font>
-                  <Font size="11.0" />
-               </font>
-               <FlowPane.margin>
-                  <Insets left="5.0" />
-               </FlowPane.margin>
-            </Label>
-         </children>
-      </FlowPane>
-   </bottom>
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <FlowPane alignment="CENTER_LEFT" styleClass="flowpane">
-               <children>
-                  <Label fx:id="functionNameLabel" text="{FUNCTION NAME}">
-                     <font>
-                        <Font name="System Bold" size="25.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-                     </padding>
-                  </Label>
-               </children>
-            </FlowPane>
-         </children>
-      </VBox>
-   </center>
-   <stylesheets>
-      <URL value="@style.css" />
-      <URL value="@glugluStyle.css" />
-   </stylesheets>
+<?import javafx.scene.text.Font?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0"
+            prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.AdminGUI">
+    <left>
+        <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar"
+                 BorderPane.alignment="CENTER">
+            <items>
+                <ToggleButton fx:id="tasksBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Tasks">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="tasks-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="collabBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Collaborators">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="collab-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="teamsBrn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Teams">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="team-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="anlysBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Analysis">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="analysis-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="vehicleBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Vehicles">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="vehicles-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="routeBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Routes">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="routes-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="spacesBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Spaces">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="gs-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="usersBtn" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Users">
+                    <graphic>
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="users-image">
+                            <image>
+                                <Image url="@icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+            </items>
+        </ToolBar>
+    </left>
+    <bottom>
+        <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot"
+                  BorderPane.alignment="CENTER">
+            <children>
+                <Label opacity="0.54" text="LEAFLINK | Green Space Management Software | FOURCORP | ISEP | 2024">
+                    <font>
+                        <Font size="11.0"/>
+                    </font>
+                    <FlowPane.margin>
+                        <Insets left="5.0"/>
+                    </FlowPane.margin>
+                </Label>
+            </children>
+        </FlowPane>
+    </bottom>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <FlowPane alignment="CENTER_LEFT" styleClass="flowpane">
+                    <children>
+                        <Label fx:id="functionNameLabel" text="{FUNCTION NAME}">
+                            <font>
+                                <Font name="System Bold" size="25.0"/>
+                            </font>
+                            <padding>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                            </padding>
+                        </Label>
+                    </children>
+                </FlowPane>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>
