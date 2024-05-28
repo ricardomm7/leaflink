@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class RegisterMaintenanceController {
     private final MaintenanceRepository maintenanceRepository;
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
 
 
     /**
@@ -35,7 +35,7 @@ public class RegisterMaintenanceController {
     }
 
     /**
-     * Retrieves a list of plates of all vehicles.
+     * Retrieves a list of all vehicle's plates.
      *
      * @return a list of vehicle plates.
      */

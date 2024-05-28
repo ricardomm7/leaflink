@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Vehicle;
@@ -9,20 +10,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * The VehicleRepository class manages the storage and retrieval of Vehicles within the application.
+ * The VehicleRepository class is responsible for managing the collection of Vehicle objects.
+ * It provides methods for retrieving available vehicles, registering new vehicles, and managing vehicle availability.
  */
 public class VehicleRepository implements Serializable {
     private final List<Vehicle> vehicleList;
 
     /**
-     * Instantiates a new Vehicle repository with an empty list of vehicles.
+     * Constructs a new VehicleRepository object and initializes the vehicle list.
      */
     public VehicleRepository() {
         vehicleList = new ArrayList<>();
     }
 
+    /**
+     * Gets the list of available VehicleDto objects.
+     *
+     * @return the list of available VehicleDto objects
+     */
     public List<VehicleDto> getAvailableVehicleList() {
         List<Vehicle> availableVehicle = new ArrayList<>();
         for (Vehicle v : vehicleList) {
@@ -33,10 +39,21 @@ public class VehicleRepository implements Serializable {
         return VehicleMapper.toDtoList(availableVehicle);
     }
 
+    /**
+     * Gets the list of all VehicleDto objects.
+     *
+     * @return the list of all VehicleDto objects
+     */
     public List<VehicleDto> getVehicleList() {
         return VehicleMapper.toDtoList(vehicleList);
     }
 
+    /**
+     * Registers a new vehicle based on the provided VehicleDto.
+     *
+     * @param dto the VehicleDto containing the vehicle data
+     * @return true if the vehicle is registered successfully, false otherwise
+     */
     public boolean registerVehicle(VehicleDto dto) {
         Vehicle vehicle = VehicleMapper.toDomain(dto);
         if (!verifyExistingVehicles(vehicle.getVehiclePlate(), vehicle.getVIN())) {
@@ -49,9 +66,9 @@ public class VehicleRepository implements Serializable {
     }
 
     /**
-     * Add vehicle.
+     * Adds a vehicle to the repository.
      *
-     * @param vehicle The vehicle
+     * @param vehicle the Vehicle object to be added
      */
     private void addVehicle(Vehicle vehicle) {
         if (getAvailableVehicleList().contains(VehicleMapper.toDto(vehicle))) {
@@ -61,11 +78,11 @@ public class VehicleRepository implements Serializable {
     }
 
     /**
-     * Verify existing vehicles boolean.
+     * Verifies if a vehicle with the given VIN or license plate already exists in the repository.
      *
-     * @param vin          The vin of the vehicle
-     * @param vehiclePlate The vehicle plate of the vehicle
-     * @return the boolean (True if vehicle exists, False otherwise)
+     * @param vin         the VIN (Vehicle Identification Number) of the vehicle
+     * @param vehiclePlate the license plate of the vehicle
+     * @return true if a vehicle with the given VIN or license plate exists, false otherwise
      */
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
         for (VehicleDto vehicle : getAvailableVehicleList()) {
@@ -77,9 +94,9 @@ public class VehicleRepository implements Serializable {
     }
 
     /**
-     * Get vehicles plates list.
+     * Gets the list of license plates for all vehicles in the repository.
      *
-     * @return the list
+     * @return the list of license plates
      */
     public List<String> getVehiclesPlates() {
         List<String> plates = new ArrayList<>();
@@ -91,10 +108,10 @@ public class VehicleRepository implements Serializable {
     }
 
     /**
-     * Gets vehicles needing maintenance list.
+     * Gets the list of VehicleDto objects that need maintenance based on the provided maintenance list.
      *
-     * @param maintenanceList The maintenance list
-     * @return The list of vehicles needing maintenance
+     * @param maintenanceList the list of MaintenanceDto objects
+     * @return the list of VehicleDto objects that need maintenance
      */
     public List<VehicleDto> getVehiclesNeedingMaintenanceList(List<MaintenanceDto> maintenanceList) {
         List<VehicleDto> vehiclesNeedingMaintenance = new ArrayList<>();
@@ -106,9 +123,7 @@ public class VehicleRepository implements Serializable {
 
             double nextMaintenanceKm = lastMaintenanceKm + maintenanceFrequency;
 
-
             if (lastMaintenanceKm == -1 || currentKm >= nextMaintenanceKm * 0.95) {
-
                 vehiclesNeedingMaintenance.add(VehicleMapper.toDto(vehicle));
             }
         }
@@ -116,17 +131,16 @@ public class VehicleRepository implements Serializable {
     }
 
     /**
-     * Get the last maintenance km registered of a vehicle
+     * Gets the kilometer reading of the last maintenance for a given vehicle license plate.
      *
-     * @param vehiclePlate    The vehicle plate
-     * @param maintenanceList The list of the maintenance
-     * @return The km of the last maintenance
+     * @param vehiclePlate   the license plate of the vehicle
+     * @param maintenanceList the list of MaintenanceDto objects
+     * @return the kilometer reading of the last maintenance, or -1 if no maintenance record is found
      */
-
     private double getLastMaintenanceKm(String vehiclePlate, List<MaintenanceDto> maintenanceList) {
-        double lastMaintenanceKm = -1; // Valor padrão para indicar que não há registro de manutenção
+        double lastMaintenanceKm = -1; // Default value to indicate no maintenance record
 
-        // Lógica para obter o km da última manutenção para o veículo com a placa especificada
+        // Logic to get the km of the last maintenance for the vehicle with the specified license plate
         for (MaintenanceDto maintenance : maintenanceList) {
             if (maintenance.getVehiclePlate().equals(vehiclePlate)) {
                 lastMaintenanceKm = maintenance.getKm();
@@ -136,8 +150,13 @@ public class VehicleRepository implements Serializable {
         return lastMaintenanceKm;
     }
 
+    /**
+     * Sets the availability of a vehicle at the specified index in the vehicle list.
+     *
+     * @param vehicleIndex the index of the vehicle in the vehicle list
+     * @param isAvailable  the availability status to be set (true for available, false for unavailable)
+     */
     public void setVehicleAvailability(int vehicleIndex, Boolean isAvailable) {
         vehicleList.get(vehicleIndex).setAvailable(isAvailable);
     }
 }
-

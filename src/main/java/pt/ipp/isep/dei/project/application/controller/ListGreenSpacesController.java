@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
@@ -8,15 +9,27 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ListGreenSpacesController class handles the logic for retrieving and organizing the list of green spaces
+ * associated with a logged-in user.
+ */
 public class ListGreenSpacesController {
-    private final Repositories repositories;
     private final GreenSpaceRepository greenSpaceRepository;
 
+    /**
+     * Constructs a new ListGreenSpacesController object and initializes the repositories.
+     */
     public ListGreenSpacesController() {
-        this.repositories = Repositories.getInstance();
+        Repositories repositories = Repositories.getInstance();
         this.greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
 
+    /**
+     * Retrieves the list of GreenSpaceDto objects associated with the logged-in user.
+     *
+     * @param loggedUser the UserSession object representing the logged-in user
+     * @return the list of GreenSpaceDto objects associated with the logged-in user
+     */
     public List<GreenSpaceDto> getList(UserSession loggedUser) {
         try {
             return greenSpaceRepository.getOrganizedList(loggedUser);
@@ -27,5 +40,4 @@ public class ListGreenSpacesController {
             throw new RuntimeException(e);
         }
     }
-
 }

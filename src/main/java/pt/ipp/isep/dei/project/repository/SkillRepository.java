@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Skill;
@@ -9,23 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents a repository for storing skills.
+ * The SkillRepository class is responsible for managing the collection of Skill objects.
+ * It provides methods for creating, retrieving, and checking for duplicate skills.
  */
 public class SkillRepository implements Serializable {
 
     private final List<Skill> skillList;
 
     /**
-     * Constructs a new SkillRepository object with an empty skill list.
+     * Constructs a new SkillRepository object and initializes the skill list.
      */
     public SkillRepository() {
         skillList = new ArrayList<>();
     }
 
     /**
-     * Add a new skill, with the specified designation, to the skill list if it's not a duplicate.
+     * Creates a new Skill based on the provided SkillDto.
      *
-     * @param skill the skill created.
+     * @param dto the SkillDto containing the skill data
      */
     public void createSkill(SkillDto dto) {
         Skill skill = SkillMapper.toDomain(dto);
@@ -37,10 +39,10 @@ public class SkillRepository implements Serializable {
     }
 
     /**
-     * Checks if the skill is a duplicate of an existing skill in the repository.
+     * Checks if a Skill with the same designation already exists in the repository.
      *
-     * @param skill the skill to check.
-     * @return true if the skill is not a duplicate, false otherwise.
+     * @param skill the Skill object to check for duplicates
+     * @return true if no duplicate is found, false otherwise
      */
     private boolean checkForDuplicates(Skill skill) {
         for (Skill x : skillList) {
@@ -52,18 +54,18 @@ public class SkillRepository implements Serializable {
     }
 
     /**
-     * Adds a skill to the skill list.
+     * Adds a Skill to the repository.
      *
-     * @param skill the skill to add.
+     * @param skill the Skill object to be added
      */
     private void addSkill(Skill skill) {
         skillList.add(skill);
     }
 
     /**
-     * Retrieves a skillDto list.
+     * Gets the list of SkillDto objects.
      *
-     * @return a list of skillsDto.
+     * @return the list of SkillDto objects
      */
     public List<SkillDto> getSkillDtoList() {
         return SkillMapper.ListToDto(skillList);

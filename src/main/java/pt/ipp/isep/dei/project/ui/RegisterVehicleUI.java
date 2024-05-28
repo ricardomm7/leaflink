@@ -9,17 +9,37 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * The type Register vehicle ui.
+ */
 public class RegisterVehicleUI implements Runnable {
+    /**
+     * The constant scanner.
+     */
     private static final Scanner scanner = new Scanner(System.in);
+    /**
+     * The constant controller.
+     */
     private static final RegisterVehicleController controller = new RegisterVehicleController();
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         registerVehicle();
     }
 
+    /**
+     * Instantiates a new Register vehicle ui.
+     */
     public RegisterVehicleUI() {
     }
 
+    /**
+     * Register vehicle.
+     */
     private static void registerVehicle() {
         System.out.println("Enter Vehicle Details:");
 
@@ -48,6 +68,14 @@ public class RegisterVehicleUI implements Runnable {
         }
     }
 
+    /**
+     * Gets valid input.
+     *
+     * @param fieldName    the field name
+     * @param errorMessage the error message
+     * @param validator    the validator
+     * @return the valid input
+     */
     private static String getValidInput(String fieldName, String errorMessage, InputValidator validator) {
         String input;
         boolean isValid;
@@ -62,6 +90,14 @@ public class RegisterVehicleUI implements Runnable {
         return input;
     }
 
+    /**
+     * Gets valid double.
+     *
+     * @param fieldName    the field name
+     * @param errorMessage the error message
+     * @param validator    the validator
+     * @return the valid double
+     */
     private static double getValidDouble(String fieldName, String errorMessage, DoubleValidator validator) {
         double value = -1;
         boolean isValid;
@@ -82,6 +118,14 @@ public class RegisterVehicleUI implements Runnable {
         return value;
     }
 
+    /**
+     * Gets valid int.
+     *
+     * @param fieldName    the field name
+     * @param errorMessage the error message
+     * @param validator    the validator
+     * @return the valid int
+     */
     private static int getValidInt(String fieldName, String errorMessage, IntValidator validator) {
         int value = -1;
         boolean isValid;
@@ -102,6 +146,12 @@ public class RegisterVehicleUI implements Runnable {
         return value;
     }
 
+    /**
+     * Gets valid date.
+     *
+     * @param fieldName the field name
+     * @return the valid date
+     */
     private static LocalDate getValidDate(String fieldName) {
         LocalDate date = null;
         boolean isValid;
@@ -119,6 +169,12 @@ public class RegisterVehicleUI implements Runnable {
         return date;
     }
 
+    /**
+     * Parse date local date.
+     *
+     * @param dateString the date string
+     * @return the local date
+     */
     private static LocalDate parseDate(String dateString) {
         // Remove espaços em branco
         String cleanedDateString = dateString.replaceAll("\\s", "");
@@ -141,6 +197,12 @@ public class RegisterVehicleUI implements Runnable {
     }
 
 
+    /**
+     * Gets valid acquisition date.
+     *
+     * @param registrationDate the registration date
+     * @return the valid acquisition date
+     */
     private static LocalDate getValidAcquisitionDate(LocalDate registrationDate) {
         LocalDate acquisitionDate = null;
         boolean isValid;
@@ -162,6 +224,12 @@ public class RegisterVehicleUI implements Runnable {
     }
 
 
+    /**
+     * Gets valid vehicle plate.
+     *
+     * @param year the year
+     * @return the valid vehicle plate
+     */
     private static String getValidVehiclePlate(int year) {
         String vehiclePlate;
         boolean isValid;
@@ -176,6 +244,13 @@ public class RegisterVehicleUI implements Runnable {
         return vehiclePlate;
     }
 
+    /**
+     * Validate vehicle plate boolean.
+     *
+     * @param vehiclePlate the vehicle plate
+     * @param year         the year
+     * @return the boolean
+     */
     private static boolean validateVehiclePlate(String vehiclePlate, int year) {
         if (vehiclePlate == null || !vehiclePlate.matches("[a-zA-Z0-9]{6}")) {
             return false;
@@ -192,6 +267,11 @@ public class RegisterVehicleUI implements Runnable {
         }
     }
 
+    /**
+     * Display vehicle plate format.
+     *
+     * @param year the year
+     */
     private static void displayVehiclePlateFormat(int year) {
         if (year >= 2020) {
             System.out.println("Vehicle plate should be in this format: AA00AA");
@@ -204,6 +284,11 @@ public class RegisterVehicleUI implements Runnable {
         }
     }
 
+    /**
+     * Gets vehicle type.
+     *
+     * @return the vehicle type
+     */
     private static VehicleType getVehicleType() {
         System.out.println("Select vehicle type:");
         VehicleType[] types = VehicleType.values();
@@ -235,6 +320,12 @@ public class RegisterVehicleUI implements Runnable {
         return types[choice - 1];
     }
 
+    /**
+     * Confirm vehicle data boolean.
+     *
+     * @param vehicleDto the vehicle dto
+     * @return the boolean
+     */
     private static boolean confirmVehicleData(VehicleDto vehicleDto) {
         System.out.println("\nConfirm Vehicle Data:");
         System.out.println("VIN: " + vehicleDto.getVIN());
@@ -254,20 +345,44 @@ public class RegisterVehicleUI implements Runnable {
         return confirmation.equalsIgnoreCase("Y");
     }
 
+    /**
+     * Format date string.
+     *
+     * @param date the date
+     * @return the string
+     */
     private static String formatDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return date.format(formatter);
     }
 
 
+    /**
+     * Validate vin boolean.
+     *
+     * @param vin the vin
+     * @return the boolean
+     */
     private static boolean validateVin(String vin) {
         return vin != null && vin.length() == 17 && vin.matches("[a-zA-Z0-9]{17}");
     }
 
+    /**
+     * Validate brand boolean.
+     *
+     * @param brand the brand
+     * @return the boolean
+     */
     private static boolean validateBrand(String brand) {
         return brand != null && brand.matches("^[a-zA-Z0-9- /]+$");
     }
 
+    /**
+     * Validate model boolean.
+     *
+     * @param model the model
+     * @return the boolean
+     */
     private static boolean validateModel(String model) {
         return model != null && model.matches("^[a-zA-Z0-9- /]+$");
     }
@@ -277,19 +392,54 @@ public class RegisterVehicleUI implements Runnable {
         registerVehicle();
     }
 
+    /**
+     * The interface Input validator.
+     */
     private interface InputValidator {
+        /**
+         * Validate boolean.
+         *
+         * @param input the input
+         * @return the boolean
+         */
         boolean validate(String input);
     }
 
+    /**
+     * The interface Double validator.
+     */
     private interface DoubleValidator {
+        /**
+         * Validate boolean.
+         *
+         * @param value the value
+         * @return the boolean
+         */
         boolean validate(double value);
     }
 
+    /**
+     * The interface Int validator.
+     */
     private interface IntValidator {
+        /**
+         * Validate boolean.
+         *
+         * @param value the value
+         * @return the boolean
+         */
         boolean validate(int value);
     }
 
+    /**
+     * The type Invalid date exception.
+     */
     public static class InvalidDateException extends Throwable {
+        /**
+         * Instantiates a new Invalid date exception.
+         *
+         * @param string the string
+         */
         public InvalidDateException(String string) {
         }
     }

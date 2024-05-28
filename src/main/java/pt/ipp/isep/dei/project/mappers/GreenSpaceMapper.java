@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Address;
@@ -9,30 +10,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Green space mapper.
+ * The GreenSpaceMapper class is responsible for mapping between the GreenSpace domain object
+ * and the GreenSpaceDto data transfer object.
  */
 public class GreenSpaceMapper implements Serializable {
 
     /**
-     * To dto green space dto.
+     * Converts a GreenSpace domain object to a GreenSpaceDto object.
      *
-     * @param greenSpace the green space
-     * @return the green space dto
+     * @param greenSpace The GreenSpace domain object to be converted.
+     * @return The corresponding GreenSpaceDto object.
      */
     public static GreenSpaceDto toDto(GreenSpace greenSpace) {
         return new GreenSpaceDto(greenSpace.getName(), greenSpace.getType(), greenSpace.getArea(), greenSpace.getManager(), greenSpace.getAddress().getAddress(), greenSpace.getAddress().getCity(), greenSpace.getAddress().getZipCode());
     }
 
     /**
-     * To domain green space.
+     * Converts a GreenSpaceDto object to a GreenSpace domain object.
      *
-     * @param greenSpaceDto the green space dto
-     * @return the green space
+     * @param greenSpaceDto The GreenSpaceDto object to be converted.
+     * @return The corresponding GreenSpace domain object.
      */
     public static GreenSpace toDomain(GreenSpaceDto greenSpaceDto) {
         return new GreenSpace(greenSpaceDto.getName(), greenSpaceDto.getType(), greenSpaceDto.getArea(), greenSpaceDto.getManager(), new Address(greenSpaceDto.getAddress(), greenSpaceDto.getCity(), greenSpaceDto.getZipCode()));
     }
 
+    /**
+     * Converts a list of GreenSpace domain objects to a list of GreenSpaceDto objects.
+     *
+     * @param greenSpaceList The list of GreenSpace domain objects to be converted.
+     * @return The corresponding list of GreenSpaceDto objects.
+     */
     public static List<GreenSpaceDto> toDtoList(List<GreenSpace> greenSpaceList) {
         List<GreenSpaceDto> r = new ArrayList<>();
         for (GreenSpace e : greenSpaceList) {
@@ -41,6 +49,12 @@ public class GreenSpaceMapper implements Serializable {
         return r;
     }
 
+    /**
+     * Converts a list of GreenSpaceDto objects to a list of GreenSpace domain objects.
+     *
+     * @param greenSpaceListDto The list of GreenSpaceDto objects to be converted.
+     * @return The corresponding list of GreenSpace domain objects.
+     */
     public static List<GreenSpace> toDomainList(List<GreenSpaceDto> greenSpaceListDto) {
         List<GreenSpace> r = new ArrayList<>();
         for (GreenSpaceDto e : greenSpaceListDto) {

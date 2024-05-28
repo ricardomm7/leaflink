@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Job;
@@ -9,18 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The JobRepository class manages the storage and retrieval of job positions within the application.
+ * The JobRepository class is responsible for managing the collection of Job objects.
+ * It provides methods for creating, retrieving, and checking for duplicate jobs.
  */
 public class JobRepository implements Serializable {
     private final List<Job> jobList;
 
     /**
-     * Constructs a new JobRepository object with an empty list of jobs.
+     * Constructs a new JobRepository object and initializes the job list.
      */
     public JobRepository() {
         jobList = new ArrayList<>();
     }
 
+    /**
+     * Creates a new Job based on the provided JobDto.
+     *
+     * @param dto the JobDto containing the job data
+     */
     public void createJob(JobDto dto) {
         Job j = JobMapper.toDomain(dto);
         if (checkForDuplicates(j)) {
@@ -31,10 +38,10 @@ public class JobRepository implements Serializable {
     }
 
     /**
-     * Checks if a job with the same title already exists in the repository.
+     * Checks if a Job with the same title already exists in the repository.
      *
-     * @param j the job to check for duplicates
-     * @return true if no job with the same title exists, false otherwise
+     * @param j the Job object to check for duplicates
+     * @return true if no duplicate is found, false otherwise
      */
     private boolean checkForDuplicates(Job j) {
         for (Job x : jobList) {
@@ -46,21 +53,20 @@ public class JobRepository implements Serializable {
     }
 
     /**
-     * Adds a job to the repository.
+     * Adds a Job to the repository.
      *
-     * @param job the job to add
+     * @param job the Job object to be added
      */
     private void addJob(Job job) {
         jobList.add(job);
     }
 
     /**
-     * Retrieves a copy of the list of jobs stored in the repository.
+     * Gets the list of JobDto objects.
      *
-     * @return a list of jobs
+     * @return the list of JobDto objects
      */
     public List<JobDto> getJobList() {
-        return JobMapper.listToDto(jobList);
+        return JobMapper.toDtoList(jobList);
     }
 }
-

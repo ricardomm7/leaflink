@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Skill;
@@ -8,35 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Skill mapper.
+ * The SkillMapper class is responsible for mapping between the Skill domain object and the SkillDto data transfer object.
  */
 public class SkillMapper implements Serializable {
 
     /**
-     * To dto skill dto.
+     * Converts a Skill domain object to a SkillDto data transfer object.
      *
-     * @param skill the skill
-     * @return the skill dto
+     * @param skill the Skill domain object
+     * @return the SkillDto data transfer object
      */
     public static SkillDto toDto(Skill skill) {
         return new SkillDto(skill.getDesignation());
     }
 
     /**
-     * To domain skill.
+     * Converts a SkillDto data transfer object to a Skill domain object.
      *
-     * @param skill the skill
-     * @return the skill
+     * @param skillDto the SkillDto data transfer object
+     * @return the Skill domain object
      */
-    public static Skill toDomain(SkillDto skill) {
-        return new Skill(skill.getDesignation());
+    public static Skill toDomain(SkillDto skillDto) {
+        return new Skill(skillDto.getDesignation());
     }
 
     /**
-     * List to domain list.
+     * Converts a list of SkillDto data transfer objects to a list of Skill domain objects.
      *
-     * @param skillDtos the skill dtos
-     * @return the list
+     * @param skillDtos the list of SkillDto data transfer objects
+     * @return the list of Skill domain objects
      */
     public static List<Skill> listToDomain(List<SkillDto> skillDtos) {
         List<Skill> skillList = new ArrayList<>();
@@ -47,8 +48,14 @@ public class SkillMapper implements Serializable {
         return skillList;
     }
 
+    /**
+     * Converts a list of Skill domain objects to a list of SkillDto data transfer objects.
+     *
+     * @param skillList the list of Skill domain objects
+     * @return the list of SkillDto data transfer objects
+     */
     public static List<SkillDto> ListToDto(List<Skill> skillList) {
-        List<SkillDto> copy = new ArrayList<SkillDto>();
+        List<SkillDto> copy = new ArrayList<>();
         for (Skill skill : skillList) {
             SkillDto skillDto = SkillMapper.toDto(skill);
             copy.add(skillDto);

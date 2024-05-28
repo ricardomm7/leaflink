@@ -1,14 +1,34 @@
+
 package pt.ipp.isep.dei.project.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * The type Skill dto.
+ * The SkillDto class represents a data transfer object for the Skill domain object.
+ * It encapsulates the data related to a skill and provides methods to access and manipulate this data.
  */
 public class SkillDto implements Serializable {
 
-    private String designation;
+    private final String designation;
+
+    /**
+     * Constructs a new SkillDto object with the provided designation.
+     *
+     * @param designation the designation of the skill
+     */
+    public SkillDto(String designation) {
+        this.designation = designation;
+    }
+
+    /**
+     * Gets the designation of the skill.
+     *
+     * @return the designation of the skill
+     */
+    public String getDesignation() {
+        return designation;
+    }
 
     @Override
     public String toString() {
@@ -26,23 +46,5 @@ public class SkillDto implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(designation);
-    }
-
-    /**
-     * Constructs a new Skill object with the specified designation.
-     *
-     * @param designation the designation of the skill.
-     */
-    public SkillDto(String designation) {
-        this.designation = designation;
-    }
-
-    /**
-     * Gets the designation of the skill.
-     *
-     * @return the designation of the skill.
-     */
-    public String getDesignation() {
-        return designation;
     }
 }

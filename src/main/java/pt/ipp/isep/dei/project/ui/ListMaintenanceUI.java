@@ -7,9 +7,12 @@ import java.util.List;
 
 
 /**
- * The ListMaintenanceUI class provides a user interface to get a list of vehicles needing check-up/maintenance.
+ * The type List maintenance ui.
  */
 public class ListMaintenanceUI implements Runnable {
+    /**
+     * The Controller.
+     */
     private final ListMaintenanceController controller;
 
     /**
@@ -20,7 +23,7 @@ public class ListMaintenanceUI implements Runnable {
     }
 
     /**
-     * List vehicles needing maintenance UI.
+     * List vehicles needing maintenance.
      */
     public void listVehiclesNeedingMaintenance() {
         System.out.println("Listing vehicles needing maintenance...");

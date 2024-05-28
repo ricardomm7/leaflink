@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
@@ -10,18 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The CollaboratorRepository class manages the storage and retrieval of collaborators within the application.
+ * The CollaboratorRepository class is responsible for managing the collection of collaborators.
+ * It provides methods for creating, retrieving, updating, and assigning skills to collaborators.
  */
 public class CollaboratorRepository implements Serializable {
     private final List<Collaborator> collaboratorList;
 
     /**
-     * Constructs a new CollaboratorRepository object with an empty list of collaborators.
+     * Constructs a new CollaboratorRepository object and initializes the collaborator list.
      */
     public CollaboratorRepository() {
         collaboratorList = new ArrayList<>();
     }
 
+    /**
+     * Creates a new collaborator based on the provided CollaboratorDto.
+     *
+     * @param dto the CollaboratorDto containing the collaborator data
+     */
     public void create(CollaboratorDto dto) {
         Collaborator c = CollaboratorMapper.toDomain(dto);
         if (checkForDuplicates(c)) {
@@ -32,8 +39,8 @@ public class CollaboratorRepository implements Serializable {
     /**
      * Checks if a collaborator with the same taxpayer number already exists in the repository.
      *
-     * @param j the collaborator to check for duplicates
-     * @return true if no collaborator with the same taxpayer number exists, false otherwise
+     * @param j the Collaborator object to check for duplicates
+     * @return true if no duplicate is found, false otherwise
      */
     private boolean checkForDuplicates(Collaborator j) {
         for (Collaborator x : collaboratorList) {
@@ -45,9 +52,9 @@ public class CollaboratorRepository implements Serializable {
     }
 
     /**
-     * Retrieves the list of collaborators stored in the repository.
+     * Gets the list of collaborators as CollaboratorDto objects.
      *
-     * @return the list of collaborators
+     * @return the list of collaborators as CollaboratorDto objects
      */
     public List<CollaboratorDto> getCollaboratorList() {
         return CollaboratorMapper.toDtoList(collaboratorList);
@@ -56,22 +63,27 @@ public class CollaboratorRepository implements Serializable {
     /**
      * Adds a collaborator to the repository.
      *
-     * @param collab the collaborator to add
+     * @param collab the Collaborator object to be added
      */
     public void addCollaborator(Collaborator collab) {
         collaboratorList.add(collab);
     }
 
     /**
-     * Assigns one or more skills to a collaborator.
+     * Assigns a list of skills to a collaborator.
      *
-     * @param collaborator The collaborator to whom the skill(s) will be assigned.
-     * @param skills       The skills to be assigned.
+     * @param collaborator the Collaborator object to assign skills to
+     * @param skills       the list of Skill objects to be assigned
      */
     public void assignSkills(Collaborator collaborator, List<Skill> skills) {
         collaborator.assignSkills(skills);
     }
 
+    /**
+     * Updates an existing collaborator in the repository.
+     *
+     * @param collaborator the updated Collaborator object
+     */
     public void updateCollaborator(Collaborator collaborator) {
         // Find the collaborator in the list and update it
         for (int i = 0; i < collaboratorList.size(); i++) {
@@ -82,4 +94,3 @@ public class CollaboratorRepository implements Serializable {
         }
     }
 }
-
