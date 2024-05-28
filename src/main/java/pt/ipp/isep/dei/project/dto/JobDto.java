@@ -1,30 +1,30 @@
-package pt.ipp.isep.dei.project.dto;
 
+package pt.ipp.isep.dei.project.dto;
 
 import java.io.Serializable;
 
 /**
- * The type Job dto.
+ * The JobDto class represents a data transfer object for the Job domain object.
+ * It encapsulates the data related to a job and provides a method to access the job title.
  */
 public class JobDto implements Serializable {
-    private String title;
+    private final String title;
 
     /**
-     * Instantiates a new Job dto.
+     * Constructs a new JobDto object with the provided job title.
      *
-     * @param title the title
+     * @param title the title of the job
      */
     public JobDto(String title) {
         this.title = title;
     }
 
     /**
-     * Gets title.
+     * Gets the title of the job.
      *
-     * @return the title
+     * @return the title of the job
      */
     public String getTitle() {
         return title;
     }
-
 }

@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
@@ -9,8 +10,8 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import java.util.List;
 
 /**
- * The RegisterCollaboratorController class manages the registration of collaborators within the application.
- * It interacts with the CollaboratorRepository and JobRepository to store and retrieve collaborator and job-related information.
+ * The RegisterCollaboratorController class handles the logic for registering new collaborators
+ * and retrieving the list of available job positions.
  */
 public class RegisterCollaboratorController {
     private final CollaboratorRepository collaboratorRepository;
@@ -26,15 +27,13 @@ public class RegisterCollaboratorController {
         jobRepository = repositories.getJobRepository();
     }
 
-
     /**
-     * Create clb from a collaborator DTO.
+     * Creates a new collaborator based on the provided CollaboratorDto.
      *
-     * @param collDto the collaborator dto
+     * @param collDto the CollaboratorDto containing the collaborator data
      */
     public void createCLB(CollaboratorDto collDto) {
         collaboratorRepository.create(collDto);
-
     }
 
     /**

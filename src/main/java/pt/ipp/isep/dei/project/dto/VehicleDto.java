@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.dto;
 
 import pt.ipp.isep.dei.project.domain.VehicleType;
@@ -5,21 +6,25 @@ import pt.ipp.isep.dei.project.domain.VehicleType;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * The VehicleDto class represents a data transfer object for the Vehicle domain object.
+ * It encapsulates the data related to a vehicle and provides methods to access this data.
+ */
 public class VehicleDto implements Serializable {
-    private String VIN;
-    private String brand;
-    private String model;
-    private VehicleType type;
-    private LocalDate registrationDate;
-    private String vehiclePlate;
-    private double tareWeight;
-    private double grossWeight;
-    private int currentKm;
-    private LocalDate acquisitionDate;
-    private int maintenanceFrequency;
+    private final String VIN;
+    private final String brand;
+    private final String model;
+    private final VehicleType type;
+    private final LocalDate registrationDate;
+    private final String vehiclePlate;
+    private final double tareWeight;
+    private final double grossWeight;
+    private final int currentKm;
+    private final LocalDate acquisitionDate;
+    private final int maintenanceFrequency;
 
     /**
-     * Gets VIN.
+     * Gets the VIN (Vehicle Identification Number) of the vehicle.
      *
      * @return The VIN of the vehicle
      */
@@ -28,7 +33,7 @@ public class VehicleDto implements Serializable {
     }
 
     /**
-     * Gets brand.
+     * Gets the brand of the vehicle.
      *
      * @return The brand of the vehicle
      */
@@ -36,9 +41,8 @@ public class VehicleDto implements Serializable {
         return brand;
     }
 
-
     /**
-     * Gets model.
+     * Gets the model of the vehicle.
      *
      * @return The model of the vehicle
      */
@@ -46,9 +50,8 @@ public class VehicleDto implements Serializable {
         return model;
     }
 
-
     /**
-     * Gets type.
+     * Gets the type of the vehicle.
      *
      * @return The type of the vehicle
      */
@@ -57,7 +60,7 @@ public class VehicleDto implements Serializable {
     }
 
     /**
-     * Gets vehicle plate.
+     * Gets the license plate of the vehicle.
      *
      * @return The vehicle plate
      */
@@ -65,9 +68,8 @@ public class VehicleDto implements Serializable {
         return vehiclePlate;
     }
 
-
     /**
-     * Gets tare weight.
+     * Gets the tare weight (unladen weight) of the vehicle.
      *
      * @return The tare weight of the vehicle
      */
@@ -75,9 +77,8 @@ public class VehicleDto implements Serializable {
         return tareWeight;
     }
 
-
     /**
-     * Gets gross weight.
+     * Gets the gross weight (maximum operating weight) of the vehicle.
      *
      * @return The gross weight of the vehicle
      */
@@ -85,9 +86,8 @@ public class VehicleDto implements Serializable {
         return grossWeight;
     }
 
-
     /**
-     * Gets current km.
+     * Gets the current kilometer reading of the vehicle.
      *
      * @return The current kilometers of the vehicle
      */
@@ -95,9 +95,8 @@ public class VehicleDto implements Serializable {
         return currentKm;
     }
 
-
     /**
-     * Gets registration date.
+     * Gets the registration date of the vehicle.
      *
      * @return The registration date of the vehicle
      */
@@ -106,7 +105,7 @@ public class VehicleDto implements Serializable {
     }
 
     /**
-     * Gets acquisition date.
+     * Gets the acquisition date of the vehicle.
      *
      * @return The acquisition date of the vehicle
      */
@@ -115,7 +114,7 @@ public class VehicleDto implements Serializable {
     }
 
     /**
-     * Gets maintenance frequency.
+     * Gets the maintenance frequency (in kilometers) of the vehicle.
      *
      * @return The maintenance frequency
      */
@@ -123,21 +122,20 @@ public class VehicleDto implements Serializable {
         return maintenanceFrequency;
     }
 
-
     /**
-     * Instantiates a new Vehicle DTO class.
+     * Constructs a new VehicleDto object with the provided data.
      *
-     * @param VIN                  the vin of vehicle
-     * @param brand                the brand of vehicle
-     * @param model                the model of vehicle
-     * @param type                 the type of vehicle
-     * @param vehiclePlate         the vehicle plate of vehicle
-     * @param tareWeight           the tare weight of vehicle
-     * @param grossWeight          the gross weight of vehicle
-     * @param currentKm            the current km of vehicle
-     * @param registrationDate     the registration date of vehicle
-     * @param acquisitionDate      the acquisition date of vehicle
-     * @param maintenanceFrequency the maintenance frequency of vehicle
+     * @param VIN                  the VIN (Vehicle Identification Number) of the vehicle
+     * @param brand                the brand of the vehicle
+     * @param model                the model of the vehicle
+     * @param type                 the type of the vehicle
+     * @param vehiclePlate         the license plate of the vehicle
+     * @param tareWeight           the tare weight (unladen weight) of the vehicle
+     * @param grossWeight          the gross weight (maximum operating weight) of the vehicle
+     * @param currentKm            the current kilometer reading of the vehicle
+     * @param registrationDate     the registration date of the vehicle
+     * @param acquisitionDate      the acquisition date of the vehicle
+     * @param maintenanceFrequency the maintenance frequency (in kilometers) of the vehicle
      */
     public VehicleDto(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
                       int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
@@ -153,8 +151,6 @@ public class VehicleDto implements Serializable {
         this.currentKm = currentKm;
         this.acquisitionDate = acquisitionDate;
         this.maintenanceFrequency = maintenanceFrequency;
-
-
     }
 
     @Override
@@ -175,4 +171,3 @@ public class VehicleDto implements Serializable {
         return vehiclePlate + " | " + brand;
     }
 }
-

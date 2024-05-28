@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
@@ -8,15 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Collaborator mapper.
+ * The CollaboratorMapper class is responsible for mapping between the Collaborator domain object
+ * and the CollaboratorDto data transfer object.
  */
 public class CollaboratorMapper implements Serializable {
 
     /**
-     * To dto collaborator dto.
+     * Converts a Collaborator domain object to a CollaboratorDto object.
      *
-     * @param collaborator the collaborator
-     * @return the collaborator dto
+     * @param collaborator The Collaborator domain object to be converted.
+     * @return The corresponding CollaboratorDto object.
      */
     public static CollaboratorDto toDto(Collaborator collaborator) {
         return new CollaboratorDto(collaborator.getName(), collaborator.getBirthdate(), collaborator.getContactMobile(),
@@ -25,12 +27,11 @@ public class CollaboratorMapper implements Serializable {
                 collaborator.getJob(), collaborator.getSkills());
     }
 
-
     /**
-     * To domain collaborator.
+     * Converts a CollaboratorDto object to a Collaborator domain object.
      *
-     * @param collaboratorDto the collaborator dto
-     * @return the collaborator
+     * @param collaboratorDto The CollaboratorDto object to be converted.
+     * @return The corresponding Collaborator domain object.
      */
     public static Collaborator toDomain(CollaboratorDto collaboratorDto) {
         return new Collaborator(collaboratorDto.getName(), collaboratorDto.getBirthdate(), collaboratorDto.getContactMobile(),
@@ -39,24 +40,33 @@ public class CollaboratorMapper implements Serializable {
                 collaboratorDto.getJob());
     }
 
+    /**
+     * Converts a list of Collaborator domain objects to a list of CollaboratorDto objects.
+     *
+     * @param collaboratorList The list of Collaborator domain objects to be converted.
+     * @return The corresponding list of CollaboratorDto objects.
+     */
     public static List<CollaboratorDto> toDtoList(List<Collaborator> collaboratorList) {
         List<CollaboratorDto> collaboratorsDto = new ArrayList<>();
         for (Collaborator collaborator : collaboratorList) {
             CollaboratorDto collDto = CollaboratorMapper.toDto(collaborator);
-
             collaboratorsDto.add(collDto);
         }
         return collaboratorsDto;
     }
 
+    /**
+     * Converts a list of CollaboratorDto objects to a list of Collaborator domain objects.
+     *
+     * @param collaboratorList The list of CollaboratorDto objects to be converted.
+     * @return The corresponding list of Collaborator domain objects.
+     */
     public static List<Collaborator> toDomainList(List<CollaboratorDto> collaboratorList) {
         List<Collaborator> collaborators = new ArrayList<>();
         for (CollaboratorDto collDto : collaboratorList) {
             Collaborator coll = CollaboratorMapper.toDomain(collDto);
-
             collaborators.add(coll);
         }
         return collaborators;
     }
-
 }

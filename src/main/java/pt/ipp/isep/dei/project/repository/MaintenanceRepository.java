@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.Maintenance;
@@ -11,24 +12,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The MaintenanceRepository class manages the storage and retrieval of maintenance within the application.
+ * The MaintenanceRepository class is responsible for managing the collection of Maintenance objects
+ * and generating maintenance reports.
  */
 public class MaintenanceRepository implements Serializable {
-    private List<Maintenance> maintenanceList;
-    private MaintenanceReport maintenanceReport;
+
+    private final List<Maintenance> maintenanceList;
+    private final MaintenanceReport maintenanceReport;
 
     /**
-     * Instantiates a new Maintenance repository.
+     * Constructs a new MaintenanceRepository object and initializes the maintenance list and maintenance report.
      */
     public MaintenanceRepository() {
-        this.maintenanceList = new ArrayList<Maintenance>();
+        this.maintenanceList = new ArrayList<>();
         this.maintenanceReport = new MaintenanceReport();
     }
 
     /**
-     * Create maintenance.
+     * Creates a new Maintenance based on the provided MaintenanceDto.
      *
-     * @param maintenanceDto the maintenance dto
+     * @param maintenanceDto the MaintenanceDto containing the maintenance data
      */
     public void createMaintenance(MaintenanceDto maintenanceDto) {
         Maintenance m = MaintenanceMapper.toDomain(maintenanceDto);
@@ -36,31 +39,30 @@ public class MaintenanceRepository implements Serializable {
     }
 
     /**
-     * Add maintenance.
+     * Adds a Maintenance to the repository.
      *
-     * @param maintenance the maintenance
+     * @param maintenance the Maintenance object to be added
      */
     private void addMaintenance(Maintenance maintenance) {
         this.maintenanceList.add(maintenance);
     }
 
     /**
-     * Gets maintenance list.
+     * Gets the list of MaintenanceDto objects.
      *
-     * @return the maintenance list
+     * @return the list of MaintenanceDto objects
      */
     public List<MaintenanceDto> getMaintenanceList() {
         return MaintenanceMapper.toDtoList(maintenanceList);
     }
 
     /**
-     * Create maintenance report string.
+     * Creates a maintenance report based on the provided list of VehicleDto objects and the maintenance list.
      *
-     * @param vehicleDtoList the vehicle dto list
-     * @return the string
+     * @param vehicleDtoList the list of VehicleDto objects
+     * @return the maintenance report as a string
      */
     public String createMaintenanceReport(List<VehicleDto> vehicleDtoList) {
         return maintenanceReport.createReport(vehicleDtoList, getMaintenanceList());
     }
 }
-

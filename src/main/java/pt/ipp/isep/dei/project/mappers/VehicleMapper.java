@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Vehicle;
@@ -7,13 +8,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The VehicleMapper class is responsible for mapping between the Vehicle domain object and the VehicleDto data transfer object.
+ * It provides methods to convert a Vehicle object to a VehicleDto object and vice versa, as well as methods to convert
+ * lists of Vehicle objects to lists of VehicleDto objects and vice versa.
+ */
 public class VehicleMapper implements Serializable {
 
     /**
-     * To dto Vehicle dto.
+     * Converts a Vehicle domain object to a VehicleDto data transfer object.
      *
-     * @param vehicle the skill
-     * @return the vehicle dto
+     * @param vehicle the Vehicle domain object to be converted
+     * @return the corresponding VehicleDto data transfer object
      */
     public static VehicleDto toDto(Vehicle vehicle) {
         return new VehicleDto(vehicle.getVIN(), vehicle.getBrand(), vehicle.getModel(), vehicle.getType(),
@@ -22,10 +28,10 @@ public class VehicleMapper implements Serializable {
     }
 
     /**
-     * To domain Vehicle.
+     * Converts a VehicleDto data transfer object to a Vehicle domain object.
      *
-     * @param vehicleDto the vehicle dtp
-     * @return the vehicle domain
+     * @param vehicleDto the VehicleDto data transfer object to be converted
+     * @return the corresponding Vehicle domain object
      */
     public static Vehicle toDomain(VehicleDto vehicleDto) {
         return new Vehicle(vehicleDto.getVIN(), vehicleDto.getBrand(), vehicleDto.getModel(), vehicleDto.getType(),
@@ -33,25 +39,33 @@ public class VehicleMapper implements Serializable {
                 vehicleDto.getCurrentKm(), vehicleDto.getAcquisitionDate(), vehicleDto.getMaintenanceFrequency());
     }
 
+    /**
+     * Converts a list of Vehicle domain objects to a list of VehicleDto data transfer objects.
+     *
+     * @param vehicleList the list of Vehicle domain objects to be converted
+     * @return the corresponding list of VehicleDto data transfer objects
+     */
     public static List<VehicleDto> toDtoList(List<Vehicle> vehicleList) {
         List<VehicleDto> result = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
             VehicleDto vehicleDto = VehicleMapper.toDto(vehicle);
-
             result.add(vehicleDto);
         }
-
         return result;
     }
 
+    /**
+     * Converts a list of VehicleDto data transfer objects to a list of Vehicle domain objects.
+     *
+     * @param vehicleList the list of VehicleDto data transfer objects to be converted
+     * @return the corresponding list of Vehicle domain objects
+     */
     public static List<Vehicle> toDomainList(List<VehicleDto> vehicleList) {
         List<Vehicle> result = new ArrayList<>();
         for (VehicleDto vehicle : vehicleList) {
             Vehicle vehicleDom = VehicleMapper.toDomain(vehicle);
-
             result.add(vehicleDom);
         }
-
         return result;
     }
 }

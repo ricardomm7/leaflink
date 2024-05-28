@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.dto;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
@@ -6,6 +7,10 @@ import pt.ipp.isep.dei.project.domain.Skill;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The TeamDto class represents a data transfer object for the Team domain object.
+ * It encapsulates the data related to a team and provides methods to access this data.
+ */
 public class TeamDto implements Serializable {
     private final List<Skill> skills;
     private final int minTeamSize;
@@ -13,9 +18,11 @@ public class TeamDto implements Serializable {
     private final List<Collaborator> collaborator;
 
     /**
-     * Constructs a new Team with the given list of collaboratorDtos.
+     * Constructs a new TeamDto object with the provided list of collaborators.
+     * The minimum team size is set to 0, and the maximum team size is set to the size of the collaborator list.
+     * The skill list is initialized as an empty list.
      *
-     * @param collaborators The list of collaboratorDtos.
+     * @param collaborators the list of collaborators in the team
      */
     public TeamDto(List<Collaborator> collaborators) {
         this.collaborator = collaborators;
@@ -25,54 +32,51 @@ public class TeamDto implements Serializable {
     }
 
     /**
-     * Constructs a new Team object with the provided skills, collaboratorDtos, and team size constraints.
+     * Constructs a new TeamDto object with the provided data.
      *
-     * @param skills        the required skills for the team
-     * @param collaborators the list of collaboratorDtos in the team
-     * @param minTeamSize   the minimum team size constraint
-     * @param maxTeamSize   the maximum team size constraint
+     * @param skills        the list of skills required for the team
+     * @param collaborators the list of collaborators in the team
+     * @param minTeamSize   the minimum size of the team
+     * @param maxTeamSize   the maximum size of the team
      */
-
     public TeamDto(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize) {
         this.skills = skills;
         this.collaborator = collaborators;
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
-
     }
 
-
     /**
-     * Retrieves the required skills for the team.
+     * Gets the list of skills required for the team.
      *
-     * @return the required skills for the team
+     * @return the list of skills required for the team
      */
     public List<Skill> getSkills() {
         return (skills);
     }
 
     /**
-     * Retrieves the list of collaboratorDtos in the team.
+     * Gets the list of collaborators in the team.
      *
-     * @return the list of collaboratorDtos in the team
+     * @return the list of collaborators in the team
      */
     public List<Collaborator> getCollaboratorsDtoList() {
         return collaborator;
     }
 
     /**
-     * Retrieves the minimum team size constraint.
+     * Gets the minimum size of the team.
      *
-     * @return the minimum team size constraint
+     * @return the minimum size of the team
      */
     public int getMinTeamSize() {
         return minTeamSize;
     }
 
     /**
-     * Retrieves the maximum team size constraint.
+     * Gets the maximum size of the team.
      *
-     * @return the maximum team size constraint
+     * @return the maximum size of the team
      */
     public int getMaxTeamSize() {
         return maxTeamSize;

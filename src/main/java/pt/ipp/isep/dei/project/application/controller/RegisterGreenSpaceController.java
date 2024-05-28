@@ -9,7 +9,6 @@ import pt.ipp.isep.dei.project.repository.Repositories;
  * It interacts with the GreenSpaceRepository to store the created green spaces.
  */
 public class RegisterGreenSpaceController {
-    private final Repositories repositories;
     private final GreenSpaceRepository greenSpaceRepository;
 
     /**
@@ -17,7 +16,7 @@ public class RegisterGreenSpaceController {
      * Initializes the repositories and the greenSpaceRepository.
      */
     public RegisterGreenSpaceController() {
-        repositories = Repositories.getInstance();
+        Repositories repositories = Repositories.getInstance();
         greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
 

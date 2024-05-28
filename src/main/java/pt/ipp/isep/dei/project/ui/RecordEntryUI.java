@@ -7,14 +7,29 @@ import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
 import java.util.List;
 
+/**
+ * The type Record entry ui.
+ */
 public class RecordEntryUI implements Runnable {
+    /**
+     * The Controller.
+     */
     private RecordEntryController controller;
+    /**
+     * The Collaborator.
+     */
     private UserSession collaborator;
 
+    /**
+     * Instantiates a new Record entry ui.
+     */
     public RecordEntryUI() {
         controller = new RecordEntryController();
     }
 
+    /**
+     * Record complete entry.
+     */
     public void RecordCompleteEntry() {
         List<AgendaEntryDto> assignedEntries = controller.getAgendaEntryOfCollaboratorList(collaborator);
         AgendaEntryDto selectedEntry = selectEntryFromList(assignedEntries);
@@ -32,6 +47,12 @@ public class RecordEntryUI implements Runnable {
         }
     }
 
+    /**
+     * Select entry from list agenda entry dto.
+     *
+     * @param entries the entries
+     * @return the agenda entry dto
+     */
     private AgendaEntryDto selectEntryFromList(List<AgendaEntryDto> entries) {
         System.out.println("Select the entry to be recorded as completed:");
         int index = Utils.showAndSelectIndex(entries, "Entries:");
@@ -41,6 +62,12 @@ public class RecordEntryUI implements Runnable {
         return null;
     }
 
+    /**
+     * Confirm entry selection boolean.
+     *
+     * @param entry the entry
+     * @return the boolean
+     */
     private boolean confirmEntrySelection(AgendaEntryDto entry) {
         System.out.println("Selected entry:");
         System.out.println("Title: " + entry.getTitle());
@@ -52,10 +79,18 @@ public class RecordEntryUI implements Runnable {
         return Utils.confirm("Confirm the selection of this entry?");
     }
 
+    /**
+     * Display success message.
+     */
     private void displaySuccessMessage() {
         System.out.println("The entry was successfully recorded as completed.");
     }
 
+    /**
+     * Display error message.
+     *
+     * @param message the message
+     */
     private void displayErrorMessage(String message) {
         System.out.println(message);
     }

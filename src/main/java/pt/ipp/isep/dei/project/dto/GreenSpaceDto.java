@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.project.dto;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
@@ -7,32 +8,29 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * The type Green space dto.
+ * The GreenSpaceDto class represents a data transfer object for the GreenSpace domain object.
+ * It encapsulates the data related to a green space and provides methods to access and manipulate this data.
  */
 public class GreenSpaceDto implements Serializable {
 
-    private String name;
-    private GreenSpaceType type;
-    private double area;
-
-    //Se quiseres faz o UserSessionDto
-    private UserSession manager;
-
-    //Em vez de criar o AddressDto
-    private String address;
-    private String city;
-    private String zipCode;
+    private final String name;
+    private final GreenSpaceType type;
+    private final double area;
+    private final UserSession manager;
+    private final String address;
+    private final String city;
+    private final String zipCode;
 
     /**
-     * Instantiates a new Green space dto.
+     * Constructs a new GreenSpaceDto object with the provided data.
      *
-     * @param name    the name
-     * @param type    the type
-     * @param area    the area
-     * @param manager the manager
-     * @param address the address
-     * @param city    the city
-     * @param zipCode the zip code
+     * @param name    the name of the green space
+     * @param type    the type of the green space
+     * @param area    the area of the green space
+     * @param manager the manager of the green space
+     * @param address the address of the green space
+     * @param city    the city of the green space
+     * @param zipCode the zip code of the green space
      */
     public GreenSpaceDto(String name, GreenSpaceType type, double area, UserSession manager, String address, String city, String zipCode) {
         this.name = name;
@@ -45,63 +43,63 @@ public class GreenSpaceDto implements Serializable {
     }
 
     /**
-     * Gets name.
+     * Gets the name of the green space.
      *
-     * @return the name
+     * @return the name of the green space
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets type.
+     * Gets the type of the green space.
      *
-     * @return the type
+     * @return the type of the green space
      */
     public GreenSpaceType getType() {
         return type;
     }
 
     /**
-     * Gets area.
+     * Gets the area of the green space.
      *
-     * @return the area
+     * @return the area of the green space
      */
     public double getArea() {
         return area;
     }
 
     /**
-     * Gets manager.
+     * Gets the manager of the green space.
      *
-     * @return the manager
+     * @return the manager of the green space
      */
     public UserSession getManager() {
         return manager;
     }
 
     /**
-     * Gets address.
+     * Gets the address of the green space.
      *
-     * @return the address
+     * @return the address of the green space
      */
     public String getAddress() {
         return address;
     }
 
     /**
-     * Gets city.
+     * Gets the city of the green space.
      *
-     * @return the city
+     * @return the city of the green space
      */
     public String getCity() {
         return city;
     }
 
     /**
-     * Gets zip code.
+     * Gets the zip code of the green space.
      *
-     * @return the zip code
+     * @return the zip code of the green space
      */
     public String getZipCode() {
         return zipCode;
