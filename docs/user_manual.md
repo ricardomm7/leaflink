@@ -2,14 +2,20 @@
 ###### LeafLink is currently not registered under our ownership, and our group is solely utilizing it for educational purposes and not for any commercial endeavors. It's essential to emphasize that the name LeafLink is still under consideration and not yet finalized. We are committed to ensuring that all aspects of our project, including branding elements, align with ethical and legal standards.
 
 ## Glossary
-[CLICK HERE TO BE REDIRECTED](sprintB/global-artifacts/01.requirements-engineering/glossary.md)
+[CLICK HERE TO BE REDIRECTED](sprintC/global-artifacts/01.requirements-engineering/glossary.md)
 
 ## Introduction
-This document serves to offer comprehensive guidance on the LeafLink Software, encompassing a broad spectrum of topics ranging from the product's general overview to its specific functionalities tailored for users. It caters to various user demographics, providing guidance suitable for their respective interactions with the application.
+This document serves to offer comprehensive guidance on the LeafLink Software, encompassing a broad spectrum of topics 
+ranging from the product's general overview to its specific functionalities tailored for users. It caters to various 
+user demographics, providing guidance suitable for their respective interactions with the application.
 
-Designed to facilitate an understanding of the LeafLink Software's functionality and to optimize its utilization for individual requirements, this manual targets all personnel involved in the administration and upkeep of these spaces.
+Designed to facilitate an understanding of the LeafLink Software's functionality and to optimize its utilization for 
+individual requirements, this manual targets all personnel involved in the administration and upkeep of these spaces.
 
-Intended for users across the spectrum of the urban green space management application, including human resources managers, vehicle and equipment fleet managers, as well as collaborators responsible for overseeing green areas and related activities, this manual aims to provide valuable insights and operational instructions on how to use the software in question.
+Intended for users across the spectrum of the urban green space management application, including human resources 
+managers, vehicle and equipment fleet managers, as well as collaborators responsible for overseeing green areas and 
+related activities, this manual aims to provide valuable insights and operational instructions on how to use the 
+software in question.
 
 ## System Overview
 ### General Descriptions
@@ -17,7 +23,9 @@ LeafLink serves as a global management tool for urban green spaces, including pa
 Its main aim is to simplify and facilitate the process of administering and maintaining these green areas as well as 
 managing resources, guaranteeing their sustainability, functionality and aesthetics. This software will simplify and 
 clarify different aspects of green space management, such as collaborator management, with their professions and 
-appropriate skills; work team management; vehicle and machinery management; and vehicle maintenance.
+appropriate skills; work team management; vehicle and machinery management; vehicle maintenance; green space management;
+task management (agenda and to-do-list); and notification service.
+
 
 ### Main Features
 The main features of LeafLink are:
@@ -40,29 +48,71 @@ This feature analyzes the skills and qualifications of available employees and p
 for specific tasks or projects. By optimizing workforce allocation, LeafLink helps ensure that projects are completed 
 efficiently and effectively.
 
+- #### Task Management
+LeafLink provides tools for effective task management essential for the timely maintenance of green areas. The To-Do 
+List feature allows managers to register and track all necessary tasks, from regular maintenance to occasional repairs, 
+categorized by urgency and expected duration. The Agenda feature enables scheduling and monitoring of these tasks, 
+assigning teams, and allocating vehicles and equipment. This ensures comprehensive and organized task execution, 
+improving overall park functionality.
+
+- ### Green Space Management
+LeafLink allows managers to register various green spaces, specifying the type (garden, medium-sized park, or 
+large-sized park) and its respective area. This feature ensures that all green spaces are systematically documented and 
+easily accessible for management purposes.
+
+- ### Team Assignment Notification
+LeafLink ensures that when a team is assigned to a task in the Agenda, all team members are promptly informed via email. 
+This notification system supports different email services, configurable to allow flexibility in communication platforms, 
+ensuring that all team members receive timely updates regardless of the email service used.
+
+- ### Data Analysis
+LeafLink offers advanced data analysis tools to support decision-making processes for green space management.
+
 - #### Water Consumption Cost Analysis
-LeafLink provides tools for analyzing water consumption costs in specific green spaces. By collecting and analyzing data
+    LeafLink provides tools for analyzing water consumption costs in specific green spaces. By collecting and analyzing data
 related to water usage, this feature helps green space managers identify areas of high consumption and potential inefficiencies. 
 With insights gained from cost analysis, managers can implement strategies to optimize water usage, reduce costs, and 
 promote sustainability.
 
+- #### Equipment Usage Analysis
+    LeafLink's equipment usage analysis feature enables managers to track and analyze the usage of equipment within green 
+    spaces. By monitoring factors such as equipment utilization rates, maintenance schedules, and performance metrics, this 
+    feature provides valuable insights into equipment efficiency and effectiveness. Armed with this information, managers 
+    can make informed decisions regarding equipment maintenance, replacement, and utilization strategies.
+
+- #### Monthly Water Consumption Cost Prediction
+    By applying a linear regression model, LeafLink predicts the average monthly water consumption cost for new parks based 
+    on their size. This feature uses historical data to provide accurate cost estimates, aiding in budget planning and 
+    resource allocation.
+
+- #### Polynomial Regression for Data Fit
+  LeafLink employs polynomial regression to determine the best-fit line for specific datasets. This feature allows 
+  managers to analyze complex data relationships, supporting more accurate predictions and informed decision-making.
+
+- #### User Portal Data Collection
+    LeafLink facilitates the collection of data from user portals regarding park usage. This feature enables managers to 
+    gather information on visitor demographics, usage patterns, and preferences. By understanding how users interact with 
+    green spaces, managers can tailor maintenance and management strategies to better meet the needs and expectations of 
+    park visitors.
+
 - #### Optimal Route Determination
-Using advanced algorithms, LeafLink calculates optimal routes for pipe installation within green spaces. By considering 
-factors such as terrain, distance, and water supply requirements, this feature helps ensure efficient and effective 
-distribution of water resources. By optimizing route planning, LeafLink supports the development of robust irrigation 
-systems that meet the needs of green spaces while minimizing resource waste.
+    Using advanced algorithms, LeafLink calculates optimal routes for pipe installation within green spaces. By considering 
+    factors such as terrain, distance, and water supply requirements, this feature helps ensure efficient and effective 
+    distribution of water resources. By optimizing route planning, LeafLink supports the development of robust irrigation 
+    systems that meet the needs of green spaces while minimizing resource waste.
 
-- #### Equipment Usage Analysis 
-LeafLink's equipment usage analysis feature enables managers to track and analyze the usage of equipment within green 
-spaces. By monitoring factors such as equipment utilization rates, maintenance schedules, and performance metrics, this 
-feature provides valuable insights into equipment efficiency and effectiveness. Armed with this information, managers 
-can make informed decisions regarding equipment maintenance, replacement, and utilization strategies.
+- #### Shortest Route to Assembly Points
+    LeafLink helps define and place signs for the shortest evacuation routes from various points within the park to 
+    designated assembly points. The feature uses custom algorithms to determine and visualize the shortest paths, ensuring 
+    efficient and safe evacuations.
 
-- #### User Portal Data Collection 
-LeafLink facilitates the collection of data from user portals regarding park usage. This feature enables managers to 
-gather information on visitor demographics, usage patterns, and preferences. By understanding how users interact with 
-green spaces, managers can tailor maintenance and management strategies to better meet the needs and expectations of 
-park visitors.
+- #### Optimal Routes to Multiple Assembly Points
+    This feature identifies the shortest evacuation routes from various points within the park to the closest assembly point. 
+    It ensures that park users can evacuate quickly and safely, regardless of their location in the park
+
+- #### Algorithm Complexity Analysis
+    LeafLink provides detailed worst-case time complexity analysis for the algorithms used in evacuation planning. 
+    This ensures transparency and reliability in the software's performance during critical situations
 
 ## Features/Functions
 ### 1. Register Skills for Collaborator | Human Resources Manager
@@ -232,7 +282,216 @@ This feature allows the GSM to apply an algorithm that determines the optimal ro
 5. The system will process the uploaded file and display a graph representing the imported routes data.
 6. The system will process the routes previously collected and generate another graph with the routes that connect all water points and has the minimum cost.
 
+### 14. Run tests for inputs of variable size | Quality Assurance Manager (QAM)
+This feature allows the QAM to run tests for inputs of variable size to observe the asymptotic behavior of the execution 
+time of the US13 algorithm.
+
+### Step by step:
+1. Open the testing module in the GMS system.
+2. Navigate to the section designated for performance testing.
+3. Select the option to run tests for variable input sizes.
+4. The system will request the US13 algorithm for testing.
+5. Provide the US13 algorithm as the input for testing.
+6. The system will run tests for 30 given files of varying input sizes.
+7. Upon completion, the system will generate a .csv file containing (input size, execution time) for each test.
+8. The system will also generate an image file with a graphical representation of the execution time as a function of input size.
+9. Both files will be saved in a designated folder.
+10. Review the .csv file and the graphical representation for accuracy.
+11. Confirm the completion of the tests by selecting the appropriate option.
+
+### 15. Predict average monthly cost for water consumption | Green Space Manager (GSM)
+This feature allows the GSM to predict the average monthly cost for water consumption in a new 55-hectare park using a linear regression model.
+
+### Step by step:
+1. Open the data analysis module in the GMS system.
+2. Navigate to the section designated for water consumption analysis.
+3. Upload the file "water consumption updated.csv" containing daily water consumption data.
+4. Upload the file "Area.csv" containing the area of each park.
+5. The system will analyze the data and apply a linear regression model considering park area as the independent variable and the average monthly cost as the response variable.
+6. The system will predict the average monthly cost for a new 55-hectare park based on the linear regression model.
+7. Review the predicted cost for accuracy.
+8. Confirm the prediction by selecting the appropriate option.
+
+### 16. Apply polynomial regression for best fit line | Green Space Manager (GSM)
+This feature allows the GSM to apply polynomial regression to determine the best line for a given dataset.
+
+### Step by step:
+1. Open the data analysis module in the GMS system.
+2. Navigate to the section designated for regression analysis.
+3. Upload the data file "solution us14.csv" if not completed US14.
+4. Select the polynomial regression option.
+5. The system will analyze the data and apply polynomial regression to determine the best fit line.
+6. Review the regression results and the best fit line for accuracy.
+7. Confirm the analysis by selecting the appropriate option.
+
+### 17. Place signs for emergency evacuation to an Assembly Point | Green Space Manager (GSM)
+This feature allows the GSM to place signs for evacuating park users to an Assembly Point, ensuring the signs provide the shortest route.
+
+### Step by step:
+1. Open the emergency planning module in the GMS system.
+2. Navigate to the section designated for placing evacuation signs.
+3. Upload the .csv file containing Assembly Point data with the structure: Assembly Point X, Assembly Point Y, Distance.
+4. The system will analyze the data and calculate the shortest route from any sign to the Assembly Point using only primitive operations.
+5. The system will generate a .csv file with the output paths in the format: (vertice sign a, vertice sign b, ..., vertice Assembly Point); path duration.
+6. The system will also present a visualization of the input graph and the output path.
+7. Save the output files and review them for accuracy.
+8. Confirm the completion by selecting the appropriate option.
+
+### 18. Place signs for emergency evacuation to the closest Assembly Point | Green Space Manager (GSM)
+This feature allows the GSM to place signs for evacuating park users to the closest Assembly Point, ensuring the signs provide the shortest routes.
+
+### Step by step:
+1. Open the emergency planning module in the GMS system.
+2. Navigate to the section designated for placing evacuation signs.
+3. Upload the .csv file containing Assembly Point data with the structure: Assembly Point X, Assembly Point Y, Distance.
+4. The system will analyze the data and calculate the shortest routes to the closest Assembly Point using only primitive operations.
+5. The system will generate a .csv file with the output paths in the format: (vertice sign a, vertice sign b, ..., vertice Assembly Point); path duration.
+6. The system will also present a visualization of the input graph and the output path.
+7. Save the output files and review them for accuracy.
+8. Confirm the completion by selecting the appropriate option.
 
 
+### 19. Analyze worst-case time complexity of developed procedures | Quality Assurance Manager (QAM)
+This feature allows the QAM to conclude the worst-case time complexity of the procedures developed in US13, US17, and US18.
 
+### Step by step:
+1. Open the analysis module in the GMS system.
+2. Navigate to the section designated for time complexity analysis.
+3. Select the algorithms from US13, US17, and US18 for analysis.
+4. The system will present a theoretical framework and perform a complexity analysis of the selected algorithms.
+5. The system will generate a .pdf file containing the analysis, including pseudo-code and the complexity analysis.
+6. Review the analysis for accuracy.
+7. Confirm the completion by selecting the appropriate option.
 
+### 20. Register a green space | Green Spaces Manager
+This feature allows the GSM to register a green space (garden, medium-sized park, or large-sized park) and its 
+respective area.
+
+#### Step by step:
+
+1. Open the GMS system.
+2. Navigate to the section designated for green space registration.
+3. Click on the option to register a new green space.
+4. The system will request the green space data such as type (garden, medium-sized park, large-sized park) and its area.
+5. Enter the requested data.
+6. After entering the data, the system will display all entered information for review. Review the information provided for accuracy.
+7. Confirm the provided data by selecting the appropriate option on the confirmation dialog.
+8. Upon confirmation, the system will display a success message confirming the creation of the new green space.
+
+### 21. Add a new entry to the To-Do List | Green Space Manager
+This feature allows the GSM to add a new entry to the To-Do List.
+
+#### Step by step:
+
+1. Open the GMS system.
+2. Navigate to the section designated for managing the To-Do List.
+3. Click on the option to add a new entry to the To-Do List.
+4. The system will request the task details such as description, urgency (High, Medium, Low), and expected duration.
+5. Select the green space from the list provided by the system.
+6. Enter the task details and select the appropriate green space.
+7. After entering the details, the system will display all entered information for review. Review the information provided for accuracy.
+8. Confirm the provided data by selecting the appropriate option on the confirmation dialog.
+9. Upon confirmation, the system will display a success message confirming the addition of the new task to the To-Do List.
+
+### 22. Add a new entry to the Agenda | Green Space Manager
+This feature allows the GSM to add a new entry to the Agenda.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for managing the Agenda.
+3. Click on the option to add a new entry to the Agenda.
+4. The system will request the task details such as team, vehicles/equipment assigned, expected duration, and status.
+5. Select the green space from the list provided by the system.
+6. Select the task from the existing To-Do List entries.
+7. Enter the task details and select the appropriate green space.
+8. After entering the details, the system will display all entered information for review. Review the information provided for accuracy.
+9. Confirm the provided data by selecting the appropriate option on the confirmation dialog.
+10. Upon confirmation, the system will display a success message confirming the addition of the new task to the Agenda.
+
+### 23. Assign a Team to an entry in the Agenda | Green Space Manager
+This feature allows the GSM to assign a team to an entry in the Agenda.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for managing the Agenda.
+3. Click on the option to assign a team to an entry in the Agenda.
+4. The system will display a list of Agenda entries. Select the entry to which you want to assign a team.
+5. Select the team members from the list provided by the system.
+6. The system will display all selected team members for review. Review the information provided for accuracy.
+7. Confirm the team assignment by selecting the appropriate option on the confirmation dialog.
+8. Upon confirmation, the system will send a message to all team members informing them about the assignment and display a success message.
+
+### 24. Postpone an entry in the Agenda | Green Space Manager
+This feature allows the GSM to postpone an entry in the Agenda to a specific future date.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for managing the Agenda.
+3. Click on the option to postpone an entry in the Agenda.
+4. The system will display a list of Agenda entries. Select the entry you want to postpone.
+5. Select the new date for the task.
+6. The system will display the new date and all related information for review. Review the information provided for accuracy.
+7. Confirm the new date by selecting the appropriate option on the confirmation dialog.
+8. Upon confirmation, the system will update the task's status and display a success message confirming the postponement
+
+### 25. Cancel an entry in the Agenda | Green Space Manager
+This feature allows the GSM to cancel an entry in the Agenda.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for managing the Agenda.
+3. Click on the option to cancel an entry in the Agenda.
+4. The system will display a list of Agenda entries. Select the entry you want to cancel.
+5. Confirm the cancellation by selecting the appropriate option on the confirmation dialog.
+6. Upon confirmation, the system will update the task's status to "Canceled" and display a success message.
+
+### 26. Assign one or more vehicles to an entry in the Agenda | Green Space Manager
+This feature allows the GSM to assign one or more vehicles to an entry in the Agenda.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for managing the Agenda.
+3. Click on the option to assign vehicles to an entry in the Agenda.
+4. The system will display a list of Agenda entries. Select the entry to which you want to assign vehicles.
+5. Select the vehicles from the list provided by the system.
+6. The system will display all selected vehicles for review. Review the information provided for accuracy.
+7. Confirm the vehicle assignment by selecting the appropriate option on the confirmation dialog.
+8. Upon confirmation, the system will update the task's details and display a success message confirming the vehicle assignment.
+
+### 27. List all green spaces managed by the GSM | Green Space Manager
+This feature allows the GSM to list all green spaces managed by them.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for listing green spaces.
+3. Click on the option to list all green spaces.
+4. The system will sort the list of green spaces by size in descending order using the sorting algorithm defined in the configuration file.
+5. The system will display the sorted list of green spaces.
+6. Review the list for accuracy. If any adjustments are needed, adjust the configuration file and repeat the sorting process.
+
+### 28. Consult tasks assigned to a Collaborator | Collaborator
+This feature allows a Collaborator to consult the tasks assigned to them between two dates.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for task consultation.
+3. Click on the option to consult tasks assigned to you.
+4. Enter the date range for the task consultation.
+5. The system will display the tasks assigned to you within the specified date range, sorted by date.
+6. Optionally, filter the results by the status of the task (Planned, Postponed, Canceled, Done).
+7. Review the displayed tasks for accuracy.
+
+### 29. Record the completion of a task | Collaborator
+This feature allows a Collaborator to record the completion of a task.
+
+#### Step by step:
+1. Open the GMS system.
+2. Navigate to the section designated for task management.
+3. Click on the option to record task completion.
+4. The system will display a list of tasks assigned to you. Select the task you want to mark as completed.
+5. Confirm the task completion by selecting the appropriate option on the confirmation dialog.
+6. Upon confirmation, the system will update the task's status to "Done" and display a success message confirming the completion of the task.
+
+## Troubleshooting
+
+## Frequently Asked Questions_ FAQs
