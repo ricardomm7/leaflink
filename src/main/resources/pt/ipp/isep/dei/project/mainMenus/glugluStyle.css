@@ -1,0 +1,122 @@
+.root {
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.menubar-cstm {
+    -fx-background-color: white;
+}
+
+.toolbar {
+    -fx-background-color: white;
+    -fx-border-width: 0px 1px 0px 0px; /* Borda esquerda maior quando pressionado */
+    -fx-border-color: #dedede;
+}
+
+.menu-btn-cstm {
+    -fx-background-color: transparent;
+    -fx-border-color: gray;
+    -fx-border-radius: 0;
+    -fx-border-width: 1px;
+    -fx-font-family: Arial;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #585858; /* Define a cor da fonte para azul */
+
+}
+
+.menu-btn-cstm .tasks-image {
+    -fx-image: url('tasks.png');
+}
+
+.menu-btn-cstm:pressed .tasks-image {
+    -fx-image: url('tasksWhite.png');
+}
+
+.menu-btn-cstm .collab-image {
+    -fx-image: url('collab.png');
+}
+
+.menu-btn-cstm:pressed .collab-image {
+    -fx-image: url('collabwhite.png');
+}
+
+.menu-btn-cstm .team-image {
+    -fx-image: url('team.png');
+}
+
+.menu-btn-cstm:pressed .team-image {
+    -fx-image: url('teamwhite.png');
+}
+
+.menu-btn-cstm .analysis-image {
+    -fx-image: url('anlysi.png');
+}
+
+.menu-btn-cstm:pressed .analysis-image {
+    -fx-image: url('anlysiwhite.png');
+}
+
+.menu-btn-cstm .vehicles-image {
+    -fx-image: url('vehi.png');
+}
+
+.menu-btn-cstm:pressed .vehicles-image {
+    -fx-image: url('vehiwhite.png');
+}
+
+.menu-btn-cstm .routes-image {
+    -fx-image: url('routes.png');
+}
+
+.menu-btn-cstm:pressed .routes-image {
+    -fx-image: url('routesWhite.png');
+}
+
+.menu-btn-cstm .gs-image {
+    -fx-image: url('gs.png');
+}
+
+.menu-btn-cstm:pressed .gs-image {
+    -fx-image: url('gswhite.png');
+}
+
+.menu-btn-cstm .users-image {
+    -fx-image: url('users.png');
+}
+
+.menu-btn-cstm:pressed .users-image {
+    -fx-image: url('userswhite.png');
+}
+
+.menu-btn-cstm:pressed {
+    -fx-background-color: #2a5890;
+    -fx-border-width: 1px 1px 1px 10px; /* Borda esquerda maior quando pressionado */
+    -fx-border-color: #90be20;
+    -fx-text-fill: white;
+}
+
+.menu-btn-cstm:focused {
+    -fx-background-color: transparent;
+    -fx-border-width: 1px; /* Mantém a borda padrão quando focado */
+}
+
+.menu-btn-cstm:focused:pressed {
+    -fx-background-color: #2a5890;
+    -fx-border-width: 1px 1px 1px 10px; /* Borda esquerda maior quando pressionado */
+}
+
+.foot {
+    -fx-background-color: #eeeeec;
+    -fx-border-color: #dedede;
+}
+
+.flowpane {
+    -fx-border-color: #dedede;
+    -fx-border-width: 0px 0px 1px 0px; /* Borda esquerda maior quando pressionado */
+}
+
+.flowpane .label{
+    -fx-text-fill: #2a5890;
+}
+
