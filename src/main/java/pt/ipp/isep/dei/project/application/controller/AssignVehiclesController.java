@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
@@ -19,8 +21,8 @@ public class AssignVehiclesController {
         this.vehicleRepository = repositories.getVehicleRepository();
     }
 
-    public List<AgendaEntryDto> getAgendaEntryList() {
-        return entryRepository.getAgendaEntryList();
+    public List<AgendaEntryDto> getAgendaEntryList(UserSession u) {
+        return entryRepository.getAgendaEntryListByGSM(u);
     }
 
     public List<VehicleDto> getVehicleList() {

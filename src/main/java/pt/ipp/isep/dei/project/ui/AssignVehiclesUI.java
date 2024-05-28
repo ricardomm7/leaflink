@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.AssignVehiclesController;
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 
@@ -16,7 +17,7 @@ public class AssignVehiclesUI implements Runnable {
     }
 
     public void assignVehicles() {
-        List<AgendaEntryDto> a = controller.getAgendaEntryList();
+        List<AgendaEntryDto> a = controller.getAgendaEntryList(ApplicationSession.getInstance().getCurrentSession());
 
         if (a.isEmpty()) {
             throw new IllegalArgumentException("The agenda entry is empty.");
