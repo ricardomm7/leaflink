@@ -8,16 +8,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.project.ui.console.menu.*;
-import pt.ipp.isep.dei.project.ui.console.utils.Utils;
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * The type Authentication gui.
@@ -45,15 +39,7 @@ public class AuthenticationGUI {
 
         boolean success = doLogin(username, password);
         if (success) {
-            //closeWindow();
-            //redirectToRoleUI();
-
-            try {
-                Main.loadActivity("mainMenus/mainmenu.fxml", true, 1205, 880);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            redirectToRoleGUI(ApplicationSession.getInstance().getCurrentSession().getUserRoles().get(0));
         } else {
             showAlert("Login Failed", "Invalid UserId and/or Password.");
         }
@@ -77,61 +63,26 @@ public class AuthenticationGUI {
         return ctrl.doLogin(username, password);
     }
 
-    private void closeWindow() {
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-        stage.close();
-    }
-
-    private void redirectToRoleUI() {
-        List<UserRoleDTO> roles = ctrl.getUserRoles();
-        if ((roles == null) || (roles.isEmpty())) {
-            System.out.println("No role assigned to user.");
-        } else {
-            UserRoleDTO role = selectsRole(roles);
-            if (!Objects.isNull(role)) {
-                List<MenuItem> rolesUI = getMenuItemForRoles();
-                redirectToRoleUI(rolesUI, role);
-            } else {
-                System.out.println("No role selected.");
+    private void redirectToRoleGUI(UserRoleDTO u) {
+        String caminho = null;
+        try {
+            if (u.getId() == AuthenticationController.ROLE_ADMIN) {
+                caminho = "mainMenus/adminMenu.fxml";
             }
-        }
-        ctrl.doLogout();
-    }
-
-    private List<MenuItem> getMenuItemForRoles() {
-        List<MenuItem> rolesUI = new ArrayList<>();
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_QAM, new QamUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_COLLAB, new ClbUI()));
-
-
-        //TODO: Complete with other user roles and related RoleUI
-        return rolesUI;
-    }
-
-
-    private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
-        if (roles.size() == 1) {
-            return roles.get(0);
-        } else {
-            return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
-        }
-    }
-
-    private void redirectToRoleUI(List<MenuItem> rolesUI, UserRoleDTO role) {
-        boolean found = false;
-        for (MenuItem item : rolesUI) {
-            if (item.hasDescription(role.getDescription())) {
-                item.run();
-                found = true;
-                break;
+            if (caminho == null) {
+                throw new IllegalArgumentException("Error!!");
             }
+        } catch (Exception e) {
+            showAlert("Error", "There is no UI assigned to this user.");
         }
-        if (!found) {
-            System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
+        launchActivity(caminho);
+    }
+
+    private void launchActivity(String caminho) {
+        try {
+            Main.loadActivity(caminho, true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -142,4 +93,65 @@ public class AuthenticationGUI {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /*
+        private void redirectToRoleUI() {
+            List<UserRoleDTO> roles = ctrl.getUserRoles();
+            if ((roles == null) || (roles.isEmpty())) {
+                System.out.println("No role assigned to user.");
+            } else {
+                UserRoleDTO role = selectsRole(roles);
+                if (!Objects.isNull(role)) {
+                    List<MenuItem> rolesUI = getMenuItemForRoles();
+                    redirectToRoleUI(rolesUI, role);
+                } else {
+                    System.out.println("No role selected.");
+                }
+            }
+            ctrl.doLogout();
+        }
+
+        private List<MenuItem> getMenuItemForRoles() {
+            List<MenuItem> rolesUI = new ArrayList<>();
+            rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
+            rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
+            rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
+            rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
+            rolesUI.add(new MenuItem(AuthenticationController.ROLE_QAM, new QamUI()));
+            rolesUI.add(new MenuItem(AuthenticationController.ROLE_COLLAB, new ClbUI()));
+
+
+            //TODO: Complete with other user roles and related RoleUI
+            return rolesUI;
+        }
+
+
+        private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
+            if (roles.size() == 1) {
+                return roles.get(0);
+            } else {
+                return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
+            }
+        }
+
+        private void redirectToRoleUI(List<MenuItem> rolesUI, UserRoleDTO role) {
+            boolean found = false;
+            for (MenuItem item : rolesUI) {
+                if (item.hasDescription(role.getDescription())) {
+                    item.run();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
+            }
+        }
+    */
+    /*
+    private void closeWindow() {
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        stage.close();
+    }
+    */
 }

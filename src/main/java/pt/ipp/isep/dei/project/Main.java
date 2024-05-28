@@ -16,12 +16,13 @@ public class Main extends Application {
 
     private static Stage appStage;
 
-    public static void loadActivity(String activity, boolean resizeable, double minWi, double minHe) throws IOException {
+    public static void loadActivity(String activity, boolean resizeable, double minWi, double minHe, boolean maximized) throws IOException {
         URL res = Main.class.getResource(activity);
-        System.out.println(res);
         Parent root = new FXMLLoader(res).load();
         Main.appStage.setMinWidth(minWi);
         Main.appStage.setMinHeight(minHe);
+        Main.appStage.setMaximized(maximized);
+        Main.appStage.setFullScreen(maximized);
         Main.appStage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("icon.png"))));
         Main.appStage.setResizable(resizeable);
         Main.appStage.setScene(new Scene(root));
@@ -29,9 +30,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         Main.appStage = primaryStage;
-
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
         Main.appStage.setTitle("LeafLink");
         Main.appStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icon.png"))));
