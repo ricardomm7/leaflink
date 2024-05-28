@@ -80,7 +80,7 @@ public class AuthenticationGUI {
 
     private void launchActivity(String caminho) {
         try {
-            Main.loadActivity(caminho, true, 1205, 900, true);
+            Main.loadNewActivity(caminho, true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

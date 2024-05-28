@@ -2,37 +2,9 @@ package pt.ipp.isep.dei.project.ui.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import pt.ipp.isep.dei.project.Main;
 
 public class AdminGUI {
-
-    @FXML
-    private ToggleButton teamsBrn;
-
-    @FXML
-    private ToggleButton routeBtn;
-
-    @FXML
-    private Label functionNameLabel;
-
-    @FXML
-    private ToggleButton vehicleBtn;
-
-    @FXML
-    private ToggleButton tasksBtn;
-
-    @FXML
-    private ToggleButton collabBtn;
-
-    @FXML
-    private ToggleButton anlysBtn;
-
-    @FXML
-    private ToggleButton spacesBtn;
-
-    @FXML
-    private ToggleButton usersBtn;
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
@@ -41,7 +13,11 @@ public class AdminGUI {
 
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
-
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

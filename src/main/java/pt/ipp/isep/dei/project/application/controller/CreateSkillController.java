@@ -32,7 +32,10 @@ public class CreateSkillController {
     }
 
     public List<SkillDto> getSkillsDto() {
-
         return skillRepository.getSkillDtoList();
+    }
+
+    public void removeSkill(int index){
+        skillRepository.removeSkill(index);
     }
 }

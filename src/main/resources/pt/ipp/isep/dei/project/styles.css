@@ -35,6 +35,7 @@
     -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
     -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
     -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+    -fx-text-fill: white;
 }
 
 .button-custom:pressed {
@@ -43,4 +44,5 @@
     -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
     -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
     -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+    -fx-text-fill: white;
 }

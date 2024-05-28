@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.AdminGUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.CollaboratorsMenuGUI">
     <left>
         <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar" BorderPane.alignment="CENTER">
             <items>
@@ -19,7 +19,7 @@
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Collaborators">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0" selected="true" styleClass="menu-btn-cstm" text="Collaborators">
                     <graphic>
                         <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="collab-image">
                         </ImageView>
@@ -78,15 +78,64 @@
             </children>
         </FlowPane>
     </bottom>
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="444.0" fitWidth="629.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icon.png" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-   </center>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <FlowPane alignment="CENTER_LEFT" styleClass="flowpane">
+                    <children>
+                        <Label fx:id="functionNameLabel" text="Collaborators">
+                            <font>
+                                <Font name="System Bold" size="25.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                </FlowPane>
+            <TabPane prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab text="Skills/Competences">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox VBox.vgrow="NEVER">
+                                 <children>
+                                    <TextField fx:id="skillsSearchTextArea" prefHeight="31.0" prefWidth="555.0" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="31.0" prefWidth="80.0" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#handleAddBtn" prefHeight="31.0" prefWidth="222.0" styleClass="button-custom" text="Add new skill/competence" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#handelRemoveBtn" prefHeight="31.0" prefWidth="88.0" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="listViewSkills" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </content>
+                </Tab>
+                <Tab text="Jobs">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>

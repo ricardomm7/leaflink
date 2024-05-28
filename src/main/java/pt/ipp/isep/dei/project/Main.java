@@ -16,16 +16,20 @@ public class Main extends Application {
 
     private static Stage appStage;
 
-    public static void loadActivity(String activity, boolean resizeable, double minWi, double minHe, boolean maximized) throws IOException {
+    public static void loadNewActivity(String activity, boolean resizeable, double minWi, double minHe, boolean maximized) throws IOException {
         URL res = Main.class.getResource(activity);
         Parent root = new FXMLLoader(res).load();
+
+        // Criar uma nova cena
+        Scene scene = new Scene(root);
+
+        // Configurar a janela principal
+        Main.appStage.setScene(scene);
+        Main.appStage.setMaximized(maximized);
         Main.appStage.setMinWidth(minWi);
         Main.appStage.setMinHeight(minHe);
-        Main.appStage.setMaximized(maximized);
-        Main.appStage.setFullScreen(maximized);
-        Main.appStage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("icon.png"))));
         Main.appStage.setResizable(resizeable);
-        Main.appStage.setScene(new Scene(root));
+        Main.appStage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("icon.png"))));
     }
 
     @Override

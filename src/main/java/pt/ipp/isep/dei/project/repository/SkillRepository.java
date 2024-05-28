@@ -69,4 +69,8 @@ public class SkillRepository implements Serializable {
     public List<SkillDto> getSkillDtoList() {
         return SkillMapper.ListToDto(skillList);
     }
+
+    public void removeSkill(int index) {
+        skillList.remove(index);
+    }
 }

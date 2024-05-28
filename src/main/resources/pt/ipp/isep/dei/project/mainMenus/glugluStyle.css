@@ -33,11 +33,19 @@
     -fx-image: url('tasksWhite.png');
 }
 
+.menu-btn-cstm:selected .tasks-image {
+    -fx-image: url('tasksWhite.png');
+}
+
 .menu-btn-cstm .collab-image {
     -fx-image: url('collab.png');
 }
 
 .menu-btn-cstm:pressed .collab-image {
+    -fx-image: url('collabwhite.png');
+}
+
+.menu-btn-cstm:selected .collab-image {
     -fx-image: url('collabwhite.png');
 }
 
@@ -49,11 +57,19 @@
     -fx-image: url('teamwhite.png');
 }
 
+.menu-btn-cstm:selected .team-image {
+    -fx-image: url('teamwhite.png');
+}
+
 .menu-btn-cstm .analysis-image {
     -fx-image: url('anlysi.png');
 }
 
 .menu-btn-cstm:pressed .analysis-image {
+    -fx-image: url('anlysiwhite.png');
+}
+
+.menu-btn-cstm:selected .analysis-image {
     -fx-image: url('anlysiwhite.png');
 }
 
@@ -65,11 +81,19 @@
     -fx-image: url('vehiwhite.png');
 }
 
+.menu-btn-cstm:selected .vehicles-image {
+    -fx-image: url('vehiwhite.png');
+}
+
 .menu-btn-cstm .routes-image {
     -fx-image: url('routes.png');
 }
 
 .menu-btn-cstm:pressed .routes-image {
+    -fx-image: url('routesWhite.png');
+}
+
+.menu-btn-cstm:selected .routes-image {
     -fx-image: url('routesWhite.png');
 }
 
@@ -81,6 +105,10 @@
     -fx-image: url('gswhite.png');
 }
 
+.menu-btn-cstm:selected .gs-image {
+    -fx-image: url('gswhite.png');
+}
+
 .menu-btn-cstm .users-image {
     -fx-image: url('users.png');
 }
@@ -89,7 +117,18 @@
     -fx-image: url('userswhite.png');
 }
 
+.menu-btn-cstm:selected .users-image {
+    -fx-image: url('userswhite.png');
+}
+
 .menu-btn-cstm:pressed {
+    -fx-background-color: #2a5890;
+    -fx-border-width: 1px 1px 1px 10px; /* Borda esquerda maior quando pressionado */
+    -fx-border-color: #90be20;
+    -fx-text-fill: white;
+}
+
+.menu-btn-cstm:selected {
     -fx-background-color: #2a5890;
     -fx-border-width: 1px 1px 1px 10px; /* Borda esquerda maior quando pressionado */
     -fx-border-color: #90be20;
@@ -118,5 +157,38 @@
 
 .flowpane .label{
     -fx-text-fill: #2a5890;
+}
+
+.text-field-custom {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: rgba(72, 144, 255, 1); /* azul com transparência total */
+    -fx-border-width: 2px; /* ajuste o tamanho do contorno conforme necessário */
+}
+
+.button-custom {
+    -fx-background-color: white; /* Define a cor de fundo para branco */
+    -fx-border-color: rgb(72, 144, 255); /* Define a cor da borda para azul */
+    -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
+    -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
+    -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+}
+
+.button-custom:hover {
+    -fx-background-color: rgb(60,125,244); /* Define a cor de fundo ao passar o mouse */
+    -fx-border-color:rgb(60,125,244);
+    -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
+    -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
+    -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+    -fx-text-fill: white;
+}
+
+.button-custom:pressed {
+    -fx-background-color: rgb(52,75,174); /* Define a cor de fundo ao clicar */
+    -fx-border-color:rgb(52,75,174);
+    -fx-border-radius: 6; /* Define o raio das bordas para 6 pixels */
+    -fx-background-radius: 6; /* Define o raio das bordas internas para 6 pixels */
+    -fx-border-width: 2; /* Define a largura da borda para 2 pixels */
+    -fx-text-fill: white;
 }
 
