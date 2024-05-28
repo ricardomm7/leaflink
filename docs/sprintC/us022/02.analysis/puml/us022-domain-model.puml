@@ -13,7 +13,6 @@ hide methods
 
 
 class AgendaEntry {
-    urgencyStatus
     estimatedDate
     progressStatus
 
@@ -24,6 +23,7 @@ class ToDoEntry {
     title
     description
     duration
+    urgencyStatus
 
 }
 
