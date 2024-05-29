@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
@@ -22,13 +23,49 @@ public class VehiclesMenuGUI {
     private final RegisterVehicleController vehicleController = new RegisterVehicleController();
     private final RegisterMaintenanceController registerMaintenanceController = new RegisterMaintenanceController();
 
-    private List<String> allVehicle;
+    private List<VehicleDto> allVehicle;
 
     @FXML
     private ListView<String> listViewVehicle;
 
     @FXML
     private TextField vehiclesSearchTextArea;
+
+    @FXML
+    private Label tareLabel;
+
+    @FXML
+    private Label plateLabel;
+
+    @FXML
+    private Label aquiLabel;
+
+    @FXML
+    private Label kmLabel;
+
+    @FXML
+    private Label registLabel;
+
+    @FXML
+    private Label modelLabel;
+
+    @FXML
+    private Label vinLabel;
+
+    @FXML
+    private Label freqLabel;
+
+    @FXML
+    private Label brandLabel;
+
+    @FXML
+    private Label typeLabel;
+
+    @FXML
+    private Label grossLabel;
+
+    @FXML
+    private VBox vbox_selectedVehicle;
 
     @FXML
     private Button removeBtn;
@@ -77,7 +114,12 @@ public class VehiclesMenuGUI {
     void handleVehicleSearchBtn(ActionEvent event) {
         String searchText = vehiclesSearchTextArea.getText().toLowerCase();
         List<String> filteredVehicles = allVehicle.stream()
-                .filter(vehicle -> vehicle.toLowerCase().contains(searchText)).collect(Collectors.toList());
+                .filter(vehicle -> vehicle.getBrand().toLowerCase().contains(searchText)
+                        || vehicle.getModel().toLowerCase().contains(searchText)
+                        || vehicle.getVehiclePlate().toLowerCase().contains(searchText))
+                .map(vehicle -> String.format("%s | %s | %s",
+                        vehicle.getBrand(), vehicle.getModel(), vehicle.getVehiclePlate()))
+                .collect(Collectors.toList());
         ObservableList<String> observableVehicleList = FXCollections.observableArrayList(filteredVehicles);
         listViewVehicle.setItems(observableVehicleList);
     }
@@ -164,10 +206,10 @@ public class VehiclesMenuGUI {
                 double tare = Double.parseDouble(tareWeightField.getText());
                 double gross = Double.parseDouble(grossWeightField.getText());
                 int currentKm = Integer.parseInt(currentKmField.getText());
-                LocalDate aquisition = acquisitionDateField.getValue();
+                LocalDate acquisition = acquisitionDateField.getValue();
                 int maintenance = Integer.parseInt(maintenanceFrequencyField.getText());
 
-                vehicleController.registerVehicle(vin, brand, model, type, registerDate, plate, tare, gross, currentKm, aquisition, maintenance);
+                vehicleController.registerVehicle(vin, brand, model, type, registerDate, plate, tare, gross, currentKm, acquisition, maintenance);
 
                 updateVehicleList();
             }
@@ -176,7 +218,6 @@ public class VehiclesMenuGUI {
         dialog.showAndWait();
 
     }
-
 
     @FXML
     void handleVehicleRemoveBtn(ActionEvent event) {
@@ -222,18 +263,56 @@ public class VehiclesMenuGUI {
 
     private void updateVehicleList() {
         List<VehicleDto> vehicleList = vehicleController.getVehicleList();
-        allVehicle = vehicleList.stream()
+        allVehicle = vehicleList;
+        List<String> vehicleDisplayList = vehicleList.stream()
                 .map(vehicleDto -> String.format("%s | %s | %s",
                         vehicleDto.getBrand(), vehicleDto.getModel(), vehicleDto.getVehiclePlate()))
                 .collect(Collectors.toList());
-        ObservableList<String> observableVehicleList = FXCollections.observableArrayList(allVehicle);
+        ObservableList<String> observableVehicleList = FXCollections.observableArrayList(vehicleDisplayList);
         listViewVehicle.setItems(observableVehicleList);
     }
 
     @FXML
     void initialize() {
+        vbox_selectedVehicle.setVisible(false);
+
         updateVehicleList();
+
+        listViewVehicle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                updateVehicleDetails(newValue);
+                vbox_selectedVehicle.setVisible(true);
+            }
+        });
+
+        listViewVehicle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            removeBtn.setDisable(newValue == null);
+        });
+        removeBtn.setDisable(true);
     }
 
+    private void updateVehicleDetails(String selectedVehicle) {
+        // Extrai os detalhes do veículo selecionado
+        String[] parts = selectedVehicle.split(" \\| ");
+        String selectedPlate = parts[2].trim();
 
+        VehicleDto vehicle = allVehicle.stream()
+                .filter(v -> v.getVehiclePlate().equals(selectedPlate))
+                .findFirst()
+                .orElse(null);
+
+        if (vehicle != null) {
+            tareLabel.setText(vehicle.getTareWeight() + " kg");
+            plateLabel.setText(vehicle.getVehiclePlate());
+            aquiLabel.setText(vehicle.getAcquisitionDate().toString()); // Substitua com o método correto
+            kmLabel.setText(vehicle.getCurrentKm() + " km");
+            registLabel.setText(vehicle.getRegistrationDate().toString());
+            modelLabel.setText(vehicle.getModel());
+            vinLabel.setText(vehicle.getVIN());
+            freqLabel.setText(vehicle.getMaintenanceFrequency() + " km");
+            brandLabel.setText(vehicle.getBrand());
+            typeLabel.setText(vehicle.getType().toString());
+            grossLabel.setText(vehicle.getGrossWeight() + " kg");
+        }
+    }
 }

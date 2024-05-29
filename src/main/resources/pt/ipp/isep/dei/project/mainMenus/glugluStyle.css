@@ -213,6 +213,16 @@
     -fx-border-color: #90be20;
 }
 
+.costum-Label{
+    -fx-text-fill: #2a5890;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+
+.costum-Label-menor{
+    -fx-font-weight: bold;
+}
 
 
 
