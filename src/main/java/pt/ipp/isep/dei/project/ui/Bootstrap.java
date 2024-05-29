@@ -23,10 +23,10 @@ public class Bootstrap implements Runnable {
      */
     public void run() {
         addUsers();
-        addSkills();
-        addJobs();
+        //addSkills();
+        //addJobs();
         //addVehicles();
-        addCollaborators();
+        //addCollaborators();
         //addMaintenance();
         //addGreenSpaces();
         //addEntries();
@@ -73,32 +73,13 @@ public class Bootstrap implements Runnable {
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
 
         // Example 1
-        vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Toyota", "Corolla", VehicleType.CAR, LocalDate.of(2013, 3, 15), "12AB12", 1500.0, 2000.0,
-                50000, LocalDate.of(2023, 3, 12), 10000));
+        vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Toyota", "Corolla", VehicleType.CAR, LocalDate.of(2013, 3, 15), "12AB12", 1500.0, 2000.0, 50000, LocalDate.of(2023, 3, 12), 10000));
 
         // Example 2
-        vehicleRepository.registerVehicle(new VehicleDto("VIN56789012345678", "Ford", "Fiesta", VehicleType.CAR, LocalDate.of(2010, 10, 10), "56CD56", 1200.0, 1800.0,
-                40000, LocalDate.of(2020, 9, 30), 8000));
+        vehicleRepository.registerVehicle(new VehicleDto("VIN56789012345678", "Ford", "Fiesta", VehicleType.CAR, LocalDate.of(2010, 10, 10), "56CD56", 1200.0, 1800.0, 40000, LocalDate.of(2020, 9, 30), 8000));
 
         // Example 3
-        vehicleRepository.registerVehicle(new VehicleDto("AIU1qasw23edfr45t", "Volkswagen", "Golf", VehicleType.CAR, LocalDate.of(2000, 10, 22), "9012EF", 1400.0, 2100.0,
-                60000, LocalDate.of(2010, 10, 1), 12000));
-
-        // Example 4: Utility Truck for Landscaping Equipment
-        vehicleRepository.registerVehicle(new VehicleDto("MLN56789012345678", "Chevrolet", "Silverado", VehicleType.CAR, LocalDate.of(2019, 8, 20), "46CD56", 2800.0, 4000.0,
-                90000, LocalDate.of(2024, 8, 19), 25000));
-
-        // Example 5: Ford F-250 for Heavy Duty Landscaping
-        vehicleRepository.registerVehicle(new VehicleDto("HIN90123456789012", "Ford", "F-250", VehicleType.CAR, LocalDate.of(2018, 10, 10), "90EF90", 3200.0, 5000.0,
-                120000, LocalDate.of(2024, 10, 9), 30000));
-
-        // Example 6: Isuzu NQR for Commercial Landscaping
-        vehicleRepository.registerVehicle(new VehicleDto("KIN23456789012345", "Isuzu", "NQR", VehicleType.CAR, LocalDate.of(2016, 6, 25), "23GH12", 3500.0, 6000.0,
-                150000, LocalDate.of(2024, 6, 24), 35000));
-
-        // Example 7: Mitsubishi Fuso Canter for Green Waste Collection
-        vehicleRepository.registerVehicle(new VehicleDto("PIN67890123456789", "Mitsubishi", "Fuso Canter", VehicleType.CAR, LocalDate.of(2017, 7, 30), "67IJ76", 4000.0, 7000.0,
-                180000, LocalDate.of(2024, 7, 29), 40000));
+        vehicleRepository.registerVehicle(new VehicleDto("AIU1qasw23edfr45t", "Volkswagen", "Golf", VehicleType.CAR, LocalDate.of(2000, 10, 22), "9012EF", 1400.0, 2100.0, 60000, LocalDate.of(2010, 10, 1), 12000));
     }
 
     /**

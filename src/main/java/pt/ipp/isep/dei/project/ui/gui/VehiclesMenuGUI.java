@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import pt.ipp.isep.dei.project.Main;
@@ -27,10 +28,10 @@ public class VehiclesMenuGUI {
     private ListView<String> listViewVehicle;
 
     @FXML
-    private TextField VehicleSearchTextArea;
+    private TextField vehiclesSearchTextArea;
 
     @FXML
-    private Button removeBtnVehicle;
+    private Button removeBtn;
 
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
@@ -71,16 +72,14 @@ public class VehiclesMenuGUI {
 
     @FXML
     void handleEnterSearchBar(KeyEvent event) {
-        try {
-            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (event.getCode() == KeyCode.ENTER) {
+            handleVehicleSearchBtn(new ActionEvent());
         }
     }
 
     @FXML
     void handleVehicleSearchBtn(ActionEvent event) {
-        String searchText = VehicleSearchTextArea.getText().toLowerCase();
+        String searchText = vehiclesSearchTextArea.getText().toLowerCase();
         List<String> filteredVehicles = allVehicle.stream()
                 .filter(vehicle -> vehicle.toLowerCase().contains(searchText)).collect(Collectors.toList());
         ObservableList<String> observableVehicleList = FXCollections.observableArrayList(filteredVehicles);
