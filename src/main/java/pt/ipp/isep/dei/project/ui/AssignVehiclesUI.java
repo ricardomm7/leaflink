@@ -1,3 +1,6 @@
+/**
+ * This class provides a user interface for assigning vehicles to agenda entries.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.AssignVehiclesController;
@@ -12,10 +15,18 @@ import java.util.Scanner;
 public class AssignVehiclesUI implements Runnable {
     private final AssignVehiclesController controller;
 
+    /**
+     * Constructs a new AssignVehiclesUI object and initializes the controller.
+     */
     public AssignVehiclesUI() {
         this.controller = new AssignVehiclesController();
     }
 
+    /**
+     * Assigns vehicles to an agenda entry.
+     * Prompts the user to select an agenda entry and then select vehicles to assign to that entry.
+     * Updates the selected agenda entry with the assigned vehicles.
+     */
     public void assignVehicles() {
         List<AgendaEntryDto> a = controller.getAgendaEntryList(ApplicationSession.getInstance().getCurrentSession());
 
@@ -57,6 +68,9 @@ public class AssignVehiclesUI implements Runnable {
 
     }
 
+    /**
+     * Runs the user interface for assigning vehicles to an agenda entry.
+     */
     @Override
     public void run() {
         assignVehicles();

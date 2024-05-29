@@ -1,3 +1,6 @@
+/**
+ * The type Register vehicle ui.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
@@ -8,9 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-/**
- * The type Register vehicle ui.
- */
 public class RegisterVehicleUI implements Runnable {
     /**
      * The constant scanner.
@@ -370,6 +370,9 @@ public class RegisterVehicleUI implements Runnable {
         return model != null && model.matches("^[a-zA-Z0-9- /]+$");
     }
 
+    /**
+     * Runs the user interface for registering a vehicle.
+     */
     @Override
     public void run() {
         registerVehicle();

@@ -1,3 +1,6 @@
+/**
+ * The WaterIrrigationUI class provides a user interface for getting the water routes.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.WaterIrrigationController;

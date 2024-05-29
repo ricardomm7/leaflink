@@ -1,3 +1,6 @@
+/**
+ * The type Bootstrap.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
@@ -13,11 +16,11 @@ import pt.isep.lei.esoft.auth.domain.model.User;
 import java.io.*;
 import java.time.LocalDate;
 
-/**
- * The type Bootstrap.
- */
 public class Bootstrap implements Runnable {
 
+    /**
+     * Runs the bootstrap process.
+     */
     public void run() {
         addUsers();
         //addSkills();
@@ -29,6 +32,9 @@ public class Bootstrap implements Runnable {
         //addEntries();
     }
 
+    /**
+     * Serializes all data to a file.
+     */
     public void serializeAll() {
         try {
             FileOutputStream fileOut = new FileOutputStream("serial/repos.dnd");
@@ -41,6 +47,9 @@ public class Bootstrap implements Runnable {
         }
     }
 
+    /**
+     * Deserializes all data from a file.
+     */
     public void deserializeAll() {
         try {
             FileInputStream fileIn = new FileInputStream("serial/repos.dnd");
@@ -92,6 +101,9 @@ public class Bootstrap implements Runnable {
                 180000, LocalDate.of(2024, 7, 29), 40000));
     }
 
+    /**
+     * Adds maintenance records for vehicles.
+     */
     private void addMaintenance() {
         MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
 
@@ -111,6 +123,9 @@ public class Bootstrap implements Runnable {
         maintenanceRepository.createMaintenance(new MaintenanceDto("67IJ76", LocalDate.of(2024, 7, 1), 19000));
     }
 
+    /**
+     * Adds ToDo entries for green spaces.
+     */
     private void addEntries() {
         EntryRepository entryRepository = Repositories.getInstance().getEntryRepository();
 
@@ -122,6 +137,9 @@ public class Bootstrap implements Runnable {
         entryRepository.create(new ToDoEntryDto("Trimming bushes", "hedge trimmer needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Riverside Park", GreenSpaceType.MEDIUM_SIZED_PARK, 400, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("f@f.com"), new Password("password789"), "Gardener"))), "202 Cedar St", "Riverdale", "9753-001")));
     }
 
+    /**
+     * Adds skills to the system.
+     */
     private void addSkills() {
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
 
@@ -151,6 +169,9 @@ public class Bootstrap implements Runnable {
         skillRepository.createSkill(new SkillDto("Seasonal Planting and Maintenance"));
     }
 
+    /**
+     * Adds jobs to the system.
+     */
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
@@ -175,6 +196,9 @@ public class Bootstrap implements Runnable {
         jobRepository.createJob(new JobDto("Machine Operator"));
     }
 
+    /**
+     * Adds collaborators to the system.
+     */
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
@@ -210,6 +234,9 @@ public class Bootstrap implements Runnable {
                 JobMapper.toDomain(jobRepository.getJobList().get(4))));
     }
 
+    /**
+     * Adds green spaces to the system.
+     */
     private void addGreenSpaces() {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
         Email email = new Email("gsm@this.app");
@@ -232,6 +259,9 @@ public class Bootstrap implements Runnable {
         greenSpaceRepository.create(new GreenSpaceDto("Praça Azul", GreenSpaceType.GARDEN, 20000, managerSession, address5.getAddress(), address5.getCity(), address5.getZipCode()));
     }
 
+    /**
+     * Adds users and their respective roles to the authentication repository.
+     */
     private void addUsers() {
         //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
@@ -243,21 +273,39 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_QAM, AuthenticationController.ROLE_QAM);
 
 
+        /**
+         * Adds a user with the "Main Administrator" role.
+         */
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
 
+        /**
+         * Adds a user with the "Vehicle and Equipment Fleet Manager" role.
+         */
         authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@this.app", "vfm",
                 AuthenticationController.ROLE_VFM);
 
+        /**
+         * Adds a user with the "Human Resources Manager" role.
+         */
         authenticationRepository.addUserWithRole("Human Resources Manager", "hrm@this.app", "hrm",
                 AuthenticationController.ROLE_HRM);
 
+        /**
+         * Adds a user with the "Green Space Manager" role.
+         */
         authenticationRepository.addUserWithRole("Green Space Manager", "gsm@this.app", "gsm",
                 AuthenticationController.ROLE_GSM);
 
+        /**
+         * Adds a user with the "Collaborator" role.
+         */
         authenticationRepository.addUserWithRole("Collaborator", "collaborator@this.app", "collab",
                 AuthenticationController.ROLE_COLLAB);
 
+        /**
+         * Adds a user with the "Software Quality Assessment Team Manager" role.
+         */
         authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@this.app", "qam",
                 AuthenticationController.ROLE_QAM);
     }
