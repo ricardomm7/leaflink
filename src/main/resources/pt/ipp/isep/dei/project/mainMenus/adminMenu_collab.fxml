@@ -98,7 +98,7 @@
                             <content>
                                 <VBox styleClass="border-line">
                                     <children>
-                                        <HBox>
+                                        <HBox VBox.vgrow="NEVER">
                                             <children>
                                                 <TextField fx:id="collaboratorsTextArea" onKeyPressed="#handleCollabEnterSearchBar" prefHeight="31.0" prefWidth="555.0" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
@@ -232,11 +232,6 @@
                                                       <Insets left="5.0" />
                                                    </padding>
                                                 </Label>
-                                                <Label fx:id="skillsLabel" layoutX="193.0" layoutY="165.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
                                                 <Label fx:id="addressLabel" layoutX="193.0" layoutY="105.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                                    <padding>
                                                       <Insets left="5.0" />
@@ -247,6 +242,38 @@
                                                       <Insets left="5.0" />
                                                    </padding>
                                                 </Label>
+                                                <Label fx:id="skillsLabel" text="info" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                   <padding>
+                                                      <Insets left="5.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label styleClass="costum-Label-menor" text="Options" GridPane.rowIndex="13">
+                                                   <GridPane.margin>
+                                                      <Insets left="20.0" right="5.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" onAction="#handleAddSkillsBtn" prefHeight="25.0" prefWidth="116.0" text="Assign Skills">
+                                                         <styleClass>
+                                                            <String fx:value="button-custom" />
+                                                            <String fx:value="no-margin-button" />
+                                                         </styleClass>
+                                                         <FlowPane.margin>
+                                                            <Insets left="5.0" />
+                                                         </FlowPane.margin>
+                                                      </Button>
+                                                      <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Edit details">
+                                                         <styleClass>
+                                                            <String fx:value="button-custom" />
+                                                            <String fx:value="no-margin-button" />
+                                                         </styleClass>
+                                                         <FlowPane.margin>
+                                                            <Insets left="5.0" />
+                                                         </FlowPane.margin>
+                                                      </Button>
+                                                   </children>
+                                                </FlowPane>
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
@@ -263,6 +290,9 @@
                                                 <RowConstraints vgrow="SOMETIMES" />
                                                 <RowConstraints vgrow="SOMETIMES" />
                                                 <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                                 <RowConstraints vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <VBox.margin>

@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import pt.ipp.isep.dei.project.Main;
+import pt.ipp.isep.dei.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.project.application.controller.CreateJobController;
 import pt.ipp.isep.dei.project.application.controller.CreateSkillController;
 import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
@@ -19,6 +20,7 @@ import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.mappers.JobMapper;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class CollaboratorsMenuGUI {
     private final CreateSkillController skillC = new CreateSkillController();
     private final CreateJobController jobC = new CreateJobController();
     private final RegisterCollaboratorController collabC = new RegisterCollaboratorController();
+    private final AssignSkillController assSkillC = new AssignSkillController();
     private List<String> allSkills;
     private List<JobDto> allJobs;
     private List<CollaboratorDto> collaboratorDtoList;
@@ -105,6 +108,70 @@ public class CollaboratorsMenuGUI {
     }
 
     @FXML
+    void handleAddSkillsBtn(ActionEvent event) {
+        String selectedCollab = collabsList.getSelectionModel().getSelectedItem();
+        if (selectedCollab == null) {
+            ShowError.showAlert("Error", "No collaborator selected.", null);
+        }
+
+        String[] parts = selectedCollab.split(" \\| ");
+        String name = parts[0].trim();
+
+        CollaboratorDto selectedCollaborator = collaboratorDtoList.stream()
+                .filter(c -> c.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+
+        List<SkillDto> allSkillsDto = skillC.getSkillsDto();
+
+        List<SkillDto> collaboratorSkillsDto = selectedCollaborator.getSkills();
+
+        Dialog<List<SkillDto>> dialog = new Dialog<>();
+        dialog.setTitle("Assign Skills");
+        dialog.setHeaderText("Select the Skills/Competences you want to associate with the employee:");
+
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+        List<CheckBox> checkBoxList = new ArrayList<>();
+        for (SkillDto skillDto : allSkillsDto) {
+            CheckBox checkBox = new CheckBox(skillDto.getDesignation());
+            checkBoxList.add(checkBox);
+            vbox.getChildren().add(checkBox);
+
+            if (collaboratorSkillsDto.contains(skillDto)) {
+                checkBox.setSelected(true);
+                checkBox.setDisable(true); // Impede que a habilidade já associada seja desmarcada
+            }
+        }
+
+        dialog.getDialogPane().setContent(vbox);
+
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        dialog.setResultConverter(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                List<SkillDto> selectedSkills = new ArrayList<>();
+                for (CheckBox checkBox : checkBoxList) {
+                    if (checkBox.isSelected() && !collaboratorSkillsDto.contains(allSkillsDto.get(checkBoxList.indexOf(checkBox)))) {
+                        SkillDto skillDto = allSkillsDto.get(checkBoxList.indexOf(checkBox));
+                        selectedSkills.add(skillDto);
+                    }
+                }
+                return selectedSkills;
+            }
+            return null;
+        });
+
+        Optional<List<SkillDto>> result = dialog.showAndWait();
+        result.ifPresent(selectedSkills -> {
+            assSkillC.assignSkills(selectedCollaborator, selectedSkills);
+            updateCollaboratorsList();
+            updateCollabDetails(selectedCollab);
+        });
+    }
+
+
+    @FXML
     void handleCollavSearchBtn(ActionEvent event) {
         String searchText = collaboratorsTextArea.getText().toLowerCase();
         List<String> filteredCollabs = allCollabs.stream()
@@ -156,7 +223,6 @@ public class CollaboratorsMenuGUI {
 
         setupEnterKeyTraversal(nameField, birthdatePicker, contactMobileField, taxpayerNumberField, emailField, addressField, zipCodeField, cityField, documentTypeComboBox, identificationNumberField, admissionDatePicker, jobComboBox);
 
-        // Validação de email
         emailField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.contains("@")) {
                 emailField.setStyle("-fx-border-color: red;");
@@ -202,7 +268,6 @@ public class CollaboratorsMenuGUI {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButtonType) {
-                // Pega os valores dos campos e cria o colaborador diretamente
                 String name = nameField.getText();
                 LocalDate birthdate = birthdatePicker.getValue();
                 int contactMobile = Integer.parseInt(contactMobileField.getText());
@@ -458,16 +523,18 @@ public class CollaboratorsMenuGUI {
         if (collab != null) {
             nameLabel.setText(collab.getName());
             birthLabel.setText(collab.getBirthdate().toString());
-            mobileLabel.setText(collab.getContactMobile()+"");
-            taxLabel.setText(collab.getTaxpayerNumber()+"");
+            mobileLabel.setText(collab.getContactMobile() + "");
+            taxLabel.setText(collab.getTaxpayerNumber() + "");
             mailLabel.setText(collab.getEmail());
             addressLabel.setText(collab.getAddress().toString());
             doctypeLabel.setText(collab.getDocumentType().toString());
             docnumberLabel.setText(collab.getIdentificationNumber());
             admissLabel.setText(collab.getAdmissionDate().toString());
             jobLabel.setText(collab.getJob().getTitle());
-            skillsLabel.setText(collab.getSkills().stream().map(SkillDto::getDesignation).collect(Collectors.joining(", ")));
+            String skillsDescription = collab.getSkills().stream()
+                    .map(SkillDto::getDesignation)
+                    .collect(Collectors.joining("\n"));
+            skillsLabel.setText(skillsDescription);
         }
     }
-
 }
