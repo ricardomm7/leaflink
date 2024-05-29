@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.domain.SortAlgorithms;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,12 +34,17 @@ public class GreenSpaceRepository implements Serializable {
      */
     public void create(GreenSpaceDto d) {
         GreenSpace g = GreenSpaceMapper.toDomain(d);
-        if (checkForDuplicates(g)) {
-            addGreenSpace(g);
-        } else {
-            throw new IllegalArgumentException("There is already a green space with that name.");
+        try {
+            if (checkForDuplicates(g)) {
+                addGreenSpace(g);
+            } else {
+                throw new IllegalArgumentException("There is already a green space with that name/zipcode.");
+            }
+        } catch (Exception e) {
+            ShowError.showAlert("Green Space", e.getMessage(), "Duplicate");
         }
     }
+
 
     /**
      * Adds a GreenSpace to the repository.
@@ -57,7 +63,7 @@ public class GreenSpaceRepository implements Serializable {
      */
     private boolean checkForDuplicates(GreenSpace g) {
         for (GreenSpace x : greenSpaceList) {
-            if (x.getName().equalsIgnoreCase(g.getName())) {
+            if (x.getName().equalsIgnoreCase(g.getName()) && x.getAddress().getZipCode().equalsIgnoreCase(g.getAddress().getZipCode())) {
                 return false;
             }
         }

@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.repository;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.mappers.JobMapper;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,10 +30,14 @@ public class JobRepository implements Serializable {
      */
     public void createJob(JobDto dto) {
         Job j = JobMapper.toDomain(dto);
-        if (checkForDuplicates(j)) {
-            addJob(j);
-        } else {
-            throw new IllegalArgumentException("There is already a job with that name.");
+        try {
+            if (checkForDuplicates(j)) {
+                addJob(j);
+            } else {
+                throw new IllegalArgumentException("There is already a job with that name.");
+            }
+        } catch (Exception e){
+            ShowError.showAlert("Job", e.getMessage(), "Duplicate");
         }
     }
 

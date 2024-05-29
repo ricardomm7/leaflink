@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,12 +43,17 @@ public class CollaboratorRepository implements Serializable {
      * @return true if no duplicate is found, false otherwise
      */
     private boolean checkForDuplicates(Collaborator j) {
-        for (Collaborator x : collaboratorList) {
-            if (x.getTaxpayerNumber() == j.getTaxpayerNumber()) {
-                return false;
+        try {
+            for (Collaborator x : collaboratorList) {
+                if (x.getTaxpayerNumber() == j.getTaxpayerNumber()) {
+                    return false;
+                }
             }
+            throw new IllegalArgumentException("There is already an employee in the program with the same tax number attribute.");
+        } catch (Exception e) {
+            ShowError.showAlert("Collaborator", e.getMessage(), "Duplicate");
+            return true;
         }
-        return true;
     }
 
     /**

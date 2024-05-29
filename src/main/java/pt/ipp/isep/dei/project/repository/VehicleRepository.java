@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -55,13 +56,18 @@ public class VehicleRepository implements Serializable {
      */
     public boolean registerVehicle(VehicleDto dto) {
         Vehicle vehicle = VehicleMapper.toDomain(dto);
-        if (!verifyExistingVehicles(vehicle.getVehiclePlate(), vehicle.getVIN())) {
-            if (vehicle.registerVehicle(vehicle)) {
-                addVehicle(vehicle);
-                return true;
+        try {
+            if (!verifyExistingVehicles(vehicle.getVehiclePlate(), vehicle.getVIN())) {
+                if (vehicle.registerVehicle(vehicle)) {
+                    addVehicle(vehicle);
+                    return true;
+                }
             }
+            throw new IllegalArgumentException("There is already a vehicle with the same attributes.");
+        } catch (Exception e) {
+            ShowError.showAlert("Vehicle", e.getMessage(), "Duplicate");
+            return false;
         }
-        return false;
     }
 
     /**
