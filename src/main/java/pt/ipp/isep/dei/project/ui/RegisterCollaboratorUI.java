@@ -1,3 +1,6 @@
+/**
+ * The RegisterCollaboratorUI class provides a user interface for registering a new collaborator.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
@@ -12,9 +15,6 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * The RegisterCollaboratorUI class provides a user interface for registering a new collaborator.
- */
 public class RegisterCollaboratorUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
 
@@ -108,9 +108,9 @@ public class RegisterCollaboratorUI implements Runnable {
     /**
      * Parse the input date (String) to LocalDate.
      *
-     * @param dateString
-     * @return
-     * @throws DateTimeParseException
+     * @param dateString the date string
+     * @return the local date
+     * @throws DateTimeParseException if the date string is not in the correct format
      */
     private LocalDate parseDate(String dateString) {
         // Remove espaços em branco
@@ -136,6 +136,9 @@ public class RegisterCollaboratorUI implements Runnable {
         return LocalDate.parse(formattedDate, formatter);
     }
 
+    /**
+     * Runs the user interface for registering a new collaborator.
+     */
     @Override
     public void run() {
         registerCollaborator();

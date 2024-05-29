@@ -1,3 +1,6 @@
+/**
+ * The type Postpone agenda entry ui.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.PostponeAgendaEntryController;
@@ -11,9 +14,6 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * The type Postpone agenda entry ui.
- */
 public class PostponeAgendaEntryUI implements Runnable {
     /**
      * The constant scanner.
@@ -178,6 +178,9 @@ public class PostponeAgendaEntryUI implements Runnable {
         return date.format(formatter);
     }
 
+    /**
+     * Runs the user interface for postponing an agenda entry.
+     */
     @Override
     public void run() {
         postponeAgendaEntry();

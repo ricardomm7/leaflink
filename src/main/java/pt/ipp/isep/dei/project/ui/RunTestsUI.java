@@ -1,3 +1,6 @@
+/**
+ * The RunTestsUI class provides a user interface for running tests.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RunTestsController;
@@ -8,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * The RunTestsUI class provides a user interface for running tests.
- */
 public class RunTestsUI implements Runnable {
     private String folderpath;
 

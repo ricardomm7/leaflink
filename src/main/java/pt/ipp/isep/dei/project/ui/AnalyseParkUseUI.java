@@ -1,3 +1,6 @@
+/**
+ * This class represents the user interface for analyzing park usage.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.AnalyseParkUseController;
@@ -5,9 +8,6 @@ import pt.ipp.isep.dei.project.application.controller.AnalyseParkUseController;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
- * This class represents the user interface for analyzing park usage.
- */
 public class AnalyseParkUseUI implements Runnable {
     private String filepath;
 

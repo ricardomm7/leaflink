@@ -1,3 +1,8 @@
+/**
+ * The RegisterGreenSpaceUI class represents a user interface for registering a new green space.
+ * It allows users to input information such as name, type, area, manager, street, ZIP code, and city
+ * to create a new green space.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterGreenSpaceController;
@@ -8,11 +13,6 @@ import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
 import java.util.Scanner;
 
-/**
- * The RegisterGreenSpaceUI class represents a user interface for registering a new green space.
- * It allows users to input information such as name, type, area, manager, street, ZIP code, and city
- * to create a new green space.
- */
 public class RegisterGreenSpaceUI implements Runnable {
 
     private final RegisterGreenSpaceController controller;

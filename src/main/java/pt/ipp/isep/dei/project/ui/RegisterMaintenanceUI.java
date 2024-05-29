@@ -1,3 +1,6 @@
+/**
+ * The RegisterMaintenanceUI class provides a user interface for registering maintenance for vehicles.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
@@ -8,9 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * The RegisterMaintenanceUI class provides a user interface for registering maintenance for vehicles.
- */
 public class RegisterMaintenanceUI implements Runnable {
     private static Scanner sc = new Scanner(System.in);
     private static RegisterMaintenanceController controller;
@@ -67,6 +67,12 @@ public class RegisterMaintenanceUI implements Runnable {
         }
     }
 
+    /**
+     * Validates the provided date to ensure it is not in the future.
+     *
+     * @param date The date to validate.
+     * @throws RegisterVehicleUI.InvalidDateException If the provided date is in the future.
+     */
     private void validateDate(LocalDate date) throws RegisterVehicleUI.InvalidDateException {
         if (date.isAfter(LocalDate.now())) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -105,7 +111,9 @@ public class RegisterMaintenanceUI implements Runnable {
         return LocalDate.parse(formattedDate, formatter);
     }
 
-
+    /**
+     * Runs the RegisterMaintenance method.
+     */
     @Override
     public void run() {
         RegisterMaintenance();

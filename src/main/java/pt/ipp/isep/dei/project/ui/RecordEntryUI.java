@@ -1,3 +1,6 @@
+/**
+ * The type Record entry ui.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RecordEntryController;
@@ -7,9 +10,6 @@ import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
 import java.util.List;
 
-/**
- * The type Record entry ui.
- */
 public class RecordEntryUI implements Runnable {
     /**
      * The Controller.
@@ -95,6 +95,9 @@ public class RecordEntryUI implements Runnable {
         System.out.println(message);
     }
 
+    /**
+     * Runs the user interface for recording the completion of an entry.
+     */
     @Override
     public void run() {
         RecordCompleteEntry();

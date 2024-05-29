@@ -1,3 +1,6 @@
+/**
+ * The type List maintenance ui.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.ListMaintenanceController;
@@ -5,10 +8,6 @@ import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.util.List;
 
-
-/**
- * The type List maintenance ui.
- */
 public class ListMaintenanceUI implements Runnable {
     /**
      * The Controller.
@@ -41,6 +40,9 @@ public class ListMaintenanceUI implements Runnable {
         }
     }
 
+    /**
+     * Runs the user interface for listing vehicles needing maintenance.
+     */
     @Override
     public void run() {
         listVehiclesNeedingMaintenance();

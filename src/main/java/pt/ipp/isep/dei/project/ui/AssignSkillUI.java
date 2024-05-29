@@ -1,3 +1,7 @@
+/**
+ * This class provides an user inteface for assigning skills to collaborators.
+ * It pronps the user to select a collaborator and a skill, displays the selected choices, and asks for confirmation before assigning the skill to the collaborator.
+ */
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.AssignSkillController;
@@ -6,10 +10,6 @@ import pt.ipp.isep.dei.project.dto.SkillDto;
 
 import java.util.*;
 
-/**
- * This class provides an user inteface for assigning skills to collaborators.
- * It pronps the user to select a collaborator and a skill, displays the selected choices, and asks for confirmation before assigning the skill to the collaborator.
- */
 public class AssignSkillUI implements Runnable {
 
     private final AssignSkillController assignSkillController;
