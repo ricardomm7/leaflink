@@ -17,12 +17,10 @@ public class AdminUI implements Runnable {
 
     public void run() {
         List<MenuItem> options = new ArrayList<>();
-        options.add(new MenuItem("Assign a Skill to Collaborator", new AssignSkillUI()));
         options.add(new MenuItem("Generate Team Proposal", new CreateTeamUI()));
         options.add(new MenuItem("Register a Vehicle", new RegisterVehicleUI()));
         options.add(new MenuItem("Register a Vehicle's Maintenance", new RegisterMaintenanceUI()));
         options.add(new MenuItem("List Vehicles Needing Maintenance", new ListMaintenanceUI()));
-        options.add(new MenuItem("Calculate the minimum cost Irrigation Route", new WaterIrrigationUI()));
         options.add(new MenuItem("Run Tests for time about Kruskal", new RunTestsUI()));
         options.add(new MenuItem("Create a new Green Space", new RegisterGreenSpaceUI()));
         options.add(new MenuItem("Add entry to To-Do List", new RegisterToDoEntryUI()));

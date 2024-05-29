@@ -26,8 +26,8 @@ public abstract class Graphviz {
             writeGraphvizDotFile(tree);
 
             // Starts the execution from here
-            String caminhoImgFinal = System.getProperty("user.dir") + File.separator + "/goOut/" + filename + ".svg";
-            String comando = "dot -Tsvg " + System.getProperty("user.dir") + File.separator + "/temp/temp_gv_file.dot -o " + caminhoImgFinal;
+            String caminhoImgFinal = System.getProperty("user.dir") + File.separator + "/goOut/" + filename + ".png";
+            String comando = "dot -Tpng " + System.getProperty("user.dir") + File.separator + "/temp/temp_gv_file.dot -o " + caminhoImgFinal;
             ProcessBuilder pb = new ProcessBuilder("cmd", "/c", comando);
             pb.start().waitFor(); // Waits until the process is finished
         } catch (Exception e) {

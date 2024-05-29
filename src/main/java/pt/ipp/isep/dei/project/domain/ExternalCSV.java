@@ -49,7 +49,7 @@ public class ExternalCSV {
                 // Checks if the line contains the correct number of elements
                 if (data.length != 3) {
                     // If not, skip this line and proceed to the next one
-                    System.out.println("Invalid line: " + line);
+                    ShowError.showAlert("Import CSV", "This line is mal-formatted", "Line " + line);
                     continue;
                 }
 
@@ -82,7 +82,7 @@ public class ExternalCSV {
      * @param path                the path where the CSV file will be saved
      */
     public static void writeMSTCSV(List<Route> minimumSpanningTree, String path) {
-        try (PrintWriter pW = new PrintWriter(System.getProperty("user.dir") + File.separator + "/goOut/" + path + "_out.csv")) {
+        try (PrintWriter pW = new PrintWriter(System.getProperty("user.dir") + File.separator + "/goOut/CSV_out")) {
             // Writes each route of the MST to the CSV file
             double cost = 0;
             for (Route r : minimumSpanningTree) {

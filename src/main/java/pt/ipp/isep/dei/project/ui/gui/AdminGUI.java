@@ -29,7 +29,11 @@ public class AdminGUI {
 
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
-
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_analysis.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

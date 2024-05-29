@@ -418,7 +418,11 @@ public class CollaboratorsMenuGUI {
 
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de análise (caso necessário)
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_analysis.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

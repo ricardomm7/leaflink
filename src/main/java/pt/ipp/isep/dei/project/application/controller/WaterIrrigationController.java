@@ -22,7 +22,7 @@ public class WaterIrrigationController {
 
     private void executeSingle(String caminhoFile) {
         // Creates an instance of ExternalCSV with a given file name
-        ExternalCSV ex = new ExternalCSV(caminhoFile + ".csv");
+        ExternalCSV ex = new ExternalCSV(caminhoFile);
 
         // Imports data from the CSV file and creates routes
         ex.importAndCreateRoutes();
@@ -31,15 +31,14 @@ public class WaterIrrigationController {
         List<Route> allRoutes = ex.getAllRoutes();
 
         // Generates an image representing all routes
-        Graphviz.execute(allRoutes, caminhoFile + "_AllRoutesImage");
+        Graphviz.execute(allRoutes, "_AllRoutesImage");
 
         // Finds the minimum spanning tree using Kruskal's algorithm
         List<Route> minimumSpanningTree = KruskalAlgorithm.findMinimumSpanningTree(allRoutes);
-
         // Writes the minimum spanning tree to CSV file
         ExternalCSV.writeMSTCSV(minimumSpanningTree, caminhoFile);
 
         // Generates an image representing the minimum spanning tree routes
-        Graphviz.execute(minimumSpanningTree, caminhoFile + "_MSTRoutesImage");
+        Graphviz.execute(minimumSpanningTree, "_MSTRoutesImage");
     }
 }
