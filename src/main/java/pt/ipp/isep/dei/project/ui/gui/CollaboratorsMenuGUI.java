@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.CreateJobController;
 import pt.ipp.isep.dei.project.application.controller.CreateSkillController;
@@ -31,10 +32,46 @@ public class CollaboratorsMenuGUI {
     private final RegisterCollaboratorController collabC = new RegisterCollaboratorController();
     private List<String> allSkills;
     private List<JobDto> allJobs;
+    private List<CollaboratorDto> collaboratorDtoList;
     private List<String> allCollabs;
 
     @FXML
     private ListView<String> listViewSkills;
+
+    @FXML
+    private Label admissLabel;
+
+    @FXML
+    private Label birthLabel;
+
+    @FXML
+    private Label skillsLabel;
+
+    @FXML
+    private Label addressLabel;
+    @FXML
+    private Label mobileLabel;
+
+    @FXML
+    private Label taxLabel;
+
+    @FXML
+    private Label jobLabel;
+
+    @FXML
+    private VBox vbox_selectedCollab;
+
+    @FXML
+    private Label mailLabel;
+
+    @FXML
+    private Label doctypeLabel;
+
+    @FXML
+    private Label docnumberLabel;
+
+    @FXML
+    private Label nameLabel;
 
     @FXML
     private TextField skillsSearchTextArea;
@@ -369,7 +406,7 @@ public class CollaboratorsMenuGUI {
     }
 
     private void updateCollaboratorsList() {
-        List<CollaboratorDto> collaboratorDtoList = collabC.getCollaborators();
+        collaboratorDtoList = collabC.getCollaborators();
         allCollabs = new ArrayList<>();
         for (CollaboratorDto s : collaboratorDtoList) {
             allCollabs.add(s.getName() + " | " + s.getJob().getTitle() + " | Tax no: " + s.getTaxpayerNumber());
@@ -380,9 +417,11 @@ public class CollaboratorsMenuGUI {
 
     @FXML
     public void initialize() {
+        vbox_selectedCollab.setVisible(false);
         updateSkillsList();
         updateJobsList();
         updateCollaboratorsList();
+
         listViewSkills.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             removeBtn.setDisable(newValue == null);
         });
@@ -397,5 +436,38 @@ public class CollaboratorsMenuGUI {
             removeBtnCollab.setDisable(newValue == null);
         });
         removeBtnCollab.setDisable(true);
+
+        collabsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                updateCollabDetails(newValue);
+                vbox_selectedCollab.setVisible(true);
+            }
+        });
     }
+
+    private void updateCollabDetails(String selected) {
+        // Extrai os detalhes do colaborador selecionado
+        String[] parts = selected.split(" \\| ");
+        String name = parts[0].trim();  // Atualizado para pegar a parte correta do nome
+
+        CollaboratorDto collab = collaboratorDtoList.stream()
+                .filter(c -> c.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+
+        if (collab != null) {
+            nameLabel.setText(collab.getName());
+            birthLabel.setText(collab.getBirthdate().toString());
+            mobileLabel.setText(collab.getContactMobile()+"");
+            taxLabel.setText(collab.getTaxpayerNumber()+"");
+            mailLabel.setText(collab.getEmail());
+            addressLabel.setText(collab.getAddress().toString());
+            doctypeLabel.setText(collab.getDocumentType().toString());
+            docnumberLabel.setText(collab.getIdentificationNumber());
+            admissLabel.setText(collab.getAdmissionDate().toString());
+            jobLabel.setText(collab.getJob().getTitle());
+            skillsLabel.setText(collab.getSkills().stream().map(SkillDto::getDesignation).collect(Collectors.joining(", ")));
+        }
+    }
+
 }

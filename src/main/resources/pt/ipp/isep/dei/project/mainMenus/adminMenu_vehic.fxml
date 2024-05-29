@@ -123,14 +123,14 @@
                                                 </Button>
                                             </children>
                                         </HBox>
-                              <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                                 <children>
-                                              <ListView fx:id="listViewVehicle" HBox.hgrow="ALWAYS" />
-                                    <VBox fx:id="vbox_selectedVehicle" fillWidth="false" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                              <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+                                <items>
+                                              <ListView fx:id="listViewVehicle" />
+                                    <VBox fx:id="vbox_selectedVehicle" fillWidth="false">
                                        <children>
                                           <Label styleClass="costum-Label" text="Selected Vehicle Information">
                                              <VBox.margin>
-                                                <Insets bottom="20.0" left="20.0" top="10.0" />
+                                                <Insets bottom="10.0" left="10.0" top="10.0" />
                                              </VBox.margin>
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
@@ -139,20 +139,20 @@
                                           <GridPane VBox.vgrow="NEVER">
                                             <columnConstraints>
                                               <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
-                                              <ColumnConstraints hgrow="SOMETIMES" />
+                                              <ColumnConstraints hgrow="ALWAYS" />
                                             </columnConstraints>
                                             <rowConstraints>
                                               <RowConstraints vgrow="SOMETIMES" />
-                                              <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints vgrow="SOMETIMES" />
+                                              <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
                                                 <Label styleClass="costum-Label-menor" text="VIN">
@@ -266,11 +266,14 @@
                                                    </padding>
                                                 </Label>
                                              </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                           </GridPane>
                                        </children>
                                     </VBox>
-                                 </children>
-                              </HBox>
+                                </items>
+                              </SplitPane>
                                     </children>
                                 </VBox>
                             </content>
