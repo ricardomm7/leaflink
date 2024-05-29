@@ -42,10 +42,6 @@ public class VehiclesMenuGUI {
     }
 
     @FXML
-    void caollabBtnActionHandle(ActionEvent event) {
-    }
-
-    @FXML
     void tasksBtnActionHandle(ActionEvent event) {
     }
 
@@ -203,6 +199,14 @@ public class VehiclesMenuGUI {
         alert.showAndWait();
     }
 
+    @FXML
+    void caollabBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void handelMaintenanceRemoveBtn(ActionEvent event) {
