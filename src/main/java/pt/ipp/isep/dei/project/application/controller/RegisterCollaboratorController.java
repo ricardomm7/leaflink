@@ -29,10 +29,22 @@ public class RegisterCollaboratorController {
         jobRepository = repositories.getJobRepository();
     }
 
+
     /**
-     * Creates a new collaborator based on the provided CollaboratorDto.
+     * Create clb.
      *
-     * @param collDto the CollaboratorDto containing the collaborator data
+     * @param name                 the name
+     * @param birthdate1           the birthdate 1
+     * @param contactMobile        the contact mobile
+     * @param taxpayerNumber       the taxpayer number
+     * @param email                the email
+     * @param address              the address
+     * @param zipCode              the zip code
+     * @param city                 the city
+     * @param documentType         the document type
+     * @param identificationNumber the identification number
+     * @param admissionDate1       the admission date 1
+     * @param job                  the job
      */
     public void createCLB(String name, LocalDate birthdate1, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate1, Job job) {
         collaboratorRepository.create(new CollaboratorDto(name, birthdate1, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate1, job));
@@ -45,5 +57,23 @@ public class RegisterCollaboratorController {
      */
     public List<JobDto> getJobs() {
         return jobRepository.getJobList();
+    }
+
+    /**
+     * Gets collaborators.
+     *
+     * @return the collaborators
+     */
+    public List<CollaboratorDto> getCollaborators() {
+        return collaboratorRepository.getCollaboratorList();
+    }
+
+    /**
+     * Remove collab.
+     *
+     * @param index the index
+     */
+    public void removeCollab(int index) {
+        collaboratorRepository.remove(index);
     }
 }

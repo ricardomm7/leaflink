@@ -4,18 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.CreateJobController;
 import pt.ipp.isep.dei.project.application.controller.CreateSkillController;
+import pt.ipp.isep.dei.project.application.controller.RegisterCollaboratorController;
+import pt.ipp.isep.dei.project.domain.DocumentType;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.mappers.JobMapper;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +27,16 @@ import java.util.stream.Collectors;
 public class CollaboratorsMenuGUI {
     private final CreateSkillController skillC = new CreateSkillController();
     private final CreateJobController jobC = new CreateJobController();
+    private final RegisterCollaboratorController collabC = new RegisterCollaboratorController();
     private List<String> allSkills;
-    private List<String> allJobs;
-
+    private List<JobDto> allJobs;
+    private List<String> allCollabs;
 
     @FXML
     private ListView<String> listViewSkills;
+
+    @FXML
+    private TextField skillsSearchTextArea;
 
     @FXML
     private Button removeBtn;
@@ -43,11 +50,140 @@ public class CollaboratorsMenuGUI {
     @FXML
     private Button removeBtnJob;
 
+    @FXML
+    private Button removeBtnCollab;
+
+    @FXML
+    private ListView<String> collabsList;
+
+    @FXML
+    private TextField collaboratorsTextArea;
+
+    @FXML
+    void handleCollabEnterSearchBar(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            handleCollavSearchBtn(new ActionEvent());
+        }
+    }
+
+    @FXML
+    void handleCollavSearchBtn(ActionEvent event) {
+        String searchText = collaboratorsTextArea.getText().toLowerCase();
+        List<String> filteredCollabs = allCollabs.stream()
+                .filter(collaborator -> collaborator.toLowerCase().contains(searchText))
+                .collect(Collectors.toList());
+        ObservableList<String> observableCollabs = FXCollections.observableArrayList(filteredCollabs);
+        collabsList.setItems(observableCollabs);
+    }
+
+    @FXML
+    void handleAddBtnCollab(ActionEvent event) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Add new Collaborator");
+
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        TextField nameField = new TextField();
+        DatePicker birthdatePicker = new DatePicker();
+        TextField contactMobileField = new TextField();
+        TextField taxpayerNumberField = new TextField();
+        TextField emailField = new TextField();
+        TextField addressField = new TextField();
+        TextField zipCodeField = new TextField();
+        TextField cityField = new TextField();
+        ComboBox<DocumentType> documentTypeComboBox = new ComboBox<>(FXCollections.observableArrayList(DocumentType.values()));
+        TextField identificationNumberField = new TextField();
+        DatePicker admissionDatePicker = new DatePicker();
+
+        ComboBox<JobDto> jobComboBox = new ComboBox<>(FXCollections.observableArrayList(allJobs));
+        jobComboBox.setCellFactory(lv -> new ListCell<JobDto>() {
+            @Override
+            protected void updateItem(JobDto item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item.getTitle());
+            }
+        });
+        jobComboBox.setButtonCell(new ListCell<JobDto>() {
+            @Override
+            protected void updateItem(JobDto item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item.getTitle());
+            }
+        });
+
+        grid.add(new Label("Nome:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Data de Nascimento:"), 0, 1);
+        grid.add(birthdatePicker, 1, 1);
+        grid.add(new Label("Contacto Móvel:"), 0, 2);
+        grid.add(contactMobileField, 1, 2);
+        grid.add(new Label("Número de Contribuinte:"), 0, 3);
+        grid.add(taxpayerNumberField, 1, 3);
+        grid.add(new Label("Email:"), 0, 4);
+        grid.add(emailField, 1, 4);
+        grid.add(new Label("Endereço:"), 0, 5);
+        grid.add(addressField, 1, 5);
+        grid.add(new Label("Código Postal:"), 0, 6);
+        grid.add(zipCodeField, 1, 6);
+        grid.add(new Label("Cidade:"), 0, 7);
+        grid.add(cityField, 1, 7);
+        grid.add(new Label("Tipo de Documento:"), 0, 8);
+        grid.add(documentTypeComboBox, 1, 8);
+        grid.add(new Label("Número de Identificação:"), 0, 9);
+        grid.add(identificationNumberField, 1, 9);
+        grid.add(new Label("Data de Admissão:"), 0, 10);
+        grid.add(admissionDatePicker, 1, 10);
+        grid.add(new Label("Job:"), 0, 11);
+        grid.add(jobComboBox, 1, 11);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                // Pega os valores dos campos e cria o colaborador diretamente
+                String name = nameField.getText();
+                LocalDate birthdate = birthdatePicker.getValue();
+                int contactMobile = Integer.parseInt(contactMobileField.getText());
+                int taxpayerNumber = Integer.parseInt(taxpayerNumberField.getText());
+                String email = emailField.getText();
+                String address = addressField.getText();
+                String zipCode = zipCodeField.getText();
+                String city = cityField.getText();
+                DocumentType documentType = documentTypeComboBox.getValue();
+                String identificationNumber = identificationNumberField.getText();
+                LocalDate admissionDate = admissionDatePicker.getValue();
+                JobDto jobDto = jobComboBox.getValue();
+
+                // Cria o colaborador
+                collabC.createCLB(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, JobMapper.toDomain(jobDto));
+
+                updateCollaboratorsList();
+                return addButtonType;
+            }
+            return null;
+        });
+        dialog.showAndWait();
+    }
+
+    @FXML
+    void handelRemoveBtnCollab(ActionEvent event) {
+        int selectedIndex = collabsList.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            collabC.removeCollab(selectedIndex);
+            updateCollaboratorsList();
+        }
+    }
 
     @FXML
     void handleJobSearchBtn(ActionEvent event) {
         String searchText = jobSearchTextArea.getText().toLowerCase();
         List<String> filteredJobs = allJobs.stream()
+                .map(JobDto::getTitle)
                 .filter(job -> job.toLowerCase().contains(searchText))
                 .collect(Collectors.toList());
         ObservableList<String> observableJobsList = FXCollections.observableArrayList(filteredJobs);
@@ -87,9 +223,6 @@ public class CollaboratorsMenuGUI {
             handleJobSearchBtn(new ActionEvent());
         }
     }
-
-    @FXML
-    private TextField skillsSearchTextArea;
 
     @FXML
     void handleSearchBtn(ActionEvent event) {
@@ -136,11 +269,6 @@ public class CollaboratorsMenuGUI {
     }
 
     @FXML
-    void tasksBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de tarefas (caso necessário)
-    }
-
-    @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
@@ -157,6 +285,11 @@ public class CollaboratorsMenuGUI {
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
         // Implementação do botão de análise (caso necessário)
+    }
+
+    @FXML
+    void tasksBtnActionHandle(ActionEvent event) {
+        // Implementação do botão de tarefas (caso necessário)
     }
 
     @FXML
@@ -191,18 +324,29 @@ public class CollaboratorsMenuGUI {
 
     private void updateJobsList() {
         List<JobDto> jobListDto = jobC.getJobList();
-        allJobs = new ArrayList<>();
-        for (JobDto s : jobListDto) {
-            allJobs.add(s.getTitle());
-        }
-        ObservableList<String> observableJobsList = FXCollections.observableArrayList(allJobs);
+        allJobs = new ArrayList<>(jobListDto);
+        List<String> jobTitles = jobListDto.stream()
+                .map(JobDto::getTitle)
+                .collect(Collectors.toList());
+        ObservableList<String> observableJobsList = FXCollections.observableArrayList(jobTitles);
         listViewJobs.setItems(observableJobsList);
+    }
+
+    private void updateCollaboratorsList() {
+        List<CollaboratorDto> collaboratorDtoList = collabC.getCollaborators();
+        allCollabs = new ArrayList<>();
+        for (CollaboratorDto s : collaboratorDtoList) {
+            allCollabs.add(s.getName() + " | " + s.getJob().getTitle() + " | Tax no: " + s.getTaxpayerNumber());
+        }
+        ObservableList<String> collabsObservable = FXCollections.observableArrayList(allCollabs);
+        collabsList.setItems(collabsObservable);
     }
 
     @FXML
     public void initialize() {
         updateSkillsList();
         updateJobsList();
+        updateCollaboratorsList();
         listViewSkills.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             removeBtn.setDisable(newValue == null);
         });
@@ -212,5 +356,10 @@ public class CollaboratorsMenuGUI {
             removeBtnJob.setDisable(newValue == null);
         });
         removeBtnJob.setDisable(true);
+
+        collabsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            removeBtnCollab.setDisable(newValue == null);
+        });
+        removeBtnCollab.setDisable(true);
     }
 }

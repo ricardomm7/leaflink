@@ -51,6 +51,15 @@ public class CollaboratorRepository implements Serializable {
     }
 
     /**
+     * Remove.
+     *
+     * @param index the index
+     */
+    public void remove(int index) {
+        collaboratorList.remove(index);
+    }
+
+    /**
      * Gets the list of collaborators as CollaboratorDto objects.
      *
      * @return the list of collaborators as CollaboratorDto objects
