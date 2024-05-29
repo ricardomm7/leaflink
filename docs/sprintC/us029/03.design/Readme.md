@@ -48,26 +48,6 @@ This diagram shows the full sequence of interactions between the classes involve
 
 ![Sequence Diagram - Full](svg/us029-sequence-diagram-full.svg)
 
-### Split Diagrams
-
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
-
-It uses Interaction Occurrence (a.k.a. Interaction Use).
-
-![Sequence Diagram - split](svg/us029-sequence-diagram-split.svg)
-
-**Get Team Repository Partial SD**
-
-![Sequence Diagram - Partial - Get Team Repository](svg/us029-sequence-diagram-partial-get-team-repository.svg)
-
-**Get Entry List SD**
-
-![Sequence Diagram - Partial - Get Entry List](svg/us029-sequence-diagram-partial-get-toDoEntry-list.svg)
-
-**Record Entry Completion**
-
-![Sequence Diagram - Partial - Record Entry Completion](svg/us029-sequence-diagram-partial-record-toDoEntry-completion.svg)
-
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us029-class-diagram.svg)

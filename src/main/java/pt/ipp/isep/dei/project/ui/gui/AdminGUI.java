@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.project.ui.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import pt.ipp.isep.dei.project.Main;
 
 public class AdminGUI {
@@ -32,7 +34,11 @@ public class AdminGUI {
 
     @FXML
     void vehicleBtnActionHandle(ActionEvent event) {
-
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -50,4 +56,25 @@ public class AdminGUI {
 
     }
 
+    @FXML
+    void handleVehicleSearchBtn(ActionEvent event){
+
+    }
+
+    @FXML
+    void handleVehicleAddBtn(ActionEvent event){
+
+    }
+
+    @FXML
+    void handelVehicleRemoveBtn(ActionEvent event){
+
+    }
+
+    @FXML
+    void handleEnterSearchBar(KeyEvent event){
+        if (event.getCode() == KeyCode.ENTER){
+            handleVehicleSearchBtn(new ActionEvent());
+        }
+    }
 }

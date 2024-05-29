@@ -326,7 +326,11 @@ public class CollaboratorsMenuGUI {
 
     @FXML
     void vehicleBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de veículos (caso necessário)
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

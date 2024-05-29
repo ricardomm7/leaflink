@@ -53,26 +53,6 @@ This diagram shows the full sequence of interactions between the classes involve
 
 ![Sequence Diagram - Full](svg/us024-sequence-diagram-full.svg)
 
-### Split Diagrams
-
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
-
-It uses Interaction Occurrence (a.k.a. Interaction Use).
-
-![Sequence Diagram - split](svg/us024-sequence-diagram-split.svg)
-
-**Get Entry List Partial SD**
-
-![Sequence Diagram - Partial - Get Entry List](svg/us024-sequence-diagram-partial-get-toDoEntry-list.svg)
-
-**Postpone an Entry in Agenda Partial SD**
-
-![Sequence Diagram - Partial - Postpone an Entry in Agenda](svg/us024-sequence-diagram-partial-postpone-a-toDoEntry-in-agenda.svg)
-
-**Notify Team**
-
-![Sequence Diagram - Partial - Notify Team](svg/us024-sequence-diagram-partial-notify-team.svg)
-
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us024-class-diagram.svg)

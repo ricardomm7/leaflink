@@ -104,4 +104,21 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
     public void setAssignedVehicles(List<Vehicle> assignedVehicles) {
         this.assignedVehicles = assignedVehicles;
     }
+
+    /**
+     * Set available collaborators of a team and vehicles assigned to a done task.
+     *
+     * @param agendaEntry the agenda entry
+     */
+    public void setAvailable(AgendaEntry agendaEntry){
+        Team team = agendaEntry.getAssignedTeam();
+        for (Collaborator collaborator : team.getCollaborators()){
+           // collaborator.setAvailable(true);
+        }
+        List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
+        for (Vehicle vehicle : vehicleList){
+            vehicle.setAvailable(true);
+        }
+    }
+
 }

@@ -121,6 +121,17 @@ activate CLB
                 deactivate AgendaEntry
                 activate EntryRepo
 
+                EntryRepo -> AgendaEntry : setAvailable(agendaEntry)
+                deactivate EntryRepo
+                activate AgendaEntry
+
+                AgendaEntry -> AgendaEntry : setTeamAvailable
+
+                AgendaEntry --> EntryRepo : success
+                deactivate AgendaEntry
+
+                activate EntryRepo
+
             EntryRepo --> CTRL : success
             deactivate EntryRepo
             activate CTRL

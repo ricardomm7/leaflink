@@ -7,6 +7,8 @@ import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.time.LocalDate;
 
+import java.util.List;
+
 /**
  * The RegisterVehicleController class handles the logic for registering new vehicles.
  */
@@ -45,5 +47,12 @@ public class RegisterVehicleController {
             return vehicleRepository.registerVehicle(vehicleDto);
         }
         return false;
+    }
+
+    public List<VehicleDto> getVehicleList(){
+        return vehicleRepository.getVehicleList();
+    }
+    public void removeVehicle(String plate){
+        vehicleRepository.removeVehicle(plate);
     }
 }
