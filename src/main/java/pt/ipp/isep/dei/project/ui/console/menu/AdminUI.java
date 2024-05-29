@@ -17,7 +17,6 @@ public class AdminUI implements Runnable {
 
     public void run() {
         List<MenuItem> options = new ArrayList<>();
-        options.add(new MenuItem("Register a Collaborator", new RegisterCollaboratorUI()));
         options.add(new MenuItem("Assign a Skill to Collaborator", new AssignSkillUI()));
         options.add(new MenuItem("Generate Team Proposal", new CreateTeamUI()));
         options.add(new MenuItem("Register a Vehicle", new RegisterVehicleUI()));

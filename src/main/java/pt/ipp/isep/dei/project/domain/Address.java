@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 
 /**
@@ -20,9 +22,13 @@ public class Address implements Serializable {
      * @throws IllegalArgumentException if the zip code does not match the required format.
      */
     public Address(String address, String city, String zipCode) {
-        setAddress(address);
-        setCity(city);
-        setZipCode(zipCode);
+        try {
+            setAddress(address);
+            setCity(city);
+            setZipCode(zipCode);
+        } catch (Exception e) {
+            ShowError.showAlert("Address", e.getMessage(), "Error when setting the address.");
+        }
     }
 
     /**

@@ -1,9 +1,7 @@
 package pt.ipp.isep.dei.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -11,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
+import pt.ipp.isep.dei.project.ui.ShowError;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 /**
@@ -25,7 +24,7 @@ public class AuthenticationGUI {
     private PasswordField passwordField;
 
     @FXML
-    private Button loginButton;
+    private Label errorLabel;
 
     private final AuthenticationController ctrl = new AuthenticationController();
 
@@ -34,6 +33,7 @@ public class AuthenticationGUI {
      */
     @FXML
     void handleLoginButtonAction() {
+        errorLabel.setVisible(false);
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -41,12 +41,15 @@ public class AuthenticationGUI {
         if (success) {
             redirectToRoleGUI(ApplicationSession.getInstance().getCurrentSession().getUserRoles().get(0));
         } else {
-            showAlert("Login Failed", "Invalid UserId and/or Password.");
+            errorLabel.setText("Invalid E-Mail and/or Password. Please try again.");
+            errorLabel.setVisible(true);
+            //ShowError.showAlert("Login Failed", "Invalid UserId and/or Password.", null);
         }
     }
 
     @FXML
     private void handleUsernameFieldKeyPressed(KeyEvent event) {
+        errorLabel.setVisible(false);
         if (event.getCode() == KeyCode.ENTER) {
             passwordField.requestFocus();
         }
@@ -54,6 +57,7 @@ public class AuthenticationGUI {
 
     @FXML
     private void handlePasswordFieldKeyPressed(KeyEvent event) {
+        errorLabel.setVisible(false);
         if (event.getCode() == KeyCode.ENTER) {
             handleLoginButtonAction();
         }
@@ -70,10 +74,10 @@ public class AuthenticationGUI {
                 caminho = "mainMenus/adminMenu.fxml";
             }
             if (caminho == null) {
-                throw new IllegalArgumentException("Error!!");
+                throw new IllegalArgumentException();
             }
         } catch (Exception e) {
-            showAlert("Error", "There is no UI assigned to this user.");
+            ShowError.showAlert("Error", "There is no UI assigned to this user.", null);
         }
         launchActivity(caminho);
     }
@@ -84,13 +88,5 @@ public class AuthenticationGUI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

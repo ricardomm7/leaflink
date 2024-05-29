@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,8 +62,7 @@ public class ExternalCSV {
                 this.allRoutes.add(route);
             }
         } catch (IOException e) {
-            // Handle IOException if it's unable to read the CSV file
-            System.out.println("Error importing the CSV: " + e.getMessage());
+            ShowError.showAlert("CSV File import", e.getMessage(), null);
         }
     }
 
@@ -92,7 +93,7 @@ public class ExternalCSV {
             pW.println("Accumulated Cost: " + cost);
         } catch (IOException e) {
             // Handles IOException if unable to write the CSV file
-            System.out.println("Error writing CSV MST: " + e.getMessage());
+            ShowError.showAlert("CSV File writing", e.getMessage(), null);
         }
     }
 
@@ -112,7 +113,7 @@ public class ExternalCSV {
             }
         } catch (IOException e) {
             // Handles IOException if unable to read the CSV file
-            System.out.println("There was an error counting lines: " + e.getMessage());
+            ShowError.showAlert("CSV File import", "There was an error counting the lines of the CSV file. Please try again later.", null);
         }
 
         return lineCount;

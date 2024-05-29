@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 
@@ -25,11 +26,15 @@ public class GreenSpace implements Serializable {
      * @param address the address of the green space.
      */
     public GreenSpace(String name, GreenSpaceType type, double area, UserSession manager, Address address) {
-        setArea(area);
-        setName(name);
-        this.type = type;
-        this.manager = manager;
-        this.address = address;
+        try {
+            setArea(area);
+            setName(name);
+            this.type = type;
+            this.manager = manager;
+            this.address = address;
+        } catch (Exception e){
+            ShowError.showAlert("Greenspace", e.getMessage(), null);
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -116,27 +117,46 @@ public class CollaboratorsMenuGUI {
             }
         });
 
-        grid.add(new Label("Nome:"), 0, 0);
+        setupEnterKeyTraversal(nameField, birthdatePicker, contactMobileField, taxpayerNumberField, emailField, addressField, zipCodeField, cityField, documentTypeComboBox, identificationNumberField, admissionDatePicker, jobComboBox);
+
+        // Validação de email
+        emailField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.contains("@")) {
+                emailField.setStyle("-fx-border-color: red;");
+            } else {
+                emailField.setStyle(null);
+            }
+        });
+
+        zipCodeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.contains("-")) {
+                zipCodeField.setStyle("-fx-border-color: red;");
+            } else {
+                zipCodeField.setStyle(null);
+            }
+        });
+
+        grid.add(new Label("Name:"), 0, 0);
         grid.add(nameField, 1, 0);
-        grid.add(new Label("Data de Nascimento:"), 0, 1);
+        grid.add(new Label("Birthdate:"), 0, 1);
         grid.add(birthdatePicker, 1, 1);
-        grid.add(new Label("Contacto Móvel:"), 0, 2);
+        grid.add(new Label("Mobile Contact:"), 0, 2);
         grid.add(contactMobileField, 1, 2);
-        grid.add(new Label("Número de Contribuinte:"), 0, 3);
+        grid.add(new Label("Taxpayer number:"), 0, 3);
         grid.add(taxpayerNumberField, 1, 3);
-        grid.add(new Label("Email:"), 0, 4);
+        grid.add(new Label("E-Mail:"), 0, 4);
         grid.add(emailField, 1, 4);
-        grid.add(new Label("Endereço:"), 0, 5);
+        grid.add(new Label("Address:"), 0, 5);
         grid.add(addressField, 1, 5);
-        grid.add(new Label("Código Postal:"), 0, 6);
+        grid.add(new Label("Zip-Code:"), 0, 6);
         grid.add(zipCodeField, 1, 6);
-        grid.add(new Label("Cidade:"), 0, 7);
+        grid.add(new Label("City:"), 0, 7);
         grid.add(cityField, 1, 7);
-        grid.add(new Label("Tipo de Documento:"), 0, 8);
+        grid.add(new Label("ID Document Type:"), 0, 8);
         grid.add(documentTypeComboBox, 1, 8);
-        grid.add(new Label("Número de Identificação:"), 0, 9);
+        grid.add(new Label("ID Document Number:"), 0, 9);
         grid.add(identificationNumberField, 1, 9);
-        grid.add(new Label("Data de Admissão:"), 0, 10);
+        grid.add(new Label("Admission Date:"), 0, 10);
         grid.add(admissionDatePicker, 1, 10);
         grid.add(new Label("Job:"), 0, 11);
         grid.add(jobComboBox, 1, 11);
@@ -159,7 +179,6 @@ public class CollaboratorsMenuGUI {
                 LocalDate admissionDate = admissionDatePicker.getValue();
                 JobDto jobDto = jobComboBox.getValue();
 
-                // Cria o colaborador
                 collabC.createCLB(name, birthdate, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate, JobMapper.toDomain(jobDto));
 
                 updateCollaboratorsList();
@@ -168,6 +187,19 @@ public class CollaboratorsMenuGUI {
             return null;
         });
         dialog.showAndWait();
+    }
+
+    private void setupEnterKeyTraversal(Node... nodes) {
+        for (int i = 0; i < nodes.length; i++) {
+            Node node = nodes[i];
+            Node nextNode = i < nodes.length - 1 ? nodes[i + 1] : nodes[0];
+            node.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    nextNode.requestFocus();
+                    event.consume();
+                }
+            });
+        }
     }
 
     @FXML
@@ -336,7 +368,7 @@ public class CollaboratorsMenuGUI {
         List<CollaboratorDto> collaboratorDtoList = collabC.getCollaborators();
         allCollabs = new ArrayList<>();
         for (CollaboratorDto s : collaboratorDtoList) {
-            allCollabs.add(s.getName() + " | " + s.getJob().getTitle() + " | Tax no: " + s.getTaxpayerNumber());
+            allCollabs.add(s.getName() + " | " + s.getJob().getTitle() + " | Tax no: " + s.getTaxpayerNumber() + " | " + s.getBirthdate() + " | " + s.getAdmissionDate());
         }
         ObservableList<String> collabsObservable = FXCollections.observableArrayList(allCollabs);
         collabsList.setItems(collabsObservable);

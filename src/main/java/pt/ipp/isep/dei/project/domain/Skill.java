@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
@@ -17,7 +19,11 @@ public class Skill implements Serializable {
      * @param designation The designation of the skill.
      */
     public Skill(String designation) {
-        setDesignation(designation);
+        try {
+            setDesignation(designation);
+        } catch (Exception e) {
+            ShowError.showAlert("Job", e.getMessage(), null);
+        }
     }
 
     /**

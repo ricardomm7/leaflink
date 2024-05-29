@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.IOException;
 
 /**
@@ -23,12 +25,9 @@ public abstract class Gnuplot {
 
             // Starts the process and waits for it to finish
             pb.start().waitFor(); // Waits until the process is finished
-        } catch (IOException e) {
+        } catch (Exception e) {
             // Handles IOException if there's an error executing Gnuplot
-            System.out.println("Error when running Gnuplot: " + e.getMessage());
-        } catch (InterruptedException e) {
-            // Throws a RuntimeException if the execution is interrupted
-            throw new RuntimeException(e);
+            ShowError.showAlert("Gnuplot", e.getMessage(), null);
         }
     }
 }

@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,10 +31,8 @@ public abstract class Graphviz {
             String comando = "dot -Tsvg " + System.getProperty("user.dir") + File.separator + "/temp/temp_gv_file.dot -o " + caminhoImgFinal;
             ProcessBuilder pb = new ProcessBuilder("cmd", "/c", comando);
             pb.start().waitFor(); // Waits until the process is finished
-        } catch (IOException e) {
-            System.out.println("Error running GraphViz: " + e.getMessage());
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            ShowError.showAlert("Graphviz", e.getMessage(), null);
         }
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
  * The NotificationService class is responsible for managing notifications to teams and collaborators
  * about changes or updates to agenda entries and to-do entries.
  */
-public class NotificationService {
+public abstract class NotificationService {
 
     /**
      * Retrieves the team assigned to the specified agenda entry.

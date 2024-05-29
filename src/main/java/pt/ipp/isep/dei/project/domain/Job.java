@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
@@ -18,7 +20,11 @@ public class Job implements Serializable {
      * @throws IllegalArgumentException if the title is invalid
      */
     public Job(String title) {
-        setTitle(title);
+        try {
+            setTitle(title);
+        }catch (Exception e){
+            ShowError.showAlert("Job", e.getMessage(), null);
+        }
     }
 
     /**

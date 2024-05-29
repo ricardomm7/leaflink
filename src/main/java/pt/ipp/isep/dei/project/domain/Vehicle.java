@@ -6,6 +6,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -290,18 +291,22 @@ public class Vehicle implements Serializable {
      */
     public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
                    int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
-        this.isAvailable = true;
-        setVIN(VIN);
-        setBrand(brand);
-        setModel(model);
-        setType(type);
-        setRegistrationDate(registrationDate);
-        setVehiclePlate(vehiclePlate);
-        setTareWeight(tareWeight);
-        setGrossWeight(grossWeight);
-        setCurrentKm(currentKm);
-        setAcquisitionDate(acquisitionDate);
-        setMaintenanceFrequency(maintenanceFrequency);
+        try {
+            this.isAvailable = true;
+            setVIN(VIN);
+            setBrand(brand);
+            setModel(model);
+            setType(type);
+            setRegistrationDate(registrationDate);
+            setVehiclePlate(vehiclePlate);
+            setTareWeight(tareWeight);
+            setGrossWeight(grossWeight);
+            setCurrentKm(currentKm);
+            setAcquisitionDate(acquisitionDate);
+            setMaintenanceFrequency(maintenanceFrequency);
+        } catch (Exception e){
+            ShowError.showAlert("Vehicle", e.getMessage(), "Error when setting the vehicle attributes.");
+        }
     }
 
     /**

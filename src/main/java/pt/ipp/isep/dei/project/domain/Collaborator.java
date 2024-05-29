@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -41,17 +43,21 @@ public class Collaborator implements Serializable {
      * @param job                  The job of the collaborator.
      */
     public Collaborator(String name, LocalDate birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate, Job job) {
-        setName(name);
-        setBirthdate(birthdate);
-        setContactMobile(contactMobile);
-        setEmail(email);
-        setAddress(address, city, zipCode);
-        this.documentType = documentType;
-        setIdentificationNumber(identificationNumber);
-        setAdmissionDate(admissionDate);
-        setTaxpayerNumber(taxpayerNumber);
-        setJob(job);
-        skills = new ArrayList<>();
+        try {
+            setName(name);
+            setBirthdate(birthdate);
+            setContactMobile(contactMobile);
+            setEmail(email);
+            setAddress(address, city, zipCode);
+            this.documentType = documentType;
+            setIdentificationNumber(identificationNumber);
+            setAdmissionDate(admissionDate);
+            setTaxpayerNumber(taxpayerNumber);
+            setJob(job);
+            skills = new ArrayList<>();
+        } catch(Exception e){
+            ShowError.showAlert("Collaborator", e.getMessage(),"Error when setting the collaborator attributes.");
+        }
     }
 
     /**
