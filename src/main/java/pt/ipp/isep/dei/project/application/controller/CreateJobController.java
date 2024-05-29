@@ -27,8 +27,8 @@ public class CreateJobController {
      *
      * @param dto the dto of the job to be created
      */
-    public void createJob(JobDto dto) {
-        jobRepository.createJob(dto);
+    public void createJob(String designation) {
+        jobRepository.createJob(new JobDto(designation));
     }
 
     /**

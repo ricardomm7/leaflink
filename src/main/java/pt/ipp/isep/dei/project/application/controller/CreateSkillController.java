@@ -23,12 +23,12 @@ public class CreateSkillController {
     }
 
     /**
-     * Creates a new skill with the specified designation.
+     * Create skill.
      *
-     * @param skillDto the designation of the skill to be created.
+     * @param designation the designation
      */
-    public void createSkill(SkillDto skillDto) {
-        skillRepository.createSkill(skillDto);
+    public void createSkill(String designation) {
+        skillRepository.createSkill(new SkillDto(designation));
     }
 
     /**

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
@@ -52,7 +53,7 @@ public class RegisterToDoEntryController {
      *
      * @param toDoEntryDto the ToDoEntryDto object to be saved.
      */
-    public void createNewToDoEntry(ToDoEntryDto toDoEntryDto) {
-        entryRepository.create(toDoEntryDto);
+    public void createNewToDoEntry(String title, String description, int duration, UrgencyStatus urg, GreenSpaceDto greenSpaceDto) {
+        entryRepository.create(new ToDoEntryDto(title, description, duration, urg, greenSpaceDto));
     }
 }

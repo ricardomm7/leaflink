@@ -43,21 +43,13 @@ deactivate UI
 GSM -> UI: user confirms
 activate UI
 
-UI->DTO** : GreenSpaceDto(name, type, area, manager, street, zipCode, city)
-activate DTO
-DTO -> DTO : this.name = name
-DTO -> DTO : this.type = type
-DTO -> DTO : this.area = area
-DTO -> DTO : this.manager = manager
-DTO -> DTO : this.address = address
-DTO -> DTO : this.city = city
-DTO -> DTO : this.zipCode = zipCode
-DTO --> UI : greenSpaceDto
-deactivate DTO
-
-UI -> CTRL : createNewGS(greenSpaceDto)
+UI -> CTRL : createNewGS(name, type, area, manager, street, zipCode, city)
 deactivate UI
 activate CTRL
+CTRL->DTO** : create(name, type, area, manager, street, zipCode, city)
+activate DTO
+DTO --> CTRL : greenSpaceDto
+deactivate DTO
 CTRL -> gsrepo : createNewGS(greenSpaceDto)
 deactivate CTRL
 activate gsrepo
@@ -67,20 +59,7 @@ activate GSMP
 GSMP -> GS** : create
 
 activate GS
-GS -> GS : setArea(greenSpaceDto.getArea)
-activate GS
-GS --> GS
-deactivate GS
 
-GS -> GS : setName(greenSpaceDto.getName)
-activate GS
-GS --> GS
-deactivate GS
-
-GS -> GS : this.type = greenSpaceDto.getType
-
-GS -> GS : this.manager = greenSpaceDto.getManager
-GS -> GS : this.address = greenSpaceDto.getAddress
 
 GS --> GSMP : greenSpace
 deactivate GS

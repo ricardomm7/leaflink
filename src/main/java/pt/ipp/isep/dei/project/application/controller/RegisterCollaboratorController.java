@@ -1,11 +1,14 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.domain.DocumentType;
+import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.JobRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -31,8 +34,8 @@ public class RegisterCollaboratorController {
      *
      * @param collDto the CollaboratorDto containing the collaborator data
      */
-    public void createCLB(CollaboratorDto collDto) {
-        collaboratorRepository.create(collDto);
+    public void createCLB(String name, LocalDate birthdate1, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate1, Job job) {
+        collaboratorRepository.create(new CollaboratorDto(name, birthdate1, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate1, job));
     }
 
     /**

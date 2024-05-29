@@ -98,8 +98,7 @@ public class RegisterCollaboratorUI implements Runnable {
         System.out.println("\nDo you want to register this collaborator? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            CollaboratorDto collDto = new CollaboratorDto(name, birthdate1, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate1, JobMapper.toDomain(jobDTO));
-            rc.createCLB(collDto);
+            rc.createCLB(name, birthdate1, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate1, JobMapper.toDomain(jobDTO));
             System.out.println("Collaborator successfully registered!");
         } else {
             System.out.println("Operation cancelled!");

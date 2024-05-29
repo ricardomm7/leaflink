@@ -60,8 +60,7 @@ public class RegisterMaintenanceUI implements Runnable {
         System.out.println("\nDo you want to register this maintenance? (Y/N)");
         String decision = sc.nextLine();
         if (decision.trim().equalsIgnoreCase("Y")) {
-            MaintenanceDto maintenanceDto = new MaintenanceDto(plate, date1, currentKm);
-            controller.createMaintenance(maintenanceDto);
+            controller.createMaintenance(plate, date1, currentKm);
             System.out.println("Maintenance successfully registered!");
         } else {
             System.out.println("Operation cancelled!");

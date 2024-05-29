@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
 import pt.ipp.isep.dei.project.domain.VehicleType;
-import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,15 +20,6 @@ public class RegisterVehicleUI implements Runnable {
      * The constant controller.
      */
     private static final RegisterVehicleController controller = new RegisterVehicleController();
-
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        registerVehicle();
-    }
 
     /**
      * Instantiates a new Register vehicle ui.
@@ -55,10 +45,8 @@ public class RegisterVehicleUI implements Runnable {
         LocalDate acquisitionDate = getValidAcquisitionDate(registrationDate);
         int maintenanceFrequency = getValidInt("Maintenance frequency (in km)", "Maintenance frequency must be greater than 0 Km.", frequency -> frequency > 0);
 
-        VehicleDto vehicleDto = new VehicleDto(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight, currentKm, acquisitionDate, maintenanceFrequency);
-
-        if (confirmVehicleData(vehicleDto)) {
-            if (controller.registerVehicle(vehicleDto)) {
+        if (confirmVehicleData(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight, currentKm, acquisitionDate, maintenanceFrequency)) {
+            if (controller.registerVehicle(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight, currentKm, acquisitionDate, maintenanceFrequency)) {
                 System.out.println("Vehicle registered successfully!");
             } else {
                 System.out.println("Failed to register vehicle.");
@@ -320,25 +308,20 @@ public class RegisterVehicleUI implements Runnable {
         return types[choice - 1];
     }
 
-    /**
-     * Confirm vehicle data boolean.
-     *
-     * @param vehicleDto the vehicle dto
-     * @return the boolean
-     */
-    private static boolean confirmVehicleData(VehicleDto vehicleDto) {
+
+    private static boolean confirmVehicleData(String vin, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
         System.out.println("\nConfirm Vehicle Data:");
-        System.out.println("VIN: " + vehicleDto.getVIN());
-        System.out.println("Brand: " + vehicleDto.getBrand());
-        System.out.println("Model: " + vehicleDto.getModel());
-        System.out.println("Vehicle Type: " + vehicleDto.getType());
-        System.out.println("Vehicle Plate: " + vehicleDto.getVehiclePlate());
-        System.out.println("Tare Weight: " + vehicleDto.getTareWeight());
-        System.out.println("Gross Weight: " + vehicleDto.getGrossWeight());
-        System.out.println("Current Kilometers: " + vehicleDto.getCurrentKm());
-        System.out.println("Registration Date: " + formatDate(vehicleDto.getRegistrationDate()));
-        System.out.println("Acquisition Date: " + formatDate(vehicleDto.getAcquisitionDate()));
-        System.out.println("Maintenance Frequency: " + vehicleDto.getMaintenanceFrequency());
+        System.out.println("VIN: " + vin);
+        System.out.println("Brand: " + brand);
+        System.out.println("Model: " + model);
+        System.out.println("Vehicle Type: " + type);
+        System.out.println("Vehicle Plate: " + registrationDate);
+        System.out.println("Tare Weight: " + tareWeight);
+        System.out.println("Gross Weight: " + grossWeight);
+        System.out.println("Current Kilometers: " + currentKm);
+        System.out.println("Registration Date: " + formatDate(registrationDate));
+        System.out.println("Acquisition Date: " + formatDate(acquisitionDate));
+        System.out.println("Maintenance Frequency: " + maintenanceFrequency);
 
         System.out.print("\nType 'Y' to confirm data: ");
         String confirmation = scanner.nextLine();

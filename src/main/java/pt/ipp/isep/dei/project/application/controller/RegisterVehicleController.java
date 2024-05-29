@@ -1,8 +1,11 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
+
+import java.time.LocalDate;
 
 /**
  * The RegisterVehicleController class handles the logic for registering new vehicles.
@@ -19,13 +22,25 @@ public class RegisterVehicleController {
         vehicleRepository = repositories.getVehicleRepository();
     }
 
+
     /**
-     * Registers a new vehicle based on the provided VehicleDto.
+     * Register vehicle boolean.
      *
-     * @param vehicleDto the VehicleDto containing the vehicle data
-     * @return true if the vehicle is registered successfully, false otherwise
+     * @param vin                  the vin
+     * @param brand                the brand
+     * @param model                the model
+     * @param type                 the type
+     * @param registrationDate     the registration date
+     * @param vehiclePlate         the vehicle plate
+     * @param tareWeight           the tare weight
+     * @param grossWeight          the gross weight
+     * @param currentKm            the current km
+     * @param acquisitionDate      the acquisition date
+     * @param maintenanceFrequency the maintenance frequency
+     * @return the boolean
      */
-    public boolean registerVehicle(VehicleDto vehicleDto) {
+    public boolean registerVehicle(String vin, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
+        VehicleDto vehicleDto = new VehicleDto(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight, currentKm, acquisitionDate, maintenanceFrequency);
         if (!vehicleRepository.verifyExistingVehicles(vehicleDto.getVIN(), vehicleDto.getVehiclePlate())) {
             return vehicleRepository.registerVehicle(vehicleDto);
         }

@@ -47,29 +47,6 @@ package MODEL{
         + getSize() : Double
     }
     }
-    package DTO{
-        class GreenSpaceDto{
-            - name : String
-            - type : GreenSpaceType
-            - area : Double
-            - manager : UserSession
-            - address : String
-            - city : String
-            - zipCode : String
-            + getName() : String
-            + getType() : GreenSpaceType
-            + getArea() : Double
-            + getManager() : UserSession
-            + getAddress() : String
-            + getCity() : String
-            + getZipCode() : String
-        }
-
-        class GreenSpaceMapper{
-            +toDto(greenSpace : GreenSpace) : GreenSpaceDto
-            +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
-        }
-    }
     }
     package EXTERNAL{
     interface SortAlgorithms{
@@ -85,6 +62,30 @@ package MODEL{
         +sort(g : List<GreenSpace>) : List<GreenSpace>
     }
 }
+package DTO{
+           class GreenSpaceDto{
+                - name : String
+                - type : GreenSpaceType
+                - area : Double
+                - manager : UserSession
+                - address : String
+                - city : String
+                - zipCode : String
+                + getName() : String
+                + getType() : GreenSpaceType
+                + getArea() : Double
+                + getManager() : UserSession
+                + getAddress() : String
+                + getCity() : String
+                + getZipCode() : String
+            }
+
+            class GreenSpaceMapper{
+                +toDto(greenSpace : GreenSpace) : GreenSpaceDto
+                +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
+            }
+        }
+
 
 ListGreenSpacesUI ..> ListGreenSpacesController
 ListGreenSpacesController ..> Repositories: repositories

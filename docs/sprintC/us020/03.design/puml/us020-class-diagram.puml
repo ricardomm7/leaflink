@@ -50,6 +50,7 @@ package MODEL{
         + verifyFilled(greenSpace: GreenSpace) : Boolean
     }
 }
+}
 package DTO{
     class GreenSpaceDto{
         - name : String
@@ -73,7 +74,6 @@ package DTO{
         +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
     }
     }
-}
 
 RegisterGreenSpaceUI ..> RegisterGreenSpaceController
 RegisterGreenSpaceController ..> Repositories: repositories

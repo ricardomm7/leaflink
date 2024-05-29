@@ -66,7 +66,7 @@ public class CollaboratorsMenuGUI {
         if (result.isPresent()) {
             String jobDescription = result.get().trim();
             if (!jobDescription.isEmpty()) {
-                jobC.createJob(new JobDto(jobDescription));
+                jobC.createJob(jobDescription);
                 updateJobsList();
             }
         }
@@ -113,7 +113,7 @@ public class CollaboratorsMenuGUI {
         if (result.isPresent()) {
             String skillDescription = result.get().trim();
             if (!skillDescription.isEmpty()) {
-                skillC.createSkill(new SkillDto(skillDescription));
+                skillC.createSkill(skillDescription);
                 updateSkillsList();
             }
         }
