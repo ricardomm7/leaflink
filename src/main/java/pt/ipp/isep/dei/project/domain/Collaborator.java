@@ -55,8 +55,8 @@ public class Collaborator implements Serializable {
             setTaxpayerNumber(taxpayerNumber);
             setJob(job);
             skills = new ArrayList<>();
-        } catch(Exception e){
-            ShowError.showAlert("Collaborator", e.getMessage(),"Error when setting the collaborator attributes.");
+        } catch (Exception e) {
+            ShowError.showAlert("Collaborator", e.getMessage(), "Error when setting the collaborator attributes.");
         }
     }
 

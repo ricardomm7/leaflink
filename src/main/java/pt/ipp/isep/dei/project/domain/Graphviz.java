@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 

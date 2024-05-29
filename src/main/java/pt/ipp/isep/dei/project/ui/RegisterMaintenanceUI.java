@@ -4,7 +4,6 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
-import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

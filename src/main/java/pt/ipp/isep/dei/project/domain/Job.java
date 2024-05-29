@@ -22,7 +22,7 @@ public class Job implements Serializable {
     public Job(String title) {
         try {
             setTitle(title);
-        }catch (Exception e){
+        } catch (Exception e) {
             ShowError.showAlert("Job", e.getMessage(), null);
         }
     }

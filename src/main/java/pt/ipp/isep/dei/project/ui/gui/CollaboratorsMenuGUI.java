@@ -368,7 +368,7 @@ public class CollaboratorsMenuGUI {
         List<CollaboratorDto> collaboratorDtoList = collabC.getCollaborators();
         allCollabs = new ArrayList<>();
         for (CollaboratorDto s : collaboratorDtoList) {
-            allCollabs.add(s.getName() + " | " + s.getJob().getTitle() + " | Tax no: " + s.getTaxpayerNumber() + " | " + s.getBirthdate() + " | " + s.getAdmissionDate());
+            allCollabs.add(s.getName() + " | " + s.getJob().getTitle() + " | Tax no: " + s.getTaxpayerNumber());
         }
         ObservableList<String> collabsObservable = FXCollections.observableArrayList(allCollabs);
         collabsList.setItems(collabsObservable);

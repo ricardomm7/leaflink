@@ -2,8 +2,6 @@ package pt.ipp.isep.dei.project.domain;
 
 import pt.ipp.isep.dei.project.ui.ShowError;
 
-import java.io.IOException;
-
 /**
  * The Gnuplot class provides a method to execute a Gnuplot script.
  * This class uses the ProcessBuilder to run the Gnuplot script located at a specific path.

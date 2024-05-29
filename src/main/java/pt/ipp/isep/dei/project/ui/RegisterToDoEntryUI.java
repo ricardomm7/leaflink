@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.project.ui;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
-import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 
 import java.util.List;
 import java.util.Scanner;

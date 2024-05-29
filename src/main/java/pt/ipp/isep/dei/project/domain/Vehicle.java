@@ -304,7 +304,7 @@ public class Vehicle implements Serializable {
             setCurrentKm(currentKm);
             setAcquisitionDate(acquisitionDate);
             setMaintenanceFrequency(maintenanceFrequency);
-        } catch (Exception e){
+        } catch (Exception e) {
             ShowError.showAlert("Vehicle", e.getMessage(), "Error when setting the vehicle attributes.");
         }
     }

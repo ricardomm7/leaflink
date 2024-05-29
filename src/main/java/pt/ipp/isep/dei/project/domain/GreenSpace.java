@@ -32,7 +32,7 @@ public class GreenSpace implements Serializable {
             this.type = type;
             this.manager = manager;
             this.address = address;
-        } catch (Exception e){
+        } catch (Exception e) {
             ShowError.showAlert("Greenspace", e.getMessage(), null);
         }
     }

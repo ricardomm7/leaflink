@@ -36,7 +36,7 @@ public class JobRepository implements Serializable {
             } else {
                 throw new IllegalArgumentException("There is already a job with that name.");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             ShowError.showAlert("Job", e.getMessage(), "Duplicate");
         }
     }

@@ -31,10 +31,17 @@ public class CollaboratorRepository implements Serializable {
      */
     public void create(CollaboratorDto dto) {
         Collaborator c = CollaboratorMapper.toDomain(dto);
-        if (checkForDuplicates(c)) {
-            addCollaborator(c);
+        try {
+            if (checkForDuplicates(c)) {
+                addCollaborator(c);
+            } else {
+                throw new IllegalArgumentException("There is already a registered employee with the same attributes.");
+            }
+        } catch (Exception e) {
+            ShowError.showAlert("Collaborator", e.getMessage(), "Duplicate");
         }
     }
+
 
     /**
      * Checks if a collaborator with the same taxpayer number already exists in the repository.
@@ -43,17 +50,12 @@ public class CollaboratorRepository implements Serializable {
      * @return true if no duplicate is found, false otherwise
      */
     private boolean checkForDuplicates(Collaborator j) {
-        try {
-            for (Collaborator x : collaboratorList) {
-                if (x.getTaxpayerNumber() == j.getTaxpayerNumber()) {
-                    return false;
-                }
+        for (Collaborator x : collaboratorList) {
+            if (x.getTaxpayerNumber() == j.getTaxpayerNumber()) {
+                return false;
             }
-            throw new IllegalArgumentException("There is already an employee in the program with the same tax number attribute.");
-        } catch (Exception e) {
-            ShowError.showAlert("Collaborator", e.getMessage(), "Duplicate");
-            return true;
         }
+        return true;
     }
 
     /**
