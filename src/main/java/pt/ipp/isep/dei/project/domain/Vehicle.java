@@ -206,15 +206,21 @@ public class Vehicle implements Serializable {
     /**
      * Sets the current kilometers of the vehicle.
      *
-     * @param currentKm The current kilometers to be set. It must be greater than or equal to zero.
+     * @param kmInput The current kilometers to be set. It must be greater than or equal to zero.
      * @throws IllegalArgumentException If the provided current kilometers is less than zero.
      */
-    public void setCurrentKm(int currentKm) {
-        if (currentKm < 0) {
-            throw new IllegalArgumentException("Current kilometers must be greater than 0 Km.");
+
+    public void setCurrentKm(String kmInput) {
+    try {
+        int km = Integer.parseInt(kmInput);
+        if (km < 0) {
+            throw new IllegalArgumentException("Kilometers must be positive");
         }
-        this.currentKm = currentKm;
+        this.currentKm = km;
+    } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("Invalid input: Kilometers must be a valid integer");
     }
+}
 
     /**
      * Retrieves the registration date of the vehicle.
@@ -267,12 +273,16 @@ public class Vehicle implements Serializable {
      * @param maintenanceFrequency The maintenance frequency to be set. It must be greater than zero.
      * @throws IllegalArgumentException If the provided maintenance frequency is less than or equal to zero.
      */
-    public void setMaintenanceFrequency(int maintenanceFrequency) {
-        if (maintenanceFrequency <= 0) {
-            throw new IllegalArgumentException("Maintenance frequency must be greater than 0 Km.");
-        }
-        this.maintenanceFrequency = maintenanceFrequency;
+    public void setMaintenanceFrequency(String maintenanceFrequency) {
+        try {
+            int maintenanceFrequencyInt = Integer.parseInt(maintenanceFrequency);
+            if (maintenanceFrequencyInt <= 0) {
+                throw new IllegalArgumentException("Maintenance frequency must be greater than 0 Km.");
+            }
+            this.maintenanceFrequency = maintenanceFrequencyInt;
+        } catch (NumberFormatException ignored) {
     }
+}
 
     /**
      * Constructs a new Vehicle object with the provided parameters.
@@ -301,9 +311,9 @@ public class Vehicle implements Serializable {
             setVehiclePlate(vehiclePlate);
             setTareWeight(tareWeight);
             setGrossWeight(grossWeight);
-            setCurrentKm(currentKm);
+            setCurrentKm(String.valueOf(currentKm));
             setAcquisitionDate(acquisitionDate);
-            setMaintenanceFrequency(maintenanceFrequency);
+            setMaintenanceFrequency(String.valueOf(maintenanceFrequency));
             validateVehicle(registrationDate, vehiclePlate, tareWeight, grossWeight, acquisitionDate);
         } catch (Exception e) {
             ShowError.showAlert("Vehicle", e.getMessage(), "Error when setting the vehicle attributes.");
@@ -340,7 +350,8 @@ public class Vehicle implements Serializable {
         }
 
         if (acquisitionDate.isAfter(LocalDate.now()) || registrationDate.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Vehicle acquisition and registration date must exists.");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            throw new IllegalArgumentException("Vehicle acquisition and registration date be  before: "+ LocalDate.now().format(formatter)+".");
         }
         if (acquisitionDate.isBefore(registrationDate)) {
             throw new IllegalArgumentException("Vehicle acquisition date must be before the registration date.");

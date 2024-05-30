@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -10,9 +13,18 @@ import java.util.Objects;
  * and the current kilometers at the time of the maintenance.
  */
 public class Maintenance implements Serializable {
-    private final String vehiclePlate;
-    private final LocalDate date;
-    private final int km;
+    /**
+     * The Vehicle plate.
+     */
+    private String vehiclePlate;
+    /**
+     * The Date.
+     */
+    private LocalDate date;
+    /**
+     * The Km.
+     */
+    private int km;
 
     /**
      * Constructs a new Maintenance object with the specified vehicle plate, date, and kilometers.
@@ -22,9 +34,14 @@ public class Maintenance implements Serializable {
      * @param currentKm    the kilometers at the time of the maintenance
      */
     public Maintenance(String vehiclePlate, LocalDate date, int currentKm) {
-        this.vehiclePlate = vehiclePlate;
-        this.date = date;
-        this.km = currentKm;
+        try {
+            setVehiclePlate(vehiclePlate);
+            setDate(date);
+            setKm(String.valueOf(currentKm));
+        }catch (Exception e) {
+            ShowError.showAlert("Maintenance", e.getMessage(),"Error registering Maintenance");
+            throw e;
+        }
     }
 
     /**
@@ -81,4 +98,43 @@ public class Maintenance implements Serializable {
     public int hashCode() {
         return Objects.hash(vehiclePlate, date, km);
     }
+
+    /**
+     * Sets vehicle plate.
+     *
+     * @param vehiclePlate the vehicle plate
+     */
+    public void setVehiclePlate(String vehiclePlate) {
+        this.vehiclePlate = vehiclePlate;
+    }
+
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
+    public void setDate(LocalDate date) {
+        if (date.isAfter(LocalDate.now())) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            throw new IllegalArgumentException("Date must be in " + LocalDate.now().format(formatter));
+        }
+        this.date = date;
+    }
+
+    /**
+     * Sets km.
+     *
+     * @param kmInput the km
+     */
+    public void setKm(String kmInput) {
+    try {
+        int km = Integer.parseInt(kmInput);
+        if (km < 0) {
+            throw new IllegalArgumentException("Kilometers must be positive");
+        }
+        this.km = km;
+    } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("Invalid input: Kilometers must be a valid integer");
+    }
+}
 }

@@ -5,8 +5,10 @@ import pt.ipp.isep.dei.project.domain.MaintenanceReport;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.MaintenanceMapper;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,11 @@ public class MaintenanceRepository implements Serializable {
      */
     public void createMaintenance(MaintenanceDto maintenanceDto) {
         Maintenance m = MaintenanceMapper.toDomain(maintenanceDto);
-        addMaintenance(m);
+        try {
+            addMaintenance(m);
+        }catch (Exception e) {
+            ShowError.showAlert("Maintenance", e.getMessage(), "Duplicate");
+        }
     }
 
     /**
@@ -43,7 +49,14 @@ public class MaintenanceRepository implements Serializable {
      * @param maintenance the Maintenance object to be added
      */
     private void addMaintenance(Maintenance maintenance) {
-        this.maintenanceList.add(maintenance);
+        for (Maintenance m : maintenanceList) {
+            if (m.getVehiclePlate().equals(maintenance.getVehiclePlate()) &&
+                    m.getDate().equals(maintenance.getDate()) && (m.getKm() == (maintenance.getKm()))) {
+                throw new IllegalArgumentException("There is already a maintenance with the same attributes.");
+            }else {
+                maintenanceList.add(maintenance);
+            }
+        }
     }
 
     /**
@@ -64,4 +77,14 @@ public class MaintenanceRepository implements Serializable {
     public String createMaintenanceReport(List<VehicleDto> vehicleDtoList) {
         return maintenanceReport.createReport(vehicleDtoList, getMaintenanceList());
     }
+
+    public void removeMaintenance(String plate, LocalDate date) {
+        for (Maintenance m : maintenanceList) {
+            if (m.getVehiclePlate().equals(plate) && m.getDate().equals(date)) {
+                maintenanceList.remove(m);
+                return;
+            }
+        }
+    }
+
 }

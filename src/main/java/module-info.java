@@ -4,6 +4,7 @@ module pt.ipp.isep.dei.project {
     requires AuthLib;
     requires org.apache.commons.lang3;
     requires java.logging;
+    requires java.xml;
 
     opens pt.ipp.isep.dei.project to javafx.fxml;
     exports pt.ipp.isep.dei.project;
