@@ -307,6 +307,7 @@ public class Vehicle implements Serializable {
             validateVehicle(registrationDate, vehiclePlate, tareWeight, grossWeight, acquisitionDate);
         } catch (Exception e) {
             ShowError.showAlert("Vehicle", e.getMessage(), "Error when setting the vehicle attributes.");
+            throw e;
         }
     }
 
@@ -314,8 +315,8 @@ public class Vehicle implements Serializable {
     /**
      * Validates the attributes of the vehicle.
      */
-    public void validateVehicle( LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
-                                 LocalDate acquisitionDate) {
+    public void validateVehicle(LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
+                                LocalDate acquisitionDate) {
 
         int year = registrationDate.getYear();
 

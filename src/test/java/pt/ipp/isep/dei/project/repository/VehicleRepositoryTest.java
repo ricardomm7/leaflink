@@ -120,7 +120,7 @@ class VehicleRepositoryTest {
         VehicleRepository vehicleRepository = new VehicleRepository();
         vehicleRepository.registerVehicle(new VehicleDto("VINlkhgtrewt53fca", "Brand", "Model", VehicleType.CAR, LocalDate.of(2013, 12, 12), "13TG52", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000));
 
-        boolean result = vehicleRepository.verifyExistingVehicles("VIN12345678901234", "PLATE0");
+        boolean result = vehicleRepository.verifyExistingVehicles(new Vehicle("VINlkhgtrewt53fca", "Brand", "Model", VehicleType.CAR, LocalDate.of(2013, 12, 12), "13TG52", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000));
 
         assertFalse(result);
     }
@@ -131,38 +131,11 @@ class VehicleRepositoryTest {
         VehicleRepository vehicleRepository = new VehicleRepository();
         vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2014, 10, 10), "12RM68", 1000.0, 2000.0, 5000, LocalDate.of(2022, 10, 10), 10000));
 
-        boolean result = vehicleRepository.verifyExistingVehicles("VIN12345678901234", "PLATE1");
+        boolean result = vehicleRepository.verifyExistingVehicles(new Vehicle("VlN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2014, 10, 10), "14RM68", 1000.0, 2000.0, 5000, LocalDate.of(2022, 10, 10), 10000));
 
         assertTrue(result);
     }
 
-    // Verify if VIN is null
-    @Test
-    public void test_vin_is_null() {
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2000, 1, 1), "2345LL", 1000.0, 2000.0, 5000, LocalDate.of(2021, 1, 1), 10000));
-
-        try {
-            vehicleRepository.verifyExistingVehicles(null, "PLATE01");
-            fail("Expected IllegalArgumentException to be thrown");
-        } catch (IllegalArgumentException e) {
-            assertEquals("VIN and vehicle plate cannot be null.", e.getMessage());
-        }
-    }
-
-    // Verify if vehicle plate is null
-    @Test
-    public void test_vehicle_plate_is_null() {
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2011, 10, 10), "88II99", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 10), 10000));
-
-        try {
-            vehicleRepository.verifyExistingVehicles("VIN12345678901234", null);
-            fail("Expected IllegalArgumentException to be thrown");
-        } catch (IllegalArgumentException e) {
-            assertEquals("VIN and vehicle plate cannot be null.", e.getMessage());
-        }
-    }
 
     // Verify if vehicle plate is on an incorrect format
     @Test
@@ -176,29 +149,6 @@ class VehicleRepositoryTest {
             assertEquals("Invalid vehicle.", e.getMessage());
         }
     }
-
-    // Verify VIN with length different than 17 and vehicle plate with length different than 6 throws IllegalArgumentException
-    @Test
-    public void test_invalid_vin_and_plate_length_throws_exception() {
-        // Arrange
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.registerVehicle(new VehicleDto("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2010, 10, 10), "22WW44", 1000.0, 2000.0, 5000, LocalDate.of(2020, 10, 1), 10000));
-
-
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            vehicleRepository.verifyExistingVehicles("VIN123456789@012345998", "PLAsdcTE01");
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            vehicleRepository.verifyExistingVehicles("VIN1234567890@1234765", "PLAdscTE012");
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            vehicleRepository.verifyExistingVehicles("VIN12345678901@234sfwe5", "PLATE0wed12");
-        });
-    }
-
 
     // Register a new vehicle with all valid parameters and verify that it is added to the repository
     @Test

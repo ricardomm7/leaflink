@@ -57,7 +57,7 @@ public class VehicleRepository implements Serializable {
     public boolean registerVehicle(VehicleDto dto) {
         Vehicle vehicle = VehicleMapper.toDomain(dto);
         try {
-            if (!verifyExistingVehicles(vehicle.getVIN(), vehicle.getVehiclePlate())) {
+            if (!verifyExistingVehicles(vehicle)){
                 addVehicle(vehicle);
                 return true;
             }else {
@@ -83,14 +83,12 @@ public class VehicleRepository implements Serializable {
     /**
      * Verifies if a vehicle with the given VIN or license plate already exists in the repository.
      *
-     * @param vin          the VIN (Vehicle Identification Number) of the vehicle
-     * @param vehiclePlate the license plate of the vehicle
+     * @param vehicleAux         The vehicle
      * @return true if a vehicle with the given VIN or license plate exists, false otherwise
      */
-    public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
-        for (VehicleDto vehicle : getVehicleList()) {
-            if (vin == null || vehiclePlate == null || vin.equalsIgnoreCase(vehicle.getVIN())
-                    || vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate())) {
+    public boolean verifyExistingVehicles(Vehicle vehicleAux) {
+        for (Vehicle vehicle : vehicleList) {
+            if (vehicle.getVIN().equalsIgnoreCase(vehicleAux.getVIN()) || vehicle.getVehiclePlate().equalsIgnoreCase(vehicleAux.getVehiclePlate())) {
                 return true;
             }
         }

@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
 import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
@@ -23,8 +24,8 @@ class MaintenanceReportTest {
         Vehicle vehicle2 = new Vehicle("VIN45sxcdfvmnhre6", "Brand2", "Model2", VehicleType.CAR, LocalDate.of(2022, 10, 12), "DE24RZ", 1500.0, 2500.0, 19000, LocalDate.of(2020, 10, 10), 6000);
         vehicleList.add(VehicleMapper.toDto(vehicle1));
         vehicleList.add(VehicleMapper.toDto(vehicle2));
-        maintenanceRepository.createMaintenance("AB01MN", LocalDate.of(2023, 2, 2), 10000);
-        maintenanceRepository.createMaintenance("DE24RZ", LocalDate.of(2023, 2, 2), 12000);
+        maintenanceRepository.createMaintenance(new MaintenanceDto("AB01MN", LocalDate.of(2023, 2, 2), 10000));
+        maintenanceRepository.createMaintenance(new MaintenanceDto("DE24RZ", LocalDate.of(2023, 2, 2), 12000));
         String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +
                 "AB01MN          Brand1          Model1          16000           5000            10000           16000          \n" +
@@ -41,11 +42,11 @@ class MaintenanceReportTest {
         List<VehicleDto> vehicleList = new ArrayList<>();
         Vehicle vehicle1 = new Vehicle("VIN123polkiujhygt", "Brand1", "Model1", VehicleType.CAR, LocalDate.of(2022, 10, 12), "AB01MN", 1000.0, 2000.0, 16000, LocalDate.of(2020, 10, 2), 5000);
         vehicleList.add(VehicleMapper.toDto(vehicle1));
-        maintenanceRepository.createMaintenance("AB01MN", LocalDate.of(2024, 2, 2), 10000);
-        maintenanceRepository.createMaintenance("AB01MN", LocalDate.of(2023, 3, 2), 9000);
-        maintenanceRepository.createMaintenance("AB01MN", LocalDate.of(2023, 7, 2), 9200);
-        maintenanceRepository.createMaintenance("AB01MN", LocalDate.of(2023, 9, 2), 9300);
-        maintenanceRepository.createMaintenance("AB01MN", LocalDate.of(2024, 1, 2), 9900);
+        maintenanceRepository.createMaintenance(new MaintenanceDto("AB01MN", LocalDate.of(2024, 2, 2), 10000));
+        maintenanceRepository.createMaintenance(new MaintenanceDto("AB01MN", LocalDate.of(2023, 3, 2), 9000));
+        maintenanceRepository.createMaintenance(new MaintenanceDto("AB01MN", LocalDate.of(2023, 7, 2), 9200));
+        maintenanceRepository.createMaintenance(new MaintenanceDto("AB01MN", LocalDate.of(2023, 9, 2), 9300));
+        maintenanceRepository.createMaintenance(new MaintenanceDto("AB01MN", LocalDate.of(2024, 1, 2), 9900));
 
         String expectedOutput = "Maintenance Report\n" +
                 "Plate           Brand           Model           Curr.Kms        Freq            Last            Next           \n" +

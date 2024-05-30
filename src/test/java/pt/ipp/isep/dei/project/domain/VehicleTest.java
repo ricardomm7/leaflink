@@ -2,76 +2,124 @@ package pt.ipp.isep.dei.project.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 class VehicleTest {
 
-    // Creating a new Vehicle object with valid parameters should succeed
     @Test
-    public void test_createVehicleWithValidParameters() {
-        LocalDate registrationDate = LocalDate.of(2010, 10, 10);
-        LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
-        Vehicle vehicle = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "00AA00", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
+    void testCreateVehicleWithValidParameters() {
+        LocalDate registrationDate = LocalDate.of(2020, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        Vehicle vehicle = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
         assertNotNull(vehicle);
-    }
-
-
-    // Create a new Vehicle object with invalid brand, model or type, call validateVehicle() method, should return false
-    @Test
-    public void test_validateVehicleWithInvalidBrandModelType() {
-        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
-        LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
-        Vehicle vehicle = new Vehicle("VIN12345678901234", "Brand!", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.registerVehicle(vehicle));
-    }
-
-    // Create a new Vehicle object with invalid VIN, call validateVehicle() method, should return false
-    @Test
-    public void test_validateVehicleWithInvalidVIN() {
-        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
-        LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
-        Vehicle vehicle = new Vehicle("VIN1234567890123!", "Brand", "Model", VehicleType.UTILITY_VEHICLE, registrationDate, "CF44TG", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.registerVehicle(vehicle));
-    }
-
-    // Calling validateVehicle() method with invalid parameters should return false
-    @Test
-    public void test_validateVehicleWithInvalidParameters() {
-        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
-        LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
-        Vehicle vehicle = new Vehicle("VIN1234567890123!4", "Brand", "Model", VehicleType.CAR, registrationDate, "Ade2@BC123", -1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.registerVehicle(vehicle));
-    }
-
-    // Create a new Vehicle object with acquisitionDate before registrationDate, call validateVehicle() method, should return false
-    @Test
-    public void test_validateVehicleWithInvalidDates() {
-        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
-        LocalDate acquisitionDate = LocalDate.of(2004, 1, 1);
-        Vehicle vehicle = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "ABC123", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
-        assertFalse(vehicle.registerVehicle(vehicle));
-    }
-
-
-    // Create a new Vehicle object with valid parameters, call getters to retrieve attributes, should return expected values
-    @Test
-    public void test_getters() {
-        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
-        LocalDate acquisitionDate = LocalDate.of(2024, 1, 1);
-        Vehicle vehicle = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12AA", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
         assertEquals("VIN12345678901234", vehicle.getVIN());
         assertEquals("Brand", vehicle.getBrand());
         assertEquals("Model", vehicle.getModel());
         assertEquals(VehicleType.CAR, vehicle.getType());
-        assertEquals("AB12AA", vehicle.getVehiclePlate());
-        assertEquals(1000.0, vehicle.getTareWeight(), 0.001);
-        assertEquals(2000.0, vehicle.getGrossWeight(), 0.001);
-        assertEquals(10000, vehicle.getCurrentKm());
         assertEquals(registrationDate, vehicle.getRegistrationDate());
+        assertEquals("AB12CD", vehicle.getVehiclePlate());
+        assertEquals(1000.0, vehicle.getTareWeight());
+        assertEquals(2000.0, vehicle.getGrossWeight());
+        assertEquals(10000, vehicle.getCurrentKm());
         assertEquals(acquisitionDate, vehicle.getAcquisitionDate());
         assertEquals(5000, vehicle.getMaintenanceFrequency());
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidVIN() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN123456789012", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidBrand() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand@123", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidModel() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model@123", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidRegistrationDate() {
+        LocalDate acquisitionDate = LocalDate.of(2020, 9, 1);
+        assertThrows(DateTimeException.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, LocalDate.of(2023, 2, 30), "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidPlate() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "ABCDEFG", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidTareWeight() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 0.0, 2000.0, 10000, acquisitionDate, 5000));
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidGrossWeight() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 0.0, 10000, acquisitionDate, 5000));
+    }
+
+    @Test
+    void testCreateVehicleWithInvalidCurrentKm() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, -1, acquisitionDate, 5000));
+    }
+
+
+    @Test
+    void testCreateVehicleWithInvalidMaintenanceFrequency() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 0));
+    }
+
+    @Test
+    void testCreateVehicleWithTareWeightGreaterThanGrossWeight() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        assertThrows(ExceptionInInitializerError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 2000.0, 1000.0, 10000, acquisitionDate, 5000));
+    }
+
+
+    @Test
+    void testEquals() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        Vehicle vehicle1 = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
+        Vehicle vehicle2 = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
+        Vehicle vehicle3 = new Vehicle("VIN87654321098765", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
+
+        assertTrue(vehicle1.equals(vehicle2));
+        assertFalse(vehicle1.equals(vehicle3));
+    }
+
+    @Test
+    void testHashCode() {
+        LocalDate registrationDate = LocalDate.of(2021, 10, 10);
+        LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
+        Vehicle vehicle1 = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
+        Vehicle vehicle2 = new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
+        Vehicle vehicle3 = new Vehicle("VIN87654321098765", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000);
+
+        assertEquals(vehicle1.hashCode(), vehicle2.hashCode());
+        assertNotEquals(vehicle1.hashCode(), vehicle3.hashCode());
     }
 }

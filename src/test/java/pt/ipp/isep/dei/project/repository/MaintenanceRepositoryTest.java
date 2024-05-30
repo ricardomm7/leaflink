@@ -27,7 +27,7 @@ class MaintenanceRepositoryTest {
         MaintenanceDto maintenanceDto = new MaintenanceDto("ABC123", LocalDate.of(2023, 2, 20), 10000);
 
         // Act
-        maintenanceRepository.createMaintenance("ABC123", LocalDate.of(2023, 2, 20), 10000);
+        maintenanceRepository.createMaintenance(new MaintenanceDto("ABC123", LocalDate.of(2023, 2, 20), 10000));
         List<MaintenanceDto> maintenanceList = maintenanceRepository.getMaintenanceList();
 
         // Assert
@@ -39,7 +39,7 @@ class MaintenanceRepositoryTest {
     @Test
     public void test_create_maintenance_using_method() {
         MaintenanceRepository maintenanceRepository = new MaintenanceRepository();
-        maintenanceRepository.createMaintenance("ABC123", LocalDate.of(2023, 2, 2), 10000);
+        maintenanceRepository.createMaintenance(new MaintenanceDto("ABC123", LocalDate.of(2023, 2, 2), 10000));
         List<MaintenanceDto> maintenanceList = maintenanceRepository.getMaintenanceList();
         assertEquals(1, maintenanceList.size());
         assertEquals("ABC123", maintenanceList.get(0).getVehiclePlate());
