@@ -43,16 +43,15 @@ public class RegisterVehicleController {
      */
     public boolean registerVehicle(String vin, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
         VehicleDto vehicleDto = new VehicleDto(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight, currentKm, acquisitionDate, maintenanceFrequency);
-        if (!vehicleRepository.verifyExistingVehicles(vehicleDto.getVIN(), vehicleDto.getVehiclePlate())) {
-            return vehicleRepository.registerVehicle(vehicleDto);
-        }
-        return false;
+        return vehicleRepository.registerVehicle(vehicleDto);
+
     }
 
-    public List<VehicleDto> getVehicleList(){
+    public List<VehicleDto> getVehicleList() {
         return vehicleRepository.getVehicleList();
     }
-    public void removeVehicle(String plate){
+
+    public void removeVehicle(String plate) {
         vehicleRepository.removeVehicle(plate);
     }
 }

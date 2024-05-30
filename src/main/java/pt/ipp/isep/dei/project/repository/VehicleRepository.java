@@ -57,17 +57,17 @@ public class VehicleRepository implements Serializable {
     public boolean registerVehicle(VehicleDto dto) {
         Vehicle vehicle = VehicleMapper.toDomain(dto);
         try {
-            if (!verifyExistingVehicles(vehicle.getVehiclePlate(), vehicle.getVIN())) {
-                if (vehicle.registerVehicle(vehicle)) {
-                    addVehicle(vehicle);
-                    return true;
-                }
+            if (!verifyExistingVehicles(vehicle.getVIN(), vehicle.getVehiclePlate())) {
+                addVehicle(vehicle);
+                return true;
+            }else {
+                throw new Exception("Vehicle already registered");
             }
-            throw new IllegalArgumentException("There is already a vehicle with the same attributes.");
         } catch (Exception e) {
-            ShowError.showAlert("Vehicle", e.getMessage(), "Duplicate");
-            return false;
+            ShowError.showAlert("Vehicle", e.getMessage(), "Vehicle already registered");
         }
+        return false;
+
     }
 
     /**
@@ -76,10 +76,8 @@ public class VehicleRepository implements Serializable {
      * @param vehicle the Vehicle object to be added
      */
     private void addVehicle(Vehicle vehicle) {
-        if (getAvailableVehicleList().contains(VehicleMapper.toDto(vehicle))) {
-            throw new IllegalArgumentException("Vehicle already exists.");
-        }
         vehicleList.add(vehicle);
+
     }
 
     /**
@@ -90,8 +88,9 @@ public class VehicleRepository implements Serializable {
      * @return true if a vehicle with the given VIN or license plate exists, false otherwise
      */
     public boolean verifyExistingVehicles(String vin, String vehiclePlate) {
-        for (VehicleDto vehicle : getAvailableVehicleList()) {
-            if (vin.equalsIgnoreCase(vehicle.getVIN()) || vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate())) {
+        for (VehicleDto vehicle : getVehicleList()) {
+            if (vin == null || vehiclePlate == null || vin.equalsIgnoreCase(vehicle.getVIN())
+                    || vehiclePlate.equalsIgnoreCase(vehicle.getVehiclePlate())) {
                 return true;
             }
         }
@@ -165,7 +164,7 @@ public class VehicleRepository implements Serializable {
         vehicleList.get(vehicleIndex).setAvailable(isAvailable);
     }
 
-    public void removeVehicle(String plate){
+    public void removeVehicle(String plate) {
         vehicleList.removeIf(vehicle -> vehicle.getVehiclePlate().equals(plate));
     }
 
