@@ -4,19 +4,21 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 from scipy import stats
 
+
 # Função para calcular o custo da água para um determinado consumo
 def calcular_custo_agua(consumo):
     TAXA = 0.15
     LIMITE_CONSUMO = 1000
     PRECO_BASE = 0.7
-    
+
     if consumo < 0:
-        raise ValueError("Consumo must be a positive number.")
+        raise ValueError("Consumo deve ser um número positivo.")
 
     if consumo <= LIMITE_CONSUMO:
         return consumo * PRECO_BASE
     else:
-        return consumo * PRECO_BASE + (consumo - LIMITE_CONSUMO) * (PRECO_BASE*TAXA)
+        return consumo * PRECO_BASE + (consumo - LIMITE_CONSUMO) * (PRECO_BASE * TAXA)
+
 
 # Lê o arquivo CSV com os dados de consumo de água
 caminho_arquivo_consumo = "water_consumption_updated.csv"
@@ -28,6 +30,7 @@ dados_areas = pd.read_csv(caminho_arquivo_areas, sep=';', decimal=',')
 
 # Converte a lista de áreas em um dicionário para fácil acesso
 areas_dict = pd.Series(dados_areas.Area.values, index=dados_areas.Park).to_dict()
+
 
 # Função para calcular a média mensal de consumo analiticamente
 def calcular_media_mensal_analitica(dados_consumo):
@@ -41,18 +44,20 @@ def calcular_media_mensal_analitica(dados_consumo):
     for _, row in consumo_mensal.iterrows():
         parque = row['Park']
         consumo = row['Consumption']
-        
+
         if parque not in consumo_total_por_parque:
             consumo_total_por_parque[parque] = 0
-            meses_por_parque[parque] = 0
+            meses_por_parque[parque] = set()
 
         consumo_total_por_parque[parque] += consumo
-        meses_por_parque[parque] += 1
+        meses_por_parque[parque].add((row['Year'], row['Month']))
 
     # Calcular a média mensal manualmente
-    media_mensal_consumo = [{'Park': parque, 'Consumption': consumo_total_por_parque[parque] / meses_por_parque[parque]}
-                            for parque in consumo_total_por_parque]
+    media_mensal_consumo = [
+        {'Park': parque, 'Consumption': consumo_total_por_parque[parque] / len(meses_por_parque[parque])}
+        for parque in consumo_total_por_parque]
     return pd.DataFrame(media_mensal_consumo)
+
 
 # Calcular a média mensal de consumo para cada parque
 media_mensal_consumo = calcular_media_mensal_analitica(dados_consumo)
@@ -74,9 +79,11 @@ custos_medios_mensais = pd.DataFrame(custos_mensais)
 # Verifica se há áreas ausentes e remove esses registros
 custos_medios_mensais = custos_medios_mensais.dropna(subset=['Area'])
 
+
 # Função para imprimir a tabela formatada
 def imprimir_tabela_formatada(tabela):
     print(tabulate(tabela, headers='keys', tablefmt='grid', showindex=False))
+
 
 # Imprime o custo médio mensal para cada parque de forma formatada
 print("Custo médio mensal para cada parque:")
@@ -85,6 +92,7 @@ imprimir_tabela_formatada(custos_medios_mensais)
 # Definir as variáveis independentes (X) e dependentes (y)
 X = custos_medios_mensais['Area'].values
 y = custos_medios_mensais['Custo Medio Mensal'].values
+
 
 # Calcular a regressão linear manualmente
 def regressao_linear_manual(X, y):
@@ -102,6 +110,7 @@ def regressao_linear_manual(X, y):
     b = (sum_y - a * sum_X) / n
 
     return a, b
+
 
 a, b = regressao_linear_manual(X, y)
 
@@ -146,17 +155,18 @@ custo_previsto = a * area_novo_parque + b
 # Erro padrão da estimativa
 y_pred = a * X + b
 residuals = y - y_pred
-s_err = np.sqrt(np.sum(residuals**2) / (len(y) - 2))
+s_err = np.sqrt(np.sum(residuals ** 2) / (len(y) - 2))
 mean_x = np.mean(X)
 t_value = stats.t.ppf(1 - 0.025, df=len(y) - 2)  # valor t para um intervalo de confiança de 95%
-conf_interval = t_value * s_err * np.sqrt(1/len(X) + (area_novo_parque - mean_x)**2 / np.sum((X - mean_x)**2))
+conf_interval = t_value * s_err * np.sqrt(1 / len(X) + (area_novo_parque - mean_x) ** 2 / np.sum((X - mean_x) ** 2))
 
 valor_min = custo_previsto - conf_interval
 valor_max = custo_previsto + conf_interval
-print(f"\nCom um grau de confiança de 95%, o custo médio mensal previsto para um parque com 55 hectares é esperado estar no intervalo: [{valor_min:.2f}€, {valor_max:.2f}€].")
+print(
+    f"\nCom um grau de confiança de 95%, o custo médio mensal previsto para um parque com 55 hectares é esperado estar no intervalo: [{valor_min:.2f}€, {valor_max:.2f}€].")
 
 # Gráfico da regressão linear
-plt.figure(dpi=300, figsize=(10,7))
+plt.figure(dpi=300, figsize=(10, 7))
 plt.scatter(X, y, color='blue', label='Dados reais')
 plt.plot(X, a * X + b, color='red', label='Linha de regressão')
 plt.scatter([area_novo_parque], [custo_previsto], color='green', label=f'Previsão para 55 ha')
@@ -168,7 +178,7 @@ plt.legend()
 
 # Adiciona o nome dos parques aos pontos no gráfico
 for i, parque in enumerate(custos_medios_mensais['Park name']):
-    plt.annotate(parque, (X[i], y[i]), textcoords="offset points", xytext=(0,7), ha='center')
+    plt.annotate(parque, (X[i], y[i]), textcoords="offset points", xytext=(0, 7), ha='center')
 
 plt.tight_layout()
 plt.show()
