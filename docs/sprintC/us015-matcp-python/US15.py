@@ -37,30 +37,20 @@ def calcular_media_mensal_analitica(dados_consumo):
     # Agrupar por parque, ano e mês e somar os consumos
     consumo_mensal = dados_consumo.groupby(['Park', 'Year', 'Month'])['Consumption'].sum().reset_index()
 
-    # Calcular a soma total e o número de meses para cada parque
-    consumo_total_por_parque = {}
-    meses_por_parque = {}
+    # Calcular o custo mensal da água
+    consumo_mensal['Cost'] = consumo_mensal['Consumption'].apply(calcular_custo_agua)
 
-    for _, row in consumo_mensal.iterrows():
-        parque = row['Park']
-        consumo = row['Consumption']
+    # Calcular a média mensal do custo para cada parque
+    media_mensal_custo = consumo_mensal.groupby('Park')['Cost'].mean().reset_index()
 
-        if parque not in consumo_total_por_parque:
-            consumo_total_por_parque[parque] = 0
-            meses_por_parque[parque] = set()
-
-        consumo_total_por_parque[parque] += consumo
-        meses_por_parque[parque].add((row['Year'], row['Month']))
-
-    # Calcular a média mensal manualmente
-    media_mensal_consumo = [
-        {'Park': parque, 'Consumption': consumo_total_por_parque[parque] / len(meses_por_parque[parque])}
-        for parque in consumo_total_por_parque]
-    return pd.DataFrame(media_mensal_consumo)
+    return media_mensal_custo
 
 
 # Calcular a média mensal de consumo para cada parque
 media_mensal_consumo = calcular_media_mensal_analitica(dados_consumo)
+
+# Junta as áreas dos parques com os custos médios mensais
+media_mensal_consumo = media_mensal_consumo.merge(dados_areas, left_on='Park', right_on='Park')
 
 # Lista para armazenar os custos médios mensais por parque
 custos_mensais = []
@@ -68,17 +58,12 @@ custos_mensais = []
 # Calcula o custo médio mensal para cada parque
 for _, row in media_mensal_consumo.iterrows():
     parque = row['Park']
-    consumo_medio_mensal = row['Consumption']
-    custo_medio_mensal = calcular_custo_agua(consumo_medio_mensal)
-    area = areas_dict.get(parque)  # Obter área do parque
+    custo_medio_mensal = row['Cost']
+    area = row['Area']  # Obter área do parque
     custos_mensais.append({'Park name': parque, 'Area': area, 'Custo Medio Mensal': round(custo_medio_mensal, 2)})
 
 # Converte a lista de custos mensais em um DataFrame
 custos_medios_mensais = pd.DataFrame(custos_mensais)
-
-# Verifica se há áreas ausentes e remove esses registros
-custos_medios_mensais = custos_medios_mensais.dropna(subset=['Area'])
-
 
 # Função para imprimir a tabela formatada
 def imprimir_tabela_formatada(tabela):
@@ -151,17 +136,19 @@ print(f"\nCaracterização da correlação: {caracterizacao}")
 area_novo_parque = 55
 custo_previsto = a * area_novo_parque + b
 
-# Calcular o intervalo de confiança de 95%
-# Erro padrão da estimativa
 y_pred = a * X + b
 residuals = y - y_pred
 s_err = np.sqrt(np.sum(residuals ** 2) / (len(y) - 2))
 mean_x = np.mean(X)
 t_value = stats.t.ppf(1 - 0.025, df=len(y) - 2)  # valor t para um intervalo de confiança de 95%
-conf_interval = t_value * s_err * np.sqrt(1 / len(X) + (area_novo_parque - mean_x) ** 2 / np.sum((X - mean_x) ** 2))
+
+# Intervalo de previsão
+sxx = np.sum((X - mean_x) ** 2)
+conf_interval = t_value * s_err * np.sqrt(1 + 1 / len(X) + (area_novo_parque - mean_x) ** 2 / sxx)
 
 valor_min = custo_previsto - conf_interval
 valor_max = custo_previsto + conf_interval
+
 print(
     f"\nCom um grau de confiança de 95%, o custo médio mensal previsto para um parque com 55 hectares é esperado estar no intervalo: [{valor_min:.2f}€, {valor_max:.2f}€].")
 

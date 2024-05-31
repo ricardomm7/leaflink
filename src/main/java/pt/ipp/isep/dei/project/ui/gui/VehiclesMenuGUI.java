@@ -4,15 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.RegisterMaintenanceController;
 import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
@@ -22,7 +18,9 @@ import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class VehiclesMenuGUI {
@@ -32,7 +30,6 @@ public class VehiclesMenuGUI {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private List<VehicleDto> allVehicle;
     private List<MaintenanceDto> allMaintenance;
-
     private List<VehicleDto> vehiclesNeedingMaintenance;
 
     @FXML
@@ -40,6 +37,9 @@ public class VehiclesMenuGUI {
 
     @FXML
     private ListView<String> listViewMaintenance;
+
+    @FXML
+    private ListView<String> needingMaintenance;
 
     @FXML
     private TextField vehiclesSearchTextArea;
@@ -85,9 +85,6 @@ public class VehiclesMenuGUI {
 
     @FXML
     private Button removeBtn;
-
-    @FXML
-    private Button handleMaintenanceListBtn;
 
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
@@ -247,19 +244,6 @@ public class VehiclesMenuGUI {
         dialog.showAndWait();
     }
 
-    @FXML
-    void handleVehicleRemoveBtn(ActionEvent event) {
-        String selectedItem = listViewVehicle.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            String[] parts = selectedItem.split(" \\|");
-            String plate = parts[2].trim();
-            vehicleController.removeVehicle(plate);
-            updateVehicleList();
-            updateVehiclesNeedingMaintenance();
-        } else {
-            showErrorDialog("No vehicle selected for removal.");
-        }
-    }
 
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -279,15 +263,29 @@ public class VehiclesMenuGUI {
     }
 
     @FXML
+    void handleVehicleRemoveBtn(ActionEvent event) {
+        String selectedItem = listViewVehicle.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            String[] parts = selectedItem.split(" \\| ");
+            String plate = parts[0].split(": ")[1].trim(); // Obtendo a placa correta
+            vehicleController.removeVehicle(plate);
+            updateVehicleList();
+            updateMaintenanceList();
+            updateVehiclesNeedingMaintenance();
+        } else {
+            showErrorDialog("No vehicle selected for removal.");
+        }
+    }
+
+    @FXML
     void handelMaintenanceRemoveBtn(ActionEvent event) {
         String selectedItem = listViewMaintenance.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            String[] parts = selectedItem.split(" \\|");
-            String id = parts[0].trim();
+            String[] parts = selectedItem.split(" \\| ");
+            String id = parts[0].split(": ")[1].trim(); // Obtendo a placa correta
 
-            // Especifica o formato esperado da data
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate date = LocalDate.parse(parts[1].trim(), formatter);
+            LocalDate date = LocalDate.parse(parts[1].split(": ")[1].trim(), formatter);
 
             registerMaintenanceController.removeMaintenance(id, date);
             updateMaintenanceList();
@@ -348,6 +346,7 @@ public class VehiclesMenuGUI {
 
                     registerMaintenanceController.createMaintenance(plate, date, km);
                     updateMaintenanceList();
+                    updateVehiclesNeedingMaintenance();
 
 
                 }
@@ -381,28 +380,58 @@ public class VehiclesMenuGUI {
         List<VehicleDto> vehicleList = vehicleController.getVehicleList();
         allVehicle = vehicleList;
         List<String> vehicleDisplayList = vehicleList.stream()
-                .map(vehicleDto -> String.format("%s | %s | %s",
-                        vehicleDto.getBrand(), vehicleDto.getModel(), vehicleDto.getVehiclePlate()))
+                .map(vehicleDto -> String.format("Plate: %s | Brand: %s | Model: %s",
+                        vehicleDto.getVehiclePlate(), vehicleDto.getBrand(), vehicleDto.getModel()))
                 .collect(Collectors.toList());
         ObservableList<String> observableVehicleList = FXCollections.observableArrayList(vehicleDisplayList);
         listViewVehicle.setItems(observableVehicleList);
     }
 
+
     private void updateMaintenanceList() {
         List<MaintenanceDto> maintenanceList = registerMaintenanceController.getMaintenanceList();
         allMaintenance = maintenanceList;
+
         List<String> maintenanceDisplayList = maintenanceList.stream()
-                .map(maintenanceDto -> String.format("%s | %s | %s",
+                .map(maintenanceDto -> String.format("Plate: %s | Date: %s | Km: %d",
                         maintenanceDto.getVehiclePlate(), maintenanceDto.getDate().format(formatter), maintenanceDto.getKm()))
                 .collect(Collectors.toList());
+
         ObservableList<String> observableMaintenanceList = FXCollections.observableArrayList(maintenanceDisplayList);
         listViewMaintenance.setItems(observableMaintenanceList);
     }
 
+
     private void updateVehiclesNeedingMaintenance() {
         vehiclesNeedingMaintenance = registerMaintenanceController.getVehiclesNeedingMaintenanceList();
+        Set<String> maintenanceNeedingSet = new HashSet<>(); // Usando Set para evitar duplicatas
 
+        for (VehicleDto vehicle : vehiclesNeedingMaintenance) {
+            MaintenanceDto latestMaintenance = getLatestMaintenance(vehicle, allMaintenance);
+            if (latestMaintenance != null) {
+                int lastKm = latestMaintenance.getKm();
+                int currKm = vehicle.getCurrentKm();
+                int freq = vehicle.getMaintenanceFrequency();
+                int nextKm = lastKm + freq;
+
+                if (currKm >= nextKm * 0.95) {
+                    if (currKm > nextKm) {
+                        nextKm = currKm;
+                    }
+
+                    String info = String.format("Plate: %s | Brand: %s | Model: %s | Curr.Kms: %d | Freq: %d | Last: %d | Next: %d",
+                            vehicle.getVehiclePlate(), vehicle.getBrand(), vehicle.getModel(),
+                            currKm, freq, lastKm, nextKm);
+
+                    maintenanceNeedingSet.add(info); // Adicionando informações ao Set
+                }
+            }
+        }
+
+        ObservableList<String> observableVehicleNeedingList = FXCollections.observableArrayList(maintenanceNeedingSet);
+        needingMaintenance.setItems(observableVehicleNeedingList);
     }
+
 
     @FXML
     void initialize() {
@@ -425,63 +454,6 @@ public class VehiclesMenuGUI {
         removeBtn.setDisable(true);
     }
 
-    @FXML
-    void handleMaintenanceListBtn(ActionEvent event) {
-        updateVehiclesNeedingMaintenance();
-
-        Stage maintenanceStage = new Stage();
-        maintenanceStage.setTitle("Vehicles Needing Maintenance");
-
-        GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10));
-        gridPane.setHgap(10);
-        gridPane.setVgap(5);
-
-        String[] headers = {"Plate", "Brand", "Model", "Curr.Kms", "Freq", "Last", "Next"};
-        for (int col = 0; col < headers.length; col++) {
-            Text header = new Text(headers[col]);
-            header.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
-            gridPane.add(header, col, 0);
-        }
-        int row = 1;
-        for (VehicleDto vehicle : vehiclesNeedingMaintenance) {
-            MaintenanceDto latestMaintenance = getLatestMaintenance(vehicle, allMaintenance);
-
-            if (latestMaintenance != null) {
-                int lastKm = latestMaintenance.getKm();
-                int currKm = vehicle.getCurrentKm();
-                int freq = vehicle.getMaintenanceFrequency();
-                int nextKm = lastKm + freq;
-
-                if (currKm >= nextKm * 0.95) {
-                    if (currKm > nextKm) {
-                        nextKm = currKm;
-                    }
-                    String[] vehicleData = {
-                            vehicle.getVehiclePlate(),
-                            vehicle.getBrand(),
-                            vehicle.getModel(),
-                            String.valueOf(currKm),
-                            String.valueOf(freq),
-                            String.valueOf(lastKm),
-                            String.valueOf(nextKm)
-                    };
-                    for (int col = 0; col < vehicleData.length; col++) {
-                        Text vehicleText = new Text(vehicleData[col]);
-                        gridPane.add(vehicleText, col, row);
-                    }
-                    row++;
-                }
-            }
-        }
-
-        // Criar a cena e defini-la no Stage
-        Scene scene = new Scene(gridPane, 600, 400);
-        maintenanceStage.setScene(scene);
-        maintenanceStage.show();
-    }
-
-
     private MaintenanceDto getLatestMaintenance(VehicleDto vehicle, List<MaintenanceDto> maintenanceDtoList) {
         return maintenanceDtoList.stream()
                 .filter(m -> m.getVehiclePlate().equals(vehicle.getVehiclePlate()))
@@ -491,28 +463,31 @@ public class VehiclesMenuGUI {
 
 
     private void updateVehicleDetails(String selectedVehicle) {
-        // Extract details of the selected vehicle
-        String[] parts = selectedVehicle.split(" \\| ");
-        String selectedPlate = parts[2].trim();
+    // Extract details of the selected vehicle
+    String[] parts = selectedVehicle.split(" \\| ");
 
-        VehicleDto vehicle = allVehicle.stream()
-                .filter(v -> v.getVehiclePlate().equals(selectedPlate))
-                .findFirst()
-                .orElse(null);
+    // Corrigir a forma como a placa é extraída
+    String selectedPlate = parts[0].split(":")[1].trim();
 
-        if (vehicle != null) {
-            tareLabel.setText(vehicle.getTareWeight() + " kg");
-            plateLabel.setText(vehicle.getVehiclePlate());
-            aquiLabel.setText(vehicle.getAcquisitionDate().format(formatter)); // Adjust the method accordingly
-            kmLabel.setText(vehicle.getCurrentKm() + " km");
-            registLabel.setText(vehicle.getRegistrationDate().format(formatter));
-            modelLabel.setText(vehicle.getModel());
-            vinLabel.setText(vehicle.getVIN());
-            freqLabel.setText(vehicle.getMaintenanceFrequency() + " km");
-            brandLabel.setText(vehicle.getBrand());
-            typeLabel.setText(vehicle.getType().toString());
-            grossLabel.setText(vehicle.getGrossWeight() + " kg");
-        }
+    VehicleDto vehicle = allVehicle.stream()
+            .filter(v -> v.getVehiclePlate().equals(selectedPlate))
+            .findFirst()
+            .orElse(null);
+
+    if (vehicle != null) {
+        tareLabel.setText(vehicle.getTareWeight() + " kg");
+        plateLabel.setText(vehicle.getVehiclePlate());
+        aquiLabel.setText(vehicle.getAcquisitionDate().format(formatter)); // Ajustando a formatação
+        kmLabel.setText(vehicle.getCurrentKm() + " km");
+        registLabel.setText(vehicle.getRegistrationDate().format(formatter));
+        modelLabel.setText(vehicle.getModel());
+        vinLabel.setText(vehicle.getVIN());
+        freqLabel.setText(vehicle.getMaintenanceFrequency() + " km");
+        brandLabel.setText(vehicle.getBrand());
+        typeLabel.setText(vehicle.getType().toString());
+        grossLabel.setText(vehicle.getGrossWeight() + " kg");
     }
+}
+
 }
 

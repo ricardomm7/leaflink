@@ -304,14 +304,30 @@
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleMaintenanceListBtn" styleClass="button-custom" text="List Vehicles">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                    </Button>
                                             </children>
                                         </HBox>
-                                        <ListView fx:id="listViewMaintenance" VBox.vgrow="ALWAYS" />
+                              <VBox VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label layoutX="10.0" layoutY="10.0" styleClass="costum-Label" text="Registered maintenances">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                              <ListView fx:id="listViewMaintenance" VBox.vgrow="ALWAYS" />
+                                    <Label styleClass="costum-Label" text="Needing maintenance">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <ListView fx:id="needingMaintenance" layoutX="10.0" layoutY="10.0" />
+                                 </children>
+                              </VBox>
                                     </children>
                                 </VBox>
                             </content>

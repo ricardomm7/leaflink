@@ -38,7 +38,7 @@ public class MaintenanceRepository implements Serializable {
         Maintenance m = MaintenanceMapper.toDomain(maintenanceDto);
         try {
             addMaintenance(m);
-        }catch (Exception e) {
+        } catch (Exception e) {
             ShowError.showAlert("Maintenance", e.getMessage(), "Duplicate");
         }
     }
@@ -51,12 +51,11 @@ public class MaintenanceRepository implements Serializable {
     private void addMaintenance(Maintenance maintenance) {
         for (Maintenance m : maintenanceList) {
             if (m.getVehiclePlate().equals(maintenance.getVehiclePlate()) &&
-                    m.getDate().equals(maintenance.getDate()) && (m.getKm() == (maintenance.getKm()))) {
+                    m.getDate().equals(maintenance.getDate()) && (m.getKm() == maintenance.getKm())) {
                 throw new IllegalArgumentException("There is already a maintenance with the same attributes.");
-            }else {
-                maintenanceList.add(maintenance);
             }
         }
+        maintenanceList.add(maintenance);
     }
 
     /**
