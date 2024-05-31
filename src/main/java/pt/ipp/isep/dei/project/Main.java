@@ -25,10 +25,10 @@ public class Main extends Application {
 
         // Configurar a janela principal
         Main.appStage.setScene(scene);
-        Main.appStage.setMaximized(maximized);
         Main.appStage.setMinWidth(minWi);
         Main.appStage.setMinHeight(minHe);
         Main.appStage.setResizable(resizeable);
+        Main.appStage.setMaximized(maximized);
         Main.appStage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("icon.png"))));
     }
 
