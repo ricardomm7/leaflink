@@ -18,6 +18,7 @@ import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -267,7 +268,7 @@ public class VehiclesMenuGUI {
         String selectedItem = listViewVehicle.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             String[] parts = selectedItem.split(" \\| ");
-            String plate = parts[0].split(": ")[1].trim(); // Obtendo a placa correta
+            String plate = parts[0].split(":")[1].trim();
             vehicleController.removeVehicle(plate);
             updateVehicleList();
             updateMaintenanceList();
@@ -276,6 +277,7 @@ public class VehiclesMenuGUI {
             showErrorDialog("No vehicle selected for removal.");
         }
     }
+
 
     @FXML
     void handelMaintenanceRemoveBtn(ActionEvent event) {
@@ -300,7 +302,6 @@ public class VehiclesMenuGUI {
     void handleMaintenanceAddBtn(ActionEvent event) {
         String selectedVehicle = listViewVehicle.getSelectionModel().getSelectedItem();
         if (selectedVehicle != null) {
-
             if (vbox_selectedVehicle.isDisabled()) {
                 showErrorDialog("No vehicle selected for maintenance.");
                 return;
@@ -331,24 +332,20 @@ public class VehiclesMenuGUI {
 
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == addButtonType) {
-
                     LocalDate date = dateField.getValue();
                     int km;
                     try {
                         km = Integer.parseInt(kmField.getText());
-
                     } catch (Exception e) {
                         showErrorDialog("Invalid kilometers value.");
                         return null;
                     }
                     String[] parts = selectedVehicle.split(" \\| ");
-                    String plate = parts[2].trim();
+                    String plate = parts[0].split(":")[1].trim(); // Corrigido para obter a placa corretamente
 
                     registerMaintenanceController.createMaintenance(plate, date, km);
                     updateMaintenanceList();
                     updateVehiclesNeedingMaintenance();
-
-
                 }
                 return null;
             });
@@ -357,6 +354,7 @@ public class VehiclesMenuGUI {
             showErrorDialog("No vehicle selected for maintenance.");
         }
     }
+
 
     @FXML
     void handleMaintenanceSearchBtn(ActionEvent event) {
@@ -409,6 +407,9 @@ public class VehiclesMenuGUI {
         for (VehicleDto vehicle : vehiclesNeedingMaintenance) {
             MaintenanceDto latestMaintenance = getLatestMaintenance(vehicle, allMaintenance);
             if (latestMaintenance != null) {
+                String plate = vehicle.getVehiclePlate();
+                String brand = vehicle.getBrand();
+                String model = vehicle.getModel();
                 int lastKm = latestMaintenance.getKm();
                 int currKm = vehicle.getCurrentKm();
                 int freq = vehicle.getMaintenanceFrequency();
@@ -420,8 +421,7 @@ public class VehiclesMenuGUI {
                     }
 
                     String info = String.format("Plate: %s | Brand: %s | Model: %s | Curr.Kms: %d | Freq: %d | Last: %d | Next: %d",
-                            vehicle.getVehiclePlate(), vehicle.getBrand(), vehicle.getModel(),
-                            currKm, freq, lastKm, nextKm);
+                            plate, brand, model, currKm, freq, lastKm, nextKm);
 
                     maintenanceNeedingSet.add(info); // Adicionando informações ao Set
                 }
@@ -457,37 +457,37 @@ public class VehiclesMenuGUI {
     private MaintenanceDto getLatestMaintenance(VehicleDto vehicle, List<MaintenanceDto> maintenanceDtoList) {
         return maintenanceDtoList.stream()
                 .filter(m -> m.getVehiclePlate().equals(vehicle.getVehiclePlate()))
-                .max((m1, m2) -> Integer.compare(m1.getKm(), m2.getKm()))
+                .max(Comparator.comparing(MaintenanceDto::getDate))
                 .orElse(null);
     }
 
 
     private void updateVehicleDetails(String selectedVehicle) {
-    // Extract details of the selected vehicle
-    String[] parts = selectedVehicle.split(" \\| ");
+        // Extract details of the selected vehicle
+        String[] parts = selectedVehicle.split(" \\| ");
 
-    // Corrigir a forma como a placa é extraída
-    String selectedPlate = parts[0].split(":")[1].trim();
+        // Corrigir a forma como a placa é extraída
+        String selectedPlate = parts[0].split(":")[1].trim();
 
-    VehicleDto vehicle = allVehicle.stream()
-            .filter(v -> v.getVehiclePlate().equals(selectedPlate))
-            .findFirst()
-            .orElse(null);
+        VehicleDto vehicle = allVehicle.stream()
+                .filter(v -> v.getVehiclePlate().equals(selectedPlate))
+                .findFirst()
+                .orElse(null);
 
-    if (vehicle != null) {
-        tareLabel.setText(vehicle.getTareWeight() + " kg");
-        plateLabel.setText(vehicle.getVehiclePlate());
-        aquiLabel.setText(vehicle.getAcquisitionDate().format(formatter)); // Ajustando a formatação
-        kmLabel.setText(vehicle.getCurrentKm() + " km");
-        registLabel.setText(vehicle.getRegistrationDate().format(formatter));
-        modelLabel.setText(vehicle.getModel());
-        vinLabel.setText(vehicle.getVIN());
-        freqLabel.setText(vehicle.getMaintenanceFrequency() + " km");
-        brandLabel.setText(vehicle.getBrand());
-        typeLabel.setText(vehicle.getType().toString());
-        grossLabel.setText(vehicle.getGrossWeight() + " kg");
+        if (vehicle != null) {
+            tareLabel.setText(vehicle.getTareWeight() + " kg");
+            plateLabel.setText(vehicle.getVehiclePlate());
+            aquiLabel.setText(vehicle.getAcquisitionDate().format(formatter)); // Ajustando a formatação
+            kmLabel.setText(vehicle.getCurrentKm() + " km");
+            registLabel.setText(vehicle.getRegistrationDate().format(formatter));
+            modelLabel.setText(vehicle.getModel());
+            vinLabel.setText(vehicle.getVIN());
+            freqLabel.setText(vehicle.getMaintenanceFrequency() + " km");
+            brandLabel.setText(vehicle.getBrand());
+            typeLabel.setText(vehicle.getType().toString());
+            grossLabel.setText(vehicle.getGrossWeight() + " kg");
+        }
     }
-}
 
 }
 
