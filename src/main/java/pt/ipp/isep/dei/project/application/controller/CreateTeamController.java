@@ -3,18 +3,12 @@ package pt.ipp.isep.dei.project.application.controller;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
-import pt.ipp.isep.dei.project.dto.CollaboratorDto;
-import pt.ipp.isep.dei.project.dto.SkillDto;
-import pt.ipp.isep.dei.project.dto.TeamDto;
-import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
-import pt.ipp.isep.dei.project.mappers.SkillMapper;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**

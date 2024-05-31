@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.SVGPath;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.project.Main;
@@ -93,7 +92,11 @@ public class AnalysisGUI {
 
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
-
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

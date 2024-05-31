@@ -15,6 +15,7 @@ import pt.ipp.isep.dei.project.application.controller.RegisterVehicleController;
 import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -98,7 +99,11 @@ public class VehiclesMenuGUI {
 
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
-        // Implementation required
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -245,15 +250,6 @@ public class VehiclesMenuGUI {
         dialog.showAndWait();
     }
 
-
-    private void showErrorDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
@@ -274,7 +270,7 @@ public class VehiclesMenuGUI {
             updateMaintenanceList();
             updateVehiclesNeedingMaintenance();
         } else {
-            showErrorDialog("No vehicle selected for removal.");
+            ShowError.showAlert("Vehicle", "No vehicle selected for removal.", null);
         }
     }
 
@@ -293,7 +289,7 @@ public class VehiclesMenuGUI {
             updateMaintenanceList();
             updateVehiclesNeedingMaintenance();
         } else {
-            showErrorDialog("No maintenance selected for removal.");
+            ShowError.showAlert("Maintenance", "No maintenance selected for removal.", null);
         }
     }
 
@@ -303,7 +299,7 @@ public class VehiclesMenuGUI {
         String selectedVehicle = listViewVehicle.getSelectionModel().getSelectedItem();
         if (selectedVehicle != null) {
             if (vbox_selectedVehicle.isDisabled()) {
-                showErrorDialog("No vehicle selected for maintenance.");
+                ShowError.showAlert("Maintenance", "No vehicle selected for maintenance.", null);
                 return;
             }
             Dialog<MaintenanceDto> dialog = new Dialog<>();
@@ -337,7 +333,7 @@ public class VehiclesMenuGUI {
                     try {
                         km = Integer.parseInt(kmField.getText());
                     } catch (Exception e) {
-                        showErrorDialog("Invalid kilometers value.");
+                        ShowError.showAlert("New Maintenance", "Invalid kilometers value.", null);
                         return null;
                     }
                     String[] parts = selectedVehicle.split(" \\| ");
@@ -351,7 +347,7 @@ public class VehiclesMenuGUI {
             });
             dialog.showAndWait();
         } else {
-            showErrorDialog("No vehicle selected for maintenance.");
+            ShowError.showAlert("Maintenance", "No vehicle selected for maintenance.", null);
         }
     }
 

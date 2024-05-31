@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.time.LocalDate;
-
 import java.util.List;
 
 /**

@@ -38,8 +38,8 @@ public class Maintenance implements Serializable {
             setVehiclePlate(vehiclePlate);
             setDate(date);
             setKm(String.valueOf(currentKm));
-        }catch (Exception e) {
-            ShowError.showAlert("Maintenance", e.getMessage(),"Error registering Maintenance");
+        } catch (Exception e) {
+            ShowError.showAlert("Maintenance", e.getMessage(), "Error registering Maintenance");
             throw e;
         }
     }
@@ -127,14 +127,14 @@ public class Maintenance implements Serializable {
      * @param kmInput the km
      */
     public void setKm(String kmInput) {
-    try {
-        int km = Integer.parseInt(kmInput);
-        if (km < 0) {
-            throw new IllegalArgumentException("Kilometers must be positive");
+        try {
+            int km = Integer.parseInt(kmInput);
+            if (km < 0) {
+                throw new IllegalArgumentException("Kilometers must be positive");
+            }
+            this.km = km;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid input: Kilometers must be a valid integer");
         }
-        this.km = km;
-    } catch (NumberFormatException e) {
-        throw new IllegalArgumentException("Invalid input: Kilometers must be a valid integer");
     }
-}
 }

@@ -58,18 +58,6 @@ public class AssignSkillController {
         return skillRepository.getSkillDtoList();
     }
 
-
-    /**
-     * Assigns one or more skills to a collaborator.
-     *
-     * @param collaborator The collaborator to whom the skill(s) will be assigned.
-     * @param skills       The skills to be assigned.
-     */
-    public void assignSkill(Collaborator collaborator, List<Skill> skills) {
-        collaborator.assignSkills(List.of(skills.toArray(new Skill[0])));
-        collaboratorRepository.updateCollaborator(collaborator);
-    }
-
     /**
      * Assigns one or more skills to a collaborator.
      *

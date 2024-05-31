@@ -2,14 +2,45 @@ package pt.ipp.isep.dei.project.ui.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.project.Main;
 
-public class AdminGUI {
+public class TeamsGUI {
+
+    @FXML
+    private TextField teamSearch;
+
+    @FXML
+    private Button removeTeamBtn;
+
+    @FXML
+    void newTeamHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleRemoveTeam(ActionEvent event) {
+
+    }
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
+
+    }
+
+    @FXML
+    void routeBtnActionHandle(ActionEvent event) {
+
+    }
+
+    @FXML
+    void spacesBtnActionHandle(ActionEvent event) {
+
+    }
+
+    @FXML
+    void usersBtnActionHandle(ActionEvent event) {
 
     }
 
@@ -49,40 +80,4 @@ public class AdminGUI {
         }
     }
 
-    @FXML
-    void routeBtnActionHandle(ActionEvent event) {
-
-    }
-
-    @FXML
-    void spacesBtnActionHandle(ActionEvent event) {
-
-    }
-
-    @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleVehicleSearchBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleVehicleAddBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handelVehicleRemoveBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleEnterSearchBar(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            handleVehicleSearchBtn(new ActionEvent());
-        }
-    }
 }

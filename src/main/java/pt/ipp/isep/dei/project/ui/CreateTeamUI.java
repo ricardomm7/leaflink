@@ -4,9 +4,6 @@ import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
-import pt.ipp.isep.dei.project.dto.CollaboratorDto;
-import pt.ipp.isep.dei.project.dto.SkillDto;
-import pt.ipp.isep.dei.project.dto.TeamDto;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 

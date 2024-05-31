@@ -73,7 +73,7 @@ public class CollaboratorRepository implements Serializable {
      * @return the list of collaborators as CollaboratorDto objects
      */
     public List<CollaboratorDto> getCollaboratorDtoList() {
-       return CollaboratorMapper.toDtoList(collaboratorList);
+        return CollaboratorMapper.toDtoList(collaboratorList);
     }
 
     public List<Collaborator> getCollaboratorList() {

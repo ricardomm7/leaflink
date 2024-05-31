@@ -211,16 +211,16 @@ public class Vehicle implements Serializable {
      */
 
     public void setCurrentKm(String kmInput) {
-    try {
-        int km = Integer.parseInt(kmInput);
-        if (km < 0) {
-            throw new IllegalArgumentException("Kilometers must be positive");
+        try {
+            int km = Integer.parseInt(kmInput);
+            if (km < 0) {
+                throw new IllegalArgumentException("Kilometers must be positive");
+            }
+            this.currentKm = km;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid input: Kilometers must be a valid integer");
         }
-        this.currentKm = km;
-    } catch (NumberFormatException e) {
-        throw new IllegalArgumentException("Invalid input: Kilometers must be a valid integer");
     }
-}
 
     /**
      * Retrieves the registration date of the vehicle.
@@ -281,8 +281,8 @@ public class Vehicle implements Serializable {
             }
             this.maintenanceFrequency = maintenanceFrequencyInt;
         } catch (NumberFormatException ignored) {
+        }
     }
-}
 
     /**
      * Constructs a new Vehicle object with the provided parameters.
@@ -351,7 +351,7 @@ public class Vehicle implements Serializable {
 
         if (acquisitionDate.isAfter(LocalDate.now()) || registrationDate.isAfter(LocalDate.now())) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            throw new IllegalArgumentException("Vehicle acquisition and registration date be  before: "+ LocalDate.now().format(formatter)+".");
+            throw new IllegalArgumentException("Vehicle acquisition and registration date be  before: " + LocalDate.now().format(formatter) + ".");
         }
         if (acquisitionDate.isBefore(registrationDate)) {
             throw new IllegalArgumentException("Vehicle acquisition date must be before the registration date.");

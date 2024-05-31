@@ -57,10 +57,10 @@ public class VehicleRepository implements Serializable {
     public boolean registerVehicle(VehicleDto dto) {
         Vehicle vehicle = VehicleMapper.toDomain(dto);
         try {
-            if (!verifyExistingVehicles(vehicle)){
+            if (!verifyExistingVehicles(vehicle)) {
                 addVehicle(vehicle);
                 return true;
-            }else {
+            } else {
                 throw new Exception("Vehicle already registered");
             }
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class VehicleRepository implements Serializable {
     /**
      * Verifies if a vehicle with the given VIN or license plate already exists in the repository.
      *
-     * @param vehicleAux         The vehicle
+     * @param vehicleAux The vehicle
      * @return true if a vehicle with the given VIN or license plate exists, false otherwise
      */
     public boolean verifyExistingVehicles(Vehicle vehicleAux) {

@@ -1,62 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.CollaboratorsMenuGUI">
+<?import java.lang.String?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0"
+            prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.CollaboratorsGUI">
     <left>
-        <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar" BorderPane.alignment="CENTER">
+        <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar"
+                 BorderPane.alignment="CENTER">
             <items>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Tasks">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Tasks">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="tasks-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="tasks-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0" selected="true" styleClass="menu-btn-cstm" text="Collaborators">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0"
+                              selected="true" styleClass="menu-btn-cstm" text="Collaborators">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="collab-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="collab-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Teams">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Teams">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="team-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="team-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Analysis">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Analysis">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="analysis-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="analysis-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Vehicles">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Vehicles">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="vehicles-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="vehicles-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Routes">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Routes">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="routes-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="routes-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Spaces">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Spaces">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="gs-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="gs-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Users">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Users">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="users-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="users-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
@@ -64,14 +89,15 @@
         </ToolBar>
     </left>
     <bottom>
-        <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot" BorderPane.alignment="CENTER">
+        <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot"
+                  BorderPane.alignment="CENTER">
             <children>
                 <Label opacity="0.54" text="LEAFLINK | Green Space Management Software | FOURCORP | ISEP | 2024">
                     <font>
-                        <Font size="11.0" />
+                        <Font size="11.0"/>
                     </font>
                     <FlowPane.margin>
-                        <Insets left="5.0" />
+                        <Insets left="5.0"/>
                     </FlowPane.margin>
                 </Label>
             </children>
@@ -84,10 +110,10 @@
                     <children>
                         <Label text="Collaborators">
                             <font>
-                                <Font name="System Bold" size="25.0" />
+                                <Font name="System Bold" size="25.0"/>
                             </font>
                             <padding>
-                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
                             </padding>
                         </Label>
                     </children>
@@ -100,209 +126,258 @@
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField fx:id="collaboratorsTextArea" onKeyPressed="#handleCollabEnterSearchBar" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="collaboratorsTextArea"
+                                                           onKeyPressed="#handleCollabEnterSearchBar"
+                                                           promptText="Enter search words here"
+                                                           styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" onAction="#handleCollavSearchBtn" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleCollavSearchBtn"
+                                                        styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#handleAddBtnCollab" styleClass="button-custom" text="Add new collaborator" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleAddBtnCollab"
+                                                        styleClass="button-custom" text="Add new collaborator"
+                                                        HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button fx:id="removeBtnCollab" mnemonicParsing="false" onAction="#handelRemoveBtnCollab" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="removeBtnCollab" mnemonicParsing="false"
+                                                        onAction="#handelRemoveBtnCollab" styleClass="button-custom"
+                                                        text="Remove" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
                                             </children>
                                         </HBox>
-                              <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
-                                 <items>
-                                              <ListView fx:id="collabsList" />
-                                    <VBox fx:id="vbox_selectedCollab" fillWidth="false">
-                                       <children>
-                                          <Label styleClass="costum-Label" text="Selected Collaborator Information">
-                                             <font>
-                                                <Font name="System Bold" size="18.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="20.0" left="20.0" top="10.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <GridPane VBox.vgrow="NEVER">
-                                             <children>
-                                                <Label styleClass="costum-Label-menor" text="Name">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label layoutX="77.0" layoutY="15.0" styleClass="costum-Label-menor" text="Birthdate" GridPane.rowIndex="1">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="Mobile" GridPane.rowIndex="2">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="Taxpayer number" GridPane.rowIndex="3">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="E-Mail" GridPane.rowIndex="4">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="ID Document Type" GridPane.rowIndex="5">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="ID Document Number" GridPane.rowIndex="6">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="Admission date" GridPane.rowIndex="7">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="Job" GridPane.rowIndex="8">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="Address" GridPane.rowIndex="9">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="Skills" GridPane.rowIndex="10">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <Label fx:id="nameLabel" text="00000000000000000" wrapText="true" GridPane.columnIndex="1">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="birthLabel" layoutX="193.0" layoutY="15.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="mobileLabel" layoutX="193.0" layoutY="45.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="taxLabel" layoutX="193.0" layoutY="75.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="mailLabel" layoutX="193.0" layoutY="105.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="doctypeLabel" layoutX="193.0" layoutY="135.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="docnumberLabel" layoutX="193.0" layoutY="165.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="admissLabel" layoutX="193.0" layoutY="135.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="addressLabel" layoutX="193.0" layoutY="105.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="jobLabel" layoutX="193.0" layoutY="195.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="skillsLabel" text="info" GridPane.columnIndex="1" GridPane.rowIndex="10">
-                                                   <padding>
-                                                      <Insets left="5.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label styleClass="costum-Label-menor" text="Options" GridPane.rowIndex="13">
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" right="5.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                                <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
-                                                   <children>
-                                                      <Button mnemonicParsing="false" onAction="#handleAddSkillsBtn" prefHeight="25.0" prefWidth="116.0" text="Assign Skills">
-                                                         <styleClass>
-                                                            <String fx:value="button-custom" />
-                                                            <String fx:value="no-margin-button" />
-                                                         </styleClass>
-                                                         <FlowPane.margin>
-                                                            <Insets left="5.0" />
-                                                         </FlowPane.margin>
-                                                      </Button>
-                                                      <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Edit details">
-                                                         <styleClass>
-                                                            <String fx:value="button-custom" />
-                                                            <String fx:value="no-margin-button" />
-                                                         </styleClass>
-                                                         <FlowPane.margin>
-                                                            <Insets left="5.0" />
-                                                         </FlowPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </FlowPane>
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
-                                                <ColumnConstraints hgrow="ALWAYS" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <VBox.margin>
-                                                <Insets right="10.0" />
-                                             </VBox.margin>
-                                          </GridPane>
-                                       </children>
-                                    </VBox>
-                                 </items>
-                              </SplitPane>
+                                        <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+                                            <items>
+                                                <ListView fx:id="collabsList"/>
+                                                <VBox fx:id="vbox_selectedCollab" fillWidth="false">
+                                                    <children>
+                                                        <Label styleClass="costum-Label"
+                                                               text="Selected Collaborator Information">
+                                                            <font>
+                                                                <Font name="System Bold" size="18.0"/>
+                                                            </font>
+                                                            <VBox.margin>
+                                                                <Insets bottom="20.0" left="20.0" top="10.0"/>
+                                                            </VBox.margin>
+                                                        </Label>
+                                                        <GridPane VBox.vgrow="NEVER">
+                                                            <children>
+                                                                <Label styleClass="costum-Label-menor" text="Name">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label layoutX="77.0" layoutY="15.0"
+                                                                       styleClass="costum-Label-menor" text="Birthdate"
+                                                                       GridPane.rowIndex="1">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor" text="Mobile"
+                                                                       GridPane.rowIndex="2">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor"
+                                                                       text="Taxpayer number" GridPane.rowIndex="3">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor" text="E-Mail"
+                                                                       GridPane.rowIndex="4">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor"
+                                                                       text="ID Document Type" GridPane.rowIndex="5">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor"
+                                                                       text="ID Document Number" GridPane.rowIndex="6">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor"
+                                                                       text="Admission date" GridPane.rowIndex="7">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor" text="Job"
+                                                                       GridPane.rowIndex="8">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor" text="Address"
+                                                                       GridPane.rowIndex="9">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor" text="Skills"
+                                                                       GridPane.rowIndex="10">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <Label fx:id="nameLabel" text="00000000000000000"
+                                                                       wrapText="true" GridPane.columnIndex="1">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="birthLabel" layoutX="193.0" layoutY="15.0"
+                                                                       text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="mobileLabel" layoutX="193.0"
+                                                                       layoutY="45.0" text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="taxLabel" layoutX="193.0" layoutY="75.0"
+                                                                       text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="mailLabel" layoutX="193.0" layoutY="105.0"
+                                                                       text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="doctypeLabel" layoutX="193.0"
+                                                                       layoutY="135.0" text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="docnumberLabel" layoutX="193.0"
+                                                                       layoutY="165.0" text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="admissLabel" layoutX="193.0"
+                                                                       layoutY="135.0" text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="addressLabel" layoutX="193.0"
+                                                                       layoutY="105.0" text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="jobLabel" layoutX="193.0" layoutY="195.0"
+                                                                       text="info" wrapText="true"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="skillsLabel" text="info"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                                    <padding>
+                                                                        <Insets left="5.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label styleClass="costum-Label-menor" text="Options"
+                                                                       GridPane.rowIndex="13">
+                                                                    <GridPane.margin>
+                                                                        <Insets left="20.0" right="5.0"/>
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <FlowPane alignment="CENTER_LEFT"
+                                                                          columnHalignment="CENTER" prefWidth="250.0"
+                                                                          GridPane.columnIndex="1"
+                                                                          GridPane.rowIndex="13">
+                                                                    <children>
+                                                                        <Button mnemonicParsing="false"
+                                                                                onAction="#handleAddSkillsBtn"
+                                                                                prefHeight="25.0" prefWidth="116.0"
+                                                                                text="Assign Skills">
+                                                                            <styleClass>
+                                                                                <String fx:value="button-custom"/>
+                                                                                <String fx:value="no-margin-button"/>
+                                                                            </styleClass>
+                                                                            <FlowPane.margin>
+                                                                                <Insets left="5.0"/>
+                                                                            </FlowPane.margin>
+                                                                        </Button>
+                                                                        <Button disable="true" mnemonicParsing="false"
+                                                                                prefHeight="25.0" prefWidth="116.0"
+                                                                                text="Edit details">
+                                                                            <styleClass>
+                                                                                <String fx:value="button-custom"/>
+                                                                                <String fx:value="no-margin-button"/>
+                                                                            </styleClass>
+                                                                            <FlowPane.margin>
+                                                                                <Insets left="5.0"/>
+                                                                            </FlowPane.margin>
+                                                                        </Button>
+                                                                    </children>
+                                                                </FlowPane>
+                                                            </children>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS"/>
+                                                                <ColumnConstraints hgrow="ALWAYS"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <VBox.margin>
+                                                                <Insets right="10.0"/>
+                                                            </VBox.margin>
+                                                        </GridPane>
+                                                    </children>
+                                                </VBox>
+                                            </items>
+                                        </SplitPane>
                                     </children>
                                 </VBox>
                             </content>
@@ -313,29 +388,37 @@
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField fx:id="skillsSearchTextArea" onKeyPressed="#handleEnterSearchBar" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="skillsSearchTextArea"
+                                                           onKeyPressed="#handleEnterSearchBar"
+                                                           promptText="Enter search words here"
+                                                           styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" onAction="#handleSearchBtn" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleSearchBtn"
+                                                        styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#handleAddBtn" styleClass="button-custom" text="Add new skill/competence" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleAddBtn"
+                                                        styleClass="button-custom" text="Add new skill/competence"
+                                                        HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#handelRemoveBtn" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="removeBtn" mnemonicParsing="false"
+                                                        onAction="#handelRemoveBtn" styleClass="button-custom"
+                                                        text="Remove" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
                                             </children>
                                         </HBox>
-                                        <ListView fx:id="listViewSkills" VBox.vgrow="ALWAYS" />
+                                        <ListView fx:id="listViewSkills" VBox.vgrow="ALWAYS"/>
                                     </children>
                                 </VBox>
                             </content>
@@ -346,29 +429,37 @@
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField fx:id="jobSearchTextArea" onKeyPressed="#handleEnterSearchBarJob" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="jobSearchTextArea"
+                                                           onKeyPressed="#handleEnterSearchBarJob"
+                                                           promptText="Enter search words here"
+                                                           styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" onAction="#handleJobSearchBtn" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleJobSearchBtn"
+                                                        styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#handleJobAddBtn" styleClass="button-custom" text="Add new job" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleJobAddBtn"
+                                                        styleClass="button-custom" text="Add new job"
+                                                        HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button fx:id="removeBtnJob" mnemonicParsing="false" onAction="#handelJobRemoveBtn" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="removeBtnJob" mnemonicParsing="false"
+                                                        onAction="#handelJobRemoveBtn" styleClass="button-custom"
+                                                        text="Remove" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
                                             </children>
                                         </HBox>
-                                        <ListView fx:id="listViewJobs" VBox.vgrow="ALWAYS" />
+                                        <ListView fx:id="listViewJobs" VBox.vgrow="ALWAYS"/>
                                     </children>
                                 </VBox>
                             </content>

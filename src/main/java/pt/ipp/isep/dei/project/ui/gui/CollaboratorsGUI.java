@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CollaboratorsMenuGUI {
+public class CollaboratorsGUI {
     private final CreateSkillController skillC = new CreateSkillController();
     private final CreateJobController jobC = new CreateJobController();
     private final RegisterCollaboratorController collabC = new RegisterCollaboratorController();
@@ -413,7 +413,11 @@ public class CollaboratorsMenuGUI {
 
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de times (caso necessário)
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

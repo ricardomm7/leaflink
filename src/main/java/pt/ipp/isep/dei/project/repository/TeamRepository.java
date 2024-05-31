@@ -27,8 +27,8 @@ public class TeamRepository implements Serializable {
 
 
     //public void addTeam(TeamDto teamDto) {
-      //  Team team = TeamMapper.toDomain(teamDto);
-        //teamList.add(team);
+    //  Team team = TeamMapper.toDomain(teamDto);
+    //teamList.add(team);
     //}
 
     public void addTeam(Team team) {
@@ -44,6 +44,7 @@ public class TeamRepository implements Serializable {
     public List<TeamDto> getTeamDtoList() {
         return TeamMapper.ListToDto(teamList);
     }
+
     public List<Team> getTeamList() {
         return new ArrayList<>(teamList);
     }
