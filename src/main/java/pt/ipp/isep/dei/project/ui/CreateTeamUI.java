@@ -1,9 +1,14 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
+import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
+import pt.ipp.isep.dei.project.repository.Repositories;
+import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,70 +20,112 @@ import java.util.Scanner;
 public class CreateTeamUI implements Runnable {
     private final CreateTeamController createTeamController;
     private final Scanner scanner;
+    private final TeamRepository teamRepository;
 
-    /**
-     * Constructs a new CreateTeamUI object.
-     */
     public CreateTeamUI() {
+        Repositories repositories = Repositories.getInstance();
         this.createTeamController = new CreateTeamController();
         this.scanner = new Scanner(System.in);
+        this.teamRepository = repositories.getTeamRepository();
     }
 
-    /**
-     * Runs the user interface for creating teams.
-     */
     public void run() {
-        List<SkillDto> skillsDto = createTeamController.getSkillsDto();
-        if (skillsDto.isEmpty()) {
+        List<Skill> skills = createTeamController.getSkills();
+        if (skills.isEmpty()) {
             System.out.println("No skills available. Exiting.");
             return;
         }
-        System.out.println("Available skills:");
-        for (int i = 0; i < skillsDto.size(); i++) {
-            System.out.println((i + 1) + ". " + skillsDto.get(i).getDesignation());
+        List<Collaborator> availableCollaborators = createTeamController.getAvailableCollaborators();
+        if (availableCollaborators.isEmpty()) {
+            System.out.println("No collaborators available. Exiting.");
+            return;
         }
-        List<SkillDto> selectedSkills = getSelectedSkillsFromUser(skillsDto);
+        System.out.println("Available skills:");
+        for (int i = 0; i < skills.size(); i++) {
+            System.out.println((i + 1) + ". " + skills.get(i).getDesignation());
+        }
+        List<Skill> selectedSkills = getSelectedSkillsFromUser(skills);
         if (selectedSkills.isEmpty()) {
             System.out.println("No skills selected. Exiting.");
             return;
         }
         int minTeamSize = getMinTeamSizeFromUser();
         int maxTeamSize = getMaxTeamSizeFromUser(minTeamSize);
-        List<CollaboratorDto> collaborators = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
-        if (collaborators.isEmpty()) {
-            System.out.println("Warning: Insufficient number of collaborators meeting the required skills.");
-            if (promptToCreateOwnTeam()) {
-                collaborators = selectCollaboratorsManually();
-            } else {
-                return;
-            }
-        }
-        displayProposal(collaborators);
-        if (!confirmTeam()) {
-            if (promptToCreateOwnTeam()) {
-                collaborators = selectCollaboratorsManually();
-            }
-        }
+        Team proposedTeam = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
 
-        if (!validateCollaboratorsSkills(collaborators, selectedSkills)) {
-            System.out.println("Warning: The selected collaborators don't have the required skills. Proceed anyway? (Y/N)");
-            if (!scanner.nextLine().equalsIgnoreCase("Y")) {
-                collaborators = selectCollaboratorsManually();
-                if (!validateCollaboratorsSkills(collaborators, selectedSkills)) {
-                    System.out.println("Please select collaborators with the required skills.");
+        if (proposedTeam != null) {
+            System.out.println("Generated Team Proposal:");
+            displayProposal(proposedTeam.getCollaborators());
+            System.out.print("Do you accept this team? (y/n): ");
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("y")) {
+                teamRepository.addTeam(proposedTeam); // Add team to repository
+                System.out.println("Team successfully created!");
+            } else {
+                promptForCustomTeamCreation(selectedSkills, minTeamSize, maxTeamSize);
+            }
+        } else {
+            System.out.println("No suitable team could be generated.");
+            promptForCustomTeamCreation(selectedSkills, minTeamSize, maxTeamSize);
+        }
+        displayCreatedTeams();
+    }
+
+
+    private void promptForCustomTeamCreation(List<Skill> selectedSkills, int minTeamSize, int maxTeamSize) {
+        System.out.print("Do you want to create your own team? (y/n): ");
+        String response = scanner.nextLine();
+        if (response.equalsIgnoreCase("y")) {
+            List<Collaborator> availableCollaborators = createTeamController.getAvailableCollaborators();
+            List<Collaborator> selectedCollaborators = getSelectedCollaboratorsFromUser(availableCollaborators);
+
+            boolean hasRequiredSkills = checkIfCollaboratorsHaveRequiredSkills(selectedCollaborators, selectedSkills);
+            if (!hasRequiredSkills) {
+                System.out.print("Warning: The selected collaborators don't have the required skills. Proceed anyway? (y/n): ");
+                String proceedResponse = scanner.nextLine();
+                if (!proceedResponse.equalsIgnoreCase("y")) {
                     return;
                 }
             }
-        }
 
-        saveTeam(collaborators);
+            if (selectedCollaborators.size() < minTeamSize) {
+                System.out.print("Warning: The selected collaborators do not meet the minimum team size requirement. Proceed anyway? (y/n): ");
+                String proceedResponse = scanner.nextLine();
+                if (!proceedResponse.equalsIgnoreCase("y")) {
+                    return;
+                }
+            }
+
+            System.out.println("Selected Collaborators:");
+            displayProposal(selectedCollaborators);
+            System.out.print("Do you confirm this selection? (y/n): ");
+            String confirmResponse = scanner.nextLine();
+            if (confirmResponse.equalsIgnoreCase("y")) {
+                Team customTeam = createTeamController.createCustomTeam(selectedSkills, selectedCollaborators, minTeamSize, maxTeamSize);
+                if (customTeam != null) {
+                    System.out.println("Team successfully created!");
+                } else {
+                    System.out.println("Unable to create a custom team.");
+                }
+            } else {
+                System.out.println("Team creation aborted.");
+            }
+        }
     }
 
-    /**
-     * Prompts the user to enter the minimum team size and returns the entered value.
-     *
-     * @return The minimum team size entered by the user.
-     */
+
+    private boolean checkIfCollaboratorsHaveRequiredSkills(List<Collaborator> selectedCollaborators, List<Skill> requiredSkills) {
+        List<Skill> combinedSkills = new ArrayList<>();
+        for (Collaborator collaborator : selectedCollaborators) {
+            for (Skill skill : collaborator.getSkills()) {
+                if (!combinedSkills.contains(skill)) {
+                    combinedSkills.add(skill);
+                }
+            }
+        }
+        return combinedSkills.containsAll(requiredSkills);
+    }
+
     private int getMinTeamSizeFromUser() {
         int minTeamSize;
         while (true) {
@@ -99,12 +146,6 @@ public class CreateTeamUI implements Runnable {
         return minTeamSize;
     }
 
-
-    /**
-     * Prompts the user to enter the maximum team size and returns the entered value.
-     *
-     * @return The maximum team size entered by the user.
-     */
     private int getMaxTeamSizeFromUser(int minTeamSize) {
         int maxTeamSize;
         while (true) {
@@ -125,72 +166,30 @@ public class CreateTeamUI implements Runnable {
         return maxTeamSize;
     }
 
-
-    /**
-     * Displays the proposal of collaborators for the team.
-     *
-     * @param collaborators The list of collaborators proposed for the team.
-     */
-    private void displayProposal(List<CollaboratorDto> collaborators) {
-        System.out.println("Generated Team Proposal:");
-        for (CollaboratorDto collaborator : collaborators) {
-            System.out.println(collaborator.getName());
-        }
-    }
-
-    /**
-     * Displays the collaborators and their respective skills.
-     *
-     * @param collaborators The list of collaborators.
-     */
-    private void displayCollaboratorsAndSkills(List<CollaboratorDto> collaborators) {
-        System.out.println("Collaborators and Skills:");
-        for (CollaboratorDto collaborator : collaborators) {
-            System.out.println("Collaborator: " + collaborator.getName());
-            System.out.println("Skills:");
-            for (SkillDto skill : collaborator.getSkills()) {
-                System.out.println("- " + skill.getDesignation());
-            }
-        }
-    }
-
-    /**
-     * Validates if the selected collaborators have the required skills for the team.
-     *
-     * @param collaborators The list of selected collaborators.
-     * @param skills        The list of required skills for the team.
-     * @return true if the majority of selected collaborators have the required skills, false otherwise.
-     */
-    private boolean validateCollaboratorsSkills(List<CollaboratorDto> collaborators, List<SkillDto> skills) {
-        int missingSkillsCount = 0;
-        for (CollaboratorDto collaborator : collaborators) {
-            List<SkillDto> collaboratorSkills = collaborator.getSkills();
-            for (SkillDto requiredSkill : skills) {
-                if (!collaboratorSkills.contains(requiredSkill)) {
-                    missingSkillsCount++;
+    private void displayProposal(List<Collaborator> collaborators) {
+        for (Collaborator collaborator : collaborators) {
+            System.out.print(collaborator.getName() + " - Skills: ");
+            List<Skill> collaboratorSkills = collaborator.getSkills();
+            for (int j = 0; j < collaboratorSkills.size(); j++) {
+                System.out.print(collaboratorSkills.get(j).getDesignation());
+                if (j < collaboratorSkills.size() - 1) {
+                    System.out.print(", ");
                 }
             }
+            System.out.println();
         }
-        // Return true if the majority of collaborators have the required skills
-        return missingSkillsCount <= (collaborators.size() / 2);
     }
 
 
-    /**
-     * Prompts the user to select skills from the available list and returns the selected skills.
-     *
-     * @param skillsDto The list of available skills Dto.
-     * @return The list of selected skills.
-     */
-    private List<SkillDto> getSelectedSkillsFromUser(List<SkillDto> skillsDto) {
-        List<SkillDto> selectedSkills = new ArrayList<>();
+    private List<Skill> getSelectedSkillsFromUser(List<Skill> skills) {
+        List<Skill> selectedSkills = new ArrayList<>();
         System.out.print("Enter the numbers of the selected skills (comma-separated): ");
         String input = scanner.nextLine();
         String[] skillNumbers = input.split(",");
         for (String skillNumber : skillNumbers) {
             int index = Integer.parseInt(skillNumber.trim()) - 1;
-            if (index >= 0 && index < skillsDto.size()) {
-                selectedSkills.add(skillsDto.get(index));
+            if (index >= 0 && index < skills.size()) {
+                selectedSkills.add(skills.get(index));
             } else {
                 System.out.println("Invalid skill number: " + skillNumber);
             }
@@ -198,56 +197,28 @@ public class CreateTeamUI implements Runnable {
         return selectedSkills;
     }
 
-    /**
-     * Prompts the user to confirm the team.
-     *
-     * @return true if the user accepts the team, false otherwise.
-     */
-    private boolean confirmTeam() {
-        System.out.print("Do you accept this team? (Y/N): ");
-        String input = scanner.nextLine();
-        return input.equalsIgnoreCase("Y");
-    }
-
-    /**
-     * Prompts the user if they want to create their own team.
-     *
-     * @return true if the user wants to create their own team, false otherwise.
-     */
-    private boolean promptToCreateOwnTeam() {
-        System.out.print("Do you want to create your own team? (Y/N): ");
-        String input = scanner.nextLine();
-        return input.equalsIgnoreCase("Y");
-    }
-
-    /**
-     * Allows the user to manually select collaborators for the team.
-     *
-     * @return The list of manually selected collaborators.
-     */
-    private List<CollaboratorDto> selectCollaboratorsManually() {
-        List<CollaboratorDto> collaboratorList = createTeamController.getCollaboratorList();
-        if (collaboratorList.isEmpty()) {
-            System.out.println("No collaborators available. Exiting.");
-            return new ArrayList<>();
-        }
+    private List<Collaborator> getSelectedCollaboratorsFromUser(List<Collaborator> collaborators) {
+        List<Collaborator> selectedCollaborators = new ArrayList<>();
         System.out.println("Available collaborators:");
-        for (int i = 0; i < collaboratorList.size(); i++) {
-            CollaboratorDto collaborator = collaboratorList.get(i);
-            System.out.println((i + 1) + ". " + collaborator.getName());
-            System.out.println("   Skills:");
-            for (SkillDto skill : collaborator.getSkills()) {
-                System.out.println("   - " + skill.getDesignation());
+        for (int i = 0; i < collaborators.size(); i++) {
+            Collaborator collaborator = collaborators.get(i);
+            System.out.print((i + 1) + ". " + collaborator.getName() + " - Skills: ");
+            List<Skill> collaboratorSkills = collaborator.getSkills();
+            for (int j = 0; j < collaboratorSkills.size(); j++) {
+                System.out.print(collaboratorSkills.get(j).getDesignation());
+                if (j < collaboratorSkills.size() - 1) {
+                    System.out.print(", ");
+                }
             }
+            System.out.println();
         }
-        List<CollaboratorDto> selectedCollaborators = new ArrayList<>();
         System.out.print("Enter the numbers of the selected collaborators (comma-separated): ");
         String input = scanner.nextLine();
         String[] collaboratorNumbers = input.split(",");
         for (String collaboratorNumber : collaboratorNumbers) {
             int index = Integer.parseInt(collaboratorNumber.trim()) - 1;
-            if (index >= 0 && index < collaboratorList.size()) {
-                selectedCollaborators.add(collaboratorList.get(index));
+            if (index >= 0 && index < collaborators.size()) {
+                selectedCollaborators.add(collaborators.get(index));
             } else {
                 System.out.println("Invalid collaborator number: " + collaboratorNumber);
             }
@@ -255,33 +226,29 @@ public class CreateTeamUI implements Runnable {
         return selectedCollaborators;
     }
 
-    /**
-     * Saves the selected team of collaborators.
-     *
-     * @param collaboratorsDto The list of collaborators to be saved as a team.
-     */
-    private void saveTeam(List<CollaboratorDto> collaboratorsDto) {
-        createTeamController.saveTeam(collaboratorsDto);
-        System.out.println("Team saved successfully.");
-    }
-
-    /**
-     * Displays the list of saved teams.
-     */
-    private void displaySavedTeams() {
-        List<TeamDto> savedTeams = createTeamController.getSavedTeams();
-        if (savedTeams.isEmpty()) {
-            System.out.println("No teams saved yet.");
+    public void displayCreatedTeams() {
+        List<Team> teams = teamRepository.getTeamList();
+        if (teams.isEmpty()) {
+            System.out.println("No teams have been created yet.");
         } else {
-            System.out.println("Saved Teams:");
-            for (int i = 0; i < savedTeams.size(); i++) {
-                TeamDto team = savedTeams.get(i);
+            System.out.println("Created Teams:");
+            for (int i = 0; i < teams.size(); i++) {
+                Team team = teams.get(i);
                 System.out.println("Team " + (i + 1) + ":");
-                System.out.println("Skills: " + team.getSkills());
-                System.out.println("Collaborators: " + team.getCollaboratorsDtoList());
-                System.out.println("Minimum Team Size: " + team.getMinTeamSize());
-                System.out.println("Maximum Team Size: " + team.getMaxTeamSize());
-                System.out.println("--------------------");
+                System.out.println("Collaborators:");
+                List<Collaborator> collaborators = team.getCollaborators();
+                for (Collaborator collaborator : collaborators) {
+                    List<Skill> collaboratorSkills = collaborator.getSkills();
+                    StringBuilder skillsString = new StringBuilder();
+                    for (int j = 0; j < collaboratorSkills.size(); j++) {
+                        skillsString.append(collaboratorSkills.get(j).getDesignation());
+                        if (j < collaboratorSkills.size() - 1) {
+                            skillsString.append(", ");
+                        }
+                    }
+                    System.out.println("- " + collaborator.getName() + " (Skills: " + skillsString.toString() + ")");
+                }
+                System.out.println();
             }
         }
     }

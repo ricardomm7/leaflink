@@ -43,7 +43,7 @@ public class CollaboratorRepositoryTest {
         repository.create(new CollaboratorDto("Jane Doe", birthdate, contactMobile, taxpayerNumber, "jane.doe@example.com", address, zipCode, city, documentType, "456DEF", admissionDate, job));
 
         // Ensure that the second collaborator is not added to the list
-        List<CollaboratorDto> collaboratorList = repository.getCollaboratorList();
+        List<CollaboratorDto> collaboratorList = repository.getCollaboratorDtoList();
         assertEquals(1, collaboratorList.size());
         assertFalse(collaboratorList.contains(new CollaboratorDto("Jane Doe", birthdate, contactMobile, taxpayerNumber, "jane.doe@example.com", address, zipCode, city, documentType, "456DEF", admissionDate, job)));
     }

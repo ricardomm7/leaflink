@@ -37,8 +37,17 @@ public class AssignSkillController {
      * @return the list of collaborators
      */
     public List<CollaboratorDto> getCollaboratorDtoList() {
+        return collaboratorRepository.getCollaboratorDtoList();
+    }
+
+    public List<Collaborator> getCollaboratorList() {
         return collaboratorRepository.getCollaboratorList();
     }
+
+    public List<Skill> getSkillList() {
+        return skillRepository.getSkillList();
+    }
+
 
 
     /**
@@ -57,11 +66,9 @@ public class AssignSkillController {
      * @param collaborator The collaborator to whom the skill(s) will be assigned.
      * @param skills       The skills to be assigned.
      */
-    public void assignSkills(CollaboratorDto collaborator, List<SkillDto> skills) {
-        Collaborator colb = CollaboratorMapper.toDomain(collaborator);
-        List<Skill> skillsList = SkillMapper.listToDomain(skills);
-        collaboratorRepository.assignSkills(colb, skillsList);
-        collaboratorRepository.updateCollaborator(colb); // Update the collaborator in the repository
+    public void assignSkill(Collaborator collaborator, List<Skill> skills) {
+        collaborator.assignSkills(List.of(skills.toArray(new Skill[0])));
+        collaboratorRepository.updateCollaborator(collaborator);
     }
 
 

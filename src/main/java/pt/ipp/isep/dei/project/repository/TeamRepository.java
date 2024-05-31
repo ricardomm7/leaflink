@@ -25,15 +25,16 @@ public class TeamRepository implements Serializable {
         this.teamList = new ArrayList<>();
     }
 
-    /**
-     * Adds a new Team to the repository based on the provided TeamDto.
-     *
-     * @param teamDto the TeamDto containing the team data
-     */
-    public void addTeam(TeamDto teamDto) {
-        Team team = TeamMapper.toDomain(teamDto);
+
+    //public void addTeam(TeamDto teamDto) {
+      //  Team team = TeamMapper.toDomain(teamDto);
+        //teamList.add(team);
+    //}
+
+    public void addTeam(Team team) {
         teamList.add(team);
     }
+
 
     /**
      * Gets the list of TeamDto objects.
@@ -43,6 +44,10 @@ public class TeamRepository implements Serializable {
     public List<TeamDto> getTeamDtoList() {
         return TeamMapper.ListToDto(teamList);
     }
+    public List<Team> getTeamList() {
+        return new ArrayList<>(teamList);
+    }
+
 
     /**
      * Gets the list of AgendaEntryDto objects assigned to a specific collaborator.
