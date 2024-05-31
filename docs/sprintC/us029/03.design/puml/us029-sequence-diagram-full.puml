@@ -47,7 +47,7 @@ activate CLB
 
         deactivate CTRL
 
-        UI -> CTRL: getToDoEntryOfCollaboratorList()
+        UI -> CTRL: getAgendaEntryOfCollaboratorList()
         activate UI
         activate CTRL
 
@@ -57,23 +57,29 @@ activate CLB
             EntryRepo --> CTRL: agendaEntryList
             deactivate EntryRepo
 
-            CTRL -> TeamRepo: getAgendaEntriesAssignedToCollaborator(CLB)
+            CTRL -> AgendaEntryMapper: toDtoList
+            deactivate CTRL
+            activate AgendaEntryMapper
+
+            loop
+
+                AgendaEntryMapper -> agendaEntryDto**: create
+                activate agendaEntryDto
+
+                agendaEntryDto --> AgendaEntryMapper: agendaEntryDto
+                deactivate agendaEntryDto
+
+            end loop
+
+            AgendaEntryMapper --> CTRL: agendaEntryDtoList
+            deactivate AgendaEntryMapper
+            activate CTRL
+
+            CTRL -> TeamRepo: getAgendaEntriesAssignedToCollaborator(CLB, agendaEntryDtoList)
             deactivate CTRL
             activate TeamRepo
 
-            loop
-                TeamRepo --> EntryMapper: toDto(agendaEntry)
-                activate EntryMapper
 
-                    EntryMapper -> EntryDto** : create
-                    activate EntryDto
-
-                    EntryDto --> EntryMapper : agendaEntryDto
-                    deactivate EntryDto
-
-                EntryMapper --> TeamRepo: agendaEntryDto
-                deactivate EntryMapper
-            end
                 TeamRepo --> CTRL: agendaEntryDtoList
             deactivate TeamRepo
         activate CTRL

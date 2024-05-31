@@ -12,8 +12,8 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "entryRepository\n:EntryRepository" as EntryRepo
 participant ":AgendaEntryMapper" as AgendaEntryMapper
-participant "agendaEntryDto\n:AgendaEntryDto" as AgendaEntryDto
 participant "agendaEntry\n:AgendaEntry" as AgendaEntry
+participant ":ToDoEntryMapper" as ToDoEntryMapper
 participant "toDoEntryDto\n:ToDoEntryDto" as ToDoEntryDto
 
 activate GSM
@@ -22,7 +22,6 @@ activate GSM
     activate UI
 
         UI -> CTRL **: create
-        deactivate UI
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -34,39 +33,38 @@ activate GSM
             CTRL -> PLAT : getEntryRepository()
             activate PLAT
 
-                PLAT --> CTRL : entryRepository
+            PLAT --> CTRL : entryRepository
             deactivate PLAT
 
-             deactivate CTRL
+        deactivate CTRL
 
-        deactivate UI
+
 
         UI -> CTRL: getToDoEntryList(GSM)
-        activate UI
         activate CTRL
 
             CTRL -> EntryRepo: getToDoEntryListByGSM(GSM)
             deactivate CTRL
             activate EntryRepo
 
-            loop
-
-            EntryRepo -> AgendaEntryMapper : toDto(toDoEntry)
-            activate AgendaEntryMapper
-
-                AgendaEntryMapper -> ToDoEntryDto** : create
-                activate ToDoEntryDto
-
-                ToDoEntryDto --> AgendaEntryMapper : toDoEntryDTO
-                deactivate ToDoEntryDto
-
-            AgendaEntryMapper --> EntryRepo : toDoEntryDTO
-            deactivate AgendaEntryMapper
-            end
-
-            EntryRepo --> CTRL : toDoEntryDtoList
+            EntryRepo --> CTRL: toDoEntryList
             deactivate EntryRepo
             activate CTRL
+
+            CTRL -> ToDoEntryMapper : toDtoList(toDoEntryList)
+            activate ToDoEntryMapper
+
+            loop
+
+                ToDoEntryMapper -> ToDoEntryDto** : create
+                activate ToDoEntryDto
+
+                ToDoEntryDto --> ToDoEntryMapper : toDoEntryListDTO
+                deactivate ToDoEntryDto
+            end
+
+            ToDoEntryMapper --> CTRL : toDoEntryDTO
+            deactivate ToDoEntryMapper
 
             CTRL --> UI : toDoEntryDtoList
         deactivate CTRL

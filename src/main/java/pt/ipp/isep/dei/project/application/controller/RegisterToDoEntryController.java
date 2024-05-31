@@ -2,9 +2,11 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.GreenSpace;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
+import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
@@ -39,9 +41,11 @@ public class RegisterToDoEntryController {
      */
     public List<GreenSpaceDto> getGreenSpacesDto() {
         List<GreenSpaceDto> listToReturn = new LinkedList<>();
-        List<GreenSpaceDto> greenSpaces = greenSpaceRepository.getGreenSpaceList();
+
+        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaceList();
+        List<GreenSpaceDto> greenSpaceDto = GreenSpaceMapper.toDtoList(greenSpaces);
         UserSession manager = ApplicationSession.getInstance().getCurrentSession();
-        for (GreenSpaceDto gs : greenSpaces) {
+        for (GreenSpaceDto gs : greenSpaceDto) {
             if (manager.getUserEmail().equals(gs.getManager().getUserEmail()))
                 listToReturn.add(gs);
         }

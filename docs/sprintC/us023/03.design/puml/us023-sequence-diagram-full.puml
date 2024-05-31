@@ -19,6 +19,8 @@ participant ":NotificationService" as NotificationService
 participant ":AgendaEntryMapper" as AgendaEntryMapper
 participant "agendaEntryDto\n:AgendaEntryDto" as AgendaEntryDto
 participant "agendaEntry\n:AgendaEntry" as AgendaEntry
+participant ":TeamMapper" as teamMapper
+participant "teamDto:\nTeamDto" as teamDto
 
 activate GSM
 
@@ -26,7 +28,6 @@ activate GSM
     activate UI
 
         UI -> CTRL** : create
-        deactivate UI
                 activate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
@@ -43,34 +44,32 @@ activate GSM
 
                      deactivate CTRL
 
-                deactivate UI
 
         UI -> CTRL: getAgendaEntryList(GSM)
-                activate UI
                 activate CTRL
 
                     CTRL -> EntryRepo: getAgendaEntryListByGSM(GSM)
-                    deactivate CTRL
                     activate EntryRepo
 
-                    loop
+                    EntryRepo --> CTRL: agendaEntryList
+                    deactivate EntryRepo
 
-                    EntryRepo -> AgendaEntryMapper : toDto(agendaEntry)
+                    CTRL -> AgendaEntryMapper : toDto(agendaEntry)
+                    deactivate CTRL
                     activate AgendaEntryMapper
 
+                    loop
                         AgendaEntryMapper -> AgendaEntryDto** : create
                         activate AgendaEntryDto
 
-                        AgendaEntryDto --> AgendaEntryMapper : agendaEntryDTO
+                        AgendaEntryDto --> AgendaEntryMapper : agendaEntryDto
                         deactivate AgendaEntryDto
-
-                    AgendaEntryMapper --> EntryRepo : agendaEntryDTO
-                    deactivate AgendaEntryMapper
                     end
 
-                    EntryRepo --> CTRL : agendaEntryDtoList
-                    deactivate EntryRepo
+                    AgendaEntryMapper --> CTRL : agendaEntryDtoList
+                    deactivate AgendaEntryMapper
                     activate CTRL
+
 
                 CTRL --> UI : agendaEntryDtoList
                 deactivate CTRL
@@ -85,6 +84,25 @@ activate GSM
 
                 TeamRepository -> CTRL : teamsList
                 deactivate TeamRepository
+
+                CTRL -> teamMapper: toDtoList(teamList)
+                deactivate CTRL
+                activate teamMapper
+
+                    loop
+
+                    teamMapper -> teamDto**: create
+                    activate teamDto
+
+                    teamDto --> teamMapper: teamDto
+                    deactivate teamDto
+
+                    end loop
+
+
+                teamMapper --> CTRL: teamDtoList
+                deactivate teamMapper
+                activate CTRL
 
                 CTRL -> UI : teamsList
                 deactivate CTRL
@@ -107,12 +125,12 @@ activate GSM
     GSM -> UI: confirms
     activate UI
 
-        UI -> CTRL : assignTeamToEntry(agendaEntryDto)
+        UI -> CTRL : assignTeamToEntry(agendaEntryDto, teamDto)
                 deactivate UI
                 activate CTRL
 
 
-                    CTRL -> EntryRepo : updateAgendaEntryTeam(agendaEntryDto, Team)
+                    CTRL -> EntryRepo : updateAgendaEntryTeam(agendaEntryDto, teamDto)
                     deactivate CTRL
                     activate EntryRepo
 

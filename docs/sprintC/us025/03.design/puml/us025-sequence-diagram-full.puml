@@ -24,7 +24,6 @@ activate GSM
     activate UI
 
         UI -> CTRL **: create
-        deactivate UI
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -41,33 +40,30 @@ activate GSM
 
              deactivate CTRL
 
-        deactivate UI
 
         UI -> CTRL: getAgendaEntryList(GSM)
-        activate UI
         activate CTRL
 
             CTRL -> EntryRepo: getAgendaEntryListByGSM(GSM)
-            deactivate CTRL
             activate EntryRepo
 
-            loop
+            EntryRepo --> CTRL: agendaEntryList
+            deactivate EntryRepo
 
-            EntryRepo -> AgendaEntryMapper : toDto(agendaEntry)
+            CTRL -> AgendaEntryMapper : toDto(agendaEntry)
+            deactivate CTRL
             activate AgendaEntryMapper
 
+            loop
                 AgendaEntryMapper -> AgendaEntryDto** : create
                 activate AgendaEntryDto
 
-                AgendaEntryDto --> AgendaEntryMapper : agendaEntryDTO
+                AgendaEntryDto --> AgendaEntryMapper : agendaEntryDto
                 deactivate AgendaEntryDto
-
-            AgendaEntryMapper --> EntryRepo : agendaEntryDTO
-            deactivate AgendaEntryMapper
             end
 
-            EntryRepo --> CTRL : agendaEntryDtoList
-            deactivate EntryRepo
+            AgendaEntryMapper --> CTRL : agendaEntryDtoList
+            deactivate AgendaEntryMapper
             activate CTRL
 
             CTRL --> UI : agendaEntryDtoList
@@ -89,14 +85,9 @@ activate GSM
         deactivate UI
         activate CTRL
 
-
-            CTRL -> EntryRepo : updateAgendaEntry(agendaEntryDto, CANCELED)
+            CTRL -> AgendaEntryMapper: toDomain(agendaEntryDto)
             deactivate CTRL
-            activate EntryRepo
-
-            EntryRepo -> AgendaEntryMapper : toDomain(agendaEntryDto)
             activate AgendaEntryMapper
-
 
                 AgendaEntryMapper -> AgendaEntry** : create
                 activate AgendaEntry
@@ -104,9 +95,14 @@ activate GSM
                 AgendaEntry --> AgendaEntryMapper : agendaEntry
                 deactivate AgendaEntry
 
-
-            AgendaEntryMapper --> EntryRepo : agendaEntry
+            AgendaEntryMapper --> CTRL: agendaEntry
             deactivate AgendaEntryMapper
+            activate CTRL
+
+
+            CTRL -> EntryRepo : updateAgendaEntry(agendaEntryDto, CANCELED)
+            deactivate CTRL
+            activate EntryRepo
 
                 EntryRepo -> EntryRepo : updateEntryStatus(agendaEntry, CANCELED)
 

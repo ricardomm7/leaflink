@@ -8,13 +8,15 @@ skinparam shadowing false
 autonumber
 
 actor "GSM" as GSM
-participant ":AddNewEntryUI" as UI
-participant ":AddNewEntryController" as CTRL
+participant ":RegisterToDoEntryUI" as UI
+participant ":RegisterToDoController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "greenSpaceRepository:\nVehicleRepository" as GreenSpaceRepository
-participant "entryRepository" as EntryRep
+participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
+participant "entryRepository\n:EntryRepository" as EntryRep
 participant "entry" as Entry
+participant "greenSpaceMapper\n:GreenSpaceMapper" as GreenSpaceMapper
+participant "greenSpaceDto\n:GreenSpaceDto" as GreenSpaceDTO
 
 activate GSM
 
@@ -23,27 +25,35 @@ activate GSM
 
 
         UI -> CTRL** : create
-
-        UI -> CTRL : get list of green spaces
         activate CTRL
+        deactivate UI
 
         CTRL -> RepositorySingleton : getInstance()
-        deactivate CTRL
         activate RepositorySingleton
 
 
         RepositorySingleton --> CTRL : repositories
         deactivate RepositorySingleton
-        activate CTRL
 
         CTRL -> PLAT :getGreenSpaceRepository
-        deactivate CTRL
         activate PLAT
 
 
         PLAT --> CTRL : GreenSpaceRepository
         deactivate PLAT
+
+         CTRL -> PLAT : getEntryRepository()
+        activate PLAT
+
+        PLAT --> CTRL : entryRepository
+        deactivate PLAT
+        deactivate CTRL
+
+        UI -> CTRL : getGreenSpacesDto
+        activate UI
         activate CTRL
+
+
 
 
         CTRL -> GreenSpaceRepository : getGreenSpaceList()
@@ -54,7 +64,24 @@ activate GSM
         deactivate GreenSpaceRepository
         activate CTRL
 
-        CTRL --> UI : greenSpaceList : List<GreenSpaceDTO>
+        CTRL -> GreenSpaceMapper: toDtoList(greenSpaceList)
+        activate GreenSpaceMapper
+
+        loop
+
+        GreenSpaceMapper -> GreenSpaceDTO** : create
+        activate GreenSpaceDTO
+        deactivate GreenSpaceMapper
+
+        GreenSpaceDTO --> GreenSpaceMapper: greenSpaceDto
+        deactivate GreenSpaceDTO
+        activate GreenSpaceMapper
+        end loop
+
+        GreenSpaceMapper --> CTRL: greenSpaceListDto
+        deactivate GreenSpaceMapper
+
+        CTRL --> UI : greenSpaceListDto
         deactivate CTRL
 
 
@@ -72,15 +99,6 @@ activate GSM
 
         UI -> CTRL : createEntry(greenSpace, description, degree of urgency, approximate expected duration)
         deactivate UI
-        activate CTRL
-
-
-        CTRL -> PLAT : getEntryRepository()
-        deactivate CTRL
-        activate PLAT
-
-        PLAT --> CTRL : entryRepository
-        deactivate PLAT
         activate CTRL
 
         CTRL -> EntryRep : createEntry(greenSpace, description, degree of urgency, approximate expected duration)

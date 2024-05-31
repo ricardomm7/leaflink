@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.project.application.controller;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
+import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
@@ -35,7 +37,8 @@ public class AssignVehiclesController {
      * @return the list of AgendaEntryDto objects for the user
      */
     public List<AgendaEntryDto> getAgendaEntryList(UserSession u) {
-        return entryRepository.getAgendaEntryListByGSM(u);
+
+        return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(u));
     }
 
     /**
@@ -44,7 +47,8 @@ public class AssignVehiclesController {
      * @return the list of available VehicleDto objects
      */
     public List<VehicleDto> getVehicleList() {
-        return vehicleRepository.getAvailableVehicleList();
+
+        return VehicleMapper.toDtoList(vehicleRepository.getAvailableVehicleList());
     }
 
     /**

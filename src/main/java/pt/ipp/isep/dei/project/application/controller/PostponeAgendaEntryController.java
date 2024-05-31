@@ -32,20 +32,21 @@ public class PostponeAgendaEntryController {
      * @return the list of AgendaEntryDto objects associated with the GSM
      */
     public List<AgendaEntryDto> getAgendaEntryList(UserSession GSM) {
-        return entryRepository.getAgendaEntryListByGSM(GSM);
+        return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(GSM));
     }
 
     /**
      * Postpones an agenda entry to a new date and notifies the assigned team.
      *
-     * @param agendaEntryDto the AgendaEntryDto object representing the agenda entry to be postponed
+     * @param agendaEntryDto the AgendaEntry object representing the agenda entry to be postponed
      * @param newDate        the new date for the agenda entry
      * @return true if the postponement is successful, false otherwise
      */
     public boolean postponeEntry(AgendaEntryDto agendaEntryDto, LocalDate newDate) {
-        boolean success = entryRepository.updateAgendaEntry(agendaEntryDto, newDate, ProgressStatus.POSTPONED);
+        AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
+        boolean success = entryRepository.updateAgendaEntry(agendaEntry, newDate, ProgressStatus.POSTPONED);
         if (success) {
-            notifyTeam(agendaEntryDto, newDate);
+            notifyTeam(agendaEntry, newDate);
         }
         return success;
     }
@@ -53,14 +54,12 @@ public class PostponeAgendaEntryController {
     /**
      * Notifies the team assigned to the given agenda entry about the new date.
      *
-     * @param agendaEntryDto the AgendaEntryDto object representing the agenda entry
+     * @param agendaEntry the AgendaEntry object representing the agenda entry
      * @param newDate        the new date for the agenda entry
      * @return true if the team notification is successful, false otherwise
      */
-    private boolean notifyTeam(AgendaEntryDto agendaEntryDto, LocalDate newDate) {
+    private boolean notifyTeam(AgendaEntry agendaEntry, LocalDate newDate) {
         boolean flag = false;
-        AgendaEntry agendaEntry = convertToAgendaEntry(agendaEntryDto);
-
         Team team = NotificationService.getTeamByEntry(agendaEntry);
         List<Collaborator> collaboratorsList = NotificationService.getCollaboratorsList(team);
         if (collaboratorsList != null) {
@@ -69,23 +68,4 @@ public class PostponeAgendaEntryController {
         return flag;
     }
 
-    /**
-     * Converts an AgendaEntryDto object to an AgendaEntry object.
-     *
-     * @param agendaEntryDto the AgendaEntryDto object to be converted
-     * @return the corresponding AgendaEntry object
-     */
-    private AgendaEntry convertToAgendaEntry(AgendaEntryDto agendaEntryDto) {
-        return AgendaEntryMapper.toDomain(agendaEntryDto);
-    }
-
-    /**
-     * Converts an AgendaEntry object to an AgendaEntryDto object.
-     *
-     * @param agendaEntry the AgendaEntry object to be converted
-     * @return the corresponding AgendaEntryDto object
-     */
-    private AgendaEntryDto convertToAgendaEntryDto(AgendaEntry agendaEntry) {
-        return AgendaEntryMapper.toDto(agendaEntry);
-    }
 }

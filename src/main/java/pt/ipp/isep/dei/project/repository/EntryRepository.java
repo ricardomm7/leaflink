@@ -5,10 +5,8 @@ import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.ToDoEntry;
 import pt.ipp.isep.dei.project.domain.Vehicle;
-import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
-import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
@@ -76,9 +74,9 @@ public class EntryRepository implements Serializable {
      * @param GSM the UserSession of the Green Space Manager.
      * @return a list of AgendaEntryDto objects managed by the specified GSM.
      */
-    public List<AgendaEntryDto> getAgendaEntryListByGSM(UserSession GSM) {
-        List<AgendaEntryDto> z = new ArrayList<>();
-        for (AgendaEntryDto s : getAgendaEntryList()) {
+    public List<AgendaEntry> getAgendaEntryListByGSM(UserSession GSM) {
+        List<AgendaEntry> z = new ArrayList<>();
+        for (AgendaEntry s : getAgendaEntryList()) {
             if (s.getGreenSpace().getManager().getUserEmail().equals(GSM.getUserEmail())) {
                 z.add(s);
             }
@@ -100,13 +98,12 @@ public class EntryRepository implements Serializable {
     /**
      * Updates the date and progress status of an AgendaEntry.
      *
-     * @param agendaEntryDto    the AgendaEntryDto to update.
+     * @param agendaEntry    the AgendaEntry to update.
      * @param newDate           the new date to set.
      * @param newProgressStatus the new progress status to set.
      * @return true if the update is successful, false otherwise.
      */
-    public boolean updateAgendaEntry(AgendaEntryDto agendaEntryDto, LocalDate newDate, ProgressStatus newProgressStatus) {
-        AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
+    public boolean updateAgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus newProgressStatus) {
         if (validateNewDate(agendaEntry, newDate)) {
             updateEntryStatus(agendaEntry, newProgressStatus);
             setNewDate(agendaEntry, newDate);
@@ -158,8 +155,8 @@ public class EntryRepository implements Serializable {
      *
      * @return a list of all AgendaEntryDto objects.
      */
-    public List<AgendaEntryDto> getAgendaEntryList() {
-        return AgendaEntryMapper.toDtoList(agendaEntryList);
+    public List<AgendaEntry> getAgendaEntryList() {
+        return (agendaEntryList);
     }
 
     /**

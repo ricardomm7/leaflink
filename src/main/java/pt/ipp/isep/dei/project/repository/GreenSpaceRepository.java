@@ -75,8 +75,8 @@ public class GreenSpaceRepository implements Serializable {
      *
      * @return the list of GreenSpaceDto objects
      */
-    public List<GreenSpaceDto> getGreenSpaceList() {
-        return GreenSpaceMapper.toDtoList(greenSpaceList);
+    public List<GreenSpace> getGreenSpaceList() {
+        return greenSpaceList;
     }
 
     /**

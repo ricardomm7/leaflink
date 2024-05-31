@@ -29,14 +29,14 @@ public class VehicleRepository implements Serializable {
      *
      * @return the list of available VehicleDto objects
      */
-    public List<VehicleDto> getAvailableVehicleList() {
+    public List<Vehicle> getAvailableVehicleList() {
         List<Vehicle> availableVehicle = new ArrayList<>();
         for (Vehicle v : vehicleList) {
             if (v.isAvailable()) {
                 availableVehicle.add(v);
             }
         }
-        return VehicleMapper.toDtoList(availableVehicle);
+        return (availableVehicle);
     }
 
     /**

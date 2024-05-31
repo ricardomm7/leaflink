@@ -35,7 +35,7 @@ public class RecordEntryController {
      * @return the list of AgendaEntryDto objects assigned to the collaborator
      */
     public List<AgendaEntryDto> getAgendaEntryOfCollaboratorList(UserSession collaborator) {
-        List<AgendaEntryDto> agendaEntryList = entryRepository.getAgendaEntryList();
+        List<AgendaEntryDto> agendaEntryList = AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryList());
         return teamRepository.getAgendaEntriesAssignedToCollaborator(collaborator, agendaEntryList);
     }
 

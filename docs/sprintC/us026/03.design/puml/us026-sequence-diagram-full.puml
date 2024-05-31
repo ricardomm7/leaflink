@@ -14,10 +14,14 @@ participant ":AssignVehiclesController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "entryRepository\n:EntryRepository" as EntryRepo
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "vehicleRepository\n:VehicleRepository" as VehicleRepository
 participant ":AgendaEntryMapper" as AgendaEntryMapper
 participant "agendaEntryDto\n:AgendaEntryDto" as AgendaEntryDto
 participant "agendaEntry\n:AgendaEntry" as AgendaEntry
+participant ":VehicleMapper" as VehicleMapper
+participant "vehicleDto\n:VehicleDto" as VehicleDto
+participant "vehicle\n:Vehicle" as Vehicle
+
 
 activate GSM
 
@@ -25,7 +29,6 @@ activate GSM
     activate UI
 
         UI -> CTRL** : create
-        deactivate UI
                 activate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
@@ -42,33 +45,32 @@ activate GSM
 
                      deactivate CTRL
 
-                deactivate UI
 
         UI -> CTRL: getAgendaEntryList(GSM)
-                        activate UI
-                        activate CTRL
+        activate CTRL
 
-                            CTRL -> EntryRepo: getAgendaEntryListByGSM(GSM)
+            CTRL -> EntryRepo: getAgendaEntryListByGSM(GSM)
+            deactivate CTRL
+            activate EntryRepo
+
+            EntryRepo --> CTRL: agendaEntryList
+            deactivate EntryRepo
+            activate CTRL
+
+                            CTRL -> AgendaEntryMapper : toDtoList(agendaEntryList)
                             deactivate CTRL
-                            activate EntryRepo
-
-                            loop
-
-                            EntryRepo -> AgendaEntryMapper : toDto(agendaEntry)
                             activate AgendaEntryMapper
 
+                            loop
                                 AgendaEntryMapper -> AgendaEntryDto** : create
                                 activate AgendaEntryDto
 
-                                AgendaEntryDto --> AgendaEntryMapper : agendaEntryDTO
+                                AgendaEntryDto --> AgendaEntryMapper : agendaEntryDto
                                 deactivate AgendaEntryDto
-
-                            AgendaEntryMapper --> EntryRepo : agendaEntryDTO
-                            deactivate AgendaEntryMapper
                             end
 
-                            EntryRepo --> CTRL : agendaEntryDtoList
-                            deactivate EntryRepo
+                            AgendaEntryMapper --> CTRL : agendaEntryDto
+                            deactivate AgendaEntryMapper
                             activate CTRL
 
                         CTRL --> UI : agendaEntryDtoList
@@ -76,8 +78,8 @@ activate GSM
                         deactivate UI
 
         UI -> CTRL : getVehiclesList()
-                activate UI
-                activate CTRL
+        activate UI
+        activate CTRL
 
                 CTRL -> VehicleRepository : getVehiclesList()
                 activate VehicleRepository
@@ -85,11 +87,29 @@ activate GSM
                 VehicleRepository -> CTRL : vehiclesList
                 deactivate VehicleRepository
 
-                CTRL -> UI : vehiclesList
+                CTRL -> VehicleMapper: toDtoList
+                deactivate CTRL
+                activate VehicleMapper
+
+                loop
+
+                    VehicleMapper -> VehicleDto**: create
+                    activate VehicleDto
+
+                    VehicleDto --> VehicleMapper: vehicleDto
+                    deactivate VehicleDto
+
+                end loop
+
+                VehicleMapper --> CTRL: vehiclesDtoList
+                deactivate VehicleMapper
+                activate CTRL
+
+                CTRL -> UI : vehiclesDtoList
                 deactivate CTRL
 
     UI --> GSM : shows the entries in the agenda and asks to select one
-        deactivate UI
+    deactivate UI
 
     GSM -> UI : select the entry
     activate UI
@@ -110,26 +130,50 @@ activate GSM
     GSM -> UI: confirms
     activate UI
 
-        UI -> CTRL : assignVehiclesToEntry(agendaEntryDto)
+        UI -> CTRL : assignVehiclesToEntry(agendaEntryDto, vehiclesDtoList)
                         deactivate UI
                         activate CTRL
 
+                            CTRL -> AgendaEntryMapper: toDomain
+                            deactivate CTRL
+                            activate AgendaEntryMapper
 
-                            CTRL -> EntryRepo : updateAgendaEntryVehicles(agendaEntryDto, Vehicles[])
+                                AgendaEntryMapper -> AgendaEntry**: create
+                                activate AgendaEntry
+
+                                AgendaEntry --> AgendaEntryMapper: agendaEntry
+                                deactivate AgendaEntry
+
+                        AgendaEntryMapper --> CTRL: agendaEntry
+                        deactivate AgendaEntryMapper
+                        activate CTRL
+
+                            CTRL -> VehicleMapper: toDomainList
+                            deactivate CTRL
+                            activate VehicleMapper
+
+                                loop
+
+                                VehicleMapper -> Vehicle**: create
+                                activate Vehicle
+
+                                Vehicle --> VehicleMapper: vehicle
+                                deactivate Vehicle
+
+                                end loop
+
+                            VehicleMapper --> CTRL: vehiclesList
+                            deactivate VehicleMapper
+                            activate CTRL
+
+
+
+
+                            CTRL -> EntryRepo : updateAgendaEntryVehicles(agendaEntry, VehiclesList)
                             deactivate CTRL
                             activate EntryRepo
 
-                            EntryRepo -> AgendaEntryMapper : toDomain(agendaEntryDto)
-                            activate AgendaEntryMapper
 
-                                AgendaEntryMapper -> AgendaEntry** : create
-                                activate AgendaEntry
-
-                                AgendaEntry --> AgendaEntryMapper : agendaEntry
-                                deactivate AgendaEntry
-
-                            AgendaEntryMapper --> EntryRepo : agendaEntry
-                            deactivate AgendaEntryMapper
 
                                 EntryRepo -> EntryRepo : updateEntryVehicles(agendaEntry, Vehicles[])
 
