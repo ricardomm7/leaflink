@@ -65,7 +65,7 @@ public class RegisterCollaboratorController {
      * @return the collaborators
      */
     public List<CollaboratorDto> getCollaborators() {
-        return collaboratorRepository.getCollaboratorList();
+        return collaboratorRepository.getCollaboratorDtoList();
     }
 
     /**

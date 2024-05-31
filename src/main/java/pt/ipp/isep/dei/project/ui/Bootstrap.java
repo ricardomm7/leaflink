@@ -24,10 +24,10 @@ public class Bootstrap implements Runnable {
     public void run() {
         addUsers();
         //addSkills();
-        addJobs();
-        addVehicles();
-        addCollaborators();
-        addMaintenance();
+        //addJobs();
+        //addVehicles();
+        //addCollaborators();
+        //addMaintenance();
         //addGreenSpaces();
         //addEntries();
     }
