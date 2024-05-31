@@ -101,27 +101,27 @@
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField fx:id="vehiclesSearchTextArea" onKeyPressed="#handleEnterSearchBar" prefHeight="43.0" prefWidth="437.0" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="vehiclesSearchTextArea" onKeyPressed="#handleEnterSearchBar" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" onAction="#handleVehicleSearchBtn" prefHeight="31.0" prefWidth="80.0" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleVehicleSearchBtn" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#handleVehicleAddBtn" prefHeight="43.0" prefWidth="147.0" styleClass="button-custom" text="Add Vehicle" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleVehicleAddBtn" styleClass="button-custom" text="Add Vehicle" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleMaintenanceAddBtn" prefHeight="43.0" prefWidth="160.0" styleClass="button-custom" text="Add Maintenance">
+                                    <Button mnemonicParsing="false" onAction="#handleMaintenanceAddBtn" styleClass="button-custom" text="Add Maintenance">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                                <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#handleVehicleRemoveBtn" prefHeight="31.0" prefWidth="88.0" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#handleVehicleRemoveBtn" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
@@ -289,22 +289,22 @@
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField fx:id="maintenanceSearchTextArea" onKeyPressed="#handleEnterSearchBar" prefHeight="43.0" prefWidth="600.0" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="maintenanceSearchTextArea" onKeyPressed="#handleEnterSearchBar" promptText="Enter search words here" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" onAction="#handleMaintenanceSearchBtn" prefHeight="31.0" prefWidth="80.0" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleMaintenanceSearchBtn" styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button fx:id="removeBtnMaintenance" mnemonicParsing="false" onAction="#handelMaintenanceRemoveBtn" prefHeight="31.0" prefWidth="88.0" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="removeBtnMaintenance" mnemonicParsing="false" onAction="#handelMaintenanceRemoveBtn" styleClass="button-custom" text="Remove" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleMaintenanceListBtn" prefHeight="31.0" prefWidth="80.0" styleClass="button-custom" text="List Vehicles">
+                                    <Button mnemonicParsing="false" onAction="#handleMaintenanceListBtn" styleClass="button-custom" text="List Vehicles">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
