@@ -19,7 +19,7 @@ participant "agendaEntry\n:AgendaEntry" as AgendaEntry
 
 activate CLB
 
-    CLB -> UI : asks to record a complete entry
+    CLB -> UI : asks to record a complete agendaEntry
     activate UI
 
         UI -> CTRL** : create
@@ -87,13 +87,13 @@ activate CLB
         CTRL --> UI : agendaEntryDtoList
         deactivate CTRL
 
-        UI -> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
+        UI -> CLB : shows the list of the agendaEntry assign to the collaborator and requests to select the one to record
     deactivate UI
 
-    CLB -> UI : select an assigned entry
+    CLB -> UI : select an assigned agendaEntry
     activate UI
 
-        UI --> CLB : show entry and requests confirmation
+        UI --> CLB : show agendaEntry and requests confirmation
     deactivate UI
 
     CLB -> UI : confirms data
@@ -146,7 +146,7 @@ activate CLB
         deactivate CTRL
         activate UI
 
-        UI --> CLB : displays a success message (toDoEntry recorded as completed)
+        UI --> CLB : displays a success message (agendaEntry recorded as completed)
     deactivate UI
 
 @enduml

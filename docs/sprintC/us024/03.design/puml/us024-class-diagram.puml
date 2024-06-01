@@ -1,7 +1,7 @@
 @startuml
 skinparam shadowing false
 skinparam line type polyline
-'left to right direction
+
 package UI {
     class PostponeAgendaEntryUI {
     }
@@ -33,7 +33,9 @@ package DOMAIN {
             - agendaEntryList: List<AgendaEntry>
             + EntryRepository()
             + getAgendaEntryListByGSM(gsm: UserSession): List<AgendaEntryDto>
-            + updateAgendaEntry(agendaEntryDto: AgendaEntryDto, newDate: LocalDate, newProgressStatus: ProgressStatus): boolean
+            + updateAgendaEntry(agendaEntry: AgendaEntry, POSTPONED: ProgressStatus): boolean
+            + setProgressStatus(status: ProgressStatus): void
+            + addAgendaEntry(agendaEntry: AgendaEntry): void
         }
     }
 
@@ -41,6 +43,7 @@ package DOMAIN {
         class AgendaEntryMapper {
             + toDto(agendaEntry: AgendaEntry): AgendaEntryDto
             + toDomain(agendaEntryDto: AgendaEntryDto): AgendaEntry
+            + toDtoList(agendaEntries: List<AgendaEntry>): List<AgendaEntryDto>
         }
 
         class AgendaEntryDto {
@@ -71,9 +74,9 @@ package DOMAIN {
             - greenSpace: GreenSpace
             - startingDate: LocalDate
             - progressStatus: ProgressStatus
+            + AgendaEntry(agendaEntry: AgendaEntry, newDate: LocalDate, progressStatus: PLANNED)
             + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
-            + setProgressStatus(status: ProgressStatus): void
-            + setStartingDate(date: LocalDate): void
+
         }
 
         class NotificationService {

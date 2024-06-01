@@ -20,14 +20,14 @@ class Collaborator {
     taxpayerNumber
 }
 
-class Entry {
+class AgendaEntry {
     startingDate
     progressStatus
 
 }
 
 
-class Task {
+class ToDoEntry {
     title
     description
     duration
@@ -55,11 +55,11 @@ class Agenda{
 
 
 
-Agenda "1" -- "1..*" Entry: has >
+Agenda "1" -- "1..*" AgendaEntry: has >
 
-Entry "1" -- "1" Task: is >
+AgendaEntry "1" -- "1" ToDoEntry: is >
 
-Collaborator "1..*" -- "*" Entry : record conclusion >
+Collaborator "1..*" -- "*" AgendaEntry : record conclusion >
 
 Collaborator "1" -- "1..*" Document : has >
 

@@ -33,6 +33,13 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         this.progressStatus = progressStatus;
     }
 
+    public AgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus PLANNED){
+        super(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(), agendaEntry.getUrgencyStatus(),agendaEntry.getGreenSpace());
+        this.startingDate = newDate;
+        this.progressStatus = PLANNED;
+
+    }
+
     /**
      * Gets the starting date of the AgendaEntry.
      *
@@ -113,7 +120,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
     public void setAvailable(AgendaEntry agendaEntry) {
         Team team = agendaEntry.getAssignedTeam();
         for (Collaborator collaborator : team.getCollaborators()) {
-            // collaborator.setAvailable(true);
+            collaborator.setAvailable(true);
         }
         List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
         for (Vehicle vehicle : vehicleList) {

@@ -34,14 +34,14 @@ manager
 
 }
 
-class Entry {
+class AgendaEntry {
     startingDate
     progressStatus
 
 }
 
 
-class Task {
+class ToDoEntry {
     title
     description
     duration
@@ -53,13 +53,13 @@ class Task {
 class Agenda{
 }
 
-Agenda "1" -- "1..*" Entry: has >
+Agenda "1" -- "1..*" AgendaEntry: has >
 
-Entry "1" -- "1" Task: is >
+AgendaEntry "1" -- "1" ToDoEntry: is >
 
-Entry "*" -- "1" GreenSpace : assigned to >
+AgendaEntry "*" -- "1" GreenSpace : assigned to >
 
-Entry "1" -- "1" Team : is assigned >
+AgendaEntry "1" -- "1" Team : is assigned >
 
 Team "1" -- "1..*" Collaborator : has >
 

@@ -16,13 +16,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * The EntryRepository class manages the persistence of ToDoEntry and AgendaEntry objects.
  * It provides methods to create, update, and retrieve these entries.
  */
 public class EntryRepository implements Serializable {
 
+    /**
+     * The To do entry list.
+     */
     private final List<ToDoEntry> toDoEntryList;
+    /**
+     * The Agenda entry list.
+     */
     private final List<AgendaEntry> agendaEntryList;
 
     /**
@@ -42,7 +49,7 @@ public class EntryRepository implements Serializable {
     public void create(ToDoEntryDto dto) {
         ToDoEntry toDoEntry = ToDoEntryMapper.toDomain(dto);
         if (checkForDuplicates(toDoEntry)) {
-            addEntry(toDoEntry);
+            addToDoEntry(toDoEntry);
         } else {
             throw new IllegalArgumentException("There is already a ToDoEntry with the same description.");
         }
@@ -64,9 +71,16 @@ public class EntryRepository implements Serializable {
      *
      * @param toDoEntry the ToDoEntry to add.
      */
-    private void addEntry(ToDoEntry toDoEntry) {
+    private void addToDoEntry(ToDoEntry toDoEntry) {
         toDoEntryList.add(toDoEntry);
     }
+
+    /**
+     * Add agenda entry.
+     *
+     * @param agendaEntry the agenda entry
+     */
+    private void addAgendaEntry(AgendaEntry agendaEntry){agendaEntryList.add(agendaEntry);}
 
     /**
      * Retrieves a list of AgendaEntryDto objects managed by the specified Green Space Manager (GSM).
@@ -98,7 +112,7 @@ public class EntryRepository implements Serializable {
     /**
      * Updates the date and progress status of an AgendaEntry.
      *
-     * @param agendaEntry    the AgendaEntry to update.
+     * @param agendaEntry       the AgendaEntry to update.
      * @param newDate           the new date to set.
      * @param newProgressStatus the new progress status to set.
      * @return true if the update is successful, false otherwise.
@@ -106,7 +120,8 @@ public class EntryRepository implements Serializable {
     public boolean updateAgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus newProgressStatus) {
         if (validateNewDate(agendaEntry, newDate)) {
             updateEntryStatus(agendaEntry, newProgressStatus);
-            setNewDate(agendaEntry, newDate);
+            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry,newDate,newProgressStatus);
+            addAgendaEntry(agendaEntry1);
 
             return true;
         }
@@ -182,6 +197,7 @@ public class EntryRepository implements Serializable {
     public boolean recordAgendaEntryCompletion(AgendaEntry entry, ProgressStatus status) {
         if (entry != null && status == ProgressStatus.COMPLETED) {
             entry.setProgressStatus(status);
+            entry.setAvailable(entry);
             return true;
         }
         return false;

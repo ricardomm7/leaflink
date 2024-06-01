@@ -1,10 +1,10 @@
-# US024 - Postpone an toDoEntry in the Agenda to a future date
+# US024 - Postpone an agendaEntry in the Agenda to a future date.
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-> As a Green Space Manager (GSM), I want to Postpone an toDoEntry in the Agenda to a specific future date.
+> As a Green Space Manager (GSM), I want to Postpone an agendaEntry in the Agenda to a specific future date.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -27,9 +27,9 @@
 > 
 > **Answer:** Yes, you are correct.
 
-> **Question:** 
+> **Question:** Can a collaborator mark a task as "done" only if it is in the "planned" status?
 > 
-> **Answer:**
+> **Answer:** It depends in the status set your team decide to have/use. But if you consider only status refered in the text and in the forum my answer would be, yes, just the "Planned" status can be changed to "Done".
 
 > **Question:** 
 > 
@@ -46,12 +46,14 @@
 * **AC2:** The new date must be after that the previous date.
 * **AC3:** The postponement action should update the toDoEntry’s progressStatus to “Postponed”.
 * **AC4:** The system should notify the team assigned to the task about the postponement.
-* **AC5:** AC5: The system should check for the availability of the team and resources for the new date.
+* **AC5:** The system should check for the availability of the team and resources for the new date.
+* **AC6:** The system should generate a new agendaEntry with the new date and the Progress as "PLANNED".
 
 ### 1.4. Found out Dependencies
 
-* US22: Adding a new toDoEntry in the Agenda
-* US23: Assigning a team to an toDoEntry in the Agenda.
+* US21: Adding a new toDoEntry in task List
+* US22: Adding a new agendaEntry in the Agenda
+* US23: Assigning a team to an agendaEntry in the Agenda.
 
 ### 1.5 Input and Output Data
 
@@ -61,7 +63,7 @@
     * New date
 	
 * Selected data:
-    * Entry
+    * agendaEntry
 
 **Output Data:**
 

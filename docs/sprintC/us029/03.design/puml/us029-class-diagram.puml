@@ -1,7 +1,7 @@
 @startuml
 skinparam shadowing false
 skinparam line type polyline
-'left to right direction
+
 package UI {
     class RecordEntryUI {
     }
@@ -55,14 +55,16 @@ package DOMAIN {
             - progressStatus: ProgressStatus
             + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
             + setStatus(status: ProgressStatus): void
-            + setAvailable(agendaEntry: AgendaEntry): void
+            + setAvailable(): void
+            + setTeamAvailable(): void
         }
     }
 }
-package DTO {
+    package DTO {
         class AgendaEntryMapper {
             + toDto(agendaEntry: AgendaEntry): AgendaEntryDto
             + toDomain(agendaEntryDto: AgendaEntryDto): AgendaEntry
+            + toDtoList(agendaEntries: List<AgendaEntry>): List<AgendaEntryDto>
         }
 
         class AgendaEntryDto {
@@ -83,6 +85,7 @@ package DTO {
             + getProgressStatus(): ProgressStatus
         }
     }
+
 
 RecordEntryUI ..> RecordEntryController
 RecordEntryController ..> Repositories

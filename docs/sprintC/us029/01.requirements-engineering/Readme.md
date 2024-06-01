@@ -11,8 +11,8 @@ As a Collaborator, I want to record the completion of a task.
 
 **From the specifications document:**
 
->  To record the completion of a task, it is necessary to ensure that the task exists in both the Agenda and the To-Do List. 
-> The task should be marked as completed in both lists once the completion is recorded.
+>  To record the completion of a task (agendaEntry), it is necessary to ensure that the task exists in both the Agenda and the To-Do List. 
+> The task(agendaEntry) should be marked as completed once the completion is recorded.
 
 **From the client clarifications:**
 
@@ -41,14 +41,14 @@ As a Collaborator, I want to record the completion of a task.
 > **Answer:** Yes.
 ### 1.3. Acceptance Criteria
 
-* **AC1** The task must exist in both the Agenda and the To-Do List before recording completion.
+* **AC1:** The task must exist in both the Agenda and the To-Do List before recording completion.
+* **AC2:** The system should change the progress status in Agenda to "COMPLETED".
 
 
 ### 1.4. Found out Dependencies
 
-* User Story US021 - Add a new toDoEntry to the To-Do List.
-
-* User Story US022 - Add a new toDoEntry in the Agenda.
+* US21: Adding a new toDoEntry in task List
+* US22: Adding a new agendaEntry in the Agenda
 
 ### 1.5 Input and Output Data
 
@@ -58,7 +58,7 @@ As a Collaborator, I want to record the completion of a task.
     * None.
 	
 * Selected data:
-    * Assign toDoEntry
+    * AgendaEntry
 
 **Output Data:**
 

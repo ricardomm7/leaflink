@@ -1,4 +1,4 @@
-# US024 - Postpone an toDoEntry in the Agenda to a future date
+# US024 - Postpone an agendaEntry in the Agenda to a future date.
 
 ## 2. Analysis
 

@@ -227,28 +227,191 @@ public class VehiclesMenuGUI {
 
         dialog.getDialogPane().setContent(grid);
 
+        addValidationListeners(vinField, brandField, modelField, typeComboBox, registrationDateField, plateField, tareWeightField, grossWeightField, currentKmField, acquisitionDateField, maintenanceFrequencyField);
+
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButtonType) {
-                String vin = vinField.getText();
-                String brand = brandField.getText();
-                String model = modelField.getText();
-                VehicleType type = typeComboBox.getValue();
-                LocalDate registerDate = registrationDateField.getValue();
-                String plate = plateField.getText();
-                double tare = Double.parseDouble(tareWeightField.getText());
-                double gross = Double.parseDouble(grossWeightField.getText());
-                int currentKm = Integer.parseInt(currentKmField.getText());
-                LocalDate acquisition = acquisitionDateField.getValue();
-                int maintenance = Integer.parseInt(maintenanceFrequencyField.getText());
+                boolean valid = validateInputs(vinField, brandField, modelField, typeComboBox, registrationDateField, plateField, tareWeightField, grossWeightField, currentKmField, acquisitionDateField, maintenanceFrequencyField);
+                if (valid) {
+                    String vin = vinField.getText();
+                    String brand = brandField.getText();
+                    String model = modelField.getText();
+                    VehicleType type = typeComboBox.getValue();
+                    LocalDate registerDate = registrationDateField.getValue();
+                    String plate = plateField.getText();
+                    double tare = Double.parseDouble(tareWeightField.getText());
+                    double gross = Double.parseDouble(grossWeightField.getText());
+                    int currentKm = Integer.parseInt(currentKmField.getText());
+                    LocalDate acquisition = acquisitionDateField.getValue();
+                    int maintenance = Integer.parseInt(maintenanceFrequencyField.getText());
 
-                vehicleController.registerVehicle(vin, brand, model, type, registerDate, plate, tare, gross, currentKm, acquisition, maintenance);
+                    vehicleController.registerVehicle(vin, brand, model, type, registerDate, plate, tare, gross, currentKm, acquisition, maintenance);
 
-                updateVehicleList();
+                    updateVehicleList();
+                    return null; // Fechar diálogo após sucesso
+                } else {
+                    ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
+                    return null; // Prevenir fechamento do diálogo
+                }
             }
             return null;
         });
         dialog.showAndWait();
     }
+
+
+    private void addValidationListeners(TextField vinField, TextField brandField, TextField modelField, ComboBox<VehicleType> typeComboBox, DatePicker registrationDateField, TextField plateField, TextField tareWeightField, TextField grossWeightField, TextField currentKmField, DatePicker acquisitionDateField, TextField maintenanceFrequencyField) {
+        vinField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\w{17}")) {
+                vinField.setStyle("-fx-border-color: red;");
+            } else {
+                vinField.setStyle(null);
+            }
+        });
+
+        brandField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[a-zA-Z0-9- /]+$")) {
+                brandField.setStyle("-fx-border-color: red;");
+            } else {
+                brandField.setStyle(null);
+            }
+        });
+
+        modelField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[a-zA-Z0-9- /]+$")) {
+                modelField.setStyle("-fx-border-color: red;");
+            } else {
+                modelField.setStyle(null);
+            }
+        });
+
+        registrationDateField.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isAfter(LocalDate.now())) {
+                registrationDateField.setStyle("-fx-border-color: red;");
+            } else {
+                registrationDateField.setStyle(null);
+            }
+        });
+
+        acquisitionDateField.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isAfter(LocalDate.now()) || newValue.isBefore(registrationDateField.getValue())) {
+                acquisitionDateField.setStyle("-fx-border-color: red;");
+            } else {
+                acquisitionDateField.setStyle(null);
+            }
+        });
+
+
+        tareWeightField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*\\.?\\d+") || Double.parseDouble(newValue) < 0) {
+                tareWeightField.setStyle("-fx-border-color: red;");
+            } else {
+                tareWeightField.setStyle(null);
+            }
+        });
+
+        grossWeightField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*\\.?\\d+") || Double.parseDouble(newValue) < 0 || Double.parseDouble(newValue) < Double.parseDouble(tareWeightField.getText())) {
+                grossWeightField.setStyle("-fx-border-color: red;");
+            } else {
+                grossWeightField.setStyle(null);
+            }
+        });
+
+        currentKmField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d+") || Integer.parseInt(newValue) < 0) {
+                currentKmField.setStyle("-fx-border-color: red;");
+            } else {
+                currentKmField.setStyle(null);
+            }
+        });
+
+        maintenanceFrequencyField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d+") || Integer.parseInt(newValue) <= 0) {
+                maintenanceFrequencyField.setStyle("-fx-border-color: red;");
+            } else {
+                maintenanceFrequencyField.setStyle(null);
+            }
+        });
+    }
+
+    private boolean validateInputs(TextField vinField, TextField brandField, TextField modelField, ComboBox<VehicleType> typeComboBox, DatePicker registrationDateField, TextField plateField, TextField tareWeightField, TextField grossWeightField, TextField currentKmField, DatePicker acquisitionDateField, TextField maintenanceFrequencyField) {
+        boolean valid = true;
+
+        if (!vinField.getText().matches("\\w{17}")) {
+            vinField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            vinField.setStyle(null);
+        }
+
+        if (!brandField.getText().matches("^[a-zA-Z0-9- /]+$")) {
+            brandField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            brandField.setStyle(null);
+        }
+
+        if (!modelField.getText().matches("^[a-zA-Z0-9- /]+$")) {
+            modelField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            modelField.setStyle(null);
+        }
+
+        if (typeComboBox.getValue() == null) {
+            typeComboBox.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            typeComboBox.setStyle(null);
+        }
+
+        if (registrationDateField.getValue() == null || registrationDateField.getValue().isAfter(LocalDate.now()) || registrationDateField.getValue().isBefore(LocalDate.parse("2000-01-01"))) {
+            registrationDateField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            registrationDateField.setStyle(null);
+        }
+
+
+        if (!tareWeightField.getText().matches("\\d*\\.?\\d+") || Double.parseDouble(tareWeightField.getText()) < 0) {
+            tareWeightField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            tareWeightField.setStyle(null);
+        }
+
+        if (!grossWeightField.getText().matches("\\d*\\.?\\d+") || Double.parseDouble(grossWeightField.getText()) < 0 || Double.parseDouble(grossWeightField.getText()) < Double.parseDouble(tareWeightField.getText())) {
+            grossWeightField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            grossWeightField.setStyle(null);
+        }
+
+        if (!currentKmField.getText().matches("\\d+") || Integer.parseInt(currentKmField.getText()) < 0) {
+            currentKmField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            currentKmField.setStyle(null);
+        }
+
+        if (acquisitionDateField.getValue() == null || acquisitionDateField.getValue().isAfter(LocalDate.now())) {
+            acquisitionDateField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            acquisitionDateField.setStyle(null);
+        }
+
+        if (!maintenanceFrequencyField.getText().matches("\\d+") || Integer.parseInt(maintenanceFrequencyField.getText()) < 0) {
+            maintenanceFrequencyField.setStyle("-fx-border-color: red;");
+            valid = false;
+        } else {
+            maintenanceFrequencyField.setStyle(null);
+        }
+
+        return valid;
+    }
+
 
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
@@ -326,22 +489,31 @@ public class VehiclesMenuGUI {
 
             dialog.getDialogPane().setContent(grid);
 
+            // Add validation listeners
+            addValidationListeners(dateField, kmField);
+
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == addButtonType) {
-                    LocalDate date = dateField.getValue();
-                    int km;
-                    try {
-                        km = Integer.parseInt(kmField.getText());
-                    } catch (Exception e) {
-                        ShowError.showAlert("New Maintenance", "Invalid kilometers value.", null);
-                        return null;
-                    }
-                    String[] parts = selectedVehicle.split(" \\| ");
-                    String plate = parts[0].split(":")[1].trim(); // Corrigido para obter a placa corretamente
+                    boolean valid = validateInputs(dateField, kmField);
+                    if (valid) {
+                        LocalDate date = dateField.getValue();
+                        int km;
+                        try {
+                            km = Integer.parseInt(kmField.getText());
+                        } catch (Exception e) {
+                            ShowError.showAlert("New Maintenance", "Invalid kilometers value.", null);
+                            return null;
+                        }
+                        String[] parts = selectedVehicle.split(" \\| ");
+                        String plate = parts[0].split(":")[1].trim();
 
-                    registerMaintenanceController.createMaintenance(plate, date, km);
-                    updateMaintenanceList();
-                    updateVehiclesNeedingMaintenance();
+                        registerMaintenanceController.createMaintenance(plate, date, km);
+                        updateMaintenanceList();
+                        updateVehiclesNeedingMaintenance();
+                    } else {
+                        ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
+                        return null; // Prevent dialog from closing
+                    }
                 }
                 return null;
             });
@@ -349,6 +521,40 @@ public class VehiclesMenuGUI {
         } else {
             ShowError.showAlert("Maintenance", "No vehicle selected for maintenance.", null);
         }
+    }
+
+    private void addValidationListeners(DatePicker dateField, TextField kmField) {
+        dateField.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if ((newValue == null) || dateField.getValue().isAfter(LocalDate.now())) {
+                dateField.setStyle("-fx-border-color: red;");
+            } else {
+                dateField.setStyle(null);
+            }
+        });
+
+        kmField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d+") || Integer.parseInt(newValue) < 0) {
+                kmField.setStyle("-fx-border-color: red;");
+            } else {
+                kmField.setStyle(null);
+            }
+        });
+    }
+
+    private boolean validateInputs(DatePicker dateField, TextField kmField) {
+        boolean valid = true;
+
+        if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
+            dateField.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+
+        if (!kmField.getText().matches("\\d+") || Integer.parseInt(kmField.getText()) < 0) {
+            kmField.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+
+        return valid;
     }
 
 

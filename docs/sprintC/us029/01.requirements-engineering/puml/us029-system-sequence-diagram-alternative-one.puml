@@ -12,23 +12,23 @@ participant ":System" as System
 
 activate CLB
 
-    CLB -> System : asks to record a complete entry
+    CLB -> System : asks to record a complete agendaEntry
     activate System
 
-        System --> CLB : shows the list of the entry assign to the collaborator and requests to select the one to record
+        System --> CLB : shows the list of the agendaEntry assign to the collaborator and requests to select the one to record
     deactivate System
 
-    CLB -> System : select an assign entry
+    CLB -> System : select an assign agendaEntry
 
     activate System
 
-        System --> CLB : show entry and requests confirmation
+        System --> CLB : show agendaEntry and requests confirmation
     deactivate System
 
     CLB -> System : confirms data
     activate System
 
-        System --> CLB :  displays a success message (Entry record as completed)
+        System --> CLB :  displays a success message (agendaEntry record as completed)
     deactivate System
 
 @enduml

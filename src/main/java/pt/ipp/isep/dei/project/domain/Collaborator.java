@@ -26,6 +26,8 @@ public class Collaborator implements Serializable {
     private Address address;
     private List<Skill> skills;
 
+    private boolean availabe;
+
     /**
      * Constructor for Collaborator class.
      *
@@ -43,6 +45,7 @@ public class Collaborator implements Serializable {
      * @param job                  The job of the collaborator.
      */
     public Collaborator(String name, LocalDate birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate, Job job) {
+        this.availabe = true;
         try {
             setName(name);
             setBirthdate(birthdate);
@@ -140,6 +143,15 @@ public class Collaborator implements Serializable {
         } else {
             throw new IllegalArgumentException("For the given document type (" + this.documentType.toString() + "), the identification number is invalid. Check the user manual for more info.");
         }
+    }
+
+    /**
+     * Sets available.
+     *
+     * @param b the boolean (available or not available)
+     */
+    public void setAvailable(boolean b) {
+        this.availabe = b;
     }
 
     /**
@@ -414,5 +426,6 @@ public class Collaborator implements Serializable {
     public String getIdentificationNumber() {
         return identificationNumber;
     }
+
 
 }

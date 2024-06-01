@@ -20,7 +20,7 @@ participant "agendaEntry\n:AgendaEntry" as AgendaEntry
 
 activate GSM
 
-    GSM -> UI : asks to postpone an agenda entry
+    GSM -> UI : asks to postpone an agendaEntry
     activate UI
 
         UI -> CTRL **: create
@@ -70,13 +70,13 @@ activate GSM
             CTRL --> UI : agendaEntryDtoList
         deactivate CTRL
 
-        UI -> GSM : shows the list of agenda entry and requests to select
+        UI -> GSM : shows the list of agendaEntry and requests to select
     deactivate UI
 
-    GSM -> UI : selects an agenda entry
+    GSM -> UI : selects an agendaEntry
     activate UI
 
-        UI --> GSM : requests new date for the selected entry
+        UI --> GSM : requests new date for the selected agendaEntry
     deactivate UI
 
     GSM -> UI : types new date
@@ -110,16 +110,17 @@ activate GSM
             deactivate CTRL
             activate EntryRepo
 
-
-
-
-
-
-
-
                 EntryRepo -> EntryRepo : validateNewDate(newDate)
-                EntryRepo -> EntryRepo : updateEntryStatus(agendaEntry, POSTPONED)
-                EntryRepo -> EntryRepo : setNewDate(agendaEntry, newDate)
+                EntryRepo -> EntryRepo : updateAgendaEntryStatus(agendaEntry, POSTPONED)
+
+                EntryRepo -> agendaEntry **: create(agendaEntry, newDate, PLANNED)
+                activate agendaEntry
+
+                agendaEntry--> EntryRepo: agendaEntry
+                deactivate agendaEntry
+
+                EntryRepo -> EntryRepo: addAgendaEntry(agendaEntry)
+
 
             EntryRepo --> CTRL : success
             deactivate EntryRepo
