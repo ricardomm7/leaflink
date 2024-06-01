@@ -343,6 +343,15 @@ public class CollaboratorsGUI {
     }
 
     @FXML
+    void routeBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_routes.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void handelJobRemoveBtn(ActionEvent event) {
         int selectedIndex = listViewJobs.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
@@ -444,13 +453,12 @@ public class CollaboratorsGUI {
     }
 
     @FXML
-    void routeBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de rotas (caso necessário)
-    }
-
-    @FXML
     void spacesBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de espaços (caso necessário)
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_spaces.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

@@ -2,24 +2,14 @@ package pt.ipp.isep.dei.project.ui.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import pt.ipp.isep.dei.project.Main;
 
-public class AdminGUI {
+
+public class SpacesGUI {
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
 
-    }
-
-    @FXML
-    void caollabBtnActionHandle(ActionEvent event) {
-        try {
-            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -50,6 +40,15 @@ public class AdminGUI {
     }
 
     @FXML
+    void caollabBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void routeBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/adminMenu_routes.fxml", true, 1205, 900, true);
@@ -71,4 +70,6 @@ public class AdminGUI {
     void usersBtnActionHandle(ActionEvent event) {
 
     }
+
 }
+

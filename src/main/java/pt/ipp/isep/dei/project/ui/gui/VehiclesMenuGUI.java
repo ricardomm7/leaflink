@@ -121,12 +121,11 @@ public class VehiclesMenuGUI {
 
     @FXML
     void spacesBtnActionHandle(ActionEvent event) {
-        // Implementation required
-    }
-
-    @FXML
-    void routeBtnActionHandle(ActionEvent event) {
-        // Implementation required
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_spaces.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -696,6 +695,15 @@ public class VehiclesMenuGUI {
             brandLabel.setText(vehicle.getBrand());
             typeLabel.setText(vehicle.getType().toString());
             grossLabel.setText(vehicle.getGrossWeight() + " kg");
+        }
+    }
+
+    @FXML
+    void routeBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/adminMenu_routes.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
