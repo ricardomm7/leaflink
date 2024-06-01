@@ -41,6 +41,9 @@ public class VehiclesMenuGUI {
     private ListView<String> listViewMaintenance;
 
     @FXML
+    private Button removeBtnMaintenance;
+
+    @FXML
     private ListView<String> needingMaintenance;
 
     @FXML
@@ -649,6 +652,11 @@ public class VehiclesMenuGUI {
                 vbox_selectedVehicle.setVisible(true);
             }
         });
+
+        listViewMaintenance.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            removeBtnMaintenance.setDisable(newValue == null);
+        });
+        removeBtnMaintenance.setDisable(true);
 
         listViewVehicle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             removeBtn.setDisable(newValue == null);

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The SortByAreaAscending class provides a sorting algorithm to sort a list of GreenSpace objects by area in ascending order.
  */
-public class SortByAreaAscending implements SortAlgorithms {
+public class SortByAreaAscending implements Sortable {
 
     /**
      * Sorts a list of GreenSpace objects by area in ascending order.

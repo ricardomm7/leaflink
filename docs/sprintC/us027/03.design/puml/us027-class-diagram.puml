@@ -49,7 +49,7 @@ package MODEL{
     }
     }
     package EXTERNAL{
-    interface SortAlgorithms{
+    interface Sortable{
     +sort(g : List<GreenSpace>) : List<GreenSpace>
     }
     class SortByAscending{
@@ -95,10 +95,10 @@ Repositories --> "1"GreenSpaceRepository: greenSpaceRepository
 GreenSpaceRepository -->"*" GreenSpace
 GreenSpaceRepository ..> GreenSpaceMapper : toDto
 GreenSpaceMapper ..> GreenSpaceDto
-GreenSpaceRepository ..> SortAlgorithms : uses
-SortAlgorithms --> SortByAscending : is implemented
-SortAlgorithms --> SortByDescending : is implemented
-SortAlgorithms --> SortByType : is implemented
+GreenSpaceRepository ..> Sortable : uses
+Sortable --> SortByAscending : is implemented
+Sortable --> SortByDescending : is implemented
+Sortable --> SortByType : is implemented
 
 
 @enduml

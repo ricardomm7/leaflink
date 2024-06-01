@@ -351,7 +351,7 @@
                                 </VBox>
                             </content>
                         </Tab>
-                        <Tab closable="false" text="Maintenance">
+                        <Tab closable="false" text="Maintenances">
                             <content>
                                 <VBox prefHeight="200.0" prefWidth="100.0" styleClass="border-line">
                                     <children>
@@ -382,6 +382,15 @@
                                         </HBox>
                                         <VBox VBox.vgrow="ALWAYS">
                                             <children>
+                                                <Label styleClass="costum-Label" text="Needing maintenance">
+                                                    <font>
+                                                        <Font name="System Bold" size="18.0"/>
+                                                    </font>
+                                                    <VBox.margin>
+                                                        <Insets bottom="2.0" left="10.0" top="10.0"/>
+                                                    </VBox.margin>
+                                                </Label>
+                                                <ListView fx:id="needingMaintenance" layoutX="10.0" layoutY="10.0"/>
                                                 <Label layoutX="10.0" layoutY="10.0" styleClass="costum-Label"
                                                        text="Registered maintenances">
                                                     <font>
@@ -392,15 +401,6 @@
                                                     </VBox.margin>
                                                 </Label>
                                                 <ListView fx:id="listViewMaintenance" VBox.vgrow="ALWAYS"/>
-                                                <Label styleClass="costum-Label" text="Needing maintenance">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0"/>
-                                                    </font>
-                                                    <VBox.margin>
-                                                        <Insets bottom="2.0" left="10.0" top="10.0"/>
-                                                    </VBox.margin>
-                                                </Label>
-                                                <ListView fx:id="needingMaintenance" layoutX="10.0" layoutY="10.0"/>
                                             </children>
                                         </VBox>
                                     </children>

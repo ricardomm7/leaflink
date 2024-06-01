@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.project.repository;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.GreenSpace;
-import pt.ipp.isep.dei.project.domain.SortAlgorithms;
+import pt.ipp.isep.dei.project.domain.Sortable;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.ui.ShowError;
@@ -96,10 +96,10 @@ public class GreenSpaceRepository implements Serializable {
 
         // Dynamically load the sorting algorithm class
         Class<?> algorithmClass = Class.forName(algorithmClassName);
-        SortAlgorithms sorter = (SortAlgorithms) algorithmClass.newInstance();
+        Sortable sortable = (Sortable) algorithmClass.newInstance();
 
         if (!verifyEmptyList(listMatched)) {
-            listMatched = sorter.sort(listMatched);
+            listMatched = sortable.sort(listMatched);
             return GreenSpaceMapper.toDtoList(listMatched);
         } else {
             throw new IllegalArgumentException("The matched list is empty.");

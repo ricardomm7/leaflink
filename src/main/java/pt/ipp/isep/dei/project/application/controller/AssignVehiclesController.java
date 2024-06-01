@@ -37,7 +37,6 @@ public class AssignVehiclesController {
      * @return the list of AgendaEntryDto objects for the user
      */
     public List<AgendaEntryDto> getAgendaEntryList(UserSession u) {
-
         return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(u));
     }
 
@@ -47,7 +46,6 @@ public class AssignVehiclesController {
      * @return the list of available VehicleDto objects
      */
     public List<VehicleDto> getVehicleList() {
-
         return VehicleMapper.toDtoList(vehicleRepository.getAvailableVehicleList());
     }
 

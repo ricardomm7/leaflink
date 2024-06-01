@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The SortByType class provides a sorting algorithm to sort a list of GreenSpace objects by type.
  */
-public class SortByType implements SortAlgorithms {
+public class SortByType implements Sortable {
 
     /**
      * Sorts a list of GreenSpace objects by type.

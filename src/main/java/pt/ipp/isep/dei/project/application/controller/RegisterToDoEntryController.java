@@ -52,10 +52,15 @@ public class RegisterToDoEntryController {
         return listToReturn;
     }
 
+
     /**
-     * Creates a new ToDo entry by saving the provided ToDoEntryDto object.
+     * Create new to do entry.
      *
-     * @param toDoEntryDto the ToDoEntryDto object to be saved.
+     * @param title         the title
+     * @param description   the description
+     * @param duration      the duration
+     * @param urg           the urg
+     * @param greenSpaceDto the green space dto
      */
     public void createNewToDoEntry(String title, String description, int duration, UrgencyStatus urg, GreenSpaceDto greenSpaceDto) {
         entryRepository.create(new ToDoEntryDto(title, description, duration, urg, greenSpaceDto));

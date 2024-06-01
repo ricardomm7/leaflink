@@ -46,10 +46,20 @@ public class RegisterVehicleController {
 
     }
 
+    /**
+     * Gets vehicle list.
+     *
+     * @return the vehicle list
+     */
     public List<VehicleDto> getVehicleList() {
         return vehicleRepository.getVehicleList();
     }
 
+    /**
+     * Remove vehicle.
+     *
+     * @param plate the plate
+     */
     public void removeVehicle(String plate) {
         vehicleRepository.removeVehicle(plate);
     }

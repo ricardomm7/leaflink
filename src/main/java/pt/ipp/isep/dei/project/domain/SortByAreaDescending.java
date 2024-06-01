@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The SortByAreaDescending class provides a sorting algorithm to sort a list of GreenSpace objects by area in descending order.
  */
-public class SortByAreaDescending implements SortAlgorithms {
+public class SortByAreaDescending implements Sortable {
 
     /**
      * Sorts a list of GreenSpace objects by area in descending order.

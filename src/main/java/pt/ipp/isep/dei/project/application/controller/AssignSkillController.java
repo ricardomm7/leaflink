@@ -32,27 +32,36 @@ public class AssignSkillController {
     }
 
     /**
-     * retrieves the list of collaborators
+     * Retrieves the list of collaborators.
      *
-     * @return the list of collaborators
+     * @return the list of collaborators.
      */
     public List<CollaboratorDto> getCollaboratorDtoList() {
         return collaboratorRepository.getCollaboratorDtoList();
     }
 
+    /**
+     * Retrieves the list of collaborator domain objects.
+     *
+     * @return the list of collaborators.
+     */
     public List<Collaborator> getCollaboratorList() {
         return collaboratorRepository.getCollaboratorList();
     }
 
+    /**
+     * Retrieves the list of skills.
+     *
+     * @return the list of skills.
+     */
     public List<Skill> getSkillList() {
         return skillRepository.getSkillList();
     }
 
-
     /**
-     * Retrieves the list of skillsDto
+     * Retrieves the list of skill DTOs.
      *
-     * @return the list of skillsDto
+     * @return the list of skill DTOs.
      */
     public List<SkillDto> getSkillDtoList() {
         return skillRepository.getSkillDtoList();
@@ -70,5 +79,4 @@ public class AssignSkillController {
         collaboratorRepository.assignSkills(colb, skillsList);
         collaboratorRepository.updateCollaborator(colb); // Update the collaborator in the repository
     }
-
 }

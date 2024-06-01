@@ -8,7 +8,7 @@ import pt.ipp.isep.dei.project.repository.VehicleRepository;
 import java.util.List;
 
 /**
- * The ListMaintenanceController class manages the listing the vehicles needing a maintenance.
+ * The ListMaintenanceController class manages the listing of vehicles needing maintenance.
  * It interacts with the ListMaintenanceUI and with VehicleRepository and MaintenanceRepository
  * to get vehicle-related information.
  */
@@ -17,43 +17,39 @@ public class ListMaintenanceController {
     private final MaintenanceRepository maintenanceRepository;
 
     /**
-     * Instantiates a new List maintenance controller.
+     * Constructs a new ListMaintenanceController object.
+     * Initializes the repositories for vehicles and maintenance.
      */
     public ListMaintenanceController() {
         Repositories repositories = Repositories.getInstance();
         vehicleRepository = repositories.getVehicleRepository();
         maintenanceRepository = repositories.getMaintenanceRepository();
-
     }
 
     /**
-     * Get all the repositories and vehicleDto needing maintenance
-     * Generate maintenance report.
+     * Generates a maintenance report by retrieving vehicles that need maintenance and creating the report.
      */
-    public void GenerateMaintenanceReport() {
+    public void generateMaintenanceReport() {
         List<VehicleDto> vehicleDtosNeedingMaintenance = getVehiclesNeedingMaintenanceList();
         createMaintenanceReport(vehicleDtosNeedingMaintenance);
-
     }
 
     /**
-     * Gets vehicles needing maintenance list.
+     * Retrieves the list of vehicles that need maintenance.
      *
-     * @return The list of vehicles needing maintenance
+     * @return The list of VehicleDto objects representing vehicles needing maintenance
      */
     public List<VehicleDto> getVehiclesNeedingMaintenanceList() {
-
-
         return vehicleRepository.getVehiclesNeedingMaintenanceList(maintenanceRepository.getMaintenanceList());
     }
 
     /**
-     * Create maintenance report string.
+     * Creates a maintenance report for the given list of vehicles.
      *
-     * @return the string
+     * @param vehicles The list of VehicleDto objects representing vehicles needing maintenance
+     * @return The maintenance report as a string
      */
     public String createMaintenanceReport(List<VehicleDto> vehicles) {
         return maintenanceRepository.createMaintenanceReport(vehicles);
     }
-
 }

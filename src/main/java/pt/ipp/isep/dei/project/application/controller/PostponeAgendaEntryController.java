@@ -55,7 +55,7 @@ public class PostponeAgendaEntryController {
      * Notifies the team assigned to the given agenda entry about the new date.
      *
      * @param agendaEntry the AgendaEntry object representing the agenda entry
-     * @param newDate        the new date for the agenda entry
+     * @param newDate     the new date for the agenda entry
      * @return true if the team notification is successful, false otherwise
      */
     private boolean notifyTeam(AgendaEntry agendaEntry, LocalDate newDate) {

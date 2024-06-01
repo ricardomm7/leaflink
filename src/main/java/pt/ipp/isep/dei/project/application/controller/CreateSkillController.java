@@ -23,27 +23,27 @@ public class CreateSkillController {
     }
 
     /**
-     * Create skill.
+     * Creates a new skill with the provided designation.
      *
-     * @param designation the designation
+     * @param designation the designation of the skill to be created
      */
     public void createSkill(String designation) {
         skillRepository.createSkill(new SkillDto(designation));
     }
 
     /**
-     * Gets skills dto.
+     * Gets the list of skill DTOs.
      *
-     * @return the skills dto
+     * @return the list of SkillDto objects
      */
     public List<SkillDto> getSkillsDto() {
         return skillRepository.getSkillDtoList();
     }
 
     /**
-     * Remove skill.
+     * Removes a skill at the specified index.
      *
-     * @param index the index
+     * @param index the index of the skill to be removed
      */
     public void removeSkill(int index) {
         skillRepository.removeSkill(index);

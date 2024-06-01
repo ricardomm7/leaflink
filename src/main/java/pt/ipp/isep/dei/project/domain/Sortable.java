@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * The SortAlgorithms interface defines a contract for sorting algorithms.
  */
-public interface SortAlgorithms {
+public interface Sortable {
 
     /**
      * Sorts a list of GreenSpace objects.

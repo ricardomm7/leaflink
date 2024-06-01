@@ -22,7 +22,7 @@ public class CreateTeamController {
 
     /**
      * Constructs a new CreateTeamController object.
-     * Initializes the TeamRepository and SkillRepository instances.
+     * Initializes the TeamRepository, SkillRepository, and CollaboratorRepository instances.
      */
     public CreateTeamController() {
         Repositories repositories = Repositories.getInstance();
@@ -46,7 +46,7 @@ public class CreateTeamController {
      * @param requiredSkills The list of skills required for the team.
      * @param minTeamSize    The minimum size of the team.
      * @param maxTeamSize    The maximum size of the team.
-     * @return A list of selected collaborators for the team, or an empty list if no suitable team can be formed.
+     * @return A Team object representing the proposed team, or null if no suitable team can be formed.
      */
     public Team generateProposal(List<Skill> requiredSkills, int minTeamSize, int maxTeamSize) {
         List<Collaborator> allCollaborators = collaboratorRepository.getCollaboratorList();
@@ -73,6 +73,12 @@ public class CreateTeamController {
         return null;
     }
 
+    /**
+     * Checks if a collaborator is already assigned to a team.
+     *
+     * @param collaborator The collaborator to check.
+     * @return True if the collaborator is assigned to a team, false otherwise.
+     */
     private boolean isCollaboratorAssignedToTeam(Collaborator collaborator) {
         for (Team team : teamRepository.getTeamList()) {
             if (team.getCollaborators().contains(collaborator)) {
@@ -82,12 +88,26 @@ public class CreateTeamController {
         return false;
     }
 
+    /**
+     * Creates a custom team with the specified skills, collaborators, and team size.
+     *
+     * @param requiredSkills        The list of skills required for the team.
+     * @param selectedCollaborators The list of collaborators selected for the team.
+     * @param minTeamSize           The minimum size of the team.
+     * @param maxTeamSize           The maximum size of the team.
+     * @return The created Team object.
+     */
     public Team createCustomTeam(List<Skill> requiredSkills, List<Collaborator> selectedCollaborators, int minTeamSize, int maxTeamSize) {
         Team team = new Team(requiredSkills, selectedCollaborators, minTeamSize, maxTeamSize);
         teamRepository.addTeam(team);
         return team;
     }
 
+    /**
+     * Retrieves the list of available collaborators who are not assigned to any team.
+     *
+     * @return The list of available collaborators.
+     */
     public List<Collaborator> getAvailableCollaborators() {
         List<Collaborator> availableCollaborators = new ArrayList<>();
         List<Collaborator> allCollaborators = collaboratorRepository.getCollaboratorList();
@@ -100,5 +120,4 @@ public class CreateTeamController {
 
         return availableCollaborators;
     }
-
 }

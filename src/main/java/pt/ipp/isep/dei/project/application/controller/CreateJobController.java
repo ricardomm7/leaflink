@@ -23,30 +23,29 @@ public class CreateJobController {
     }
 
     /**
-     * Creates a new job with the provided dto.
+     * Creates a new job with the provided designation.
      *
-     * @param dto the dto of the job to be created
+     * @param designation the designation of the job to be created
      */
     public void createJob(String designation) {
         jobRepository.createJob(new JobDto(designation));
     }
 
     /**
-     * Gets job list.
+     * Gets the list of jobs.
      *
-     * @return the job list
+     * @return the list of JobDto objects
      */
     public List<JobDto> getJobList() {
         return jobRepository.getJobList();
     }
 
     /**
-     * Remove job.
+     * Removes a job at the specified index.
      *
-     * @param index the index
+     * @param index the index of the job to be removed
      */
     public void removeJob(int index) {
         jobRepository.removeJob(index);
     }
 }
-

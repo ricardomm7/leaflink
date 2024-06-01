@@ -13,15 +13,19 @@ public class RegisterGreenSpaceController {
 
     /**
      * Constructs a new RegisterGreenSpaceController object.
-     * Initializes the repositories and the greenSpaceRepository.
+     * Initializes the green space repository.
      */
     public RegisterGreenSpaceController() {
         Repositories repositories = Repositories.getInstance();
         greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
 
-    public void createNewGS(GreenSpaceDto g1) {
-        greenSpaceRepository.create(g1);
+    /**
+     * Creates a new green space with the provided information.
+     *
+     * @param greenSpaceDto the GreenSpaceDto object representing the new green space
+     */
+    public void createNewGS(GreenSpaceDto greenSpaceDto) {
+        greenSpaceRepository.create(greenSpaceDto);
     }
-
 }

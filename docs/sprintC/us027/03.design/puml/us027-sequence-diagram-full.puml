@@ -19,7 +19,7 @@ participant "greenSpaceDto\n:GreenSpaceDto" as dto
 participant ":ApplicationSession" as ApplicationSession
 participant "applicationSession\n:ApplicationSession" as applicationSession
 participant ":Class" as Class
-participant "sorter\n:SortAlgorithms" as SortAlgorithms
+participant "sortable\n:Sortable" as SortAlgorithms
 
 activate GSM
 GSM -> UI : asks to list all green spaces managed by him

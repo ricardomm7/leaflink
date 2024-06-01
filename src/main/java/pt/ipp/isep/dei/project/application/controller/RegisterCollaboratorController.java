@@ -31,20 +31,20 @@ public class RegisterCollaboratorController {
 
 
     /**
-     * Create clb.
+     * Creates a new collaborator with the provided information.
      *
-     * @param name                 the name
-     * @param birthdate1           the birthdate 1
-     * @param contactMobile        the contact mobile
-     * @param taxpayerNumber       the taxpayer number
-     * @param email                the email
-     * @param address              the address
-     * @param zipCode              the zip code
-     * @param city                 the city
-     * @param documentType         the document type
-     * @param identificationNumber the identification number
-     * @param admissionDate1       the admission date 1
-     * @param job                  the job
+     * @param name                 the name of the collaborator
+     * @param birthdate1           the birthdate of the collaborator
+     * @param contactMobile        the contact mobile number of the collaborator
+     * @param taxpayerNumber       the taxpayer number of the collaborator
+     * @param email                the email address of the collaborator
+     * @param address              the address of the collaborator
+     * @param zipCode              the zip code of the collaborator's address
+     * @param city                 the city of the collaborator's address
+     * @param documentType         the document type of the collaborator
+     * @param identificationNumber the identification number of the collaborator
+     * @param admissionDate1       the admission date of the collaborator
+     * @param job                  the job position of the collaborator
      */
     public void createCLB(String name, LocalDate birthdate1, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate1, Job job) {
         collaboratorRepository.create(new CollaboratorDto(name, birthdate1, contactMobile, taxpayerNumber, email, address, zipCode, city, documentType, identificationNumber, admissionDate1, job));
@@ -60,18 +60,18 @@ public class RegisterCollaboratorController {
     }
 
     /**
-     * Gets collaborators.
+     * Gets the list of collaborators.
      *
-     * @return the collaborators
+     * @return the list of collaborators
      */
     public List<CollaboratorDto> getCollaborators() {
         return collaboratorRepository.getCollaboratorDtoList();
     }
 
     /**
-     * Remove collab.
+     * Removes a collaborator from the repository.
      *
-     * @param index the index
+     * @param index the index of the collaborator to be removed
      */
     public void removeCollab(int index) {
         collaboratorRepository.remove(index);

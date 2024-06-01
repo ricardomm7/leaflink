@@ -15,7 +15,6 @@ _**Note that SSD - Alternative One is adopted.**_
 | Step 3         | ... receiving data?                           | RegisterGreenSpaceUI         | Pure Fabrication.                                                                       |
 | Step 4         | ... showing data and requesting confirmation? | RegisterGreenSpaceUI         | Pure Fabrication.                                                                       |
 | Step 5         | ... get the Green Space repository?           | Repositories                 | Information Expert.                                                                     |
-|                | ... having all the repositories?              | Repositories                 | Information Expert, High cohesion, Low coupling.                                        |
 |                | ... instantiating a new green space?          | GreenSpaceRepository         | Creator, High cohesion, Low coupling.                                                   |
 |                | ... validating all data (local validation)?   | GreenSpace                   | Information Expert.                                                                     | 
 |                | ... validating all data (global validation)?  | GreenSpaceRepository         | Information Expert.                                                                     | 

@@ -13,15 +13,8 @@ import java.util.List;
  * This class represents the controller responsible for registering maintenance.
  */
 public class RegisterMaintenanceController {
-    /**
-     * The Maintenance repository.
-     */
     private final MaintenanceRepository maintenanceRepository;
-    /**
-     * The Vehicle repository.
-     */
     private final VehicleRepository vehicleRepository;
-
 
     /**
      * Constructs a new RegisterMaintenanceController object.
@@ -33,49 +26,49 @@ public class RegisterMaintenanceController {
         vehicleRepository = repositories.getVehicleRepository();
     }
 
-
     /**
-     * Create maintenance.
+     * Creates a new maintenance record with the provided information.
      *
-     * @param plate     the plate
-     * @param date1     the date
-     * @param currentKm the current km
+     * @param plate     the plate number of the vehicle
+     * @param date      the date of the maintenance
+     * @param currentKm the current mileage of the vehicle
      */
-    public void createMaintenance(String plate, LocalDate date1, int currentKm) {
-        maintenanceRepository.createMaintenance(new MaintenanceDto(plate, date1, currentKm));
+    public void createMaintenance(String plate, LocalDate date, int currentKm) {
+        maintenanceRepository.createMaintenance(new MaintenanceDto(plate, date, currentKm));
     }
 
     /**
-     * Retrieves a list of all vehicle's plates.
+     * Retrieves a list of all vehicle plates.
      *
-     * @return a list of vehicle plates.
+     * @return a list of vehicle plates
      */
     public List<String> getPlatesList() {
         return vehicleRepository.getVehiclesPlates();
     }
 
     /**
-     * Gets vehicles needing maintenance list.
+     * Retrieves a list of vehicles needing maintenance.
      *
-     * @return the vehicles needing maintenance list
+     * @return a list of vehicles needing maintenance
      */
     public List<VehicleDto> getVehiclesNeedingMaintenanceList() {
         return vehicleRepository.getVehiclesNeedingMaintenanceList(maintenanceRepository.getMaintenanceList());
     }
 
     /**
-     * Gets maintenance list.
+     * Retrieves the list of maintenance records.
      *
-     * @return the maintenance list
+     * @return the list of maintenance records
      */
     public List<MaintenanceDto> getMaintenanceList() {
         return maintenanceRepository.getMaintenanceList();
     }
 
     /**
-     * Remove maintenance.
+     * Removes a maintenance record.
      *
-     * @param plate the plate
+     * @param plate the plate number of the vehicle
+     * @param date  the date of the maintenance record
      */
     public void removeMaintenance(String plate, LocalDate date) {
         maintenanceRepository.removeMaintenance(plate, date);

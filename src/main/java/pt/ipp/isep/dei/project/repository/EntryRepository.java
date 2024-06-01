@@ -80,7 +80,9 @@ public class EntryRepository implements Serializable {
      *
      * @param agendaEntry the agenda entry
      */
-    private void addAgendaEntry(AgendaEntry agendaEntry){agendaEntryList.add(agendaEntry);}
+    private void addAgendaEntry(AgendaEntry agendaEntry) {
+        agendaEntryList.add(agendaEntry);
+    }
 
     /**
      * Retrieves a list of AgendaEntryDto objects managed by the specified Green Space Manager (GSM).
@@ -120,7 +122,7 @@ public class EntryRepository implements Serializable {
     public boolean updateAgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus newProgressStatus) {
         if (validateNewDate(agendaEntry, newDate)) {
             updateEntryStatus(agendaEntry, newProgressStatus);
-            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry,newDate,newProgressStatus);
+            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, newProgressStatus);
             addAgendaEntry(agendaEntry1);
 
             return true;
