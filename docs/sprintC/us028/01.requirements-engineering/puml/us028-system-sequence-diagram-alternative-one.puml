@@ -15,6 +15,24 @@ activate CLB
     CLB -> System : asks to consult the entry assigned to himself
     activate System
 
+    System --> CLB :asks to select the beginning and end date of the search
+    deactivate System
+
+    CLB -> System : selects the beginning and end date
+    activate System
+
+    System --> CLB :asks to select the type of status he wants to consult
+    deactivate System
+
+    CLB -> System : Selects the type he wants to consult
+    activate System
+
+    System --> CLB :asks for confirmation
+    deactivate System
+
+    CLB -> System :confirms that he wants to create the list
+    activate System
+
         System --> CLB : displays greens spaces sorted by date
     deactivate System
 @enduml

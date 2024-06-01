@@ -25,7 +25,7 @@ participant "agendaEntries\n:List<AgendaEntries>" as AGENDAENTRIES
 
 activate Col
 
-Col -> UI : requests to consult tasks assigned to him
+Col -> UI : asks to consult the entry assigned to himself
     activate UI
 
     UI -> CTRL** : create
@@ -234,7 +234,7 @@ Col -> UI : confirms that he wants to create the list
         CTRL --> UI : listEntriesDto
         deactivate CTRL
 
-    UI --> Col : shows the LISTTASK
+    UI --> Col : displays greens spaces sorted by date
     deactivate UI
 
 deactivate Col
