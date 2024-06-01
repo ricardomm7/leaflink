@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.project.ui.gui;
+package pt.ipp.isep.dei.project.ui.gui.admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -345,7 +345,7 @@ public class CollaboratorsGUI {
     @FXML
     void routeBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_routes.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -414,7 +414,7 @@ public class CollaboratorsGUI {
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -423,7 +423,7 @@ public class CollaboratorsGUI {
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_teams.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -432,7 +432,7 @@ public class CollaboratorsGUI {
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_analysis.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_analysis.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -446,7 +446,7 @@ public class CollaboratorsGUI {
     @FXML
     void vehicleBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_vehic.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -455,7 +455,7 @@ public class CollaboratorsGUI {
     @FXML
     void spacesBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_spaces.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

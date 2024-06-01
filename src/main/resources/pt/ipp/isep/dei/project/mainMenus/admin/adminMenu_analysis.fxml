@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0"
             prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.AdminGUI">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.AnalysisGUI">
+
     <left>
         <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar"
                  BorderPane.alignment="CENTER">
@@ -41,7 +42,7 @@
                 </ToggleButton>
                 <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
                               mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Analysis">
+                              selected="true" styleClass="menu-btn-cstm" text="Analysis">
                     <graphic>
                         <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
                                    styleClass="analysis-image">
@@ -103,13 +104,60 @@
         </FlowPane>
     </bottom>
     <center>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="444.0" fitWidth="629.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icon.png"/>
-                    </image>
-                </ImageView>
+                <FlowPane alignment="CENTER_LEFT" styleClass="flowpane">
+                    <children>
+                        <Label text="Analysis">
+                            <font>
+                                <Font name="System Bold" size="25.0"/>
+                            </font>
+                            <padding>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                            </padding>
+                        </Label>
+                    </children>
+                </FlowPane>
+                <TabPane styleClass="tabpane-custom" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                    <tabs>
+                        <Tab closable="false" text="Park equipment usage">
+                            <content>
+                                <VBox prefHeight="200.0" prefWidth="100.0" styleClass="border-line">
+                                    <children>
+                                        <HBox VBox.vgrow="NEVER">
+                                            <children>
+                                                <TextField editable="false" focusTraversable="false"
+                                                           mouseTransparent="true" prefHeight="31.0" prefWidth="555.0"
+                                                           promptText="File path" styleClass="text-field-custom"
+                                                           HBox.hgrow="ALWAYS">
+                                                    <HBox.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </HBox.margin>
+                                                </TextField>
+                                                <Button mnemonicParsing="false" styleClass="button-custom"
+                                                        text="Open new" HBox.hgrow="ALWAYS">
+                                                    <HBox.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </HBox.margin>
+                                                </Button>
+                                                <Button disable="true" mnemonicParsing="false"
+                                                        styleClass="button-custom" text="Execute">
+                                                    <HBox.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </HBox.margin>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                        <HBox VBox.vgrow="ALWAYS"/>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </Tab>
+                        <Tab closable="false" disable="true" text="Water analysis"/>
+                        <Tab closable="false" disable="true" text="Water analysis"/>
+                        <Tab closable="false" disable="true" text="Users usage"/>
+                    </tabs>
+                </TabPane>
             </children>
         </VBox>
     </center>

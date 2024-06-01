@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0"
             prefWidth="466.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.AuthenticationGUI">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.AuthenticationGUI">
     <center>
         <GridPane alignment="CENTER" hgap="10" prefHeight="167.0" prefWidth="431.0" vgap="10">
             <padding>

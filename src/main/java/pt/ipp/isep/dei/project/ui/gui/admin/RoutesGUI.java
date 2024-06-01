@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.project.ui.gui;
+package pt.ipp.isep.dei.project.ui.gui.admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,7 +93,7 @@ public class RoutesGUI {
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_teams.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,7 +102,7 @@ public class RoutesGUI {
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_analysis.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_analysis.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +111,7 @@ public class RoutesGUI {
     @FXML
     void vehicleBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_vehic.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class RoutesGUI {
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,7 +129,7 @@ public class RoutesGUI {
     @FXML
     void routeBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_routes.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -138,7 +138,7 @@ public class RoutesGUI {
     @FXML
     void spacesBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_spaces.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
