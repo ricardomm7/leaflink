@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.project.dto;
 
-import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 
 import java.io.Serializable;
@@ -15,7 +14,7 @@ public class GreenSpaceDto implements Serializable {
     private final String name;
     private final GreenSpaceType type;
     private final double area;
-    private final UserSession manager;
+    private final String manager;
     private final String address;
     private final String city;
     private final String zipCode;
@@ -31,7 +30,7 @@ public class GreenSpaceDto implements Serializable {
      * @param city    the city of the green space
      * @param zipCode the zip code of the green space
      */
-    public GreenSpaceDto(String name, GreenSpaceType type, double area, UserSession manager, String address, String city, String zipCode) {
+    public GreenSpaceDto(String name, GreenSpaceType type, double area, String manager, String address, String city, String zipCode) {
         this.name = name;
         this.type = type;
         this.area = area;
@@ -73,7 +72,7 @@ public class GreenSpaceDto implements Serializable {
      *
      * @return the manager of the green space
      */
-    public UserSession getManager() {
+    public String getManager() {
         return manager;
     }
 

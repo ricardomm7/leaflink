@@ -74,7 +74,7 @@ GreenSpaceRepo -> SortAlgorithms** : newInstance()
 GreenSpaceRepo -> GreenSpaceRepo : verifyEmptyList(listMatched)
 activate GreenSpaceRepo
 
-GreenSpaceRepo -> GreenSpaceRepo : sorter.sort(listMatched)
+GreenSpaceRepo -> GreenSpaceRepo : sortable.sort(listMatched)
 activate GreenSpaceRepo
 GreenSpaceRepo -> mapper : toDtoList(listOrganized)
 activate mapper

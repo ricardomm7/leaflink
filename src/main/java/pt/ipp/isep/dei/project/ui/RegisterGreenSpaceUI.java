@@ -71,7 +71,7 @@ public class RegisterGreenSpaceUI implements Runnable {
             System.out.println("\nDo you want to register this green space? (Y/N)");
             String decision = scanner.nextLine();
             if (decision.trim().equalsIgnoreCase("Y")) {
-                controller.createNewGS(name, street, zipCode, area, city, manager, type);
+                controller.createNewGS(name, street, zipCode, area, city, manager.getUserEmail(), type);
                 System.out.println("Green space registered successfully!");
             } else {
                 System.out.println("Operation cancelled!");

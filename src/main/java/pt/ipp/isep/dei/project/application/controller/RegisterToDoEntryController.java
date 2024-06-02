@@ -46,7 +46,7 @@ public class RegisterToDoEntryController {
         List<GreenSpaceDto> greenSpaceDto = GreenSpaceMapper.toDtoList(greenSpaces);
         UserSession manager = ApplicationSession.getInstance().getCurrentSession();
         for (GreenSpaceDto gs : greenSpaceDto) {
-            if (manager.getUserEmail().equals(gs.getManager().getUserEmail()))
+            if (manager.getUserEmail().equals(gs.getManager()))
                 listToReturn.add(gs);
         }
         return listToReturn;

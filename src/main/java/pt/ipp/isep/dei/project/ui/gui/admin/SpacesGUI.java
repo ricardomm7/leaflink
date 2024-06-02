@@ -128,7 +128,7 @@ public class SpacesGUI {
         ObservableList<String> observableList = FXCollections.observableArrayList(
                 greenSpaces.stream()
                         .map(greenSpaceDto -> {
-                            String managerEmail = (greenSpaceDto.getManager() != null) ? greenSpaceDto.getManager().getUserEmail() : "No Manager";
+                            String managerEmail = (greenSpaceDto.getManager() != null) ? greenSpaceDto.getManager() : "No Manager";
                             return greenSpaceDto.getName() + " | " +
                                     greenSpaceDto.getAddress() + ", " +
                                     greenSpaceDto.getCity() + " | " +
@@ -217,7 +217,7 @@ public class SpacesGUI {
                 double area = Double.parseDouble(areaField.getText());
                 GreenSpaceType type = gsType.getValue();
 
-                gsC.createNewGS(name, street, zipCode, area, city, manager, type);
+                gsC.createNewGS(name, street, zipCode, area, city, manager.getUserEmail(), type);
 
                 updateGSList();
                 return addButtonType;

@@ -125,7 +125,7 @@ public class GreenSpaceRepository implements Serializable {
     private List<GreenSpace> matchWithLoggedUser(UserSession loggedUser) {
         List<GreenSpace> u = new ArrayList<>();
         for (GreenSpace g : greenSpaceList) {
-            if (g.getManager() != null && g.getManager().getUserEmail().equalsIgnoreCase(loggedUser.getUserEmail())) {
+            if (g.getManager() != null && g.getManager().equalsIgnoreCase(loggedUser.getUserEmail())) {
                 u.add(g);
             }
         }

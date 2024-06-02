@@ -4,14 +4,10 @@
 package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.*;
 import pt.ipp.isep.dei.project.dto.*;
 import pt.ipp.isep.dei.project.mappers.JobMapper;
 import pt.ipp.isep.dei.project.repository.*;
-import pt.isep.lei.esoft.auth.domain.model.Email;
-import pt.isep.lei.esoft.auth.domain.model.Password;
-import pt.isep.lei.esoft.auth.domain.model.User;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -110,12 +106,12 @@ public class Bootstrap implements Runnable {
     private void addEntries() {
         EntryRepository entryRepository = Repositories.getInstance().getEntryRepository();
 
-        entryRepository.create(new ToDoEntryDto("Prunning trees", "machines required", 2, UrgencyStatus.LOW, new GreenSpaceDto("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("a@a.com"), new Password("password"), "User"))), "address", "city", "8888-000")));
-        entryRepository.create(new ToDoEntryDto("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("b@b.com"), new Password("password123"), "Admin"))), "123 Main St", "Metropolis", "1234-005")));
-        entryRepository.create(new ToDoEntryDto("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpaceDto("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("c@c.com"), new Password("pass123word"), "Manager"))), "456 Elm St", "Cityville", "5432-001")));
-        entryRepository.create(new ToDoEntryDto("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpaceDto("Community Garden", GreenSpaceType.GARDEN, 100, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("d@d.com"), new Password("password456"), "Volunteer"))), "789 Oak St", "Townsville", "6789-000")));
-        entryRepository.create(new ToDoEntryDto("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpaceDto("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("e@e.com"), new Password("pass456word"), "Supervisor"))), "101 Pine St", "Villageville", "1357-009")));
-        entryRepository.create(new ToDoEntryDto("Trimming bushes", "hedge trimmer needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Riverside Park", GreenSpaceType.MEDIUM_SIZED_PARK, 400, new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(new Email("f@f.com"), new Password("password789"), "Gardener"))), "202 Cedar St", "Riverdale", "9753-001")));
+        entryRepository.create(new ToDoEntryDto("Prunning trees", "machines required", 2, UrgencyStatus.LOW, new GreenSpaceDto("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, "a@a.com", "address", "city", "8888-000")));
+        entryRepository.create(new ToDoEntryDto("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, "b@b.com", "123 Main St", "Metropolis", "1234-005")));
+        entryRepository.create(new ToDoEntryDto("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpaceDto("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, "c@c.com", "456 Elm St", "Cityville", "5432-001")));
+        entryRepository.create(new ToDoEntryDto("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpaceDto("Community Garden", GreenSpaceType.GARDEN, 100, "d@d.com", "789 Oak St", "Townsville", "6789-000")));
+        entryRepository.create(new ToDoEntryDto("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpaceDto("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, "e@e.com", "101 Pine St", "Villageville", "1357-009")));
+        entryRepository.create(new ToDoEntryDto("Trimming bushes", "hedge trimmer needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Riverside Park", GreenSpaceType.MEDIUM_SIZED_PARK, 400, "f@f.com", "202 Cedar St", "Riverdale", "9753-001")));
     }
 
     /**
@@ -220,9 +216,7 @@ public class Bootstrap implements Runnable {
      */
     private void addGreenSpaces() {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
-        Email email = new Email("gsm@this.app");
-        Password password = new Password("gsm");
-        UserSession managerSession = new UserSession(new pt.isep.lei.esoft.auth.UserSession(new User(email, password, "Green Space Manager")));
+        String managerSession = "gsm@this.app";
         Address address = new Address("Santa Acácia", "Uriunda", "5555-999");
 
         greenSpaceRepository.create(new GreenSpaceDto("Alameda", GreenSpaceType.MEDIUM_SIZED_PARK, 78876, managerSession, address.getAddress(), address.getCity(), address.getZipCode()));

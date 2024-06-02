@@ -15,7 +15,7 @@ public class Repositories implements Serializable {
     private final SkillRepository skillRepository;
     private final TeamRepository teamRepository;
     private final GreenSpaceRepository greenSpaceRepository;
-    private static transient AuthenticationRepository authenticationRepository;
+    private static AuthenticationRepository authenticationRepository;
     private final EntryRepository registerToDoEntryRepository;
 
     /**
