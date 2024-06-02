@@ -155,18 +155,68 @@ public class TeamsGUI {
     private void updateTeamList() {
         teamList.clear();
         List<TeamDto> teams = createTeamController.getTeams();
-        int teamIndex = 1;
+        List<TeamDto> uniqueTeams = new ArrayList<>(); // Lista para armazenar equipes únicas
+
         for (TeamDto team : teams) {
+            // Verifica se a equipe já está na lista de equipes únicas
+            if (!isTeamAlreadyAdded(uniqueTeams, team)) {
+                uniqueTeams.add(team);
+            }
+        }
+
+        int teamIndex = 1;
+        for (TeamDto team : uniqueTeams) {
+            // Construa uma string com os detalhes da equipe, por exemplo, nome da equipe
             StringBuilder teamDetails = new StringBuilder("Team " + teamIndex + ": ");
             for (Collaborator collaborator : team.getCollaboratorsDtoList()) {
                 teamDetails.append(collaborator.getName()).append(", ");
             }
             // Remove a vírgula extra no final
             teamDetails.setLength(teamDetails.length() - 2);
+
             teamList.add(teamDetails.toString());
             teamIndex++;
         }
         listTeamView.setItems(teamList); // Atualiza a ListView com a nova lista de equipes
+    }
+
+    private boolean isTeamAlreadyAdded(List<TeamDto> teams, TeamDto newTeam) {
+        for (TeamDto team : teams) {
+            // Verifica se as equipes são iguais
+            if (areTeamsEqual(team, newTeam)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean areTeamsEqual(TeamDto team1, TeamDto team2) {
+        List<Collaborator> collaborators1 = team1.getCollaboratorsDtoList();
+        List<Collaborator> collaborators2 = team2.getCollaboratorsDtoList();
+
+        // Verifica se as equipes têm o mesmo número de colaboradores
+        if (collaborators1.size() != collaborators2.size()) {
+            return false;
+        }
+
+        // Verifica se todos os colaboradores da equipe 1 estão presentes na equipe 2
+        for (Collaborator collaborator1 : collaborators1) {
+            boolean collaboratorFound = false;
+            for (Collaborator collaborator2 : collaborators2) {
+                // Comparando os nomes dos colaboradores para verificar a igualdade
+                if (collaborator1.getName().equals(collaborator2.getName())) {
+                    collaboratorFound = true;
+                    break;
+                }
+            }
+            // Se um colaborador da equipe 1 não for encontrado na equipe 2, as equipes não são iguais
+            if (!collaboratorFound) {
+                return false;
+            }
+        }
+
+        // Se todas as verificações passarem, as equipes são consideradas iguais
+        return true;
     }
  /*   private void updateTeamList() {
         teamList.clear();
