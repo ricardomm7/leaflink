@@ -326,6 +326,15 @@ public class CollaboratorsGUI {
     }
 
     @FXML
+    void tasksBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_tasks.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void handleJobAddBtn(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("New Job");
@@ -437,11 +446,6 @@ public class CollaboratorsGUI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void tasksBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de tarefas (caso necessário)
     }
 
     @FXML

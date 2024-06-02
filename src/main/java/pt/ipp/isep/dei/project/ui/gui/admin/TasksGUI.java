@@ -4,21 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import pt.ipp.isep.dei.project.Main;
 
-public class AdminGUI {
+public class TasksGUI {
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/admin/adminMenu_tasks.fxml", true, 1205, 900, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void caollabBtnActionHandle(ActionEvent event) {
-        try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,6 +43,15 @@ public class AdminGUI {
     }
 
     @FXML
+    void caollabBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void routeBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
@@ -73,4 +73,5 @@ public class AdminGUI {
     void usersBtnActionHandle(ActionEvent event) {
 
     }
+
 }
