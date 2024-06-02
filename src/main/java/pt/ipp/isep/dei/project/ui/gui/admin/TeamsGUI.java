@@ -1,12 +1,27 @@
 package pt.ipp.isep.dei.project.ui.gui.admin;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import pt.ipp.isep.dei.project.Main;
+import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
+import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
+import pt.ipp.isep.dei.project.dto.TeamDto;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class TeamsGUI {
+
+    @FXML
+    private ListView<String> listTeamView;
 
     @FXML
     private TextField teamSearch;
@@ -14,15 +29,168 @@ public class TeamsGUI {
     @FXML
     private Button removeTeamBtn;
 
-    @FXML
-    void newTeamHandler(ActionEvent event) {
+    private CreateTeamController createTeamController;
+    private ObservableList<String> teamList = FXCollections.observableArrayList();
+
+    public void initialize() {
+        createTeamController = new CreateTeamController();
+        updateTeamList();
 
     }
+
+    @FXML
+    void newTeamHandler(ActionEvent event) {
+        Dialog<List<SkillDto>> skillDialog = createSkillSelectionDialog();
+        Optional<List<SkillDto>> result = skillDialog.showAndWait();
+        result.ifPresent(selectedSkills -> {
+            if (!selectedSkills.isEmpty()) {
+                Dialog<Integer[]> sizeDialog = createTeamSizeDialog();
+                Optional<Integer[]> sizeResult = sizeDialog.showAndWait();
+                sizeResult.ifPresent(sizes -> {
+                    int minTeamSize = sizes[0];
+                    int maxTeamSize = sizes[1];
+                    TeamDto proposedTeam = createTeamController.generateProposal(selectedSkills, minTeamSize, maxTeamSize);
+                    if (proposedTeam != null) {
+                        boolean confirmed = showTeamProposalDialog(proposedTeam);
+                        if (confirmed) {
+                            createTeamController.createCustomTeam(selectedSkills, proposedTeam.getCollaboratorsDtoList(), minTeamSize, maxTeamSize);
+                            updateTeamList();
+                        }
+                    } else {
+                        showAlert("No suitable team could be generated.");
+                    }
+                });
+            }
+        });
+    }
+
+    private Dialog<List<SkillDto>> createSkillSelectionDialog() {
+        Dialog<List<SkillDto>> dialog = new Dialog<>();
+        dialog.setTitle("Select Skills");
+
+        List<SkillDto> skills = createTeamController.getSkills();
+        VBox vBox = new VBox();
+        CheckBox[] checkBoxes = new CheckBox[skills.size()];
+        for (int i = 0; i < skills.size(); i++) {
+            checkBoxes[i] = new CheckBox(skills.get(i).getDesignation());
+            vBox.getChildren().add(checkBoxes[i]);
+        }
+
+        dialog.getDialogPane().setContent(vBox);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                List<SkillDto> selectedSkills = new ArrayList<>();
+                for (int i = 0; i < skills.size(); i++) {
+                    if (checkBoxes[i].isSelected()) {
+                        selectedSkills.add(skills.get(i));
+                    }
+                }
+                return selectedSkills;
+            }
+            return null;
+        });
+
+        return dialog;
+    }
+
+    private Dialog<Integer[]> createTeamSizeDialog() {
+        Dialog<Integer[]> dialog = new Dialog<>();
+        dialog.setTitle("Set Team Size");
+
+        VBox vBox = new VBox();
+        TextField minTeamSizeField = new TextField();
+        minTeamSizeField.setPromptText("Minimum Team Size");
+        TextField maxTeamSizeField = new TextField();
+        maxTeamSizeField.setPromptText("Maximum Team Size");
+        vBox.getChildren().addAll(new Label("Minimum Team Size:"), minTeamSizeField, new Label("Maximum Team Size:"), maxTeamSizeField);
+
+        dialog.getDialogPane().setContent(vBox);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                try {
+                    int minTeamSize = Integer.parseInt(minTeamSizeField.getText());
+                    int maxTeamSize = Integer.parseInt(maxTeamSizeField.getText());
+                    return new Integer[]{minTeamSize, maxTeamSize};
+                } catch (NumberFormatException e) {
+                    showAlert("Please enter valid numbers.");
+                    return null;
+                }
+            }
+            return null;
+        });
+
+        return dialog;
+    }
+
+    private boolean showTeamProposalDialog(TeamDto proposedTeam) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Team Proposal");
+        alert.setHeaderText("Generated Team Proposal:");
+        StringBuilder content = new StringBuilder();
+        for (Collaborator collaborator : proposedTeam.getCollaboratorsDtoList()) {
+            content.append(collaborator.getName()).append(" - Skills: ");
+            for (Skill skill : collaborator.getSkills()) {
+                content.append(skill.getDesignation()).append(", ");
+            }
+            content.setLength(content.length() - 2);
+            content.append("\n");
+        }
+        alert.setContentText(content.toString());
+
+        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+        return result == ButtonType.OK;
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
+    private void updateTeamList() {
+        teamList.clear();
+        List<TeamDto> teams = createTeamController.getTeams();
+        int teamIndex = 1;
+        for (TeamDto team : teams) {
+            StringBuilder teamDetails = new StringBuilder("Team " + teamIndex + ": ");
+            for (Collaborator collaborator : team.getCollaboratorsDtoList()) {
+                teamDetails.append(collaborator.getName()).append(", ");
+            }
+            // Remove a vírgula extra no final
+            teamDetails.setLength(teamDetails.length() - 2);
+            teamList.add(teamDetails.toString());
+            teamIndex++;
+        }
+        listTeamView.setItems(teamList); // Atualiza a ListView com a nova lista de equipes
+    }
+ /*   private void updateTeamList() {
+        teamList.clear();
+        List<TeamDto> teams = createTeamController.getTeams();
+        int teamIndex = 1;
+        for (TeamDto team : teams) {
+            // Construa uma string com os detalhes da equipe, por exemplo, nome da equipe
+            String teamDetails = "Team " + teamIndex; // Atribui nome por ordem numérica crescente
+            teamList.add(teamDetails);
+            teamIndex++;
+        }
+        listTeamView.setItems(teamList); // Atualiza a ListView com a nova lista de equipes
+    }*/
+
 
     @FXML
     void handleRemoveTeam(ActionEvent event) {
-
+        // Implement team removal logic here
+        int selectedIndex = listTeamView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            listTeamView.getItems().remove(selectedIndex);
+        }
     }
+    // Handle tasks button action
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
@@ -35,31 +203,23 @@ public class TeamsGUI {
 
     @FXML
     void routeBtnActionHandle(ActionEvent event) {
-        try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Handle route button action
     }
 
     @FXML
     void spacesBtnActionHandle(ActionEvent event) {
-        try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Handle spaces button action
     }
 
     @FXML
     void usersBtnActionHandle(ActionEvent event) {
-
+        // Handle users button action
     }
 
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +228,7 @@ public class TeamsGUI {
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_teams.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,7 +237,7 @@ public class TeamsGUI {
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_analysis.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/adminMenu_analysis.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,10 +246,9 @@ public class TeamsGUI {
     @FXML
     void vehicleBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_vehic.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
