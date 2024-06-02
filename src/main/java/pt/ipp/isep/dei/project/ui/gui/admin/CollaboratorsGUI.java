@@ -52,6 +52,7 @@ public class CollaboratorsGUI {
 
     @FXML
     private Label addressLabel;
+
     @FXML
     private Label mobileLabel;
 
@@ -232,10 +233,10 @@ public class CollaboratorsGUI {
         });
 
         zipCodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.contains("-")) {
-                zipCodeField.setStyle("-fx-border-color: red;");
+            if (!newValue.matches("\\d{4}-\\d{3}")) { // Verifica se o ZIP code possui o formato correto
+                zipCodeField.setStyle("-fx-border-color: red;"); // Define o estilo do campo se o formato estiver incorreto
             } else {
-                zipCodeField.setStyle(null);
+                zipCodeField.setStyle(null); // Remove qualquer estilo definido anteriormente
             }
         });
 

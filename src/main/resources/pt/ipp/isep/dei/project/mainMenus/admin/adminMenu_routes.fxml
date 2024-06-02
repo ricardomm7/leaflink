@@ -1,63 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.RoutesGUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0"
+            prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.RoutesGUI">
 
     <left>
-        <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar" BorderPane.alignment="CENTER">
+        <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar"
+                 BorderPane.alignment="CENTER">
             <items>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Tasks">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Tasks">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="tasks-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="tasks-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Collaborators">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Collaborators">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="collab-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="collab-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Teams">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Teams">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="team-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="team-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Analysis">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Analysis">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="analysis-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="analysis-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Vehicles">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Vehicles">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="vehicles-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="vehicles-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0" selected="true" styleClass="menu-btn-cstm" text="Routes">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0"
+                              selected="true" styleClass="menu-btn-cstm" text="Routes">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="routes-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="routes-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Spaces">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Spaces">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="gs-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="gs-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Users">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0"
+                              styleClass="menu-btn-cstm" text="Users">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="users-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="users-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
@@ -65,14 +89,15 @@
         </ToolBar>
     </left>
     <bottom>
-        <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot" BorderPane.alignment="CENTER">
+        <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot"
+                  BorderPane.alignment="CENTER">
             <children>
                 <Label opacity="0.54" text="LEAFLINK | Green Space Management Software | FOURCORP | ISEP | 2024">
                     <font>
-                        <Font size="11.0" />
+                        <Font size="11.0"/>
                     </font>
                     <FlowPane.margin>
-                        <Insets left="5.0" />
+                        <Insets left="5.0"/>
                     </FlowPane.margin>
                 </Label>
             </children>
@@ -85,10 +110,10 @@
                     <children>
                         <Label text="Routes">
                             <font>
-                                <Font name="System Bold" size="25.0" />
+                                <Font name="System Bold" size="25.0"/>
                             </font>
                             <padding>
-                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
                             </padding>
                         </Label>
                     </children>
@@ -101,19 +126,25 @@
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField fx:id="filepathInput" editable="false" focusTraversable="false" mouseTransparent="true" promptText="File path" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="filepathInput" editable="false"
+                                                           focusTraversable="false" mouseTransparent="true"
+                                                           promptText="File path" styleClass="text-field-custom"
+                                                           HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" onAction="#handleOpenNewBtn" styleClass="button-custom" text="Open new" HBox.hgrow="ALWAYS">
+                                                <Button mnemonicParsing="false" onAction="#handleOpenNewBtn"
+                                                        styleClass="button-custom" text="Open new" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button fx:id="executeBtn" disable="true" mnemonicParsing="false" onAction="#handleExecuteBtn" styleClass="button-custom" text="Execute">
+                                                <Button fx:id="executeBtn" disable="true" mnemonicParsing="false"
+                                                        onAction="#handleExecuteBtn" styleClass="button-custom"
+                                                        text="Execute">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </Button>
                                             </children>
@@ -122,12 +153,14 @@
                                             <children>
                                                 <ScrollPane prefHeight="638.0" prefWidth="518.0">
                                                     <content>
-                                                        <ImageView fx:id="media1" fitHeight="633.0" fitWidth="506.0" pickOnBounds="true" preserveRatio="true" />
+                                                        <ImageView fx:id="media1" fitHeight="633.0" fitWidth="506.0"
+                                                                   pickOnBounds="true" preserveRatio="true"/>
                                                     </content>
                                                 </ScrollPane>
                                                 <ScrollPane prefHeight="638.0" prefWidth="496.0">
                                                     <content>
-                                                        <ImageView fx:id="media2" fitHeight="627.0" fitWidth="486.0" pickOnBounds="true" preserveRatio="true" />
+                                                        <ImageView fx:id="media2" fitHeight="627.0" fitWidth="486.0"
+                                                                   pickOnBounds="true" preserveRatio="true"/>
                                                     </content>
                                                 </ScrollPane>
                                             </children>

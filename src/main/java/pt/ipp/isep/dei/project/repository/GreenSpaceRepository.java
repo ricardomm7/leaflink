@@ -131,4 +131,13 @@ public class GreenSpaceRepository implements Serializable {
         }
         return u;
     }
+
+    /**
+     * Remove the selected Greenspace.
+     *
+     * @param index the index
+     */
+    public void removeGS(int index) {
+        greenSpaceList.remove(index);
+    }
 }

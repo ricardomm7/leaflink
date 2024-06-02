@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -120,32 +120,21 @@
                 </FlowPane>
                 <TabPane styleClass="tabpane-custom" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                     <tabs>
-                        <Tab closable="false" text="Park equipment usage">
+                        <Tab closable="false" disable="true" text="Park equipment usage">
                             <content>
                                 <VBox prefHeight="200.0" prefWidth="100.0" styleClass="border-line">
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField editable="false" focusTraversable="false"
+                                                <TextField disable="true" editable="false" focusTraversable="false"
                                                            mouseTransparent="true" prefHeight="31.0" prefWidth="555.0"
                                                            promptText="File path" styleClass="text-field-custom"
+                                                           text="This functions aren't available yet"
                                                            HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
                                                 </TextField>
-                                                <Button mnemonicParsing="false" styleClass="button-custom"
-                                                        text="Open new" HBox.hgrow="ALWAYS">
-                                                    <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                                                    </HBox.margin>
-                                                </Button>
-                                                <Button disable="true" mnemonicParsing="false"
-                                                        styleClass="button-custom" text="Execute">
-                                                    <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                                                    </HBox.margin>
-                                                </Button>
                                             </children>
                                         </HBox>
                                         <HBox VBox.vgrow="ALWAYS"/>

@@ -29,11 +29,24 @@ public class GreenSpace implements Serializable {
         try {
             setArea(area);
             setName(name);
-            this.type = type;
+            setType(type);
             this.manager = manager;
             this.address = address;
         } catch (Exception e) {
             ShowError.showAlert("Greenspace", e.getMessage(), null);
+        }
+    }
+
+    /**
+     * Sets the green space type.
+     *
+     * @param type - the green space type from the enum class.
+     */
+    private void setType(GreenSpaceType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("The type can't be empty!");
+        } else {
+            this.type = type;
         }
     }
 

@@ -2,12 +2,13 @@ package pt.ipp.isep.dei.project.application.session;
 
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * The type User session.
  */
-public class UserSession {
+public class UserSession implements Serializable {
 
     private pt.isep.lei.esoft.auth.UserSession userSession;
 

@@ -1,8 +1,13 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
+
+import java.util.List;
 
 /**
  * The RegisterGreenSpaceController class is responsible for handling the registration of new green spaces.
@@ -23,9 +28,35 @@ public class RegisterGreenSpaceController {
     /**
      * Creates a new green space with the provided information.
      *
-     * @param greenSpaceDto the GreenSpaceDto object representing the new green space
+     * @param name    the name
+     * @param street  the street
+     * @param zipcode the zipcode
+     * @param area    the area
+     * @param city    the city
+     * @param us      the manager
+     * @param type    the type
      */
-    public void createNewGS(GreenSpaceDto greenSpaceDto) {
+    public void createNewGS(String name, String street, String zipcode, double area, String city, UserSession us, GreenSpaceType type) {
+        GreenSpaceDto greenSpaceDto = new GreenSpaceDto(name, type, area, us, street, city, zipcode);
         greenSpaceRepository.create(greenSpaceDto);
+    }
+
+    /**
+     * Returns the list of green spaces.
+     *
+     * @return the list of green spaces in DTO.
+     */
+    public List<GreenSpaceDto> getGreenSpaces() {
+        return GreenSpaceMapper.toDtoList(greenSpaceRepository.getGreenSpaceList());
+    }
+
+
+    /**
+     * Remove gs.
+     *
+     * @param index the index
+     */
+    public void removeGS(int index) {
+        greenSpaceRepository.removeGS(index);
     }
 }
