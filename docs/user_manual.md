@@ -1,5 +1,5 @@
 # LeafLink - User Manual
-###### LeafLink is currently not registered under our ownership, and our group is solely utilizing it for educational purposes and not for any commercial endeavors. It's essential to emphasize that the name LeafLink is still under consideration and not yet finalized. We are committed to ensuring that all aspects of our project, including branding elements, align with ethical and legal standards.
+###### LeafLink is currently not registered under our ownership, and our group is solely utilizing it for educational purposes and not for any commercial endeavors. We are committed to ensuring that all aspects of our project, including branding elements, align with ethical and legal standards.
 
 ## Glossary
 [CLICK HERE TO BE REDIRECTED](sprintC/global-artifacts/01.requirements-engineering/glossary.md)
