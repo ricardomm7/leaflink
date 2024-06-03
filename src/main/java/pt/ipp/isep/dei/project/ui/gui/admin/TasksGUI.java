@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -192,36 +193,42 @@ public class TasksGUI {
 
         dialog.getDialogPane().setContent(grid);
 
-        addValidationListeners(titleField, descriptionField, durationField);
+        addValidationListeners(titleField, descriptionField, durationField, urgencyComboBox, greenSpaceComboBox);
+
+        Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
+        addButton.addEventFilter(ActionEvent.ACTION, event1 -> {
+            boolean isValid = validateInputs(titleField, descriptionField, durationField, urgencyComboBox, greenSpaceComboBox);
+            if (isValid) {
+                String title = titleField.getText();
+                String description = descriptionField.getText();
+                int duration = Integer.parseInt(durationField.getText());
+                UrgencyStatus urgency = urgencyComboBox.getValue();
+                GreenSpaceDto greenSpace = greenSpaceComboBox.getValue();
+                registerToDoEntryController.createNewToDoEntry(title, description, duration, urgency, greenSpace);
+
+                dialog.setResult(new ToDoEntryDto(title, description, duration, urgency, greenSpace));
+            } else {
+                ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
+                event1.consume(); // Prevent the dialog from closing
+            }
+        });
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButtonType) {
-                boolean isValid = validateInputs(titleField, descriptionField, durationField);
-                if (isValid) {
-                    String title = titleField.getText();
-                    String description = descriptionField.getText();
-                    int duration = Integer.parseInt(durationField.getText());
-                    UrgencyStatus urgency = urgencyComboBox.getValue();
-                    GreenSpaceDto greenSpace = greenSpaceComboBox.getValue();
-                    registerToDoEntryController.createNewToDoEntry(title, description, duration, urgency, greenSpace);
-
-                    updateToDoEntry();
-                    return new ToDoEntryDto(title, description, duration, urgency, greenSpace);
-                } else {
-                    ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
-                    return null;
-                }
+                return null; // This should not close the dialog
             }
             return null;
         });
 
         dialog.showAndWait().ifPresent(entryDto -> {
-            allToDoEntry.add(entryDto);
-            updateToDoEntry();
+            if (entryDto != null) {
+                allToDoEntry.add(entryDto);
+                updateToDoEntry();
+            }
         });
     }
 
-    private void addValidationListeners(TextField titleField, TextField descriptionField, TextField durationField) {
+    private void addValidationListeners(TextField titleField, TextField descriptionField, TextField durationField, ComboBox<UrgencyStatus> urgencyComboBox, ComboBox<GreenSpaceDto> greenSpaceComboBox) {
         titleField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
                 titleField.setStyle("-fx-border-color: red;");
@@ -245,9 +252,25 @@ public class TasksGUI {
                 durationField.setStyle(null);
             }
         });
+
+        urgencyComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                urgencyComboBox.setStyle("-fx-border-color: red;");
+            } else {
+                urgencyComboBox.setStyle(null);
+            }
+        });
+
+        greenSpaceComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                greenSpaceComboBox.setStyle("-fx-border-color: red;");
+            } else {
+                greenSpaceComboBox.setStyle(null);
+            }
+        });
     }
 
-    private boolean validateInputs(TextField titleField, TextField descriptionField, TextField durationField) {
+    private boolean validateInputs(TextField titleField, TextField descriptionField, TextField durationField, ComboBox<UrgencyStatus> urgencyComboBox, ComboBox<GreenSpaceDto> greenSpaceComboBox) {
         boolean valid = true;
 
         if (!titleField.getText().matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
@@ -265,8 +288,19 @@ public class TasksGUI {
             valid = false;
         }
 
+        if (urgencyComboBox.getValue() == null) {
+            urgencyComboBox.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+
+        if (greenSpaceComboBox.getValue() == null) {
+            greenSpaceComboBox.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+
         return valid;
     }
+
 
     @FXML
     void handleRemoveToDoEntry(ActionEvent event) {

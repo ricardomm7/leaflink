@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -90,6 +91,8 @@ public class VehiclesMenuGUI {
 
     @FXML
     private Button removeBtn;
+    @FXML
+    private Button maintenanceAddBtn;
 
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
@@ -235,33 +238,31 @@ public class VehiclesMenuGUI {
 
         addValidationListeners(vinField, brandField, modelField, typeComboBox, registrationDateField, plateField, tareWeightField, grossWeightField, currentKmField, acquisitionDateField, maintenanceFrequencyField);
 
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == addButtonType) {
-                boolean valid = validateInputs(vinField, brandField, modelField, typeComboBox, registrationDateField, plateField, tareWeightField, grossWeightField, currentKmField, acquisitionDateField, maintenanceFrequencyField);
-                if (valid) {
-                    String vin = vinField.getText();
-                    String brand = brandField.getText();
-                    String model = modelField.getText();
-                    VehicleType type = typeComboBox.getValue();
-                    LocalDate registerDate = registrationDateField.getValue();
-                    String plate = plateField.getText();
-                    double tare = Double.parseDouble(tareWeightField.getText());
-                    double gross = Double.parseDouble(grossWeightField.getText());
-                    int currentKm = Integer.parseInt(currentKmField.getText());
-                    LocalDate acquisition = acquisitionDateField.getValue();
-                    int maintenance = Integer.parseInt(maintenanceFrequencyField.getText());
+        Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
+        addButton.addEventFilter(ActionEvent.ACTION, event1 -> {
+            boolean valid = validateInputs(vinField, brandField, modelField, typeComboBox, registrationDateField, plateField, tareWeightField, grossWeightField, currentKmField, acquisitionDateField, maintenanceFrequencyField);
+            if (valid) {
+                String vin = vinField.getText();
+                String brand = brandField.getText();
+                String model = modelField.getText();
+                VehicleType type = typeComboBox.getValue();
+                LocalDate registerDate = registrationDateField.getValue();
+                String plate = plateField.getText();
+                double tare = Double.parseDouble(tareWeightField.getText());
+                double gross = Double.parseDouble(grossWeightField.getText());
+                int currentKm = Integer.parseInt(currentKmField.getText());
+                LocalDate acquisition = acquisitionDateField.getValue();
+                int maintenance = Integer.parseInt(maintenanceFrequencyField.getText());
 
-                    vehicleController.registerVehicle(vin, brand, model, type, registerDate, plate, tare, gross, currentKm, acquisition, maintenance);
+                vehicleController.registerVehicle(vin, brand, model, type, registerDate, plate, tare, gross, currentKm, acquisition, maintenance);
 
-                    updateVehicleList();
-                    return null; // Fechar diálogo após sucesso
-                } else {
-                    ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
-                    return null; // Prevenir fechamento do diálogo
-                }
+                updateVehicleList();
+            } else {
+                ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
+                event1.consume(); // Prevenir fechamento do diálogo
             }
-            return null;
         });
+
         dialog.showAndWait();
     }
 
@@ -498,36 +499,37 @@ public class VehiclesMenuGUI {
             // Add validation listeners
             addValidationListeners(dateField, kmField);
 
-            dialog.setResultConverter(dialogButton -> {
-                if (dialogButton == addButtonType) {
-                    boolean valid = validateInputs(dateField, kmField);
-                    if (valid) {
-                        LocalDate date = dateField.getValue();
-                        int km;
-                        try {
-                            km = Integer.parseInt(kmField.getText());
-                        } catch (Exception e) {
-                            ShowError.showAlert("New Maintenance", "Invalid kilometers value.", null);
-                            return null;
-                        }
-                        String[] parts = selectedVehicle.split(" \\| ");
-                        String plate = parts[0].split(":")[1].trim();
-
-                        registerMaintenanceController.createMaintenance(plate, date, km);
-                        updateMaintenanceList();
-                        updateVehiclesNeedingMaintenance();
-                    } else {
-                        ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
-                        return null; // Prevent dialog from closing
+            Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
+            addButton.addEventFilter(ActionEvent.ACTION, event1 -> {
+                boolean valid = validateInputs(dateField, kmField);
+                if (valid) {
+                    LocalDate date = dateField.getValue();
+                    int km;
+                    try {
+                        km = Integer.parseInt(kmField.getText());
+                    } catch (Exception e) {
+                        ShowError.showAlert("New Maintenance", "Invalid kilometers value.", null);
+                        event1.consume();
+                        return;
                     }
+                    String[] parts = selectedVehicle.split(" \\| ");
+                    String plate = parts[0].split(":")[1].trim();
+
+                    registerMaintenanceController.createMaintenance(plate, date, km);
+                    updateMaintenanceList();
+                    updateVehiclesNeedingMaintenance();
+                } else {
+                    ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
+                    event1.consume(); // Prevenir fechamento do diálogo
                 }
-                return null;
             });
+
             dialog.showAndWait();
         } else {
             ShowError.showAlert("Maintenance", "No vehicle selected for maintenance.", null);
         }
     }
+
 
     private void addValidationListeners(DatePicker dateField, TextField kmField) {
         dateField.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -644,6 +646,8 @@ public class VehiclesMenuGUI {
     @FXML
     void initialize() {
         vbox_selectedVehicle.setVisible(false);
+        removeBtnMaintenance.setDisable(true);
+        maintenanceAddBtn.setDisable(true);
 
         updateVehicleList();
         updateMaintenanceList();
@@ -657,14 +661,24 @@ public class VehiclesMenuGUI {
         });
 
         listViewMaintenance.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            removeBtnMaintenance.setDisable(newValue == null);
-        });
-        removeBtnMaintenance.setDisable(true);
+            if (newValue != null) {
+                removeBtnMaintenance.setDisable(false);
+            }else {
+                removeBtnMaintenance.setDisable(true);
+        }});
 
         listViewVehicle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             removeBtn.setDisable(newValue == null);
         });
         removeBtn.setDisable(true);
+
+        listViewVehicle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                maintenanceAddBtn.setDisable(false);
+            } else {
+                maintenanceAddBtn.setDisable(true);
+            }
+        });
     }
 
     private MaintenanceDto getLatestMaintenance(VehicleDto vehicle, List<MaintenanceDto> maintenanceDtoList) {
