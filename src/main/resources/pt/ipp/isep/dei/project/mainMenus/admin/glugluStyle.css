@@ -227,3 +227,23 @@
 .no-margin-button {
     -fx-padding: 0; /* Define o preenchimento interno como zero para remover as margens */
 }
+
+.urgency-low {
+    -fx-fill: green;
+    -fx-text-fill: green;
+        -fx-font-weight: bold;
+
+}
+
+.urgency-medium {
+    -fx-fill: orange;
+    -fx-text-fill: orange;
+        -fx-font-weight: bold;
+
+}
+
+.urgency-high {
+    -fx-fill: red;
+    -fx-text-fill: red;
+        -fx-font-weight: bold;
+}

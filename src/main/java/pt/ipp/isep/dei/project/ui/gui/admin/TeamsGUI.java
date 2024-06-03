@@ -10,7 +10,6 @@ import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
-import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
 
@@ -151,6 +150,15 @@ public class TeamsGUI {
         alert.showAndWait();
     }
 
+    @FXML
+    void routeBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void updateTeamList() {
         teamList.clear();
@@ -251,14 +259,9 @@ public class TeamsGUI {
         }
     }
 
-    @FXML
-    void routeBtnActionHandle(ActionEvent event) {
-        // Handle route button action
-    }
-
-   // @FXML
+    // @FXML
     // void spacesBtnActionHandle(ActionEvent event) {
-        // Handle spaces button action
+    // Handle spaces button action
     //}
 
     @FXML

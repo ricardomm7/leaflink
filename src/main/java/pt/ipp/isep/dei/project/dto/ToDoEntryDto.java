@@ -121,7 +121,8 @@ public class ToDoEntryDto {
     public void setUrgencyStatus(UrgencyStatus urgencyStatus) {
         this.urgencyStatus = urgencyStatus;
     }
-        /**
+
+    /**
      * Checks if two to-do entries are equal.
      *
      * @param o The object to compare.

@@ -5,10 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
-import pt.ipp.isep.dei.project.application.controller.ListMaintenanceController;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 public class TasksGUI {
 
-    private final ListMaintenanceController listMaintenanceController = new ListMaintenanceController();
     private final RegisterToDoEntryController registerToDoEntryController = new RegisterToDoEntryController();
 
     @FXML
@@ -124,17 +123,14 @@ public class TasksGUI {
         dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
 
         TextField titleField = new TextField();
-        titleField.setPromptText("Title");
         Label titleErrorLabel = new Label();
         titleErrorLabel.setStyle("-fx-text-fill: red;");
 
         TextField descriptionField = new TextField();
-        descriptionField.setPromptText("Description");
         Label descriptionErrorLabel = new Label();
         descriptionErrorLabel.setStyle("-fx-text-fill: red;");
 
         TextField durationField = new TextField();
-        durationField.setPromptText("Duration (hours)");
         Label durationErrorLabel = new Label();
         durationErrorLabel.setStyle("-fx-text-fill: red;");
 
@@ -172,15 +168,29 @@ public class TasksGUI {
             }
         });
 
-        VBox content = new VBox(10);
-        content.getChildren().addAll(
-                new Label("Title:"), titleField, titleErrorLabel,
-                new Label("Description:"), descriptionField, descriptionErrorLabel,
-                new Label("Duration (hours):"), durationField, durationErrorLabel,
-                new Label("Urgency:"), urgencyComboBox,
-                new Label("Green Space:"), greenSpaceComboBox
-        );
-        dialog.getDialogPane().setContent(content);
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        grid.add(new Label("Title:"), 0, 0);
+        grid.add(titleField, 1, 0);
+        grid.add(titleErrorLabel, 2, 0);
+
+        grid.add(new Label("Description:"), 0, 1);
+        grid.add(descriptionField, 1, 1);
+        grid.add(descriptionErrorLabel, 2, 1);
+
+        grid.add(new Label("Duration (hours):"), 0, 2);
+        grid.add(durationField, 1, 2);
+        grid.add(durationErrorLabel, 2, 2);
+
+        grid.add(new Label("Urgency:"), 0, 3);
+        grid.add(urgencyComboBox, 1, 3);
+
+        grid.add(new Label("Green Space:"), 0, 4);
+        grid.add(greenSpaceComboBox, 1, 4);
+
+        dialog.getDialogPane().setContent(grid);
 
         addValidationListeners(titleField, descriptionField, durationField);
 
@@ -262,11 +272,11 @@ public class TasksGUI {
     void handleRemoveToDoEntry(ActionEvent event) {
         String selectedItem = toDoListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-        String[] splittedString = selectedItem.split(" \\| ");
-        String title = splittedString[0].split(": ")[1];
-        String space = splittedString[2].split(": ")[1];
+            String[] splittedString = selectedItem.split(" \\| ");
+            String title = splittedString[0].split(": ")[1];
+            String space = splittedString[2].split(": ")[1];
 
-            registerToDoEntryController.removeToDoEntry(title,space);
+            registerToDoEntryController.removeToDoEntry(title, space);
             updateToDoEntry();
         } else {
             ShowError.showAlert("ToDo Entry", "No ToDo entry selected for removal.", null);

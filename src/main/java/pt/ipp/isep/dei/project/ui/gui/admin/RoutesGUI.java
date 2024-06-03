@@ -104,6 +104,15 @@ public class RoutesGUI {
     }
 
     @FXML
+    void routeBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void analysBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/admin/adminMenu_analysis.fxml", true, 1205, 900, true);
@@ -125,15 +134,6 @@ public class RoutesGUI {
     void caollabBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void routeBtnActionHandle(ActionEvent event) {
-        try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

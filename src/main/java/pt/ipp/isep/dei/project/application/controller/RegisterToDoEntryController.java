@@ -98,10 +98,11 @@ public class RegisterToDoEntryController {
     /**
      * Remove to do entry.
      *
-     * @param title    the title
-     * @param space    the space
+     * @param title the title
+     * @param space the space
      */
     public void removeToDoEntry(String title, String space) {
-        entryRepository.remove(title,  space);;
+        entryRepository.remove(title, space);
+        ;
     }
 }
