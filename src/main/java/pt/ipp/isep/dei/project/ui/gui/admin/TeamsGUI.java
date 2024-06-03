@@ -256,16 +256,61 @@ public class TeamsGUI {
         // Handle route button action
     }
 
-    @FXML
-    void spacesBtnActionHandle(ActionEvent event) {
+   // @FXML
+    // void spacesBtnActionHandle(ActionEvent event) {
         // Handle spaces button action
-    }
+    //}
 
     @FXML
     void usersBtnActionHandle(ActionEvent event) {
         // Handle users button action
     }
 
+    @FXML
+    void caollabBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void teamsBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_teams.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void analysBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_analysis.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void vehicleBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_vehic.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void spacesBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+/*
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
@@ -300,5 +345,5 @@ public class TeamsGUI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
