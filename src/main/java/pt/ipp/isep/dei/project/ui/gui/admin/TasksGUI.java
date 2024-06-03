@@ -1,10 +1,51 @@
 package pt.ipp.isep.dei.project.ui.gui.admin;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
+import pt.ipp.isep.dei.project.application.controller.ListMaintenanceController;
+import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
+import pt.ipp.isep.dei.project.domain.UrgencyStatus;
+import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
+import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
+import pt.ipp.isep.dei.project.ui.ShowError;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TasksGUI {
+
+    private final ListMaintenanceController listMaintenanceController = new ListMaintenanceController();
+    private final RegisterToDoEntryController registerToDoEntryController = new RegisterToDoEntryController();
+
+    @FXML
+    private ListView<String> toDoListView;
+
+    @FXML
+    private List<ToDoEntryDto> allToDoEntry;
+
+    @FXML
+    private Button addEntryBtn;
+    @FXML
+    private Button removeEntryBtn;
+
+    @FXML
+    private Label titleLabel;
+    @FXML
+    private Label descriptionLabel;
+    @FXML
+    private Label durationLabel;
+    @FXML
+    private Label urgencyLabel;
+    @FXML
+    private Label greenSpaceLabel;
+    @FXML
+    private VBox taskDetailsVBox;
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
@@ -71,7 +112,263 @@ public class TasksGUI {
 
     @FXML
     void usersBtnActionHandle(ActionEvent event) {
+        // Não implementado
+    }
+
+    @FXML
+    void handleAddEntry(ActionEvent event) {
+        Dialog<ToDoEntryDto> dialog = new Dialog<>();
+        dialog.setTitle("Add New To-Do Entry");
+
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        TextField titleField = new TextField();
+        titleField.setPromptText("Title");
+        Label titleErrorLabel = new Label();
+        titleErrorLabel.setStyle("-fx-text-fill: red;");
+
+        TextField descriptionField = new TextField();
+        descriptionField.setPromptText("Description");
+        Label descriptionErrorLabel = new Label();
+        descriptionErrorLabel.setStyle("-fx-text-fill: red;");
+
+        TextField durationField = new TextField();
+        durationField.setPromptText("Duration (hours)");
+        Label durationErrorLabel = new Label();
+        durationErrorLabel.setStyle("-fx-text-fill: red;");
+
+        ComboBox<UrgencyStatus> urgencyComboBox = new ComboBox<>();
+        urgencyComboBox.getItems().setAll(UrgencyStatus.values());
+
+        ComboBox<GreenSpaceDto> greenSpaceComboBox = new ComboBox<>();
+        greenSpaceComboBox.getItems().setAll(registerToDoEntryController.getGreenSpacesDto());
+        greenSpaceComboBox.setCellFactory(new Callback<ListView<GreenSpaceDto>, ListCell<GreenSpaceDto>>() {
+            @Override
+            public ListCell<GreenSpaceDto> call(ListView<GreenSpaceDto> param) {
+                return new ListCell<GreenSpaceDto>() {
+                    @Override
+                    protected void updateItem(GreenSpaceDto item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.getName());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+
+        greenSpaceComboBox.setButtonCell(new ListCell<GreenSpaceDto>() {
+            @Override
+            protected void updateItem(GreenSpaceDto item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item.getName());
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+        VBox content = new VBox(10);
+        content.getChildren().addAll(
+                new Label("Title:"), titleField, titleErrorLabel,
+                new Label("Description:"), descriptionField, descriptionErrorLabel,
+                new Label("Duration (hours):"), durationField, durationErrorLabel,
+                new Label("Urgency:"), urgencyComboBox,
+                new Label("Green Space:"), greenSpaceComboBox
+        );
+        dialog.getDialogPane().setContent(content);
+
+        addValidationListeners(titleField, descriptionField, durationField);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                boolean isValid = validateInputs(titleField, descriptionField, durationField);
+                if (isValid) {
+                    String title = titleField.getText();
+                    String description = descriptionField.getText();
+                    int duration = Integer.parseInt(durationField.getText());
+                    UrgencyStatus urgency = urgencyComboBox.getValue();
+                    GreenSpaceDto greenSpace = greenSpaceComboBox.getValue();
+                    registerToDoEntryController.createNewToDoEntry(title, description, duration, urgency, greenSpace);
+
+                    updateToDoEntry();
+                    return new ToDoEntryDto(title, description, duration, urgency, greenSpace);
+                } else {
+                    ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
+                    return null;
+                }
+            }
+            return null;
+        });
+
+        dialog.showAndWait().ifPresent(entryDto -> {
+            allToDoEntry.add(entryDto);
+            updateToDoEntry();
+        });
+    }
+
+    private void addValidationListeners(TextField titleField, TextField descriptionField, TextField durationField) {
+        titleField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
+                titleField.setStyle("-fx-border-color: red;");
+            } else {
+                titleField.setStyle(null);
+            }
+        });
+
+        descriptionField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
+                descriptionField.setStyle("-fx-border-color: red;");
+            } else {
+                descriptionField.setStyle(null);
+            }
+        });
+
+        durationField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d+") || Integer.parseInt(newValue) <= 0) {
+                durationField.setStyle("-fx-border-color: red;");
+            } else {
+                durationField.setStyle(null);
+            }
+        });
+    }
+
+    private boolean validateInputs(TextField titleField, TextField descriptionField, TextField durationField) {
+        boolean valid = true;
+
+        if (!titleField.getText().matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
+            titleField.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+
+        if (!descriptionField.getText().matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
+            descriptionField.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+
+        if (!durationField.getText().matches("\\d+") || Integer.parseInt(durationField.getText()) <= 0) {
+            durationField.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    @FXML
+    void handleRemoveToDoEntry(ActionEvent event) {
+        String selectedItem = toDoListView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+        String[] splittedString = selectedItem.split(" \\| ");
+        String title = splittedString[0].split(": ")[1];
+        String space = splittedString[2].split(": ")[1];
+
+            registerToDoEntryController.removeToDoEntry(title,space);
+            updateToDoEntry();
+        } else {
+            ShowError.showAlert("ToDo Entry", "No ToDo entry selected for removal.", null);
+        }
 
     }
 
+
+    @FXML
+    void initialize() {
+        taskDetailsVBox.setVisible(false);
+        removeEntryBtn.setDisable(true);
+        allToDoEntry = registerToDoEntryController.getToDoEntry();
+        updateToDoEntry();
+
+        toDoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showTaskDetails(newValue);
+                removeEntryBtn.setDisable(false);
+            } else {
+                taskDetailsVBox.setVisible(false);
+                removeEntryBtn.setDisable(true);
+            }
+        });
+
+
+        toDoListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                            setStyle(null);
+                            ToDoEntryDto entry = getToDoEntryDto(item);
+                            if (entry != null) {
+                                switch (entry.getUrgencyStatus()) {
+                                    case HIGH:
+                                        setStyle("-fx-text-fill: red;");
+                                        break;
+                                    case MEDIUM:
+                                        setStyle("-fx-text-fill: orange;");
+                                        break;
+                                    case LOW:
+                                        setStyle("-fx-text-fill: green;");
+                                        break;
+                                    default:
+                                        setStyle("-fx-text-fill: black;");
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+
+    private void updateToDoEntry() {
+        allToDoEntry = registerToDoEntryController.getToDoEntry();
+        List<String> toDoEntryList = allToDoEntry.stream()
+                .map(entry -> String.format("Title: %s | Duration: %dh | Green Space: %s",
+                        entry.getTitle(), entry.getDuration(), entry.getGreenSpace().getName()))
+                .collect(Collectors.toList());
+        ObservableList<String> observableList = FXCollections.observableArrayList(toDoEntryList);
+        toDoListView.getItems().setAll(observableList);
+    }
+
+
+    private void showTaskDetails(String string) {
+        ToDoEntryDto entry = getToDoEntryDto(string);
+
+        if (entry != null) {
+            titleLabel.setText(entry.getTitle());
+            descriptionLabel.setText(entry.getDescription());
+            durationLabel.setText(String.valueOf(entry.getDuration()) + "h");
+            urgencyLabel.setText(entry.getUrgencyStatus().toString());
+            greenSpaceLabel.setText(entry.getGreenSpace().getName());
+            taskDetailsVBox.setVisible(true);
+        } else {
+            taskDetailsVBox.setVisible(false);
+        }
+    }
+
+    private ToDoEntryDto getToDoEntryDto(String string) {
+        ToDoEntryDto entry = null;
+        String[] splittedString = string.split(" \\| ");
+        String title = splittedString[0].split(": ")[1];
+        String duration = splittedString[1].split(": ")[1].replace("h", "");
+        String space = splittedString[2].split(": ")[1];
+
+        for (ToDoEntryDto toDoEntry : allToDoEntry) {
+            if (toDoEntry.getTitle().equalsIgnoreCase(title) && toDoEntry.getGreenSpace().getName().equalsIgnoreCase(space)) {
+                entry = toDoEntry;
+                return entry;
+            }
+        }
+        return null;
+    }
 }

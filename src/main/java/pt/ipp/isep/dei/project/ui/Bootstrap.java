@@ -24,8 +24,8 @@ public class Bootstrap implements Runnable {
         //addVehicles();
         //addCollaborators();
         //addMaintenance();
-        //addGreenSpaces();
-        //addEntries();
+        addGreenSpaces();
+        addEntries();
     }
 
     /**
@@ -106,12 +106,12 @@ public class Bootstrap implements Runnable {
     private void addEntries() {
         EntryRepository entryRepository = Repositories.getInstance().getEntryRepository();
 
-        entryRepository.create(new ToDoEntryDto("Prunning trees", "machines required", 2, UrgencyStatus.LOW, new GreenSpaceDto("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, "a@a.com", "address", "city", "8888-000")));
-        entryRepository.create(new ToDoEntryDto("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, "b@b.com", "123 Main St", "Metropolis", "1234-005")));
-        entryRepository.create(new ToDoEntryDto("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpaceDto("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, "c@c.com", "456 Elm St", "Cityville", "5432-001")));
-        entryRepository.create(new ToDoEntryDto("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpaceDto("Community Garden", GreenSpaceType.GARDEN, 100, "d@d.com", "789 Oak St", "Townsville", "6789-000")));
-        entryRepository.create(new ToDoEntryDto("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpaceDto("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, "e@e.com", "101 Pine St", "Villageville", "1357-009")));
-        entryRepository.create(new ToDoEntryDto("Trimming bushes", "hedge trimmer needed", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Riverside Park", GreenSpaceType.MEDIUM_SIZED_PARK, 400, "f@f.com", "202 Cedar St", "Riverdale", "9753-001")));
+        entryRepository.create(new ToDoEntry("Prunning trees", "machines required", 2, UrgencyStatus.LOW, new GreenSpace("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, "a@a.com", new Address("address", "city", "8888-000"))));
+        entryRepository.create(new ToDoEntry("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpace("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, "b@b.com", new Address("123 Main St", "Metropolis", "1234-005"))));
+        entryRepository.create(new ToDoEntry("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpace("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, "c@c.com", new Address("456 Elm St", "Cityville", "5432-001"))));
+        entryRepository.create(new ToDoEntry("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpace("Community Garden", GreenSpaceType.GARDEN, 100, "d@d.com", new Address("789 Oak St", "Townsville", "6789-000"))));
+        entryRepository.create(new ToDoEntry("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpace("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, "e@e.com", new Address("101 Pine St", "Villageville", "1357-009"))));
+        entryRepository.create(new ToDoEntry("Trimming bushes", "hedge trimmer needed", 1, UrgencyStatus.HIGH, new GreenSpace("Riverside Park", GreenSpaceType.MEDIUM_SIZED_PARK, 400, "f@f.com", new Address("202 Cedar St", "Riverdale", "9753-001"))));
     }
 
     /**

@@ -5,10 +5,7 @@ import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.ToDoEntry;
 import pt.ipp.isep.dei.project.domain.Vehicle;
-import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
-import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
-import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
 import java.io.Serializable;
@@ -46,10 +43,9 @@ public class EntryRepository implements Serializable {
      * @param dto the ToDoEntryDto containing the information for the new ToDoEntry.
      * @throws IllegalArgumentException if a ToDoEntry with the same description already exists.
      */
-    public void create(ToDoEntryDto dto) {
-        ToDoEntry toDoEntry = ToDoEntryMapper.toDomain(dto);
-        if (checkForDuplicates(toDoEntry)) {
-            addToDoEntry(toDoEntry);
+    public void create(ToDoEntry dto) {
+        if (checkForDuplicates(dto)) {
+            addToDoEntry(dto);
         } else {
             throw new IllegalArgumentException("There is already a ToDoEntry with the same description.");
         }
@@ -181,12 +177,8 @@ public class EntryRepository implements Serializable {
      *
      * @return a list of all ToDoEntryDto objects.
      */
-    public List<ToDoEntryDto> getToDoEntryList() {
-        List<ToDoEntryDto> r = new ArrayList<>();
-        for (ToDoEntry e : toDoEntryList) {
-            r.add(new ToDoEntryDto(e.getTitle(), e.getDescription(), e.getDuration(), e.getUrgencyStatus(), GreenSpaceMapper.toDto(e.getGreenSpace())));
-        }
-        return r;
+    public List<ToDoEntry> getToDoEntryList() {
+        return toDoEntryList;
     }
 
     /**
@@ -204,4 +196,17 @@ public class EntryRepository implements Serializable {
         }
         return false;
     }
+
+
+    /**
+     * Remove.
+     *
+     * @param title      the title
+     * @param greenSpace the green space
+     */
+    public void remove(String title, String greenSpace) {
+        toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
+    }
+
+
 }
