@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0"
             prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.TeamsGUI">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.TeamsGUI">
 
     <left>
         <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar"
@@ -127,9 +127,8 @@
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
                                                 <TextField fx:id="teamSearch" editable="false" focusTraversable="false"
-                                                           mouseTransparent="true" prefHeight="31.0" prefWidth="555.0"
-                                                           promptText="File path" styleClass="text-field-custom"
-                                                           HBox.hgrow="ALWAYS">
+                                                           mouseTransparent="true" promptText="File path"
+                                                           styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                                     </HBox.margin>
@@ -152,7 +151,7 @@
                                         </HBox>
                                         <HBox VBox.vgrow="ALWAYS">
                                             <children>
-                                                <ListView HBox.hgrow="ALWAYS"/>
+                                                <ListView fx:id="listTeamView" HBox.hgrow="ALWAYS"/>
                                             </children>
                                         </HBox>
                                     </children>

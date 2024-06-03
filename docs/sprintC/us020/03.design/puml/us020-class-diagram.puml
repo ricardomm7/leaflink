@@ -7,7 +7,7 @@ package UI {
     class RegisterGreenSpaceUI {
         - controller : RegisterGreenSpaceController
         + RegisterGreenSpaceUI()
-        + createNewGS() : void
+        + createNewGS(name : String, type : GreenSpaceType, area : Double, manager : String, street : String, zipCode : String, city : String) : void
         '- parseAddress(street : String, zipcode : String, city : String) : Address
     }
 }
@@ -44,9 +44,9 @@ package MODEL{
         - name : String
         - type : GreenSpaceType
         - area : Double
-        - manager : UserSession
+        - manager : String
         - address : Address
-        + GreenSpace(name : String, type : String, area : Double, address : Address, manager : UserSession)
+        + GreenSpace(name : String, type : String, area : Double, address : Address, manager : String)
         + verifyFilled(greenSpace: GreenSpace) : Boolean
     }
 }
@@ -56,14 +56,14 @@ package DTO{
         - name : String
         - type : GreenSpaceType
         - area : Double
-        - manager : UserSession
+        - manager : String
         - address : String
         - city : String
         - zipCode : String
         + getName() : String
         + getType() : GreenSpaceType
         + getArea() : Double
-        + getManager() : UserSession
+        + getManager() : String
         + getAddress() : String
         + getCity() : String
         + getZipCode() : String

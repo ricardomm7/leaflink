@@ -1,22 +1,24 @@
-package pt.ipp.isep.dei.project.ui.gui;
+package pt.ipp.isep.dei.project.ui.gui.admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import pt.ipp.isep.dei.project.Main;
 
 public class AdminGUI {
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
-
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_tasks.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,7 +27,7 @@ public class AdminGUI {
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_teams.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,7 +36,7 @@ public class AdminGUI {
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_analysis.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_analysis.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,7 +45,7 @@ public class AdminGUI {
     @FXML
     void vehicleBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_vehic.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,38 +53,24 @@ public class AdminGUI {
 
     @FXML
     void routeBtnActionHandle(ActionEvent event) {
-
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void spacesBtnActionHandle(ActionEvent event) {
-
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void usersBtnActionHandle(ActionEvent event) {
 
-    }
-
-    @FXML
-    void handleVehicleSearchBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleVehicleAddBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handelVehicleRemoveBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleEnterSearchBar(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            handleVehicleSearchBtn(new ActionEvent());
-        }
     }
 }

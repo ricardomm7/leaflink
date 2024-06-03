@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.project.ui.gui;
+package pt.ipp.isep.dei.project.ui.gui.admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,6 +52,7 @@ public class CollaboratorsGUI {
 
     @FXML
     private Label addressLabel;
+
     @FXML
     private Label mobileLabel;
 
@@ -232,10 +233,10 @@ public class CollaboratorsGUI {
         });
 
         zipCodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.contains("-")) {
-                zipCodeField.setStyle("-fx-border-color: red;");
+            if (!newValue.matches("\\d{4}-\\d{3}")) { // Verifica se o ZIP code possui o formato correto
+                zipCodeField.setStyle("-fx-border-color: red;"); // Define o estilo do campo se o formato estiver incorreto
             } else {
-                zipCodeField.setStyle(null);
+                zipCodeField.setStyle(null); // Remove qualquer estilo definido anteriormente
             }
         });
 
@@ -325,6 +326,15 @@ public class CollaboratorsGUI {
     }
 
     @FXML
+    void tasksBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_tasks.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void handleJobAddBtn(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("New Job");
@@ -339,6 +349,15 @@ public class CollaboratorsGUI {
                 jobC.createJob(jobDescription);
                 updateJobsList();
             }
+        }
+    }
+
+    @FXML
+    void routeBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_routes.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -405,7 +424,7 @@ public class CollaboratorsGUI {
     @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_collab.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -414,7 +433,7 @@ public class CollaboratorsGUI {
     @FXML
     void teamsBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_teams.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_teams.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -423,34 +442,28 @@ public class CollaboratorsGUI {
     @FXML
     void analysBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_analysis.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_analysis.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void tasksBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de tarefas (caso necessário)
     }
 
     @FXML
     void vehicleBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/adminMenu_vehic.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_vehic.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    void routeBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de rotas (caso necessário)
-    }
-
-    @FXML
     void spacesBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de espaços (caso necessário)
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

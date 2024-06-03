@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.project.domain;
 
-import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
@@ -13,7 +12,8 @@ public class GreenSpace implements Serializable {
     private String name;
     private GreenSpaceType type;
     private double area;
-    private transient UserSession manager;
+    private String manager;
+    //private transient UserSession manager;
     private Address address;
 
     /**
@@ -25,15 +25,28 @@ public class GreenSpace implements Serializable {
      * @param manager the manager of the green space.
      * @param address the address of the green space.
      */
-    public GreenSpace(String name, GreenSpaceType type, double area, UserSession manager, Address address) {
+    public GreenSpace(String name, GreenSpaceType type, double area, String manager, Address address) {
         try {
             setArea(area);
             setName(name);
-            this.type = type;
+            setType(type);
             this.manager = manager;
             this.address = address;
         } catch (Exception e) {
             ShowError.showAlert("Greenspace", e.getMessage(), null);
+        }
+    }
+
+    /**
+     * Sets the green space type.
+     *
+     * @param type - the green space type from the enum class.
+     */
+    private void setType(GreenSpaceType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("The type can't be empty!");
+        } else {
+            this.type = type;
         }
     }
 
@@ -102,9 +115,9 @@ public class GreenSpace implements Serializable {
     /**
      * Gets the manager of the green space.
      *
-     * @return the manager of the green space.
+     * @return the manager's e-mail of the green space.
      */
-    public UserSession getManager() {
+    public String getManager() {
         return manager;
     }
 }

@@ -7,7 +7,7 @@ package UI{
     class ListGreenSpacesUI {
         - controller : ListGreenSpacesController
         + ListGreenSpacesUI()
-        + getOrganizedList(loggedUser) : List<GreenSpace>
+        + getOrganizedList(loggedUser : String) : List<GreenSpace>
     }
 }
 package CONTROLLER {
@@ -16,7 +16,7 @@ package CONTROLLER {
         - greenSpaceRepository : GreenSpaceRepository
 
         + ListGreenSpacesController()
-        +getList(loggedUser) : List<GreenSpace>
+        +getList(loggedUser : String) : List<GreenSpace>
     }
 }
 package DOMAIN{
@@ -32,9 +32,9 @@ package REPOSITORY{
     class GreenSpaceRepository {
         - greenSpaceList : List<GreenSpace>
         + GreenSpaceRepository()
-        + getOrganizedList(loggedUser) : List<GreenSpaceDto>
+        + getOrganizedList(loggedUser : String) : List<GreenSpaceDto>
         - verifyEmptyList(listMatched : List<GreenSpace>) : Boolean
-        - matchWithLoggedUser(loggedUser) : List<GreenSpace>
+        - matchWithLoggedUser(loggedUser : String) : List<GreenSpace>
         - organizeList(listMatched : List<GreenSpace>) : void
     }
     }
@@ -42,7 +42,7 @@ package MODEL{
     class GreenSpace {
         - name : String
         - size : Double
-        - manager : Collaborator
+        - manager : String
         + getManager() : Collaborator
         + getSize() : Double
     }
@@ -67,14 +67,14 @@ package DTO{
                 - name : String
                 - type : GreenSpaceType
                 - area : Double
-                - manager : UserSession
+                - manager : String
                 - address : String
                 - city : String
                 - zipCode : String
                 + getName() : String
                 + getType() : GreenSpaceType
                 + getArea() : Double
-                + getManager() : UserSession
+                + getManager() : String
                 + getAddress() : String
                 + getCity() : String
                 + getZipCode() : String

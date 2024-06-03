@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.project.dto;
 
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 
+import java.util.Objects;
+
 /**
  * The ToDoEntryDto class represents a data transfer object for the ToDoEntry domain object.
  * It encapsulates the data related to a to-do entry and provides methods to access and manipulate this data.
@@ -118,5 +120,23 @@ public class ToDoEntryDto {
      */
     public void setUrgencyStatus(UrgencyStatus urgencyStatus) {
         this.urgencyStatus = urgencyStatus;
+    }
+
+    /**
+     * Checks if two to-do entries are equal.
+     *
+     * @param o The object to compare.
+     * @return True if the objects are equal, false otherwise.
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ToDoEntryDto toDoEntry = (ToDoEntryDto) o;
+        return duration == toDoEntry.duration &&
+                Objects.equals(greenSpace, toDoEntry.greenSpace) &&
+                Objects.equals(description, toDoEntry.description) &&
+                urgencyStatus == toDoEntry.urgencyStatus;
     }
 }

@@ -494,4 +494,77 @@ This feature allows a Collaborator to record the completion of a task.
 
 ## Troubleshooting
 
+In this troubleshooting section, we provide solutions to common issues that users may encounter while utilizing the LeafLink software. From registration errors to system malfunctions, our troubleshooting guide offers step-by-step solutions to address these challenges effectively.
+
+### 1. Unable to register a collaborator in the HRm system.
+
+Verify that all required fields for registering a collaborator, including personal information, assigned job, and fundamental characteristics, are accurately filled out. Ensure that the system has the necessary permissions to create new collaborator entries. If the error persists, check for any restrictions or validation rules that may be preventing successful registration.
+
+### 2. Error while registering a vehicle in the VFM system.
+
+Double-check the input data required for registering a vehicle, including VIN, vehicle plate, tare weight, gross weight, current kilometers, acquisition date, and maintenance frequency. Ensure that all mandatory fields are filled out accurately and completely. Verify that the VIN provided is unique and not already registered in the system.
+
+### 3. Unable to generate a team proposal automatically in the HRM system.
+
+Ensure that the HRM system has access to the necessary data, such as collaborator skills and job requirements, to generate team proposals automatically. Verify that the system settings for team composition and maximum team size are configured correctly. If the automatic proposal generation fails, consider manually reviewing collaborator skills and assigning teams based on individual qualifications.
+
+### 4. Error when analyzing water consumption costs in the GMS system.
+
+Verify that the input data, including the time period and park identification, is correctly entered and matches the available data in the system. Check for any formatting errors or inconsistencies in the data files. Ensure that the system has access to the necessary data files and permissions to perform the analysis.
+
+### 5. Error when listing vehicles needing check-up in the VFM system.
+
+Verify that all registered vehicles are correctly marked with their last maintenance check-up dates. Ensure that the system has access to the necessary vehicle maintenance data to generate the list of vehicles needing check-up. Check for any inconsistencies or errors in the maintenance records that may be affecting the listing process. If the error persists, review the system configuration and database connections to identify potential issues. 
+
+
+
+###
+
+
+
+###
+
+
+
+###
+
+
+
+
 ## Frequently Asked Questions_ FAQs
+
+In this Frequently Asked Questions (FAQ) section for LeafLink software we aim to address common inquiries and provide straightforward answers to help users navigate the platform smoothly. Whether you're new to LeafLink or seeking clarification on specific features, this FAQ section offers concise solutions to your queries. Explore the questions below to find the information you need to enhance your experience with LeafLink.
+
+### Q: How do I register a new collaborator in the HRM system?
+
+A: To register a new collaborator, navigate to the section for creating a new collaborator in the HRM system. Fill out all required fields with accurate information, including personal details and job assignments. Review the entered data for accuracy and confirm the registration to create the new collaborator profile.
+
+### Q: What steps should I take to register a vehicle in the VFM system?
+
+A: To register a vehicle in the VFM system, navigate to the vehicle registration section and provide the required vehicle data, including VIN, vehicle plate, tare weight, gross weight, current kilometers, acquisition date, and maintenance frequency. Ensure that all mandatory fields are filled out accurately and completely, and confirm the registration to add the vehicle to the system's database.
+
+### Q: Can I generate a team proposal automatically in the HRM system?
+
+A: Yes, you can generate a team proposal automatically in the HRM system by accessing the designated section and providing the necessary input, such as required skills and maximum team size. The system will analyze available collaborator skills and qualifications and propose suitable team compositions based on predefined criteria. Review the generated team proposal for accuracy and confirm it to proceed with task assignment.
+
+### Q: How can I analyze water consumption costs in the GMS system?
+
+A: Access the section for requesting statistical analysis of water consumption costs in the GMS system. Input the necessary data, including the time period and park identification, for the analysis. The system will process the data and generate analysis outcomes, such as average costs and statistical indicators. Review the analysis results for insights into water consumption costs.
+
+### Q: What should I do if I encounter an error while performing a task in the system?
+
+A: If you encounter an error or face difficulties while using the system, refer to the troubleshooting section of the user manual for guidance. Check for common issues and follow the provided solutions to resolve the problem. If the issue persists, consider reaching out to the system administrator or technical support for further assistance.
+
+### Q: How can I list vehicles needing check-up in the VFM system?
+
+A: To list vehicles needing check-up in the VFM system, access the designated section and follow the prompts to generate the list. The system will analyze vehicle maintenance records and identify vehicles that are due for check-up based on predefined criteria. Review the generated list for accuracy and take necessary maintenance actions for the listed vehicles to ensure operational efficiency.
+
+###
+
+
+
+###
+
+
+
+###

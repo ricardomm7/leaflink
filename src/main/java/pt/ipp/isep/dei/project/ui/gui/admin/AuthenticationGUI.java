@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.project.ui.gui;
+package pt.ipp.isep.dei.project.ui.gui.admin;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -71,7 +71,7 @@ public class AuthenticationGUI {
         String caminho = null;
         try {
             if (u.getId() == AuthenticationController.ROLE_ADMIN) {
-                caminho = "mainMenus/adminMenu.fxml";
+                caminho = "mainMenus/admin/adminMenu.fxml";
             }
             if (caminho == null) {
                 throw new IllegalArgumentException();

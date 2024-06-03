@@ -40,6 +40,22 @@ As a Green Space Manager (GSM), I want to add a new toDoEntry in the Agenda.
 > **Question:** When a To-Do List entry is planned and moves to the Agenda, the status change from "Pending" to "Planned". Should this entry be removed from the To-Do List or just change status to "Planned" as it is on the Agenda?
 >
 > **Answer:** Changing the status in the To-Do list to Planned seems to be a good approach.
+> 
+> **Question:** Tasks have a status of Planned, Postponed, Canceled or Done. When do they pass to "Planned" status? When they are added to the agenda (before the GSM assigns a team) or when a team is assigned to them?
+> 
+> **Answer:** Assuming you are using states, a task would become "Planned" as soon as it enters the Agenda.
+> 
+> **Question:** Should the team be generated like in the us05 or should each element be selected manually?
+>
+> **Answer:** There is only one US that allows to create teams, as you mentioned, the US05.
+> 
+> **Question:**
+>
+> **Answer:**
+> 
+> **Question:**
+>
+> **Answer:**
 
 
 
