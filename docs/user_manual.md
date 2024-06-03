@@ -386,7 +386,7 @@ This feature allows the GSM to add a new entry to the To-Do List.
 1. Open the GMS system.
 2. Navigate to the section designated for managing the To-Do List.
 3. Click on the option to add a new entry to the To-Do List.
-4. The system will request the task details such as description, urgency (High, Medium, Low), and expected duration.
+4. The system will request the task details such as title, description, urgency (High, Medium, Low), and expected duration.
 5. Select the green space from the list provided by the system.
 6. Enter the task details and select the appropriate green space.
 7. After entering the details, the system will display all entered information for review. Review the information provided for accuracy.
