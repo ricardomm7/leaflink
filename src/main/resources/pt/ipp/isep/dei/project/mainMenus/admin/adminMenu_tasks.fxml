@@ -1,88 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0"
-            prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.TasksGUI">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.TasksGUI">
 
     <left>
-        <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar"
-                 BorderPane.alignment="CENTER">
+        <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar" BorderPane.alignment="CENTER">
             <items>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0"
-                              selected="true" styleClass="menu-btn-cstm" text="Tasks">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#tasksBtnActionHandle" prefHeight="103.0" selected="true" styleClass="menu-btn-cstm" text="Tasks">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="tasks-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="tasks-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Collaborators">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Collaborators">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="collab-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="collab-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Teams">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Teams">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="team-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="team-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Analysis">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Analysis">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="analysis-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="analysis-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Vehicles">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Vehicles">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="vehicles-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="vehicles-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Routes">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#routeBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Routes">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="routes-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="routes-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Spaces">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#spacesBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Spaces">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="gs-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="gs-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Users">
+                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0" styleClass="menu-btn-cstm" text="Users">
                     <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="users-image">
+                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" styleClass="users-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
@@ -90,15 +67,14 @@
         </ToolBar>
     </left>
     <bottom>
-        <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot"
-                  BorderPane.alignment="CENTER">
+        <FlowPane alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="1076.0" styleClass="foot" BorderPane.alignment="CENTER">
             <children>
                 <Label opacity="0.54" text="LEAFLINK | Green Space Management Software | FOURCORP | ISEP | 2024">
                     <font>
-                        <Font size="11.0"/>
+                        <Font size="11.0" />
                     </font>
                     <FlowPane.margin>
-                        <Insets left="5.0"/>
+                        <Insets left="5.0" />
                     </FlowPane.margin>
                 </Label>
             </children>
@@ -111,10 +87,10 @@
                     <children>
                         <Label text="Tasks">
                             <font>
-                                <Font name="System Bold" size="25.0"/>
+                                <Font name="System Bold" size="25.0" />
                             </font>
                             <padding>
-                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                             </padding>
                         </Label>
                     </children>
@@ -127,146 +103,122 @@
                                     <children>
                                         <HBox alignment="CENTER" VBox.vgrow="NEVER">
                                             <children>
-                                                <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT"
-                                                        strokeType="INSIDE" styleClass="urgency-low"
-                                                        HBox.hgrow="ALWAYS">
+                                                <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="urgency-low" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets left="10.0" right="10.0"/>
+                                                        <Insets left="10.0" right="10.0" />
                                                     </HBox.margin>
                                                 </Circle>
-                                                <Label styleClass="urgency-low" text="Low urgency"/>
-                                                <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT"
-                                                        strokeType="INSIDE" styleClass="urgency-medium">
+                                                <Label styleClass="urgency-low" text="Low urgency" />
+                                                <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="urgency-medium">
                                                     <HBox.margin>
-                                                        <Insets left="10.0" right="10.0"/>
+                                                        <Insets left="10.0" right="10.0" />
                                                     </HBox.margin>
                                                 </Circle>
-                                                <Label styleClass="urgency-medium" text="Medium urgency"/>
-                                                <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT"
-                                                        strokeType="INSIDE" styleClass="urgency-high">
+                                                <Label styleClass="urgency-medium" text="Medium urgency" />
+                                                <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="urgency-high">
                                                     <HBox.margin>
-                                                        <Insets left="10.0" right="10.0"/>
+                                                        <Insets left="10.0" right="10.0" />
                                                     </HBox.margin>
                                                 </Circle>
-                                                <Label styleClass="urgency-high" text="High urgency"/>
-                                                <Region HBox.hgrow="ALWAYS"/>
-                                                <Button fx:id="addEntryBtn" mnemonicParsing="false"
-                                                        onAction="#handleAddEntry" styleClass="button-custom"
-                                                        text="Add New Entry">
+                                                <Label styleClass="urgency-high" text="High urgency" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="addEntryBtn" mnemonicParsing="false" onAction="#handleAddEntry" styleClass="button-custom" text="Add New Entry">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button fx:id="removeEntryBtn" disable="true" mnemonicParsing="false"
-                                                        onAction="#handleRemoveToDoEntry" styleClass="button-custom"
-                                                        text="Remove">
+                                                <Button fx:id="removeEntryBtn" disable="true" mnemonicParsing="false" onAction="#handleRemoveToDoEntry" styleClass="button-custom" text="Remove">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </Button>
                                             </children>
                                         </HBox>
                                         <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                                             <items>
-                                                <ListView fx:id="toDoListView"/>
-                                                <VBox fx:id="taskDetailsVBox" fillWidth="false" prefHeight="380.0"
-                                                      prefWidth="1040.0">
+                                                <ListView fx:id="toDoListView" />
+                                                <VBox fx:id="taskDetailsVBox" fillWidth="false" prefHeight="380.0" prefWidth="1040.0">
                                                     <children>
-                                                        <Label styleClass="costum-Label"
-                                                               text="Selected Entry Information">
+                                                        <Label styleClass="costum-Label" text="Selected Entry Information">
                                                             <font>
-                                                                <Font name="System Bold" size="18.0"/>
+                                                                <Font name="System Bold" size="18.0" />
                                                             </font>
                                                             <VBox.margin>
-                                                                <Insets bottom="10.0" left="10.0" top="10.0"/>
+                                                                <Insets bottom="10.0" left="10.0" top="10.0" />
                                                             </VBox.margin>
                                                         </Label>
                                                         <GridPane VBox.vgrow="NEVER">
                                                             <children>
                                                                 <Label styleClass="costum-Label-menor" text="Title">
                                                                     <GridPane.margin>
-                                                                        <Insets left="20.0" right="5.0"/>
+                                                                        <Insets left="20.0" right="5.0" />
                                                                     </GridPane.margin>
                                                                 </Label>
-                                                                <Label layoutX="77.0" layoutY="15.0"
-                                                                       styleClass="costum-Label-menor"
-                                                                       text="Description" GridPane.rowIndex="1">
+                                                                <Label layoutX="77.0" layoutY="15.0" styleClass="costum-Label-menor" text="Description" GridPane.rowIndex="1">
                                                                     <GridPane.margin>
-                                                                        <Insets left="20.0" right="5.0"/>
+                                                                        <Insets left="20.0" right="5.0" />
                                                                     </GridPane.margin>
                                                                 </Label>
-                                                                <Label styleClass="costum-Label-menor" text="Duration"
-                                                                       GridPane.rowIndex="2">
+                                                                <Label styleClass="costum-Label-menor" text="Duration" GridPane.rowIndex="2">
                                                                     <GridPane.margin>
-                                                                        <Insets left="20.0" right="5.0"/>
+                                                                        <Insets left="20.0" right="5.0" />
                                                                     </GridPane.margin>
                                                                 </Label>
-                                                                <Label styleClass="costum-Label-menor" text="Urgency"
-                                                                       GridPane.rowIndex="3">
+                                                                <Label styleClass="costum-Label-menor" text="Urgency" GridPane.rowIndex="3">
                                                                     <GridPane.margin>
-                                                                        <Insets left="20.0" right="5.0"/>
+                                                                        <Insets left="20.0" right="5.0" />
                                                                     </GridPane.margin>
                                                                 </Label>
-                                                                <Label styleClass="costum-Label-menor"
-                                                                       text="Green Space" GridPane.rowIndex="4">
+                                                                <Label styleClass="costum-Label-menor" text="Green Space" GridPane.rowIndex="4">
                                                                     <GridPane.margin>
-                                                                        <Insets left="20.0" right="5.0"/>
+                                                                        <Insets left="20.0" right="5.0" />
                                                                     </GridPane.margin>
                                                                 </Label>
-                                                                <Label fx:id="titleLabel" text="info"
-                                                                       GridPane.columnIndex="1">
+                                                                <Label fx:id="titleLabel" text="info" GridPane.columnIndex="1">
                                                                     <padding>
-                                                                        <Insets left="5.0"/>
+                                                                        <Insets left="5.0" />
                                                                     </padding>
                                                                 </Label>
-                                                                <Label fx:id="descriptionLabel" layoutX="193.0"
-                                                                       layoutY="15.0" text="info"
-                                                                       GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                <Label fx:id="descriptionLabel" layoutX="193.0" layoutY="15.0" text="info" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                     <padding>
-                                                                        <Insets left="5.0"/>
+                                                                        <Insets left="5.0" />
                                                                     </padding>
                                                                 </Label>
-                                                                <Label fx:id="durationLabel" layoutX="193.0"
-                                                                       layoutY="45.0" text="00" GridPane.columnIndex="1"
-                                                                       GridPane.rowIndex="2">
+                                                                <Label fx:id="durationLabel" layoutX="193.0" layoutY="45.0" text="00" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                                     <padding>
-                                                                        <Insets left="5.0"/>
+                                                                        <Insets left="5.0" />
                                                                     </padding>
                                                                 </Label>
-                                                                <Label fx:id="urgencyLabel" layoutX="193.0"
-                                                                       layoutY="75.0" text="info"
-                                                                       GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                                <Label fx:id="urgencyLabel" layoutX="193.0" layoutY="75.0" text="info" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                                     <padding>
-                                                                        <Insets left="5.0"/>
+                                                                        <Insets left="5.0" />
                                                                     </padding>
                                                                 </Label>
-                                                                <Label fx:id="greenSpaceLabel" layoutX="193.0"
-                                                                       layoutY="105.0" text="info"
-                                                                       GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                                <Label fx:id="greenSpaceLabel" layoutX="193.0" layoutY="105.0" text="info" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                                     <padding>
-                                                                        <Insets left="5.0"/>
+                                                                        <Insets left="5.0" />
                                                                     </padding>
                                                                 </Label>
                                                             </children>
                                                             <columnConstraints>
-                                                                <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS"/>
-                                                                <ColumnConstraints hgrow="ALWAYS"/>
+                                                                <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+                                                                <ColumnConstraints hgrow="ALWAYS" />
                                                             </columnConstraints>
                                                             <rowConstraints>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
-                                                                <RowConstraints vgrow="SOMETIMES"/>
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
+                                                                <RowConstraints vgrow="SOMETIMES" />
                                                             </rowConstraints>
                                                             <VBox.margin>
-                                                                <Insets bottom="10.0"/>
+                                                                <Insets bottom="10.0" />
                                                             </VBox.margin>
                                                         </GridPane>
                                                     </children>
@@ -283,17 +235,14 @@
                                     <children>
                                         <HBox VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField editable="false" focusTraversable="false"
-                                                           mouseTransparent="true" prefHeight="31.0" prefWidth="555.0"
-                                                           promptText="Enter the search words"
-                                                           styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                <TextField editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="31.0" prefWidth="555.0" promptText="Enter the search words" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
                                                     <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </TextField>
                                             </children>
                                         </HBox>
-                                        <HBox VBox.vgrow="ALWAYS"/>
+                                        <HBox VBox.vgrow="ALWAYS" />
                                     </children>
                                 </VBox>
                             </content>
