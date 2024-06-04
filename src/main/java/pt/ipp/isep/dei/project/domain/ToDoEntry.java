@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -24,11 +26,15 @@ public class ToDoEntry implements Serializable {
      * @param greenSpace    The green space associated with the to-do entry.
      */
     public ToDoEntry(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpace greenSpace) {
-        this.title = title;
-        this.description = description;
-        this.duration = duration;
-        this.urgencyStatus = urgencyStatus;
-        this.greenSpace = greenSpace;
+       try {
+           setTitle(title);
+           setDescription(description);
+           setDuration(duration);
+           setDegreeOfUrgency(urgencyStatus);
+           setGreenSpace(greenSpace);
+       } catch (Exception e) {
+           ShowError.showAlert("To-Do Entry", e.getMessage(), "Error when setting the To-Do Entry attributes.");
+       }
     }
 
     /**
@@ -46,6 +52,13 @@ public class ToDoEntry implements Serializable {
      * @param title The title of the to-do entry.
      */
     public void setTitle(String title) {
+        if (title == null) {
+            throw new IllegalStateException("Title cannot be null");
+        }
+        // Check for special characters (assuming alphanumeric and spaces are valid)
+        if (!title.matches("^[\\p{Alnum}\\s]*$")) {
+            throw new IllegalArgumentException("Title cannot contain special characters");
+        }
         this.title = title;
     }
 
@@ -64,6 +77,13 @@ public class ToDoEntry implements Serializable {
      * @param description The description of the to-do entry.
      */
     public void setDescription(String description) {
+        if (description == null) {
+            throw new IllegalStateException("Description cannot be null");
+        }
+        // Check for special characters (assuming alphanumeric and spaces are valid)
+        if (!description.matches("^[\\p{Alnum}\\s]*$")) {
+            throw new IllegalArgumentException("Description cannot contain special characters");
+        }
         this.description = description;
     }
 
@@ -81,7 +101,10 @@ public class ToDoEntry implements Serializable {
      *
      * @param duration The duration of the to-do entry.
      */
-    public void setDuration(int duration) {
+    public void setDuration(int duration) throws IllegalArgumentException {
+        if (duration <= 0) {
+            throw new IllegalArgumentException("Duration must be a positive number");
+        }
         this.duration = duration;
     }
 
