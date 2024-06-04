@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
@@ -16,6 +18,7 @@ import pt.ipp.isep.dei.project.dto.TeamDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TeamsGUI {
 
@@ -27,6 +30,23 @@ public class TeamsGUI {
 
     @FXML
     private Button removeTeamBtn;
+
+    @FXML
+    void handleEnterSearchBar(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            searchBtnHandler(new ActionEvent());
+        }
+    }
+
+    @FXML
+    void searchBtnHandler(ActionEvent event) {
+        String searchText = teamSearch.getText().toLowerCase();
+        List<String> filteredTeams = teamList.stream()
+                .filter(team -> team.toLowerCase().contains(searchText))
+                .collect(Collectors.toList());
+        ObservableList<String> observableTeamList = FXCollections.observableArrayList(filteredTeams);
+        listTeamView.setItems(observableTeamList);
+    }
 
     private CreateTeamController createTeamController;
     private ObservableList<String> teamList = FXCollections.observableArrayList();

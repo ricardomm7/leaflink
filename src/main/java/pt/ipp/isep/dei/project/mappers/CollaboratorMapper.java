@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,10 +34,13 @@ public class CollaboratorMapper implements Serializable {
      * @return The corresponding Collaborator domain object.
      */
     public static Collaborator toDomain(CollaboratorDto collaboratorDto) {
-        return new Collaborator(collaboratorDto.getName(), collaboratorDto.getBirthdate(), collaboratorDto.getContactMobile(),
+        List<SkillDto> s = collaboratorDto.getSkills();
+        Collaborator c1 = new Collaborator(collaboratorDto.getName(), collaboratorDto.getBirthdate(), collaboratorDto.getContactMobile(),
                 collaboratorDto.getTaxpayerNumber(), collaboratorDto.getEmail(), collaboratorDto.getAddress().getAddress(), collaboratorDto.getAddress().getZipCode(),
                 collaboratorDto.getAddress().getCity(), collaboratorDto.getDocumentType(), collaboratorDto.getIdentificationNumber(), collaboratorDto.getAdmissionDate(),
                 collaboratorDto.getJob());
+        c1.setSkills(SkillMapper.listToDomain(s));
+        return c1;
     }
 
     /**

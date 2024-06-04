@@ -24,7 +24,7 @@ public class Collaborator implements Serializable {
     private LocalDate admissionDate;
     private Job job;
     private Address address;
-    private List<Skill> skills;
+    private List<Skill> skills = new ArrayList<>();
 
     private boolean availabe;
 
@@ -57,7 +57,6 @@ public class Collaborator implements Serializable {
             setAdmissionDate(admissionDate);
             setTaxpayerNumber(taxpayerNumber);
             setJob(job);
-            skills = new ArrayList<>();
         } catch (Exception e) {
             ShowError.showAlert("Collaborator", e.getMessage(), "Error when setting the collaborator attributes.");
         }
@@ -340,10 +339,14 @@ public class Collaborator implements Serializable {
      */
     public void assignSkills(List<Skill> selectedSkills) {
         for (Skill skill : selectedSkills) {
-            if (!skills.contains(skill)) {
-                skills.add(skill);
+            if (!this.skills.contains(skill)) {
+                this.skills.add(skill);
             }
         }
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
     }
 
     /**
@@ -427,5 +430,13 @@ public class Collaborator implements Serializable {
         return identificationNumber;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Collaborator that = (Collaborator) o;
+        return contactMobile == that.getContactMobile() &&
+                taxpayerNumber == that.getTaxpayerNumber() &&
+                name.equals(that.getName());
+    }
 }

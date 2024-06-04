@@ -200,15 +200,7 @@ public class CollaboratorDto implements Serializable {
         CollaboratorDto that = (CollaboratorDto) o;
         return contactMobile == that.getContactMobile() &&
                 taxpayerNumber == that.getTaxpayerNumber() &&
-                Objects.equals(name, that.getName()) &&
-                Objects.equals(birthdate, that.getBirthdate()) &&
-                Objects.equals(email, that.getEmail()) &&
-                documentType == that.getDocumentType() &&
-                Objects.equals(identificationNumber, that.getIdentificationNumber()) &&
-                Objects.equals(admissionDate, that.getAdmissionDate()) &&
-                Objects.equals(job, that.getJob()) &&
-                Objects.equals(address, that.getAddress()) &&
-                Objects.equals(skills, SkillMapper.listToDomain(that.getSkills()));
+                name.equals(that.getName());
     }
 
     @Override

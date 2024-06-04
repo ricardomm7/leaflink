@@ -11,6 +11,8 @@ import pt.ipp.isep.dei.project.repository.*;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bootstrap implements Runnable {
 
@@ -19,12 +21,13 @@ public class Bootstrap implements Runnable {
      */
     public void run() {
         addUsers();
-        //addSkills();
-        //addJobs();
-        //addVehicles();
-        //addCollaborators();
-        //addMaintenance();
-        //addGreenSpaces();
+        addSkills();
+        addJobs();
+        addTeams();
+        addVehicles();
+        addCollaborators();
+        addMaintenance();
+        addGreenSpaces();
         //addEntries();
     }
 
@@ -33,7 +36,7 @@ public class Bootstrap implements Runnable {
      */
     public void serializeAll() {
         try {
-            FileOutputStream fileOut = new FileOutputStream("serial/repos.dnd");
+            FileOutputStream fileOut = new FileOutputStream("serial/repos.leaflink");
             ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
             outStream.writeObject(Repositories.getInstance());
             outStream.close();
@@ -48,7 +51,7 @@ public class Bootstrap implements Runnable {
      */
     public void deserializeAll() {
         try {
-            FileInputStream fileIn = new FileInputStream("serial/repos.dnd");
+            FileInputStream fileIn = new FileInputStream("serial/repos.leaflink");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Repositories instance = (Repositories) in.readObject();
             Repositories.setInstance(instance);
@@ -76,6 +79,50 @@ public class Bootstrap implements Runnable {
 
         // Example 3
         vehicleRepository.registerVehicle(new VehicleDto("AIU1qasw23edfr45t", "Volkswagen", "Golf", VehicleType.CAR, LocalDate.of(2000, 10, 22), "9012EF", 1400.0, 2100.0, 60000, LocalDate.of(2010, 10, 1), 12000));
+    }
+
+    private void addTeams() {
+        TeamRepository teamRepository = new TeamRepository();
+        JobRepository jobRepository = Repositories.getInstance().getJobRepository();
+
+        Collaborator collaborator1 = new Collaborator(
+                "Bob Smith", LocalDate.of(2000, 9, 30), 987654321,
+                123456789, "bob.smith@example.com", "5678 Oak Street", "6789-100",
+                "Shelbyville", DocumentType.PASSPORT, "CD2345678", LocalDate.of(2021, 9, 30),
+                JobMapper.toDomain(jobRepository.getJobList().get(0))
+        );
+
+        Collaborator collaborator2 = new Collaborator(
+                "Alice Johnson", LocalDate.of(1995, 5, 15), 987654322,
+                123456788, "alice.johnson@example.com", "1234 Maple Street", "1234-567",
+                "Springfield", DocumentType.PASSPORT, "EF3456789", LocalDate.of(2020, 5, 15),
+                JobMapper.toDomain(jobRepository.getJobList().get(1))
+        );
+
+        Collaborator collaborator3 = new Collaborator(
+                "Charlie Brown", LocalDate.of(1988, 12, 25), 987654323,
+                123456787, "charlie.brown@example.com", "4321 Pine Street", "9876-543",
+                "Capital City", DocumentType.PASSPORT, "GH4567890", LocalDate.of(2019, 12, 25),
+                JobMapper.toDomain(jobRepository.getJobList().get(2))
+        );
+
+        Collaborator collaborator4 = new Collaborator(
+                "Diana Prince", LocalDate.of(1992, 11, 11), 987654324,
+                123456786, "diana.prince@example.com", "8765 Elm Street", "3456-789",
+                "Metropolis", DocumentType.PASSPORT, "IJ5678901", LocalDate.of(2022, 11, 11),
+                JobMapper.toDomain(jobRepository.getJobList().get(3))
+        );
+
+        List<Collaborator> l1 = new ArrayList<>();
+        l1.add(collaborator1);
+        l1.add(collaborator2);
+
+        List<Collaborator> l2 = new ArrayList<>();
+        l2.add(collaborator3);
+        l2.add(collaborator4);
+
+        teamRepository.addTeam(new Team(l1));
+        teamRepository.addTeam(new Team(l2));
     }
 
     /**
