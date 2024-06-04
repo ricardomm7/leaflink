@@ -9,7 +9,7 @@ autonumber
 
 actor "GSM" as GSM
 participant ":RegisterToDoEntryUI" as UI
-participant ":RegisterToDoController" as CTRL
+participant ":RegisterToDoEntryController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
@@ -65,7 +65,9 @@ activate GSM
         activate CTRL
 
         CTRL -> GreenSpaceMapper: toDtoList(greenSpaceList)
+        deactivate CTRL
         activate GreenSpaceMapper
+
 
         loop
 
@@ -80,6 +82,7 @@ activate GSM
 
         GreenSpaceMapper --> CTRL: greenSpaceListDto
         deactivate GreenSpaceMapper
+        activate CTRL
 
         CTRL --> UI : greenSpaceListDto
         deactivate CTRL
