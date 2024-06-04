@@ -11,6 +11,7 @@ public class Team implements Serializable {
     private final int minTeamSize;
     private final int maxTeamSize;
     private final List<Collaborator> collaborators;
+    private boolean isAssigned;
 
     /**
      * Constructs a team with the given collaborators.
@@ -73,5 +74,9 @@ public class Team implements Serializable {
      */
     public int getMaxTeamSize() {
         return maxTeamSize;
+    }
+
+    public void setAvailable(Boolean flag){
+        this.isAssigned = flag;
     }
 }

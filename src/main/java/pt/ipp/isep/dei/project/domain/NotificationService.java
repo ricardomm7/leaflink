@@ -43,13 +43,13 @@ public abstract class NotificationService {
      * @param newDate       the new date for the to-do entry
      * @return true if the notification is successfully written to a file, false otherwise
      */
-    public static boolean notifyTeam(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
+    public static boolean notifyTeam(List<Collaborator> collaborators, AgendaEntry toDoEntry, LocalDate newDate) {
         List<String> emails = new ArrayList<>();
         for (Collaborator collaborator : collaborators) {
             emails.add(collaborator.getEmail());
         }
 
-        String subject = "Entrada adiada: " + toDoEntry.getDescription();
+        String subject = "Entrada adiada: " + toDoEntry.getTitle();
         String body = buildEmailBody(collaborators, toDoEntry, newDate);
 
         try {
@@ -87,15 +87,67 @@ public abstract class NotificationService {
      * @param newDate       the new date for the to-do entry
      * @return the body of the email notification as a String
      */
-    private static String buildEmailBody(List<Collaborator> collaborators, ToDoEntry toDoEntry, LocalDate newDate) {
+    private static String buildEmailBody(List<Collaborator> collaborators, AgendaEntry toDoEntry, LocalDate newDate) {
         StringBuilder emailBuilder = new StringBuilder();
 
         for (Collaborator collaborator : collaborators) {
             emailBuilder.append("Caro ").append(collaborator.getName()).append(",\n\n");
             emailBuilder.append("Esta é uma notificação sobre o adiamento de uma entrada na agenda.\n\n");
-            emailBuilder.append("Entrada: ").append(toDoEntry.getDescription()).append("\n");
+            emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
             emailBuilder.append("Nova data: ").append(newDate).append("\n\n");
+            emailBuilder.append("Por favor, tome nota desta alteração e ajuste seus planos conforme necessário.\n\n");
+        }
+
+        emailBuilder.append("Atenciosamente,\n");
+        emailBuilder.append("Equipe de Gestão de Parques");
+
+        return emailBuilder.toString();
+    }
+
+    public static boolean notifyTeamCancel(List<Collaborator> collaborators, ToDoEntry toDoEntry) {
+        List<String> emails = new ArrayList<>();
+        for (Collaborator collaborator : collaborators) {
+            emails.add(collaborator.getEmail());
+        }
+        String subject = "Entrada adiada: " + toDoEntry.getTitle();
+        String body = buildEmailBodyCancel(collaborators, toDoEntry);
+
+        try {
+            // Creates the "Notifications" directory if it does not exist
+            File directory = new File("Notifications");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            // Creates the notification file
+            File file = new File(directory, subject + ".txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+            // Writes the subject and body of the message to the file
+            writer.write(subject);
+            writer.newLine();
+            writer.write(body);
+
+            // Closes the file
+            writer.close();
+
+            System.out.println("Notificação escrita no arquivo: " + file.getAbsolutePath());
+            return true;
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever a notificação: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private static String buildEmailBodyCancel(List<Collaborator> collaborators, ToDoEntry toDoEntry) {
+                StringBuilder emailBuilder = new StringBuilder();
+
+        for (Collaborator collaborator : collaborators) {
+            emailBuilder.append("Caro ").append(collaborator.getName()).append(",\n\n");
+            emailBuilder.append("Esta é uma notificação sobre o cancelamento de uma entrada na agenda.\n\n");
+            emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
+            emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
             emailBuilder.append("Por favor, tome nota desta alteração e ajuste seus planos conforme necessário.\n\n");
         }
 

@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.AgendaEntry;
-import pt.ipp.isep.dei.project.domain.ProgressStatus;
-import pt.ipp.isep.dei.project.domain.ToDoEntry;
-import pt.ipp.isep.dei.project.domain.Vehicle;
+import pt.ipp.isep.dei.project.domain.*;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
@@ -118,13 +115,29 @@ public class EntryRepository implements Serializable {
     public boolean updateAgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus newProgressStatus) {
         if (validateNewDate(agendaEntry, newDate)) {
             updateEntryStatus(agendaEntry, newProgressStatus);
-            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, newProgressStatus);
+            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, ProgressStatus.PLANED);
             addAgendaEntry(agendaEntry1);
 
             return true;
         }
         return false;
     }
+
+       public void cancelAgendaEntry(AgendaEntry agendaEntry) {
+           updateEntryStatus(agendaEntry, ProgressStatus.CANCELLED);
+           List<Vehicle> assignedVehicles = agendaEntry.getAssignedVehicles();
+           List<Collaborator> collaborators = agendaEntry.getAssignedTeam().getCollaborators();
+           agendaEntry.getAssignedTeam().setAvailable(true);
+           for (Vehicle v : assignedVehicles) {
+               v.setAvailable(true);
+           }
+           for (Collaborator c : collaborators) {
+               c.setAvailable(true);
+           }
+
+       }
+
+
 
     /**
      * Validates the new date for an AgendaEntry.
@@ -207,6 +220,7 @@ public class EntryRepository implements Serializable {
     public void remove(String title, String greenSpace) {
         toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
     }
+
 
 
 }
