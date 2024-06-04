@@ -97,6 +97,11 @@
             <artifactId>javafx-controls</artifactId>
             <version>21-ea+24</version>
         </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.4</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

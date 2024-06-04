@@ -139,4 +139,8 @@ public class ToDoEntryDto {
                 Objects.equals(description, toDoEntry.description) &&
                 urgencyStatus == toDoEntry.urgencyStatus;
     }
+
+    public String toString() {
+        return String.format("Title: %s | Duration: %dh | Green Space: %s", title, duration, greenSpace.getName());
+    }
 }

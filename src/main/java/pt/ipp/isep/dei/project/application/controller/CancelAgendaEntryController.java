@@ -26,10 +26,10 @@ public class CancelAgendaEntryController {
         return AgendaEntryMapper.toDtoList(agendaEntry);
     }
 
-    public void cancelAgendaEntry(AgendaEntryDto agendaEntryDto) {
-        AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
-        entryRepository.cancelAgendaEntry(agendaEntry);
-    }
+   // public void cancelAgendaEntry(AgendaEntryDto agendaEntryDto) {
+     //   AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
+       // entryRepository.cancelAgendaEntry(agendaEntry);
+    //}
 
     public boolean notifyTeam(AgendaEntry agendaEntry) {
         boolean flag = false;

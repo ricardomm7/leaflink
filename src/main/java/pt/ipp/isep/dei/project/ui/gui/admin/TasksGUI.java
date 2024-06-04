@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
+import pt.ipp.isep.dei.project.application.controller.AddAgendaEntryController;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
@@ -17,11 +18,14 @@ import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TasksGUI {
 
     private final RegisterToDoEntryController registerToDoEntryController = new RegisterToDoEntryController();
+    private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
+
 
     @FXML
     private ListView<String> toDoListView;
@@ -46,6 +50,80 @@ public class TasksGUI {
     private Label greenSpaceLabel;
     @FXML
     private VBox taskDetailsVBox;
+
+
+    @FXML
+    private Button PostponeAgendaEntryBtn;
+
+
+    private Button AddAgendaEntryBtn;
+
+
+    @FXML
+    private Button CancelAgendaEntryBtn;
+
+
+    @FXML
+    void AddAgendaEntryHandle(ActionEvent event) {
+
+        // Carregar a lista de todas as entradas da To-Do list
+        List<ToDoEntryDto> allEntries = registerToDoEntryController.getToDoEntry();
+
+        // Criar uma lista de CheckBox para cada entrada da To-Do list
+        List<CheckBox> checkBoxList = allEntries.stream()
+                .map(entry -> {
+                    CheckBox checkBox = new CheckBox(String.format("Title: %s | Duration: %dh | Green Space: %s",
+                            entry.getTitle(), entry.getDuration(), entry.getGreenSpace().getName()));
+                    checkBox.setUserData(entry); // Associar cada CheckBox com sua entrada correspondente
+                    return checkBox;
+                })
+                .collect(Collectors.toList());
+
+        // Criar um VBox para exibir as CheckBoxes
+        VBox checkBoxesVBox = new VBox();
+        checkBoxesVBox.getChildren().addAll(checkBoxList);
+
+        // Criar um diálogo personalizado para exibir as CheckBoxes
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Select To-Do Entry");
+        dialog.setHeaderText("Select a To-Do entry to add to the agenda:");
+
+        ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
+
+        // Adicionar a lista de CheckBoxes ao diálogo
+        dialog.getDialogPane().setContent(checkBoxesVBox);
+
+        // Mostrar o diálogo e aguardar a seleção do usuário
+        Optional<Void> result = dialog.showAndWait();
+
+        // Se o usuário clicou em "Add", adicionar as entradas selecionadas à agenda
+        if (result.isPresent()) {
+            List<ToDoEntryDto> selectedEntries = checkBoxList.stream()
+                    .filter(CheckBox::isSelected)
+                    .map(checkBox -> (ToDoEntryDto) checkBox.getUserData())
+                    .collect(Collectors.toList());
+
+            // Adicionar as entradas selecionadas à agenda
+            selectedEntries.forEach(addAgendaEntryController::addAgendaEntry);
+
+            // Remover as entradas selecionadas da To-Do list
+            selectedEntries.forEach(entry -> registerToDoEntryController.removeToDoEntry(entry.getTitle(), entry.getGreenSpace().getName()));
+
+            // Atualizar a To-Do list
+            updateToDoEntry();
+        }
+    }
+
+    @FXML
+    void PostponeAgendaEntryHandle(ActionEvent event) {
+
+    }
+
+    @FXML
+    void CancelAgendaEntryHandle(ActionEvent event) {
+
+    }
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
@@ -418,4 +496,9 @@ public class TasksGUI {
         }
         return null;
     }
+
+
 }
+
+
+
