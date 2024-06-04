@@ -58,7 +58,7 @@ public class PostponeAgendaEntryController {
      * @param newDate     the new date for the agenda entry
      * @return true if the team notification is successful, false otherwise
      */
-    private boolean notifyTeam(AgendaEntry agendaEntry, LocalDate newDate) {
+    public boolean notifyTeam(AgendaEntry agendaEntry, LocalDate newDate) {
         boolean flag = false;
         Team team = NotificationService.getTeamByEntry(agendaEntry);
         List<Collaborator> collaboratorsList = NotificationService.getCollaboratorsList(team);

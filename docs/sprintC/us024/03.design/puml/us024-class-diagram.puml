@@ -14,8 +14,7 @@ package CONTROLLER {
         + PostponeAgendaEntryController()
         + getAgendaEntryList(gsm: UserSession): List<AgendaEntryDto>
         + postponeEntry(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
-        - convertToAgendaEntry(agendaEntryDto: AgendaEntryDto): AgendaEntry
-        - notifyTeam(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
+        + notifyTeam(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
     }
 }
 

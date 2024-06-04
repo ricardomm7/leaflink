@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.project.ui.gui.admin;
+package pt.ipp.isep.dei.project.ui.gui.vfm;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -70,14 +70,9 @@ public class AuthenticationGUI {
     private void redirectToRoleGUI(UserRoleDTO u) {
         String caminho = null;
         try {
-            if (u.getId() == AuthenticationController.ROLE_ADMIN) {
-                caminho = "mainMenus/admin/adminMenu.fxml";
-            } else if (u.getId() == AuthenticationController.ROLE_VFM) {
+            if (u.getId() == AuthenticationController.ROLE_VFM) {
                 caminho = "mainMenus/VFM/vfmMenu.fxml";
-            } else if (u.getId() == AuthenticationController.ROLE_HRM) {
-                caminho = "mainMenus/HRM/hrmMenu.fxml";
             }
-
             if (caminho == null) {
                 throw new IllegalArgumentException();
             }

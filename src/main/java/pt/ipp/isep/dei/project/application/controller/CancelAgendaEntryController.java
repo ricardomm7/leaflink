@@ -32,7 +32,6 @@ public class CancelAgendaEntryController {
     }
 
     public boolean notifyTeam(AgendaEntry agendaEntry) {
-        ;
         boolean flag = false;
         Team team = NotificationService.getTeamByEntry(agendaEntry);
         List<Collaborator> collaboratorsList = NotificationService.getCollaboratorsList(team);
