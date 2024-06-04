@@ -20,14 +20,14 @@ public class Bootstrap implements Runnable {
      * Runs the bootstrap process.
      */
     public void run() {
-        addUsers();
-        addSkills();
-        addJobs();
-        addTeams();
-        addVehicles();
-        addCollaborators();
-        addMaintenance();
-        addGreenSpaces();
+        //addUsers();
+        //addSkills();
+        //addJobs();
+        //addTeams();
+        //addVehicles();
+        //addCollaborators();
+        //addMaintenance();
+        //addGreenSpaces();
         //addEntries();
     }
 
