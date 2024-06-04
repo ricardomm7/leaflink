@@ -110,7 +110,7 @@ public abstract class NotificationService {
         for (Collaborator collaborator : collaborators) {
             emails.add(collaborator.getEmail());
         }
-        String subject = "Entrada adiada: " + toDoEntry.getTitle();
+        String subject = "Entrada cancelada: " + toDoEntry.getTitle();
         String body = buildEmailBodyCancel(collaborators, toDoEntry);
 
         try {
@@ -141,7 +141,7 @@ public abstract class NotificationService {
     }
 
     private static String buildEmailBodyCancel(List<Collaborator> collaborators, ToDoEntry toDoEntry) {
-                StringBuilder emailBuilder = new StringBuilder();
+        StringBuilder emailBuilder = new StringBuilder();
 
         for (Collaborator collaborator : collaborators) {
             emailBuilder.append("Caro ").append(collaborator.getName()).append(",\n\n");
@@ -149,6 +149,60 @@ public abstract class NotificationService {
             emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
             emailBuilder.append("Por favor, tome nota desta alteração e ajuste seus planos conforme necessário.\n\n");
+        }
+
+        emailBuilder.append("Atenciosamente,\n");
+        emailBuilder.append("Equipe de Gestão de Parques");
+
+        return emailBuilder.toString();
+    }
+
+    public static boolean notifyTeamCreate(List<Collaborator> collaborators, AgendaEntry toDoEntry) {
+        List<String> emails = new ArrayList<>();
+        for (Collaborator collaborator : collaborators) {
+            emails.add(collaborator.getEmail());
+        }
+
+        String subject = "Entrada criada: " + toDoEntry.getTitle();
+        String body = buildEmailBodyCreate(collaborators, toDoEntry);
+
+        try {
+            // Creates the "Notifications" directory if it does not exist
+            File directory = new File("Notifications");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            // Creates the notification file
+            File file = new File(directory, subject + ".txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+            // Writes the subject and body of the message to the file
+            writer.write(subject);
+            writer.newLine();
+            writer.write(body);
+
+            // Closes the file
+            writer.close();
+
+            System.out.println("Notificação escrita no arquivo: " + file.getAbsolutePath());
+            return true;
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever a notificação: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private static String buildEmailBodyCreate(List<Collaborator> collaborators, AgendaEntry toDoEntry) {
+        StringBuilder emailBuilder = new StringBuilder();
+
+        for (Collaborator collaborator : collaborators) {
+            emailBuilder.append("Caro ").append(collaborator.getName()).append(",\n\n");
+            emailBuilder.append("Esta é uma notificação sobre a atribuição de uma entrada na agenda.\n\n");
+            emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
+            emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
+            emailBuilder.append("Data: ").append(toDoEntry.getStartingDate()).append("\n");
+            emailBuilder.append("Por favor, tome nota desta atribuição e ajuste seus planos conforme necessário.\n\n");
         }
 
         emailBuilder.append("Atenciosamente,\n");
