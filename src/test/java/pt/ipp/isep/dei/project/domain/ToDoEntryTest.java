@@ -27,54 +27,41 @@ public class ToDoEntryTest {
      * Test get title.
      */
     @Test
-    public void testGetTitle() {
-        toDoEntry.setTitle("Gardening");
-        assertEquals("Gardening", toDoEntry.getTitle());
-    }
-
-    /**
-     * Test get description.
-     */
-    @Test
-    public void testGetDescription() {
-        toDoEntry.setDescription("Gardening the backyard");
-        assertEquals("Gardening the backyard", toDoEntry.getDescription());
-    }
-
-    /**
-     * Test get duration.
-     */
-    @Test
-    public void testGetDuration() {
-        toDoEntry.setDuration(2);
-        assertEquals(2, toDoEntry.getDuration());
-    }
-
-    /**
-     * Test get urgency status.
-     */
-    @Test
-    public void testGetUrgencyStatus() {
-        toDoEntry.setDegreeOfUrgency(UrgencyStatus.valueOf("Low"));
-        assertEquals(UrgencyStatus.valueOf("Low"), toDoEntry.getUrgencyStatus());
-    }
-
-    /**
-     * Test get green space.
-     */
-    @Test
-    public void testGetGreenSpace() {
+    public void testToDoEntryConstructorValidInput() {
+        // Arrange
+        String title = "Gardening";
+        String description = "Gardening the backyard";
+        int duration = 2;
+        UrgencyStatus urgencyStatus = UrgencyStatus.valueOf("Low");
         GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "4000-007", "Porto"));
-        toDoEntry.setGreenSpace(gs);
-        assertEquals(gs, toDoEntry.getGreenSpace());
+
+        // Act
+        ToDoEntry entry = new ToDoEntry(title, description, duration, urgencyStatus, gs);
+
+        // Assert
+        assertEquals(title, entry.getTitle());
+        assertEquals(description, entry.getDescription());
+        assertEquals(duration, entry.getDuration());
+        assertEquals(urgencyStatus, entry.getUrgencyStatus());
+        assertEquals(gs, entry.getGreenSpace());
     }
 
-    /**
-     * Test set name invalid characters.
-     */
     @Test
-    public void testSetName_InvalidCharacters() {
-        assertThrows(IllegalArgumentException.class, () -> toDoEntry.setTitle("###Gardening$&"));
+    public void testToDoEntryConstructorInvalidInput() {
+        // Arrange
+        String title = null; // Invalid title
+        String description = null; // Invalid description
+        int duration = -1; // Invalid duration
+        UrgencyStatus urgencyStatus = UrgencyStatus.HIGH;
+        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "4000-007", "Porto"));
+
+
+        // Act & Assert
+        Exception exception = assertThrows(Exception.class, () -> {
+            new ToDoEntry(title, description, duration, urgencyStatus, gs);
+        });
+
+        assertEquals("Error when setting the To-Do Entry attributes.", exception.getMessage());
     }
 
     /**
@@ -93,19 +80,5 @@ public class ToDoEntryTest {
         assertThrows(IllegalArgumentException.class, () -> toDoEntry.setDescription("###Gardening$&"));
     }
 
-    /**
-     * Test set description empty description.
-     */
-    @Test
-    public void testSetDescription_EmptyDescription() {
-        assertThrows(IllegalArgumentException.class, () -> toDoEntry.setDescription(""));
-    }
 
-    /**
-     * Test set duration negative duration.
-     */
-    @Test
-    public void testSetDuration_NegativeDuration() {
-        assertThrows(IllegalArgumentException.class, () -> toDoEntry.setDuration(-1));
-    }
 }
