@@ -49,7 +49,7 @@ As a Collaborator, I wish to consult the entrys assigned to me.
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us021-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us028-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
