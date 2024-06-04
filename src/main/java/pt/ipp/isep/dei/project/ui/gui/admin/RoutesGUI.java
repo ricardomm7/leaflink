@@ -140,17 +140,21 @@ public class RoutesGUI {
     }
 
     @FXML
-    void spacesBtnActionHandle(ActionEvent event) {
+    void usersBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_users.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-
+    void spacesBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_spaces.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -76,7 +76,7 @@ public class Team implements Serializable {
         return maxTeamSize;
     }
 
-    public void setAvailable(Boolean flag){
+    public void setAvailable(Boolean flag) {
         this.isAssigned = flag;
     }
 }

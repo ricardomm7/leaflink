@@ -90,11 +90,6 @@ public class SpacesGUI {
     }
 
     @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-
-    }
-
-    @FXML
     private ListView<String> listGreenSpaces;
 
     @FXML
@@ -252,6 +247,15 @@ public class SpacesGUI {
         if (selectedIndex >= 0) {
             gsC.removeGS(selectedIndex);
             updateGSList();
+        }
+    }
+
+    @FXML
+    void usersBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_users.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

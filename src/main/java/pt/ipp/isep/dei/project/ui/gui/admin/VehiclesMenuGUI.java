@@ -113,17 +113,21 @@ public class VehiclesMenuGUI {
     }
 
     @FXML
-    void tasksBtnActionHandle(ActionEvent event) {
+    void usersBtnActionHandle(ActionEvent event) {
         try {
-            Main.loadNewActivity("mainMenus/admin/adminMenu_tasks.fxml", true, 1205, 900, true);
+            Main.loadNewActivity("mainMenus/admin/adminMenu_users.fxml", true, 1205, 900, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-        // Implementation required
+    void tasksBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_tasks.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -663,9 +667,10 @@ public class VehiclesMenuGUI {
         listViewMaintenance.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 removeBtnMaintenance.setDisable(false);
-            }else {
+            } else {
                 removeBtnMaintenance.setDisable(true);
-        }});
+            }
+        });
 
         listViewVehicle.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             removeBtn.setDisable(newValue == null);

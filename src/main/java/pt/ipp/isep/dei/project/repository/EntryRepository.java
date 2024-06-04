@@ -123,20 +123,19 @@ public class EntryRepository implements Serializable {
         return false;
     }
 
-       public void cancelAgendaEntry(AgendaEntry agendaEntry) {
-           updateEntryStatus(agendaEntry, ProgressStatus.CANCELLED);
-           List<Vehicle> assignedVehicles = agendaEntry.getAssignedVehicles();
-           List<Collaborator> collaborators = agendaEntry.getAssignedTeam().getCollaborators();
-           agendaEntry.getAssignedTeam().setAvailable(true);
-           for (Vehicle v : assignedVehicles) {
-               v.setAvailable(true);
-           }
-           for (Collaborator c : collaborators) {
-               c.setAvailable(true);
-           }
+    public void cancelAgendaEntry(AgendaEntry agendaEntry) {
+        updateEntryStatus(agendaEntry, ProgressStatus.CANCELLED);
+        List<Vehicle> assignedVehicles = agendaEntry.getAssignedVehicles();
+        List<Collaborator> collaborators = agendaEntry.getAssignedTeam().getCollaborators();
+        agendaEntry.getAssignedTeam().setAvailable(true);
+        for (Vehicle v : assignedVehicles) {
+            v.setAvailable(true);
+        }
+        for (Collaborator c : collaborators) {
+            c.setAvailable(true);
+        }
 
-       }
-
+    }
 
 
     /**
@@ -220,7 +219,6 @@ public class EntryRepository implements Serializable {
     public void remove(String title, String greenSpace) {
         toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
     }
-
 
 
 }

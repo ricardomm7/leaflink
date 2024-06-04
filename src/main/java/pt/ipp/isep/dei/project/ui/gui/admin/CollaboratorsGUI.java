@@ -315,6 +315,15 @@ public class CollaboratorsGUI {
     }
 
     @FXML
+    void usersBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_users.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void handleJobSearchBtn(ActionEvent event) {
         String searchText = jobSearchTextArea.getText().toLowerCase();
         List<String> filteredJobs = allJobs.stream()
@@ -464,11 +473,6 @@ public class CollaboratorsGUI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-        // Implementação do botão de usuários (caso necessário)
     }
 
     private void updateSkillsList() {

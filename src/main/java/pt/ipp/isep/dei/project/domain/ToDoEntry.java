@@ -26,15 +26,15 @@ public class ToDoEntry implements Serializable {
      * @param greenSpace    the green space
      */
     public ToDoEntry(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpace greenSpace) {
-       try {
-           setTitle(title);
-           setDescription(description);
-           setDuration(duration);
-           setDegreeOfUrgency(urgencyStatus);
-           setGreenSpace(greenSpace);
-       } catch (Exception e) {
-           ShowError.showAlert("To-Do Entry", e.getMessage(), "Error when setting the To-Do Entry attributes.");
-       }
+        try {
+            setTitle(title);
+            setDescription(description);
+            setDuration(duration);
+            setDegreeOfUrgency(urgencyStatus);
+            setGreenSpace(greenSpace);
+        } catch (Exception e) {
+            ShowError.showAlert("To-Do Entry", e.getMessage(), "Error when setting the To-Do Entry attributes.");
+        }
     }
 
     /**

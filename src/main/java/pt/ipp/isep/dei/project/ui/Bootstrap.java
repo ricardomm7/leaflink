@@ -20,7 +20,7 @@ public class Bootstrap implements Runnable {
      * Runs the bootstrap process.
      */
     public void run() {
-        //addUsers();
+        addUsers();
         //addSkills();
         //addJobs();
         //addTeams();

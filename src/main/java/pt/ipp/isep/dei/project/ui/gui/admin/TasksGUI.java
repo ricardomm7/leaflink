@@ -111,11 +111,6 @@ public class TasksGUI {
     }
 
     @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-        // Não implementado
-    }
-
-    @FXML
     void handleAddEntry(ActionEvent event) {
         Dialog<ToDoEntryDto> dialog = new Dialog<>();
         dialog.setTitle("Add New To-Do Entry");
@@ -318,6 +313,14 @@ public class TasksGUI {
 
     }
 
+    @FXML
+    void usersBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_users.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void initialize() {

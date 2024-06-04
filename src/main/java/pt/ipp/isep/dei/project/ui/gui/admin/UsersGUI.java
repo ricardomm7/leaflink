@@ -4,8 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import pt.ipp.isep.dei.project.Main;
 
-
-public class AnalysisGUI {
+public class UsersGUI {
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
@@ -80,4 +79,3 @@ public class AnalysisGUI {
     }
 
 }
-

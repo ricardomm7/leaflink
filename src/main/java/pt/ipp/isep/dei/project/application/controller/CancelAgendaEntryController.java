@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.domain.AgendaEntry;
+import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.NotificationService;
+import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
@@ -28,7 +31,8 @@ public class CancelAgendaEntryController {
         entryRepository.cancelAgendaEntry(agendaEntry);
     }
 
-    public boolean notifyTeam(AgendaEntry agendaEntry) {;
+    public boolean notifyTeam(AgendaEntry agendaEntry) {
+        ;
         boolean flag = false;
         Team team = NotificationService.getTeamByEntry(agendaEntry);
         List<Collaborator> collaboratorsList = NotificationService.getCollaboratorsList(team);

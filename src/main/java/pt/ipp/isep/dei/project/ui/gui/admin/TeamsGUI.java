@@ -285,11 +285,6 @@ public class TeamsGUI {
     //}
 
     @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-        // Handle users button action
-    }
-
-    @FXML
     void caollabBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/admin/adminMenu_collab.fxml", true, 1205, 900, true);
@@ -369,4 +364,13 @@ public class TeamsGUI {
             e.printStackTrace();
         }
     }*/
+
+    @FXML
+    void usersBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_users.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

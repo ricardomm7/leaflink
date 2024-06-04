@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.project.domain.Address;
 import pt.ipp.isep.dei.project.domain.DocumentType;
 import pt.ipp.isep.dei.project.domain.Job;
 import pt.ipp.isep.dei.project.domain.Skill;
-import pt.ipp.isep.dei.project.mappers.SkillMapper;
 
 import java.io.Serializable;
 import java.time.LocalDate;

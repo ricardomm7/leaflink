@@ -7,6 +7,15 @@ import pt.ipp.isep.dei.project.Main;
 public class AdminGUI {
 
     @FXML
+    void usersBtnActionHandle(ActionEvent event) {
+        try {
+            Main.loadNewActivity("mainMenus/admin/adminMenu_users.fxml", true, 1205, 900, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void tasksBtnActionHandle(ActionEvent event) {
         try {
             Main.loadNewActivity("mainMenus/admin/adminMenu_tasks.fxml", true, 1205, 900, true);
@@ -67,10 +76,5 @@ public class AdminGUI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void usersBtnActionHandle(ActionEvent event) {
-
     }
 }
