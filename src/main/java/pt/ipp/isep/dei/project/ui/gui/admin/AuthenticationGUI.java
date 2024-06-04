@@ -72,10 +72,8 @@ public class AuthenticationGUI {
         try {
             if (u.getId() == AuthenticationController.ROLE_ADMIN) {
                 caminho = "mainMenus/admin/adminMenu.fxml";
-            } else if (u.getId() == AuthenticationController.ROLE_VFM) {
-                caminho = "mainMenus/VFM/vfmMenu.fxml";
             } else if (u.getId() == AuthenticationController.ROLE_HRM) {
-                caminho = "mainMenus/HRM/hrmMenu.fxml";
+                caminho = "mainMenus/hrm/hrmMenu.fxml";
             }
 
             if (caminho == null) {

@@ -10,4 +10,6 @@ module pt.ipp.isep.dei.project {
     exports pt.ipp.isep.dei.project;
     exports pt.ipp.isep.dei.project.ui.gui.admin;
     opens pt.ipp.isep.dei.project.ui.gui.admin to javafx.fxml;
+    exports pt.ipp.isep.dei.project.ui.gui.hrm;
+    opens pt.ipp.isep.dei.project.ui.gui.hrm to javafx.fxml;
 }
