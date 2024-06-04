@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * The ToDoEntry class represents an entry in a to-do list.
+ * The type To do entry.
  */
 public class ToDoEntry implements Serializable {
 
@@ -17,13 +17,13 @@ public class ToDoEntry implements Serializable {
     private GreenSpace greenSpace;
 
     /**
-     * Constructs a to-do entry with the given attributes.
+     * Instantiates a new To do entry.
      *
-     * @param title         The title of the to-do entry.
-     * @param description   The description of the to-do entry.
-     * @param duration      The duration of the to-do entry.
-     * @param urgencyStatus The urgency status of the to-do entry.
-     * @param greenSpace    The green space associated with the to-do entry.
+     * @param title         the title
+     * @param description   the description
+     * @param duration      the duration
+     * @param urgencyStatus the urgency status
+     * @param greenSpace    the green space
      */
     public ToDoEntry(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpace greenSpace) {
        try {
@@ -38,18 +38,18 @@ public class ToDoEntry implements Serializable {
     }
 
     /**
-     * Gets the title of the to-do entry.
+     * Gets title.
      *
-     * @return The title of the to-do entry.
+     * @return the title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * Sets the title of the to-do entry.
+     * Sets title.
      *
-     * @param title The title of the to-do entry.
+     * @param title the title
      */
     public void setTitle(String title) {
         if (title == null) {
@@ -63,18 +63,18 @@ public class ToDoEntry implements Serializable {
     }
 
     /**
-     * Gets the description of the to-do entry.
+     * Gets description.
      *
-     * @return The description of the to-do entry.
+     * @return the description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Sets the description of the to-do entry.
+     * Sets description.
      *
-     * @param description The description of the to-do entry.
+     * @param description the description
      */
     public void setDescription(String description) {
         if (description == null) {
@@ -88,18 +88,19 @@ public class ToDoEntry implements Serializable {
     }
 
     /**
-     * Gets the duration of the to-do entry.
+     * Gets duration.
      *
-     * @return The duration of the to-do entry.
+     * @return the duration
      */
     public int getDuration() {
         return duration;
     }
 
     /**
-     * Sets the duration of the to-do entry.
+     * Sets duration.
      *
-     * @param duration The duration of the to-do entry.
+     * @param duration the duration
+     * @throws IllegalArgumentException the illegal argument exception
      */
     public void setDuration(int duration) throws IllegalArgumentException {
         if (duration <= 0) {
@@ -109,47 +110,41 @@ public class ToDoEntry implements Serializable {
     }
 
     /**
-     * Gets the urgency status of the to-do entry.
+     * Gets urgency status.
      *
-     * @return The urgency status of the to-do entry.
+     * @return the urgency status
      */
     public UrgencyStatus getUrgencyStatus() {
         return urgencyStatus;
     }
 
     /**
-     * Sets the urgency status of the to-do entry.
+     * Sets degree of urgency.
      *
-     * @param urgencyStatus The urgency status of the to-do entry.
+     * @param urgencyStatus the urgency status
      */
     public void setDegreeOfUrgency(UrgencyStatus urgencyStatus) {
         this.urgencyStatus = urgencyStatus;
     }
 
     /**
-     * Gets the green space associated with the to-do entry.
+     * Gets green space.
      *
-     * @return The green space associated with the to-do entry.
+     * @return the green space
      */
     public GreenSpace getGreenSpace() {
         return greenSpace;
     }
 
     /**
-     * Sets the green space associated with the to-do entry.
+     * Sets green space.
      *
-     * @param greenSpace The green space associated with the to-do entry.
+     * @param greenSpace the green space
      */
     public void setGreenSpace(GreenSpace greenSpace) {
         this.greenSpace = greenSpace;
     }
 
-    /**
-     * Checks if two to-do entries are equal.
-     *
-     * @param o The object to compare.
-     * @return True if the objects are equal, false otherwise.
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -161,21 +156,11 @@ public class ToDoEntry implements Serializable {
                 urgencyStatus == toDoEntry.urgencyStatus;
     }
 
-    /**
-     * Generates a hash code for the to-do entry.
-     *
-     * @return The hash code for the to-do entry.
-     */
     @Override
     public int hashCode() {
         return Objects.hash(greenSpace, description, urgencyStatus, duration);
     }
 
-    /**
-     * Returns a string representation of the to-do entry.
-     *
-     * @return A string representation of the to-do entry.
-     */
     @Override
     public String toString() {
         return "ToDoEntry{" +
