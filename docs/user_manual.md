@@ -1,5 +1,5 @@
 # LeafLink - User Manual
-###### LeafLink is currently not registered under our ownership, and our group is solely utilizing it for educational purposes and not for any commercial endeavors. It's essential to emphasize that the name LeafLink is still under consideration and not yet finalized. We are committed to ensuring that all aspects of our project, including branding elements, align with ethical and legal standards.
+###### LeafLink is currently not registered under our ownership, and our group is solely utilizing it for educational purposes and not for any commercial endeavors. We are committed to ensuring that all aspects of our project, including branding elements, align with ethical and legal standards.
 
 ## Glossary
 [CLICK HERE TO BE REDIRECTED](sprintC/global-artifacts/01.requirements-engineering/glossary.md)
@@ -386,7 +386,7 @@ This feature allows the GSM to add a new entry to the To-Do List.
 1. Open the GMS system.
 2. Navigate to the section designated for managing the To-Do List.
 3. Click on the option to add a new entry to the To-Do List.
-4. The system will request the task details such as description, urgency (High, Medium, Low), and expected duration.
+4. The system will request the task details such as title, description, urgency (High, Medium, Low), and expected duration.
 5. Select the green space from the list provided by the system.
 6. Enter the task details and select the appropriate green space.
 7. After entering the details, the system will display all entered information for review. Review the information provided for accuracy.
