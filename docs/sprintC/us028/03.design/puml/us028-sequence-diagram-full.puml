@@ -5,7 +5,7 @@ skinparam shadowing false
 
 autonumber
 
-actor "Collaborator" as Col
+actor "Collaborator" as CLB
 participant ":ListTaskSpaceUI" as UI
 participant ":ListTaskController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -23,9 +23,9 @@ participant "listEntriesDto\n:List<EntryDto>" as LISTENTRIESDTO
 participant "entryDto\n:EntryDto" as DTO
 participant "agendaEntries\n:List<AgendaEntries>" as AGENDAENTRIES
 
-activate Col
+activate CLB
 
-Col -> UI : asks to consult the entry assigned to himself
+CLB -> UI : asks to consult the entry assigned to himself
     activate UI
 
     UI -> CTRL** : create
@@ -61,10 +61,10 @@ Col -> UI : asks to consult the entry assigned to himself
         CTRL --> UI : collaborator
         deactivate CTRL
 
-    UI --> Col : asks to select the beginning and end date of the search
+    UI --> CLB : asks to select the beginning and end date of the search
     deactivate UI
 
-Col -> UI : selects the beginning and end date
+CLB -> UI : selects the beginning and end date
     activate UI
 
     UI -> CTRL : getStatusList()
@@ -99,16 +99,16 @@ Col -> UI : selects the beginning and end date
         CTRL --> UI : statusList
         deactivate CTRL
 
-    UI --> Col : asks to select the type of status he wants to consult
+    UI --> CLB : asks to select the type of status he wants to consult
     deactivate UI
 
-Col -> UI : Selects the type he wants to consult
+CLB -> UI : Selects the type he wants to consult
     activate UI
 
-    UI --> Col : asks for confirmation
+    UI --> CLB : asks for confirmation
     deactivate UI
 
-Col -> UI : confirms that he wants to create the list
+CLB -> UI : confirms that he wants to create the list
     activate UI
 
     UI -> CTRL : getTaskList(collaborator,dateI,dateF,typeStatus)
@@ -234,8 +234,8 @@ Col -> UI : confirms that he wants to create the list
         CTRL --> UI : listEntriesDto
         deactivate CTRL
 
-    UI --> Col : displays greens spaces sorted by date
+    UI --> CLB : displays greens spaces sorted by date
     deactivate UI
 
-deactivate Col
+deactivate CLB
 @enduml
