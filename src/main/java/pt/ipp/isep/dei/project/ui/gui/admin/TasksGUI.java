@@ -12,11 +12,13 @@ import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.AddAgendaEntryController;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
+import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -82,7 +84,7 @@ public class TasksGUI {
 
 
     @FXML
-    private ListView<?> agendaEntryList;
+    private ListView<String> agendaEntryList;
 
     @FXML
     private VBox vbox_selectedCollab;
@@ -152,7 +154,18 @@ public class TasksGUI {
 
             // Atualizar a To-Do list
             updateToDoEntry();
+            updateAgendaEntryList();
         }
+    }
+
+    private void updateAgendaEntryList() {
+        List<ToDoEntryDto> agendaEntries = addAgendaEntryController.getAgendaEntries(); // Obter entradas da agenda
+        List<String> agendaEntryTitles = new ArrayList<>();
+        for (ToDoEntryDto entry : agendaEntries) {
+            agendaEntryTitles.add(entry.getTitle());
+        }
+        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryTitles);
+        agendaEntryList.setItems(observableList);
     }
 
     @FXML
