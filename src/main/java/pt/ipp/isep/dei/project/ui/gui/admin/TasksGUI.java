@@ -26,7 +26,6 @@ public class TasksGUI {
     private final RegisterToDoEntryController registerToDoEntryController = new RegisterToDoEntryController();
     private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
 
-
     @FXML
     private ListView<String> toDoListView;
 
@@ -35,22 +34,27 @@ public class TasksGUI {
 
     @FXML
     private Button addEntryBtn;
+
     @FXML
     private Button removeEntryBtn;
 
     @FXML
     private Label titleLabel;
+
     @FXML
     private Label descriptionLabel;
+
     @FXML
     private Label durationLabel;
+
     @FXML
     private Label urgencyLabel;
+
     @FXML
     private Label greenSpaceLabel;
+
     @FXML
     private VBox taskDetailsVBox;
-
 
     @FXML
     private Button PostponeAgendaEntryBtn;
@@ -61,6 +65,42 @@ public class TasksGUI {
 
     @FXML
     private Button CancelAgendaEntryBtn;
+
+    @FXML
+    private Button AddAgendaEntryBtn1;
+
+
+    @FXML
+    private Label startingDateLabel;
+
+    @FXML
+    private Label teamLabel;
+
+
+    @FXML
+    private Label vehicleLabel;
+
+
+    @FXML
+    private ListView<?> agendaEntryList;
+
+    @FXML
+    private VBox vbox_selectedCollab;
+
+
+    @FXML
+    private Label progressStatusLabel;
+
+
+    @FXML
+    void handleAddTeamBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleAddVehicleBtn(ActionEvent event) {
+
+    }
 
 
     @FXML
