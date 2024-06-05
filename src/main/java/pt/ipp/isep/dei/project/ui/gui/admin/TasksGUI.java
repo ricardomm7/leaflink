@@ -11,11 +11,12 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.AddAgendaEntryController;
+import pt.ipp.isep.dei.project.application.controller.AssignVehiclesController;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
-import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class TasksGUI {
 
     private final RegisterToDoEntryController registerToDoEntryController = new RegisterToDoEntryController();
     private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
+    private final AssignVehiclesController assignVehiclesController = new AssignVehiclesController();
 
+    private List<VehicleDto> vehicleListDto;
     @FXML
     private ListView<String> toDoListView;
 
@@ -61,9 +64,8 @@ public class TasksGUI {
     @FXML
     private Button PostponeAgendaEntryBtn;
 
-
+    @FXML
     private Button AddAgendaEntryBtn;
-
 
     @FXML
     private Button CancelAgendaEntryBtn;
@@ -101,7 +103,45 @@ public class TasksGUI {
 
     @FXML
     void handleAddVehicleBtn(ActionEvent event) {
+        Dialog<List<VehicleDto>> dialog = createVehicleSelectionDialog();
+        Optional<List<VehicleDto>> result = dialog.showAndWait();
 
+        result.ifPresent(selectedVehicles -> {
+            // Faça algo com os veículos selecionados
+            // Aqui você pode atualizar a entrada com os veículos selecionados
+            int entryIndex = 1; // Suponha que a entrada que você deseja atualizar seja a entrada de índice 1
+            assignVehiclesController.updateEntryWithVehicles(entryIndex, selectedVehicles);
+        });
+    }
+
+    private Dialog<List<VehicleDto>> createVehicleSelectionDialog() {
+        Dialog<List<VehicleDto>> dialog = new Dialog<>();
+        dialog.setTitle("Select Vehicles");
+
+        List<VehicleDto> vehicles = assignVehiclesController.getVehicleList();
+        VBox vBox = new VBox();
+        CheckBox[] checkBoxes = new CheckBox[vehicles.size()];
+        for (int i = 0; i < vehicles.size(); i++) {
+            checkBoxes[i] = new CheckBox(vehicles.get(i).getVehiclePlate() + " - " + vehicles.get(i).getType());
+            vBox.getChildren().add(checkBoxes[i]);
+        }
+
+        dialog.getDialogPane().setContent(vBox);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                List<VehicleDto> selectedVehicles = new ArrayList<>();
+                for (int i = 0; i < vehicles.size(); i++) {
+                    if (checkBoxes[i].isSelected()) {
+                        selectedVehicles.add(vehicles.get(i));
+                    }
+                }
+                return selectedVehicles;
+            }
+            return null;
+        });
+
+        return dialog;
     }
 
 
@@ -505,6 +545,42 @@ public class TasksGUI {
                 };
             }
         });
+
+        // Configurando a célula de fábrica para agendaEntryList
+        agendaEntryList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                            setStyle(null);
+                            ToDoEntryDto entry = getAgendaEntry(item);
+                            if (entry != null) {
+                                switch (entry.getUrgencyStatus()) {
+                                    case HIGH:
+                                        setStyle("-fx-text-fill: red;");
+                                        break;
+                                    case MEDIUM:
+                                        setStyle("-fx-text-fill: orange;");
+                                        break;
+                                    case LOW:
+                                        setStyle("-fx-text-fill: green;");
+                                        break;
+                                    default:
+                                        setStyle("-fx-text-fill: black;");
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
 
@@ -532,6 +608,17 @@ public class TasksGUI {
         } else {
             taskDetailsVBox.setVisible(false);
         }
+    }
+
+    private ToDoEntryDto getAgendaEntry(String string) {
+        for (ToDoEntryDto entry : addAgendaEntryController.getAgendaEntries()) {
+            // Verifique se o título da entrada corresponde à string fornecida
+            if (entry.getTitle().equalsIgnoreCase(string)) {
+                return entry; // Se corresponder, retorne a entrada da agenda
+            }
+        }
+        return null;
+
     }
 
     private ToDoEntryDto getToDoEntryDto(String string) {
