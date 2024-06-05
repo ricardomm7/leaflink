@@ -219,6 +219,4 @@ public class EntryRepository implements Serializable {
     }
 
 
-
-
 }

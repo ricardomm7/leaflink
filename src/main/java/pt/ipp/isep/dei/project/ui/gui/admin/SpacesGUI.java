@@ -25,6 +25,8 @@ public class SpacesGUI {
     private final RegisterGreenSpaceController gsC = new RegisterGreenSpaceController();
     private final ListGreenSpacesController lgsC = new ListGreenSpacesController();
     private List<GreenSpaceDto> allGreenSpaces;
+    private List<GreenSpaceDto> listedMyGS;
+
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
@@ -98,6 +100,12 @@ public class SpacesGUI {
     @FXML
     private Button desassociateBtn;
 
+    @FXML
+    void handleEnterSearch1(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            searchBtnMyGsHandler(new ActionEvent());
+        }
+    }
 
     @FXML
     void handleEnterSearch(KeyEvent event) {
@@ -128,6 +136,7 @@ public class SpacesGUI {
                                     greenSpaceDto.getAddress() + ", " +
                                     greenSpaceDto.getCity() + " | " +
                                     greenSpaceDto.getType() + " | " +
+                                    greenSpaceDto.getArea() + " he | " +
                                     managerEmail;
                         })
                         .collect(Collectors.toList())
@@ -215,6 +224,7 @@ public class SpacesGUI {
                 gsC.createNewGS(name, street, zipCode, area, city, manager.getUserEmail(), type);
 
                 updateGSList();
+                updateMyGSList();
                 return addButtonType;
             }
             return null;
@@ -260,8 +270,51 @@ public class SpacesGUI {
     }
 
     @FXML
+    private TextField searchBarMyGS;
+
+    @FXML
+    void searchBtnMyGsHandler(ActionEvent event) {
+        String searchText = searchBarMyGS.getText().toLowerCase();
+        List<GreenSpaceDto> filteredGreenSpaces = listedMyGS.stream()
+                .filter(greenSpaceDto -> greenSpaceDto.getName().toLowerCase().contains(searchText) ||
+                        greenSpaceDto.getAddress().toLowerCase().contains(searchText) ||
+                        greenSpaceDto.getCity().toLowerCase().contains(searchText) ||
+                        greenSpaceDto.getType().toString().toLowerCase().contains(searchText))
+                .collect(Collectors.toList());
+
+        updateListView2(filteredGreenSpaces);
+    }
+
+    private void updateMyGSList() {
+        listMyGreenSpaces.getItems().clear();
+        listedMyGS = lgsC.getList(ApplicationSession.getInstance().getCurrentSession());
+        updateListView2(listedMyGS);
+    }
+
+    private void updateListView2(List<GreenSpaceDto> greenSpaces) {
+        ObservableList<String> observableList = FXCollections.observableArrayList(
+                greenSpaces.stream()
+                        .map(greenSpaceDto -> {
+                            String managerEmail = (greenSpaceDto.getManager() != null) ? greenSpaceDto.getManager() : "No Manager";
+                            return greenSpaceDto.getName() + " | " +
+                                    greenSpaceDto.getAddress() + ", " +
+                                    greenSpaceDto.getCity() + " | " +
+                                    greenSpaceDto.getType() + " | " +
+                                    greenSpaceDto.getArea() + " he | " +
+                                    managerEmail;
+                        })
+                        .collect(Collectors.toList())
+        );
+        listMyGreenSpaces.setItems(observableList);
+    }
+
+    @FXML
+    private ListView<String> listMyGreenSpaces;
+
+    @FXML
     public void initialize() {
         updateGSList();
+        updateMyGSList();
         listGreenSpaces.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             desassociateBtn.setDisable(newValue == null);
         });

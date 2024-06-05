@@ -164,6 +164,37 @@
                                 </VBox>
                             </content>
                         </Tab>
+                        <Tab closable="false" text="My Green Spaces">
+                            <content>
+                                <VBox prefHeight="200.0" prefWidth="100.0" styleClass="border-line">
+                                    <children>
+                                        <HBox VBox.vgrow="NEVER">
+                                            <children>
+                                                <TextField fx:id="searchBarMyGS" onKeyPressed="#handleEnterSearch1"
+                                                           promptText="Enter search words here"
+                                                           styleClass="text-field-custom" HBox.hgrow="ALWAYS">
+                                                    <HBox.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </HBox.margin>
+                                                </TextField>
+                                                <Button mnemonicParsing="false" onAction="#searchBtnMyGsHandler"
+                                                        styleClass="button-custom" text="Search" HBox.hgrow="ALWAYS">
+                                                    <HBox.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </HBox.margin>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                        <HBox VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <ListView fx:id="listMyGreenSpaces" styleClass="list-view-cstm"
+                                                          HBox.hgrow="ALWAYS"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </Tab>
                     </tabs>
                 </TabPane>
             </children>

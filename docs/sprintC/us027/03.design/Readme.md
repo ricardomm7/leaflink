@@ -1,31 +1,31 @@
 # US027 - List all green spaces managed by a GSM.
 
-## 3. Design - User Story Realization 
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
 _**Note that SSD - Alternative One is adopted.**_
 
-
 | Interaction ID | Question: Which class is responsible for...   | Answer                    | Justification (with patterns)                                                           |
 |:---------------|:----------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------|
 | Step 1         | ... interacting with the actor?               | ListGreenSpacesUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class. |
 |                | ... coordinating the US?                      | ListGreenSpacesController | Controller.                                                                             |
+|                | ... get the Green Space Repository?           | Repositories              | Information Expert, High cohesion, Low coupling.                                        |
 | Step 2         | ... request the sorting algorithm?            | RegisterVehicleUI         | Pure Fabrication.                                                                       |
-| Step 3         | ... get the Green Space Repository?           | Repositories              | Information Expert, High cohesion, Low coupling.                                        |
-|                | ... creating the Green Spaces List?           | GreenSpaceRepository      | Information Expert.                                                                     |
+| Step 3         | ... creating the Green Spaces List?           | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... verifying if the generated list is empty? | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... having the list to organize?              | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... organizing the list of green spaces?      | Sortable                  | Protected Variations.                                                                   |
+|                | ... passing the domain objects to DTO?        | GreenSpaceMapper          | Creator, Low coupling.                                                                  |
 | Step 4         | ... showing the created list?                 | RegisterVehicleUI         | Pure Fabrication.                                                                       |
+
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
 * GreenSpace
 
-
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
 * Repositories
 * ListGreenSpacesUI

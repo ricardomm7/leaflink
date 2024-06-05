@@ -1,12 +1,7 @@
 package pt.ipp.isep.dei.project.application.controller;
 
-import pt.ipp.isep.dei.project.domain.AgendaEntry;
-import pt.ipp.isep.dei.project.domain.ProgressStatus;
-import pt.ipp.isep.dei.project.domain.ToDoEntry;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
-import pt.ipp.isep.dei.project.repository.EntryRepository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +17,6 @@ public class AddAgendaEntryController {
     public List<ToDoEntryDto> getAgendaEntries() {
         return agendaEntries;
     }
-
 
 
 }
