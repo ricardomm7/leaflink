@@ -1,10 +1,8 @@
 package pt.ipp.isep.dei.project.repository;
 
+import pt.ipp.isep.dei.project.application.controller.ListTaskController;
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.AgendaEntry;
-import pt.ipp.isep.dei.project.domain.ProgressStatus;
-import pt.ipp.isep.dei.project.domain.ToDoEntry;
-import pt.ipp.isep.dei.project.domain.Vehicle;
+import pt.ipp.isep.dei.project.domain.*;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
@@ -96,6 +94,16 @@ public class EntryRepository implements Serializable {
         return z;
     }
 
+    public List<AgendaEntry> getAgendaEntryListByEmail(String email) {
+        List<AgendaEntry> z = new ArrayList<>();
+        for (AgendaEntry s : getAgendaEntryList()) {
+            if (s.getGreenSpace().getManager().equals(email)) {
+                z.add(s);
+            }
+        }
+        return z;
+    }
+
     /**
      * Updates the vehicles assigned to a specific AgendaEntry.
      *
@@ -172,6 +180,33 @@ public class EntryRepository implements Serializable {
         return (agendaEntryList);
     }
 
+    /**
+     * Gets dates list.
+     *
+     * @param beginningDate the beginning date
+     * @param endDate       the end date
+     * @param status        the status
+     * @param team          the team
+     * @return the dates list
+     */
+    public List<AgendaEntry> getDatesList(LocalDate beginningDate , LocalDate endDate, ProgressStatus status, Team team) {
+        List<AgendaEntry> fullList = getAgendaEntryList();
+
+        List<AgendaEntry> teamEntries = new ArrayList<>();
+        for (AgendaEntry entry : fullList) {
+            if (entry.getTeam().equals(team)) {
+                teamEntries.add(entry);
+            }
+        }
+
+        for (AgendaEntry entry : teamEntries) {
+            if (entry.getStartingDate().isBefore(beginningDate)|| entry.getStartingDate().isAfter(endDate)) {
+                teamEntries.remove(entry);
+            }
+        }
+        return teamEntries;
+
+    }
     /**
      * Retrieves a list of all ToDoEntryDto objects.
      *
