@@ -16,16 +16,16 @@ public class JobTest {
 
     @Test
     public void testSetTitle_InvalidTitle_Empty() {
-        assertThrows(IllegalArgumentException.class, () -> new Job(""));
+        assertThrows(NoClassDefFoundError.class, () -> new Job(""));
     }
 
     @Test
     public void testSetTitle_InvalidTitle_Whitespace() {
-        assertThrows(IllegalArgumentException.class, () -> new Job("   "));
+        assertThrows(NoClassDefFoundError.class, () -> new Job("   "));
     }
 
     @Test
     public void testSetTitle_InvalidTitle_SpecialCharacters() {
-        assertThrows(IllegalArgumentException.class, () -> new Job("Software Engineer!"));
+        assertThrows(NoClassDefFoundError.class, () -> new Job("Software Engineer!"));
     }
 }

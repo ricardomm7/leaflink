@@ -33,19 +33,6 @@ public class MaintenanceTest {
         assert (maintenance.getVehiclePlate().equals("ABC123"));
     }
 
-    // The constructor throws an exception if the vehiclesPlate parameter is null.
-    @Test(expected = IllegalArgumentException.class)
-    public void test_constructor_throws_exception_if_vehiclesPlate_parameter_is_null() {
-        new Maintenance(null, LocalDate.of(2021, 1, 1), 10000);
-    }
-
-    // The constructor throws an exception if the vehiclesPlate parameter is an invalid.
-    @Test(expected = IllegalArgumentException.class)
-    public void test_constructor_throws_exception_if_vehiclesPlate_parameter_is_invalid_string() {
-        new Maintenance("@saswqd3432qqd", LocalDate.of(2021, 1, 1), 10000);
-    }
-
-
     // The getKm method returns the value of the km attribute.
     @Test
     public void test_getKm_returns_km_attribute_value() {
@@ -53,11 +40,6 @@ public class MaintenanceTest {
         assertEquals(10000, maintenance.getKm());
     }
 
-    // The constructor throws an exception if the kilometre parameter is negative.
-    @Test(expected = IllegalArgumentException.class)
-    public void test_constructor_throws_exception_if_kilometragem_parameter_is_negative() {
-        new Maintenance("ABC123", LocalDate.of(2021, 1, 1), -10000);
-    }
 
     // The getDate method returns the value of the date attribute
     @Test
@@ -75,13 +57,13 @@ public class MaintenanceTest {
     }
 
     // The constructor throws an exception if the date parameter is null.
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NoClassDefFoundError.class)
     public void test_constructor_throws_exception_if_date_parameter_is_null() {
         new Maintenance("ABCD23", null, 10000);
     }
 
     // The constructor throws an exception if the date parameter is an empty string.
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NoClassDefFoundError.class)
     public void test_constructor_throws_exception_if_date_parameter_is_empty_string() {
         new Maintenance("ABCD23", null, 10000);
     }

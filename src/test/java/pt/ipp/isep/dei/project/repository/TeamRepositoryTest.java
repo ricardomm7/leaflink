@@ -18,7 +18,7 @@ class TeamRepositoryTest {
 
         TeamRepository teamRepository = new TeamRepository();
 
-        teamRepository.addTeam(TeamMapper.toDto(team));
+        teamRepository.addTeam((team));
 
         List<TeamDto> teamList = teamRepository.getTeamDtoList();
 
@@ -36,7 +36,7 @@ class TeamRepositoryTest {
 
         Team team = new Team(new ArrayList<>(), new ArrayList<>(), 3, 5);
 
-        teamRepository.addTeam(TeamMapper.toDto(team));
+        teamRepository.addTeam((team));
 
         List<TeamDto> updatedTeamList = teamRepository.getTeamDtoList();
 

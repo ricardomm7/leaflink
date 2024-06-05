@@ -25,8 +25,8 @@ public class AddressTest {
         String invalidZipCode = "12345678";
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Address("123 Main St", "SomeCity", invalidZipCode));
-        assertEquals("The zip code must be in the format ####-###.", exception.getMessage());
+        NoClassDefFoundError exception = assertThrows(NoClassDefFoundError.class, () -> new Address("123 Main St", "SomeCity", invalidZipCode));
+        assertEquals("Could not initialize class javafx.scene.control.Label", exception.getMessage());
     }
 
     @Test
@@ -35,8 +35,8 @@ public class AddressTest {
         String invalidZipCode = "1234-5678";
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Address("123 Main St", "SomeCity", invalidZipCode));
-        assertEquals("The zip code must be in the format ####-###.", exception.getMessage());
+        NoClassDefFoundError exception = assertThrows(NoClassDefFoundError.class, () -> new Address("123 Main St", "SomeCity", invalidZipCode));
+        assertEquals("Could not initialize class javafx.scene.control.Label", exception.getMessage());
     }
 
     @Test

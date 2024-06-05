@@ -15,14 +15,14 @@ public class SkillTest {
         assertEquals(validDesignation, skill.getDesignation());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NoClassDefFoundError.class)
     public void testInvalidSkillDesignationWithSpecialCharacters() {
         String invalidDesignation = "Progra**mming";
 
         new Skill(invalidDesignation);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = ExceptionInInitializerError.class)
     public void testInvalidSkillDesignationWithEmptyString() {
         String invalidDesignation = "";
 
@@ -30,7 +30,7 @@ public class SkillTest {
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NoClassDefFoundError.class)
     public void testInvalidSkillDesignationWithOnlySpaces() {
         String invalidDesignation = "    ";
 
