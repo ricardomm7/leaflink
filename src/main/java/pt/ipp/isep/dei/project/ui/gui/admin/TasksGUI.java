@@ -505,6 +505,42 @@ public class TasksGUI {
                 };
             }
         });
+
+        // Configurando a célula de fábrica para agendaEntryList
+        agendaEntryList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                            setStyle(null);
+                            ToDoEntryDto entry = getAgendaEntry(item);
+                            if (entry != null) {
+                                switch (entry.getUrgencyStatus()) {
+                                    case HIGH:
+                                        setStyle("-fx-text-fill: red;");
+                                        break;
+                                    case MEDIUM:
+                                        setStyle("-fx-text-fill: orange;");
+                                        break;
+                                    case LOW:
+                                        setStyle("-fx-text-fill: green;");
+                                        break;
+                                    default:
+                                        setStyle("-fx-text-fill: black;");
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
 
@@ -532,6 +568,17 @@ public class TasksGUI {
         } else {
             taskDetailsVBox.setVisible(false);
         }
+    }
+
+    private ToDoEntryDto getAgendaEntry(String string) {
+        for (ToDoEntryDto entry : addAgendaEntryController.getAgendaEntries()) {
+            // Verifique se o título da entrada corresponde à string fornecida
+            if (entry.getTitle().equalsIgnoreCase(string)) {
+                return entry; // Se corresponder, retorne a entrada da agenda
+            }
+        }
+        return null;
+
     }
 
     private ToDoEntryDto getToDoEntryDto(String string) {

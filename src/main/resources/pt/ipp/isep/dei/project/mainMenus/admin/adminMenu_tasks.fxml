@@ -262,6 +262,43 @@
                                     </Button>
                                             </children>
                                         </HBox>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="urgency-low" HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Circle>
+                                    <Label styleClass="urgency-low" text="Low urgency" HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="urgency-medium">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Circle>
+                                    <Label styleClass="urgency-medium" text="Medium urgency">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Circle fill="#00bf10" radius="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="urgency-high" HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Circle>
+                                    <Label styleClass="urgency-high" text="High urgency">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
                                         <HBox VBox.vgrow="ALWAYS">
                                  <children>
                                     <SplitPane dividerPositions="0.5" HBox.hgrow="ALWAYS">
