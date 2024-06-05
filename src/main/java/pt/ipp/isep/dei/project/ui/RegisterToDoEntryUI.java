@@ -31,14 +31,8 @@ public class RegisterToDoEntryUI implements Runnable {
     public void registerToDoEntry() {
         Scanner sc = new Scanner(System.in);
         try {
-            System.out.println("ToDoEntry title:");
-            String title = sc.nextLine();
-
-            System.out.println("ToDoEntry description: ");
-            String description = sc.nextLine();
-
             System.out.println("Available green spaces: ");
-            List<GreenSpaceDto> greenSpaceDtos = controller.getGreenSpacesDto();
+            List<GreenSpaceDto> greenSpaceDtos = getGreenSpaceDtos();
             int index = 1;
             for (GreenSpaceDto gs : greenSpaceDtos) {
                 System.out.println(index + ". " + gs);
@@ -46,6 +40,12 @@ public class RegisterToDoEntryUI implements Runnable {
             }
             int gsIndex = sc.nextInt();
             GreenSpaceDto greenSpaceDto = greenSpaceDtos.get(gsIndex - 1);
+
+            System.out.println("ToDoEntry title:");
+            String title = sc.nextLine();
+
+            System.out.println("ToDoEntry description: ");
+            String description = sc.nextLine();
 
             System.out.println("Select degree of urgency: ");
             UrgencyStatus[] dgUrg = UrgencyStatus.values();
@@ -72,6 +72,10 @@ public class RegisterToDoEntryUI implements Runnable {
         } catch (Exception e) {
             System.err.println("An unexpected error occurred: " + e.getMessage());
         }
+    }
+
+    private List<GreenSpaceDto> getGreenSpaceDtos() {
+        return controller.getGreenSpacesDto();
     }
 
     /**

@@ -76,7 +76,7 @@ public class RegisterToDoEntryController {
      */
     public void createNewToDoEntry(String title, String description, int duration, UrgencyStatus urg, GreenSpaceDto greenSpaceDto) {
         ToDoEntry newEntry = new ToDoEntry(title, description, duration, urg, GreenSpaceMapper.toDomain(greenSpaceDto));
-        entryRepository.create(newEntry);
+        entryRepository.createNewToDoEntry(newEntry);
 
     }
 

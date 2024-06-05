@@ -43,7 +43,7 @@ public class EntryRepository implements Serializable {
      * @param dto the ToDoEntryDto containing the information for the new ToDoEntry.
      * @throws IllegalArgumentException if a ToDoEntry with the same description already exists.
      */
-    public void create(ToDoEntry dto) {
+    public void createNewToDoEntry(ToDoEntry dto) {
         if (checkForDuplicates(dto)) {
             addToDoEntry(dto);
         } else {
