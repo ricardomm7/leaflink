@@ -67,7 +67,7 @@ CLB -> UI : asks to consult the entry assigned to himself
 CLB -> UI : selects the beginning and end date
     activate UI
 
-    UI -> CTRL : getStatusList()
+    UI -> CTRL : getStatusList(beginningDate,endDate)
         activate CTRL
 
         CTRL -> RepositorySingleton : getInstance()
@@ -82,10 +82,10 @@ CLB -> UI : selects the beginning and end date
             REP --> CTRL : taskRepository
             deactivate REP
 
-        CTRL -> taskRepository : getStatusList()
+        CTRL -> taskRepository : getStatusList(beginningDate,endDate)
             activate taskRepository
 
-            taskRepository --> LISTSTATUS** : create()
+            taskRepository --> LISTSTATUS** : create(beginningDate,endDate)
                 loop for each status in the system
                     taskRepository -> LISTSTATUS : add(status)
                         activate LISTSTATUS
@@ -129,20 +129,6 @@ CLB -> UI : confirms that he wants to create the list
         CTRL -> teamRepository : getTeamsThoughCollaborator(collaborator)
             activate teamRepository
 
-            teamRepository -> LISTTEAM** : create()
-                loop for each team in the system
-                    teamRepository -> TEAM : validateCollaboratorTeam(collaborator,team)
-                        activate TEAM
-                        TEAM -> TEAM : inTeam = validateCollaboratorTeam(collaborator,team)
-                        TEAM --> teamRepository : inTeam
-                        deactivate TEAM
-                    opt inTeam == true
-                        teamRepository -> LISTTEAM : addTeamOfCollaborator(team)
-                            activate LISTTEAM
-                    end
-
-                end
-            LISTTEAM --> teamRepository : teamList
             deactivate LISTTEAM
             teamRepository --> CTRL : teamList
             deactivate teamRepository
@@ -176,34 +162,6 @@ CLB -> UI : confirms that he wants to create the list
             taskRepository --> CTRL : taskList
         deactivate taskRepository
 
-        CTRL -> RepositorySingleton : getInstance()
-            activate RepositorySingleton
-
-            RepositorySingleton --> CTRL : repositories
-            deactivate RepositorySingleton
-
-        CTRL -> REP : getAgenda()
-            activate REP
-
-            REP --> CTRL : Agenda
-            deactivate REP
-
-        CTRL -> AGENDA : getCollaboratorAgendaEntries(taskList)
-            activate AGENDA
-
-            AGENDA --> AGENDAENTRIES** : create()
-                loop for each task
-                    loop for each agendaEntry
-                        opt (agendaEntry.getTask() == task)
-                            AGENDA -> AGENDAENTRIES : add(agendaEntry)
-                                activate AGENDAENTRIES
-                        end
-                    end
-                end
-            AGENDAENTRIES --> AGENDA : listEntries
-            deactivate AGENDAENTRIES
-        AGENDA --> CTRL : listEntries
-        deactivate AGENDA
 
         CTRL -> Mapper : toDTOList(listEntries)
             activate Mapper
