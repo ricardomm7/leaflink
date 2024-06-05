@@ -13,15 +13,15 @@ import java.util.List;
  * This class extends the ToDoEntryDto class and adds additional properties specific to an agenda entry.
  */
 public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
-    private String title;
-    private String description;
-    private int duration;
-    private UrgencyStatus urgencyStatus;
-    private GreenSpaceDto greenSpace;
-    private LocalDate startingDate;
-    private ProgressStatus progressStatus;
-    private TeamDto assignedTeam;
-    private List<VehicleDto> assignedVehicles;
+    public String title;
+    public String description;
+    public int duration;
+    public UrgencyStatus urgencyStatus;
+    public GreenSpaceDto greenSpace;
+    public LocalDate startingDate;
+    public ProgressStatus progressStatus;
+    public TeamDto assignedTeam;
+    public List<VehicleDto> assignedVehicles;
 
     /**
      * Constructs a new AgendaEntryDto object with the provided data, including the assigned team and vehicles.

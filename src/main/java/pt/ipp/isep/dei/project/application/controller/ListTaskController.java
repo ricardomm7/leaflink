@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
+import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
@@ -69,8 +71,9 @@ public class ListTaskController {
      * @param collaborator  the collaborator
      * @return the dates list
      */
-    public List<AgendaEntry> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Collaborator collaborator) {
+    public List<AgendaEntryDto> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Collaborator collaborator) {
         Team team = getTeamTroughCLB(collaborator);
-        return entryRepository.getDatesList(beginningDate, endDate, status, team);
+        List<AgendaEntry> entries =entryRepository.getDatesList(beginningDate, endDate, status, team);
+        return AgendaEntryMapper.toDtoList(entries);
     }
 }

@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
+import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -61,14 +62,14 @@ public class ListTaskSpaceUI implements Runnable {
         }
 
 
-        List<AgendaEntry> DatesList = controller.getDatesList(beginningDate, endDate, statuses[selectedStatusIndex], clb);
+        List<AgendaEntryDto> DatesList = controller.getDatesList(beginningDate, endDate, statuses[selectedStatusIndex], clb);
         if (DatesList.isEmpty()) {
             System.out.println("No entries found for the GSM.");
             return;
         }
         System.out.println("List of entries:");
         for (int i = 0; i < DatesList.size(); i++) {
-            AgendaEntry entry = DatesList.get(i);
+            AgendaEntryDto entry = DatesList.get(i);
             System.out.println((i + 1) + ". " + entry.getDescription());
         }
 
