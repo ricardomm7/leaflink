@@ -20,7 +20,7 @@ public enum ProgressStatus implements Serializable {
     /**
      * Represents a planned status.
      */
-    PLANED {
+    PLANNED {
         public String toString() {
             return "Planned";
         }
