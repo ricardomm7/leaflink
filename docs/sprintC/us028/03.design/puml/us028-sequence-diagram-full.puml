@@ -12,10 +12,8 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as REP
 participant "collaboratorRepository\n:CollaboratorRepository" as collaboratorRepository
 participant "teamRepository\n:TeamRepository" as teamRepository
-participant "teamList\n:List<Team>" as LISTTEAM
-participant "team:Team" as TEAM
-participant "taskRepository\n:TaskRepository" as taskRepository
-participant "taskList\n:List<Task>" as LISTTASK
+participant "entryRepository\n:EntryRepository" as entryRepository
+participant "datesList\n:List<AgendaEntry>" as LISTDATES
 participant "statusList\n:List<String>" as LISTSTATUS
 participant "agenda\n:Agenda" as AGENDA
 participant ":EntryMapper" as Mapper
@@ -76,25 +74,25 @@ CLB -> UI : selects the beginning and end date
             RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
-        CTRL -> REP : getTaskRepository()
+        CTRL -> REP : getEntryRepository()
             activate REP
 
-            REP --> CTRL : taskRepository
+            REP --> CTRL : entryRepository
             deactivate REP
 
-        CTRL -> taskRepository : getStatusList(beginningDate,endDate)
-            activate taskRepository
+        CTRL -> entryRepository : getStatusList(beginningDate,endDate)
+            activate entryRepository
 
-            taskRepository --> LISTSTATUS** : create(beginningDate,endDate)
+            entryRepository --> LISTSTATUS** : create(beginningDate,endDate)
                 loop for each status in the system
-                    taskRepository -> LISTSTATUS : add(status)
+                    entryRepository -> LISTSTATUS : add(status)
                         activate LISTSTATUS
                 end
-            LISTSTATUS --> taskRepository : statusList
+            LISTSTATUS --> entryRepository : statusList
             deactivate LISTSTATUS
 
-        taskRepository --> CTRL : statusList
-        deactivate taskRepository
+        entryRepository --> CTRL : statusList
+        deactivate entryRepository
 
         CTRL --> UI : statusList
         deactivate CTRL
@@ -129,7 +127,11 @@ CLB -> UI : confirms that he wants to create the list
         CTRL -> teamRepository : getTeamsThoughCollaborator(collaborator)
             activate teamRepository
 
-            deactivate LISTTEAM
+            teamRepository -> teamRepository : getTeamsThoughCollaborator(collaborator)
+            activate teamRepository
+            teamRepository --> teamRepository : collaborator
+            deactivate teamRepository
+
             teamRepository --> CTRL : teamList
             deactivate teamRepository
 
@@ -139,28 +141,28 @@ CLB -> UI : confirms that he wants to create the list
             RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
-        CTRL -> REP : getTaskRepository()
+        CTRL -> REP : getEntryRepository()
             activate REP
 
-            REP --> CTRL : taskRepository
+            REP --> CTRL : entryRepository
             deactivate REP
 
-        CTRL -> taskRepository : getTaskList(teamList,dateI,dateF,typeStatus)
-            activate taskRepository
+        CTRL -> entryRepository : getDatesList(teamList,dateI,dateF,typeStatus)
+            activate entryRepository
 
-            taskRepository -> LISTTASK** : create()
-                loop for each task in the system
-                    opt ((typeStatus() == task.getStatus() && (team == task.getTeam)) && (dateI <= task.getDateI()) && (dateF >= task.getDateF()))
-                        taskRepository -> LISTTASK : addTaskOfCollaborator(task)
-                            activate LISTTASK
+            entryRepository -> LISTDATES** : create()
+                loop for each entry in the system
+                    opt ((typeStatus() == entry.getStatus() && (team == entry.getTeam)) && (dateI <= entry.getDateI()) && (dateF >= entry.getDateF()))
+                        entryRepository -> LISTDATES : addEntryOfCollaborator(entry)
+                            activate LISTDATES
                     end
 
                 end
-            LISTTASK --> taskRepository : taskList
-            deactivate LISTTASK
+            LISTDATES --> entryRepository : datesList
+            deactivate LISTDATES
 
-            taskRepository --> CTRL : taskList
-        deactivate taskRepository
+            entryRepository --> CTRL : datesList
+        deactivate entryRepository
 
 
         CTRL -> Mapper : toDTOList(listEntries)
