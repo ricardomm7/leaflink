@@ -134,4 +134,13 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         }
     }
 
+    /**
+     * Get team.
+     *
+     * @return the team
+     */
+    public Team getTeam(){
+        return assignedTeam;
+    }
+
 }
