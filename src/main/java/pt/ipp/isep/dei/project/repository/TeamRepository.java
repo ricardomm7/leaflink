@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
@@ -54,6 +55,21 @@ public class TeamRepository implements Serializable {
         return new ArrayList<>(teamList);
     }
 
+
+    /**
+     * Gets team trough collaborator.
+     *
+     * @param clb the clb
+     * @return the team trough collaborator
+     */
+    public Team getTeamTroughCollaborator(Collaborator clb) {
+        for (Team team : teamList) {
+            if (team.getCollaborators().contains(clb)) {
+                return team;
+            }
+        }
+        return null;
+    }
 
     /**
      * Gets the list of AgendaEntryDto objects assigned to a specific collaborator.
