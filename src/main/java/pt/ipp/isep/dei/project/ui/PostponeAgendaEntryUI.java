@@ -34,7 +34,7 @@ public class PostponeAgendaEntryUI implements Runnable {
     /**
      * Postpone agenda entry.
      */
-    private static void postponeAgendaEntry() {
+    public static void postponeAgendaEntry() {
         List<AgendaEntryDto> entryList = controller.getAgendaEntryList(getGSMLogged());
 
         if (entryList.isEmpty()) {

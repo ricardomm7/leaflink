@@ -5,6 +5,7 @@ module pt.ipp.isep.dei.project {
     requires org.apache.commons.lang3;
     requires java.logging;
     requires java.xml;
+    requires java.sql;
 
     opens pt.ipp.isep.dei.project to javafx.fxml;
     exports pt.ipp.isep.dei.project;
