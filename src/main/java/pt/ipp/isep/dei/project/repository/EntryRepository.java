@@ -7,7 +7,9 @@ import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.application.controller.ListTaskController;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.dto.TeamDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.TeamMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
 import java.io.Serializable;
@@ -117,6 +119,11 @@ public class EntryRepository implements Serializable {
     public void updateVehiclesAgendaEntry(int entryIndex, List<VehicleDto> f) {
         List<Vehicle> u = VehicleMapper.toDomainList(f);
         agendaEntryList.get(entryIndex).setAssignedVehicles(u);
+    }
+
+    public void updateTeamAgendaEntry(int entryIndex, TeamDto team) {
+        Team t = TeamMapper.toDomain(team);
+        agendaEntryList.get(entryIndex).setAssignedTeam(t);
     }
 
     /**

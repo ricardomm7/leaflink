@@ -11,19 +11,10 @@ public class Team implements Serializable {
     private final int minTeamSize;
     private final int maxTeamSize;
     private final List<Collaborator> collaborators;
-    private boolean isAssigned;
+    private boolean isAvailable;
 
-    /**
-     * Constructs a team with the given collaborators.
-     *
-     * @param collaborators The list of collaborators in the team.
-     */
-    public Team(List<Collaborator> collaborators) {
-        this.collaborators = collaborators;
-        this.skills = List.of();
-        this.minTeamSize = 0;
-        this.maxTeamSize = collaborators.size();
-    }
+
+
 
     /**
      * Constructs a team with the given skills, collaborators, minimum and maximum team size.
@@ -34,11 +25,17 @@ public class Team implements Serializable {
      * @param maxTeamSize   The maximum size of the team.
      */
     public Team(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize) {
+        this.isAvailable = true;
         this.skills = skills;
         this.collaborators = collaborators;
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
 
     /**
      * Gets the skills of the team.
@@ -76,12 +73,10 @@ public class Team implements Serializable {
         return maxTeamSize;
     }
 
-    /**
-     * Sets the availability of the team.
-     *
-     * @param flag the true (available) or false (unavailable)
-     */
-    public void setAvailable(Boolean flag) {
-        this.isAssigned = flag;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
+
+
+
 }

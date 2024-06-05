@@ -90,6 +90,20 @@ public class TeamRepository implements Serializable {
         return assignedEntries;
     }
 
+    public List<Team> getAvailableTeamList() {
+        List<Team> availableTeam = new ArrayList<>();
+        for (Team team : teamList) {
+            if(team.isAvailable()) {
+                availableTeam.add(team);
+            }
+        }
+        return (availableTeam);
+    }
+
+    public void setTeamAvailability(int teamIndex, Boolean isAvailable) {
+        teamList.get(teamIndex).setAvailable(isAvailable);
+    }
+
     /**
      * Remove.
      *

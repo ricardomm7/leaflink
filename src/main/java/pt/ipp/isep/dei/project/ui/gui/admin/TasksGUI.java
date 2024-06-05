@@ -10,18 +10,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
-import pt.ipp.isep.dei.project.application.controller.AddAgendaEntryController;
-import pt.ipp.isep.dei.project.application.controller.AssignVehiclesController;
-import pt.ipp.isep.dei.project.application.controller.PostponeAgendaEntryController;
-import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
+import pt.ipp.isep.dei.project.application.controller.*;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
-import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
-import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
-import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
-import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.dto.*;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.time.LocalDate;
@@ -36,6 +30,7 @@ public class TasksGUI {
     private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
     private final AssignVehiclesController assignVehiclesController = new AssignVehiclesController();
     private final PostponeAgendaEntryController postponeAgendaEntryController = new PostponeAgendaEntryController();
+    private final AssignTeamController assignTeamController = new AssignTeamController();
 
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
     private List<VehicleDto> vehicleListDto;
@@ -107,8 +102,57 @@ public class TasksGUI {
 
     @FXML
     void handleAddTeamBtn(ActionEvent event) {
+        String selectedAgendaEntry = agendaEntryList.getSelectionModel().getSelectedItem();
+        if (selectedAgendaEntry == null) {
+            ShowError.showAlert("Assign Team", "No entry selected to assign a team.", null);
+            return;
+        }
+
+        Dialog<TeamDto> dialog = createTeamSelectionDialog();
+        Optional<TeamDto> result = dialog.showAndWait();
+
+        result.ifPresent(selectedTeam -> {
+            int entryIndex = agendaEntryList.getSelectionModel().getSelectedIndex();
+            assignTeamController.updateEntryWithTeam(entryIndex, selectedTeam);
+            updateAgendaEntryList();
+        });
 
     }
+
+    private Dialog<TeamDto> createTeamSelectionDialog() {
+        Dialog<TeamDto> dialog = new Dialog<>();
+        dialog.setTitle("Select Team");
+
+        List<TeamDto> teams = assignTeamController.getTeamList();
+        VBox vBox = new VBox();
+        ToggleGroup toggleGroup = new ToggleGroup();
+        RadioButton[] radioButtons = new RadioButton[teams.size()];
+
+        for (int i = 0; i < teams.size(); i++) {
+            radioButtons[i] = new RadioButton(teams.get(i).getTeamAsString());
+            radioButtons[i].setToggleGroup(toggleGroup);
+            vBox.getChildren().add(radioButtons[i]);
+        }
+
+        dialog.getDialogPane().setContent(vBox);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                for (int i = 0; i < teams.size(); i++) {
+                    if (radioButtons[i].isSelected()) {
+                        return teams.get(i);
+                    }
+                }
+            }
+            return null;
+        });
+
+        return dialog;
+    }
+
+
+
+
 
     @FXML
     void handleAddVehicleBtn(ActionEvent event) {
