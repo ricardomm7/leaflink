@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * The CreateTeamController class handles the logic for creating teams.
- * It interacts with the TeamRepository and SkillRepository to retrieve skills and generate team proposals.
+ * It interacts with the TeamRepository, SkillRepository, and CollaboratorRepository to manage and propose teams.
  */
 public class CreateTeamController {
     private final TeamRepository teamRepository;
@@ -39,7 +39,7 @@ public class CreateTeamController {
     /**
      * Retrieves the list of skills from the repository.
      *
-     * @return the list of skills
+     * @return the list of SkillDto objects
      */
     public List<SkillDto> getSkills() {
         return SkillMapper.ListToDto(skillRepository.getSkillList());
@@ -69,7 +69,7 @@ public class CreateTeamController {
      * @param requiredSkills The list of skills required for the team.
      * @param minTeamSize    The minimum size of the team.
      * @param maxTeamSize    The maximum size of the team.
-     * @return A Team object representing the proposed team, or null if no suitable team can be formed.
+     * @return A TeamDto object representing the proposed team, or null if no suitable team can be formed.
      */
     public TeamDto generateProposal(List<SkillDto> requiredSkills, int minTeamSize, int maxTeamSize) {
         List<CollaboratorDto> allCollaborators = CollaboratorMapper.toDtoList(collaboratorRepository.getCollaboratorList());
@@ -125,7 +125,7 @@ public class CreateTeamController {
      * @param selectedCollaborators The list of collaborators selected for the team.
      * @param minTeamSize           The minimum size of the team.
      * @param maxTeamSize           The maximum size of the team.
-     * @return The created Team object.
+     * @return The created TeamDto object.
      */
     public TeamDto createCustomTeam(List<SkillDto> requiredSkills, List<Collaborator> selectedCollaborators, int minTeamSize, int maxTeamSize) {
         Team team = new Team(SkillMapper.listToDomain(requiredSkills), selectedCollaborators, minTeamSize, maxTeamSize);
@@ -133,19 +133,46 @@ public class CreateTeamController {
         return TeamMapper.toDto(team);
     }
 
-
+    /**
+     * Checks if the team size is within the specified range.
+     *
+     * @param teamSize    The size of the team.
+     * @param minTeamSize The minimum size of the team.
+     * @param maxTeamSize The maximum size of the team.
+     * @return True if the team size is within the range, false otherwise.
+     */
     public boolean checkTeamSize(int teamSize, int minTeamSize, int maxTeamSize) {
         return teamSize >= minTeamSize && teamSize <= maxTeamSize;
     }
 
+    /**
+     * Checks if the minimum team size is greater than zero.
+     *
+     * @param minTeamSize The minimum size of the team.
+     * @return True if the minimum team size is greater than zero, false otherwise.
+     */
     public boolean checkMinTeamSize(int minTeamSize) {
         return minTeamSize > 0;
     }
 
+    /**
+     * Checks if the maximum team size is greater than the minimum team size.
+     *
+     * @param maxTeamSize The maximum size of the team.
+     * @param minTeamSize The minimum size of the team.
+     * @return True if the maximum team size is greater than the minimum team size, false otherwise.
+     */
     public boolean checkMaxTeamSize(int maxTeamSize, int minTeamSize) {
         return maxTeamSize > minTeamSize;
     }
 
+    /**
+     * Checks if the selected collaborators have the required skills.
+     *
+     * @param selectedCollaborators The list of selected collaborators.
+     * @param requiredSkills        The list of required skills.
+     * @return True if the selected collaborators have all the required skills, false otherwise.
+     */
     public boolean checkIfCollaboratorsHaveRequiredSkills(List<Collaborator> selectedCollaborators, List<SkillDto> requiredSkills) {
         List<SkillDto> combinedSkills = new ArrayList<>();
         for (Collaborator collaborator : selectedCollaborators) {
@@ -158,7 +185,11 @@ public class CreateTeamController {
         return combinedSkills.containsAll(requiredSkills);
     }
 
-
+    /**
+     * Retrieves the list of teams from the repository.
+     *
+     * @return the list of TeamDto objects
+     */
     public List<TeamDto> getTeams() {
         return TeamMapper.ListToDto(teamRepository.getTeamList());
     }

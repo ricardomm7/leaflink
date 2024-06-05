@@ -8,16 +8,22 @@ import java.io.Serializable;
 public enum UrgencyStatus implements Serializable {
 
     HIGH {
+        // Override toString method to return a more readable representation
+        @Override
         public String toString() {
             return "High";
         }
     },
     MEDIUM {
+        // Override toString method to return a more readable representation
+        @Override
         public String toString() {
             return "Medium";
         }
     },
     LOW {
+        // Override toString method to return a more readable representation
+        @Override
         public String toString() {
             return "Low";
         }

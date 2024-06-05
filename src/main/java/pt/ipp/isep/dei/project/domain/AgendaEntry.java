@@ -33,11 +33,17 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         this.progressStatus = progressStatus;
     }
 
+    /**
+     * Constructs a new AgendaEntry by copying an existing one and setting a new date and progress status.
+     *
+     * @param agendaEntry the existing AgendaEntry to copy.
+     * @param newDate     the new starting date for the copied AgendaEntry.
+     * @param PLANNED     the new progress status for the copied AgendaEntry.
+     */
     public AgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus PLANNED) {
         super(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(), agendaEntry.getUrgencyStatus(), agendaEntry.getGreenSpace());
         this.startingDate = newDate;
         this.progressStatus = PLANNED;
-
     }
 
     /**
@@ -113,9 +119,9 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
     }
 
     /**
-     * Set available collaborators of a team and vehicles assigned to a done task.
+     * Sets available collaborators of a team and vehicles assigned to a completed task.
      *
-     * @param agendaEntry the agenda entry
+     * @param agendaEntry the agenda entry that has been completed.
      */
     public void setAvailable(AgendaEntry agendaEntry) {
         Team team = agendaEntry.getAssignedTeam();

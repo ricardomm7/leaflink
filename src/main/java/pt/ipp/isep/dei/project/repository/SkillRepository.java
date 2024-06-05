@@ -84,6 +84,11 @@ public class SkillRepository implements Serializable {
         skillList.remove(index);
     }
 
+    /**
+     * Gets skill list.
+     *
+     * @return the skill list
+     */
     public List<Skill> getSkillList() {
         return new ArrayList<>(skillList);
     }

@@ -197,10 +197,21 @@ public class EntryRepository implements Serializable {
         return false;
     }
 
+    /**
+     * Remove to do entry.
+     *
+     * @param toDoEntry the to do entry
+     */
     public void removeToDoEntry(ToDoEntry toDoEntry) {
         toDoEntryList.remove(toDoEntry);
     }
 
+    /**
+     * Find to do entry by title to do entry.
+     *
+     * @param title the title
+     * @return the to do entry
+     */
     public ToDoEntry findToDoEntryByTitle(String title) {
         return toDoEntryList.stream()
                 .filter(entry -> entry.getTitle().equalsIgnoreCase(title))

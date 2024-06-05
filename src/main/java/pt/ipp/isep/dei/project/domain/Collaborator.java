@@ -26,7 +26,7 @@ public class Collaborator implements Serializable {
     private Address address;
     private List<Skill> skills = new ArrayList<>();
 
-    private boolean availabe;
+    private boolean available;
 
     /**
      * Constructor for Collaborator class.
@@ -45,7 +45,7 @@ public class Collaborator implements Serializable {
      * @param job                  The job of the collaborator.
      */
     public Collaborator(String name, LocalDate birthdate, int contactMobile, int taxpayerNumber, String email, String address, String zipCode, String city, DocumentType documentType, String identificationNumber, LocalDate admissionDate, Job job) {
-        this.availabe = true;
+        this.available = true;
         try {
             setName(name);
             setBirthdate(birthdate);
@@ -115,7 +115,6 @@ public class Collaborator implements Serializable {
         }
     }
 
-
     /**
      * Sets the email address of the collaborator.
      *
@@ -147,10 +146,10 @@ public class Collaborator implements Serializable {
     /**
      * Sets available.
      *
-     * @param b the boolean (available or not available)
+     * @param available the boolean (available or not available)
      */
-    public void setAvailable(boolean b) {
-        this.availabe = b;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     /**
@@ -175,15 +174,7 @@ public class Collaborator implements Serializable {
             return false;
         }
         try {
-            if (this.documentType == DocumentType.CITIZEN_CARD) {
-                return DocumentType.CITIZEN_CARD.verifyNumber(identificationNumber);
-            } else if (this.documentType == DocumentType.PASSPORT) {
-                return DocumentType.PASSPORT.verifyNumber(identificationNumber);
-            } else if (this.documentType == DocumentType.IDENTITY_CARD) {
-                return DocumentType.IDENTITY_CARD.verifyNumber(identificationNumber);
-            } else {
-                return DocumentType.OTHER_TYPE.verifyNumber(identificationNumber);
-            }
+            return this.documentType.verifyNumber(identificationNumber);
         } catch (Exception e) {
             return false;
         }
@@ -266,10 +257,10 @@ public class Collaborator implements Serializable {
             return false;
         }
 
-        // Obtém a data de hoje
+        // Get today's date
         LocalDate today = LocalDate.now();
 
-        // Verifica se a data não é a de hoje ou futura
+        // Verify if the date is not today or in the future
         return !date.isAfter(today);
     }
 
@@ -293,7 +284,7 @@ public class Collaborator implements Serializable {
         if (email == null) {
             return false;
         }
-        // Verifica se o email contém "@" e se há pelo menos um caractere antes e depois dele
+        // Verify if the email contains "@" and has at least one character before and after it
         int atIndex = email.indexOf('@');
         int dotIndex = email.lastIndexOf('.');
 
@@ -311,15 +302,15 @@ public class Collaborator implements Serializable {
             return false;
         }
 
-        // Verifica se a data de admissão não é anterior à data de nascimento
+        // Verify if the admission date is not before the birthdate
         if (admissionDate.isBefore(this.birthdate)) {
             return false;
         }
 
-        // Calcula a diferença em anos entre a data de admissão e a data de nascimento
+        // Calculate the age difference in years between the admission date and the birthdate
         int ageDifference = Period.between(this.birthdate, admissionDate).getYears();
 
-        // Verifica se a diferença de idade é pelo menos 18 anos
+        // Verify if the age difference is at least 18 years
         return ageDifference >= 18;
     }
 
@@ -350,7 +341,7 @@ public class Collaborator implements Serializable {
     }
 
     /**
-     * retrieves the skills of the collaborator.
+     * Retrieves the skills of the collaborator.
      *
      * @return the list of skills of the collaborator.
      */
@@ -368,63 +359,63 @@ public class Collaborator implements Serializable {
     }
 
     /**
-     * Gets the address of the person.
+     * Gets the address of the collaborator.
      *
-     * @return the address of the person.
+     * @return the address of the collaborator.
      */
     public Address getAddress() {
         return address;
     }
 
     /**
-     * Gets the admission date of the person.
+     * Gets the admission date of the collaborator.
      *
-     * @return the admission date of the person.
+     * @return the admission date of the collaborator.
      */
     public LocalDate getAdmissionDate() {
         return admissionDate;
     }
 
     /**
-     * Gets the document type of the person's identification.
+     * Gets the document type of the collaborator's identification.
      *
-     * @return the document type of the person's identification.
+     * @return the document type of the collaborator's identification.
      */
     public DocumentType getDocumentType() {
         return documentType;
     }
 
     /**
-     * Gets the mobile contact number of the person.
+     * Gets the mobile contact number of the collaborator.
      *
-     * @return the mobile contact number of the person.
+     * @return the mobile contact number of the collaborator.
      */
     public int getContactMobile() {
         return contactMobile;
     }
 
     /**
-     * Gets the job of the person.
+     * Gets the job of the collaborator.
      *
-     * @return the job of the person.
+     * @return the job of the collaborator.
      */
     public Job getJob() {
         return job;
     }
 
     /**
-     * Gets the email address of the person.
+     * Gets the email address of the collaborator.
      *
-     * @return the email address of the person.
+     * @return the email address of the collaborator.
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Gets the identification number of the person.
+     * Gets the identification number of the collaborator.
      *
-     * @return the identification number of the person.
+     * @return the identification number of the collaborator.
      */
     public String getIdentificationNumber() {
         return identificationNumber;

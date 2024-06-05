@@ -76,6 +76,11 @@ public class Team implements Serializable {
         return maxTeamSize;
     }
 
+    /**
+     * Sets the availability of the team.
+     *
+     * @param flag the true (available) or false (unavailable)
+     */
     public void setAvailable(Boolean flag) {
         this.isAssigned = flag;
     }

@@ -12,25 +12,39 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 
 import java.util.List;
 
+/**
+ * Controller class for handling the cancellation of agenda entries.
+ */
 public class CancelAgendaEntryController {
     private Repositories repositories;
     private EntryRepository entryRepository;
 
+    /**
+     * Constructor for CancelAgendaEntryController.
+     * Initializes the repositories and entry repository instances.
+     */
     public CancelAgendaEntryController() {
         Repositories repositories = Repositories.getInstance();
         EntryRepository entryRepository = repositories.getEntryRepository();
     }
 
+    /**
+     * Retrieves the list of agenda entries for a given user session.
+     *
+     * @param GSM the user session
+     * @return a list of AgendaEntryDto objects
+     */
     public List<AgendaEntryDto> getAgendaEntryList(UserSession GSM) {
         List<AgendaEntry> agendaEntry = entryRepository.getAgendaEntryListByGSM(GSM);
         return AgendaEntryMapper.toDtoList(agendaEntry);
     }
 
-    // public void cancelAgendaEntry(AgendaEntryDto agendaEntryDto) {
-    //   AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
-    // entryRepository.cancelAgendaEntry(agendaEntry);
-    //}
-
+    /**
+     * Notifies the team about the cancellation of an agenda entry.
+     *
+     * @param agendaEntry the agenda entry to be cancelled
+     * @return true if the team was successfully notified, false otherwise
+     */
     public boolean notifyTeam(AgendaEntry agendaEntry) {
         boolean flag = false;
         Team team = NotificationService.getTeamByEntry(agendaEntry);
@@ -40,4 +54,9 @@ public class CancelAgendaEntryController {
         }
         return flag;
     }
+
+    // public void cancelAgendaEntry(AgendaEntryDto agendaEntryDto) {
+    //   AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
+    // entryRepository.cancelAgendaEntry(agendaEntry);
+    //}
 }

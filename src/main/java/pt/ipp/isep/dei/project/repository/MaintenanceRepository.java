@@ -77,6 +77,12 @@ public class MaintenanceRepository implements Serializable {
         return maintenanceReport.createReport(vehicleDtoList, getMaintenanceList());
     }
 
+    /**
+     * Remove maintenance.
+     *
+     * @param plate the plate
+     * @param date  the date
+     */
     public void removeMaintenance(String plate, LocalDate date) {
         for (Maintenance m : maintenanceList) {
             if (m.getVehiclePlate().equals(plate) && m.getDate().equals(date)) {

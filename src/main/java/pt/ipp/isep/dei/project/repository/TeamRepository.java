@@ -45,6 +45,11 @@ public class TeamRepository implements Serializable {
         return TeamMapper.ListToDto(teamList);
     }
 
+    /**
+     * Gets team list.
+     *
+     * @return the team list
+     */
     public List<Team> getTeamList() {
         return new ArrayList<>(teamList);
     }

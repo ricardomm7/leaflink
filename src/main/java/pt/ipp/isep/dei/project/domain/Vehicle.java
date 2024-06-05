@@ -5,7 +5,6 @@
  */
 package pt.ipp.isep.dei.project.domain;
 
-import pt.ipp.isep.dei.project.ui.RegisterVehicleUI;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
@@ -357,21 +356,6 @@ public class Vehicle implements Serializable {
             throw new IllegalArgumentException("Vehicle acquisition date must be before the registration date.");
         }
 
-    }
-
-    /**
-     * Validates a given date by checking if it is before the current date.
-     *
-     * @param date The date to be validated.
-     * @return true if the date is before the current date, false otherwise.
-     * @throws RegisterVehicleUI.InvalidDateException If the date is after the current date.
-     */
-    private boolean validateDate(LocalDate date) throws RegisterVehicleUI.InvalidDateException {
-        if (date.isAfter(LocalDate.now())) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            throw new RegisterVehicleUI.InvalidDateException("Date must be before " + LocalDate.now().format(formatter));
-        }
-        return true;
     }
 
     /**

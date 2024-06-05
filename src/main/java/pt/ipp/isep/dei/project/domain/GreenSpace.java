@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.domain;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * The GreenSpace class represents a green space area managed by a user.
@@ -13,7 +14,6 @@ public class GreenSpace implements Serializable {
     private GreenSpaceType type;
     private double area;
     private String manager;
-    //private transient UserSession manager;
     private Address address;
 
     /**
@@ -41,6 +41,7 @@ public class GreenSpace implements Serializable {
      * Sets the green space type.
      *
      * @param type - the green space type from the enum class.
+     * @throws IllegalArgumentException if the type is null.
      */
     private void setType(GreenSpaceType type) {
         if (type == null) {
@@ -119,5 +120,22 @@ public class GreenSpace implements Serializable {
      */
     public String getManager() {
         return manager;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GreenSpace that = (GreenSpace) o;
+        return Double.compare(that.getArea(), getArea()) == 0 &&
+                name.equals(that.getName()) &&
+                type == that.getType() &&
+                manager.equals(that.getManager()) &&
+                address.equals(that.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type, area, manager, address);
     }
 }

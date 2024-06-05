@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * The Address class represents a physical address with street address, city, and zip code.
+ * This class ensures that the zip code adheres to the format ####-###.
  */
 public class Address implements Serializable {
 

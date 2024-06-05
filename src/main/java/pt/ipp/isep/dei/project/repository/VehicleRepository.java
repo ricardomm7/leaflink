@@ -162,6 +162,11 @@ public class VehicleRepository implements Serializable {
         vehicleList.get(vehicleIndex).setAvailable(isAvailable);
     }
 
+    /**
+     * Remove vehicle.
+     *
+     * @param plate the plate
+     */
     public void removeVehicle(String plate) {
         vehicleList.removeIf(vehicle -> vehicle.getVehiclePlate().equals(plate));
     }
