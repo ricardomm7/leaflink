@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.application.controller.authorization;
 
 import pt.ipp.isep.dei.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
+import pt.isep.lei.esoft.auth.mappers.dto.UserDTO;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 import java.util.List;
@@ -81,5 +82,14 @@ public class AuthenticationController {
      */
     public void doLogout() {
         authenticationRepository.doLogout();
+    }
+
+    /**
+     * Gets users.
+     *
+     * @return the users
+     */
+    public List<UserDTO> getUsers() {
+        return authenticationRepository.getUsers();
     }
 }

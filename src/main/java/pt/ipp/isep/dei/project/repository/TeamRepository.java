@@ -90,4 +90,12 @@ public class TeamRepository implements Serializable {
         return assignedEntries;
     }
 
+    /**
+     * Remove.
+     *
+     * @param selectedIndex the selected index
+     */
+    public void remove(int selectedIndex) {
+        teamList.remove(selectedIndex);
+    }
 }

@@ -265,7 +265,7 @@ public class TeamsGUI {
         // Implement team removal logic here
         int selectedIndex = listTeamView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            listTeamView.getItems().remove(selectedIndex);
+            createTeamController.removeTeam(selectedIndex);
         }
     }
     // Handle tasks button action

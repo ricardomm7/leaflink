@@ -2,8 +2,10 @@ package pt.ipp.isep.dei.project.repository;
 
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
+import pt.isep.lei.esoft.auth.mappers.dto.UserDTO;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * The AuthenticationRepository class is responsible for handling authentication-related operations.
@@ -68,5 +70,14 @@ public class AuthenticationRepository implements Serializable {
      */
     public boolean addUserWithRole(String name, String email, String pwd, String roleId) {
         return authenticationFacade.addUserWithRole(name, email, pwd, roleId);
+    }
+
+    /**
+     * Gets users.
+     *
+     * @return the users
+     */
+    public List<UserDTO> getUsers() {
+        return authenticationFacade.getUsers();
     }
 }

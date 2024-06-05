@@ -193,4 +193,13 @@ public class CreateTeamController {
     public List<TeamDto> getTeams() {
         return TeamMapper.ListToDto(teamRepository.getTeamList());
     }
+
+    /**
+     * Remove team.
+     *
+     * @param selectedIndex the selected index
+     */
+    public void removeTeam(int selectedIndex) {
+        teamRepository.remove(selectedIndex);
+    }
 }
