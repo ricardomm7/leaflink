@@ -13,8 +13,8 @@ participant "repositories\n:Repositories" as PLAT
 participant "entryRepository:\n:EntryRepository" as EntryRepo
 participant "teamRepository:\n:TeamRepository" as TeamRepo
 participant "AgendaEntryMapper" as EntryMapper
-participant "agendaEntryDto\n:AgendaEntryDto" as EntryDto
 participant "agendaEntry\n:AgendaEntry" as AgendaEntry
+participant "agendaEntryDto\n:AgendaEntryDto" as agendaEntryDto
 
 
 activate CLB
@@ -57,32 +57,30 @@ activate CLB
             EntryRepo --> CTRL: agendaEntryList
             deactivate EntryRepo
 
-            CTRL -> AgendaEntryMapper: toDtoList
+            CTRL -> EntryMapper: toDtoList
             deactivate CTRL
-            activate AgendaEntryMapper
+            activate EntryMapper
 
             loop
 
-                AgendaEntryMapper -> agendaEntryDto**: create
+                EntryMapper -> agendaEntryDto**: create
                 activate agendaEntryDto
 
-                agendaEntryDto --> AgendaEntryMapper: agendaEntryDto
+                agendaEntryDto --> EntryMapper: agendaEntryDto
                 deactivate agendaEntryDto
 
             end loop
 
-            AgendaEntryMapper --> CTRL: agendaEntryDtoList
-            deactivate AgendaEntryMapper
+            EntryMapper --> CTRL: agendaEntryDtoList
+            deactivate EntryMapper
             activate CTRL
 
             CTRL -> TeamRepo: getAgendaEntriesAssignedToCollaborator(CLB, agendaEntryDtoList)
-            deactivate CTRL
             activate TeamRepo
 
 
                 TeamRepo --> CTRL: agendaEntryDtoList
             deactivate TeamRepo
-        activate CTRL
 
         CTRL --> UI : agendaEntryDtoList
         deactivate CTRL
@@ -120,15 +118,12 @@ activate CLB
             activate EntryRepo
 
                 EntryRepo -> AgendaEntry : setStatus(COMPLETED)
-                deactivate EntryRepo
                 activate AgendaEntry
 
                 AgendaEntry -> EntryRepo : success
                 deactivate AgendaEntry
-                activate EntryRepo
 
                 EntryRepo -> AgendaEntry : setAvailable(agendaEntry)
-                deactivate EntryRepo
                 activate AgendaEntry
 
                 AgendaEntry -> AgendaEntry : setTeamAvailable
@@ -136,7 +131,6 @@ activate CLB
                 AgendaEntry --> EntryRepo : success
                 deactivate AgendaEntry
 
-                activate EntryRepo
 
             EntryRepo --> CTRL : success
             deactivate EntryRepo

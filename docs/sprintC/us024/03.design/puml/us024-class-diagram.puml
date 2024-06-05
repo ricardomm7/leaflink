@@ -14,7 +14,7 @@ package CONTROLLER {
         + PostponeAgendaEntryController()
         + getAgendaEntryList(gsm: UserSession): List<AgendaEntryDto>
         + postponeEntry(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
-        + notifyTeam(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
+        - notifyTeam(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
     }
 }
 
@@ -38,7 +38,30 @@ package DOMAIN {
         }
     }
 
-    package DTO {
+
+
+    package MODEL {
+        class AgendaEntry {
+            - title: String
+            - description: String
+            - duration: int
+            - urgencyStatus: UrgencyStatus
+            - greenSpace: GreenSpace
+            - startingDate: LocalDate
+            - progressStatus: ProgressStatus
+            + AgendaEntry(agendaEntry: AgendaEntry, newDate: LocalDate, progressStatus: PLANNED)
+            + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
+
+        }
+
+        class NotificationService {
+            + getTeamByEntry(agendaEntry: AgendaEntry): Team
+            + getCollaboratorsList(team: Team): List<Collaborator>
+            + notifyTeam(collaboratorsList: List<Collaborator>, agendaEntry: AgendaEntry, newDate: LocalDate): boolean
+        }
+    }
+}
+package DTO {
         class AgendaEntryMapper {
             + toDto(agendaEntry: AgendaEntry): AgendaEntryDto
             + toDomain(agendaEntryDto: AgendaEntryDto): AgendaEntry
@@ -63,28 +86,6 @@ package DOMAIN {
             + getProgressStatus(): ProgressStatus
         }
     }
-
-    package MODEL {
-        class AgendaEntry {
-            - title: String
-            - description: String
-            - duration: int
-            - urgencyStatus: UrgencyStatus
-            - greenSpace: GreenSpace
-            - startingDate: LocalDate
-            - progressStatus: ProgressStatus
-            + AgendaEntry(agendaEntry: AgendaEntry, newDate: LocalDate, progressStatus: PLANNED)
-            + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
-
-        }
-
-        class NotificationService {
-            + getTeamByEntry(agendaEntry: AgendaEntry): Team
-            + getCollaboratorsList(team: Team): List<Collaborator>
-            + notifyTeam(collaboratorsList: List<Collaborator>, agendaEntry: AgendaEntry, newDate: LocalDate): boolean
-        }
-    }
-}
 
 PostponeAgendaEntryUI ..> PostponeAgendaEntryController
 PostponeAgendaEntryController ..> Repositories

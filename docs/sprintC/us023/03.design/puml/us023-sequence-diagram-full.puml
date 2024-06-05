@@ -159,7 +159,7 @@ activate GSM
                         NotificationService -> NotificationService : getTeamByEntry(agendaEntry)
                         activate NotificationService
 
-                        NotificationService --> NotificationService : teamD
+                        NotificationService --> NotificationService : team
                         deactivate NotificationService
 
                         NotificationService -> NotificationService : getCollaboratorsList(team)

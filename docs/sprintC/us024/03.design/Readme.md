@@ -7,25 +7,27 @@
 _**Note that SSD - Alternative One is adopted.**_
 
 
-| Interaction ID | Question: Which class is responsible for...  | Answer                        | Justification (with patterns)                      |
-|:---------------|:---------------------------------------------|:------------------------------|:---------------------------------------------------|
-| Step 1         | ... interacting with the actor?              | PostponeAgendaEntryUI         | Pure Fabrication                                   |
-|                | ... coordinating the US?                     | PostponeAgendaEntryController | Controller                                         |
-|                | ... getting EntryRepository?                 | Repositories                  | Pure Fabrication, low coupling and high cohesion   |
-|                | ... getting agendaEntry list?                | EntryRepository               | Information Expert, low coupling and high cohesion |
-| Step 2         | ... show the agendaEntry list?               | PostponeAgendaEntryUI         | Pure Fabrication                                   |
-| Step 3         | ... selecting a agendaEntry ?                | PostponeAgendaEntryUI         | Pure Fabrication                                   |
-| Step 4         | ... requesting new date for the agendaEntry? | PostponeAgendaEntryUI         | Pure Fabrication                                   |
-| Step 5         | ... submitting the new date?                 | PostponeAgendaEntryController | Controller:                                        |
-| Step 6         | ... displaying agendaEntry  data?            | PostponeAgendaEntryUI         | Pure Fabrication                                   |
-| Step 7         | ... confirms data                            | PostponeAgendaEntryUI         | Pure Fabrication                                   |
-|                | ... validate submitted data?                 | EntryRepository               | Information Expert                                 |
-|                | ... postponing the agendaEntry?              | EntryRepository               | Information Expert, low coupling and high cohesion | 
-|                | ... create new agendaEntry?                  | EntryRepository               | creator                                            |
-|                | ... verify local data?                       | AgendaEntry                   | Information Expert                                 |
-|                | ... notifying the team?                      | TeamRepository                | Information Expert                                 | 
-|                | ... sending notifications?                   | NotificationService           | Pure Fabrication, low coupling and high cohesion   |
-| Step 8         | ... informing operation success?             | PostponeAgendaEntryUI         | Pure Fabrication                                   | 
+| Interaction ID | Question: Which class is responsible for...       | Answer                        | Justification (with patterns)                               |
+|:---------------|:--------------------------------------------------|:------------------------------|:------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                   | PostponeAgendaEntryUI         | Pure Fabrication                                            |
+|                | ... coordinating the US?                          | PostponeAgendaEntryController | Controller                                                  |
+|                | ... getting EntryRepository?                      | Repositories                  | Pure Fabrication, low coupling and high cohesion            |
+|                | ... getting agendaEntry list?                     | EntryRepository               | Information Expert, low coupling and high cohesion          |
+|                | ... transforms the agendaEntry in agendaEntryDto? | AgendaEntryMapper             | Information Expert, creator, low coupling                   |
+| Step 2         | ... show the agendaEntry list?                    | PostponeAgendaEntryUI         | Pure Fabrication                                            |
+| Step 3         | ... selecting a agendaEntry ?                     | PostponeAgendaEntryUI         | Pure Fabrication                                            |
+| Step 4         | ... requesting new date for the agendaEntry?      | PostponeAgendaEntryUI         | Pure Fabrication                                            |
+| Step 5         | ... submitting the new date?                      | PostponeAgendaEntryController | Controller                                                  |
+| Step 6         | ... displaying agendaEntry  data?                 | PostponeAgendaEntryUI         | Pure Fabrication                                            |
+| Step 7         | ... confirms data                                 | PostponeAgendaEntryUI         | Pure Fabrication                                            |
+|                | ... validate submitted data?                      | EntryRepository               | Information Expert                                          |
+|                | ... transforms the agendaEntryDto in agendaEntry? | AgendaEntryMapper             | Information Expert, creator, low coupling and high cohesion |
+|                | ... postponing the agendaEntry?                   | EntryRepository               | Information Expert, low coupling and high cohesion          | 
+|                | ... create new agendaEntry?                       | EntryRepository               | creator                                                     |
+|                | ... verify local data?                            | AgendaEntry                   | Information Expert                                          |
+|                | ... notifying the team?                           | TeamRepository                | Information Expert                                          | 
+|                | ... sending notifications?                        | NotificationService           | Pure Fabrication, low coupling and high cohesion            |
+| Step 8         | ... informing operation success?                  | PostponeAgendaEntryUI         | Pure Fabrication                                            | 
 
 
 ### Systematization ##
@@ -33,6 +35,7 @@ _**Note that SSD - Alternative One is adopted.**_
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
 * agendaEntry
+* agendaEntryDto
 
 
 Other software classes (i.e. Pure Fabrication) identified: 
@@ -43,6 +46,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 * EntryRepository
 * TeamRepository
 * NotificationService
+* AgendaEntryMapper
 
 
 

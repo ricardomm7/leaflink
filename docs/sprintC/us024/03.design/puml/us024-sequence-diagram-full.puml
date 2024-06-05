@@ -126,13 +126,7 @@ activate GSM
             deactivate EntryRepo
             activate CTRL
 
-           CTRL --> UI: success
-           deactivate CTRL
-           activate UI
 
-           UI-> CTRL: notifyTeam(agendaEntry, newDate)
-           deactivate UI
-           activate CTRL
 
             CTRL -> NotificationService : notifyTeam(agendaEntry, newDate)
             deactivate CTRL
@@ -141,7 +135,7 @@ activate GSM
                 NotificationService -> NotificationService : getTeamByEntry(agendaEntry)
                 activate NotificationService
 
-                NotificationService --> NotificationService : teamD
+                NotificationService --> NotificationService : team
                 deactivate NotificationService
 
                 NotificationService -> NotificationService : getCollaboratorsList(team)
