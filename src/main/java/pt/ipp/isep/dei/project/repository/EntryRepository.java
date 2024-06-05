@@ -1,5 +1,9 @@
 package pt.ipp.isep.dei.project.repository;
 
+import pt.ipp.isep.dei.project.domain.AgendaEntry;
+import pt.ipp.isep.dei.project.domain.ProgressStatus;
+import pt.ipp.isep.dei.project.domain.ToDoEntry;
+import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.application.controller.ListTaskController;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.*;
@@ -81,13 +85,13 @@ public class EntryRepository implements Serializable {
     /**
      * Retrieves a list of AgendaEntryDto objects managed by the specified Green Space Manager (GSM).
      *
-     * @param GSM the UserSession of the Green Space Manager.
+     * @param email the email of the UserSession of the Green Space Manager.
      * @return a list of AgendaEntryDto objects managed by the specified GSM.
      */
-    public List<AgendaEntry> getAgendaEntryListByGSM(UserSession GSM) {
+    public List<AgendaEntry> getAgendaEntryListByGSM(String email) {
         List<AgendaEntry> z = new ArrayList<>();
         for (AgendaEntry s : getAgendaEntryList()) {
-            if (s.getGreenSpace().getManager().equals(GSM.getUserEmail())) {
+            if (s.getGreenSpace().getManager().equals(email)) {
                 z.add(s);
             }
         }

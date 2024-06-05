@@ -37,7 +37,7 @@ public class AssignVehiclesController {
      * @return the list of AgendaEntryDto objects for the user
      */
     public List<AgendaEntryDto> getAgendaEntryList(UserSession u) {
-        return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(u));
+        return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(u.getUserEmail()));
     }
 
     /**

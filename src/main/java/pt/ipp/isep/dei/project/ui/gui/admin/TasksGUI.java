@@ -12,13 +12,19 @@ import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.AddAgendaEntryController;
 import pt.ipp.isep.dei.project.application.controller.AssignVehiclesController;
+import pt.ipp.isep.dei.project.application.controller.PostponeAgendaEntryController;
 import pt.ipp.isep.dei.project.application.controller.RegisterToDoEntryController;
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
+import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
+import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,13 +35,16 @@ public class TasksGUI {
     private final RegisterToDoEntryController registerToDoEntryController = new RegisterToDoEntryController();
     private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
     private final AssignVehiclesController assignVehiclesController = new AssignVehiclesController();
+    private final PostponeAgendaEntryController postponeAgendaEntryController = new PostponeAgendaEntryController();
 
+    private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
     private List<VehicleDto> vehicleListDto;
     @FXML
     private ListView<String> toDoListView;
-
     @FXML
     private List<ToDoEntryDto> allToDoEntry;
+    @FXML
+    private List<AgendaEntryDto> allAgendaEntry;
 
     @FXML
     private Button addEntryBtn;
@@ -147,25 +156,28 @@ public class TasksGUI {
 
     @FXML
     void AddAgendaEntryHandle(ActionEvent event) {
-
         // Carregar a lista de todas as entradas da To-Do list
         List<ToDoEntryDto> allEntries = registerToDoEntryController.getToDoEntry();
 
-        // Criar uma lista de CheckBox para cada entrada da To-Do list
-        List<CheckBox> checkBoxList = allEntries.stream()
+        // Criar um ToggleGroup para garantir que apenas uma entrada possa ser selecionada
+        ToggleGroup toggleGroup = new ToggleGroup();
+
+        // Criar uma lista de RadioButton para cada entrada da To-Do list
+        List<RadioButton> radioButtonList = allEntries.stream()
                 .map(entry -> {
-                    CheckBox checkBox = new CheckBox(String.format("Title: %s | Duration: %dh | Green Space: %s",
+                    RadioButton radioButton = new RadioButton(String.format("Title: %s | Duration: %dh | Green Space: %s",
                             entry.getTitle(), entry.getDuration(), entry.getGreenSpace().getName()));
-                    checkBox.setUserData(entry); // Associar cada CheckBox com sua entrada correspondente
-                    return checkBox;
+                    radioButton.setToggleGroup(toggleGroup); // Adicionar ao ToggleGroup
+                    radioButton.setUserData(entry); // Associar cada RadioButton com sua entrada correspondente
+                    return radioButton;
                 })
                 .collect(Collectors.toList());
 
-        // Criar um VBox para exibir as CheckBoxes
-        VBox checkBoxesVBox = new VBox();
-        checkBoxesVBox.getChildren().addAll(checkBoxList);
+        // Criar um VBox para exibir os RadioButtons
+        VBox radioButtonsVBox = new VBox();
+        radioButtonsVBox.getChildren().addAll(radioButtonList);
 
-        // Criar um diálogo personalizado para exibir as CheckBoxes
+        // Criar um diálogo personalizado para exibir os RadioButtons
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Select To-Do Entry");
         dialog.setHeaderText("Select a To-Do entry to add to the agenda:");
@@ -173,35 +185,54 @@ public class TasksGUI {
         ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
 
-        // Adicionar a lista de CheckBoxes ao diálogo
-        dialog.getDialogPane().setContent(checkBoxesVBox);
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        ComboBox<ProgressStatus> progressStatusComboBox = new ComboBox<>(FXCollections.observableArrayList(ProgressStatus.values()));
+        progressStatusComboBox.setPromptText("Select Progress Status");
+
+        DatePicker startingDate = new DatePicker();
+        startingDate.setPromptText("Starting Date");
+
+        grid.add(new Label("Progress Status:"), 0, 3);
+        grid.add(progressStatusComboBox, 1, 3);
+        grid.add(new Label("Starting Date:"), 0, 4);
+        grid.add(startingDate, 1, 4);
+
+        VBox content = new VBox();
+        content.getChildren().addAll(radioButtonsVBox, grid);
+        dialog.getDialogPane().setContent(content);
 
         // Mostrar o diálogo e aguardar a seleção do usuário
         Optional<Void> result = dialog.showAndWait();
 
-        // Se o usuário clicou em "Add", adicionar as entradas selecionadas à agenda
-        if (result.isPresent()) {
-            List<ToDoEntryDto> selectedEntries = checkBoxList.stream()
-                    .filter(CheckBox::isSelected)
-                    .map(checkBox -> (ToDoEntryDto) checkBox.getUserData())
-                    .collect(Collectors.toList());
+        // Se o usuário clicou em "Add", adicionar a entrada selecionada à agenda
+        if (result.isPresent() && toggleGroup.getSelectedToggle() != null) {
+            ToDoEntryDto selectedEntry = (ToDoEntryDto) toggleGroup.getSelectedToggle().getUserData();
 
-            // Adicionar as entradas selecionadas à agenda
-            selectedEntries.forEach(addAgendaEntryController::addAgendaEntry);
+            // Adicionar a entrada selecionada à agenda
+            AgendaEntryDto agendaEntryDto = new AgendaEntryDto(selectedEntry.getTitle(),
+                    selectedEntry.getDescription(), selectedEntry.getDuration(),
+                    selectedEntry.getUrgencyStatus(), selectedEntry.getGreenSpace(),
+                    startingDate.getValue(), progressStatusComboBox.getValue(), null, null);
 
-            // Remover as entradas selecionadas da To-Do list
-            selectedEntries.forEach(entry -> registerToDoEntryController.removeToDoEntry(entry.getTitle(), entry.getGreenSpace().getName()));
+            addAgendaEntryController.addAgendaEntry(agendaEntryDto);
 
-            // Atualizar a To-Do list
+            // Remover a entrada selecionada da To-Do list
+            registerToDoEntryController.removeToDoEntry(selectedEntry.getTitle(), selectedEntry.getGreenSpace().getName());
+
+            // Atualizar a To-Do list e a Agenda
             updateToDoEntry();
             updateAgendaEntryList();
         }
     }
 
+
     private void updateAgendaEntryList() {
-        List<ToDoEntryDto> agendaEntries = addAgendaEntryController.getAgendaEntries(); // Obter entradas da agenda
+        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session); // Obter entradas da agenda
         List<String> agendaEntryTitles = new ArrayList<>();
-        for (ToDoEntryDto entry : agendaEntries) {
+        for (AgendaEntryDto entry : allAgendaEntry) {
             agendaEntryTitles.add(entry.getTitle());
         }
         ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryTitles);
@@ -210,7 +241,69 @@ public class TasksGUI {
 
     @FXML
     void PostponeAgendaEntryHandle(ActionEvent event) {
+        String selectedAgendaEntry = agendaEntryList.getSelectionModel().getSelectedItem();
 
+        if (selectedAgendaEntry != null) {
+            if (PostponeAgendaEntryBtn.isDisabled()) {
+                ShowError.showAlert("Postpone", "No entry selected to postpone.", null);
+                return;
+            }
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Agenda Entry");
+            dialog.setHeaderText("Postpone Agenda Entry");
+
+            ButtonType postpone = new ButtonType("Postpone", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(postpone, ButtonType.CANCEL);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+
+            DatePicker dateField = new DatePicker();
+            dateField.setPromptText("New date");
+
+            grid.add(new Label("Date:"), 0, 0);
+            grid.add(dateField, 1, 0);
+
+            dialog.getDialogPane().setContent(grid);
+
+            ValidationListenersDate(dateField);
+
+            Node postponeButton = dialog.getDialogPane().lookupButton(postpone);
+            postponeButton.addEventFilter(ActionEvent.ACTION, event1 -> {
+                boolean valid = validateInputsDate(dateField);
+                if (valid) {
+                    LocalDate date = dateField.getValue();
+                    AgendaEntryDto agendaEntry = getAgendaEntry(selectedAgendaEntry, session);
+                    postponeAgendaEntryController.postponeEntry(agendaEntry, date);
+                    updateAgendaEntryList();
+                } else {
+                    ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
+                    event1.consume(); // Prevenir fechamento do diálogo
+                }
+            });
+            dialog.showAndWait();
+        }
+    }
+
+    private boolean validateInputsDate(DatePicker dateField) {
+        boolean valid = true;
+
+        if (dateField.getValue() == null || dateField.getValue().isBefore(LocalDate.now())) {
+            dateField.setStyle("-fx-border-color: red;");
+            valid = false;
+        }
+        return valid;
+    }
+
+    private void ValidationListenersDate(DatePicker dateField) {
+        dateField.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if ((newValue == null) || dateField.getValue().isBefore(LocalDate.now())) {
+                dateField.setStyle("-fx-border-color: red;");
+            } else {
+                dateField.setStyle(null);
+            }
+        });
     }
 
     @FXML
@@ -392,6 +485,7 @@ public class TasksGUI {
                 updateToDoEntry();
             }
         });
+        updateToDoEntry();
     }
 
     private void addValidationListeners(TextField titleField, TextField descriptionField, TextField durationField, ComboBox<UrgencyStatus> urgencyComboBox, ComboBox<GreenSpaceDto> greenSpaceComboBox) {
@@ -493,12 +587,15 @@ public class TasksGUI {
         }
     }
 
-    @FXML
+     @FXML
     void initialize() {
         taskDetailsVBox.setVisible(false);
         removeEntryBtn.setDisable(true);
         allToDoEntry = registerToDoEntryController.getToDoEntry();
         updateToDoEntry();
+        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
+        updateAgendaEntryList();
+
 
         toDoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -545,43 +642,9 @@ public class TasksGUI {
                 };
             }
         });
-
-        // Configurando a célula de fábrica para agendaEntryList
-        agendaEntryList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-            @Override
-            public ListCell<String> call(ListView<String> param) {
-                return new ListCell<String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty || item == null) {
-                            setText(null);
-                        } else {
-                            setText(item);
-                            setStyle(null);
-                            ToDoEntryDto entry = getAgendaEntry(item);
-                            if (entry != null) {
-                                switch (entry.getUrgencyStatus()) {
-                                    case HIGH:
-                                        setStyle("-fx-text-fill: red;");
-                                        break;
-                                    case MEDIUM:
-                                        setStyle("-fx-text-fill: orange;");
-                                        break;
-                                    case LOW:
-                                        setStyle("-fx-text-fill: green;");
-                                        break;
-                                    default:
-                                        setStyle("-fx-text-fill: black;");
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                };
-            }
-        });
     }
+
+
 
 
     private void updateToDoEntry() {
@@ -610,8 +673,8 @@ public class TasksGUI {
         }
     }
 
-    private ToDoEntryDto getAgendaEntry(String string) {
-        for (ToDoEntryDto entry : addAgendaEntryController.getAgendaEntries()) {
+    private AgendaEntryDto getAgendaEntry(String string, UserSession GSM) {
+        for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
             // Verifique se o título da entrada corresponde à string fornecida
             if (entry.getTitle().equalsIgnoreCase(string)) {
                 return entry; // Se corresponder, retorne a entrada da agenda
@@ -621,11 +684,10 @@ public class TasksGUI {
 
     }
 
-    private ToDoEntryDto getToDoEntryDto(String string) {
+     private ToDoEntryDto getToDoEntryDto(String string) {
         ToDoEntryDto entry = null;
         String[] splittedString = string.split(" \\| ");
         String title = splittedString[0].split(": ")[1];
-        String duration = splittedString[1].split(": ")[1].replace("h", "");
         String space = splittedString[2].split(": ")[1];
 
         for (ToDoEntryDto toDoEntry : allToDoEntry) {

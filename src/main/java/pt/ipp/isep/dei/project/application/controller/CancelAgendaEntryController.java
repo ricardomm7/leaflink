@@ -35,7 +35,7 @@ public class CancelAgendaEntryController {
      * @return a list of AgendaEntryDto objects
      */
     public List<AgendaEntryDto> getAgendaEntryList(UserSession GSM) {
-        List<AgendaEntry> agendaEntry = entryRepository.getAgendaEntryListByGSM(GSM);
+        List<AgendaEntry> agendaEntry = entryRepository.getAgendaEntryListByGSM(GSM.getUserEmail());
         return AgendaEntryMapper.toDtoList(agendaEntry);
     }
 

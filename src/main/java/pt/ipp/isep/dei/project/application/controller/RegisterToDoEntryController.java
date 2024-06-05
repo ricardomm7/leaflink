@@ -87,7 +87,6 @@ public class RegisterToDoEntryController {
      */
     public List<ToDoEntryDto> getToDoEntry() {
         List<ToDoEntryDto> listToReturn = new ArrayList<>();
-
         for (ToDoEntry entry : entryRepository.getToDoEntryList()) {
             listToReturn.add(ToDoEntryMapper.toDto(entry));
         }

@@ -144,3 +144,4 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
     }
 
 }
+

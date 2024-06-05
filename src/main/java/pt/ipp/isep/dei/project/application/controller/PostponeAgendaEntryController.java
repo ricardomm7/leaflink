@@ -32,7 +32,7 @@ public class PostponeAgendaEntryController {
      * @return the list of AgendaEntryDto objects associated with the GSM
      */
     public List<AgendaEntryDto> getAgendaEntryList(UserSession GSM) {
-        return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(GSM));
+        return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(GSM.getUserEmail()));
     }
 
     /**
