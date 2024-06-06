@@ -231,7 +231,11 @@ public class TasksGUI {
     void AddAgendaEntryHandle(ActionEvent event) {
         // Carregar a lista de todas as entradas da To-Do list
         List<ToDoEntryDto> allEntries = registerToDoEntryController.getToDoEntry();
-
+        if (allEntries.isEmpty()) {
+            // Exibe uma janela de erro se não houver entradas de ToDo disponíveis
+            showErrorAlert("No To Do Entries", "There are no To Do entries available to add to the agenda.");
+            return;
+        }
         // Criar um ToggleGroup para garantir que apenas uma entrada possa ser selecionada
         ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -280,6 +284,7 @@ public class TasksGUI {
         // Mostrar o diálogo e aguardar a seleção do usuário
         Optional<Void> result = dialog.showAndWait();
 
+
         // Se o usuário clicou em "Add", adicionar a entrada selecionada à agenda
         if (result.isPresent() && toggleGroup.getSelectedToggle() != null) {
             ToDoEntryDto selectedEntry = (ToDoEntryDto) toggleGroup.getSelectedToggle().getUserData();
@@ -300,6 +305,13 @@ public class TasksGUI {
             // Atualizar a lista de entradas de agenda
             updateAgendaEntryList();
         }
+    }
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 
