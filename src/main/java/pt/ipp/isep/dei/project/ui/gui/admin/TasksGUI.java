@@ -16,7 +16,6 @@ import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.*;
-import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.time.LocalDate;
@@ -33,7 +32,7 @@ public class TasksGUI {
     private final PostponeAgendaEntryController postponeAgendaEntryController = new PostponeAgendaEntryController();
     private final AssignTeamController assignTeamController = new AssignTeamController();
 
-    private final EntryRepository entryRepository = new EntryRepository();
+    private final RecordEntryController recordEntryController = new RecordEntryController();
 
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
     private List<VehicleDto> vehicleListDto;
@@ -99,7 +98,21 @@ public class TasksGUI {
     @FXML
     private Button CancelAgendaEntryBtn;
     @FXML
-    private Button AddAgendaEntryBtn1;
+    private Button CompleteAgendaEntryBtn;
+
+    @FXML
+    void CompleteAgendaEntryHandle(ActionEvent event){
+        String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
+        if (selectedAgendaEntry == null) {
+            ShowError.showAlert("Complete Agenda Entry", "No entry selected to complete.", null);
+            return;
+        }else {
+        AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry,session);
+        recordEntryController.recordEntryCompletion(agendaEntryDto);
+
+        updateAgendaEntryList();
+        }
+    }
 
 
     @FXML
@@ -639,8 +652,8 @@ public class TasksGUI {
         AgendaDetailsVBox.setVisible(false);
         PostponeAgendaEntryBtn.setDisable(true);
         CancelAgendaEntryBtn.setDisable(true);
-        AddAgendaEntryBtn1.setDisable(true);
         removeEntryBtn.setDisable(true);
+        CompleteAgendaEntryBtn.setDisable(true);
 
         allToDoEntry = registerToDoEntryController.getToDoEntry();
         updateToDoEntry();
@@ -663,12 +676,12 @@ public class TasksGUI {
                 AgendaDetailsVBox.setVisible(true);
                 PostponeAgendaEntryBtn.setDisable(false);
                 CancelAgendaEntryBtn.setDisable(false);
-                AddAgendaEntryBtn1.setDisable(false);
+                CompleteAgendaEntryBtn.setDisable(false);
             } else {
                 AgendaDetailsVBox.setVisible(false);
                 PostponeAgendaEntryBtn.setDisable(true);
                 CancelAgendaEntryBtn.setDisable(true);
-                AddAgendaEntryBtn1.setDisable(true);
+                CompleteAgendaEntryBtn.setDisable(true);
             }
         });
 

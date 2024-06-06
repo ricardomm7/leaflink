@@ -28,7 +28,7 @@ public class Bootstrap implements Runnable {
         addCollaborators();
         addMaintenance();
         addGreenSpaces();
-        //addEntries();
+        addEntries();
         addAgendaEntries();
     }
 

@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -131,12 +133,18 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
      */
     public void setAvailable(AgendaEntry agendaEntry) {
         Team team = agendaEntry.getAssignedTeam();
-        for (Collaborator collaborator : team.getCollaborators()) {
-            collaborator.setAvailable(true);
-        }
-        List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
-        for (Vehicle vehicle : vehicleList) {
-            vehicle.setAvailable(true);
+        if (team != null) {
+            team.setAvailable(true);
+
+            for (Collaborator collaborator : team.getCollaborators()) {
+                collaborator.setAvailable(true);
+            }
+            List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
+            for (Vehicle vehicle : vehicleList) {
+                vehicle.setAvailable(true);
+            }
+        }else {
+            ShowError.showAlert("Completion Error", "There is no Team assigned to this Entry.", "No team assigned");
         }
     }
 
