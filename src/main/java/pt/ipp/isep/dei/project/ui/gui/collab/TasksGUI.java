@@ -17,48 +17,25 @@ import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TasksGUI {
 
     private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
-
-
     private final RecordEntryController recordEntryController = new RecordEntryController();
-
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
-    private List<VehicleDto> vehicleListDto;
-
     @FXML
     private ListView<String> agendaListView;
-
     @FXML
     private List<AgendaEntryDto> allAgendaEntry;
-
-    @FXML
-    private Label titleLabel;
-
-    @FXML
-    private Label descriptionLabel;
-
-    @FXML
-    private Label durationLabel;
-
-    @FXML
-    private Label urgencyLabel;
-
-    @FXML
-    private Label greenSpaceLabel;
     @FXML
     private Label titleLabelA;
-
     @FXML
     private Label descriptionLabelA;
-
     @FXML
     private Label durationLabelA;
-
     @FXML
     private Label urgencyLabelA;
     @FXML
@@ -71,10 +48,8 @@ public class TasksGUI {
     private Label vehicleLabelA;
     @FXML
     private Label teamLabelA;
-
     @FXML
     private VBox AgendaDetailsVBox;
-
     @FXML
     private Button CompleteAgendaEntryBtn;
 
@@ -94,18 +69,28 @@ public class TasksGUI {
 
 
     private void updateAgendaEntryList() {
-        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
+    // Obtenha a lista inicial de AgendaEntryDto
+    List<AgendaEntryDto> initialize = recordEntryController.getAgendaEntryOfCollaboratorList(session);
 
-        List<String> agendaEntryList = allAgendaEntry.stream()
-                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s",
-                        entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
-                        entry.getAssignedTeam() != null ? entry.getAssignedTeam().getTeamAsString() : "No team assigned",
-                        entry.getAssignedVehicles() != null && !entry.getAssignedVehicles().isEmpty() ?
-                                entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) : "No vehicles assigned"))
-                .collect(Collectors.toList());
-        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
-        agendaListView.setItems(observableList);
-    }
+    // Ordena a lista pela data de início em ordem decrescente (mais recentes primeiro)
+    List<AgendaEntryDto> sortedList = initialize.stream()
+            .sorted(Comparator.comparing(AgendaEntryDto::getStartingDate).reversed())
+            .collect(Collectors.toList());
+
+    // Transforma a lista ordenada em strings formatadas
+    List<String> agendaEntryList = sortedList.stream()
+            .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s",
+                    entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
+                    entry.getAssignedTeam() != null ? entry.getAssignedTeam().getTeamAsString() : "No team assigned",
+                    entry.getAssignedVehicles() != null && !entry.getAssignedVehicles().isEmpty() ?
+                            entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) : "No vehicles assigned"))
+            .collect(Collectors.toList());
+
+    // Atualiza a ListView com a lista ordenada e formatada
+    ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
+    agendaListView.setItems(observableList);
+}
+
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
