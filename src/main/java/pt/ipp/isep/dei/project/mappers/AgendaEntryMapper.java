@@ -1,7 +1,11 @@
 package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.AgendaEntry;
+import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
+import pt.ipp.isep.dei.project.dto.TeamDto;
+import pt.ipp.isep.dei.project.dto.VehicleDto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,8 +27,14 @@ public class AgendaEntryMapper implements Serializable {
      * @return The corresponding AgendaEntry domain object.
      */
     public static AgendaEntry toDomain(AgendaEntryDto agendaEntryDto) {
-        return new AgendaEntry(agendaEntryDto.getTitle(), agendaEntryDto.getDescription(), agendaEntryDto.getDuration(),
+        TeamDto teamDto = agendaEntryDto.getAssignedTeam();
+        List<VehicleDto> vehicleList = agendaEntryDto.assignedVehicles;
+        AgendaEntry agendaEntry = new AgendaEntry(agendaEntryDto.getTitle(), agendaEntryDto.getDescription(), agendaEntryDto.getDuration(),
                 agendaEntryDto.getUrgencyStatus(), GreenSpaceMapper.toDomain(agendaEntryDto.getGreenSpace()), agendaEntryDto.getStartingDate(), agendaEntryDto.getProgressStatus());
+        agendaEntry.setAssignedTeam(TeamMapper.toDomain(teamDto));
+        agendaEntry.setAssignedVehicles(VehicleMapper.toDomainList(vehicleList));
+
+        return agendaEntry;
     }
 
     /**
@@ -34,8 +44,16 @@ public class AgendaEntryMapper implements Serializable {
      * @return The corresponding AgendaEntryDto object.
      */
     public static AgendaEntryDto toDto(AgendaEntry agendaEntry) {
-        return new AgendaEntryDto(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(),
+        Team teamDto = agendaEntry.getAssignedTeam();
+        List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
+        AgendaEntryDto agendaEntryDto = new AgendaEntryDto(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(),
                 agendaEntry.getUrgencyStatus(), GreenSpaceMapper.toDto(agendaEntry.getGreenSpace()), agendaEntry.getStartingDate(), agendaEntry.getProgressStatus());
+        if (teamDto != null) {
+            agendaEntryDto.setAssignedTeam(null);
+        }
+        agendaEntryDto.setAssignedTeam(TeamMapper.toDto(teamDto));
+        agendaEntryDto.setAssignedVehicles(VehicleMapper.toDtoList(vehicleList));
+        return agendaEntryDto;
     }
 
     /**

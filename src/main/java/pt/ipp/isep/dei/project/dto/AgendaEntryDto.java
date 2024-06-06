@@ -64,8 +64,11 @@ public class AgendaEntryDto implements Serializable {
         this.description = description;
         this.duration = duration;
         this.urgencyStatus = urgencyStatus;
-        this.greenSpace = greenSpace;        this.startingDate = startingDate;
+        this.greenSpace = greenSpace;
+        this.startingDate = startingDate;
         this.progressStatus = progressStatus;
+        this.assignedTeam = null;
+        this.assignedVehicles = null;
     }
 
     /**
@@ -220,6 +223,7 @@ public class AgendaEntryDto implements Serializable {
     public UrgencyStatus getUrgencyStatus() {
         return this.urgencyStatus;
     }
+
 
     /**
      * Sets the urgency status of the agenda entry.

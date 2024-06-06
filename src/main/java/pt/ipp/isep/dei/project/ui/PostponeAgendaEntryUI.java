@@ -48,7 +48,7 @@ public class PostponeAgendaEntryUI implements Runnable {
             System.out.println((i + 1) + ". " + entry.getDescription());
         }
 
-        AgendaEntryDto selectedEntry = selectEntry(entryList);
+        AgendaEntryDto selectedEntry = (selectEntry(entryList));
         if (selectedEntry == null) {
             return;
         }

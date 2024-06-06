@@ -10,10 +10,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.CreateTeamController;
-import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.Skill;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
+import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class TeamsGUI {
                     if (proposedTeam != null) {
                         boolean confirmed = showTeamProposalDialog(proposedTeam);
                         if (confirmed) {
-                            createTeamController.createCustomTeam(selectedSkills, proposedTeam.getCollaboratorsDtoList(), minTeamSize, maxTeamSize);
+                            createTeamController.createCustomTeam(selectedSkills, CollaboratorMapper.toDomainList(proposedTeam.getCollaboratorsDtoList()), minTeamSize, maxTeamSize);
                             updateTeamList();
                         }
                     } else {
@@ -148,9 +148,9 @@ public class TeamsGUI {
         alert.setTitle("Team Proposal");
         alert.setHeaderText("Generated Team Proposal:");
         StringBuilder content = new StringBuilder();
-        for (Collaborator collaborator : proposedTeam.getCollaboratorsDtoList()) {
+        for (CollaboratorDto collaborator : proposedTeam.getCollaboratorsDtoList()) {
             content.append(collaborator.getName()).append(" - Skills: ");
-            for (Skill skill : collaborator.getSkills()) {
+            for (SkillDto skill : collaborator.getSkills()) {
                 content.append(skill.getDesignation()).append(", ");
             }
             content.setLength(content.length() - 2);
@@ -196,7 +196,7 @@ public class TeamsGUI {
         for (TeamDto team : uniqueTeams) {
             // Construa uma string com os detalhes da equipe, por exemplo, nome da equipe
             StringBuilder teamDetails = new StringBuilder("Team " + teamIndex + ": ");
-            for (Collaborator collaborator : team.getCollaboratorsDtoList()) {
+            for (CollaboratorDto collaborator : team.getCollaboratorsDtoList()) {
                 teamDetails.append(collaborator.getName()).append(", ");
             }
             // Remove a vírgula extra no final
@@ -219,8 +219,8 @@ public class TeamsGUI {
     }
 
     private boolean areTeamsEqual(TeamDto team1, TeamDto team2) {
-        List<Collaborator> collaborators1 = team1.getCollaboratorsDtoList();
-        List<Collaborator> collaborators2 = team2.getCollaboratorsDtoList();
+        List<CollaboratorDto> collaborators1 = team1.getCollaboratorsDtoList();
+        List<CollaboratorDto> collaborators2 = team2.getCollaboratorsDtoList();
 
         // Verifica se as equipes têm o mesmo número de colaboradores
         if (collaborators1.size() != collaborators2.size()) {
@@ -228,9 +228,9 @@ public class TeamsGUI {
         }
 
         // Verifica se todos os colaboradores da equipe 1 estão presentes na equipe 2
-        for (Collaborator collaborator1 : collaborators1) {
+        for (CollaboratorDto collaborator1 : collaborators1) {
             boolean collaboratorFound = false;
-            for (Collaborator collaborator2 : collaborators2) {
+            for (CollaboratorDto collaborator2 : collaborators2) {
                 // Comparando os nomes dos colaboradores para verificar a igualdade
                 if (collaborator1.getName().equals(collaborator2.getName())) {
                     collaboratorFound = true;

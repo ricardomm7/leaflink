@@ -1,8 +1,5 @@
 package pt.ipp.isep.dei.project.dto;
 
-import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.Skill;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,10 +9,10 @@ import java.util.stream.Collectors;
  * It encapsulates the data related to a team and provides methods to access this data.
  */
 public class TeamDto implements Serializable {
-    private final List<Skill> skills;
+    private List<SkillDto> skills;
     private final int minTeamSize;
     private final int maxTeamSize;
-    private final List<Collaborator> collaborator;
+    private List<CollaboratorDto> collaborator;
 
     /**
      * Constructs a new TeamDto object with the provided list of collaborators.
@@ -24,7 +21,7 @@ public class TeamDto implements Serializable {
      *
      * @param collaborators the list of collaborators in the team
      */
-    public TeamDto(List<Collaborator> collaborators) {
+    public TeamDto(List<CollaboratorDto> collaborators) {
         this.collaborator = collaborators;
         this.skills = List.of();
         this.minTeamSize = 0;
@@ -39,9 +36,13 @@ public class TeamDto implements Serializable {
      * @param minTeamSize   the minimum size of the team
      * @param maxTeamSize   the maximum size of the team
      */
-    public TeamDto(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize) {
+    public TeamDto(List<SkillDto> skills, List<CollaboratorDto> collaborators, int minTeamSize, int maxTeamSize) {
         this.skills = skills;
         this.collaborator = collaborators;
+        this.minTeamSize = minTeamSize;
+        this.maxTeamSize = maxTeamSize;
+    }
+    public TeamDto( int minTeamSize, int maxTeamSize) {
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }
@@ -51,7 +52,7 @@ public class TeamDto implements Serializable {
      *
      * @return the list of skills required for the team
      */
-    public List<Skill> getSkills() {
+    public List<SkillDto> getSkills() {
         return (skills);
     }
 
@@ -60,7 +61,7 @@ public class TeamDto implements Serializable {
      *
      * @return the list of collaborators in the team
      */
-    public List<Collaborator> getCollaboratorsDtoList() {
+    public List<CollaboratorDto> getCollaboratorsDtoList() {
         return collaborator;
     }
 
@@ -89,7 +90,15 @@ public class TeamDto implements Serializable {
      */
     public String getTeamAsString() {
         return collaborator.stream()
-                .map(Collaborator::getName) // Assuming Collaborator has a getName() method
+                .map(CollaboratorDto::getName) // Assuming Collaborator has a getName() method
                 .collect(Collectors.joining(", "));
+    }
+
+    public void setCollaboratorsDtoList(List<CollaboratorDto> dtoList) {
+        this.collaborator = dtoList;
+    }
+
+    public void setSkills(List<SkillDto> skills) {
+        this.skills = skills;
     }
 }

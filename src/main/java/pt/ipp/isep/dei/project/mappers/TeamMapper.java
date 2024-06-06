@@ -1,6 +1,10 @@
 package pt.ipp.isep.dei.project.mappers;
 
+import pt.ipp.isep.dei.project.domain.Collaborator;
+import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.domain.Team;
+import pt.ipp.isep.dei.project.dto.CollaboratorDto;
+import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
 
 import java.io.Serializable;
@@ -21,7 +25,20 @@ public class TeamMapper implements Serializable {
      * @return the corresponding TeamDto data transfer object
      */
     public static TeamDto toDto(Team team) {
-        return new TeamDto(team.getSkills(), team.getCollaborators(), team.getMinTeamSize(), team.getMaxTeamSize());
+        if (team == null) {
+            return null;
+        }
+        List<CollaboratorDto> collaboratorDtos = CollaboratorMapper.toDtoList(team.getCollaborators());
+        List<SkillDto> skillDtos = new ArrayList<>();
+        for (Skill skill : team.getSkills()) {
+            skillDtos.add(SkillMapper.toDto(skill));
+        }
+
+        TeamDto team1 = new TeamDto( team.getMinTeamSize(), team.getMaxTeamSize());
+        team1.setCollaboratorsDtoList(collaboratorDtos);
+        team1.setSkills(skillDtos);
+
+        return team1;
     }
 
     /**
@@ -31,7 +48,17 @@ public class TeamMapper implements Serializable {
      * @return the corresponding Team domain object
      */
     public static Team toDomain(TeamDto teamDto) {
-        return new Team(teamDto.getSkills(), teamDto.getCollaboratorsDtoList(), teamDto.getMinTeamSize(), teamDto.getMaxTeamSize());
+        if (teamDto == null) {
+            return null;
+        }
+        List<Collaborator> collaboratorDtos = CollaboratorMapper.toDomainList(teamDto.getCollaboratorsDtoList());
+        List<Skill> skillDtos = new ArrayList<>();
+        for (SkillDto skill : teamDto.getSkills()) {
+            skillDtos.add(SkillMapper.toDomain(skill));
+        }
+
+
+        return new Team(skillDtos,collaboratorDtos ,teamDto.getMinTeamSize(), teamDto.getMaxTeamSize());
     }
 
     /**

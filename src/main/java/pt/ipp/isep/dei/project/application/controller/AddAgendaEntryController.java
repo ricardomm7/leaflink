@@ -10,7 +10,7 @@ import pt.ipp.isep.dei.project.repository.EntryRepository;
 
 import java.util.List;
 
-public class AddAgendaEntryController {
+public class AddAgendaEntryController  {
     private final EntryRepository entryRepository = new EntryRepository();
 
     public List<ToDoEntryDto> getToDoEntry (){
@@ -26,4 +26,5 @@ public class AddAgendaEntryController {
     public List<AgendaEntryDto> getAgendaEntries(UserSession GSM) {
         return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(GSM.getUserEmail()));
     }
+
 }

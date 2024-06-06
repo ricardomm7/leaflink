@@ -1,10 +1,9 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.*;
-import pt.ipp.isep.dei.project.dto.TeamDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
-import pt.ipp.isep.dei.project.mappers.TeamMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,14 +16,7 @@ import java.util.List;
  * It provides methods to create, update, and retrieve these entries.
  */
 public class EntryRepository implements Serializable {
-
-    /**
-     * The To do entry list.
-     */
     private final List<ToDoEntry> toDoEntryList;
-    /**
-     * The Agenda entry list.
-     */
     private final List<AgendaEntry> agendaEntryList;
 
     /**
@@ -85,19 +77,7 @@ public class EntryRepository implements Serializable {
      * @return a list of AgendaEntryDto objects managed by the specified GSM.
      */
     public List<AgendaEntry> getAgendaEntryListByGSM(String email) {
-        List<AgendaEntry> z = new ArrayList<>();
-        for (AgendaEntry s : agendaEntryList) {
-            if (s.getGreenSpace().getManager().equals(email)){
-                z.add(s);
-            }else {
-                for (Collaborator collaborator: s.getAssignedTeam().getCollaborators()) {
-                    if (collaborator.getEmail().equals(email)) {
-                        z.add(s);
-                    }
-                }
-            }
-        }
-        return z;
+        return agendaEntryList;
     }
 
     /**
@@ -111,10 +91,6 @@ public class EntryRepository implements Serializable {
         agendaEntryList.get(entryIndex).setAssignedVehicles(u);
     }
 
-    public void updateTeamAgendaEntry(int entryIndex, TeamDto team) {
-        Team t = TeamMapper.toDomain(team);
-        agendaEntryList.get(entryIndex).setAssignedTeam(t);
-    }
 
     /**
      * Updates the date and progress status of an AgendaEntry.
@@ -131,6 +107,8 @@ public class EntryRepository implements Serializable {
             addAgendaEntry(agendaEntry1);
 
             return true;
+        } else {
+            ShowError.showAlert("Postpone Entry", "The new date cannot be before the starting date.", "Invalid Date");
         }
         return false;
     }
@@ -190,7 +168,7 @@ public class EntryRepository implements Serializable {
      * @param team          the team
      * @return the dates list
      */
-    public List<AgendaEntry> getDatesList(LocalDate beginningDate , LocalDate endDate, ProgressStatus status, Team team) {
+    public List<AgendaEntry> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Team team) {
         List<AgendaEntry> fullList = getAgendaEntryList();
 
         List<AgendaEntry> teamEntries = new ArrayList<>();
@@ -201,13 +179,14 @@ public class EntryRepository implements Serializable {
         }
 
         for (AgendaEntry entry : teamEntries) {
-            if (entry.getStartingDate().isBefore(beginningDate)|| entry.getStartingDate().isAfter(endDate)) {
+            if (entry.getStartingDate().isBefore(beginningDate) || entry.getStartingDate().isAfter(endDate)) {
                 teamEntries.remove(entry);
             }
         }
         return teamEntries;
 
     }
+
     /**
      * Retrieves a list of all ToDoEntryDto objects.
      *
@@ -265,5 +244,8 @@ public class EntryRepository implements Serializable {
         toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
     }
 
+    public void updateTeamAgendaEntry(AgendaEntry entryIndex, Team team) {
+        entryIndex.setAssignedTeam(team);
+    }
 
 }

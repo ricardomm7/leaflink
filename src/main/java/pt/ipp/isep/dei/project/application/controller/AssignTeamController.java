@@ -1,16 +1,15 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.AgendaEntry;
+import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
-import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.mappers.TeamMapper;
-import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
-import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.util.List;
 
@@ -40,7 +39,9 @@ public class AssignTeamController {
     }
 
 
-    public void updateEntryWithTeam(int entryIndex, TeamDto teamDtoList) {
-        entryRepository.updateTeamAgendaEntry(entryIndex, teamDtoList);
+    public void updateEntryWithTeam(AgendaEntryDto agendaEntryDto, TeamDto teamDtoList) {
+        Team t = TeamMapper.toDomain(teamDtoList);
+        AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
+        entryRepository.updateTeamAgendaEntry(agendaEntry, t);
     }
 }
