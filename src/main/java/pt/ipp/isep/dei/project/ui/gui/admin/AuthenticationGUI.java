@@ -76,6 +76,8 @@ public class AuthenticationGUI {
                 caminho = "mainMenus/hrm/hrmMenu.fxml";
             } else if (u.getId() == AuthenticationController.ROLE_VFM) {
                 caminho = "mainMenus/vfm/vfmMenu.fxml";
+            }else if (u.getId() == AuthenticationController.ROLE_COLLAB) {
+                caminho = "mainMenus/collab/collabMenu.fxml";
             }
 
             if (caminho == null) {
