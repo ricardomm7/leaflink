@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.project.domain;
 
+import pt.ipp.isep.dei.project.ui.ShowError;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +16,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
     private LocalDate startingDate;
     private ProgressStatus progressStatus;
     private Team assignedTeam;
-    private List<Vehicle> assignedVehicles;
+    private List<Vehicle> assignedVehicles = new ArrayList<>();
 
     /**
      * Constructs a new AgendaEntry with the specified details.
@@ -41,6 +44,12 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
      * @param PLANNED     the new progress status for the copied AgendaEntry.
      */
     public AgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus PLANNED) {
+        super(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(), agendaEntry.getUrgencyStatus(), agendaEntry.getGreenSpace());
+        this.startingDate = newDate;
+        this.progressStatus = PLANNED;
+    }
+
+    public AgendaEntry(ToDoEntry agendaEntry, LocalDate newDate, ProgressStatus PLANNED) {
         super(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(), agendaEntry.getUrgencyStatus(), agendaEntry.getGreenSpace());
         this.startingDate = newDate;
         this.progressStatus = PLANNED;
@@ -115,7 +124,9 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
      * @param assignedVehicles the new list of assigned vehicles.
      */
     public void setAssignedVehicles(List<Vehicle> assignedVehicles) {
-        this.assignedVehicles = assignedVehicles;
+        for (Vehicle v : assignedVehicles) {
+            this.assignedVehicles.add(v);
+        }
     }
 
     /**
@@ -125,12 +136,18 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
      */
     public void setAvailable(AgendaEntry agendaEntry) {
         Team team = agendaEntry.getAssignedTeam();
-        for (Collaborator collaborator : team.getCollaborators()) {
-            collaborator.setAvailable(true);
-        }
-        List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
-        for (Vehicle vehicle : vehicleList) {
-            vehicle.setAvailable(true);
+        if (team != null) {
+            team.setAvailable(true);
+
+            for (Collaborator collaborator : team.getCollaborators()) {
+                collaborator.setAvailable(true);
+            }
+            List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
+            for (Vehicle vehicle : vehicleList) {
+                vehicle.setAvailable(true);
+            }
+        } else {
+            ShowError.showAlert("Completion Error", "There is no Team assigned to this Entry.", "No team assigned");
         }
     }
 
@@ -139,7 +156,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
      *
      * @return the team
      */
-    public Team getTeam(){
+    public Team getTeam() {
         return assignedTeam;
     }
 

@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.domain.Skill;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The TeamDto class represents a data transfer object for the Team domain object.
@@ -79,5 +80,16 @@ public class TeamDto implements Serializable {
      */
     public int getMaxTeamSize() {
         return maxTeamSize;
+    }
+
+    /**
+     * Returns a string representation of the team, listing the names of the collaborators separated by commas.
+     *
+     * @return a string representation of the team
+     */
+    public String getTeamAsString() {
+        return collaborator.stream()
+                .map(Collaborator::getName) // Assuming Collaborator has a getName() method
+                .collect(Collectors.joining(", "));
     }
 }

@@ -1,13 +1,9 @@
 package pt.ipp.isep.dei.project.repository;
 
-import pt.ipp.isep.dei.project.domain.AgendaEntry;
-import pt.ipp.isep.dei.project.domain.ProgressStatus;
-import pt.ipp.isep.dei.project.domain.ToDoEntry;
-import pt.ipp.isep.dei.project.domain.Vehicle;
-import pt.ipp.isep.dei.project.application.controller.ListTaskController;
-import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.dto.TeamDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.TeamMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 
 import java.io.Serializable;
@@ -90,19 +86,15 @@ public class EntryRepository implements Serializable {
      */
     public List<AgendaEntry> getAgendaEntryListByGSM(String email) {
         List<AgendaEntry> z = new ArrayList<>();
-        for (AgendaEntry s : getAgendaEntryList()) {
-            if (s.getGreenSpace().getManager().equals(email)) {
+        for (AgendaEntry s : agendaEntryList) {
+            if (s.getGreenSpace().getManager().equals(email)){
                 z.add(s);
-            }
-        }
-        return z;
-    }
-
-    public List<AgendaEntry> getAgendaEntryListByEmail(String email) {
-        List<AgendaEntry> z = new ArrayList<>();
-        for (AgendaEntry s : getAgendaEntryList()) {
-            if (s.getGreenSpace().getManager().equals(email)) {
-                z.add(s);
+            }else {
+                for (Collaborator collaborator: s.getAssignedTeam().getCollaborators()) {
+                    if (collaborator.getEmail().equals(email)) {
+                        z.add(s);
+                    }
+                }
             }
         }
         return z;
@@ -117,6 +109,11 @@ public class EntryRepository implements Serializable {
     public void updateVehiclesAgendaEntry(int entryIndex, List<VehicleDto> f) {
         List<Vehicle> u = VehicleMapper.toDomainList(f);
         agendaEntryList.get(entryIndex).setAssignedVehicles(u);
+    }
+
+    public void updateTeamAgendaEntry(int entryIndex, TeamDto team) {
+        Team t = TeamMapper.toDomain(team);
+        agendaEntryList.get(entryIndex).setAssignedTeam(t);
     }
 
     /**
