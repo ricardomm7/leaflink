@@ -93,7 +93,7 @@ public class TeamRepository implements Serializable {
     public List<Team> getAvailableTeamList() {
         List<Team> availableTeam = new ArrayList<>();
         for (Team team : teamList) {
-            if(team.isAvailable()) {
+            if (team.isAvailable()) {
                 availableTeam.add(team);
             }
         }

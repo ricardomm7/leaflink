@@ -142,9 +142,9 @@ public class ToDoEntry implements Serializable {
      * @param greenSpace the green space
      */
     public void setGreenSpace(GreenSpace greenSpace) {
-        if(greenSpace != null){
+        if (greenSpace != null) {
             this.greenSpace = greenSpace;
-        }else {
+        } else {
             throw new IllegalArgumentException("Green Space cannot be null");
         }
     }

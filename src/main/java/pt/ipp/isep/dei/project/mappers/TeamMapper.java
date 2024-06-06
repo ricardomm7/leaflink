@@ -34,7 +34,7 @@ public class TeamMapper implements Serializable {
             skillDtos.add(SkillMapper.toDto(skill));
         }
 
-        TeamDto team1 = new TeamDto( team.getMinTeamSize(), team.getMaxTeamSize());
+        TeamDto team1 = new TeamDto(team.getMinTeamSize(), team.getMaxTeamSize());
         team1.setCollaboratorsDtoList(collaboratorDtos);
         team1.setSkills(skillDtos);
 
@@ -58,7 +58,7 @@ public class TeamMapper implements Serializable {
         }
 
 
-        return new Team(skillDtos,collaboratorDtos ,teamDto.getMinTeamSize(), teamDto.getMaxTeamSize());
+        return new Team(skillDtos, collaboratorDtos, teamDto.getMinTeamSize(), teamDto.getMaxTeamSize());
     }
 
     /**

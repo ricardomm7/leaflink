@@ -31,7 +31,7 @@ public class ToDoEntryTest {
         String description = "Gardening the backyard";
         int duration = 2;
         UrgencyStatus urgencyStatus = UrgencyStatus.valueOf("LOW");
-        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua","Porto", "4000-007"));
+        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "Porto", "4000-007"));
         ToDoEntry entry = new ToDoEntry(title, description, duration, urgencyStatus, gs);
 
         String newDescription = "Trimming the hedges";
@@ -46,7 +46,7 @@ public class ToDoEntryTest {
         String description = "Gardening the backyard";
         int duration = 2;
         UrgencyStatus urgencyStatus = UrgencyStatus.valueOf("LOW");
-        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua","Porto", "4000-007"));
+        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "Porto", "4000-007"));
         ToDoEntry entry = new ToDoEntry(title, description, duration, urgencyStatus, gs);
 
         assertThrows(IllegalArgumentException.class, () -> entry.setDescription("###Gardening$&"));
@@ -73,7 +73,7 @@ public class ToDoEntryTest {
         String description = "Gardening the backyard";
         int duration = 2;
         UrgencyStatus urgencyStatus = UrgencyStatus.valueOf("LOW");
-        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua","Porto", "4000-007"));
+        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "Porto", "4000-007"));
         ToDoEntry entry = new ToDoEntry(title, description, duration, urgencyStatus, gs);
 
         assertThrows(IllegalArgumentException.class, () -> entry.setDuration(-1));
@@ -85,7 +85,7 @@ public class ToDoEntryTest {
         String description = "Gardening the backyard";
         int duration = 2;
         UrgencyStatus urgencyStatus = UrgencyStatus.valueOf("LOW");
-        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "Porto","4000-007"));
+        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "Porto", "4000-007"));
         ToDoEntry entry = new ToDoEntry(title, description, duration, urgencyStatus, gs);
 
         UrgencyStatus newUrgencyStatus = UrgencyStatus.HIGH;
@@ -100,7 +100,7 @@ public class ToDoEntryTest {
         String description = "Gardening the backyard";
         int duration = 2;
         UrgencyStatus urgencyStatus = UrgencyStatus.valueOf("LOW");
-        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua","Porto", "4000-007"));
+        GreenSpace gs = new GreenSpace("Garden", GreenSpaceType.GARDEN, 12, "a@a.com", new Address("Rua", "Porto", "4000-007"));
         ToDoEntry entry = new ToDoEntry(title, description, duration, urgencyStatus, gs);
 
         GreenSpace newGreenSpace = new GreenSpace("Park", GreenSpaceType.GARDEN, 20, "b@b.com", new Address("Avenida", "Porto", "4000-008"));

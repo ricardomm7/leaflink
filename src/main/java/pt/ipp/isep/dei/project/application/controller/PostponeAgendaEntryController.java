@@ -68,8 +68,8 @@ public class PostponeAgendaEntryController {
                 flag = NotificationService.notifyTeam(collaboratorsList, agendaEntry, newDate);
             }
 
-        }else {
-            ShowError.showAlert("Error", "There is no team assigned to this entry","No Team");
+        } else {
+            ShowError.showAlert("Error", "There is no team assigned to this entry", "No Team");
         }
         return flag;
 

@@ -190,7 +190,7 @@ public class TasksGUI {
 
     private Dialog<List<VehicleDto>> createVehicleSelectionDialog() {
         Dialog<List<VehicleDto>> dialog = new Dialog<>();
-        dialog.setTitle("Select Vehicles");
+        dialog.setTitle("Select from the available vehicles");
 
         List<VehicleDto> vehicles = assignVehiclesController.getVehicleList();
         int entryIndex = agendaListView.getSelectionModel().getSelectedIndex();
@@ -203,6 +203,7 @@ public class TasksGUI {
             checkBoxes[i] = new CheckBox(vehicle.getVehiclePlate() + " - " + vehicle.getType());
             if (associatedVehicles != null && associatedVehicles.contains(vehicle)) {
                 checkBoxes[i].setSelected(true);
+                checkBoxes[i].setDisable(true); // Desativar a checkbox
             }
             vBox.getChildren().add(checkBoxes[i]);
         }
@@ -387,6 +388,7 @@ public class TasksGUI {
             }
         });
     }
+
     @FXML
     void CancelAgendaEntryHandle(ActionEvent event) {
 
@@ -669,89 +671,88 @@ public class TasksGUI {
     }
 
     @FXML
-void initialize() {
-    // Inicialização das caixas de detalhes e botões
-    taskDetailsVBox.setVisible(false);
-    AgendaDetailsVBox.setVisible(false);
-    PostponeAgendaEntryBtn.setDisable(true);
-    CancelAgendaEntryBtn.setDisable(true);
-    removeEntryBtn.setDisable(true);
-    CompleteAgendaEntryBtn.setDisable(true);
-    updateToDoEntry();
-    updateAgendaEntryList();
+    void initialize() {
+        // Inicialização das caixas de detalhes e botões
+        taskDetailsVBox.setVisible(false);
+        AgendaDetailsVBox.setVisible(false);
+        PostponeAgendaEntryBtn.setDisable(true);
+        CancelAgendaEntryBtn.setDisable(true);
+        removeEntryBtn.setDisable(true);
+        CompleteAgendaEntryBtn.setDisable(true);
+        updateToDoEntry();
+        updateAgendaEntryList();
 
-    // Listener para seleção de itens na lista ToDo
-    toDoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue != null) {
-            showToDoEntryDetails(newValue);
-            removeEntryBtn.setDisable(false);
-        } else {
-            taskDetailsVBox.setVisible(false);
-            removeEntryBtn.setDisable(true);
-        }
-    });
+        // Listener para seleção de itens na lista ToDo
+        toDoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showToDoEntryDetails(newValue);
+                removeEntryBtn.setDisable(false);
+            } else {
+                taskDetailsVBox.setVisible(false);
+                removeEntryBtn.setDisable(true);
+            }
+        });
 
-    // Listener para seleção de itens na lista de Agenda
-    agendaListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue != null) {
-            showAgendaEntryDetails(newValue);
-            AgendaDetailsVBox.setVisible(true);
-            PostponeAgendaEntryBtn.setDisable(false);
-            CancelAgendaEntryBtn.setDisable(false);
-            CompleteAgendaEntryBtn.setDisable(false);
-        } else {
-            AgendaDetailsVBox.setVisible(false);
-            PostponeAgendaEntryBtn.setDisable(true);
-            CancelAgendaEntryBtn.setDisable(true);
-            CompleteAgendaEntryBtn.setDisable(true);
-        }
-    });
+        // Listener para seleção de itens na lista de Agenda
+        agendaListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showAgendaEntryDetails(newValue);
+                AgendaDetailsVBox.setVisible(true);
+                PostponeAgendaEntryBtn.setDisable(false);
+                CancelAgendaEntryBtn.setDisable(false);
+                CompleteAgendaEntryBtn.setDisable(false);
+            } else {
+                AgendaDetailsVBox.setVisible(false);
+                PostponeAgendaEntryBtn.setDisable(true);
+                CancelAgendaEntryBtn.setDisable(true);
+                CompleteAgendaEntryBtn.setDisable(true);
+            }
+        });
 
-    // Definir fábrica de células personalizada para a lista ToDo
-    toDoListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-        @Override
-        public ListCell<String> call(ListView<String> param) {
-            return new ListCell<String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText(null);
-                    } else {
-                        setText(item);
-                        setStyle(null);
-                        ToDoEntryDto entry = getToDoEntryDto(item);
-                        if (entry != null) {
-                            switch (entry.getUrgencyStatus()) {
-                                case HIGH:
-                                    setStyle("-fx-text-fill: red;");
-                                    break;
-                                case MEDIUM:
-                                    setStyle("-fx-text-fill: orange;");
-                                    break;
-                                case LOW:
-                                    setStyle("-fx-text-fill: green;");
-                                    break;
-                                default:
-                                    setStyle("-fx-text-fill: black;");
-                                    break;
+        // Definir fábrica de células personalizada para a lista ToDo
+        toDoListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                            setStyle(null);
+                            ToDoEntryDto entry = getToDoEntryDto(item);
+                            if (entry != null) {
+                                switch (entry.getUrgencyStatus()) {
+                                    case HIGH:
+                                        setStyle("-fx-text-fill: red;");
+                                        break;
+                                    case MEDIUM:
+                                        setStyle("-fx-text-fill: orange;");
+                                        break;
+                                    case LOW:
+                                        setStyle("-fx-text-fill: green;");
+                                        break;
+                                    default:
+                                        setStyle("-fx-text-fill: black;");
+                                        break;
+                                }
                             }
                         }
                     }
-                }
-            };
-        }
-    });
+                };
+            }
+        });
 
-    // Recarregar entradas de agenda ao inicializar
-    reloadAgendaEntries();
-}
+        // Recarregar entradas de agenda ao inicializar
+        reloadAgendaEntries();
+    }
 
-private void reloadAgendaEntries() {
-    allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
-    updateAgendaEntryList();
-}
-
+    private void reloadAgendaEntries() {
+        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
+        updateAgendaEntryList();
+    }
 
 
     private void updateToDoEntry() {
@@ -786,7 +787,7 @@ private void reloadAgendaEntries() {
         if (entry != null) {
             titleLabelA.setText(entry.getTitle());
             descriptionLabelA.setText(entry.getDescription());
-            durationLabelA.setText(String.valueOf(entry.getDuration()) + "h");
+            durationLabelA.setText(entry.getDuration() + "h");
             urgencyLabelA.setText(entry.getUrgencyStatus().toString());
             greenSpaceLabelA.setText(entry.getGreenSpace().getName());
             startingDateLabelA.setText(entry.getStartingDate().toString());

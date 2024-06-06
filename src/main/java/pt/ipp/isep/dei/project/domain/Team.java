@@ -14,8 +14,6 @@ public class Team implements Serializable {
     private boolean isAvailable;
 
 
-
-
     /**
      * Constructs a team with the given skills, collaborators, minimum and maximum team size.
      *
@@ -76,7 +74,6 @@ public class Team implements Serializable {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
-
 
 
 }

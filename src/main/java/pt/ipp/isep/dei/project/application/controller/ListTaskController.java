@@ -11,7 +11,6 @@ import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,7 +72,7 @@ public class ListTaskController {
      */
     public List<AgendaEntryDto> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Collaborator collaborator) {
         Team team = getTeamTroughCLB(collaborator);
-        List<AgendaEntry> entries =entryRepository.getDatesList(beginningDate, endDate, status, team);
+        List<AgendaEntry> entries = entryRepository.getDatesList(beginningDate, endDate, status, team);
         return AgendaEntryMapper.toDtoList(entries);
     }
 }

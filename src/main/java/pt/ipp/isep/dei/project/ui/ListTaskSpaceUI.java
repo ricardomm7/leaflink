@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.ui;
 
 import pt.ipp.isep.dei.project.application.controller.ListTaskController;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
-import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
@@ -12,8 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
-
-import static org.apache.commons.lang3.time.DateUtils.parseDate;
 
 /**
  * The type List task space ui.

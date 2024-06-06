@@ -7,13 +7,20 @@ import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
+import pt.ipp.isep.dei.project.repository.Repositories;
 
 import java.util.List;
 
-public class AddAgendaEntryController  {
-    private final EntryRepository entryRepository = new EntryRepository();
+public class AddAgendaEntryController {
+    private final Repositories repositories;
+    private final EntryRepository entryRepository;
 
-    public List<ToDoEntryDto> getToDoEntry (){
+    public AddAgendaEntryController() {
+        repositories = Repositories.getInstance();
+        entryRepository = repositories.getEntryRepository();
+    }
+
+    public List<ToDoEntryDto> getToDoEntry() {
         return ToDoEntryMapper.toDtoList(entryRepository.getToDoEntryList());
     }
 

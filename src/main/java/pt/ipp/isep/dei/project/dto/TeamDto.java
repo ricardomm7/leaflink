@@ -42,7 +42,8 @@ public class TeamDto implements Serializable {
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }
-    public TeamDto( int minTeamSize, int maxTeamSize) {
+
+    public TeamDto(int minTeamSize, int maxTeamSize) {
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }

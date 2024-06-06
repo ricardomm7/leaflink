@@ -17,9 +17,6 @@ import java.util.List;
  */
 public class AgendaEntryMapper implements Serializable {
 
-    public AgendaEntryMapper() {
-    }
-
     /**
      * Converts an AgendaEntryDto object to an AgendaEntry domain object.
      *
