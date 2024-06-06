@@ -12,7 +12,7 @@ import java.util.List;
  * It encapsulates the data related to an agenda entry and provides methods to access and manipulate this data.
  * This class extends the ToDoEntryDto class and adds additional properties specific to an agenda entry.
  */
-public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
+public class AgendaEntryDto implements Serializable {
     public String title;
     public String description;
     public int duration;
@@ -37,7 +37,10 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
      * @param assignedVehicles the list of vehicles assigned to the agenda entry
      */
     public AgendaEntryDto(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpaceDto greenSpace, LocalDate startingDate, ProgressStatus progressStatus, TeamDto assignedTeam, List<VehicleDto> assignedVehicles) {
-        super(title, description, duration, urgencyStatus, greenSpace);
+        this.title = title;
+        this.description = description;
+        this.duration = duration;
+        this.urgencyStatus = urgencyStatus;
         this.greenSpace = greenSpace;
         this.startingDate = startingDate;
         this.progressStatus = progressStatus;
@@ -57,9 +60,11 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
      * @param progressStatus the progress status of the agenda entry
      */
     public AgendaEntryDto(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpaceDto greenSpace, LocalDate startingDate, ProgressStatus progressStatus) {
-        super(title, description, duration, urgencyStatus, greenSpace);
-        this.greenSpace = greenSpace;
-        this.startingDate = startingDate;
+        this.title = title;
+        this.description = description;
+        this.duration = duration;
+        this.urgencyStatus = urgencyStatus;
+        this.greenSpace = greenSpace;        this.startingDate = startingDate;
         this.progressStatus = progressStatus;
     }
 
@@ -105,7 +110,7 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
      * @return the description of the agenda entry
      */
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -123,7 +128,7 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
      * @return the duration of the agenda entry
      */
     public int getDuration() {
-        return duration;
+        return this.duration;
     }
 
     /**
@@ -141,7 +146,7 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
      * @return the green space associated with the agenda entry
      */
     public GreenSpaceDto getGreenSpace() {
-        return greenSpace;
+        return this.greenSpace;
     }
 
     /**
@@ -195,7 +200,7 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
      * @return the title of the agenda entry
      */
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     /**
@@ -213,7 +218,7 @@ public class AgendaEntryDto extends ToDoEntryDto implements Serializable {
      * @return the urgency status of the agenda entry
      */
     public UrgencyStatus getUrgencyStatus() {
-        return urgencyStatus;
+        return this.urgencyStatus;
     }
 
     /**

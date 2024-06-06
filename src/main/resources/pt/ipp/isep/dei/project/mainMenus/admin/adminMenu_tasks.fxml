@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.TasksGUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.TasksGUI">
 
     <left>
         <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar" BorderPane.alignment="CENTER">
@@ -233,13 +231,8 @@
                             <content>
                                 <VBox prefHeight="200.0" prefWidth="100.0" styleClass="border-line">
                                     <children>
-                                        <HBox VBox.vgrow="NEVER">
+                                        <HBox alignment="TOP_CENTER" VBox.vgrow="NEVER">
                                             <children>
-                                                <TextField editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="31.0" prefWidth="555.0" promptText="Enter the search words" styleClass="text-field-custom" HBox.hgrow="ALWAYS">
-                                                    <HBox.margin>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                    </HBox.margin>
-                                                </TextField>
                                                 <Button fx:id="AddAgendaEntryBtn" minWidth="-Infinity" mnemonicParsing="false" onAction="#AddAgendaEntryHandle" styleClass="button-custom" text="Add Entry">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -261,6 +254,9 @@
                                        </HBox.margin>
                                     </Button>
                                             </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
                                         </HBox>
                               <HBox alignment="CENTER_LEFT">
                                  <children>
@@ -303,8 +299,8 @@
                                  <children>
                                     <SplitPane dividerPositions="0.5" HBox.hgrow="ALWAYS">
                                        <items>
-                                          <ListView fx:id="agendaEntryList" />
-                                          <VBox fx:id="vbox_selectedCollab" fillWidth="false">
+                                          <ListView fx:id="agendaListView" />
+                                          <VBox fx:id="AgendaDetailsVBox" fillWidth="false">
                                              <children>
                                                 <Label styleClass="costum-Label" text="Selected  Entry Information">
                                                    <font>
@@ -361,47 +357,47 @@
                                                             <Insets left="20.0" right="5.0" />
                                                          </GridPane.margin>
                                                       </Label>
-                                                      <Label fx:id="titleLabel" text="info" wrapText="true" GridPane.columnIndex="1">
+                                                      <Label fx:id="titleLabelA" text="info" wrapText="true" GridPane.columnIndex="1">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="descriptionLabel" layoutX="193.0" layoutY="15.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                      <Label fx:id="descriptionLabelA" layoutX="193.0" layoutY="15.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="durationLabel" layoutX="193.0" layoutY="45.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                      <Label fx:id="durationLabelA" layoutX="193.0" layoutY="45.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="urgencyLabel" layoutX="193.0" layoutY="75.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                      <Label fx:id="urgencyLabelA" layoutX="193.0" layoutY="75.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="greenSpaceLabel" layoutX="193.0" layoutY="105.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                      <Label fx:id="greenSpaceLabelA" layoutX="193.0" layoutY="105.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="startingDateLabel" layoutX="193.0" layoutY="135.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                      <Label fx:id="startingDateLabelA" layoutX="193.0" layoutY="135.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="progressStatusLabel" layoutX="193.0" layoutY="165.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                      <Label fx:id="progressStatusLabelA" layoutX="193.0" layoutY="165.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="teamLabel" layoutX="193.0" layoutY="135.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                      <Label fx:id="teamLabelA" layoutX="193.0" layoutY="135.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label fx:id="vehicleLabel" layoutX="193.0" layoutY="195.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                      <Label fx:id="vehicleLabelA" layoutX="193.0" layoutY="195.0" text="info" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                                          <padding>
                                                             <Insets left="5.0" />
                                                          </padding>

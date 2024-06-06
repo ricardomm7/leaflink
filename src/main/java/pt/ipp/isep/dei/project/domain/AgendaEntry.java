@@ -46,6 +46,12 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         this.progressStatus = PLANNED;
     }
 
+     public AgendaEntry(ToDoEntry agendaEntry, LocalDate newDate, ProgressStatus PLANNED) {
+        super(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(), agendaEntry.getUrgencyStatus(), agendaEntry.getGreenSpace());
+        this.startingDate = newDate;
+        this.progressStatus = PLANNED;
+    }
+
     /**
      * Gets the starting date of the AgendaEntry.
      *

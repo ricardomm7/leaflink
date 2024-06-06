@@ -16,6 +16,7 @@ import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import pt.ipp.isep.dei.project.dto.*;
+import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.time.LocalDate;
@@ -32,10 +33,14 @@ public class TasksGUI {
     private final PostponeAgendaEntryController postponeAgendaEntryController = new PostponeAgendaEntryController();
     private final AssignTeamController assignTeamController = new AssignTeamController();
 
+    private final EntryRepository entryRepository = new EntryRepository();
+
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
     private List<VehicleDto> vehicleListDto;
     @FXML
     private ListView<String> toDoListView;
+    @FXML
+    private ListView<String> agendaListView;
     @FXML
     private List<ToDoEntryDto> allToDoEntry;
     @FXML
@@ -61,48 +66,45 @@ public class TasksGUI {
 
     @FXML
     private Label greenSpaceLabel;
+    @FXML
+    private Label titleLabelA;
+
+    @FXML
+    private Label descriptionLabelA;
+
+    @FXML
+    private Label durationLabelA;
+
+    @FXML
+    private Label urgencyLabelA;
+    @FXML
+    private Label greenSpaceLabelA;
+    @FXML
+    private Label startingDateLabelA;
+    @FXML
+    private Label progressStatusLabelA;
+    @FXML
+    private Label vehicleLabelA;
+    @FXML
+    private Label teamLabelA;
 
     @FXML
     private VBox taskDetailsVBox;
-
+    @FXML
+    private VBox AgendaDetailsVBox;
     @FXML
     private Button PostponeAgendaEntryBtn;
-
     @FXML
     private Button AddAgendaEntryBtn;
-
     @FXML
     private Button CancelAgendaEntryBtn;
-
     @FXML
     private Button AddAgendaEntryBtn1;
 
 
     @FXML
-    private Label startingDateLabel;
-
-    @FXML
-    private Label teamLabel;
-
-
-    @FXML
-    private Label vehicleLabel;
-
-
-    @FXML
-    private ListView<String> agendaEntryList;
-
-    @FXML
-    private VBox vbox_selectedCollab;
-
-
-    @FXML
-    private Label progressStatusLabel;
-
-
-    @FXML
     void handleAddTeamBtn(ActionEvent event) {
-        String selectedAgendaEntry = agendaEntryList.getSelectionModel().getSelectedItem();
+        String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
         if (selectedAgendaEntry == null) {
             ShowError.showAlert("Assign Team", "No entry selected to assign a team.", null);
             return;
@@ -112,7 +114,7 @@ public class TasksGUI {
         Optional<TeamDto> result = dialog.showAndWait();
 
         result.ifPresent(selectedTeam -> {
-            int entryIndex = agendaEntryList.getSelectionModel().getSelectedIndex();
+            int entryIndex = agendaListView.getSelectionModel().getSelectedIndex();
             assignTeamController.updateEntryWithTeam(entryIndex, selectedTeam);
             updateAgendaEntryList();
         });
@@ -151,9 +153,6 @@ public class TasksGUI {
     }
 
 
-
-
-
     @FXML
     void handleAddVehicleBtn(ActionEvent event) {
         Dialog<List<VehicleDto>> dialog = createVehicleSelectionDialog();
@@ -164,6 +163,7 @@ public class TasksGUI {
             // Aqui você pode atualizar a entrada com os veículos selecionados
             int entryIndex = 1; // Suponha que a entrada que você deseja atualizar seja a entrada de índice 1
             assignVehiclesController.updateEntryWithVehicles(entryIndex, selectedVehicles);
+            updateAgendaEntryList();
         });
     }
 
@@ -261,31 +261,32 @@ public class TasksGUI {
                     selectedEntry.getUrgencyStatus(), selectedEntry.getGreenSpace(),
                     startingDate.getValue(), progressStatusComboBox.getValue(), null, null);
 
+
+            // Adicionar a nova entrada de agenda usando o controlador
             addAgendaEntryController.addAgendaEntry(agendaEntryDto);
 
-            // Remover a entrada selecionada da To-Do list
-            registerToDoEntryController.removeToDoEntry(selectedEntry.getTitle(), selectedEntry.getGreenSpace().getName());
 
-            // Atualizar a To-Do list e a Agenda
-            updateToDoEntry();
+            // Atualizar a lista de entradas de agenda
             updateAgendaEntryList();
         }
     }
 
 
     private void updateAgendaEntryList() {
-        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session); // Obter entradas da agenda
-        List<String> agendaEntryTitles = new ArrayList<>();
-        for (AgendaEntryDto entry : allAgendaEntry) {
-            agendaEntryTitles.add(entry.getTitle());
-        }
-        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryTitles);
-        agendaEntryList.setItems(observableList);
+        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
+
+        List<String> agendaEntryList = allAgendaEntry.stream()
+                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s",
+                        entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName()))
+                .collect(Collectors.toList());
+        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
+        agendaListView.setItems(observableList);
     }
+
 
     @FXML
     void PostponeAgendaEntryHandle(ActionEvent event) {
-        String selectedAgendaEntry = agendaEntryList.getSelectionModel().getSelectedItem();
+        String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
 
         if (selectedAgendaEntry != null) {
             if (PostponeAgendaEntryBtn.isDisabled()) {
@@ -318,11 +319,12 @@ public class TasksGUI {
                 boolean valid = validateInputsDate(dateField);
                 if (valid) {
                     LocalDate date = dateField.getValue();
-                    AgendaEntryDto agendaEntry = getAgendaEntry(selectedAgendaEntry, session);
+                    AgendaEntryDto agendaEntry = getAgendaEntryTitle(selectedAgendaEntry, session);
                     postponeAgendaEntryController.postponeEntry(agendaEntry, date);
                     updateAgendaEntryList();
+
+                    System.out.println();
                 } else {
-                    ShowError.showAlert("Invalid Input", "Please correct the highlighted fields.", null);
                     event1.consume(); // Prevenir fechamento do diálogo
                 }
             });
@@ -631,23 +633,42 @@ public class TasksGUI {
         }
     }
 
-     @FXML
+    @FXML
     void initialize() {
         taskDetailsVBox.setVisible(false);
+        AgendaDetailsVBox.setVisible(false);
+        PostponeAgendaEntryBtn.setDisable(true);
+        CancelAgendaEntryBtn.setDisable(true);
+        AddAgendaEntryBtn1.setDisable(true);
         removeEntryBtn.setDisable(true);
+
         allToDoEntry = registerToDoEntryController.getToDoEntry();
         updateToDoEntry();
         allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
         updateAgendaEntryList();
 
-
         toDoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                showTaskDetails(newValue);
+                showToDoEntryDetails(newValue);
                 removeEntryBtn.setDisable(false);
             } else {
                 taskDetailsVBox.setVisible(false);
                 removeEntryBtn.setDisable(true);
+            }
+        });
+
+        agendaListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showAgendaEntryDetails(newValue);
+                AgendaDetailsVBox.setVisible(true);
+                PostponeAgendaEntryBtn.setDisable(false);
+                CancelAgendaEntryBtn.setDisable(false);
+                AddAgendaEntryBtn1.setDisable(false);
+            } else {
+                AgendaDetailsVBox.setVisible(false);
+                PostponeAgendaEntryBtn.setDisable(true);
+                CancelAgendaEntryBtn.setDisable(true);
+                AddAgendaEntryBtn1.setDisable(true);
             }
         });
 
@@ -688,9 +709,6 @@ public class TasksGUI {
         });
     }
 
-
-
-
     private void updateToDoEntry() {
         allToDoEntry = registerToDoEntryController.getToDoEntry();
         List<String> toDoEntryList = allToDoEntry.stream()
@@ -702,7 +720,7 @@ public class TasksGUI {
     }
 
 
-    private void showTaskDetails(String string) {
+    private void showToDoEntryDetails(String string) {
         ToDoEntryDto entry = getToDoEntryDto(string);
 
         if (entry != null) {
@@ -717,18 +735,58 @@ public class TasksGUI {
         }
     }
 
+    private void showAgendaEntryDetails(String string) {
+        AgendaEntryDto entry = getAgendaEntry(string, session);
+
+        if (entry != null) {
+            titleLabelA.setText(entry.getTitle());
+            descriptionLabelA.setText(entry.getDescription());
+            durationLabelA.setText(String.valueOf(entry.getDuration()) + "h");
+            urgencyLabelA.setText(entry.getUrgencyStatus().toString());
+            greenSpaceLabelA.setText(entry.getGreenSpace().getName());
+            startingDateLabelA.setText(entry.getStartingDate().toString());
+            progressStatusLabelA.setText(entry.getProgressStatus().toString());
+            if (entry.getAssignedTeam() != null || entry.getAssignedVehicles() != null) {
+                teamLabelA.setText(entry.getAssignedTeam().toString());
+                vehicleLabelA.setText(entry.getAssignedVehicles().toString());
+            } else {
+                teamLabelA.setText("No team assigned");
+                vehicleLabelA.setText("No Vehicles assigned");
+            }
+            AgendaDetailsVBox.setVisible(true);
+        } else {
+            AgendaDetailsVBox.setVisible(false);
+
+        }
+    }
+
+
     private AgendaEntryDto getAgendaEntry(String string, UserSession GSM) {
+        String[] splittedString = string.split(" \\| ");
+        String title = splittedString[1].split(": ")[1];
         for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
-            // Verifique se o título da entrada corresponde à string fornecida
-            if (entry.getTitle().equalsIgnoreCase(string)) {
-                return entry; // Se corresponder, retorne a entrada da agenda
+            if (entry.getTitle().equalsIgnoreCase(title)) {
+                return entry;
+            }
+        }
+
+        return null;
+
+    }
+
+    private AgendaEntryDto getAgendaEntryTitle(String string, UserSession GSM) {
+        String[] splittedString = string.split(" \\| ");
+        String title = splittedString[1].split(": ")[1];
+        for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
+            if (entry.getTitle().equalsIgnoreCase(title)) {
+                return entry;
             }
         }
         return null;
 
     }
 
-     private ToDoEntryDto getToDoEntryDto(String string) {
+    private ToDoEntryDto getToDoEntryDto(String string) {
         ToDoEntryDto entry = null;
         String[] splittedString = string.split(" \\| ");
         String title = splittedString[0].split(": ")[1];
