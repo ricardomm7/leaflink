@@ -1,4 +1,5 @@
-# US006 - Register a Vehicle 
+# US028 - List the entrys assigned to myself
+
 
 ## 3. Design - User Story Realization 
 
@@ -7,22 +8,23 @@
 _**Note that SSD - Alternative One is adopted.**_
 
 
-| Interaction ID | Question: Which class is responsible for...  | Answer                    | Justification (with patterns)                                                                                                                                                                 |
-|:---------------|:---------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?              | RegisterVehicleUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction.                    |
-|                | ... coordinating the US?                     | RegisterVehicleController | Controller: RegisterVehicleController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                                               |
-| Step 2         | ... display vehicle data input fields?       | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 3         | ... types vehicle data?                      | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 4         | ... confirms the user's input data?          | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI confirms the user's input data before proceeding with the registration process, ensuring data integrity and adhering to the Creator pattern.              |
-| Step 5         | ... handles the registration of the vehicle? | RegisterVehicleController | Controller: RegisterVehicleController manages the registration process, ensuring high cohesion and low coupling by encapsulating related functionality.                                       |
-|                | ... get VehicleRepository?                   | Repositories              | Pure Fabrication:  Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic.                   |
-|                | ... verify existing vehicle?                 | VehicleRepository         | Information Expert: VehicleRepository performs global validation, adhering to the Protected Variation pattern by encapsulating data access.                                                   |
-|                | ... register a vehicle?                      | VehicleRepository         | Creator: Vehicle is directly created by vehicleRepository, which encapsulates the logic for managing vehicles.                                                                                |
-|                | ... validating all data (local validation)?  | Vehicle                   | Information Expert: Vehicle performs local validation on its attributes, adhering to the Information Expert pattern by encapsulating its own data validation logic.                           | 
-|                | ... validating all data (global validation)? | VehicleRepository         | Information Expert: VehicleRepository performs global validation, following the Protected Variation pattern by encapsulating validation rules.                                                | 
-|                | ... stores vehicle registration data?        | VehicleRepository         | Repository Pattern: VehicleRepository is responsible for persisting and managing vehicle registration data, applying the Low Coupling pattern by decoupling data storage from business logic. |
-| Step 6         | ... informing operation success?             | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.                         | 
-
+| Interaction ID | Question: Which class is responsible for...         | Answer             | Justification (with patterns)                                                                                                                                                    |
+|:---------------|:----------------------------------------------------|:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                     | ListTaskSpaceUI    | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction.       |
+|                | ... coordinating the US?                            | ListTaskController | Controller: ListTaskController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                                         |
+| Step 2         | ... display date selection fields?                  | ListTaskSpaceUI    | Pure Fabrication: ListTaskSpaceUI displays the input fields for date selection, promoting low coupling by separating UI logic from domain logic.                                 |
+| Step 3         | ... selects the beginning and end date?             | ListTaskSpaceUI    | Pure Fabrication: ListTaskSpaceUI handles the user's date selection, promoting low coupling by separating UI logic from domain logic.                                            |
+| Step 4         | ... selects the type of status he wants to consult? | ListTaskSpaceUI    | Pure Fabrication: ListTaskSpaceUI handles the user's status type selection, promoting low coupling by separating UI logic from domain logic.                                     |
+| Step 5         | ... asks for confirmation?                          | ListTaskSpaceUI    | Pure Fabrication: ListTaskSpaceUI asks for user's confirmation before proceeding with the task list creation, ensuring data integrity and adhering to the Creator pattern.       |
+| Step 6         | ... confirms that he wants to create the list?      | ListTaskSpaceUI    | Pure Fabrication: ListTaskSpaceUI handles the user's confirmation, promoting low coupling by separating UI logic from domain logic.                                              |
+| Step 7         | ... handles the creation of the task list?          | ListTaskController | Controller: ListTaskController manages the task list creation process, ensuring high cohesion and low coupling by encapsulating related functionality.                           |
+|                | ... get EntryRepository?                            | Repositories       | Pure Fabrication:  Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic.      |
+|                | ... verify existing entries?                        | EntryRepository    | Information Expert: EntryRepository performs global validation, adhering to the Protected Variation pattern by encapsulating data access.                                        |
+|                | ... create a task list?                             | EntryRepository    | Creator: Task list is directly created by EntryRepository, which encapsulates the logic for managing entries.                                                                    |
+|                | ... validating all data (local validation)?         | Entry              | Information Expert: Entry performs local validation on its attributes, adhering to the Information Expert pattern by encapsulating its own data validation logic.                |
+|                | ... validating all data (global validation)?        | EntryRepository    | Information Expert: EntryRepository performs global validation, following the Protected Variation pattern by encapsulating validation rules.                                     |
+|                | ... stores task list data?                          | EntryRepository    | Repository Pattern: EntryRepository is responsible for persisting and managing task list data, applying the Low Coupling pattern by decoupling data storage from business logic. |
+| Step 8         | ... informing operation success?                    | ListTaskSpaceUI    | Pure Fabrication: ListTaskSpaceUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.              |
 
 ### Systematization ##
 
@@ -38,8 +40,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 * VehicleRepository
 * RegisterVehicleController
 
-
-
 ## 3.2. Sequence Diagram (SD)
 
 _**Note that SSD - Alternative Two is adopted.**_
@@ -48,28 +48,8 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
-
-### Split Diagrams
-
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
-
-It uses Interaction Occurrence (a.k.a. Interaction Use).
-
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
-
-**Get Vehicle Repository Partial SD**
-
-![Sequence Diagram - Partial - Get Vehicle Repository](svg/us006-sequence-diagram-partial-get-vehicle-repository.svg)
-
-**Verify Existing Vehicle Partial SD**
-
-![Sequence Diagram - Partial - Verify Existing Vehicle](svg/us006-sequence-diagram-partial-verify-existing-vehicle.svg)
-
-**Register a Vehicle**
-
-![Sequence Diagram - Partial - Register a Vehicle](svg/us006-sequence-diagram-partial-register-vehicle.svg)
+![Sequence Diagram - Full](svg/us021-sequence-diagram-full.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us021-class-diagram.svg)
