@@ -295,6 +295,8 @@ public class TasksGUI {
             addAgendaEntryController.addAgendaEntry(agendaEntryDto);
             allAgendaEntry.add(agendaEntryDto);
 
+            updateToDoEntry();
+
             // Atualizar a lista de entradas de agenda
             updateAgendaEntryList();
         }
@@ -313,6 +315,46 @@ public class TasksGUI {
                 .collect(Collectors.toList());
         ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
         agendaListView.setItems(observableList);
+
+        agendaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> listView) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                            setStyle(null);
+                        } else {
+                            setText(item);
+                            setStyle(null);
+                            AgendaEntryDto agendaEntry = allAgendaEntry.stream()
+                                    .filter(entry -> item.contains(entry.getTitle()) && item.contains(entry.getGreenSpace().getName()))
+                                    .findFirst().orElse(null);
+
+                            if (agendaEntry != null) {
+                                // Apply style based on urgency
+                                switch (agendaEntry.getUrgencyStatus()) {
+                                    case HIGH:
+                                        setStyle("-fx-text-fill: red;");
+                                        break;
+                                    case MEDIUM:
+                                        setStyle("-fx-text-fill: orange;");
+                                        break;
+                                    case LOW:
+                                        setStyle("-fx-text-fill: green;");
+                                        break;
+                                    default:
+                                        setStyle("-fx-text-fill: black;");
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
 
@@ -849,6 +891,21 @@ public class TasksGUI {
         for (ToDoEntryDto toDoEntry : allToDoEntry) {
             if (toDoEntry.getTitle().equalsIgnoreCase(title) && toDoEntry.getGreenSpace().getName().equalsIgnoreCase(space)) {
                 entry = toDoEntry;
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    private AgendaEntryDto getAgendaEntryDto(String string) {
+        AgendaEntryDto entry = null;
+        String[] splittedString = string.split(" \\| ");
+        String title = splittedString[0].split(": ")[1];
+        String space = splittedString[2].split(": ")[1];
+
+        for (AgendaEntryDto agendaEntry : allAgendaEntry) {
+            if (agendaEntry.getTitle().equalsIgnoreCase(title) && agendaEntry.getGreenSpace().getName().equalsIgnoreCase(space)) {
+                entry = agendaEntry;
                 return entry;
             }
         }

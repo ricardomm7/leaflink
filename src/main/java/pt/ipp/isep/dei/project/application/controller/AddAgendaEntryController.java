@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.AgendaEntry;
+import pt.ipp.isep.dei.project.domain.ToDoEntry;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
@@ -27,6 +28,12 @@ public class AddAgendaEntryController {
     public void addAgendaEntry(AgendaEntryDto entry) {
         AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(entry);
         entryRepository.addAgendaEntry(agendaEntry);
+
+        // Remove corresponding ToDoEntry from the repository
+        ToDoEntry toDoEntry = entryRepository.findToDoEntryByTitle(entry.getTitle());
+        if (toDoEntry != null) {
+            entryRepository.removeToDoEntry(toDoEntry);
+        }
     }
 
 
