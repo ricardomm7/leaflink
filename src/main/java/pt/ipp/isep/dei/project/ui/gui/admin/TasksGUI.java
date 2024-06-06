@@ -130,6 +130,10 @@ public class TasksGUI {
             int entryIndex = agendaListView.getSelectionModel().getSelectedIndex();
             assignTeamController.updateEntryWithTeam(entryIndex, selectedTeam);
             updateAgendaEntryList();
+
+            // Atualizar a label "teamLabelA" com as informações da equipe selecionada
+            String teamInfo = "Team: " + selectedTeam.getTeamAsString() ; // Ou qualquer outra informação que você queira mostrar
+            teamLabelA.setText(teamInfo);
         });
 
     }
@@ -721,6 +725,7 @@ public class TasksGUI {
             }
         });
     }
+
 
     private void updateToDoEntry() {
         allToDoEntry = registerToDoEntryController.getToDoEntry();
