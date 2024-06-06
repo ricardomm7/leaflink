@@ -101,16 +101,16 @@ public class TasksGUI {
     private Button CompleteAgendaEntryBtn;
 
     @FXML
-    void CompleteAgendaEntryHandle(ActionEvent event){
+    void CompleteAgendaEntryHandle(ActionEvent event) {
         String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
         if (selectedAgendaEntry == null) {
             ShowError.showAlert("Complete Agenda Entry", "No entry selected to complete.", null);
             return;
-        }else {
-        AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry,session);
-        recordEntryController.recordEntryCompletion(agendaEntryDto);
+        } else {
+            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
+            recordEntryController.recordEntryCompletion(agendaEntryDto);
 
-        updateAgendaEntryList();
+            updateAgendaEntryList();
         }
     }
 
@@ -132,7 +132,7 @@ public class TasksGUI {
             updateAgendaEntryList();
 
             // Atualizar a label "teamLabelA" com as informações da equipe selecionada
-            String teamInfo = "Team: " + selectedTeam.getTeamAsString() ; // Ou qualquer outra informação que você queira mostrar
+            String teamInfo = "Team: " + selectedTeam.getTeamAsString(); // Ou qualquer outra informação que você queira mostrar
             teamLabelA.setText(teamInfo);
         });
 
@@ -176,11 +176,16 @@ public class TasksGUI {
         Optional<List<VehicleDto>> result = dialog.showAndWait();
 
         result.ifPresent(selectedVehicles -> {
-            // Faça algo com os veículos selecionados
-            // Aqui você pode atualizar a entrada com os veículos selecionados
-            int entryIndex = 1; // Suponha que a entrada que você deseja atualizar seja a entrada de índice 1
+            int entryIndex = agendaListView.getSelectionModel().getSelectedIndex();
             assignVehiclesController.updateEntryWithVehicles(entryIndex, selectedVehicles);
+            assignVehiclesController.setVehicleAvailability(selectedVehicles, false);
             updateAgendaEntryList();
+
+            StringBuilder a = new StringBuilder();
+            for (VehicleDto v : assignVehiclesController.getAgendaEntryList(ApplicationSession.getInstance().getCurrentSession()).get(entryIndex).getAssignedVehicles()) {
+                a.append(v.getVehiclePlate()).append(" | ").append(v.getType()).append("\n");
+            }
+            vehicleLabelA.setText(a.toString());
         });
     }
 
@@ -189,10 +194,17 @@ public class TasksGUI {
         dialog.setTitle("Select Vehicles");
 
         List<VehicleDto> vehicles = assignVehiclesController.getVehicleList();
+        int entryIndex = agendaListView.getSelectionModel().getSelectedIndex();
+        List<VehicleDto> associatedVehicles = assignVehiclesController.getAgendaEntryList(ApplicationSession.getInstance().getCurrentSession()).get(entryIndex).getAssignedVehicles();
+
         VBox vBox = new VBox();
         CheckBox[] checkBoxes = new CheckBox[vehicles.size()];
         for (int i = 0; i < vehicles.size(); i++) {
-            checkBoxes[i] = new CheckBox(vehicles.get(i).getVehiclePlate() + " - " + vehicles.get(i).getType());
+            VehicleDto vehicle = vehicles.get(i);
+            checkBoxes[i] = new CheckBox(vehicle.getVehiclePlate() + " - " + vehicle.getType());
+            if (associatedVehicles != null && associatedVehicles.contains(vehicle)) {
+                checkBoxes[i].setSelected(true);
+            }
             vBox.getChildren().add(checkBoxes[i]);
         }
 
@@ -276,7 +288,7 @@ public class TasksGUI {
             AgendaEntryDto agendaEntryDto = new AgendaEntryDto(selectedEntry.getTitle(),
                     selectedEntry.getDescription(), selectedEntry.getDuration(),
                     selectedEntry.getUrgencyStatus(), selectedEntry.getGreenSpace(),
-                    startingDate.getValue(), progressStatusComboBox.getValue(), null, null);
+                    startingDate.getValue(), progressStatusComboBox.getValue());
 
 
             // Adicionar a nova entrada de agenda usando o controlador

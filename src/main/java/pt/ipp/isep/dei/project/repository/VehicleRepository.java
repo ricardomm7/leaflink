@@ -158,8 +158,14 @@ public class VehicleRepository implements Serializable {
      * @param vehicleIndex the index of the vehicle in the vehicle list
      * @param isAvailable  the availability status to be set (true for available, false for unavailable)
      */
-    public void setVehicleAvailability(int vehicleIndex, Boolean isAvailable) {
-        vehicleList.get(vehicleIndex).setAvailable(isAvailable);
+    public void setVehicleAvailability(List<Vehicle> v, Boolean isAvailable) {
+        for(Vehicle u : v){
+            for (Vehicle w : vehicleList){
+                if (u.getVehiclePlate().equalsIgnoreCase(w.getVehiclePlate())){
+                    w.setAvailable(isAvailable);
+                }
+            }
+        }
     }
 
     /**

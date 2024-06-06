@@ -55,8 +55,8 @@ public class AssignVehiclesController {
      * @param vehicleIndex the index of the vehicle
      * @param isAvailable  the availability status to be set (true for available, false for unavailable)
      */
-    public void setVehicleAvailability(int vehicleIndex, Boolean isAvailable) {
-        vehicleRepository.setVehicleAvailability(vehicleIndex, isAvailable);
+    public void setVehicleAvailability(List<VehicleDto> v, Boolean isAvailable) {
+        vehicleRepository.setVehicleAvailability(VehicleMapper.toDomainList(v), isAvailable);
     }
 
     /**
