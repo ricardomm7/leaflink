@@ -11,7 +11,7 @@ hide circle
 hide methods
 
 
-class Task {
+class Entry {
     title
     description
     duration
@@ -23,5 +23,5 @@ class ToDoList {
 
 }
 
-ToDoList "1" -"1..*" Task: has >
+ToDoList "1" -"1..*" Entry: has >
 @enduml

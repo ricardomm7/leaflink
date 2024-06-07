@@ -126,10 +126,6 @@ public class ListTaskSpaceUI implements Runnable {
         return day + "/" + month + "/" + year;
     }
 
-    private static String formatDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return date.format(formatter);
-    }
 
     @Override
     public void run() {
