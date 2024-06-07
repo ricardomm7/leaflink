@@ -6,9 +6,6 @@ skinparam line type polyline
 package UI {
     class RegisterGreenSpaceUI {
         - controller : RegisterGreenSpaceController
-        + RegisterGreenSpaceUI()
-        + createNewGS(name : String, type : GreenSpaceType, area : Double, manager : String, street : String, zipCode : String, city : String) : void
-        '- parseAddress(street : String, zipcode : String, city : String) : Address
     }
 }
 
@@ -47,8 +44,15 @@ package MODEL{
         - manager : String
         - address : Address
         + GreenSpace(name : String, type : String, area : Double, address : Address, manager : String)
-        + verifyFilled(greenSpace: GreenSpace) : Boolean
+        + setName(name : String) : Boolean
+        + setType(type : GreenSpaceType) : Boolean
+        + setArea(area : Double) : Boolean
     }
+       enum GreenSpaceType{
+       +GARDEN
+       +MEDIUM-SIZED-PARK
+       +LARGE-SIZED-PARK
+       }
 }
 }
 package DTO{
@@ -85,5 +89,6 @@ RegisterGreenSpaceUI ..> GreenSpaceDto
 GreenSpaceRepository ..> GreenSpaceMapper
 GreenSpaceMapper ..> GreenSpace
 GreenSpaceMapper ..> GreenSpaceDto
+GreenSpace ..> GreenSpaceType
 
 @enduml

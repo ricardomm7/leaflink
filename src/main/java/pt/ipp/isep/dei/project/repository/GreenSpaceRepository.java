@@ -41,7 +41,7 @@ public class GreenSpaceRepository implements Serializable {
                 throw new IllegalArgumentException("There is already a green space with that name/zipcode.");
             }
         } catch (Exception e) {
-            ShowError.showAlert("Green Space", e.getMessage(), "Duplicate");
+            ShowError.showAlert("GreenSpace", e.getMessage(), "Duplicate");
         }
     }
 

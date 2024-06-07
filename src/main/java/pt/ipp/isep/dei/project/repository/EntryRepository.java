@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
@@ -33,9 +35,10 @@ public class EntryRepository implements Serializable {
      * @param dto the ToDoEntryDto containing the information for the new ToDoEntry.
      * @throws IllegalArgumentException if a ToDoEntry with the same description already exists.
      */
-    public void createNewToDoEntry(ToDoEntry dto) {
-        if (checkForDuplicates(dto)) {
-            addToDoEntry(dto);
+    public void createNewToDoEntry(ToDoEntryDto dto) {
+        ToDoEntry entry = ToDoEntryMapper.toDomain(dto);
+        if (checkForDuplicates(entry)) {
+            addToDoEntry(entry);
         } else {
             throw new IllegalArgumentException("There is already a ToDoEntry with the same description.");
         }

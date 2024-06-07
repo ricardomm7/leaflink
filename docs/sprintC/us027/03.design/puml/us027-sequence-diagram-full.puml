@@ -43,7 +43,7 @@ deactivate UI
 activate CTRL
 
 
-CTRL -> GreenSpaceRepo : getOrgList(loggedUser)
+CTRL -> GreenSpaceRepo : getList(loggedUser)
 deactivate CTRL
 
 activate GreenSpaceRepo

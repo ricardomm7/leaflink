@@ -78,7 +78,7 @@ public class ListTaskSpaceUI implements Runnable {
 
     private Collaborator getCollaboratorTroughEmail() {
         String email = getCollaboratorEmail();
-        return ListTaskController.getCollaboratorTroughEmail(email);
+        return controller.getCollaboratorTroughEmail(email);
     }
 
     private static LocalDate getValidDate(String fieldName) {

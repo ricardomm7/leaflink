@@ -59,6 +59,9 @@ activate GSMP
 GSMP -> GS** : create
 
 activate GS
+GS->GS : verifyArea(area)
+GS->GS : verifyFilled(name)
+GS->GS : setType(type)
 
 
 GS --> GSMP : greenSpace

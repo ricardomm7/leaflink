@@ -16,7 +16,7 @@ _**Note that SSD - Alternative One is adopted.**_
 |                | ... verifying if the generated list is empty? | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... having the list to organize?              | GreenSpaceRepository      | Information Expert.                                                                     |
 |                | ... organizing the list of green spaces?      | Sortable                  | Protected Variations.                                                                   |
-|                | ... passing the domain objects to DTO?        | GreenSpaceMapper          | Creator, Low coupling.                                                                  |
+|                | ... passing the domain objects to DTO?        | GreenSpaceMapper          | Low coupling.                                                                           |
 | Step 4         | ... showing the created list?                 | RegisterVehicleUI         | Pure Fabrication.                                                                       |
 
 ### Systematization ##

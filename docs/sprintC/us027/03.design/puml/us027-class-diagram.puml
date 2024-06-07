@@ -6,9 +6,7 @@ skinparam line type polyline
 package UI{
     class ListGreenSpacesUI {
         - controller : ListGreenSpacesController
-        + ListGreenSpacesUI()
-        + getOrganizedList(loggedUser : String) : List<GreenSpace>
-    }
+            }
 }
 package CONTROLLER {
     class ListGreenSpacesController {
@@ -16,7 +14,7 @@ package CONTROLLER {
         - greenSpaceRepository : GreenSpaceRepository
 
         + ListGreenSpacesController()
-        +getList(loggedUser : String) : List<GreenSpace>
+        +getList(loggedUser : UserSession) : List<GreenSpace>
     }
 }
 package DOMAIN{
@@ -32,10 +30,9 @@ package REPOSITORY{
     class GreenSpaceRepository {
         - greenSpaceList : List<GreenSpace>
         + GreenSpaceRepository()
-        + getOrganizedList(loggedUser : String) : List<GreenSpaceDto>
+        + getOrganizedList(loggedUser : UserSession) : List<GreenSpaceDto>
         - verifyEmptyList(listMatched : List<GreenSpace>) : Boolean
-        - matchWithLoggedUser(loggedUser : String) : List<GreenSpace>
-        - organizeList(listMatched : List<GreenSpace>) : void
+        - matchWithLoggedUser(loggedUser : UserSession) : List<GreenSpace>
     }
     }
 package MODEL{
@@ -43,7 +40,7 @@ package MODEL{
         - name : String
         - size : Double
         - manager : String
-        + getManager() : Collaborator
+        + getManager() : String
         + getSize() : Double
     }
     }
