@@ -52,7 +52,7 @@ public class AssignVehiclesController {
     /**
      * Sets the availability of a vehicle at the specified index.
      *
-     * @param vehicleIndex the index of the vehicle
+     * @param v the index of the vehicle
      * @param isAvailable  the availability status to be set (true for available, false for unavailable)
      */
     public void setVehicleAvailability(List<VehicleDto> v, Boolean isAvailable) {

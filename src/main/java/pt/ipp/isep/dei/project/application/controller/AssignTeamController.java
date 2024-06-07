@@ -43,5 +43,6 @@ public class AssignTeamController {
         Team t = TeamMapper.toDomain(teamDtoList);
         AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
         entryRepository.updateTeamAgendaEntry(agendaEntry, t);
+
     }
 }

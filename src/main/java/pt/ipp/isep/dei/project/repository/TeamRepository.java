@@ -52,7 +52,7 @@ public class TeamRepository implements Serializable {
      * @return the team list
      */
     public List<Team> getTeamList() {
-        return new ArrayList<>(teamList);
+        return teamList;
     }
 
 
@@ -92,11 +92,12 @@ public class TeamRepository implements Serializable {
 
     public List<Team> getAvailableTeamList() {
         List<Team> availableTeam = new ArrayList<>();
-        for (Team team : teamList) {
+        for (Team team : getTeamList()) {
             if (team.isAvailable()) {
                 availableTeam.add(team);
             }
         }
+
         return (availableTeam);
     }
 

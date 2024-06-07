@@ -2,15 +2,16 @@ package pt.ipp.isep.dei.project.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The Team class represents a team of collaborators working together.
  */
 public class Team implements Serializable {
-    private final List<Skill> skills;
+    private List<Skill> skills;
     private final int minTeamSize;
     private final int maxTeamSize;
-    private final List<Collaborator> collaborators;
+    private List<Collaborator> collaborators;
     private boolean isAvailable;
 
 
@@ -26,6 +27,14 @@ public class Team implements Serializable {
         this.isAvailable = true;
         this.skills = skills;
         this.collaborators = collaborators;
+        this.minTeamSize = minTeamSize;
+        this.maxTeamSize = maxTeamSize;
+    }
+
+    public Team(int minTeamSize, int maxTeamSize) {
+        this.isAvailable = true;
+        this.skills = null;
+        this.collaborators = null;
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }
@@ -76,4 +85,28 @@ public class Team implements Serializable {
     }
 
 
+    public void setCollaborators(List<Collaborator> collaboratorDtos) {
+        this.collaborators = collaboratorDtos;
+    }
+
+    public void setSkills(List<Skill> skillDtos) {
+        this.skills = skillDtos;
+    }
+
+     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Team)) return false;
+        Team team = (Team) o;
+        return minTeamSize == team.minTeamSize &&
+               maxTeamSize == team.maxTeamSize &&
+               isAvailable == team.isAvailable &&
+               Objects.equals(skills, team.skills) &&
+               Objects.equals(collaborators, team.collaborators);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(skills, minTeamSize, maxTeamSize, collaborators, isAvailable);
+    }
 }

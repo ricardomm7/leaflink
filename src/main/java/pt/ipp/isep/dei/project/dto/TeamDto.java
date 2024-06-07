@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.dto;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -101,5 +102,20 @@ public class TeamDto implements Serializable {
 
     public void setSkills(List<SkillDto> skills) {
         this.skills = skills;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TeamDto)) return false;
+        TeamDto teamDto = (TeamDto) o;
+        return minTeamSize == teamDto.minTeamSize &&
+               maxTeamSize == teamDto.maxTeamSize &&
+               Objects.equals(skills, teamDto.skills);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(skills, minTeamSize, maxTeamSize);
     }
 }

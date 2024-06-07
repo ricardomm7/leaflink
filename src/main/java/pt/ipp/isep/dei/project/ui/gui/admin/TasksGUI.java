@@ -131,7 +131,11 @@ public class TasksGUI {
             assignTeamController.updateEntryWithTeam(agendaEntryDto, selectedTeam);
             updateAgendaEntryList();
 
-            // Atualiza os detalhes da agenda
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (CollaboratorDto teamDto : agendaEntryDto.getAssignedTeam().getCollaboratorsDtoList()) {
+                stringBuilder.append(teamDto).append(" | ");
+            }
             showAgendaEntryDetails(selectedAgendaEntry);
         });
     }
@@ -141,7 +145,10 @@ public class TasksGUI {
         Dialog<TeamDto> dialog = new Dialog<>();
         dialog.setTitle("Select Team");
 
-        List<TeamDto> teams = assignTeamController.getTeamList();
+        List<TeamDto> teams = assignTeamController.getTeamList().stream()
+                .distinct()  // Remove duplicatas da lista de equipes
+                .collect(Collectors.toList());
+
         VBox vBox = new VBox();
         ToggleGroup toggleGroup = new ToggleGroup();
         RadioButton[] radioButtons = new RadioButton[teams.size()];
@@ -306,6 +313,7 @@ public class TasksGUI {
             updateAgendaEntryList();
         }
     }
+
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

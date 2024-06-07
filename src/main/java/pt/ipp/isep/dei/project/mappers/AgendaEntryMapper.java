@@ -28,7 +28,9 @@ public class AgendaEntryMapper implements Serializable {
         List<VehicleDto> vehicleList = agendaEntryDto.assignedVehicles;
         AgendaEntry agendaEntry = new AgendaEntry(agendaEntryDto.getTitle(), agendaEntryDto.getDescription(), agendaEntryDto.getDuration(),
                 agendaEntryDto.getUrgencyStatus(), GreenSpaceMapper.toDomain(agendaEntryDto.getGreenSpace()), agendaEntryDto.getStartingDate(), agendaEntryDto.getProgressStatus());
-        agendaEntry.setAssignedTeam(TeamMapper.toDomain(teamDto));
+
+        Team teamDto1 = TeamMapper.toDomain(teamDto);
+        agendaEntry.setAssignedTeam(teamDto1);
         agendaEntry.setAssignedVehicles(VehicleMapper.toDomainList(vehicleList));
 
         return agendaEntry;
@@ -45,9 +47,7 @@ public class AgendaEntryMapper implements Serializable {
         List<Vehicle> vehicleList = agendaEntry.getAssignedVehicles();
         AgendaEntryDto agendaEntryDto = new AgendaEntryDto(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(),
                 agendaEntry.getUrgencyStatus(), GreenSpaceMapper.toDto(agendaEntry.getGreenSpace()), agendaEntry.getStartingDate(), agendaEntry.getProgressStatus());
-        if (teamDto != null) {
-            agendaEntryDto.setAssignedTeam(null);
-        }
+
         agendaEntryDto.setAssignedTeam(TeamMapper.toDto(teamDto));
         agendaEntryDto.setAssignedVehicles(VehicleMapper.toDtoList(vehicleList));
         return agendaEntryDto;

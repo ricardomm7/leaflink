@@ -155,7 +155,7 @@ public class VehicleRepository implements Serializable {
     /**
      * Sets the availability of a vehicle at the specified index in the vehicle list.
      *
-     * @param vehicleIndex the index of the vehicle in the vehicle list
+     * @param v the index of the vehicle in the vehicle list
      * @param isAvailable  the availability status to be set (true for available, false for unavailable)
      */
     public void setVehicleAvailability(List<Vehicle> v, Boolean isAvailable) {

@@ -14,6 +14,7 @@ import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -75,7 +76,7 @@ public class CreateTeamController {
         List<CollaboratorDto> allCollaborators = CollaboratorMapper.toDtoList(collaboratorRepository.getCollaboratorList());
         List<CollaboratorDto> selectedCollaborators = new ArrayList<>();
         List<SkillDto> combinedSkills = new ArrayList<>();
-        List<SkillDto> domainRequiredSkills = requiredSkills;
+
 
         for (CollaboratorDto collaborator : allCollaborators) {
             if (isCollaboratorAssignedToTeam(collaborator)) {
@@ -90,10 +91,9 @@ public class CreateTeamController {
             }
             selectedCollaborators.add(collaborator);
 
-            if (combinedSkills.containsAll(domainRequiredSkills) && selectedCollaborators.size() >= minTeamSize) {
+            if (new HashSet<>(combinedSkills).containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
                 if (selectedCollaborators.size() <= maxTeamSize) {
-                    Team proposedTeam = new Team(SkillMapper.listToDomain(domainRequiredSkills), CollaboratorMapper.toDomainList(selectedCollaborators), minTeamSize, maxTeamSize);
-                    teamRepository.addTeam(proposedTeam); // Add team to repository
+                    Team proposedTeam = new Team(SkillMapper.listToDomain(requiredSkills), CollaboratorMapper.toDomainList(selectedCollaborators), minTeamSize, maxTeamSize);
 
                     return TeamMapper.toDto(proposedTeam);
                 }
