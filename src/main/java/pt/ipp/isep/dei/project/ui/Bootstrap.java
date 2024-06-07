@@ -22,14 +22,14 @@ public class Bootstrap implements Runnable {
     public void run() {
         addUsers();
         //addSkills();
-        //addJobs();
-        //addTeams();
-        //addVehicles();
-        //addCollaborators();
-        //addMaintenance();
-        //addGreenSpaces();
-        //addEntries();
-        //addAgendaEntries();
+        addJobs();
+        addTeams();
+        addVehicles();
+        addCollaborators();
+        addMaintenance();
+        addGreenSpaces();
+        addEntries();
+        addAgendaEntries();
     }
 
     /**

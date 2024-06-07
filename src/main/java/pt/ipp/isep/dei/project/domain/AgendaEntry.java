@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The AgendaEntry class represents a scheduled task or entry that extends ToDoEntry.
@@ -125,9 +124,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
      * @param assignedVehicles the new list of assigned vehicles.
      */
     public void setAssignedVehicles(List<Vehicle> assignedVehicles) {
-        for (Vehicle v : assignedVehicles) {
-            this.assignedVehicles.add(v);
-        }
+        this.assignedVehicles.addAll(assignedVehicles);
     }
 
     /**
@@ -161,21 +158,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         return assignedTeam;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AgendaEntry)) return false;
-        if (!super.equals(o)) return false;
-        AgendaEntry that = (AgendaEntry) o;
-        return
-                startingDate.equals(that.startingDate) &&
-                progressStatus == that.progressStatus;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), startingDate, progressStatus);
-    }
 
 }
 

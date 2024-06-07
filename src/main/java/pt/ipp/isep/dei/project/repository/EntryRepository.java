@@ -247,8 +247,8 @@ public class EntryRepository implements Serializable {
         toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
     }
 
-    public void updateTeamAgendaEntry(AgendaEntry entryIndex, Team team) {
-        entryIndex.setAssignedTeam(team);
+    public void updateTeamAgendaEntry(AgendaEntry agendaEntry, Team team) {
+        agendaEntry.setAssignedTeam(team);
     }
 
 }

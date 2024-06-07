@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.project.domain.UrgencyStatus;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The AgendaEntryDto class represents a data transfer object for the AgendaEntry domain object.
@@ -240,23 +239,6 @@ public class AgendaEntryDto implements Serializable {
         return this.title + " " + description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AgendaEntryDto)) return false;
-        AgendaEntryDto that = (AgendaEntryDto) o;
-        return duration == that.duration &&
-                title.equalsIgnoreCase(that.title) &&
-                description.equalsIgnoreCase(that.description) &&
-                urgencyStatus == that.urgencyStatus &&
-                greenSpace.equals(that.greenSpace) &&
-                startingDate.equals(that.startingDate) &&
-                progressStatus == that.progressStatus;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, description, duration, urgencyStatus, greenSpace, startingDate, progressStatus);
-    }
 
 }
