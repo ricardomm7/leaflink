@@ -238,4 +238,7 @@ public class AgendaEntryDto implements Serializable {
     public String toString() {
         return this.title + " " + description;
     }
+
+
+
 }

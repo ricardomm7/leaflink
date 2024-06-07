@@ -13,8 +13,7 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * The CreateTeamController class handles the logic for creating teams.
@@ -72,31 +71,28 @@ public class CreateTeamController {
      * @return A TeamDto object representing the proposed team, or null if no suitable team can be formed.
      */
     public TeamDto generateProposal(List<SkillDto> requiredSkills, int minTeamSize, int maxTeamSize) {
-        List<CollaboratorDto> allCollaborators = CollaboratorMapper.toDtoList(collaboratorRepository.getCollaboratorList());
+        List<CollaboratorDto> availableCollaborators = getAvailableCollaborators();
         List<CollaboratorDto> selectedCollaborators = new ArrayList<>();
-        List<SkillDto> combinedSkills = new ArrayList<>();
-        List<SkillDto> domainRequiredSkills = requiredSkills;
+        Set<SkillDto> combinedSkills = new HashSet<>();
 
-        for (CollaboratorDto collaborator : allCollaborators) {
-            if (isCollaboratorAssignedToTeam(collaborator)) {
-                continue;
-            }
-            List<SkillDto> collaboratorSkills = collaborator.getSkills();
+        requiredSkills.sort(Comparator.comparing(SkillDto::getDesignation));
 
-            for (SkillDto skill : collaboratorSkills) {
-                if (!combinedSkills.contains(skill)) {
-                    combinedSkills.add(skill);
+
+        for (SkillDto requiredSkill : requiredSkills) {
+            for (CollaboratorDto collaborator : availableCollaborators) {
+                if (collaborator.getSkills().contains(requiredSkill)) {
+                    combinedSkills.add(requiredSkill);
+                    selectedCollaborators.add(collaborator);
+                    break; // Break once a collaborator with the required skill is found
                 }
             }
-            selectedCollaborators.add(collaborator);
+        }
 
-            if (combinedSkills.containsAll(domainRequiredSkills) && selectedCollaborators.size() >= minTeamSize) {
-                if (selectedCollaborators.size() <= maxTeamSize) {
-                    Team proposedTeam = new Team(SkillMapper.listToDomain(domainRequiredSkills), CollaboratorMapper.toDomainList(selectedCollaborators), minTeamSize, maxTeamSize);
-                    teamRepository.addTeam(proposedTeam); // Add team to repository
-
-                    return TeamMapper.toDto(proposedTeam);
-                }
+        // Check if combined skills cover all required skills and team size is within limits
+        if (combinedSkills.containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
+            if (selectedCollaborators.size() <= maxTeamSize) {
+                Team proposedTeam = new Team(SkillMapper.listToDomain(requiredSkills), CollaboratorMapper.toDomainList(selectedCollaborators), minTeamSize, maxTeamSize);
+                return TeamMapper.toDto(proposedTeam);
             }
         }
 

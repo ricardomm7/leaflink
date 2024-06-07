@@ -35,6 +35,9 @@ public class TasksGUI {
     private final RecordEntryController recordEntryController = new RecordEntryController();
 
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
+
+    private final CancelAgendaEntryController cancelAgendaEntryController = new CancelAgendaEntryController();
+
     private List<VehicleDto> vehicleListDto;
     @FXML
     private ListView<String> toDoListView;
@@ -114,7 +117,6 @@ public class TasksGUI {
         }
     }
 
-
     @FXML
     void handleAddTeamBtn(ActionEvent event) {
         String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
@@ -131,17 +133,29 @@ public class TasksGUI {
             assignTeamController.updateEntryWithTeam(agendaEntryDto, selectedTeam);
             updateAgendaEntryList();
 
-            // Atualiza os detalhes da agenda
+
+            StringBuilder stringBuilder = new StringBuilder();
+            if (agendaEntryDto != null && agendaEntryDto.getAssignedTeam() != null) {
+                stringBuilder.append(agendaEntryDto.getAssignedTeam().getCollaboratorsDtoList()).append(" | ");
+                teamLabelA.setText(stringBuilder.toString());
+
+            } else {
+                stringBuilder.append("No team assigned");
+                teamLabelA.setText(stringBuilder.toString());
+            }
+
             showAgendaEntryDetails(selectedAgendaEntry);
         });
     }
-
 
     private Dialog<TeamDto> createTeamSelectionDialog() {
         Dialog<TeamDto> dialog = new Dialog<>();
         dialog.setTitle("Select Team");
 
-        List<TeamDto> teams = assignTeamController.getTeamList();
+        List<TeamDto> teams = assignTeamController.getTeamList().stream()
+                .distinct()  // Remove duplicatas da lista de equipes
+                .collect(Collectors.toList());
+
         VBox vBox = new VBox();
         ToggleGroup toggleGroup = new ToggleGroup();
         RadioButton[] radioButtons = new RadioButton[teams.size()];
@@ -168,23 +182,28 @@ public class TasksGUI {
         return dialog;
     }
 
-
     @FXML
     void handleAddVehicleBtn(ActionEvent event) {
         Dialog<List<VehicleDto>> dialog = createVehicleSelectionDialog();
         Optional<List<VehicleDto>> result = dialog.showAndWait();
 
         result.ifPresent(selectedVehicles -> {
-            int entryIndex = agendaListView.getSelectionModel().getSelectedIndex();
-            assignVehiclesController.updateEntryWithVehicles(entryIndex, selectedVehicles);
+            String selectedItem = agendaListView.getSelectionModel().getSelectedItem();
+            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedItem,session);
+            assignVehiclesController.updateEntryWithVehicles(agendaEntryDto, selectedVehicles);
             assignVehiclesController.setVehicleAvailability(selectedVehicles, false);
             updateAgendaEntryList();
 
             StringBuilder a = new StringBuilder();
-            for (VehicleDto v : assignVehiclesController.getAgendaEntryList(ApplicationSession.getInstance().getCurrentSession()).get(entryIndex).getAssignedVehicles()) {
-                a.append(v.getVehiclePlate()).append(" | ").append(v.getType()).append("\n");
+
+            if (agendaEntryDto != null && agendaEntryDto.getAssignedVehicles() != null) {
+                for (VehicleDto v : agendaEntryDto.getAssignedVehicles()) {
+                    a.append(v.getVehiclePlate()).append(" | ").append(v.getType()).append("\n");
+                }
+                vehicleLabelA.setText(a.toString());
+            }else{
+                vehicleLabelA.setText("No vehicle assigned");
             }
-            vehicleLabelA.setText(a.toString());
         });
     }
 
@@ -226,12 +245,15 @@ public class TasksGUI {
         return dialog;
     }
 
-
     @FXML
     void AddAgendaEntryHandle(ActionEvent event) {
         // Carregar a lista de todas as entradas da To-Do list
         List<ToDoEntryDto> allEntries = registerToDoEntryController.getToDoEntry();
-
+        if (allEntries.isEmpty()) {
+            // Exibe uma janela de erro se não houver entradas de ToDo disponíveis
+            showErrorAlert("No To Do Entries", "There are no To Do entries available to add to the agenda.");
+            return;
+        }
         // Criar um ToggleGroup para garantir que apenas uma entrada possa ser selecionada
         ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -241,7 +263,7 @@ public class TasksGUI {
                     RadioButton radioButton = new RadioButton(String.format("Title: %s | Duration: %dh | Green Space: %s",
                             entry.getTitle(), entry.getDuration(), entry.getGreenSpace().getName()));
                     radioButton.setToggleGroup(toggleGroup); // Adicionar ao ToggleGroup
-                    radioButton.setUserData(entry); // Associar cada RadioButton com sua entrada correspondente
+                    radioButton.setUserData(entry); // Associar cada RadioButton com a sua entrada correspondente
                     return radioButton;
                 })
                 .collect(Collectors.toList());
@@ -251,7 +273,7 @@ public class TasksGUI {
         radioButtonsVBox.getChildren().addAll(radioButtonList);
 
         // Criar um diálogo personalizado para exibir os RadioButtons
-        Dialog<Void> dialog = new Dialog<>();
+        Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Select To-Do Entry");
         dialog.setHeaderText("Select a To-Do entry to add to the agenda:");
 
@@ -277,11 +299,11 @@ public class TasksGUI {
         content.getChildren().addAll(radioButtonsVBox, grid);
         dialog.getDialogPane().setContent(content);
 
-        // Mostrar o diálogo e aguardar a seleção do usuário
-        Optional<Void> result = dialog.showAndWait();
+        // Mostrar o diálogo e aguardar a seleção do utilizador
+        Optional<ButtonType> result = dialog.showAndWait();
 
-        // Se o usuário clicou em "Add", adicionar a entrada selecionada à agenda
-        if (result.isPresent() && toggleGroup.getSelectedToggle() != null) {
+        // Se o utilizador clicou em "Add", adicionar a entrada selecionada à agenda
+        if (result.isPresent() && result.get() == addButton && toggleGroup.getSelectedToggle() != null) {
             ToDoEntryDto selectedEntry = (ToDoEntryDto) toggleGroup.getSelectedToggle().getUserData();
 
             // Adicionar a entrada selecionada à agenda
@@ -290,16 +312,24 @@ public class TasksGUI {
                     selectedEntry.getUrgencyStatus(), selectedEntry.getGreenSpace(),
                     startingDate.getValue(), progressStatusComboBox.getValue());
 
-
             // Adicionar a nova entrada de agenda usando o controlador
             addAgendaEntryController.addAgendaEntry(agendaEntryDto);
             allAgendaEntry.add(agendaEntryDto);
+
+            updateToDoEntry();
 
             // Atualizar a lista de entradas de agenda
             updateAgendaEntryList();
         }
     }
 
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
     private void updateAgendaEntryList() {
         allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
@@ -313,8 +343,47 @@ public class TasksGUI {
                 .collect(Collectors.toList());
         ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
         agendaListView.setItems(observableList);
-    }
 
+        agendaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> listView) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                            setStyle(null);
+                        } else {
+                            setText(item);
+                            AgendaEntryDto agendaEntry = allAgendaEntry.stream()
+                                    .filter(entry -> item.contains(entry.getTitle()) && item.contains(entry.getGreenSpace().getName()))
+                                    .findFirst().orElse(null);
+
+                            if (agendaEntry != null) {
+                                switch (agendaEntry.getUrgencyStatus()) {
+                                    case HIGH:
+                                        setStyle("-fx-text-fill: red;");
+                                        break;
+                                    case MEDIUM:
+                                        setStyle("-fx-text-fill: orange;");
+                                        break;
+                                    case LOW:
+                                        setStyle("-fx-text-fill: green;");
+                                        break;
+                                    default:
+                                        setStyle("-fx-text-fill: black;");
+                                        break;
+                                }
+                            } else {
+                                setStyle("-fx-text-fill: black;");
+                            }
+                        }
+                    }
+                };
+            }
+        });
+    }
 
     @FXML
     void PostponeAgendaEntryHandle(ActionEvent event) {
@@ -390,9 +459,30 @@ public class TasksGUI {
     }
 
     @FXML
-    void CancelAgendaEntryHandle(ActionEvent event) {
+    void cancelAgendaEntryHandle(ActionEvent event) {
+        String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
+        if (selectedAgendaEntry != null) {
+            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
 
+            // Cria uma janela de confirmação
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Cancelation");
+            alert.setHeaderText("Are you sure you want to cancel this agenda entry?");
+            alert.setContentText("Title: " + agendaEntryDto.getTitle() + "\nDescription: " + agendaEntryDto.getDescription());
+
+            // Mostra a janela e espera pela resposta do utilizador
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (cancelAgendaEntryController.cancelAgendaEntry(agendaEntryDto)) {
+                    ShowError.showAlertConfirm("Success", "Agenda entry cancelled successfully.", null);
+                    updateAgendaEntryList();
+                } else {
+                    ShowError.showAlert("Error", "Failed to cancel agenda entry.", null);
+                }
+            }
+        }
     }
+
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
@@ -644,7 +734,6 @@ public class TasksGUI {
         return valid;
     }
 
-
     @FXML
     void handleRemoveToDoEntry(ActionEvent event) {
         String selectedItem = toDoListView.getSelectionModel().getSelectedItem();
@@ -754,7 +843,6 @@ public class TasksGUI {
         updateAgendaEntryList();
     }
 
-
     private void updateToDoEntry() {
         allToDoEntry = registerToDoEntryController.getToDoEntry();
         List<String> toDoEntryList = allToDoEntry.stream()
@@ -764,7 +852,6 @@ public class TasksGUI {
         ObservableList<String> observableList = FXCollections.observableArrayList(toDoEntryList);
         toDoListView.getItems().setAll(observableList);
     }
-
 
     private void showToDoEntryDetails(String string) {
         ToDoEntryDto entry = getToDoEntryDto(string);
@@ -814,12 +901,13 @@ public class TasksGUI {
         }
     }
 
-
     private AgendaEntryDto getAgendaEntry(String string, UserSession GSM) {
         String[] splittedString = string.split(" \\| ");
         String title = splittedString[1].split(": ")[1];
+        String date = splittedString[0].split(": ")[1];
+        LocalDate dateLocal = LocalDate.parse(date);
         for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
-            if (entry.getTitle().equalsIgnoreCase(title)) {
+            if (entry.getTitle().equalsIgnoreCase(title) && entry.getStartingDate().isEqual(dateLocal)) {
                 return entry;
             }
         }
@@ -827,19 +915,6 @@ public class TasksGUI {
         return null;
 
     }
-
-    private AgendaEntryDto getAgendaEntryTitle(String string, UserSession GSM) {
-        String[] splittedString = string.split(" \\| ");
-        String title = splittedString[1].split(": ")[1];
-        for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
-            if (entry.getTitle().equalsIgnoreCase(title)) {
-                return entry;
-            }
-        }
-        return null;
-
-    }
-
     private ToDoEntryDto getToDoEntryDto(String string) {
         ToDoEntryDto entry = null;
         String[] splittedString = string.split(" \\| ");
@@ -854,4 +929,5 @@ public class TasksGUI {
         }
         return null;
     }
+
 }

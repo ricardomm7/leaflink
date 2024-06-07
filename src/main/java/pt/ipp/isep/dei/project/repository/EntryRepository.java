@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.project.repository;
 
 import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
@@ -33,9 +35,10 @@ public class EntryRepository implements Serializable {
      * @param dto the ToDoEntryDto containing the information for the new ToDoEntry.
      * @throws IllegalArgumentException if a ToDoEntry with the same description already exists.
      */
-    public void createNewToDoEntry(ToDoEntry dto) {
-        if (checkForDuplicates(dto)) {
-            addToDoEntry(dto);
+    public void createNewToDoEntry(ToDoEntryDto dto) {
+        ToDoEntry entry = ToDoEntryMapper.toDomain(dto);
+        if (checkForDuplicates(entry)) {
+            addToDoEntry(entry);
         } else {
             throw new IllegalArgumentException("There is already a ToDoEntry with the same description.");
         }
@@ -83,12 +86,16 @@ public class EntryRepository implements Serializable {
     /**
      * Updates the vehicles assigned to a specific AgendaEntry.
      *
-     * @param entryIndex the index of the AgendaEntry to update.
-     * @param f          the list of VehicleDto objects to assign.
+     * @param agendaEntry the index of the AgendaEntry to update.
+     * @param f           the list of VehicleDto objects to assign.
      */
-    public void updateVehiclesAgendaEntry(int entryIndex, List<VehicleDto> f) {
+    public void updateVehiclesAgendaEntry(AgendaEntry agendaEntry, List<VehicleDto> f) {
         List<Vehicle> u = VehicleMapper.toDomainList(f);
-        agendaEntryList.get(entryIndex).setAssignedVehicles(u);
+        for (AgendaEntry agendaEntry1 : agendaEntryList) {
+            if (agendaEntry.getTitle().equalsIgnoreCase(agendaEntry1.getTitle()) && agendaEntry.getDescription().
+                    equalsIgnoreCase(agendaEntry1.getDescription()) && agendaEntry.getStartingDate().isEqual(agendaEntry1.getStartingDate()))
+                (agendaEntry1).setAssignedVehicles(u);
+        }
     }
 
 
@@ -103,7 +110,7 @@ public class EntryRepository implements Serializable {
     public boolean updateAgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus newProgressStatus) {
         if (validateNewDate(agendaEntry, newDate)) {
             updateEntryStatus(agendaEntry, newProgressStatus);
-            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, newProgressStatus);
+            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, ProgressStatus.PLANNED);
             addAgendaEntry(agendaEntry1);
 
             return true;
@@ -137,7 +144,11 @@ public class EntryRepository implements Serializable {
      * @param newProgressStatus the new progress status to set.
      */
     private void updateEntryStatus(AgendaEntry agendaEntry, ProgressStatus newProgressStatus) {
-        agendaEntry.setProgressStatus(newProgressStatus);
+        for (AgendaEntry e : agendaEntryList) {
+            if (e.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && e.getStartingDate().isEqual(agendaEntry.getStartingDate()) && e.getDescription().equalsIgnoreCase(agendaEntry.getDescription())) {
+                agendaEntry.setProgressStatus(newProgressStatus);
+            }
+        }
     }
 
     /**
@@ -244,8 +255,26 @@ public class EntryRepository implements Serializable {
         toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
     }
 
-    public void updateTeamAgendaEntry(AgendaEntry entryIndex, Team team) {
-        entryIndex.setAssignedTeam(team);
+    public void updateTeamAgendaEntry(AgendaEntry agendaEntry, Team team) {
+        for (AgendaEntry entry : agendaEntryList) {
+            if (entry.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && entry.getDescription().equalsIgnoreCase(agendaEntry.getDescription()) && entry.getStartingDate().equals(agendaEntry.getStartingDate())) {
+                entry.setAssignedTeam(team);
+            }
+        }
     }
 
+    public boolean cancelAgendaEntry(AgendaEntry agendaEntry) {
+        for (AgendaEntry entry : agendaEntryList) {
+            if (entry.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && entry.getDescription().equalsIgnoreCase(agendaEntry.getDescription()) && entry.getStartingDate().equals(agendaEntry.getStartingDate()) &&
+                    entry.getProgressStatus().equals(agendaEntry.getProgressStatus())) {
+                entry.setProgressStatus(ProgressStatus.CANCELLED);
+                entry.getAssignedTeam().setAvailable(true);
+                for(Vehicle vehicle: entry.getAssignedVehicles()){
+                    vehicle.setAvailable(true);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 }

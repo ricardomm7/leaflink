@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +35,11 @@ public class RegisterMaintenanceController {
      * @param currentKm the current mileage of the vehicle
      */
     public void createMaintenance(String plate, LocalDate date, int currentKm) {
-        maintenanceRepository.createMaintenance(new MaintenanceDto(plate, date, currentKm));
+        try {
+            maintenanceRepository.createMaintenance(new MaintenanceDto(plate, date, currentKm));
+        }catch (Exception e) {
+            ShowError.showAlert("Maintenance", e.getMessage(), "Error");
+        }
     }
 
     /**

@@ -14,9 +14,12 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
 participant "entryRepository\n:EntryRepository" as EntryRep
+participant ":ToDoEntryMapper" as ToDoEntryMapper
+
 participant "entry" as Entry
 participant "greenSpaceMapper\n:GreenSpaceMapper" as GreenSpaceMapper
 participant "greenSpaceDto\n:GreenSpaceDto" as GreenSpaceDTO
+participant "toDoEntryDto\n:ToDoEntryDto" as ToDoEntryDto
 
 activate GSM
 
@@ -98,19 +101,28 @@ activate GSM
         GSM -> UI : types requested data
         activate UI
 
-        UI -> CTRL : createNewToDoEntry(greenSpace, description, degree of urgency, approximate expected duration)
+        UI -> CTRL : createNewToDoEntry(greenSpaceDto, description, degreeOfUrgency, duration)
         deactivate UI
         activate CTRL
 
-        CTRL -> EntryRep : createNewToDoEntry(greenSpace, description, degree of urgency, approximate expected duration)
+CTRL -> ToDoEntryDto** : create(greenSpaceDto, description, degreeOfUrgency, duration)
+activate ToDoEntryDto
+ToDoEntryDto --> CTRL : entryDto
+deactivate ToDoEntryDto
+
+        CTRL -> EntryRep : createNewToDoEntry(entryDto)
         deactivate CTRL
         activate EntryRep
 
-        EntryRep -> Entry** : createNewToDoEntry(greenSpace, description, degree of urgency, approximate expected duration)
-        deactivate EntryRep
-        activate Entry
 
-        Entry -> Entry : verifyFilled(description)
+
+EntryRep -> ToDoEntryMapper : toDomain(entryDto)
+activate ToDoEntryMapper
+
+ToDoEntryMapper -> Entry** : create
+
+activate Entry
+Entry -> Entry : verifyFilled(description)
         activate Entry
 
         Entry -> Entry : verifyDuration(aproxExpDuration)
@@ -122,15 +134,28 @@ activate GSM
         Entry --> Entry
         deactivate Entry
 
-        Entry -> EntryRep : Entry
-        deactivate Entry
-        activate EntryRep
+Entry --> ToDoEntryMapper : entry
+deactivate Entry
 
-        EntryRep --> CTRL : Entry
+       ToDoEntryMapper -->EntryRep : entry
+       deactivate ToDoEntryMapper
+
+       EntryRep -> EntryRep : checkForDuplicates(entry)
+       activate EntryRep
+       EntryRep->EntryRep : add(entry)
+       activate EntryRep
+       EntryRep--> EntryRep
+       deactivate EntryRep
+         EntryRep--> EntryRep
+              deactivate EntryRep
+
+
+
+        EntryRep --> CTRL : success
         deactivate EntryRep
         activate CTRL
 
-        CTRL --> UI : Entry
+        CTRL --> UI : success
         deactivate CTRL
         activate UI
 

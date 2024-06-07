@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -51,11 +53,11 @@ public abstract class NotificationService {
      * The notification is written to a file in the "Notifications" directory.
      *
      * @param collaborators the list of collaborators to notify
-     * @param toDoEntry     the to-do entry that has been canceled
+     * @param agendaEntry   the to-do entry that has been canceled
      * @return true if the notification is successfully written to a file, false otherwise
      */
-    public static boolean notifyTeamCancel(List<Collaborator> collaborators, ToDoEntry toDoEntry) {
-        return writeNotification(collaborators, "Entrada cancelada: " + toDoEntry.getTitle(), buildEmailBodyCancel(collaborators, toDoEntry));
+    public static boolean notifyTeamCancel(List<Collaborator> collaborators, AgendaEntry agendaEntry) {
+        return writeNotification(collaborators, "Entrada cancelada: " + agendaEntry.getTitle(), buildEmailBodyCancel(collaborators, agendaEntry));
     }
 
     /**
@@ -86,8 +88,18 @@ public abstract class NotificationService {
                 directory.mkdir();
             }
 
-            // Creates the notification file
-            File file = new File(directory, subject + ".txt");
+            // Format the current date and time
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+            String formattedDate = LocalDateTime.now().format(formatter);
+
+            // Clean the subject for filename
+            String cleanSubject = subject.replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s+", "_");
+
+            // Create a well-formatted filename
+            String filename = String.format("Email_%s_Notification_at_%s.txt", cleanSubject, formattedDate);
+
+            // Create the notification file
+            File file = new File(directory, filename);
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 // Writes the subject and body of the message to the file
                 writer.write(subject);
@@ -119,7 +131,7 @@ public abstract class NotificationService {
             emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
             emailBuilder.append("Nova data: ").append(newDate).append("\n\n");
-            emailBuilder.append("Por favor, tome nota desta alteração e ajuste seus planos conforme necessário.\n\n");
+            emailBuilder.append("Por favor, tome nota desta alteração e ajuste os seus planos conforme necessário.\n\n");
         }
         emailBuilder.append("Atenciosamente,\n");
         emailBuilder.append("Equipe de Gestão de Parques");
@@ -140,7 +152,7 @@ public abstract class NotificationService {
             emailBuilder.append("Esta é uma notificação sobre o cancelamento de uma entrada na agenda.\n\n");
             emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
-            emailBuilder.append("Por favor, tome nota desta alteração e ajuste seus planos conforme necessário.\n\n");
+            emailBuilder.append("Por favor, tome nota desta alteração e ajuste os seus planos conforme necessário.\n\n");
         }
         emailBuilder.append("Atenciosamente,\n");
         emailBuilder.append("Equipe de Gestão de Parques");
@@ -162,7 +174,7 @@ public abstract class NotificationService {
             emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
             emailBuilder.append("Data: ").append(toDoEntry.getStartingDate()).append("\n");
-            emailBuilder.append("Por favor, tome nota desta atribuição e ajuste seus planos conforme necessário.\n\n");
+            emailBuilder.append("Por favor, tome nota desta atribuição e ajuste os seus planos conforme necessário.\n\n");
         }
         emailBuilder.append("Atenciosamente,\n");
         emailBuilder.append("Equipe de Gestão de Parques");

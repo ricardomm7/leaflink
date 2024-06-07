@@ -8,6 +8,7 @@ import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
+import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
 import java.time.LocalDate;
@@ -18,16 +19,20 @@ import java.util.List;
  */
 public class ListTaskController {
 
-    private static CollaboratorRepository collaboratorRepository;
-    private static TeamRepository teamRepository;
+    private final Repositories repositories;
+    private final CollaboratorRepository collaboratorRepository;
+    private final TeamRepository teamRepository;
     private final EntryRepository entryRepository;
 
     /**
      * Instantiates a new List task controller.
      */
     public ListTaskController() {
-        collaboratorRepository = new CollaboratorRepository();
-        entryRepository = new EntryRepository();
+        repositories = Repositories.getInstance();
+        collaboratorRepository = repositories.getCollaboratorRepository();
+        entryRepository = repositories.getEntryRepository();
+        teamRepository = repositories.getTeamRepository();
+
     }
 
     /**
@@ -36,7 +41,7 @@ public class ListTaskController {
      * @param email the email
      * @return the collaborator trough email
      */
-    public static Collaborator getCollaboratorTroughEmail(String email) {
+    public Collaborator getCollaboratorTroughEmail(String email) {
         for (Collaborator collaborator : collaboratorRepository.getCollaboratorList()) {
             if (collaborator.getEmail().equals(email)) {
                 return collaborator;
@@ -51,7 +56,7 @@ public class ListTaskController {
      * @param clb the clb
      * @return the team trough clb
      */
-    public static Team getTeamTroughCLB(Collaborator clb) {
+    public Team getTeamTroughCLB(Collaborator clb) {
         for (Team team : teamRepository.getTeamList()) {
             if (team.getCollaborators().contains(clb)) {
                 return team;

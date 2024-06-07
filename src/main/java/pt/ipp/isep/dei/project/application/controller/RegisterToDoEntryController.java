@@ -12,6 +12,7 @@ import pt.ipp.isep.dei.project.mappers.ToDoEntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -75,9 +76,12 @@ public class RegisterToDoEntryController {
      * @param greenSpaceDto the green space dto
      */
     public void createNewToDoEntry(String title, String description, int duration, UrgencyStatus urg, GreenSpaceDto greenSpaceDto) {
-        ToDoEntry newEntry = new ToDoEntry(title, description, duration, urg, GreenSpaceMapper.toDomain(greenSpaceDto));
-        entryRepository.createNewToDoEntry(newEntry);
-
+        try {
+            ToDoEntryDto newEntry = new ToDoEntryDto(title, description, duration, urg, greenSpaceDto);
+            entryRepository.createNewToDoEntry(newEntry);
+        } catch (Exception e) {
+            ShowError.showAlert("Add entries", e.getMessage(), "Error");
+        }
     }
 
     /**

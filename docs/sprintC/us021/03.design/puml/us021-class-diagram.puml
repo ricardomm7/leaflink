@@ -1,17 +1,23 @@
 @startuml
-skinparam monochrome true
-skinparam packageStyle rectangle
 skinparam shadowing false
+skinparam line type polyline
 
 class AddNewEntryUI {
+    - controller : RegisterToDoEntryController
 }
 
-class AddNewEntryController {
+class RegisterToDoEntryController {
     - greenSpaceRepository : GreenSpaceRepository
     - entryRepository : EntryRepository
-    + AddNewEntryController()
-    + getGreenSpaceList() : List<GreenSpaceDTO>
-    + createEntry(greenSpace: GreenSpaceDTO, description: String, urgency: int, expectedDuration: int) : Entry
+    + RegisterToDoEntryController()
+    + getGreenSpacesDto() : List<GreenSpaceDTO>
+    + createNewToDoEntry(greenSpace: GreenSpaceDTO, description: String, urgency: UrgencyStatus, expectedDuration: int) : Entry
+}
+
+enum UrgencyStatus{
++HIGH
++MEDIUM
++LOW
 }
 
 class Repositories {
@@ -24,17 +30,17 @@ class Repositories {
 }
 
 class GreenSpaceRepository {
-    + getGreenSpaceList() : List<GreenSpaceDTO>
+    + getGreenSpaceList() : List<GreenSpace>
 }
 
 class EntryRepository {
-    + createEntry(greenSpace: GreenSpaceDTO, description: String, urgency: int, expectedDuration: int) : Entry
+    + createEntry(greenSpace: GreenSpaceDTO, description: String, urgency: UrgencyStatus, expectedDuration: int) : Entry
 }
 
 class Entry {
     - greenSpace : GreenSpaceDTO
     - description : String
-    - urgency : int
+    - urgency : UrgencyStatus
     - expectedDuration : int
     + Entry(greenSpace: GreenSpaceDTO, description: String, urgency: int, expectedDuration: int)
     + verifyFilled(description: String) : Boolean
@@ -48,15 +54,15 @@ class GreenSpaceDTO {
 class GreenSpaceMapper {
 }
 
-AddNewEntryUI ..> AddNewEntryController
-
-AddNewEntryController ..> Repositories: repositories
+AddNewEntryUI ..> RegisterToDoEntryController
+Entry ..> UrgencyStatus
+RegisterToDoEntryController ..> Repositories: repositories
 Repositories --> Repositories: instance
-AddNewEntryController ..> GreenSpaceRepository
-AddNewEntryController ..> EntryRepository
+RegisterToDoEntryController ..> GreenSpaceRepository
+RegisterToDoEntryController ..> EntryRepository
 Repositories --> "1" GreenSpaceRepository
 Repositories --> "1" EntryRepository
-AddNewEntryController ..> GreenSpaceMapper
+RegisterToDoEntryController ..> GreenSpaceMapper
 
 GreenSpaceMapper ..> GreenSpaceDTO
 EntryRepository --> Entry

@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.application.controller;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.util.List;
 
@@ -28,7 +29,11 @@ public class CreateSkillController {
      * @param designation the designation of the skill to be created
      */
     public void createSkill(String designation) {
-        skillRepository.createSkill(new SkillDto(designation));
+        try {
+            skillRepository.createSkill(new SkillDto(designation));
+        } catch (Exception e) {
+            ShowError.showAlert("Skill", e.getMessage(), "Error");
+        }
     }
 
     /**

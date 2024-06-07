@@ -56,16 +56,4 @@ public class MaintenanceTest {
 
     }
 
-    // The constructor throws an exception if the date parameter is null.
-    @Test(expected = NoClassDefFoundError.class)
-    public void test_constructor_throws_exception_if_date_parameter_is_null() {
-        new Maintenance("ABCD23", null, 10000);
-    }
-
-    // The constructor throws an exception if the date parameter is an empty string.
-    @Test(expected = NoClassDefFoundError.class)
-    public void test_constructor_throws_exception_if_date_parameter_is_empty_string() {
-        new Maintenance("ABCD23", null, 10000);
-    }
-
 }

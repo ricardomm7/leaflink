@@ -1,49 +1,55 @@
 package pt.ipp.isep.dei.project.repository;
 
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+class SkillRepositoryTest {
 
-public class SkillRepositoryTest {
+    private SkillRepository skillRepository;
 
-    @Test
-    public void testCreateSkill() {
-        SkillRepository repository = new SkillRepository();
-        String designation = "Programming";
-
-        repository.createSkill(new SkillDto(designation));
-        List<SkillDto> skillList = repository.getSkillDtoList();
-
-        assertEquals(1, skillList.size());
-        assertEquals(designation, skillList.get(0).getDesignation());
+    @BeforeEach
+    void setUp() {
+        skillRepository = new SkillRepository();
     }
 
     @Test
-    public void testCreateDuplicateSkill() {
-        SkillRepository repository = new SkillRepository();
-        String designation = "Programming";
+    void createSkill_Successfully() {
+        // Arrange
+        SkillDto dto = new SkillDto("Java Programming");
 
-        repository.createSkill(new SkillDto(designation));
+        // Act
+        skillRepository.createSkill(dto);
 
-        assertThrows(IllegalArgumentException.class, () -> repository.createSkill(new SkillDto("Programming")));
+        // Assert
+        assertEquals(1, skillRepository.getSkillList().size());
     }
 
     @Test
-    public void testGetSkillList() {
-        SkillRepository repository = new SkillRepository();
-        String designation1 = "Programming";
-        String designation2 = "Project Management";
+    void createSkill_WithDuplicateName_ShouldThrowException() {
+        // Arrange
+        SkillDto dto1 = new SkillDto("Java Programming");
+        SkillDto dto2 = new SkillDto("Java Programming");
+        skillRepository.createSkill(dto1);
 
-        repository.createSkill(new SkillDto(designation1));
-        repository.createSkill(new SkillDto(designation2));
-        List<SkillDto> skillList = repository.getSkillDtoList();
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> skillRepository.createSkill(dto2));
+        assertEquals("There is already a skill with that name.", exception.getMessage());
+    }
 
-        assertEquals(2, skillList.size());
-        assertEquals(designation1, skillList.get(0).getDesignation());
-        assertEquals(designation2, skillList.get(1).getDesignation());
+    @Test
+    void removeSkill_Successfully() {
+        // Arrange
+        SkillDto dto = new SkillDto("Java Programming");
+        skillRepository.createSkill(dto);
+        int initialSize = skillRepository.getSkillList().size();
+
+        // Act
+        skillRepository.removeSkill(0);
+
+        // Assert
+        assertEquals(initialSize - 1, skillRepository.getSkillList().size());
     }
 }

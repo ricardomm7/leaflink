@@ -25,7 +25,7 @@ As a GSM, I need to list all green spaces managed by me.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency, which is the US20. There must also be a manager (US2) registered for that particular location (US3).
+* There is a dependency, which is the US20 - Register a green space.
 
 ### 1.5 Input and Output Data
 
@@ -35,7 +35,7 @@ As a GSM, I need to list all green spaces managed by me.
     * None
 	
 * Selected data:
-    * Sorting algorithm (descending by size (default))
+    * Sorting algorithm (descending by size (default)) - on the config file
 
 **Output Data:**
 

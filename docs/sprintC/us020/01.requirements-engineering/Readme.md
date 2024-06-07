@@ -56,7 +56,7 @@ As a Green Space Manager (GSM), I want to register a green space (garden, medium
 
 ### 1.4. Found out Dependencies
 
-* There needs to be a collaborator (US3) with the work of GSM (US2).
+* No found out dependencies.
 
 ### 1.5 Input and Output Data
 
