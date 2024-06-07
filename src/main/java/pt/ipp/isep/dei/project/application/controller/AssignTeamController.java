@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.AgendaEntry;
+import pt.ipp.isep.dei.project.domain.NotificationService;
 import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.TeamDto;
@@ -76,6 +77,9 @@ public class AssignTeamController {
         Team t = TeamMapper.toDomain(teamDtoList);
         AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
         entryRepository.updateTeamAgendaEntry(agendaEntry, t);
+        NotificationService.notifyTeamCreate(t.getCollaborators(),agendaEntry);
+
 
     }
+
 }

@@ -475,7 +475,7 @@ public class TasksGUI {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 if (cancelAgendaEntryController.cancelAgendaEntry(agendaEntryDto)) {
                     ShowError.showAlertConfirm("Success", "Agenda entry cancelled successfully.", null);
-                    updateAgendaEntryList(); // Atualiza a lista após o cancelamento
+                    updateAgendaEntryList();
                 } else {
                     ShowError.showAlert("Error", "Failed to cancel agenda entry.", null);
                 }

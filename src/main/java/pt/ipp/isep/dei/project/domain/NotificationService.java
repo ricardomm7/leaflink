@@ -1,9 +1,12 @@
 package pt.ipp.isep.dei.project.domain;
 
-import pt.ipp.isep.dei.project.ui.ShowError;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -50,11 +53,11 @@ public abstract class NotificationService {
      * The notification is written to a file in the "Notifications" directory.
      *
      * @param collaborators the list of collaborators to notify
-     * @param toDoEntry     the to-do entry that has been canceled
+     * @param agendaEntry   the to-do entry that has been canceled
      * @return true if the notification is successfully written to a file, false otherwise
      */
-    public static boolean notifyTeamCancel(List<Collaborator> collaborators, ToDoEntry toDoEntry) {
-        return writeNotification(collaborators, "Entrada cancelada: " + toDoEntry.getTitle(), buildEmailBodyCancel(collaborators, toDoEntry));
+    public static boolean notifyTeamCancel(List<Collaborator> collaborators, AgendaEntry agendaEntry) {
+        return writeNotification(collaborators, "Entrada cancelada: " + agendaEntry.getTitle(), buildEmailBodyCancel(collaborators, agendaEntry));
     }
 
     /**
@@ -79,19 +82,32 @@ public abstract class NotificationService {
      */
     private static boolean writeNotification(List<Collaborator> collaborators, String subject, String body) {
         try {
-            // Creates the notification file
-            String name = "Email";
-            LocalDate date = LocalDate.now();
-            String filename = "Notification_ "+ ".txt";
-            try (PrintWriter writer = new PrintWriter("Notifications/"+name+"_"+date+filename)) {
+            // Creates the "Notifications" directory if it does not exist
+            File directory = new File("Notifications");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            // Format the current date and time
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+            String formattedDate = LocalDateTime.now().format(formatter);
+
+            // Clean the subject for filename
+            String cleanSubject = subject.replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s+", "_");
+
+            // Create a well-formatted filename
+            String filename = String.format("Email_%s_Notification_at_%s.txt", cleanSubject, formattedDate);
+
+            // Create the notification file
+            File file = new File(directory, filename);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 // Writes the subject and body of the message to the file
                 writer.write(subject);
-                writer.println();
+                writer.newLine();
                 writer.write(body);
-                writer.close();
-
             }
-            ShowError.showAlertConfirm("Notification","Notifications sent",null);
+
+            System.out.println("Notificação escrita no arquivo: " + file.getAbsolutePath());
             return true;
         } catch (IOException e) {
             System.out.println("Erro ao escrever a notificação: " + e.getMessage());

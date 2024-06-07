@@ -161,7 +161,7 @@ public class VehicleRepository implements Serializable {
     public void setVehicleAvailability(List<Vehicle> v, Boolean isAvailable) {
         for (Vehicle u : v) {
             for (Vehicle w : vehicleList) {
-                if (u.getVehiclePlate().equalsIgnoreCase(w.getVehiclePlate())) {
+                if (u.getVehiclePlate().equalsIgnoreCase(w.getVehiclePlate()) && u.getVIN().equalsIgnoreCase(w.getVIN())) {
                     w.setAvailable(isAvailable);
                 }
             }
