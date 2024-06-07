@@ -21,4 +21,19 @@ public abstract class ShowError {
 
         alert.showAndWait();
     }
+
+    public static void showAlertConfirm(String title, String message, String header) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        // Carrega o CSS
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                Objects.requireNonNull(Main.class.getResource("alert-style.css")).toExternalForm()
+        );
+        dialogPane.getStyleClass().add("custom-alert");
+
+        alert.showAndWait();
+    }
 }

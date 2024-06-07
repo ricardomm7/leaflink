@@ -457,11 +457,22 @@ public class TasksGUI {
         String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
         if (selectedAgendaEntry != null) {
             AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
-            if (cancelAgendaEntryController.cancelAgendaEntry(agendaEntryDto)) {
-                ShowError.showAlert("Success", "Agenda entry cancelled successfully.", null);
-                updateAgendaEntryList(); // Atualiza a lista após o cancelamento
-            } else {
-                ShowError.showAlert("Error", "Failed to cancel agenda entry.", null);
+
+            // Cria uma janela de confirmação
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Cancelation");
+            alert.setHeaderText("Are you sure you want to cancel this agenda entry?");
+            alert.setContentText("Title: " + agendaEntryDto.getTitle() + "\nDescription: " + agendaEntryDto.getDescription());
+
+            // Mostra a janela e espera pela resposta do utilizador
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (cancelAgendaEntryController.cancelAgendaEntry(agendaEntryDto)) {
+                    ShowError.showAlertConfirm("Success", "Agenda entry cancelled successfully.", null);
+                    updateAgendaEntryList(); // Atualiza a lista após o cancelamento
+                } else {
+                    ShowError.showAlert("Error", "Failed to cancel agenda entry.", null);
+                }
             }
         }
     }
