@@ -16,6 +16,7 @@ import pt.ipp.isep.dei.project.repository.TeamRepository;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The CreateTeamController class handles the logic for creating teams.
@@ -73,34 +74,29 @@ public class CreateTeamController {
      * @return A TeamDto object representing the proposed team, or null if no suitable team can be formed.
      */
     public TeamDto generateProposal(List<SkillDto> requiredSkills, int minTeamSize, int maxTeamSize) {
-        List<CollaboratorDto> allCollaborators = CollaboratorMapper.toDtoList(collaboratorRepository.getCollaboratorList());
+        List<CollaboratorDto> availableCollaborators = getAvailableCollaborators();
         List<CollaboratorDto> selectedCollaborators = new ArrayList<>();
-        List<SkillDto> combinedSkills = new ArrayList<>();
+        Set<SkillDto> combinedSkills = new HashSet<>();
 
 
-        for (CollaboratorDto collaborator : allCollaborators) {
-            if (isCollaboratorAssignedToTeam(collaborator)) {
-                continue;
-            }
+        for (CollaboratorDto collaborator : availableCollaborators) {
             List<SkillDto> collaboratorSkills = collaborator.getSkills();
 
             for (SkillDto skill : collaboratorSkills) {
-                if (!combinedSkills.contains(skill)) {
-                    combinedSkills.add(skill);
-                }
+                combinedSkills.add(skill);
             }
             selectedCollaborators.add(collaborator);
 
-            if (new HashSet<>(combinedSkills).containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
+            if (combinedSkills.containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
                 if (selectedCollaborators.size() <= maxTeamSize) {
                     Team proposedTeam = new Team(SkillMapper.listToDomain(requiredSkills), CollaboratorMapper.toDomainList(selectedCollaborators), minTeamSize, maxTeamSize);
-
                     return TeamMapper.toDto(proposedTeam);
                 }
             }
         }
 
         return null;
+
     }
 
     /**
