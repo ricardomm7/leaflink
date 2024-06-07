@@ -209,7 +209,6 @@ public class SpacesGUI {
 
         dialog.getDialogPane().setContent(grid);
 
-        UserSession manager = ApplicationSession.getInstance().getCurrentSession();
 
 
         dialog.setResultConverter(dialogButton -> {
@@ -221,7 +220,7 @@ public class SpacesGUI {
                 double area = Double.parseDouble(areaField.getText());
                 GreenSpaceType type = gsType.getValue();
 
-                gsC.createNewGS(name, street, zipCode, area, city, manager.getUserEmail(), type);
+                gsC.createNewGS(name, street, zipCode, area, city, type);
 
                 updateGSList();
                 updateMyGSList();
@@ -287,7 +286,7 @@ public class SpacesGUI {
 
     private void updateMyGSList() {
         listMyGreenSpaces.getItems().clear();
-        listedMyGS = lgsC.getList(ApplicationSession.getInstance().getCurrentSession());
+        listedMyGS = lgsC.getList();
         updateListView2(listedMyGS);
     }
 

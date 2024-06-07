@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
@@ -33,10 +34,10 @@ public class RegisterGreenSpaceController {
      * @param zipcode the zipcode
      * @param area    the area
      * @param city    the city
-     * @param us      the manager
      * @param type    the type
      */
-    public void createNewGS(String name, String street, String zipcode, double area, String city, String us, GreenSpaceType type) {
+    public void createNewGS(String name, String street, String zipcode, double area, String city, GreenSpaceType type) {
+        String us = ApplicationSession.getInstance().getCurrentSession().getUserEmail();
         try {
             GreenSpaceDto greenSpaceDto = new GreenSpaceDto(name, type, area, us, street, city, zipcode);
             greenSpaceRepository.create(greenSpaceDto);

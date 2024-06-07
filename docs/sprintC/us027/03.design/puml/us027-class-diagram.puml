@@ -14,7 +14,7 @@ package CONTROLLER {
         - greenSpaceRepository : GreenSpaceRepository
 
         + ListGreenSpacesController()
-        +getList(loggedUser : UserSession) : List<GreenSpace>
+        +getList() : List<GreenSpaceDto>
     }
 }
 package DOMAIN{
@@ -46,6 +46,12 @@ package MODEL{
     }
     }
     package EXTERNAL{
+    class ApplicationSession{
+            +getInstance : ApplicationSession
+            +getSortAlgorithmClassName : String
+            +getCurrentSession : UserSession
+    }
+
     interface Sortable{
     +sort(g : List<GreenSpace>) : List<GreenSpace>
     }
@@ -79,6 +85,7 @@ package DTO{
 
             class GreenSpaceMapper{
                 +toDto(greenSpace : GreenSpace) : GreenSpaceDto
+                +toDtoList(list : List<GreenSpace>) : List<GreenSpaceDto>
                 +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
             }
         }
@@ -90,12 +97,15 @@ Repositories --> Repositories: instance
 ListGreenSpacesController ..> GreenSpaceRepository: greenSpaceRepository
 Repositories --> "1"GreenSpaceRepository: greenSpaceRepository
 GreenSpaceRepository -->"*" GreenSpace
-GreenSpaceRepository ..> GreenSpaceMapper : toDto
+GreenSpaceRepository ..> GreenSpaceMapper : toDtoList
 GreenSpaceMapper ..> GreenSpaceDto
 GreenSpaceRepository ..> Sortable : uses
 Sortable --> SortByAscending : is implemented
 Sortable --> SortByDescending : is implemented
 Sortable --> SortByType : is implemented
+ApplicationSession --> ApplicationSession: instance
+
+ListGreenSpacesController ..> ApplicationSession : getCurrentSession
 
 
 @enduml

@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
@@ -26,10 +27,10 @@ public class ListGreenSpacesController {
     /**
      * Retrieves the list of GreenSpaceDto objects associated with the logged-in user.
      *
-     * @param loggedUser the UserSession object representing the logged-in user
      * @return the list of GreenSpaceDto objects associated with the logged-in user
      */
-    public List<GreenSpaceDto> getList(UserSession loggedUser) {
+    public List<GreenSpaceDto> getList() {
+        UserSession loggedUser = ApplicationSession.getInstance().getCurrentSession();
         try {
             return greenSpaceRepository.getOrganizedList(loggedUser);
         } catch (IllegalArgumentException e) {

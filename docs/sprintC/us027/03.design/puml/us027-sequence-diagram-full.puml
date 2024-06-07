@@ -17,6 +17,7 @@ participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepo
 participant ":GreenSpaceMapper" as mapper
 participant "greenSpaceDto\n:GreenSpaceDto" as dto
 participant ":ApplicationSession" as ApplicationSession
+participant "applicationSession\n:ApplicationSession" as applicationSession1
 participant "applicationSession\n:ApplicationSession" as applicationSession
 participant ":Class" as Class
 participant "sortable\n:Sortable" as SortAlgorithms
@@ -36,11 +37,17 @@ PLAT -->  CTRL: greenSpaceRepository
 deactivate CTRL
 
 deactivate PLAT
-UI --> GSM : requests the sorting algorithm
-GSM -> UI : selects the sorting algorithm
-UI -> CTRL : getOrganizedList(loggedUser)
+UI -> CTRL : getOrganizedList()
 deactivate UI
 activate CTRL
+CTRL -> ApplicationSession : getInstance
+activate ApplicationSession
+ApplicationSession --> CTRL : applicationSession
+deactivate ApplicationSession
+CTRL -> applicationSession1 : getCurrentSession()
+activate applicationSession1
+applicationSession1 --> CTRL : loggedUser
+deactivate applicationSession1
 
 
 CTRL -> GreenSpaceRepo : getList(loggedUser)

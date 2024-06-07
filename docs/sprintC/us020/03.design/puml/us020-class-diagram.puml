@@ -13,7 +13,7 @@ package CONTROLLER {
     class RegisterGreenSpaceController {
         - repositories: Repositories
         - greenSpaceRepository : GreenSpaceRepository
-        + createNewGS(greenSpaceDto : GreenSpaceDto) : void
+        + createNewGS(name : String, street : String, zipCode : String, area : Double, city : String, type : GreenSpaceType ) : void
         + RegisterGreenSpaceController()
     }
 }
@@ -78,6 +78,13 @@ package DTO{
         +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
     }
     }
+    package EXTERNAL{
+    class ApplicationSession{
+            +getInstance : ApplicationSession
+            +getSortAlgorithmClassName : String
+            +getCurrentSession : UserSession
+    }
+    }
 
 RegisterGreenSpaceUI ..> RegisterGreenSpaceController
 RegisterGreenSpaceController ..> Repositories: repositories
@@ -90,5 +97,8 @@ GreenSpaceRepository ..> GreenSpaceMapper
 GreenSpaceMapper ..> GreenSpace
 GreenSpaceMapper ..> GreenSpaceDto
 GreenSpace ..> GreenSpaceType
+ApplicationSession --> ApplicationSession: instance
+
+RegisterGreenSpaceController ..> ApplicationSession  : getCurrentSession
 
 @enduml

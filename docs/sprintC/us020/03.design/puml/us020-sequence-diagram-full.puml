@@ -14,6 +14,8 @@ participant ":RegisterGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as gsrepo
+participant ":ApplicationSession" as ApplicationSession
+participant "applicationSession\n:ApplicationSession" as applicationSession1
 participant ":GreenSpaceMapper" as GSMP
 participant "greenSpace\n:GreenSpace" as GS
 participant "greenSpaceDto\n:GreenSpaceDto" as DTO
@@ -43,9 +45,18 @@ deactivate UI
 GSM -> UI: user confirms
 activate UI
 
-UI -> CTRL : createNewGS(name, type, area, manager, street, zipCode, city)
+UI -> CTRL : createNewGS(name, type, area street, zipCode, city)
 deactivate UI
 activate CTRL
+CTRL -> ApplicationSession : getInstance
+activate ApplicationSession
+ApplicationSession --> CTRL : applicationSession
+deactivate ApplicationSession
+CTRL -> applicationSession1 : getCurrentSession()
+activate applicationSession1
+applicationSession1 --> CTRL : manager
+deactivate applicationSession1
+
 CTRL->DTO** : create(name, type, area, manager, street, zipCode, city)
 activate DTO
 DTO --> CTRL : greenSpaceDto

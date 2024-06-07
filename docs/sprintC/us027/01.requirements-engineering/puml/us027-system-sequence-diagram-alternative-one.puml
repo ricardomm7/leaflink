@@ -15,10 +15,7 @@ activate GSM
     GSM -> System : asks to list all green spaces managed by him
     activate System
 
-        System --> GSM : requests the sorting algorithm
-    deactivate System
-    GSM -> System : selects the sorting algorithm
-    activate System
+       
 
         System --> GSM : displays operation success by showing the list
     deactivate System
