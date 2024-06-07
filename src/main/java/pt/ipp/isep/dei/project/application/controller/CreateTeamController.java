@@ -13,10 +13,7 @@ import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.SkillRepository;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The CreateTeamController class handles the logic for creating teams.
@@ -78,25 +75,28 @@ public class CreateTeamController {
         List<CollaboratorDto> selectedCollaborators = new ArrayList<>();
         Set<SkillDto> combinedSkills = new HashSet<>();
 
+        requiredSkills.sort(Comparator.comparing(SkillDto::getDesignation));
 
-        for (CollaboratorDto collaborator : availableCollaborators) {
-            List<SkillDto> collaboratorSkills = collaborator.getSkills();
 
-            for (SkillDto skill : collaboratorSkills) {
-                combinedSkills.add(skill);
-            }
-            selectedCollaborators.add(collaborator);
-
-            if (combinedSkills.containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
-                if (selectedCollaborators.size() <= maxTeamSize) {
-                    Team proposedTeam = new Team(SkillMapper.listToDomain(requiredSkills), CollaboratorMapper.toDomainList(selectedCollaborators), minTeamSize, maxTeamSize);
-                    return TeamMapper.toDto(proposedTeam);
+        for (SkillDto requiredSkill : requiredSkills) {
+            for (CollaboratorDto collaborator : availableCollaborators) {
+                if (collaborator.getSkills().contains(requiredSkill)) {
+                    combinedSkills.add(requiredSkill);
+                    selectedCollaborators.add(collaborator);
+                    break; // Break once a collaborator with the required skill is found
                 }
             }
         }
 
-        return null;
+        // Check if combined skills cover all required skills and team size is within limits
+        if (combinedSkills.containsAll(requiredSkills) && selectedCollaborators.size() >= minTeamSize) {
+            if (selectedCollaborators.size() <= maxTeamSize) {
+                Team proposedTeam = new Team(SkillMapper.listToDomain(requiredSkills), CollaboratorMapper.toDomainList(selectedCollaborators), minTeamSize, maxTeamSize);
+                return TeamMapper.toDto(proposedTeam);
+            }
+        }
 
+        return null;
     }
 
     /**
