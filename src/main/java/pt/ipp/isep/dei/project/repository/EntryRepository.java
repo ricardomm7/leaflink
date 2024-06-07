@@ -251,4 +251,11 @@ public class EntryRepository implements Serializable {
         agendaEntry.setAssignedTeam(team);
     }
 
+    public boolean cancelAgendaEntry(AgendaEntry agendaEntry) {
+        if (agendaEntry != null) {
+            agendaEntry.setProgressStatus(ProgressStatus.CANCELLED);
+            return true;
+        }
+        return false;
+    }
 }

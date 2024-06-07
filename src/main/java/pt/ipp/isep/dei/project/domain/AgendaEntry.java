@@ -159,6 +159,31 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false; // Ensure equality checks with ToDoEntry class
+
+        AgendaEntry that = (AgendaEntry) o;
+
+        if (!startingDate.equals(that.startingDate)) return false;
+        if (progressStatus != that.progressStatus) return false;
+        if (assignedTeam != null ? !assignedTeam.equals(that.assignedTeam) : that.assignedTeam != null) return false;
+        return assignedVehicles.equals(that.assignedVehicles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + startingDate.hashCode();
+        result = 31 * result + (progressStatus != null ? progressStatus.hashCode() : 0);
+        result = 31 * result + (assignedTeam != null ? assignedTeam.hashCode() : 0);
+        result = 31 * result + assignedVehicles.hashCode();
+        return result;
+    }
+
+
 
 }
 

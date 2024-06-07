@@ -24,8 +24,8 @@ public class CancelAgendaEntryController {
      * Initializes the repositories and entry repository instances.
      */
     public CancelAgendaEntryController() {
-        Repositories repositories = Repositories.getInstance();
-        EntryRepository entryRepository = repositories.getEntryRepository();
+        repositories = Repositories.getInstance();
+        entryRepository = repositories.getEntryRepository();
     }
 
     /**
@@ -55,8 +55,12 @@ public class CancelAgendaEntryController {
         return flag;
     }
 
-    // public void cancelAgendaEntry(AgendaEntryDto agendaEntryDto) {
-    //   AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
-    // entryRepository.cancelAgendaEntry(agendaEntry);
-    //}
+    public boolean cancelAgendaEntry(AgendaEntryDto agendaEntryDto) {
+        if (entryRepository != null) { // Verifica se entryRepository não é nulo antes de usá-lo
+            AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
+           return entryRepository.cancelAgendaEntry(agendaEntry); // Assume que o cancelamento é sempre bem-sucedido por enquanto
+        } else {
+            return false; // Retorna false se entryRepository for nulo
+        }
+    }
 }

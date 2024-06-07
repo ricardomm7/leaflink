@@ -35,6 +35,9 @@ public class TasksGUI {
     private final RecordEntryController recordEntryController = new RecordEntryController();
 
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
+
+    private final CancelAgendaEntryController cancelAgendaEntryController = new CancelAgendaEntryController();
+
     private List<VehicleDto> vehicleListDto;
     @FXML
     private ListView<String> toDoListView;
@@ -450,9 +453,19 @@ public class TasksGUI {
     }
 
     @FXML
-    void CancelAgendaEntryHandle(ActionEvent event) {
-
+    void cancelAgendaEntryHandle(ActionEvent event) {
+        String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
+        if (selectedAgendaEntry != null) {
+            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
+            if (cancelAgendaEntryController.cancelAgendaEntry(agendaEntryDto)) {
+                ShowError.showAlert("Success", "Agenda entry cancelled successfully.", null);
+                updateAgendaEntryList(); // Atualiza a lista após o cancelamento
+            } else {
+                ShowError.showAlert("Error", "Failed to cancel agenda entry.", null);
+            }
+        }
     }
+
 
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {

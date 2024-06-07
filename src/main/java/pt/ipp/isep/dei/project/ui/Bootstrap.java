@@ -21,7 +21,7 @@ public class Bootstrap implements Runnable {
      */
     public void run() {
         addUsers();
-        //addSkills();
+        addSkills();
         addJobs();
         addTeams();
         addVehicles();
