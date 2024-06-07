@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
@@ -51,6 +52,10 @@ public class TasksGUI {
     @FXML
     private VBox AgendaDetailsVBox;
     @FXML
+    private DatePicker startDateDateP;
+    @FXML
+    private DatePicker endDateDateP;
+    @FXML
     private Button CompleteAgendaEntryBtn;
 
     @FXML
@@ -69,27 +74,27 @@ public class TasksGUI {
 
 
     private void updateAgendaEntryList() {
-    // Obtenha a lista inicial de AgendaEntryDto
-    List<AgendaEntryDto> initialize = recordEntryController.getAgendaEntryOfCollaboratorList(session);
+        // Obtenha a lista inicial de AgendaEntryDto
+        List<AgendaEntryDto> initialize = recordEntryController.getAgendaEntryOfCollaboratorList(session);
 
-    // Ordena a lista pela data de início em ordem decrescente (mais recentes primeiro)
-    List<AgendaEntryDto> sortedList = initialize.stream()
-            .sorted(Comparator.comparing(AgendaEntryDto::getStartingDate).reversed())
-            .collect(Collectors.toList());
+        // Ordena a lista pela data de início em ordem decrescente (mais recentes primeiro)
+        List<AgendaEntryDto> sortedList = initialize.stream()
+                .sorted(Comparator.comparing(AgendaEntryDto::getStartingDate).reversed())
+                .collect(Collectors.toList());
 
-    // Transforma a lista ordenada em strings formatadas
-    List<String> agendaEntryList = sortedList.stream()
-            .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s",
-                    entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
-                    entry.getAssignedTeam() != null ? entry.getAssignedTeam().getTeamAsString() : "No team assigned",
-                    entry.getAssignedVehicles() != null && !entry.getAssignedVehicles().isEmpty() ?
-                            entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) : "No vehicles assigned"))
-            .collect(Collectors.toList());
+        // Transforma a lista ordenada em strings formatadas
+        List<String> agendaEntryList = sortedList.stream()
+                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s",
+                        entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
+                        entry.getAssignedTeam() != null ? entry.getAssignedTeam().getTeamAsString() : "No team assigned",
+                        entry.getAssignedVehicles() != null && !entry.getAssignedVehicles().isEmpty() ?
+                                entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) : "No vehicles assigned"))
+                .collect(Collectors.toList());
 
-    // Atualiza a ListView com a lista ordenada e formatada
-    ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
-    agendaListView.setItems(observableList);
-}
+        // Atualiza a ListView com a lista ordenada e formatada
+        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
+        agendaListView.setItems(observableList);
+    }
 
 
     @FXML

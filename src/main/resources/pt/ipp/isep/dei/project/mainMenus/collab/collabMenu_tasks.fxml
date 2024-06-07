@@ -96,6 +96,16 @@
                                                         <Insets />
                                                     </HBox.margin>
                                                 </Label>
+                                    <DatePicker fx:id="startDateDateP" promptText="Start date">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </DatePicker>
+                                    <DatePicker fx:id="endDateDateP" promptText="End date">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </DatePicker>
                                             </children>
                                             <VBox.margin>
                                                 <Insets bottom="10.0" top="10.0" />
