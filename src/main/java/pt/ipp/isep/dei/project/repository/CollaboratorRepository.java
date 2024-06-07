@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.CollaboratorDto;
 import pt.ipp.isep.dei.project.mappers.CollaboratorMapper;
-import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,14 +30,10 @@ public class CollaboratorRepository implements Serializable {
      */
     public void create(CollaboratorDto dto) {
         Collaborator c = CollaboratorMapper.toDomain(dto);
-        try {
-            if (checkForDuplicates(c)) {
-                addCollaborator(c);
-            } else {
-                throw new IllegalArgumentException("There is already a registered employee with the same attributes.");
-            }
-        } catch (Exception e) {
-            ShowError.showAlert("Collaborator", e.getMessage(), "Duplicate");
+        if (checkForDuplicates(c)) {
+            addCollaborator(c);
+        } else {
+            throw new IllegalArgumentException("There is already a registered employee with the same attributes.");
         }
     }
 

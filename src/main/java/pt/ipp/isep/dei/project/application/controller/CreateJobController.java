@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.project.application.controller;
 import pt.ipp.isep.dei.project.dto.JobDto;
 import pt.ipp.isep.dei.project.repository.JobRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.util.List;
 
@@ -28,7 +29,11 @@ public class CreateJobController {
      * @param designation the designation of the job to be created
      */
     public void createJob(String designation) {
-        jobRepository.createJob(new JobDto(designation));
+        try {
+            jobRepository.createJob(new JobDto(designation));
+        }catch (Exception e) {
+            ShowError.showAlert("Job", e.getMessage(), "Error");
+        }
     }
 
     /**

@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.project.domain.MaintenanceReport;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.MaintenanceMapper;
-import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -36,11 +35,7 @@ public class MaintenanceRepository implements Serializable {
      */
     public void createMaintenance(MaintenanceDto maintenanceDto) {
         Maintenance m = MaintenanceMapper.toDomain(maintenanceDto);
-        try {
-            addMaintenance(m);
-        } catch (Exception e) {
-            ShowError.showAlert("Maintenance", e.getMessage(), "Duplicate");
-        }
+        addMaintenance(m);
     }
 
     /**

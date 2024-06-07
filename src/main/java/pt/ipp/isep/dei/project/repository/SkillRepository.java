@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.project.repository;
 import pt.ipp.isep.dei.project.domain.Skill;
 import pt.ipp.isep.dei.project.dto.SkillDto;
 import pt.ipp.isep.dei.project.mappers.SkillMapper;
-import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,14 +30,10 @@ public class SkillRepository implements Serializable {
      */
     public void createSkill(SkillDto dto) {
         Skill skill = SkillMapper.toDomain(dto);
-        try {
-            if (checkForDuplicates(skill)) {
-                addSkill(skill);
-            } else {
-                throw new IllegalArgumentException("There is already a skill with that name.");
-            }
-        } catch (Exception e) {
-            ShowError.showAlert("Skill", e.getMessage(), "Duplicate");
+        if (checkForDuplicates(skill)) {
+            addSkill(skill);
+        } else {
+            throw new IllegalArgumentException("There is already a skill with that name.");
         }
     }
 

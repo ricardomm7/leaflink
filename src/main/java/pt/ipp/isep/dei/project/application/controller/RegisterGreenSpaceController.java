@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 import pt.ipp.isep.dei.project.mappers.GreenSpaceMapper;
 import pt.ipp.isep.dei.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.util.List;
 
@@ -36,8 +37,12 @@ public class RegisterGreenSpaceController {
      * @param type    the type
      */
     public void createNewGS(String name, String street, String zipcode, double area, String city, String us, GreenSpaceType type) {
-        GreenSpaceDto greenSpaceDto = new GreenSpaceDto(name, type, area, us, street, city, zipcode);
-        greenSpaceRepository.create(greenSpaceDto);
+        try {
+            GreenSpaceDto greenSpaceDto = new GreenSpaceDto(name, type, area, us, street, city, zipcode);
+            greenSpaceRepository.create(greenSpaceDto);
+        } catch (Exception e) {
+            ShowError.showAlert("Create green space", e.getMessage(), "Error");
+        }
     }
 
     /**

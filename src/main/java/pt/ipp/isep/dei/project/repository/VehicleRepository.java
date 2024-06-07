@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
-import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,18 +55,13 @@ public class VehicleRepository implements Serializable {
      */
     public boolean registerVehicle(VehicleDto dto) {
         Vehicle vehicle = VehicleMapper.toDomain(dto);
-        try {
-            if (!verifyExistingVehicles(vehicle)) {
-                addVehicle(vehicle);
-                return true;
-            } else {
-                throw new Exception("Vehicle already registered");
-            }
-        } catch (Exception e) {
-            ShowError.showAlert("Vehicle", e.getMessage(), "Vehicle already registered");
-        }
-        return false;
 
+        if (!verifyExistingVehicles(vehicle)) {
+            addVehicle(vehicle);
+            return true;
+        } else {
+            throw new IllegalArgumentException("Vehicle already registered");
+        }
     }
 
     /**
@@ -155,8 +149,8 @@ public class VehicleRepository implements Serializable {
     /**
      * Sets the availability of a vehicle at the specified index in the vehicle list.
      *
-     * @param v the index of the vehicle in the vehicle list
-     * @param isAvailable  the availability status to be set (true for available, false for unavailable)
+     * @param v           the index of the vehicle in the vehicle list
+     * @param isAvailable the availability status to be set (true for available, false for unavailable)
      */
     public void setVehicleAvailability(List<Vehicle> v, Boolean isAvailable) {
         for (Vehicle u : v) {

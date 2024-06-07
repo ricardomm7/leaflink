@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -41,9 +42,13 @@ public class RegisterVehicleController {
      * @return the boolean
      */
     public boolean registerVehicle(String vin, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight, int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
-        VehicleDto vehicleDto = new VehicleDto(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight, currentKm, acquisitionDate, maintenanceFrequency);
-        return vehicleRepository.registerVehicle(vehicleDto);
-
+        try {
+            VehicleDto vehicleDto = new VehicleDto(vin, brand, model, type, registrationDate, vehiclePlate, tareWeight, grossWeight, currentKm, acquisitionDate, maintenanceFrequency);
+            return vehicleRepository.registerVehicle(vehicleDto);
+        } catch (Exception e) {
+            ShowError.showAlert("Vehicle", e.getMessage(), "Error");
+            return false;
+        }
     }
 
     /**

@@ -34,14 +34,9 @@ public class Maintenance implements Serializable {
      * @param currentKm    the kilometers at the time of the maintenance
      */
     public Maintenance(String vehiclePlate, LocalDate date, int currentKm) {
-        try {
             setVehiclePlate(vehiclePlate);
             setDate(date);
             setKm(String.valueOf(currentKm));
-        } catch (Exception e) {
-            ShowError.showAlert("Maintenance", e.getMessage(), "Error registering Maintenance");
-            throw e;
-        }
     }
 
     /**
