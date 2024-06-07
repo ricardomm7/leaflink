@@ -1,9 +1,8 @@
 package pt.ipp.isep.dei.project.domain;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import pt.ipp.isep.dei.project.ui.ShowError;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -80,22 +79,19 @@ public abstract class NotificationService {
      */
     private static boolean writeNotification(List<Collaborator> collaborators, String subject, String body) {
         try {
-            // Creates the "Notifications" directory if it does not exist
-            File directory = new File("Notifications");
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-
             // Creates the notification file
-            File file = new File(directory, subject + ".txt");
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            String name = "Email";
+            LocalDate date = LocalDate.now();
+            String filename = "Notification_ "+ ".txt";
+            try (PrintWriter writer = new PrintWriter("Notifications/"+name+"_"+date+filename)) {
                 // Writes the subject and body of the message to the file
                 writer.write(subject);
-                writer.newLine();
+                writer.println();
                 writer.write(body);
-            }
+                writer.close();
 
-            System.out.println("Notificação escrita no arquivo: " + file.getAbsolutePath());
+            }
+            ShowError.showAlertConfirm("Notification","Notifications sent",null);
             return true;
         } catch (IOException e) {
             System.out.println("Erro ao escrever a notificação: " + e.getMessage());
@@ -119,7 +115,7 @@ public abstract class NotificationService {
             emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
             emailBuilder.append("Nova data: ").append(newDate).append("\n\n");
-            emailBuilder.append("Por favor, tome nota desta alteração e ajuste seus planos conforme necessário.\n\n");
+            emailBuilder.append("Por favor, tome nota desta alteração e ajuste os seus planos conforme necessário.\n\n");
         }
         emailBuilder.append("Atenciosamente,\n");
         emailBuilder.append("Equipe de Gestão de Parques");
@@ -140,7 +136,7 @@ public abstract class NotificationService {
             emailBuilder.append("Esta é uma notificação sobre o cancelamento de uma entrada na agenda.\n\n");
             emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
-            emailBuilder.append("Por favor, tome nota desta alteração e ajuste seus planos conforme necessário.\n\n");
+            emailBuilder.append("Por favor, tome nota desta alteração e ajuste os seus planos conforme necessário.\n\n");
         }
         emailBuilder.append("Atenciosamente,\n");
         emailBuilder.append("Equipe de Gestão de Parques");
@@ -162,7 +158,7 @@ public abstract class NotificationService {
             emailBuilder.append("Entrada: ").append(toDoEntry.getTitle()).append("\n");
             emailBuilder.append("Parque: ").append(toDoEntry.getGreenSpace().getName()).append("\n");
             emailBuilder.append("Data: ").append(toDoEntry.getStartingDate()).append("\n");
-            emailBuilder.append("Por favor, tome nota desta atribuição e ajuste seus planos conforme necessário.\n\n");
+            emailBuilder.append("Por favor, tome nota desta atribuição e ajuste os seus planos conforme necessário.\n\n");
         }
         emailBuilder.append("Atenciosamente,\n");
         emailBuilder.append("Equipe de Gestão de Parques");

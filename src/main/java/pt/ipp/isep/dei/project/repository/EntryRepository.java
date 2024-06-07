@@ -86,176 +86,189 @@ public class EntryRepository implements Serializable {
     /**
      * Updates the vehicles assigned to a specific AgendaEntry.
      *
-     * @param entryIndex the index of the AgendaEntry to update.
-     * @param f          the list of VehicleDto objects to assign.
+     * @param agendaEntry the index of the AgendaEntry to update.
+     * @param f           the list of VehicleDto objects to assign.
      */
-    public void updateVehiclesAgendaEntry(int entryIndex, List<VehicleDto> f) {
+    public void updateVehiclesAgendaEntry(AgendaEntry agendaEntry, List<VehicleDto> f) {
         List<Vehicle> u = VehicleMapper.toDomainList(f);
-        agendaEntryList.get(entryIndex).setAssignedVehicles(u);
+        for (AgendaEntry agendaEntry1 : agendaEntryList) {
+            if (agendaEntry.getTitle().equalsIgnoreCase(agendaEntry1.getTitle()) && agendaEntry.getDescription().
+                    equalsIgnoreCase(agendaEntry1.getDescription()) && agendaEntry.getStartingDate().isEqual(agendaEntry1.getStartingDate()))
+                (agendaEntry1).setAssignedVehicles(u);
+        }
     }
 
 
-    /**
-     * Updates the date and progress status of an AgendaEntry.
-     *
-     * @param agendaEntry       the AgendaEntry to update.
-     * @param newDate           the new date to set.
-     * @param newProgressStatus the new progress status to set.
-     * @return true if the update is successful, false otherwise.
-     */
-    public boolean updateAgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus newProgressStatus) {
-        if (validateNewDate(agendaEntry, newDate)) {
-            updateEntryStatus(agendaEntry, newProgressStatus);
-            AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, newProgressStatus);
-            addAgendaEntry(agendaEntry1);
 
-            return true;
-        } else {
-            ShowError.showAlert("Postpone Entry", "The new date cannot be before the starting date.", "Invalid Date");
+/**
+ * Updates the date and progress status of an AgendaEntry.
+ *
+ * @param agendaEntry       the AgendaEntry to update.
+ * @param newDate           the new date to set.
+ * @param newProgressStatus the new progress status to set.
+ * @return true if the update is successful, false otherwise.
+ */
+public boolean updateAgendaEntry(AgendaEntry agendaEntry, LocalDate newDate, ProgressStatus newProgressStatus) {
+    if (validateNewDate(agendaEntry, newDate)) {
+        updateEntryStatus(agendaEntry, newProgressStatus);
+        AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, ProgressStatus.PLANNED);
+        addAgendaEntry(agendaEntry1);
+
+        return true;
+    } else {
+        ShowError.showAlert("Postpone Entry", "The new date cannot be before the starting date.", "Invalid Date");
+    }
+    return false;
+}
+
+/**
+ * Validates the new date for an AgendaEntry.
+ *
+ * @param agendaEntry the AgendaEntry to validate.
+ * @param newDate     the new date to validate.
+ * @return true if the new date is valid, false otherwise.
+ * @throws IllegalArgumentException if the new date is null or before the current date.
+ */
+private Boolean validateNewDate(AgendaEntry agendaEntry, LocalDate newDate) {
+    if (newDate == null) {
+        throw new IllegalArgumentException("New date cannot be null.");
+    } else if (newDate.isBefore(agendaEntry.getStartingDate())) {
+        throw new IllegalArgumentException("New date must be after the current estimated date.");
+    }
+    return true;
+}
+
+/**
+ * Updates the progress status of an AgendaEntry.
+ *
+ * @param agendaEntry       the AgendaEntry to update.
+ * @param newProgressStatus the new progress status to set.
+ */
+private void updateEntryStatus(AgendaEntry agendaEntry, ProgressStatus newProgressStatus) {
+    for (AgendaEntry e : agendaEntryList) {
+        if (e.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && e.getStartingDate().isEqual(agendaEntry.getStartingDate()) && e.getDescription().equalsIgnoreCase(agendaEntry.getDescription())) {
+            agendaEntry.setProgressStatus(newProgressStatus);
         }
-        return false;
+    }
+}
+
+/**
+ * Sets a new date for an AgendaEntry.
+ *
+ * @param agendaEntry the AgendaEntry to update.
+ * @param newDate     the new date to set.
+ */
+private void setNewDate(AgendaEntry agendaEntry, LocalDate newDate) {
+    agendaEntry.setStartingDate(newDate);
+}
+
+/**
+ * Retrieves a list of all AgendaEntryDto objects.
+ *
+ * @return a list of all AgendaEntryDto objects.
+ */
+public List<AgendaEntry> getAgendaEntryList() {
+    return (agendaEntryList);
+}
+
+/**
+ * Gets dates list.
+ *
+ * @param beginningDate the beginning date
+ * @param endDate       the end date
+ * @param status        the status
+ * @param team          the team
+ * @return the dates list
+ */
+public List<AgendaEntry> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Team team) {
+    List<AgendaEntry> fullList = getAgendaEntryList();
+
+    List<AgendaEntry> teamEntries = new ArrayList<>();
+    for (AgendaEntry entry : fullList) {
+        if (entry.getTeam().equals(team)) {
+            teamEntries.add(entry);
+        }
     }
 
-    /**
-     * Validates the new date for an AgendaEntry.
-     *
-     * @param agendaEntry the AgendaEntry to validate.
-     * @param newDate     the new date to validate.
-     * @return true if the new date is valid, false otherwise.
-     * @throws IllegalArgumentException if the new date is null or before the current date.
-     */
-    private Boolean validateNewDate(AgendaEntry agendaEntry, LocalDate newDate) {
-        if (newDate == null) {
-            throw new IllegalArgumentException("New date cannot be null.");
-        } else if (newDate.isBefore(agendaEntry.getStartingDate())) {
-            throw new IllegalArgumentException("New date must be after the current estimated date.");
+    for (AgendaEntry entry : teamEntries) {
+        if (entry.getStartingDate().isBefore(beginningDate) || entry.getStartingDate().isAfter(endDate)) {
+            teamEntries.remove(entry);
         }
+    }
+    return teamEntries;
+
+}
+
+/**
+ * Retrieves a list of all ToDoEntryDto objects.
+ *
+ * @return a list of all ToDoEntryDto objects.
+ */
+public List<ToDoEntry> getToDoEntryList() {
+    return toDoEntryList;
+}
+
+/**
+ * Records the completion of an AgendaEntry.
+ *
+ * @param entry  the AgendaEntry to update.
+ * @param status the new progress status to set.
+ * @return true if the entry is updated successfully, false otherwise.
+ */
+public boolean recordAgendaEntryCompletion(AgendaEntry entry, ProgressStatus status) {
+    if (entry != null && status == ProgressStatus.COMPLETED) {
+        entry.setProgressStatus(status);
+        entry.setAvailable(entry);
         return true;
     }
+    return false;
+}
 
-    /**
-     * Updates the progress status of an AgendaEntry.
-     *
-     * @param agendaEntry       the AgendaEntry to update.
-     * @param newProgressStatus the new progress status to set.
-     */
-    private void updateEntryStatus(AgendaEntry agendaEntry, ProgressStatus newProgressStatus) {
-        agendaEntry.setProgressStatus(newProgressStatus);
-    }
+/**
+ * Remove to do entry.
+ *
+ * @param toDoEntry the to do entry
+ */
+public void removeToDoEntry(ToDoEntry toDoEntry) {
+    toDoEntryList.remove(toDoEntry);
+}
 
-    /**
-     * Sets a new date for an AgendaEntry.
-     *
-     * @param agendaEntry the AgendaEntry to update.
-     * @param newDate     the new date to set.
-     */
-    private void setNewDate(AgendaEntry agendaEntry, LocalDate newDate) {
-        agendaEntry.setStartingDate(newDate);
-    }
+/**
+ * Find to do entry by title to do entry.
+ *
+ * @param title the title
+ * @return the to do entry
+ */
+public ToDoEntry findToDoEntryByTitle(String title) {
+    return toDoEntryList.stream()
+            .filter(entry -> entry.getTitle().equalsIgnoreCase(title))
+            .findFirst()
+            .orElse(null);
+}
 
-    /**
-     * Retrieves a list of all AgendaEntryDto objects.
-     *
-     * @return a list of all AgendaEntryDto objects.
-     */
-    public List<AgendaEntry> getAgendaEntryList() {
-        return (agendaEntryList);
-    }
+/**
+ * Remove.
+ *
+ * @param title      the title
+ * @param greenSpace the green space
+ */
+public void remove(String title, String greenSpace) {
+    toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
+}
 
-    /**
-     * Gets dates list.
-     *
-     * @param beginningDate the beginning date
-     * @param endDate       the end date
-     * @param status        the status
-     * @param team          the team
-     * @return the dates list
-     */
-    public List<AgendaEntry> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Team team) {
-        List<AgendaEntry> fullList = getAgendaEntryList();
-
-        List<AgendaEntry> teamEntries = new ArrayList<>();
-        for (AgendaEntry entry : fullList) {
-            if (entry.getTeam().equals(team)) {
-                teamEntries.add(entry);
-            }
+public void updateTeamAgendaEntry(AgendaEntry agendaEntry, Team team) {
+    for (AgendaEntry entry : agendaEntryList) {
+        if (entry.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && entry.getDescription().equalsIgnoreCase(agendaEntry.getDescription()) && entry.getStartingDate().equals(agendaEntry.getStartingDate())) {
+            entry.setAssignedTeam(team);
         }
-
-        for (AgendaEntry entry : teamEntries) {
-            if (entry.getStartingDate().isBefore(beginningDate) || entry.getStartingDate().isAfter(endDate)) {
-                teamEntries.remove(entry);
-            }
-        }
-        return teamEntries;
-
     }
+}
 
-    /**
-     * Retrieves a list of all ToDoEntryDto objects.
-     *
-     * @return a list of all ToDoEntryDto objects.
-     */
-    public List<ToDoEntry> getToDoEntryList() {
-        return toDoEntryList;
+public boolean cancelAgendaEntry(AgendaEntry agendaEntry) {
+    if (agendaEntry != null) {
+        agendaEntry.setProgressStatus(ProgressStatus.CANCELLED);
+        return true;
     }
-
-    /**
-     * Records the completion of an AgendaEntry.
-     *
-     * @param entry  the AgendaEntry to update.
-     * @param status the new progress status to set.
-     * @return true if the entry is updated successfully, false otherwise.
-     */
-    public boolean recordAgendaEntryCompletion(AgendaEntry entry, ProgressStatus status) {
-        if (entry != null && status == ProgressStatus.COMPLETED) {
-            entry.setProgressStatus(status);
-            entry.setAvailable(entry);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Remove to do entry.
-     *
-     * @param toDoEntry the to do entry
-     */
-    public void removeToDoEntry(ToDoEntry toDoEntry) {
-        toDoEntryList.remove(toDoEntry);
-    }
-
-    /**
-     * Find to do entry by title to do entry.
-     *
-     * @param title the title
-     * @return the to do entry
-     */
-    public ToDoEntry findToDoEntryByTitle(String title) {
-        return toDoEntryList.stream()
-                .filter(entry -> entry.getTitle().equalsIgnoreCase(title))
-                .findFirst()
-                .orElse(null);
-    }
-
-    /**
-     * Remove.
-     *
-     * @param title      the title
-     * @param greenSpace the green space
-     */
-    public void remove(String title, String greenSpace) {
-        toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
-    }
-
-    public void updateTeamAgendaEntry(AgendaEntry agendaEntry, Team team) {
-        agendaEntry.setAssignedTeam(team);
-    }
-
-    public boolean cancelAgendaEntry(AgendaEntry agendaEntry) {
-        if (agendaEntry != null) {
-            agendaEntry.setProgressStatus(ProgressStatus.CANCELLED);
-            return true;
-        }
-        return false;
-    }
+    return false;
+}
 }

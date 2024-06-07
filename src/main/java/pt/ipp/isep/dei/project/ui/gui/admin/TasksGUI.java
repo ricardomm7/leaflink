@@ -188,16 +188,22 @@ public class TasksGUI {
         Optional<List<VehicleDto>> result = dialog.showAndWait();
 
         result.ifPresent(selectedVehicles -> {
-            int entryIndex = agendaListView.getSelectionModel().getSelectedIndex();
-            assignVehiclesController.updateEntryWithVehicles(entryIndex, selectedVehicles);
+            String selectedItem = agendaListView.getSelectionModel().getSelectedItem();
+            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedItem,session);
+            assignVehiclesController.updateEntryWithVehicles(agendaEntryDto, selectedVehicles);
             assignVehiclesController.setVehicleAvailability(selectedVehicles, false);
             updateAgendaEntryList();
 
             StringBuilder a = new StringBuilder();
-            for (VehicleDto v : assignVehiclesController.getAgendaEntryList(ApplicationSession.getInstance().getCurrentSession()).get(entryIndex).getAssignedVehicles()) {
-                a.append(v.getVehiclePlate()).append(" | ").append(v.getType()).append("\n");
+
+            if (agendaEntryDto != null && agendaEntryDto.getAssignedVehicles() != null) {
+                for (VehicleDto v : agendaEntryDto.getAssignedVehicles()) {
+                    a.append(v.getVehiclePlate()).append(" | ").append(v.getType()).append("\n");
+                }
+                vehicleLabelA.setText(a.toString());
+            }else{
+                vehicleLabelA.setText("No vehicle assigned");
             }
-            vehicleLabelA.setText(a.toString());
         });
     }
 
@@ -898,8 +904,10 @@ public class TasksGUI {
     private AgendaEntryDto getAgendaEntry(String string, UserSession GSM) {
         String[] splittedString = string.split(" \\| ");
         String title = splittedString[1].split(": ")[1];
+        String date = splittedString[0].split(": ")[1];
+        LocalDate dateLocal = LocalDate.parse(date);
         for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
-            if (entry.getTitle().equalsIgnoreCase(title)) {
+            if (entry.getTitle().equalsIgnoreCase(title) && entry.getStartingDate().isEqual(dateLocal)) {
                 return entry;
             }
         }

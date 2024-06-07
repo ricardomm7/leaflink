@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
@@ -62,10 +63,11 @@ public class AssignVehiclesController {
     /**
      * Updates an agenda entry with the assigned vehicles.
      *
-     * @param entryIndex     the index of the agenda entry
+     * @param agendaEntryDto     the index of the agenda entry
      * @param vehicleDtoList the list of VehicleDto objects representing the assigned vehicles
      */
-    public void updateEntryWithVehicles(int entryIndex, List<VehicleDto> vehicleDtoList) {
-        entryRepository.updateVehiclesAgendaEntry(entryIndex, vehicleDtoList);
+    public void updateEntryWithVehicles(AgendaEntryDto agendaEntryDto, List<VehicleDto> vehicleDtoList) {
+        AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
+        entryRepository.updateVehiclesAgendaEntry(agendaEntry, vehicleDtoList);
     }
 }
