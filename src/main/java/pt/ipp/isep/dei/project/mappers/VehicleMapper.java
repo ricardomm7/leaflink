@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Vehicle;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,9 +37,14 @@ public class VehicleMapper implements Serializable {
         if (vehicleDto == null) {
             return null;
         }
-        return new Vehicle(vehicleDto.getVIN(), vehicleDto.getBrand(), vehicleDto.getModel(), vehicleDto.getType(),
-                vehicleDto.getRegistrationDate(), vehicleDto.getVehiclePlate(), vehicleDto.getTareWeight(), vehicleDto.getGrossWeight(),
-                vehicleDto.getCurrentKm(), vehicleDto.getAcquisitionDate(), vehicleDto.getMaintenanceFrequency());
+        try {
+            return new Vehicle(vehicleDto.getVIN(), vehicleDto.getBrand(), vehicleDto.getModel(), vehicleDto.getType(),
+                    vehicleDto.getRegistrationDate(), vehicleDto.getVehiclePlate(), vehicleDto.getTareWeight(), vehicleDto.getGrossWeight(),
+                    vehicleDto.getCurrentKm(), vehicleDto.getAcquisitionDate(), vehicleDto.getMaintenanceFrequency());
+        } catch (Exception e) {
+            ShowError.showAlert("Vehicle", e.getMessage(), "Error when setting the vehicle attributes.");
+            throw e;
+        }
     }
 
     /**

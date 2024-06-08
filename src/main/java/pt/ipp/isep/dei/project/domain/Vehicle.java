@@ -300,7 +300,6 @@ public class Vehicle implements Serializable {
      */
     public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
                    int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
-        try {
             this.isAvailable = true;
             setVIN(VIN);
             setBrand(brand);
@@ -314,10 +313,6 @@ public class Vehicle implements Serializable {
             setAcquisitionDate(acquisitionDate);
             setMaintenanceFrequency(String.valueOf(maintenanceFrequency));
             validateVehicle(registrationDate, vehiclePlate, tareWeight, grossWeight, acquisitionDate);
-        } catch (Exception e) {
-            ShowError.showAlert("Vehicle", e.getMessage(), "Error when setting the vehicle attributes.");
-            throw e;
-        }
     }
 
 

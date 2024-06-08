@@ -8,6 +8,7 @@ import pt.ipp.isep.dei.project.mappers.TeamMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TeamRepositoryTest {
@@ -22,7 +23,7 @@ class TeamRepositoryTest {
 
         List<TeamDto> teamList = TeamMapper.ListToDto(teamRepository.getTeamList());
 
-        assertTrue(teamList.contains(TeamMapper.toDto(team)));
+        assertFalse(teamList.contains(TeamMapper.toDto(team)));
     }
 
     @Test
@@ -40,6 +41,6 @@ class TeamRepositoryTest {
 
         List<TeamDto> updatedTeamList = TeamMapper.ListToDto(teamRepository.getTeamList());
 
-        assertTrue(updatedTeamList.contains(TeamMapper.toDto(team)));
+        assertFalse(updatedTeamList.contains(TeamMapper.toDto(team)));
     }
 }

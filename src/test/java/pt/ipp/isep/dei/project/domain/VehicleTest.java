@@ -32,21 +32,21 @@ class VehicleTest {
     void testCreateVehicleWithInvalidVIN() {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
-        assertThrows(NoClassDefFoundError.class, () -> new Vehicle("VIN123456789012", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("VIN123456789012", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
     }
 
     @Test
     void testCreateVehicleWithInvalidBrand() {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
-        assertThrows(NoClassDefFoundError.class, () -> new Vehicle("VIN12345678901234", "Brand@123", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("VIN12345678901234", "Brand@123", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
     }
 
     @Test
     void testCreateVehicleWithInvalidModel() {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
-        assertThrows(NoClassDefFoundError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model@123", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model@123", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
     }
 
     @Test
@@ -59,7 +59,7 @@ class VehicleTest {
     void testCreateVehicleWithInvalidPlate() {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
-        assertThrows(NoClassDefFoundError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "ABCDEFG", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "ABCDEFG", 1000.0, 2000.0, 10000, acquisitionDate, 5000));
     }
 
 
@@ -67,21 +67,21 @@ class VehicleTest {
     void testCreateVehicleWithInvalidGrossWeight() {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
-        assertThrows(NoClassDefFoundError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 0.0, 10000, acquisitionDate, 5000));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 0.0, 10000, acquisitionDate, 5000));
     }
 
     @Test
     void testCreateVehicleWithInvalidMaintenanceFrequency() {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
-        assertThrows(NoClassDefFoundError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 0));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 1000.0, 2000.0, 10000, acquisitionDate, 0));
     }
 
     @Test
     void testCreateVehicleWithTareWeightGreaterThanGrossWeight() {
         LocalDate registrationDate = LocalDate.of(2021, 10, 10);
         LocalDate acquisitionDate = LocalDate.of(2023, 9, 1);
-        assertThrows(NoClassDefFoundError.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 2000.0, 1000.0, 10000, acquisitionDate, 5000));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("VIN12345678901234", "Brand", "Model", VehicleType.CAR, registrationDate, "AB12CD", 2000.0, 1000.0, 10000, acquisitionDate, 5000));
     }
 
 

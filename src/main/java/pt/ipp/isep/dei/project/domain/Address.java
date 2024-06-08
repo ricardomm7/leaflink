@@ -103,6 +103,16 @@ public class Address implements Serializable {
         return true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address that = (Address) o;
+        return that.getAddress().equalsIgnoreCase(address) &&
+                that.getZipCode().equalsIgnoreCase(zipCode) &&
+                that.getCity().equalsIgnoreCase(city);
+    }
+
     /**
      * Returns a string representation of the address.
      *

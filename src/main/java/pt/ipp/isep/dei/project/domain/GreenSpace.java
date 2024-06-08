@@ -129,7 +129,7 @@ public class GreenSpace implements Serializable {
         GreenSpace that = (GreenSpace) o;
         return Double.compare(that.getArea(), getArea()) == 0 &&
                 name.equals(that.getName()) &&
-                type == that.getType() &&
+                type.toString().equalsIgnoreCase(that.getType().toString()) &&
                 manager.equals(that.getManager()) &&
                 address.equals(that.getAddress());
     }
