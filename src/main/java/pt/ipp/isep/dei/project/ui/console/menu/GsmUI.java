@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.project.ui.console.menu;
 
 
-import pt.ipp.isep.dei.project.ui.PostponeAgendaEntryUI;
-import pt.ipp.isep.dei.project.ui.RegisterToDoEntryUI;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -18,8 +16,6 @@ public class GsmUI implements Runnable {
 
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Add entry to To-Do List", new RegisterToDoEntryUI()));
-        options.add(new MenuItem("Postpone a ToDoEntry", new PostponeAgendaEntryUI()));
 
 
         int option = 0;

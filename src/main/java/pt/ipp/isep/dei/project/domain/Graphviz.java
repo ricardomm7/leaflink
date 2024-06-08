@@ -4,7 +4,9 @@ import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,5 +57,64 @@ public abstract class Graphviz {
         }
         pW.println("}");
         pW.close();
+    }
+
+    public static void executeDijkra(List<Route> allRoutes, List<Route> shortestPath, String filename) {
+        try {
+            writeGraphvizDotFileDij(allRoutes, shortestPath);
+
+            String caminhoImgFinal = System.getProperty("user.dir") + File.separator + "/goOut/evac/" + filename + ".svg";
+            String comando = "dot -Tsvg temp_gv_file.dot -o " + caminhoImgFinal;
+            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", comando);
+            pb.start().waitFor();
+        } catch (Exception e) {
+            System.out.println("Erro ao executar o GraphViz: " + e.getMessage());
+        }
+    }
+
+    private static void writeGraphvizDotFileDij(List<Route> allRoutes, List<Route> shortestPath) throws IOException {
+        List<Route> filteredAllRoutes = new ArrayList<>();
+
+        // Filter allRoutes to remove duplicates
+        for (Route r : allRoutes) {
+            boolean isDuplicate = false;
+            for (Route s : filteredAllRoutes) {
+                if (s.getStartPoint().getID().equals(r.getEndPoint().getID()) && s.getEndPoint().getID().equals(r.getStartPoint().getID())) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate && !shortestPath.contains(r)) {
+                filteredAllRoutes.add(r);
+            }
+        }
+
+        // Remove routes from filteredAllRoutes that are in shortestPath
+        filteredAllRoutes.removeIf(r -> {
+            for (Route s : shortestPath) {
+                if (r.getStartPoint().getID().equals(s.getEndPoint().getID()) && r.getEndPoint().getID().equals(s.getStartPoint().getID())) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        try (PrintWriter pW = new PrintWriter("temp_gv_file.dot")) {
+            pW.print("graph G {\n" +
+                    "fontname=\"Helvetica,Arial,sans-serif\"\n" +
+                    "node [fontname=\"Helvetica,Arial,sans-serif\", color=black, fontcolor=black]\n" +
+                    "edge [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
+                    "layout=dot\n");
+
+            for (Route r : filteredAllRoutes) {
+                pW.println(r.getStartPoint().getID() + " -- " + r.getEndPoint().getID() + " [label=\"" + r.getCost() + "\"]");
+            }
+
+            for (Route r : shortestPath) {
+                pW.println(r.getStartPoint().getID() + " -- " + r.getEndPoint().getID() + " [label=\"" + r.getCost() + "\", color=blue, penwidth=2.0]");
+            }
+
+            pW.println("}");
+        }
     }
 }

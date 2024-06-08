@@ -1,0 +1,18 @@
+Path;Cost
+(﻿Biblioteca, AP);10.0
+(Teatro, AP);7.0
+(Pavilhao, AP);5.0
+(Topo, AP);9.0
+(ParqueInfantil, Topo, AP);16.0
+(Macieirinha, ParqueInfantil, Topo, AP);26.0
+(Fontaine, Miradouro, Topo, AP);20.0
+(Miradouro, Topo, AP);12.0
+(Capela, Topo, AP);13.0
+(Torreao, Miradouro, Topo, AP);21.0
+(Lago, AP);9.0
+(Escadas3, Escadas2, Escadas1, AP);18.0
+(Sentimentos, Escadas2, Escadas1, AP);20.0
+(CasaRoseiral, Escadas2, Escadas1, AP);17.0
+(JardimRoseiral, Escadas2, Escadas1, AP);16.0
+(Escadas2, Escadas1, AP);13.0
+(Escadas1, AP);10.0

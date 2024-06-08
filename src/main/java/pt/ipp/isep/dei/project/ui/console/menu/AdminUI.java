@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.project.ui.console.menu;
 
 
-import pt.ipp.isep.dei.project.ui.PostponeAgendaEntryUI;
-import pt.ipp.isep.dei.project.ui.RecordEntryUI;
-import pt.ipp.isep.dei.project.ui.RegisterToDoEntryUI;
 import pt.ipp.isep.dei.project.ui.RunTestsUI;
 import pt.ipp.isep.dei.project.ui.console.utils.Utils;
 
@@ -21,9 +18,6 @@ public class AdminUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Run Tests for time about Kruskal", new RunTestsUI()));
-        options.add(new MenuItem("Add entry to To-Do List", new RegisterToDoEntryUI()));
-        options.add(new MenuItem("Postpone a ToDoEntry", new PostponeAgendaEntryUI()));
-        options.add(new MenuItem("Record a task competition", new RecordEntryUI()));
 
 
         int option = 0;

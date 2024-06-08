@@ -6,6 +6,7 @@ module pt.ipp.isep.dei.project {
     requires java.logging;
     requires java.xml;
     requires java.sql;
+    requires java.desktop;
 
     opens pt.ipp.isep.dei.project to javafx.fxml;
     exports pt.ipp.isep.dei.project;

@@ -1,27 +1,44 @@
 package pt.ipp.isep.dei.project.domain;
 
-import java.io.Serializable;
-
-/**
- * The Route class represents a route between two points in a graph.
- */
-public class Route implements Serializable {
-
-    // The starting point of the route
+public class Route {
     private final Point startPoint;
-
-    // The ending point of the route
     private final Point endPoint;
-
-    // The cost of traversing the route
     private final double cost;
 
     /**
-     * Constructs a route with the given starting point, ending point, and cost.
+     * Returns the cost of crossing this route
      *
-     * @param startPoint The starting point of the route.
-     * @param endPoint   The ending point of the route.
-     * @param cost       The cost of traversing the route.
+     * @return the cost of the route
+     */
+    public double getCost() {
+        return cost;
+    }
+
+    /**
+     * Returns the starting point of this route
+     *
+     * @return the starting point
+     */
+    public Point getStartPoint() {
+        return startPoint;
+    }
+
+    /**
+     * Returns the ending point of this route
+     *
+     * @return the ending point
+     */
+    public Point getEndPoint() {
+        return endPoint;
+    }
+
+
+    /**
+     * Constructs a Route object with the given starting point, end point and cost.
+     *
+     * @param startPoint the starting point of the route
+     * @param endPoint   the ending point of the route
+     * @param cost       the cost of crossing the route
      */
     public Route(Point startPoint, Point endPoint, double cost) {
         this.startPoint = startPoint;
@@ -30,29 +47,25 @@ public class Route implements Serializable {
     }
 
     /**
-     * Gets the cost of traversing the route.
+     * Checks if this route is equal to another object.
      *
-     * @return The cost of traversing the route.
+     * @param o the object to compare with
+     * @return true if the objects are equal, false otherwise
      */
-    public double getCost() {
-        return cost;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Route route = (Route) o;
+        return route.cost == cost && route.getEndPoint().getID().equals(endPoint.getID()) && route.getStartPoint().getID().equals(startPoint.getID());
     }
 
-    /**
-     * Gets the starting point of the route.
-     *
-     * @return The starting point of the route.
-     */
-    public Point getStartPoint() {
-        return startPoint;
+    @Override
+    public int hashCode() {
+        int result = startPoint.hashCode();
+        result = 31 * result + endPoint.hashCode();
+        return result;
     }
 
-    /**
-     * Gets the ending point of the route.
-     *
-     * @return The ending point of the route.
-     */
-    public Point getEndPoint() {
-        return endPoint;
-    }
 }
+

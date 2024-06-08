@@ -10,20 +10,33 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.project.Main;
+import pt.ipp.isep.dei.project.application.controller.EvacuationController;
 import pt.ipp.isep.dei.project.application.controller.WaterIrrigationController;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 
 public class RoutesGUI {
 
     private final WaterIrrigationController w1 = new WaterIrrigationController();
 
+    private final EvacuationController e1 = new EvacuationController();
+
     private String filePath;
+
+    private String filePathNames;
 
     @FXML
     private TextField filepathInput;
+
+    @FXML
+    private TextField namesFilepath;
+
+    @FXML
+    private TextField costMatrixFilepath;
 
     @FXML
     private ImageView media2;
@@ -33,6 +46,94 @@ public class RoutesGUI {
 
     @FXML
     private Button executeBtn;
+
+    @FXML
+    private Button executeBtn1;
+
+    @FXML
+    private Button exportfolderBtn;
+
+    @FXML
+    void handleExecuteBtn1(ActionEvent event) throws IOException {
+        e1.run(filePath, filePathNames);
+        exportfolderBtn.setDisable(false);
+    }
+
+    @FXML
+    void handleOpenexportFolder(ActionEvent event) {
+        // Obtém o diretório que você deseja abrir
+        File directory = new File("goOut/evac");
+
+        try {
+            // Verifica se o desktop é suportado
+            if (Desktop.isDesktopSupported()) {
+                // Obtém a instância do desktop
+                Desktop desktop = Desktop.getDesktop();
+
+                // Abre o diretório no explorador de arquivos
+                desktop.open(directory);
+            } else {
+                throw new IllegalArgumentException("Your desktop is not compatible with this function.");
+            }
+        } catch (Exception e) {
+            ShowError.showAlert("System not supported", e.getMessage(), null);
+        }
+    }
+
+
+    @FXML
+    void handleOpenNewname(ActionEvent event) {
+        executeBtn1.setDisable(true);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open CSV File (names of the points)");
+
+        // Define o filtro de extensão para mostrar apenas arquivos CSV
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Obtém o palco associado ao evento
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Mostra o seletor de arquivo e obtém o arquivo selecionado
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        // Se o arquivo foi selecionado, define o caminho no campo de entrada
+        if (selectedFile != null) {
+            namesFilepath.setText(selectedFile.getAbsolutePath());
+            filePathNames = selectedFile.getAbsolutePath();
+            if (!namesFilepath.getText().isEmpty() && !costMatrixFilepath.getText().isEmpty()) {
+                executeBtn1.setDisable(false);
+            }
+        }
+    }
+
+    @FXML
+    void handleOpenNewcost(ActionEvent event) {
+        executeBtn1.setDisable(true);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open CSV File (cost matrix)");
+
+        // Define o filtro de extensão para mostrar apenas arquivos CSV
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Obtém o palco associado ao evento
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Mostra o seletor de arquivo e obtém o arquivo selecionado
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        // Se o arquivo foi selecionado, define o caminho no campo de entrada
+        if (selectedFile != null) {
+            costMatrixFilepath.setText(selectedFile.getAbsolutePath());
+            filePath = selectedFile.getAbsolutePath();
+            if (!namesFilepath.getText().isEmpty() && !costMatrixFilepath.getText().isEmpty()) {
+                executeBtn1.setDisable(false);
+            }
+        }
+    }
 
     @FXML
     void handleOpenNewBtn(ActionEvent event) {
