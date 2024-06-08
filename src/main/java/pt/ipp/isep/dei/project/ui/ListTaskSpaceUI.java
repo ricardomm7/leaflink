@@ -59,7 +59,7 @@ public class ListTaskSpaceUI implements Runnable {
         }
 
 
-        List<AgendaEntryDto> DatesList = controller.getDatesList(beginningDate, endDate, statuses[selectedStatusIndex], clb);
+        List<AgendaEntryDto> DatesList = controller.getDatesList(beginningDate, endDate, clb);
         if (DatesList.isEmpty()) {
             System.out.println("No entries found for the GSM.");
             return;

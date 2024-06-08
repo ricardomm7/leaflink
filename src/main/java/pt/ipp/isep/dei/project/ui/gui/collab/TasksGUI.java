@@ -64,29 +64,25 @@ public class TasksGUI {
     @FXML
     void SerchAgendaEntryHandle(ActionEvent event) {
         //Não dá!!
-        /**
-         LocalDate startDate = startDateDateP.getValue();
-         LocalDate endDate = endDateDateP.getValue();
+        LocalDate startDate = startDateDateP.getValue();
+        LocalDate endDate = endDateDateP.getValue();
 
-         if (startDate != null && endDate != null && !startDate.isAfter(endDate)) {
-         List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(
-         startDate,
-         endDate,
-         ProgressStatus.PLANNED, // ou qualquer outro status que você deseja usar
-         listTaskController.getCollaboratorTroughEmail(session.getUserEmail())
-         );
+        if (startDate != null && endDate != null && !startDate.isAfter(endDate)) {
+            List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(
+                    startDate,
+                    endDate,
+                    listTaskController.getCollaboratorTroughEmail(session.getUserEmail())
+            );
 
-         if (agendaEntries.isEmpty()) {
-         ShowError.showAlert("Search Agenda Entry", "No entries found for the given date range.", null);
-         } else {
-         // Atualiza a lista de entradas de agenda
-         allAgendaEntry = agendaEntries;
-         updateAgendaEntryList();
-         }
-         } else {
-         ShowError.showAlert("Search Agenda Entry", "Please select both start and end dates.", null);
-         }
-         **/
+            if (agendaEntries.isEmpty()) {
+                ShowError.showAlert("Search Agenda Entry", "No entries found for the given date range.", null);
+            } else {
+                // Atualiza a lista de entradas de agenda
+                updateWithDates(agendaEntries);
+            }
+        } else {
+            ShowError.showAlert("Search Agenda Entry", "Please select both start and end dates.", null);
+        }
     }
 
 
@@ -104,9 +100,67 @@ public class TasksGUI {
         }
     }
 
+    private void updateWithDates(List<AgendaEntryDto> a) {
+
+        List<String> agendaEntryList = a.stream()
+                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s | Progress Status: %s",
+                        entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
+                        entry.getAssignedTeam() != null ? entry.getAssignedTeam().getTeamAsString() : "No team assigned",
+                        entry.getAssignedVehicles() != null && !entry.getAssignedVehicles().isEmpty() ?
+                                entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) :
+                                "No vehicles assigned", entry.getProgressStatus()))
+                .collect(Collectors.toList());
+        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
+        agendaListView.setItems(observableList);
+
+        agendaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> listView) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                            setStyle(null);
+                        } else {
+                            setText(item);
+                            AgendaEntryDto agendaEntry = allAgendaEntry.stream()
+                                    .filter(entry -> item.contains(entry.getTitle()) && item.contains(entry.getGreenSpace().getName()))
+                                    .findFirst().orElse(null);
+
+                            if (agendaEntry != null) {
+                                if (agendaEntry.getProgressStatus() == ProgressStatus.CANCELLED) {
+                                    setStyle("-fx-text-fill: black;");
+                                } else {
+                                    switch (agendaEntry.getUrgencyStatus()) {
+                                        case HIGH:
+                                            setStyle("-fx-text-fill: red;");
+                                            break;
+                                        case MEDIUM:
+                                            setStyle("-fx-text-fill: orange;");
+                                            break;
+                                        case LOW:
+                                            setStyle("-fx-text-fill: green;");
+                                            break;
+                                        default:
+                                            setStyle("-fx-text-fill: black;");
+                                            break;
+                                    }
+                                }
+                            } else {
+                                setStyle("-fx-text-fill: black;");
+                            }
+                        }
+                    }
+                };
+            }
+        });
+    }
+
 
     private void updateAgendaEntryList() {
-        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
+        allAgendaEntry = listTaskController.getAgendaEntries(session);
 
         List<String> agendaEntryList = allAgendaEntry.stream()
                 .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s | Progress Status: %s",
@@ -197,6 +251,13 @@ public class TasksGUI {
         // Recarregar entradas de agenda ao inicializar
         reloadAgendaEntries();
 
+        if (listTaskController.getTeamTroughCLB(listTaskController.getCollaboratorTroughEmail(session.getUserEmail())) != null) {
+            startDateDateP.setDisable(false);
+            endDateDateP.setDisable(false);
+        } else {
+            startDateDateP.setDisable(true);
+            endDateDateP.setDisable(true);
+        }
         // Listeners para habilitar o botão de busca
         startDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
         endDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
@@ -212,7 +273,7 @@ public class TasksGUI {
 
 
     private void reloadAgendaEntries() {
-        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
+        allAgendaEntry = listTaskController.getAgendaEntries(session);
         updateAgendaEntryList();
     }
 
