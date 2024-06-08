@@ -68,7 +68,7 @@ public class TasksGUI {
          LocalDate startDate = startDateDateP.getValue();
          LocalDate endDate = endDateDateP.getValue();
 
-         if (startDate != null && endDate != null) {
+         if (startDate != null && endDate != null && startDate > endDate) {
          List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(
          startDate,
          endDate,
