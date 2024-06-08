@@ -136,33 +136,33 @@ public class Bootstrap implements Runnable {
      * Adds skills to the system.
      */
     private void addSkills() {
-        try{
-        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+        try {
+            SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
 
-        // Example 1
-        skillRepository.createSkill(new SkillDto("Class A Driving Licence"));
+            // Example 1
+            skillRepository.createSkill(new SkillDto("Class A Driving Licence"));
 
-        skillRepository.createSkill(new SkillDto("Class B Driving Licence"));
+            skillRepository.createSkill(new SkillDto("Class B Driving Licence"));
 
-        skillRepository.createSkill(new SkillDto("Class C Driving Licence"));
+            skillRepository.createSkill(new SkillDto("Class C Driving Licence"));
 
-        skillRepository.createSkill(new SkillDto("Operation of Landscaping Machinery"));
+            skillRepository.createSkill(new SkillDto("Operation of Landscaping Machinery"));
 
-        skillRepository.createSkill(new SkillDto("Irrigation System Installation and Maintenance"));
+            skillRepository.createSkill(new SkillDto("Irrigation System Installation and Maintenance"));
 
-        skillRepository.createSkill(new SkillDto("Pruning and Trimming Techniques"));
+            skillRepository.createSkill(new SkillDto("Pruning and Trimming Techniques"));
 
-        skillRepository.createSkill(new SkillDto("Soil Testing and Analysis"));
+            skillRepository.createSkill(new SkillDto("Soil Testing and Analysis"));
 
-        skillRepository.createSkill(new SkillDto("Pest and Weed Control"));
+            skillRepository.createSkill(new SkillDto("Pest and Weed Control"));
 
-        skillRepository.createSkill(new SkillDto("Hardscape Installation"));
+            skillRepository.createSkill(new SkillDto("Hardscape Installation"));
 
-        skillRepository.createSkill(new SkillDto("Tree Planting and Care"));
+            skillRepository.createSkill(new SkillDto("Tree Planting and Care"));
 
-        skillRepository.createSkill(new SkillDto("Safety Procedures for Green Space Maintenance"));
+            skillRepository.createSkill(new SkillDto("Safety Procedures for Green Space Maintenance"));
 
-        skillRepository.createSkill(new SkillDto("Seasonal Planting and Maintenance"));
+            skillRepository.createSkill(new SkillDto("Seasonal Planting and Maintenance"));
         } catch (Exception e) {
             ShowError.showAlert("Skill", e.getMessage(), "Error");
         }

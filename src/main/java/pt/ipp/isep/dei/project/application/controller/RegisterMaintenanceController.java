@@ -37,7 +37,7 @@ public class RegisterMaintenanceController {
     public void createMaintenance(String plate, LocalDate date, int currentKm) {
         try {
             maintenanceRepository.createMaintenance(new MaintenanceDto(plate, date, currentKm));
-        }catch (Exception e) {
+        } catch (Exception e) {
             ShowError.showAlert("Maintenance", e.getMessage(), "Error");
         }
     }

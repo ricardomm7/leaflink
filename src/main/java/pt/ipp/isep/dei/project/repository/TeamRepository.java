@@ -64,8 +64,8 @@ public class TeamRepository implements Serializable {
 
 
     public void setTeamAvailable(Team team, Boolean flag) {
-        for (Team team1 : teamList){
-            if (team.getCollaborators().equals(team1.getCollaborators()) && team.getSkills().equals(team1.getSkills()) && team.getMaxTeamSize()==team1.getMaxTeamSize() && team.getMinTeamSize()== team1.getMinTeamSize()){
+        for (Team team1 : teamList) {
+            if (team.getCollaborators().equals(team1.getCollaborators()) && team.getSkills().equals(team1.getSkills()) && team.getMaxTeamSize() == team1.getMaxTeamSize() && team.getMinTeamSize() == team1.getMinTeamSize()) {
                 team1.setAvailable(flag);
             }
         }

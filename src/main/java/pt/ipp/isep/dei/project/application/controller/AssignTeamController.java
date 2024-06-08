@@ -66,8 +66,8 @@ public class AssignTeamController {
         Team t = TeamMapper.toDomain(teamDtoList);
         AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
 
-        entryRepository.updateTeamAgendaEntry(agendaEntry,t);
-        NotificationService.notifyTeamCreate(t.getCollaborators(),agendaEntry);
+        entryRepository.updateTeamAgendaEntry(agendaEntry, t);
+        NotificationService.notifyTeamCreate(t.getCollaborators(), agendaEntry);
 
 
     }

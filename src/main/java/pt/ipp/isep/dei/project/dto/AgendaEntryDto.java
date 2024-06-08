@@ -240,5 +240,4 @@ public class AgendaEntryDto implements Serializable {
     }
 
 
-
 }

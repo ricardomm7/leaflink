@@ -50,8 +50,8 @@ public class RecordEntryController {
      */
     public boolean recordEntryCompletion(AgendaEntryDto agendaEntryDto, Boolean flag) {
         AgendaEntry entry = AgendaEntryMapper.toDomain(agendaEntryDto);
-        vehicleRepository.setVehicleAvailability(entry.getAssignedVehicles(),true);
-        teamRepository.setTeamAvailable(TeamMapper.toDomain(agendaEntryDto.getAssignedTeam()),flag);
+        vehicleRepository.setVehicleAvailability(entry.getAssignedVehicles(), true);
+        teamRepository.setTeamAvailable(TeamMapper.toDomain(agendaEntryDto.getAssignedTeam()), flag);
         return entryRepository.recordAgendaEntryCompletion(entry, ProgressStatus.COMPLETED);
     }
 }

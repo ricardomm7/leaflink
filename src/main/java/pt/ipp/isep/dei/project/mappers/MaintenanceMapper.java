@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.project.mappers;
 
 import pt.ipp.isep.dei.project.domain.Maintenance;
 import pt.ipp.isep.dei.project.dto.MaintenanceDto;
-import pt.ipp.isep.dei.project.ui.ShowError;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class MaintenanceMapper implements Serializable {
      * @return the maintenance
      */
     public static Maintenance toDomain(MaintenanceDto m) {
-            return new Maintenance(m.getVehiclePlate(), m.getDate(), m.getKm());
+        return new Maintenance(m.getVehiclePlate(), m.getDate(), m.getKm());
     }
 
     /**

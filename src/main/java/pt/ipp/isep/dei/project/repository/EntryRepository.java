@@ -286,8 +286,8 @@ public class EntryRepository implements Serializable {
     }
 
     public List<AgendaEntry> getAgendaEntriesAssignedToCollaborator(UserSession collaborator) {
-        List<AgendaEntry> agendaEntries= new ArrayList<>();
-        for (AgendaEntry entry: agendaEntryList){
+        List<AgendaEntry> agendaEntries = new ArrayList<>();
+        for (AgendaEntry entry : agendaEntryList) {
             if (entry.getAssignedTeam() != null) {
                 for (Collaborator c : entry.getAssignedTeam().getCollaborators()) {
                     if (c.getEmail().equalsIgnoreCase(collaborator.getUserEmail())) {

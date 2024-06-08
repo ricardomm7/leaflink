@@ -125,7 +125,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
      * @param assignedVehicles the new list of assigned vehicles.
      */
     public void setAssignedVehicles(List<Vehicle> assignedVehicles) {
-        this.assignedVehicles= assignedVehicles;
+        this.assignedVehicles = assignedVehicles;
     }
 
     /**
@@ -174,7 +174,6 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         result = 31 * result + assignedVehicles.hashCode();
         return result;
     }
-
 
 
 }

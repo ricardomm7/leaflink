@@ -31,7 +31,7 @@ public class CreateJobController {
     public void createJob(String designation) {
         try {
             jobRepository.createJob(new JobDto(designation));
-        }catch (Exception e) {
+        } catch (Exception e) {
             ShowError.showAlert("Job", e.getMessage(), "Error");
         }
     }

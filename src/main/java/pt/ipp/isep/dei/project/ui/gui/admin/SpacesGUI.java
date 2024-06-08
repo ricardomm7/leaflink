@@ -12,8 +12,6 @@ import javafx.scene.layout.GridPane;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.ListGreenSpacesController;
 import pt.ipp.isep.dei.project.application.controller.RegisterGreenSpaceController;
-import pt.ipp.isep.dei.project.application.session.ApplicationSession;
-import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.GreenSpaceType;
 import pt.ipp.isep.dei.project.dto.GreenSpaceDto;
 
@@ -208,7 +206,6 @@ public class SpacesGUI {
         grid.add(gsType, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
-
 
 
         dialog.setResultConverter(dialogButton -> {

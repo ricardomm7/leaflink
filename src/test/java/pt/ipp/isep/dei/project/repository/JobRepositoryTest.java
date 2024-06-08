@@ -3,8 +3,6 @@ package pt.ipp.isep.dei.project.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.project.dto.JobDto;
-import pt.ipp.isep.dei.project.domain.Job;
-import pt.ipp.isep.dei.project.mappers.JobMapper;
 
 import java.util.List;
 

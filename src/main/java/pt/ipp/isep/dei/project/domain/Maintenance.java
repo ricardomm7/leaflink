@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.project.domain;
 
-import pt.ipp.isep.dei.project.ui.ShowError;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -34,9 +32,9 @@ public class Maintenance implements Serializable {
      * @param currentKm    the kilometers at the time of the maintenance
      */
     public Maintenance(String vehiclePlate, LocalDate date, int currentKm) {
-            setVehiclePlate(vehiclePlate);
-            setDate(date);
-            setKm(String.valueOf(currentKm));
+        setVehiclePlate(vehiclePlate);
+        setDate(date);
+        setKm(String.valueOf(currentKm));
     }
 
     /**

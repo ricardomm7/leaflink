@@ -56,8 +56,8 @@ public class AssignVehiclesController {
     /**
      * Sets the availability of a vehicle at the specified index.
      *
-     * @param v the index of the vehicle
-     * @param isAvailable  the availability status to be set (true for available, false for unavailable)
+     * @param v           the index of the vehicle
+     * @param isAvailable the availability status to be set (true for available, false for unavailable)
      */
     public void setVehicleAvailability(List<VehicleDto> v, Boolean isAvailable) {
         vehicleRepository.setVehicleAvailability(VehicleMapper.toDomainList(v), isAvailable);
@@ -66,7 +66,7 @@ public class AssignVehiclesController {
     /**
      * Updates an agenda entry with the assigned vehicles.
      *
-     * @param agendaEntryDto     the index of the agenda entry
+     * @param agendaEntryDto the index of the agenda entry
      * @param vehicleDtoList the list of VehicleDto objects representing the assigned vehicles
      */
     public void updateEntryWithVehicles(AgendaEntryDto agendaEntryDto, List<VehicleDto> vehicleDtoList) {

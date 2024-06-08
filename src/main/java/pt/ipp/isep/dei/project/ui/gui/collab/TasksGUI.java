@@ -62,10 +62,33 @@ public class TasksGUI {
     private Button searchBtn;
 
     @FXML
-    void SerchAgendaEntryHandle(ActionEvent event){
+    void SerchAgendaEntryHandle(ActionEvent event) {
+        //Não dá!!
+        /**
+         LocalDate startDate = startDateDateP.getValue();
+         LocalDate endDate = endDateDateP.getValue();
 
+         if (startDate != null && endDate != null) {
+         List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(
+         startDate,
+         endDate,
+         ProgressStatus.PLANNED, // ou qualquer outro status que você deseja usar
+         listTaskController.getCollaboratorTroughEmail(session.getUserEmail())
+         );
 
+         if (agendaEntries.isEmpty()) {
+         ShowError.showAlert("Search Agenda Entry", "No entries found for the given date range.", null);
+         } else {
+         // Atualiza a lista de entradas de agenda
+         allAgendaEntry = agendaEntries;
+         updateAgendaEntryList();
+         }
+         } else {
+         ShowError.showAlert("Search Agenda Entry", "Please select both start and end dates.", null);
+         }
+         **/
     }
+
 
     @FXML
     void CompleteAgendaEntryHandle(ActionEvent event) {
@@ -156,6 +179,7 @@ public class TasksGUI {
         // Inicialização das caixas de detalhes e botões
         AgendaDetailsVBox.setVisible(false);
         CompleteAgendaEntryBtn.setDisable(true);
+        searchBtn.setDisable(true);  // Inicialmente desabilitado
         updateAgendaEntryList();
 
         // Listener para seleção de itens na lista de Agenda
@@ -172,7 +196,20 @@ public class TasksGUI {
 
         // Recarregar entradas de agenda ao inicializar
         reloadAgendaEntries();
+
+        // Listeners para habilitar o botão de busca
+        startDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
+        endDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
     }
+
+    private void checkDatesAndEnableSearch() {
+        if (startDateDateP.getValue() != null && endDateDateP.getValue() != null) {
+            searchBtn.setDisable(false);
+        } else {
+            searchBtn.setDisable(true);
+        }
+    }
+
 
     private void reloadAgendaEntries() {
         allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
