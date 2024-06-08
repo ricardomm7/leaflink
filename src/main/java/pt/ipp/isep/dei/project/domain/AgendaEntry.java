@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The AgendaEntry class represents a scheduled task or entry that extends ToDoEntry.
@@ -149,15 +150,6 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         }
     }
 
-    /**
-     * Get team.
-     *
-     * @return the team
-     */
-    public Team getTeam() {
-        return assignedTeam;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -169,7 +161,7 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
 
         if (!startingDate.equals(that.startingDate)) return false;
         if (progressStatus != that.progressStatus) return false;
-        if (assignedTeam != null ? !assignedTeam.equals(that.assignedTeam) : that.assignedTeam != null) return false;
+        if (!Objects.equals(assignedTeam, that.assignedTeam)) return false;
         return assignedVehicles.equals(that.assignedVehicles);
     }
 

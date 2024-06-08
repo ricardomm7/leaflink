@@ -20,7 +20,7 @@ class TeamRepositoryTest {
 
         teamRepository.addTeam((team));
 
-        List<TeamDto> teamList = teamRepository.getTeamDtoList();
+        List<TeamDto> teamList = TeamMapper.ListToDto(teamRepository.getTeamList());
 
         assertTrue(teamList.contains(TeamMapper.toDto(team)));
     }
@@ -30,7 +30,7 @@ class TeamRepositoryTest {
 
         TeamRepository teamRepository = new TeamRepository();
 
-        List<TeamDto> initialTeamList = teamRepository.getTeamDtoList();
+        List<TeamDto> initialTeamList = TeamMapper.ListToDto(teamRepository.getTeamList());
 
         assertTrue(initialTeamList.isEmpty());
 
@@ -38,7 +38,7 @@ class TeamRepositoryTest {
 
         teamRepository.addTeam((team));
 
-        List<TeamDto> updatedTeamList = teamRepository.getTeamDtoList();
+        List<TeamDto> updatedTeamList = TeamMapper.ListToDto(teamRepository.getTeamList());
 
         assertTrue(updatedTeamList.contains(TeamMapper.toDto(team)));
     }

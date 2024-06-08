@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.project.repository;
 
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.*;
 import pt.ipp.isep.dei.project.dto.ToDoEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
@@ -21,12 +22,14 @@ public class EntryRepository implements Serializable {
     private final List<ToDoEntry> toDoEntryList;
     private final List<AgendaEntry> agendaEntryList;
 
+
     /**
      * Constructs a new EntryRepository instance and initializes the internal lists.
      */
     public EntryRepository() {
         agendaEntryList = new ArrayList<>();
         toDoEntryList = new ArrayList<>();
+
     }
 
     /**
@@ -91,10 +94,11 @@ public class EntryRepository implements Serializable {
      */
     public void updateVehiclesAgendaEntry(AgendaEntry agendaEntry, List<VehicleDto> f) {
         List<Vehicle> u = VehicleMapper.toDomainList(f);
+
         for (AgendaEntry agendaEntry1 : agendaEntryList) {
             if (agendaEntry.getTitle().equalsIgnoreCase(agendaEntry1.getTitle()) && agendaEntry.getDescription().
                     equalsIgnoreCase(agendaEntry1.getDescription()) && agendaEntry.getStartingDate().isEqual(agendaEntry1.getStartingDate()))
-                (agendaEntry1).setAssignedVehicles(u);
+                agendaEntry1.setAssignedVehicles(u);
         }
     }
 
@@ -184,7 +188,7 @@ public class EntryRepository implements Serializable {
 
         List<AgendaEntry> teamEntries = new ArrayList<>();
         for (AgendaEntry entry : fullList) {
-            if (entry.getTeam().equals(team)) {
+            if (entry.getAssignedTeam().equals(team)) {
                 teamEntries.add(entry);
             }
         }
@@ -215,10 +219,17 @@ public class EntryRepository implements Serializable {
      * @return true if the entry is updated successfully, false otherwise.
      */
     public boolean recordAgendaEntryCompletion(AgendaEntry entry, ProgressStatus status) {
-        if (entry != null && status == ProgressStatus.COMPLETED) {
-            entry.setProgressStatus(status);
-            entry.setAvailable(entry);
-            return true;
+        for (AgendaEntry entry1 : agendaEntryList) {
+            if (entry.getTitle().equalsIgnoreCase(entry1.getTitle()) && entry.getDescription().equalsIgnoreCase(entry1.getDescription()) &&
+                    entry.getStartingDate().isEqual(entry1.getStartingDate())) {
+                if (entry1.getProgressStatus() != ProgressStatus.COMPLETED) {
+                    entry1.setProgressStatus(status);
+                    entry1.setAvailable(entry1);
+                    return true;
+                } else {
+                    ShowError.showAlert("Error", "Entry already completed or cancelled ", null);
+                }
+            }
         }
         return false;
     }
@@ -268,13 +279,23 @@ public class EntryRepository implements Serializable {
             if (entry.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && entry.getDescription().equalsIgnoreCase(agendaEntry.getDescription()) && entry.getStartingDate().equals(agendaEntry.getStartingDate()) &&
                     entry.getProgressStatus().equals(agendaEntry.getProgressStatus())) {
                 entry.setProgressStatus(ProgressStatus.CANCELLED);
-                entry.getAssignedTeam().setAvailable(true);
-                for(Vehicle vehicle: entry.getAssignedVehicles()){
-                    vehicle.setAvailable(true);
-                }
                 return true;
             }
         }
         return false;
+    }
+
+    public List<AgendaEntry> getAgendaEntriesAssignedToCollaborator(UserSession collaborator) {
+        List<AgendaEntry> agendaEntries= new ArrayList<>();
+        for (AgendaEntry entry: agendaEntryList){
+            if (entry.getAssignedTeam() != null) {
+                for (Collaborator c : entry.getAssignedTeam().getCollaborators()) {
+                    if (c.getEmail().equalsIgnoreCase(collaborator.getUserEmail())) {
+                        agendaEntries.add(entry);
+                    }
+                }
+            }
+        }
+        return agendaEntries;
     }
 }

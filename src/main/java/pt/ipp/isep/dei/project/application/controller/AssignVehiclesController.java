@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
+import pt.ipp.isep.dei.project.repository.MaintenanceRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
@@ -21,6 +22,7 @@ public class AssignVehiclesController {
     private final Repositories repositories;
     private final EntryRepository entryRepository;
     private final VehicleRepository vehicleRepository;
+    private final MaintenanceRepository maintenanceRepository;
 
     /**
      * Constructs a new AssignVehiclesController object and initializes the repositories.
@@ -29,6 +31,7 @@ public class AssignVehiclesController {
         this.repositories = Repositories.getInstance();
         this.entryRepository = repositories.getEntryRepository();
         this.vehicleRepository = repositories.getVehicleRepository();
+        this.maintenanceRepository = repositories.getMaintenanceRepository();
     }
 
     /**

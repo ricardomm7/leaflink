@@ -30,6 +30,13 @@ public class Team implements Serializable {
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }
+    public Team(List<Skill> skills, List<Collaborator> collaborators, int minTeamSize, int maxTeamSize, boolean flag) {
+        this.isAvailable = flag;
+        this.skills = skills;
+        this.collaborators = collaborators;
+        this.minTeamSize = minTeamSize;
+        this.maxTeamSize = maxTeamSize;
+    }
 
     public Team(int minTeamSize, int maxTeamSize) {
         this.isAvailable = true;
@@ -80,6 +87,7 @@ public class Team implements Serializable {
         return maxTeamSize;
     }
 
+
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
@@ -101,8 +109,8 @@ public class Team implements Serializable {
         return minTeamSize == team.minTeamSize &&
                maxTeamSize == team.maxTeamSize &&
                isAvailable == team.isAvailable &&
-               Objects.equals(skills, team.skills) &&
-               Objects.equals(collaborators, team.collaborators);
+               (skills == team.skills) &&
+               (collaborators == team.collaborators);
     }
 
     @Override

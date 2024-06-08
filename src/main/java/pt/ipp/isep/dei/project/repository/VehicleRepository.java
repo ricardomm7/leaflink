@@ -43,8 +43,8 @@ public class VehicleRepository implements Serializable {
      *
      * @return the list of all VehicleDto objects
      */
-    public List<VehicleDto> getVehicleList() {
-        return VehicleMapper.toDtoList(vehicleList);
+    public List<Vehicle> getVehicleList() {
+        return (vehicleList);
     }
 
     /**
@@ -117,10 +117,12 @@ public class VehicleRepository implements Serializable {
             double maintenanceFrequency = vehicle.getMaintenanceFrequency();
             double lastMaintenanceKm = getLastMaintenanceKm(vehicle.getVehiclePlate(), maintenanceList);
 
-            double nextMaintenanceKm = lastMaintenanceKm + maintenanceFrequency;
-
-            if (lastMaintenanceKm == -1 || currentKm >= nextMaintenanceKm * 0.95) {
+            // Check if the vehicle has never had maintenance or if it needs maintenance soon
+            if (lastMaintenanceKm == -1 || currentKm >= (lastMaintenanceKm + maintenanceFrequency) * 0.95) {
+                vehicle.setAvailable(false);
                 vehiclesNeedingMaintenance.add(VehicleMapper.toDto(vehicle));
+            } else {
+                vehicle.setAvailable(true);
             }
         }
         return vehiclesNeedingMaintenance;
@@ -155,7 +157,7 @@ public class VehicleRepository implements Serializable {
     public void setVehicleAvailability(List<Vehicle> v, Boolean isAvailable) {
         for (Vehicle u : v) {
             for (Vehicle w : vehicleList) {
-                if (u.getVehiclePlate().equalsIgnoreCase(w.getVehiclePlate()) && u.getVIN().equalsIgnoreCase(w.getVIN())) {
+                if (u.getVehiclePlate().equalsIgnoreCase(w.getVehiclePlate())) {
                     w.setAvailable(isAvailable);
                 }
             }

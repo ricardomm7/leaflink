@@ -4,21 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
 import pt.ipp.isep.dei.project.application.controller.AddAgendaEntryController;
+import pt.ipp.isep.dei.project.application.controller.ListTaskController;
 import pt.ipp.isep.dei.project.application.controller.RecordEntryController;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.project.application.session.UserSession;
+import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
 import pt.ipp.isep.dei.project.ui.ShowError;
 
-import java.util.Comparator;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +26,7 @@ public class TasksGUI {
 
     private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
     private final RecordEntryController recordEntryController = new RecordEntryController();
+    private final ListTaskController listTaskController = new ListTaskController();
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
     @FXML
     private ListView<String> agendaListView;
@@ -57,6 +58,14 @@ public class TasksGUI {
     private DatePicker endDateDateP;
     @FXML
     private Button CompleteAgendaEntryBtn;
+    @FXML
+    private Button searchBtn;
+
+    @FXML
+    void SerchAgendaEntryHandle(ActionEvent event){
+
+
+    }
 
     @FXML
     void CompleteAgendaEntryHandle(ActionEvent event) {
@@ -64,9 +73,9 @@ public class TasksGUI {
         if (selectedAgendaEntry == null) {
             ShowError.showAlert("Complete Agenda Entry", "No entry selected to complete.", null);
         } else {
-            updateAgendaEntryList();
             AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
-            recordEntryController.recordEntryCompletion(agendaEntryDto);
+
+            recordEntryController.recordEntryCompletion(agendaEntryDto, false);
 
             updateAgendaEntryList();
         }
@@ -74,26 +83,62 @@ public class TasksGUI {
 
 
     private void updateAgendaEntryList() {
-        // Obtenha a lista inicial de AgendaEntryDto
-        List<AgendaEntryDto> initialize = recordEntryController.getAgendaEntryOfCollaboratorList(session);
+        allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
 
-        // Ordena a lista pela data de início em ordem decrescente (mais recentes primeiro)
-        List<AgendaEntryDto> sortedList = initialize.stream()
-                .sorted(Comparator.comparing(AgendaEntryDto::getStartingDate).reversed())
-                .collect(Collectors.toList());
-
-        // Transforma a lista ordenada em strings formatadas
-        List<String> agendaEntryList = sortedList.stream()
-                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s",
+        List<String> agendaEntryList = allAgendaEntry.stream()
+                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s | Progress Status: %s",
                         entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
                         entry.getAssignedTeam() != null ? entry.getAssignedTeam().getTeamAsString() : "No team assigned",
                         entry.getAssignedVehicles() != null && !entry.getAssignedVehicles().isEmpty() ?
-                                entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) : "No vehicles assigned"))
+                                entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) :
+                                "No vehicles assigned", entry.getProgressStatus()))
                 .collect(Collectors.toList());
-
-        // Atualiza a ListView com a lista ordenada e formatada
         ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
         agendaListView.setItems(observableList);
+
+        agendaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> listView) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                            setStyle(null);
+                        } else {
+                            setText(item);
+                            AgendaEntryDto agendaEntry = allAgendaEntry.stream()
+                                    .filter(entry -> item.contains(entry.getTitle()) && item.contains(entry.getGreenSpace().getName()))
+                                    .findFirst().orElse(null);
+
+                            if (agendaEntry != null) {
+                                if (agendaEntry.getProgressStatus() == ProgressStatus.CANCELLED) {
+                                    setStyle("-fx-text-fill: black;");
+                                } else {
+                                    switch (agendaEntry.getUrgencyStatus()) {
+                                        case HIGH:
+                                            setStyle("-fx-text-fill: red;");
+                                            break;
+                                        case MEDIUM:
+                                            setStyle("-fx-text-fill: orange;");
+                                            break;
+                                        case LOW:
+                                            setStyle("-fx-text-fill: green;");
+                                            break;
+                                        default:
+                                            setStyle("-fx-text-fill: black;");
+                                            break;
+                                    }
+                                }
+                            } else {
+                                setStyle("-fx-text-fill: black;");
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
 
@@ -170,8 +215,11 @@ public class TasksGUI {
     private AgendaEntryDto getAgendaEntry(String string, UserSession GSM) {
         String[] splittedString = string.split(" \\| ");
         String title = splittedString[1].split(": ")[1];
+        String date = splittedString[0].split(": ")[1];
+        String status = splittedString[5].split(": ")[1];
+        LocalDate dateLocal = LocalDate.parse(date);
         for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
-            if (entry.getTitle().equalsIgnoreCase(title)) {
+            if (entry.getTitle().equalsIgnoreCase(title) && entry.getStartingDate().isEqual(dateLocal) && entry.getProgressStatus().toString().equals(status)) {
                 return entry;
             }
         }

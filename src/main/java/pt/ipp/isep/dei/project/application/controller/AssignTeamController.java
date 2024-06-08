@@ -57,17 +57,6 @@ public class AssignTeamController {
 
 
     /**
-     * Sets the availability of a team.
-     *
-     * @param teamIndex   the index of the team to set availability for.
-     * @param isAvailable a boolean indicating the availability status.
-     */
-    public void setTeamAvailability(int teamIndex, Boolean isAvailable) {
-        teamRepository.setTeamAvailability(teamIndex, isAvailable);
-    }
-
-
-    /**
      * Updates an agenda entry with the selected team.
      *
      * @param agendaEntryDto the AgendaEntryDto to be updated.
@@ -76,10 +65,15 @@ public class AssignTeamController {
     public void updateEntryWithTeam(AgendaEntryDto agendaEntryDto, TeamDto teamDtoList) {
         Team t = TeamMapper.toDomain(teamDtoList);
         AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
-        entryRepository.updateTeamAgendaEntry(agendaEntry, t);
+
+        entryRepository.updateTeamAgendaEntry(agendaEntry,t);
         NotificationService.notifyTeamCreate(t.getCollaborators(),agendaEntry);
 
 
     }
 
+    public void setTeamAvailable(TeamDto selectedTeam, boolean flag) {
+        Team team = TeamMapper.toDomain(selectedTeam);
+        teamRepository.setTeamAvailable(team, flag);
+    }
 }

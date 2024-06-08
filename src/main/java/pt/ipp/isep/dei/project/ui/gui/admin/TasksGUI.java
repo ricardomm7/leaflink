@@ -109,9 +109,9 @@ public class TasksGUI {
         if (selectedAgendaEntry == null) {
             ShowError.showAlert("Complete Agenda Entry", "No entry selected to complete.", null);
         } else {
-            updateAgendaEntryList();
             AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
-            recordEntryController.recordEntryCompletion(agendaEntryDto);
+
+            recordEntryController.recordEntryCompletion(agendaEntryDto, false);
 
             updateAgendaEntryList();
         }
@@ -130,31 +130,35 @@ public class TasksGUI {
 
         result.ifPresent(selectedTeam -> {
             AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
+
+            if (agendaEntryDto == null) {
+                ShowError.showAlert("Assign Team", "The selected agenda entry does not exist.", null);
+                return;
+            }
+
             assignTeamController.updateEntryWithTeam(agendaEntryDto, selectedTeam);
+            assignTeamController.setTeamAvailable(selectedTeam, false);
+
             updateAgendaEntryList();
 
-
             StringBuilder stringBuilder = new StringBuilder();
-            if (agendaEntryDto != null && agendaEntryDto.getAssignedTeam() != null) {
+            if (agendaEntryDto.getAssignedTeam() != null) {
                 stringBuilder.append(agendaEntryDto.getAssignedTeam().getCollaboratorsDtoList()).append(" | ");
-                teamLabelA.setText(stringBuilder.toString());
-
             } else {
                 stringBuilder.append("No team assigned");
-                teamLabelA.setText(stringBuilder.toString());
             }
+            teamLabelA.setText(stringBuilder.toString());
 
             showAgendaEntryDetails(selectedAgendaEntry);
         });
     }
 
+
     private Dialog<TeamDto> createTeamSelectionDialog() {
         Dialog<TeamDto> dialog = new Dialog<>();
         dialog.setTitle("Select Team");
 
-        List<TeamDto> teams = assignTeamController.getTeamList().stream()
-                .distinct()  // Remove duplicatas da lista de equipes
-                .collect(Collectors.toList());
+        List<TeamDto> teams = assignTeamController.getTeamList();
 
         VBox vBox = new VBox();
         ToggleGroup toggleGroup = new ToggleGroup();
@@ -182,6 +186,7 @@ public class TasksGUI {
         return dialog;
     }
 
+
     @FXML
     void handleAddVehicleBtn(ActionEvent event) {
         Dialog<List<VehicleDto>> dialog = createVehicleSelectionDialog();
@@ -189,7 +194,8 @@ public class TasksGUI {
 
         result.ifPresent(selectedVehicles -> {
             String selectedItem = agendaListView.getSelectionModel().getSelectedItem();
-            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedItem,session);
+            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedItem, session);
+
             assignVehiclesController.updateEntryWithVehicles(agendaEntryDto, selectedVehicles);
             assignVehiclesController.setVehicleAvailability(selectedVehicles, false);
             updateAgendaEntryList();
@@ -201,7 +207,7 @@ public class TasksGUI {
                     a.append(v.getVehiclePlate()).append(" | ").append(v.getType()).append("\n");
                 }
                 vehicleLabelA.setText(a.toString());
-            }else{
+            } else {
                 vehicleLabelA.setText("No vehicle assigned");
             }
         });
@@ -335,11 +341,12 @@ public class TasksGUI {
         allAgendaEntry = addAgendaEntryController.getAgendaEntries(session);
 
         List<String> agendaEntryList = allAgendaEntry.stream()
-                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s",
+                .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s | Progress Status: %s",
                         entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
                         entry.getAssignedTeam() != null ? entry.getAssignedTeam().getTeamAsString() : "No team assigned",
                         entry.getAssignedVehicles() != null && !entry.getAssignedVehicles().isEmpty() ?
-                                entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) : "No vehicles assigned"))
+                                entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) :
+                                "No vehicles assigned", entry.getProgressStatus()))
                 .collect(Collectors.toList());
         ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
         agendaListView.setItems(observableList);
@@ -361,19 +368,23 @@ public class TasksGUI {
                                     .findFirst().orElse(null);
 
                             if (agendaEntry != null) {
-                                switch (agendaEntry.getUrgencyStatus()) {
-                                    case HIGH:
-                                        setStyle("-fx-text-fill: red;");
-                                        break;
-                                    case MEDIUM:
-                                        setStyle("-fx-text-fill: orange;");
-                                        break;
-                                    case LOW:
-                                        setStyle("-fx-text-fill: green;");
-                                        break;
-                                    default:
-                                        setStyle("-fx-text-fill: black;");
-                                        break;
+                                if (agendaEntry.getProgressStatus() == ProgressStatus.CANCELLED) {
+                                    setStyle("-fx-text-fill: black;");
+                                } else {
+                                    switch (agendaEntry.getUrgencyStatus()) {
+                                        case HIGH:
+                                            setStyle("-fx-text-fill: red;");
+                                            break;
+                                        case MEDIUM:
+                                            setStyle("-fx-text-fill: orange;");
+                                            break;
+                                        case LOW:
+                                            setStyle("-fx-text-fill: green;");
+                                            break;
+                                        default:
+                                            setStyle("-fx-text-fill: black;");
+                                            break;
+                                    }
                                 }
                             } else {
                                 setStyle("-fx-text-fill: black;");
@@ -384,6 +395,7 @@ public class TasksGUI {
             }
         });
     }
+
 
     @FXML
     void PostponeAgendaEntryHandle(ActionEvent event) {
@@ -422,7 +434,7 @@ public class TasksGUI {
                     AgendaEntryDto agendaEntry = getAgendaEntry(selectedAgendaEntry, session);
 
                     // Verifique se a equipe foi atribuída antes de adiar a entrada
-                    if (agendaEntry.getAssignedTeam() == null) {
+                    if (agendaEntry != null && agendaEntry.getAssignedTeam() == null) {
                         ShowError.showAlert("Postpone Agenda Entry", "No team assigned to this entry.", null);
                         return;
                     }
@@ -464,14 +476,7 @@ public class TasksGUI {
         if (selectedAgendaEntry != null) {
             AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
 
-            // Cria uma janela de confirmação
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm Cancelation");
-            alert.setHeaderText("Are you sure you want to cancel this agenda entry?");
-            alert.setContentText("Title: " + agendaEntryDto.getTitle() + "\nDescription: " + agendaEntryDto.getDescription());
-
-            // Mostra a janela e espera pela resposta do utilizador
-            Optional<ButtonType> result = alert.showAndWait();
+            Optional<ButtonType> result = getButtonType(agendaEntryDto);
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 if (cancelAgendaEntryController.cancelAgendaEntry(agendaEntryDto)) {
                     ShowError.showAlertConfirm("Success", "Agenda entry cancelled successfully.", null);
@@ -481,6 +486,18 @@ public class TasksGUI {
                 }
             }
         }
+    }
+
+    private static Optional<ButtonType> getButtonType(AgendaEntryDto agendaEntryDto) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Cancelation");
+        alert.setHeaderText("Are you sure you want to cancel this agenda entry?");
+        if (agendaEntryDto != null) {
+            alert.setContentText("Title: " + agendaEntryDto.getTitle() + "\nDescription: " + agendaEntryDto.getDescription());
+        }
+
+        // Mostra a janela e espera pela resposta do utilizador
+        return alert.showAndWait();
     }
 
 
@@ -653,15 +670,14 @@ public class TasksGUI {
         });
 
         dialog.showAndWait().ifPresent(entryDto -> {
-            if (entryDto != null) {
-                allToDoEntry.add(entryDto);
-                updateToDoEntry();
-            }
+            allToDoEntry.add(entryDto);
+            updateToDoEntry();
         });
         updateToDoEntry();
     }
 
-    private void addValidationListeners(TextField titleField, TextField descriptionField, TextField durationField, ComboBox<UrgencyStatus> urgencyComboBox, ComboBox<GreenSpaceDto> greenSpaceComboBox) {
+    private void addValidationListeners(TextField titleField, TextField descriptionField, TextField
+            durationField, ComboBox<UrgencyStatus> urgencyComboBox, ComboBox<GreenSpaceDto> greenSpaceComboBox) {
         titleField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
                 titleField.setStyle("-fx-border-color: red;");
@@ -703,7 +719,8 @@ public class TasksGUI {
         });
     }
 
-    private boolean validateInputs(TextField titleField, TextField descriptionField, TextField durationField, ComboBox<UrgencyStatus> urgencyComboBox, ComboBox<GreenSpaceDto> greenSpaceComboBox) {
+    private boolean validateInputs(TextField titleField, TextField descriptionField, TextField
+            durationField, ComboBox<UrgencyStatus> urgencyComboBox, ComboBox<GreenSpaceDto> greenSpaceComboBox) {
         boolean valid = true;
 
         if (!titleField.getText().matches("[\\w\\s,./-áéíóúãõâêîôûçÁÉÍÓÚÃÕÂÊÎÔÛÇ]+")) {
@@ -905,9 +922,10 @@ public class TasksGUI {
         String[] splittedString = string.split(" \\| ");
         String title = splittedString[1].split(": ")[1];
         String date = splittedString[0].split(": ")[1];
+        String status = splittedString[5].split(": ")[1];
         LocalDate dateLocal = LocalDate.parse(date);
         for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
-            if (entry.getTitle().equalsIgnoreCase(title) && entry.getStartingDate().isEqual(dateLocal)) {
+            if (entry.getTitle().equalsIgnoreCase(title) && entry.getStartingDate().isEqual(dateLocal) && entry.getProgressStatus().toString().equals(status)) {
                 return entry;
             }
         }
@@ -915,6 +933,7 @@ public class TasksGUI {
         return null;
 
     }
+
     private ToDoEntryDto getToDoEntryDto(String string) {
         ToDoEntryDto entry = null;
         String[] splittedString = string.split(" \\| ");

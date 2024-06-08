@@ -77,13 +77,15 @@ public class CreateTeamController {
 
         requiredSkills.sort(Comparator.comparing(SkillDto::getDesignation));
 
-
         for (SkillDto requiredSkill : requiredSkills) {
-            for (CollaboratorDto collaborator : availableCollaborators) {
+            Iterator<CollaboratorDto> iterator = availableCollaborators.iterator();
+            while (iterator.hasNext()) {
+                CollaboratorDto collaborator = iterator.next();
                 if (collaborator.getSkills().contains(requiredSkill)) {
                     combinedSkills.add(requiredSkill);
                     selectedCollaborators.add(collaborator);
-                    break; // Break once a collaborator with the required skill is found
+                    iterator.remove(); // Remove o colaborador da lista de disponíveis
+                    break; // Interrompe uma vez que um colaborador com a skill necessária foi encontrado
                 }
             }
         }
@@ -98,6 +100,7 @@ public class CreateTeamController {
 
         return null;
     }
+
 
     /**
      * Checks if a collaborator is already assigned to a team.

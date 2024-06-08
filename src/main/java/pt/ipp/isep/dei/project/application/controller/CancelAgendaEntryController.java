@@ -9,6 +9,7 @@ import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
+import pt.ipp.isep.dei.project.repository.VehicleRepository;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class CancelAgendaEntryController {
     private Repositories repositories;
     private EntryRepository entryRepository;
+    private VehicleRepository vehicleRepository;
 
     /**
      * Constructor for CancelAgendaEntryController.
@@ -26,6 +28,7 @@ public class CancelAgendaEntryController {
     public CancelAgendaEntryController() {
         repositories = Repositories.getInstance();
         entryRepository = repositories.getEntryRepository();
+        vehicleRepository = repositories.getVehicleRepository();
     }
 
     /**
@@ -59,6 +62,7 @@ public class CancelAgendaEntryController {
         if (entryRepository != null) { // Verifica se entryRepository não é nulo antes de usá-lo
             AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
             NotificationService.notifyTeamCancel(agendaEntry.getAssignedTeam().getCollaborators(),agendaEntry);
+            vehicleRepository.setVehicleAvailability(agendaEntry.getAssignedVehicles(),true);
            return entryRepository.cancelAgendaEntry(agendaEntry);
         } else {
             return false; // Retorna false se entryRepository for nulo

@@ -13,6 +13,7 @@ public class TeamDto implements Serializable {
     private List<SkillDto> skills;
     private final int minTeamSize;
     private final int maxTeamSize;
+    private boolean isAvailable;
     private List<CollaboratorDto> collaborator;
 
     /**
@@ -43,11 +44,14 @@ public class TeamDto implements Serializable {
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }
-
-    public TeamDto(int minTeamSize, int maxTeamSize) {
+    public TeamDto(List<SkillDto> skills, List<CollaboratorDto> collaborators, int minTeamSize, int maxTeamSize, boolean flag) {
+        this.isAvailable = flag;
+        this.skills = skills;
+        this.collaborator = collaborators;
         this.minTeamSize = minTeamSize;
         this.maxTeamSize = maxTeamSize;
     }
+
 
     /**
      * Gets the list of skills required for the team.
@@ -103,19 +107,24 @@ public class TeamDto implements Serializable {
     public void setSkills(List<SkillDto> skills) {
         this.skills = skills;
     }
+    public boolean getAvailable(){
+        return isAvailable;
+    }
 
-    @Override
+     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TeamDto)) return false;
-        TeamDto teamDto = (TeamDto) o;
-        return minTeamSize == teamDto.minTeamSize &&
-               maxTeamSize == teamDto.maxTeamSize &&
-               Objects.equals(skills, teamDto.skills);
+        TeamDto team = (TeamDto) o;
+        return minTeamSize == team.minTeamSize &&
+               maxTeamSize == team.maxTeamSize &&
+               isAvailable == team.isAvailable &&
+               (skills == team.skills) &&
+               (collaborator == team.collaborator);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(skills, minTeamSize, maxTeamSize);
+        return Objects.hash(skills, minTeamSize, maxTeamSize,collaborator,isAvailable);
     }
 }

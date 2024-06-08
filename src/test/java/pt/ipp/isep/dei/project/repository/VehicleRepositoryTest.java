@@ -30,7 +30,7 @@ class VehicleRepositoryTest {
         vehicleRepository.registerVehicle(vehicle1);
         vehicleRepository.registerVehicle(vehicle2);
 
-        List<VehicleDto> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = VehicleMapper.toDtoList(vehicleRepository.getVehicleList());
 
         assertEquals(2, result.size());
         assertTrue(result.contains(vehicle1));
@@ -39,7 +39,7 @@ class VehicleRepositoryTest {
 
     @Test
     public void test_returns_new_list_instance() {
-        List<VehicleDto> result = vehicleRepository.getVehicleList();
+        List<VehicleDto> result = VehicleMapper.toDtoList(vehicleRepository.getVehicleList());
 
         assertNotSame(vehicleRepository.getAvailableVehicleList(), result);
     }

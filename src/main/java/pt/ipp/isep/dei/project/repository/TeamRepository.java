@@ -1,11 +1,6 @@
 package pt.ipp.isep.dei.project.repository;
 
-import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.Collaborator;
 import pt.ipp.isep.dei.project.domain.Team;
-import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
-import pt.ipp.isep.dei.project.dto.TeamDto;
-import pt.ipp.isep.dei.project.mappers.TeamMapper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,24 +22,15 @@ public class TeamRepository implements Serializable {
     }
 
 
-    //public void addTeam(TeamDto teamDto) {
-    //  Team team = TeamMapper.toDomain(teamDto);
-    //teamList.add(team);
-    //}
-
+    /**
+     * Add team.
+     *
+     * @param team the team
+     */
     public void addTeam(Team team) {
         teamList.add(team);
     }
 
-
-    /**
-     * Gets the list of TeamDto objects.
-     *
-     * @return the list of TeamDto objects
-     */
-    public List<TeamDto> getTeamDtoList() {
-        return TeamMapper.ListToDto(teamList);
-    }
 
     /**
      * Gets team list.
@@ -56,54 +42,16 @@ public class TeamRepository implements Serializable {
     }
 
 
-    /**
-     * Gets team trough collaborator.
-     *
-     * @param clb the clb
-     * @return the team trough collaborator
-     */
-    public Team getTeamTroughCollaborator(Collaborator clb) {
-        for (Team team : teamList) {
-            if (team.getCollaborators().contains(clb)) {
-                return team;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Gets the list of AgendaEntryDto objects assigned to a specific collaborator.
-     *
-     * @param collaborator       the UserSession object representing the collaborator
-     * @param agendaEntryDtoList the list of AgendaEntryDto objects to search
-     * @return the list of AgendaEntryDto objects assigned to the collaborator
-     */
-    public List<AgendaEntryDto> getAgendaEntriesAssignedToCollaborator(UserSession collaborator, List<AgendaEntryDto> agendaEntryDtoList) {
-        List<AgendaEntryDto> assignedEntries = new ArrayList<>();
-        for (AgendaEntryDto toDoEntryDto : agendaEntryDtoList) {
-            for (Team team : teamList) {
-                if (team.getCollaborators().equals(collaborator)) {
-                    assignedEntries.add(toDoEntryDto);
-                }
-            }
-        }
-        return assignedEntries;
-    }
-
     public List<Team> getAvailableTeamList() {
         List<Team> availableTeam = new ArrayList<>();
-        for (Team team : getTeamList()) {
+        for (Team team : teamList) {
             if (team.isAvailable()) {
                 availableTeam.add(team);
             }
         }
-
-        return (availableTeam);
+        return availableTeam;
     }
 
-    public void setTeamAvailability(int teamIndex, Boolean isAvailable) {
-        teamList.get(teamIndex).setAvailable(isAvailable);
-    }
 
     /**
      * Remove.
@@ -112,5 +60,14 @@ public class TeamRepository implements Serializable {
      */
     public void remove(int selectedIndex) {
         teamList.remove(selectedIndex);
+    }
+
+
+    public void setTeamAvailable(Team team, Boolean flag) {
+        for (Team team1 : teamList){
+            if (team.getCollaborators().equals(team1.getCollaborators()) && team.getSkills().equals(team1.getSkills()) && team.getMaxTeamSize()==team1.getMaxTeamSize() && team.getMinTeamSize()== team1.getMinTeamSize()){
+                team1.setAvailable(flag);
+            }
+        }
     }
 }

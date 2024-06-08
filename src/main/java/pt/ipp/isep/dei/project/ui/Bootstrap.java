@@ -11,8 +11,6 @@ import pt.ipp.isep.dei.project.repository.*;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Bootstrap implements Runnable {
 
@@ -21,14 +19,14 @@ public class Bootstrap implements Runnable {
      */
     public void run() {
         addUsers();
-        //addSkills();
-        //addJobs();
-        //addVehicles();
-        //addCollaborators();
-        //addMaintenance();
-        //addGreenSpaces();
-        //addEntries();
-        //addAgendaEntries();
+        /*addSkills();
+        addJobs();
+        addVehicles();
+        addCollaborators();
+        addMaintenance();
+        addGreenSpaces();
+        addEntries();
+        addAgendaEntries();*/
     }
 
     /**
@@ -236,6 +234,11 @@ public class Bootstrap implements Runnable {
             collaboratorRepository.create(new CollaboratorDto("Edward Scissorhands", LocalDate.of(2000, 9, 30), 456789123,
                     654321987, "edward.scissorhands@example.com", "5678 Pine Street", "4567-908",
                     "Suburbia", DocumentType.PASSPORT, "IJ5678901", LocalDate.of(2021, 9, 30),
+                    JobMapper.toDomain(jobRepository.getJobList().get(4))));
+
+            collaboratorRepository.create(new CollaboratorDto("Collaborador Teste", LocalDate.of(2000, 9, 30), 916789123,
+                    104321987, "collaborator@this.app", "5678 Pine Street", "4567-908",
+                    "Suburbia", DocumentType.PASSPORT, "IP5678901", LocalDate.of(2021, 9, 30),
                     JobMapper.toDomain(jobRepository.getJobList().get(4))));
 
         } catch (

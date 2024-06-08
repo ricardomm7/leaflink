@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.domain.VehicleType;
 import pt.ipp.isep.dei.project.dto.VehicleDto;
+import pt.ipp.isep.dei.project.mappers.VehicleMapper;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.project.ui.ShowError;
@@ -57,7 +58,7 @@ public class RegisterVehicleController {
      * @return the vehicle list
      */
     public List<VehicleDto> getVehicleList() {
-        return vehicleRepository.getVehicleList();
+        return VehicleMapper.toDtoList(vehicleRepository.getVehicleList());
     }
 
     /**

@@ -37,7 +37,7 @@ public class RecordEntryUI implements Runnable {
         if (selectedEntry != null) {
             boolean confirmed = confirmEntrySelection(selectedEntry);
             if (confirmed) {
-                boolean success = controller.recordEntryCompletion(selectedEntry);
+                boolean success = controller.recordEntryCompletion(selectedEntry, false);
                 if (success) {
                     displaySuccessMessage();
                 } else {
