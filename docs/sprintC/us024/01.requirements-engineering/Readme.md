@@ -31,27 +31,18 @@
 > 
 > **Answer:** It depends in the status set your team decide to have/use. But if you consider only status refered in the text and in the forum my answer would be, yes, just the "Planned" status can be changed to "Done".
 
-> **Question:** 
-> 
-> **Answer:** 
- 
-> **Question:** 
-> 
-> **Answer:** 
 
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The toDoEntry must exist in the Agenda
 * **AC2:** The new date must be after that the previous date.
-* **AC3:** The postponement action should update the toDoEntry’s progressStatus to “Postponed”.
+* **AC3:** The postponement action should update the agendaEntry’s progressStatus to “Postponed”.
 * **AC4:** The system should notify the team assigned to the task about the postponement.
-* **AC5:** The system should check for the availability of the team and resources for the new date.
-* **AC6:** The system should generate a new agendaEntry with the new date and the Progress as "PLANNED".
+* **AC5:** The system should generate a new agendaEntry with the new date and the Progress as "PLANNED".
 
 ### 1.4. Found out Dependencies
 
-* US21: Adding a new toDoEntry in task List
 * US22: Adding a new agendaEntry in the Agenda
 * US23: Assigning a team to an agendaEntry in the Agenda.
 
@@ -60,7 +51,7 @@
 **Input Data:**
 
 * Typed data:
-    * New date
+    * new date
 	
 * Selected data:
     * agendaEntry
@@ -80,4 +71,4 @@
 
 ### 1.7 Other Relevant Remarks
 
-* Implement appropriate permissions and access controls to restrict the ability to Postpone an toDoEntry to authorized GSM users only.
+* Implement appropriate permissions and access controls to restrict the ability to Postpone an toDoEntry to authorize GSM users only.

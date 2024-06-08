@@ -20,13 +20,12 @@ _**Note that SSD - Alternative One is adopted.**_
 | Step 5         | ... submitting the new date?                      | PostponeAgendaEntryController | Controller                                                  |
 | Step 6         | ... displaying agendaEntry  data?                 | PostponeAgendaEntryUI         | Pure Fabrication                                            |
 | Step 7         | ... confirms data                                 | PostponeAgendaEntryUI         | Pure Fabrication                                            |
-|                | ... validate submitted data?                      | EntryRepository               | Information Expert                                          |
 |                | ... transforms the agendaEntryDto in agendaEntry? | AgendaEntryMapper             | Information Expert, creator, low coupling and high cohesion |
 |                | ... postponing the agendaEntry?                   | EntryRepository               | Information Expert, low coupling and high cohesion          | 
+|                | ... update agendaEntry progressStatus?            | AgendaEntry                   | Information Expert                                          |
 |                | ... create new agendaEntry?                       | EntryRepository               | creator                                                     |
 |                | ... verify local data?                            | AgendaEntry                   | Information Expert                                          |
-|                | ... notifying the team?                           | TeamRepository                | Information Expert                                          | 
-|                | ... sending notifications?                        | NotificationService           | Pure Fabrication, low coupling and high cohesion            |
+|                | ... notifying the team (send notifications)?      | NotificationService           | Pure Fabrication, low coupling and high cohesion            |
 | Step 8         | ... informing operation success?                  | PostponeAgendaEntryUI         | Pure Fabrication                                            | 
 
 
