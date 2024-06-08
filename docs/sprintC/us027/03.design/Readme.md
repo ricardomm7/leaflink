@@ -6,18 +6,18 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                    | Justification (with patterns)                                                           |
-|:---------------|:----------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?               | ListGreenSpacesUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class. |
-|                | ... coordinating the US?                      | ListGreenSpacesController | Controller.                                                                             |
-|                | ... knowing the user of the system?           | UserSession               | Information Expert, because this object has the ID/E-Mail of the user (what's needed).  |
-|                | ... get the Green Space Repository?           | Repositories              | Information Expert, High cohesion, Low coupling.                                        |
-|                | ... creating the Green Spaces matching List?  | GreenSpaceRepository      | Information Expert.                                                                     |
-|                | ... verifying if the generated list is empty? | GreenSpaceRepository      | Information Expert.                                                                     |
-|                | ... having the list to organize?              | GreenSpaceRepository      | Information Expert.                                                                     |
-|                | ... organizing the list of green spaces?      | Sortable                  | Polymorphism, Protected Variations.                                                     |
-|                | ... passing the domain objects to DTO?        | GreenSpaceMapper          | Low coupling.                                                                           |
-| Step 2         | ... showing the created list?                 | RegisterVehicleUI         | Pure Fabrication.                                                                       |
+| Interaction ID | Question: Which class is responsible for...                 | Answer                    | Justification (with patterns)                                                           |
+|:---------------|:------------------------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                             | ListGreenSpacesUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class. |
+|                | ... coordinating the US?                                    | ListGreenSpacesController | Controller.                                                                             |
+|                | ... knowing the user of the system?                         | UserSession               | Information Expert, because this object has the ID/E-Mail of the user (what's needed).  |
+|                | ... get the Green Space Repository?                         | Repositories              | Information Expert, High cohesion, Low coupling.                                        |
+|                | ... creating the Green Spaces List (matched with the user)? | GreenSpaceRepository      | Information Expert.                                                                     |
+|                | ... verifying if the generated list is empty?               | GreenSpaceRepository      | Information Expert.                                                                     |
+|                | ... having the list to organize?                            | GreenSpaceRepository      | Information Expert.                                                                     |
+|                | ... organizing the list of green spaces?                    | Sortable                  | Polymorphism, Protected Variations.                                                     |
+|                | ... passing the domain objects to DTO?                      | GreenSpaceMapper          | Low coupling.                                                                           |
+| Step 2         | ... showing the created list?                               | RegisterVehicleUI         | Pure Fabrication.                                                                       |
 
 ### Systematization ##
 
@@ -32,6 +32,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 * ListGreenSpacesController
 * GreenSpaceRepository
 * SortAlgorithms
+* GreenSpaceDto
+* GreenSpaceMapper
+* Sortable
 
 ## 3.2. Sequence Diagram (SD)
 
