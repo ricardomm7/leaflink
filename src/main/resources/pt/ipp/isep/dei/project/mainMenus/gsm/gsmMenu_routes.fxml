@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0"
             prefWidth="1205.0" stylesheets="@glugluStyle.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.admin.RoutesGUI">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.project.ui.gui.gsm.RoutesGUI">
 
     <left>
         <ToolBar orientation="VERTICAL" prefHeight="823.0" prefWidth="163.0" styleClass="toolbar"
@@ -23,38 +23,11 @@
                     </graphic>
                 </ToggleButton>
                 <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#caollabBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Collaborators">
-                    <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="collab-image">
-                        </ImageView>
-                    </graphic>
-                </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#teamsBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Teams">
-                    <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="team-image">
-                        </ImageView>
-                    </graphic>
-                </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
                               mnemonicParsing="false" onAction="#analysBtnActionHandle" prefHeight="103.0"
                               styleClass="menu-btn-cstm" text="Analysis">
                     <graphic>
                         <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
                                    styleClass="analysis-image">
-                        </ImageView>
-                    </graphic>
-                </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#vehicleBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Vehicles">
-                    <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="vehicles-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>
@@ -73,15 +46,6 @@
                     <graphic>
                         <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
                                    styleClass="gs-image">
-                        </ImageView>
-                    </graphic>
-                </ToggleButton>
-                <ToggleButton contentDisplay="TOP" focusTraversable="false" maxWidth="1.7976931348623157E308"
-                              mnemonicParsing="false" onAction="#usersBtnActionHandle" prefHeight="103.0"
-                              styleClass="menu-btn-cstm" text="Users">
-                    <graphic>
-                        <ImageView fitHeight="59.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true"
-                                   styleClass="users-image">
                         </ImageView>
                     </graphic>
                 </ToggleButton>

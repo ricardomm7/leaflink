@@ -18,4 +18,6 @@ module pt.ipp.isep.dei.project {
     opens pt.ipp.isep.dei.project.ui.gui.vfm to javafx.fxml;
     exports pt.ipp.isep.dei.project.ui.gui.collab;
     opens pt.ipp.isep.dei.project.ui.gui.collab to javafx.fxml;
+    exports pt.ipp.isep.dei.project.ui.gui.gsm;
+    opens pt.ipp.isep.dei.project.ui.gui.gsm to javafx.fxml;
 }

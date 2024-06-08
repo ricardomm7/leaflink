@@ -5,8 +5,6 @@
  */
 package pt.ipp.isep.dei.project.domain;
 
-import pt.ipp.isep.dei.project.ui.ShowError;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -300,19 +298,19 @@ public class Vehicle implements Serializable {
      */
     public Vehicle(String VIN, String brand, String model, VehicleType type, LocalDate registrationDate, String vehiclePlate, double tareWeight, double grossWeight,
                    int currentKm, LocalDate acquisitionDate, int maintenanceFrequency) {
-            this.isAvailable = true;
-            setVIN(VIN);
-            setBrand(brand);
-            setModel(model);
-            setType(type);
-            setRegistrationDate(registrationDate);
-            setVehiclePlate(vehiclePlate);
-            setTareWeight(tareWeight);
-            setGrossWeight(grossWeight);
-            setCurrentKm(String.valueOf(currentKm));
-            setAcquisitionDate(acquisitionDate);
-            setMaintenanceFrequency(String.valueOf(maintenanceFrequency));
-            validateVehicle(registrationDate, vehiclePlate, tareWeight, grossWeight, acquisitionDate);
+        this.isAvailable = true;
+        setVIN(VIN);
+        setBrand(brand);
+        setModel(model);
+        setType(type);
+        setRegistrationDate(registrationDate);
+        setVehiclePlate(vehiclePlate);
+        setTareWeight(tareWeight);
+        setGrossWeight(grossWeight);
+        setCurrentKm(String.valueOf(currentKm));
+        setAcquisitionDate(acquisitionDate);
+        setMaintenanceFrequency(String.valueOf(maintenanceFrequency));
+        validateVehicle(registrationDate, vehiclePlate, tareWeight, grossWeight, acquisitionDate);
     }
 
 

@@ -84,8 +84,8 @@ public class EntryRepository implements Serializable {
      */
     public List<AgendaEntry> getAgendaEntryListByGSM(String email) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
-        for (AgendaEntry agendaEntry: agendaEntryList){
-            if(agendaEntry.getGreenSpace().getManager().equals(email)){
+        for (AgendaEntry agendaEntry : agendaEntryList) {
+            if (agendaEntry.getGreenSpace().getManager().equals(email)) {
                 agendaEntries.add(agendaEntry);
             }
         }
