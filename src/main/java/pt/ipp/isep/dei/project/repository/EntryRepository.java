@@ -83,7 +83,13 @@ public class EntryRepository implements Serializable {
      * @return a list of AgendaEntryDto objects managed by the specified GSM.
      */
     public List<AgendaEntry> getAgendaEntryListByGSM(String email) {
-        return agendaEntryList;
+        List<AgendaEntry> agendaEntries = new ArrayList<>();
+        for (AgendaEntry agendaEntry: agendaEntryList){
+            if(agendaEntry.getGreenSpace().getManager().equals(email)){
+                agendaEntries.add(agendaEntry);
+            }
+        }
+        return agendaEntries;
     }
 
     /**
@@ -94,7 +100,6 @@ public class EntryRepository implements Serializable {
      */
     public void updateVehiclesAgendaEntry(AgendaEntry agendaEntry, List<VehicleDto> f) {
         List<Vehicle> u = VehicleMapper.toDomainList(f);
-
         for (AgendaEntry agendaEntry1 : agendaEntryList) {
             if (agendaEntry.getTitle().equalsIgnoreCase(agendaEntry1.getTitle()) && agendaEntry.getDescription().
                     equalsIgnoreCase(agendaEntry1.getDescription()) && agendaEntry.getStartingDate().isEqual(agendaEntry1.getStartingDate()))
@@ -116,7 +121,6 @@ public class EntryRepository implements Serializable {
             updateEntryStatus(agendaEntry, newProgressStatus);
             AgendaEntry agendaEntry1 = new AgendaEntry(agendaEntry, newDate, ProgressStatus.PLANNED);
             addAgendaEntry(agendaEntry1);
-
             return true;
         } else {
             ShowError.showAlert("Postpone Entry", "The new date cannot be before the starting date.", "Invalid Date");
@@ -153,16 +157,6 @@ public class EntryRepository implements Serializable {
                 agendaEntry.setProgressStatus(newProgressStatus);
             }
         }
-    }
-
-    /**
-     * Sets a new date for an AgendaEntry.
-     *
-     * @param agendaEntry the AgendaEntry to update.
-     * @param newDate     the new date to set.
-     */
-    private void setNewDate(AgendaEntry agendaEntry, LocalDate newDate) {
-        agendaEntry.setStartingDate(newDate);
     }
 
     /**
@@ -224,7 +218,6 @@ public class EntryRepository implements Serializable {
                     entry.getStartingDate().isEqual(entry1.getStartingDate())) {
                 if (entry1.getProgressStatus() != ProgressStatus.COMPLETED) {
                     entry1.setProgressStatus(status);
-                    entry1.setAvailable(entry1);
                     return true;
                 } else {
                     ShowError.showAlert("Error", "Entry already completed or cancelled ", null);

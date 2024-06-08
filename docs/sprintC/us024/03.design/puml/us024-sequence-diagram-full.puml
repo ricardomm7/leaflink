@@ -128,23 +128,17 @@ activate GSM
 
 
 
-            CTRL -> NotificationService : notifyTeam(agendaEntry, newDate)
+            CTRL -> NotificationService : notifyTeam(collaboratorsList ,agendaEntry, newDate)
             deactivate CTRL
             activate NotificationService
 
-                NotificationService -> NotificationService : getTeamByEntry(agendaEntry)
+                NotificationService -> NotificationService : buildEmailBody(collaboratorsList,agendaEntry,newDate)
                 activate NotificationService
 
-                NotificationService --> NotificationService : team
+                NotificationService --> NotificationService : email
                 deactivate NotificationService
 
-                NotificationService -> NotificationService : getCollaboratorsList(team)
-                activate NotificationService
-
-                NotificationService --> NotificationService : collaboratorsList
-                deactivate NotificationService
-
-                NotificationService -> NotificationService : notifyTeam(collaboratorsList, agendaEntry, newDate)
+                NotificationService -> NotificationService : writeNotification(collaboratorsList, subject, email, agendaEntry, newDate)
                 activate NotificationService
 
                 NotificationService --> NotificationService : success

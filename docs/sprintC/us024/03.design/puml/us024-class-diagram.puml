@@ -14,7 +14,7 @@ package CONTROLLER {
         + PostponeAgendaEntryController()
         + getAgendaEntryList(gsm: UserSession): List<AgendaEntryDto>
         + postponeEntry(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
-        - notifyTeam(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): boolean
+        - notifyTeam(agendaEntryDto: AgendaEntryDto, newDate: LocalDate): void
     }
 }
 
@@ -23,7 +23,7 @@ package DOMAIN {
         class Repositories {
             - instance: Repositories
             - entryRepository: EntryRepository
-            - Repositories()
+            + Repositories()
             + getInstance(): Repositories
             + getEntryRepository(): EntryRepository
         }
@@ -31,10 +31,9 @@ package DOMAIN {
         class EntryRepository {
             - agendaEntryList: List<AgendaEntry>
             + EntryRepository()
-            + getAgendaEntryListByGSM(gsm: UserSession): List<AgendaEntryDto>
-            + updateAgendaEntry(agendaEntry: AgendaEntry, POSTPONED: ProgressStatus): boolean
-            + setProgressStatus(status: ProgressStatus): void
-            + addAgendaEntry(agendaEntry: AgendaEntry): void
+            + getAgendaEntryListByGSM(String: email): List<AgendaEntryDto>
+            + updateAgendaEntry(agendaEntry: AgendaEntry, newDate: LocalDate, POSTPONED: ProgressStatus): boolean
+            - updateEntryStatus(agendaEntry: AgendaEntry, POSTPONED: ProgressStatus): void
         }
     }
 
@@ -42,22 +41,27 @@ package DOMAIN {
 
     package MODEL {
         class AgendaEntry {
+            - startingDate: LocalDate
+            - progressStatus: ProgressStatus
+            - assignedTeam: Team
+            - assignedVehicle: List<Vehicle>
+            + getStartingDate(): LocalDate
+            + getProgressStatus(): ProgressStatus
+            - setStartingDate(newDate: LocalDate): void
+            - setProgressStatus(newStatus: ProgressStatus): void
+            + AgendaEntry(agendaEntry: AgendaEntry, newDate: LocalDate, progressStatus: PLANNED)
+        }
+
+        class ToDoEntry{
             - title: String
             - description: String
             - duration: int
-            - urgencyStatus: UrgencyStatus
             - greenSpace: GreenSpace
-            - startingDate: LocalDate
-            - progressStatus: ProgressStatus
-            + AgendaEntry(agendaEntry: AgendaEntry, newDate: LocalDate, progressStatus: PLANNED)
-            + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
-
         }
 
         class NotificationService {
-            + getTeamByEntry(agendaEntry: AgendaEntry): Team
-            + getCollaboratorsList(team: Team): List<Collaborator>
-            + notifyTeam(collaboratorsList: List<Collaborator>, agendaEntry: AgendaEntry, newDate: LocalDate): boolean
+            - buildEmailBody(collaboratorsList: List<Collaborator> , agendaEntry: AgendaEntry, newDate :LocalDate): String
+            + notifyTeam(collaboratorsList: List<Collaborator>, agendaEntry: AgendaEntry, email: String newDate: LocalDate): boolean
         }
     }
 }
@@ -76,7 +80,9 @@ package DTO {
             - greenSpace: GreenSpaceDto
             - startingDate: LocalDate
             - progressStatus: ProgressStatus
-            + AgendaEntryDto(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpaceDto, startingDate: LocalDate, progressStatus: ProgressStatus)
+            - assignedTeam: List<VehicleDto>
+            - assignedTeam: TeamDto
+            + AgendaEntryDto(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpaceDto, startingDate: LocalDate, progressStatus: ProgressStatus, assignedTeam: TeamDto, assignedVehicle: List<VehicleDto>)
             + getTitle(): String
             + getDescription(): String
             + getDuration(): int
@@ -84,6 +90,10 @@ package DTO {
             + getGreenSpace(): GreenSpaceDto
             + getStartingDate(): LocalDate
             + getProgressStatus(): ProgressStatus
+            + getAssignedTeam(): TeamDto
+            + getAssignedVehicle(): List<VehicleDto>
+            + setAssignedTeam(team: TeamDto): void
+            + setAssignedVehicle(vehicleList: List<VehicleDto>): void
         }
     }
 
@@ -96,5 +106,6 @@ EntryRepository --> "*" AgendaEntry
 AgendaEntryMapper ..> AgendaEntryDto
 AgendaEntryMapper ..> AgendaEntry
 PostponeAgendaEntryController ..> NotificationService
+AgendaEntry -> ToDoEntry
 
 @enduml

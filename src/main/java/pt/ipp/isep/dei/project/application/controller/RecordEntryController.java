@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
-import pt.ipp.isep.dei.project.mappers.TeamMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
 import pt.ipp.isep.dei.project.repository.Repositories;
 import pt.ipp.isep.dei.project.repository.TeamRepository;
@@ -50,8 +49,8 @@ public class RecordEntryController {
      */
     public boolean recordEntryCompletion(AgendaEntryDto agendaEntryDto, Boolean flag) {
         AgendaEntry entry = AgendaEntryMapper.toDomain(agendaEntryDto);
-        vehicleRepository.setVehicleAvailability(entry.getAssignedVehicles(), true);
-        teamRepository.setTeamAvailable(TeamMapper.toDomain(agendaEntryDto.getAssignedTeam()), flag);
+        vehicleRepository.setVehicleAvailable(entry.getAssignedVehicles(), flag);
+        teamRepository.setTeamAvailable(entry.getAssignedTeam(), flag);
         return entryRepository.recordAgendaEntryCompletion(entry, ProgressStatus.COMPLETED);
     }
 }

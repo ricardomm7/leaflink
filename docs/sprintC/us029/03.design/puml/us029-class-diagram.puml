@@ -24,7 +24,7 @@ package DOMAIN {
             - instance: Repositories
             - entryRepository: EntryRepository
             - teamRepository: TeamRepository
-            - Repositories()
+            + Repositories()
             + getInstance(): Repositories
             + getEntryRepository(): EntryRepository
             + getTeamRepository(): TeamRepository
@@ -33,30 +33,65 @@ package DOMAIN {
         class EntryRepository {
             - agendaEntryList: List<AgendaEntry>
             + EntryRepository()
-            + getAgendaEntriesList(): List<AgendaEntry>
+            + getAgendaEntriesAssignedToCollaborator(collaborator: UserSession): List<AgendaEntry>
             + recordAgendaEntryCompletion(agendaEntry: AgendaEntry, status: ProgressStatus): boolean
         }
 
         class TeamRepository {
-            - agendaEntryList: List<AgendaEntry>
+            - teamList: List<Team>
             + TeamRepository()
-            + getAgendaEntriesAssignedToCollaborator(collaborator: UserSession): List<AgendaEntry>
+            + setTeamAvailable(team: Team, flag: boolean): void
+
+
+        }
+        class VehicleRepository {
+            - vehicleList: List<Vehicle>
+            + VehicleRepository()
+            + setvehicleAvailable(vehicleList: List<Vehicle>, flag: boolean): void
         }
     }
 
     package MODEL {
         class AgendaEntry {
+            - startingDate: LocalDate
+            - progressStatus: ProgressStatus
+            - assignedTeam: Team
+            - assignedVehicle: List<Vehicle>
+            + getStartingDate(): LocalDate
+            + getProgressStatus(): ProgressStatus
+            - setProgressStatus(newStatus: ProgressStatus): void
+        }
+
+        class ToDoEntry{
             - title: String
             - description: String
             - duration: int
-            - urgencyStatus: UrgencyStatus
             - greenSpace: GreenSpace
-            - startingDate: LocalDate
-            - progressStatus: ProgressStatus
-            + AgendaEntry(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpace, startingDate: LocalDate, progressStatus: ProgressStatus)
-            + setStatus(status: ProgressStatus): void
-            + setAvailable(): void
-            + setTeamAvailable(): void
+        }
+
+        class Team {
+            - skills : List<Skill>
+            - minTeamSize : int
+            - maxTeamSize : int
+            - collaborators : List<Collaborator>
+            - isAvailable : boolean
+            + setAvailable(flag: boolean): void
+        }
+
+        class Vehicle {
+            - VIN : String
+            - brand : String
+            - model : String
+            - type : VehicleType
+            - registrationDate: LocalDate
+            - vehiclePlate : String
+            - tareWeight : double
+            - grossWeight : double
+            - currentKm : int
+            - acquisitionDate : LocalDate
+            - maintenanceFrequency : int
+            - isAvailable : boolean
+            + setAvailable(flag: boolean): void
         }
     }
 }
@@ -88,14 +123,21 @@ package DOMAIN {
 
 
 RecordEntryUI ..> RecordEntryController
+
 RecordEntryController ..> Repositories
 Repositories --> Repositories: instance
 RecordEntryController ..> EntryRepository
 RecordEntryController ..> TeamRepository
+RecordEntryController ..> VehicleRepository
 Repositories --> EntryRepository
 Repositories --> TeamRepository
-EntryRepository --> "*" AgendaEntry
+Repositories --> VehicleRepository
+EntryRepository --> "*" AgendaEntry: agendaEntry
+TeamRepository --> "*" Team: team
+VehicleRepository --> "*" Vehicle: vehicle
 AgendaEntryMapper ..> AgendaEntryDto
 AgendaEntryMapper ..> AgendaEntry
+
+AgendaEntry -> ToDoEntry
 
 @enduml

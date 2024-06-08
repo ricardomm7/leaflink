@@ -60,7 +60,7 @@ public class AssignVehiclesController {
      * @param isAvailable the availability status to be set (true for available, false for unavailable)
      */
     public void setVehicleAvailability(List<VehicleDto> v, Boolean isAvailable) {
-        vehicleRepository.setVehicleAvailability(VehicleMapper.toDomainList(v), isAvailable);
+        vehicleRepository.setVehicleAvailable(VehicleMapper.toDomainList(v), isAvailable);
     }
 
     /**

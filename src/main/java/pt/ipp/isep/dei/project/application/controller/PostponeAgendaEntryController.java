@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.project.application.controller;
 
 import pt.ipp.isep.dei.project.application.session.UserSession;
-import pt.ipp.isep.dei.project.domain.*;
+import pt.ipp.isep.dei.project.domain.AgendaEntry;
+import pt.ipp.isep.dei.project.domain.NotificationService;
+import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
 import pt.ipp.isep.dei.project.repository.EntryRepository;
@@ -57,21 +59,14 @@ public class PostponeAgendaEntryController {
      *
      * @param agendaEntry the AgendaEntry object representing the agenda entry
      * @param newDate     the new date for the agenda entry
-     * @return true if the team notification is successful, false otherwise
      */
-    private boolean notifyTeam(AgendaEntry agendaEntry, LocalDate newDate) {
-        boolean flag = false;
-        Team team = agendaEntry.getAssignedTeam();
-        if (team != null) {
-            List<Collaborator> collaboratorsList = team.getCollaborators();
-            if (collaboratorsList != null) {
-                flag = NotificationService.notifyTeam(collaboratorsList, agendaEntry, newDate);
-            }
+    private void notifyTeam(AgendaEntry agendaEntry, LocalDate newDate) {
+        if (agendaEntry.getAssignedTeam() != null) {
+            NotificationService.notifyTeam(agendaEntry.getAssignedTeam().getCollaborators(), agendaEntry, newDate);
 
         } else {
             ShowError.showAlert("Error", "There is no team assigned to this entry", "No Team");
         }
-        return flag;
 
     }
 }

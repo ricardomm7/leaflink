@@ -62,7 +62,7 @@ public class CancelAgendaEntryController {
         if (entryRepository != null) { // Verifica se entryRepository não é nulo antes de usá-lo
             AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
             NotificationService.notifyTeamCancel(agendaEntry.getAssignedTeam().getCollaborators(), agendaEntry);
-            vehicleRepository.setVehicleAvailability(agendaEntry.getAssignedVehicles(), true);
+            vehicleRepository.setVehicleAvailable(agendaEntry.getAssignedVehicles(), true);
             return entryRepository.cancelAgendaEntry(agendaEntry);
         } else {
             return false; // Retorna false se entryRepository for nulo

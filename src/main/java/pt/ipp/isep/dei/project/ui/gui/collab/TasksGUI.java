@@ -98,7 +98,7 @@ public class TasksGUI {
         } else {
             AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
 
-            recordEntryController.recordEntryCompletion(agendaEntryDto, false);
+            recordEntryController.recordEntryCompletion(agendaEntryDto, true);
 
             updateAgendaEntryList();
         }
