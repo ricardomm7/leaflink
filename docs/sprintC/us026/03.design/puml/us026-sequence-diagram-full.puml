@@ -29,6 +29,7 @@ activate GSM
     activate UI
 
         UI -> CTRL** : create
+        deactivate UI
                 activate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
@@ -45,6 +46,7 @@ activate GSM
 
                      deactivate CTRL
 
+                deactivate UI
 
         UI -> CTRL: getAgendaEntryList(GSM)
         activate CTRL

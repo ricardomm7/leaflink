@@ -23,7 +23,7 @@ activate GSM
 
     activate System
 
-        System --> GSM : shows teams and asks to select one
+        System --> GSM : shows teams available and asks to select one
     deactivate System
 
     GSM -> System : selects the team

@@ -115,10 +115,10 @@ activate GSM
         UI --> GSM : shows the entries in the agenda and asks to select one
         deactivate UI
 
-    GSM -> UI : sselects the entry
+    GSM -> UI : selects the entry
     activate UI
 
-    UI --> GSM : shows teams and asks to select one
+    UI --> GSM : shows teams available and asks to select one
     deactivate UI
 
     GSM -> UI: selects the team

@@ -7,36 +7,47 @@
 _**Note that SSD - Alternative One is adopted.**_
 
 
-| Interaction ID | Question: Which class is responsible for...  | Answer                    | Justification (with patterns)                                                                                                                                                                 |
-|:---------------|:---------------------------------------------|:--------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?              | RegisterVehicleUI         | Pure Fabrication: There is no need to assign this responsibility to any existing class in the Domain Model. The UI class is a utility class for handling user interaction.                    |
-|                | ... coordinating the US?                     | RegisterVehicleController | Controller: RegisterVehicleController is responsible for coordinating and controlling the flow of interaction, applying the Controller pattern.                                               |
-| Step 2         | ... display vehicle data input fields?       | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 3         | ... types vehicle data?                      | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI displays the input fields for vehicle data, promoting low coupling by separating UI logic from domain logic.                                              |
-| Step 4         | ... confirms the user's input data?          | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI confirms the user's input data before proceeding with the registration process, ensuring data integrity and adhering to the Creator pattern.              |
-| Step 5         | ... handles the registration of the vehicle? | RegisterVehicleController | Controller: RegisterVehicleController manages the registration process, ensuring high cohesion and low coupling by encapsulating related functionality.                                       |
-|                | ... get VehicleRepository?                   | Repositories              | Pure Fabrication:  Repositories is responsible for providing access to various repositories. It promotes low coupling and high cohesion by encapsulating data access logic.                   |
-|                | ... verify existing vehicle?                 | VehicleRepository         | Information Expert: VehicleRepository performs global validation, adhering to the Protected Variation pattern by encapsulating data access.                                                   |
-|                | ... register a vehicle?                      | VehicleRepository         | Creator: Vehicle is directly created by vehicleRepository, which encapsulates the logic for managing vehicles.                                                                                |
-|                | ... validating all data (local validation)?  | Vehicle                   | Information Expert: Vehicle performs local validation on its attributes, adhering to the Information Expert pattern by encapsulating its own data validation logic.                           | 
-|                | ... validating all data (global validation)? | VehicleRepository         | Information Expert: VehicleRepository performs global validation, following the Protected Variation pattern by encapsulating validation rules.                                                | 
-|                | ... stores vehicle registration data?        | VehicleRepository         | Repository Pattern: VehicleRepository is responsible for persisting and managing vehicle registration data, applying the Low Coupling pattern by decoupling data storage from business logic. |
-| Step 6         | ... informing operation success?             | RegisterVehicleUI         | Pure Fabrication: RegisterVehicleUI handles user interaction and displays success/error messages, promoting low coupling and high cohesion by encapsulating UI logic.                         | 
+| Interaction ID | Question: Which class is responsible for...       | Answer               | Justification (with patterns)                                                                                  |
+|:---------------|:--------------------------------------------------|:---------------------|:---------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                   | AssignTeamUI         | Pure Fabrication                                                                                               |
+|                | ... coordinating the US?                          | AssignTeamController | Controller:                                                                                                    |
+|                | ... getting EntryRepository?                      | Repositories         | Pure Fabrication, low coupling and high cohesion                                                               |
+|                | ... getting TeamRepository?                       | Repositories         | Pure Fabrication, low coupling and high cohesion                                                               |
+|                | ... getting agendaEntry list?                     | EntryRepository      | Information Expert, low coupling and high cohesion                                                             |
+|                | ... transforms the agendaEntry in agendaEntryDto? | AgendaEntryMapper    | Information Expert, creator, low coupling                                                                      |
+|                | ... getting Team list?                            | TeamRepository       | Information Expert, low coupling and high cohesion                                                             |
+|                | ... transforms the team in teamDtoList?           | TeamMapper           | Information Expert, creator, low coupling                                                                      |
+| Step 2         | ... show the entries in the agenda?               | AssignTeamUI         | Pure Fabrication                                                                                               |
+| Step 3         | ... selecting the entry?                          | AssignTeamUI         | Pure Fabrication                                                                                               |
+| Step 4         | ... show the teams available?                     | AssignTeamUI         | Pure Fabrication                                                                                               |
+| Step 5         | ... selecting the team?                           | AssignTeamUI         | Pure Fabrication                                                                                               |
+| Step 6         | ... show data and request confirmation?           | AssignTeamUI         | Pure Fabrication                                                                                               |
+| Step 7         | ... confirm data?                                 | AssignTeamUI         | Pure Fabrication                                                                                               |
+|                | ... transforms the teamDtoList in team?           | TeamMapper           | Information Expert, creator, low coupling and high cohesion                                                    |
+|                | ... transforms the agendaEntryDto in agendaEntry? | AgendaEntryMapper    | Information Expert, creator, low coupling and high cohesion                                                    |
+|                | ... updating the agendaEntry?                     | EntryRepository      | Creator: Vehicle is directly created by vehicleRepository, which encapsulates the logic for managing vehicles. |
+|                | ... notifying the team (send notifications)?      | NotificationService  | Pure Fabrication, low coupling and high cohesion                                                               |
+| Step 8         | ... informing operation success?                  | AssignTeamUI         | Pure Fabrication                                                                                               | 
 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Vehicle
+* agendaEntry
+* agendaEntryDto
 
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
 * Repositories
-* RegisterVehicleUI
-* VehicleRepository
-* RegisterVehicleController
+* AssignTeamUI
+* AssignTeamController
+* EntryRepository
+* TeamRepository
+* AgendaEntryMapper
+* TeamMapper
+* NotificationService
 
 
 
