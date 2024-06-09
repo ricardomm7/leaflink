@@ -2,24 +2,28 @@
 skinparam shadowing false
 skinparam line type polyline
 
-class AddNewEntryUI {
-    - controller : RegisterToDoEntryController
+package UI {
+class ListTaskSpaceUI {
+    - controller : ListTaskController
+}
 }
 
-class RegisterToDoEntryController {
+package CONTROLLER {
+class ListTaskController {
+    - repositories: Repositories
+    - collaborator : CollaboratorRepository
     - greenSpaceRepository : GreenSpaceRepository
     - entryRepository : EntryRepository
-    + RegisterToDoEntryController()
-    + getGreenSpacesDto() : List<GreenSpaceDTO>
-    + createNewToDoEntry(greenSpace: GreenSpaceDTO, description: String, urgency: UrgencyStatus, expectedDuration: int) : Entry
+    + getCollaboratorTroughEmail(String email) : Collaborator
+    + ListTaskController()
+    + getTeamTroughCLB(Collaborator clb) : Team
+    + getDatesList(LocalDate beginningDate, LocalDate endDate, Collaborator collaborator) : List<AgendaEntryDto>
+    + getAgendaEntries(UserSession session) : List<AgendaEntryDto>
 }
 
-enum UrgencyStatus{
-+HIGH
-+MEDIUM
-+LOW
-}
 
+package DOMAIN {
+package REPOSITORY {
 class Repositories {
     - instance : Repositories
     - greenSpaceRepository : GreenSpaceRepository
@@ -36,35 +40,64 @@ class GreenSpaceRepository {
 class EntryRepository {
     + createEntry(greenSpace: GreenSpaceDTO, description: String, urgency: UrgencyStatus, expectedDuration: int) : Entry
 }
-
-class Entry {
-    - greenSpace : GreenSpaceDTO
+}
+package MODEL{
+class AgendaEntry {
+    - title : String
     - description : String
+    - duration : int
     - urgency : UrgencyStatus
-    - expectedDuration : int
-    + Entry(greenSpace: GreenSpaceDTO, description: String, urgency: int, expectedDuration: int)
-    + verifyFilled(description: String) : Boolean
-    + verifyDuration(expectedDuration: int) : Boolean
+    - greenSpace : GreenSpaceDTO
+    - startingDate : LocalDate
+    - progressStatus : ProgressStatus
+
+    +AgendaEntry(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpace greenSpace,
+                            LocalDate startingDate, ProgressStatus progressStatus)
+    + setAvailable(agendaEntry , AgendaEntry) : void
 }
 
-class GreenSpaceDTO {
-
+enum UrgencyStatus{
++HIGH
++MEDIUM
++LOW
 }
-
-class GreenSpaceMapper {
 }
+}
+package DTO{
+    class GreenSpaceDto{
+        - name : String
+        - type : GreenSpaceType
+        - area : Double
+        - manager : String
+        - address : String
+        - city : String
+        - zipCode : String
+        + getName() : String
+        + getType() : GreenSpaceType
+        + getArea() : Double
+        + getManager() : String
+        + getAddress() : String
+        + getCity() : String
+        + getZipCode() : String
+    }
 
-AddNewEntryUI ..> RegisterToDoEntryController
-Entry ..> UrgencyStatus
-RegisterToDoEntryController ..> Repositories: repositories
+    class GreenSpaceMapper{
+        +toDto(greenSpace : GreenSpace) : GreenSpaceDto
+        +toDomain(greenSpaceDto : GreenSpaceDto) : GreenSpace
+    }
+    }
+
+ListTaskSpaceUI ..> ListTaskController
+AgendaEntry ..> UrgencyStatus
+ListTaskController ..> Repositories: repositories
 Repositories --> Repositories: instance
-RegisterToDoEntryController ..> GreenSpaceRepository
-RegisterToDoEntryController ..> EntryRepository
+ListTaskController ..> GreenSpaceRepository
+ListTaskController ..> EntryRepository
 Repositories --> "1" GreenSpaceRepository
 Repositories --> "1" EntryRepository
-RegisterToDoEntryController ..> GreenSpaceMapper
+ListTaskController ..> GreenSpaceMapper
 
-GreenSpaceMapper ..> GreenSpaceDTO
-EntryRepository --> Entry
+GreenSpaceMapper ..> GreenSpaceDto
+EntryRepository --> AgendaEntry
 
 @enduml
