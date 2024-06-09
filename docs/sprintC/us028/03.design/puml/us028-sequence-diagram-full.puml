@@ -27,20 +27,24 @@ CLB -> UI : asks to consult the entry assigned to himself
     activate UI
 
     UI -> CTRL** : create
-    UI -> CTRL : getCollaboratorThoughEmail(email)
-        activate CTRL
+    activate CTRL
 
-        CTRL -> RepositorySingleton : getInstance()
+     CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton
+
 
             RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
+
 
         CTRL -> REP : getCollaboratorRepository
             activate REP
 
             REP --> CTRL : collaboratorRepository
             deactivate REP
+             deactivate CTRL
+UI -> CTRL : getCollaboratorThoughEmail(email)
+    activate CTRL
 
         CTRL -> collaboratorRepository : getCollaboratorThoughEmail(email)
             activate collaboratorRepository
@@ -68,11 +72,7 @@ CLB -> UI : selects the beginning and end date
     UI -> CTRL : getStatusList(beginningDate,endDate)
         activate CTRL
 
-        CTRL -> RepositorySingleton : getInstance()
-            activate RepositorySingleton
 
-            RepositorySingleton --> CTRL : repositories
-            deactivate RepositorySingleton
 
         CTRL -> REP : getEntryRepository()
             activate REP
@@ -112,11 +112,6 @@ CLB -> UI : confirms that he wants to create the list
     UI -> CTRL : getTaskList(collaborator,dateI,dateF,typeStatus)
         activate CTRL
 
-        CTRL -> RepositorySingleton : getInstance()
-            activate RepositorySingleton
-
-            RepositorySingleton --> CTRL : repositories
-            deactivate RepositorySingleton
 
         CTRL -> REP : getTeamRepository()
             activate REP
@@ -135,11 +130,7 @@ CLB -> UI : confirms that he wants to create the list
             teamRepository --> CTRL : teamList
             deactivate teamRepository
 
-        CTRL -> RepositorySingleton : getInstance()
-            activate RepositorySingleton
 
-            RepositorySingleton --> CTRL : repositories
-            deactivate RepositorySingleton
 
         CTRL -> REP : getEntryRepository()
             activate REP

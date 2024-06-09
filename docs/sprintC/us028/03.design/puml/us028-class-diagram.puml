@@ -2,20 +2,27 @@
 skinparam shadowing false
 skinparam line type polyline
 
-class ListEntrySpaceUI {
+package UI {
+class ListTaskSpaceUI {
+    - controller : ListTaskController
+}
 }
 
-class ListEntryController {
-    - collaboratorRepository : CollaboratorRepository
-    - teamRepository : TeamRepository
-    - taskRepository : TaskRepository
-    - agenda : Agenda
-    + ListEntryController()
-    + getCollaboratorThoughEmail(email: String) : Collaborator
-    + getStatusList() : List<String>
-    + getTaskList(collaborator: Collaborator, dateI: Date, dateF: Date, typeStatus: String) : List<Task>
+package CONTROLLER {
+class ListTaskController {
+    - repositories: Repositories
+    - collaborator : CollaboratorRepository
+    - greenSpaceRepository : GreenSpaceRepository
+    - entryRepository : EntryRepository
+    + getCollaboratorTroughEmail(String email) : Collaborator
+    + ListTaskController()
+    + getTeamTroughCLB(Collaborator clb) : Team
+    + getDatesList(LocalDate beginningDate, LocalDate endDate, Collaborator collaborator) : List<AgendaEntryDto>
+    + getAgendaEntries(UserSession session) : List<AgendaEntryDto>
 }
-
+}
+package DOMAIN {
+package REPOSITORY {
 class Repositories {
     - instance : Repositories
     - collaboratorRepository : CollaboratorRepository
@@ -25,7 +32,7 @@ class Repositories {
     + getCollaboratorRepository() : CollaboratorRepository
     + getTeamRepository() : TeamRepository
     + getTaskRepository() : TaskRepository
-    + getAgenda() : Agenda
+    + getAgenda() : AgendaRepository
 }
 
 class CollaboratorRepository {
@@ -36,48 +43,66 @@ class TeamRepository {
     + getTeamsThoughCollaborator(collaborator: Collaborator) : List<Team>
 }
 
-class Agenda {
-    + getCollaboratorAgendaEntries(taskList: List<Task>) : List<AgendaEntries>
+class AgendaRepository {
+    + createEntry(greenSpace: GreenSpaceDTO, description: String, urgency: UrgencyStatus, expectedDuration: int) : Entry
 }
-
-class EntryMapper {
-    + toDTOList(listEntries: List<AgendaEntries>) : List<EntryDto>
-}
-
-class Collaborator {
-}
-
-class Team {
-}
-
-class AgendaEntries {
-}
-
-class EntryDto {
 }
 
 
 
-ListEntrySpaceUI ..> ListEntryController
+package MODEL{
+class AgendaEntry {
+    - title : String
+    - description : String
+    - duration : int
+    - urgency : UrgencyStatus
+    - greenSpace : GreenSpaceDTO
+    - startingDate : LocalDate
+    - progressStatus : ProgressStatus
 
-ListEntryController ..> EntryMapper
-ListEntryController ..> Repositories: repositories
+    +AgendaEntry(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpace greenSpace,
+                            LocalDate startingDate, ProgressStatus progressStatus)
+    + setAvailable(agendaEntry , AgendaEntry) : void
+}
+}
+}
+package DTO {
+class AgendaEntryDto {
+    - title : String
+    - description : String
+    - duration : int
+    - urgency : UrgencyStatus
+    - greenSpace : GreenSpaceDTO
+    - startingDate : LocalDate
+    - progressStatus : ProgressStatus
+    - assignedTeam : TeamDto
+    - assignedVehicle : List<VehicleDto>
+    +AgendaEntryDto(String title, String description, int duration, UrgencyStatus urgencyStatus, GreenSpace greenSpace,
+                            LocalDate startingDate, ProgressStatus progressStatus)
+}
+
+class AgendaEntryMapper {
+    + toDomain(agendaEntryDto : AgendaEntryDto) : AgendaEntry
+    + toDTOList(listEntries: List<AgendaEntries>) : List<AgendaEntryDto>
+    + toDto(agendaEntry : AgendaEntry) : AgendaEntryDto
+}
+}
+
+ListTaskSpaceUI ..> ListTaskController
+
+ListTaskController ..> AgendaEntryMapper
+ListTaskController ..> Repositories: repositories
 Repositories --> Repositories: instance
-ListEntryController ..> CollaboratorRepository
-ListEntryController ..> TeamRepository
-ListEntryController ..> Agenda
+ListTaskController ..> CollaboratorRepository
+ListTaskController ..> TeamRepository
+ListTaskController ..> AgendaRepository
 Repositories --> "1" CollaboratorRepository
 Repositories --> "1" TeamRepository
-Repositories --> "1" Agenda
+Repositories --> "1" AgendaRepository
 
-Agenda --> AgendaEntries
+AgendaRepository --> AgendaEntry
 
-AgendaEntries --> Entry
-EntryMapper ..> EntryDto
-EntryMapper ..> Entry
-TeamRepository --> Team
+AgendaEntryMapper ..> AgendaEntryDto
 
-Team ..> Collaborator
-CollaboratorRepository --> Collaborator
 @enduml
 
