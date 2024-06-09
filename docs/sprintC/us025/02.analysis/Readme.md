@@ -1,4 +1,4 @@
-# US025 - Cancel an entry in the Agenda
+# US025 - Cancel an agendaEntry in the Agenda
 
 ## 2. Analysis
 

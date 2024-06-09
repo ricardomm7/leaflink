@@ -1,11 +1,11 @@
-# US026 - Assign one or more vehicles to an toDoEntry in the Agenda
+# US026 - Assign one or more vehicles to an agendaEntry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a GSM, I want to assign one or more vehicles to an toDoEntry in
+As a GSM, I want to assign one or more vehicles to an agendaEntry in
 the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
@@ -62,7 +62,7 @@ Num contexto real precisariamos de gerir também (in)disponibilidade dos veiculo
     * none
 	
 * Selected data:
-    * Entry
+    * agendaEntry
     * Vehicle
 
 **Output Data:**
