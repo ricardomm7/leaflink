@@ -71,7 +71,6 @@ public class ListTaskController {
      *
      * @param beginningDate the beginning date
      * @param endDate       the end date
-     * @param status        the status
      * @param collaborator  the collaborator
      * @return the dates list
      */

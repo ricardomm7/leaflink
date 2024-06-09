@@ -186,13 +186,13 @@ public class EntryRepository implements Serializable {
             } catch (Exception ignored) {
             }
         }
-
+        List<AgendaEntry> result = new ArrayList<>();
         for (AgendaEntry entry : teamEntries) {
-            if (entry.getStartingDate().isBefore(beginningDate) || entry.getStartingDate().isAfter(endDate)) {
-                teamEntries.remove(entry);
+            if (!entry.getStartingDate().isBefore(beginningDate) || !entry.getStartingDate().isAfter(endDate)) {
+                result.add(entry);
             }
         }
-        return teamEntries;
+        return result;
 
     }
 

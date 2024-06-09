@@ -68,11 +68,7 @@ public class TasksGUI {
         LocalDate endDate = endDateDateP.getValue();
 
         if (startDate != null && endDate != null && !startDate.isAfter(endDate)) {
-            List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(
-                    startDate,
-                    endDate,
-                    listTaskController.getCollaboratorTroughEmail(session.getUserEmail())
-            );
+            List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(startDate, endDate, listTaskController.getCollaboratorTroughEmail(session.getUserEmail()));
 
             if (agendaEntries.isEmpty()) {
                 ShowError.showAlert("Search Agenda Entry", "No entries found for the given date range.", null);
@@ -232,8 +228,8 @@ public class TasksGUI {
     void initialize() {
         // Inicialização das caixas de detalhes e botões
         AgendaDetailsVBox.setVisible(false);
-        CompleteAgendaEntryBtn.setDisable(true);
-        searchBtn.setDisable(true);  // Inicialmente desabilitado
+        CompleteAgendaEntryBtn.setDisable(false);
+        searchBtn.setDisable(false);  // Inicialmente desabilitado
         updateAgendaEntryList();
 
         // Listener para seleção de itens na lista de Agenda
@@ -261,6 +257,8 @@ public class TasksGUI {
         // Listeners para habilitar o botão de busca
         startDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
         endDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
+        reloadAgendaEntries();
+
     }
 
     private void checkDatesAndEnableSearch() {
@@ -281,13 +279,13 @@ public class TasksGUI {
         AgendaEntryDto entry = getAgendaEntry(string, session);
 
         if (entry != null) {
-            titleLabelA.setText(entry.getTitle());
-            descriptionLabelA.setText(entry.getDescription());
-            durationLabelA.setText(entry.getDuration() + "h");
-            urgencyLabelA.setText(entry.getUrgencyStatus().toString());
-            greenSpaceLabelA.setText(entry.getGreenSpace().getName());
-            startingDateLabelA.setText(entry.getStartingDate().toString());
-            progressStatusLabelA.setText(entry.getProgressStatus().toString());
+                titleLabelA.setText(entry.getTitle());
+                descriptionLabelA.setText(entry.getDescription());
+                durationLabelA.setText(entry.getDuration() + "h");
+                urgencyLabelA.setText(entry.getUrgencyStatus().toString());
+                greenSpaceLabelA.setText(entry.getGreenSpace().getName());
+                startingDateLabelA.setText(entry.getStartingDate().toString());
+                progressStatusLabelA.setText(entry.getProgressStatus().toString());
 
             if (entry.getAssignedTeam() == null) {
                 teamLabelA.setText("No team assigned");
@@ -325,4 +323,7 @@ public class TasksGUI {
         return null;
 
     }
+
+
+
 }

@@ -24,6 +24,9 @@ public class AgendaEntryMapper implements Serializable {
      * @return The corresponding AgendaEntry domain object.
      */
     public static AgendaEntry toDomain(AgendaEntryDto agendaEntryDto) {
+        if (agendaEntryDto == null) {
+            throw new IllegalArgumentException("AgendaEntryDto cannot be null");
+        }
         TeamDto teamDto = agendaEntryDto.getAssignedTeam();
         List<VehicleDto> vehicleList = agendaEntryDto.assignedVehicles;
         AgendaEntry agendaEntry = new AgendaEntry(agendaEntryDto.getTitle(), agendaEntryDto.getDescription(), agendaEntryDto.getDuration(),
