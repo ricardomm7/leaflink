@@ -15,6 +15,8 @@ participant ":AgendaEntryMapper" as AgendaEntryMapper
 participant "agendaEntry\n:AgendaEntry" as AgendaEntry
 participant ":ToDoEntryMapper" as ToDoEntryMapper
 participant "toDoEntryDto\n:ToDoEntryDto" as ToDoEntryDto
+participant ":ApplicationSession" as ApplicationSession
+participant "applicationSession\n:ApplicationSession" as applicationSession1
 
 activate GSM
 
@@ -43,7 +45,17 @@ activate GSM
         UI -> CTRL: getToDoEntryList(GSM)
         activate CTRL
 
-            CTRL -> EntryRepo: getToDoEntryListByGSM(GSM)
+        CTRL -> ApplicationSession : getInstance()
+                activate ApplicationSession
+                ApplicationSession --> CTRL : applicationSession
+                deactivate ApplicationSession
+
+                CTRL -> applicationSession1 : getCurrentSession()
+                activate applicationSession1
+                applicationSession1 --> CTRL : loggedUser
+                deactivate applicationSession1
+
+            CTRL -> EntryRepo: getToDoEntryList(loggedUser)
             deactivate CTRL
             activate EntryRepo
 
@@ -81,10 +93,10 @@ activate GSM
     GSM -> UI : types starting date
     activate UI
 
-         UI --> GSM : requests urgency status for the selected entry
+         UI --> GSM : requests progress status for the selected entry
     deactivate UI
 
-    GSM -> UI : selects urgency status
+    GSM -> UI : selects progress status
     activate UI
 
     UI --> GSM : Shows all data and requests confirmation
@@ -93,12 +105,12 @@ activate GSM
     GSM -> UI: confirms data
     activate UI
 
-        UI -> CTRL : addAgendaEntry(toDoEntryDto, startingDate, urgencyStatus)
+        UI -> CTRL : addAgendaEntry(toDoEntryDto, startingDate, progressStatus)
         deactivate UI
         activate CTRL
 
 
-            CTRL -> EntryRepo : addAgendaEntry(toDoEntryDto, startingDate, urgencyStatus)
+            CTRL -> EntryRepo : addAgendaEntry(toDoEntryDto, startingDate, progressStatus)
             deactivate CTRL
             activate EntryRepo
 
@@ -115,7 +127,7 @@ activate GSM
             deactivate AgendaEntryMapper
 
                 EntryRepo -> EntryRepo : setStartingDate(agendaEntry, startingDate)
-                EntryRepo -> EntryRepo : updateEntryStatus(agendaEntry, urgencyStatus)
+                EntryRepo -> EntryRepo : setProgressStatus(agendaEntry, progressStatus)
 
             EntryRepo --> CTRL : success
             deactivate EntryRepo

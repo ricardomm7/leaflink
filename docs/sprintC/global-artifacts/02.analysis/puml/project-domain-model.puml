@@ -221,7 +221,7 @@ AgendaEntry "1" -- "1" Team : is assigned >
 
 AgendaEntry "1" -- "*" GardenTool : needs >
 
-AgendaEntry "*" -- "1" GreenSpace: assigned to >
+ToDoEntry "*" -- "1" GreenSpace: assigned to >
 
 GreenSpace "1" -- "1..*" ElectronicDevice: has >
 
@@ -231,7 +231,7 @@ GreenSpace "1" -- "1" Portal : is connected >
 
 Portal "1" -- "1" StatsUserPortal : is analysed >
 
-ToDoList "1" -- "1..*" AgendaEntry : has >
+ToDoList "1" -- "1..*" ToDoEntry : has >
 
 Agenda "1" -- "1..*" AgendaEntry: has >
 

@@ -12,8 +12,8 @@ package CONTROLLER {
         - repositories: Repositories
         - entryRepository: EntryRepository
         + AddAgendaEntryController()
-        + getToDoEntryList(gsm: UserSession): List<ToDoEntryDto>
-        - convertToAgendaEntry(agendaEntryDto: AgendaEntryDto): AgendaEntry
+        + getToDoEntry(gsm: UserSession): List<ToDoEntryDto>
+        + addAgendaEntry (agendaEntryDto: AgendaEntryDto)
     }
 }
 
@@ -28,51 +28,15 @@ package DOMAIN {
         }
 
         class EntryRepository {
+            - toDoEntryList: List<ToDoEntry>
             - agendaEntryList: List<AgendaEntry>
             + EntryRepository()
             + getToDoEntryListByGSM(gsm: UserSession): List<ToDoEntryDto>
-            + addAgendaEntry(agendaEntryDto: AgendaEntryDto, newDate: LocalDate, newUrgencyStatus: UrgencyStatus): boolean
+            + addAgendaEntry(agendaEntry: AgendaEntry): void
         }
     }
 
-    package DTO {
-        class AgendaEntryMapper {
-             + toDto(agendaEntry: AgendaEntry): AgendaEntryDto
-             + toDto(toDoEntry: ToDoEntry): ToDoEntryDto
-             + toDomain(agendaEntryDto: AgendaEntryDto): AgendaEntry
-             + toDomain(toDoEntryDto: ToDoEntryDto): AgendaEntry
-        }
 
-        class AgendaEntryDto {
-            - title: String
-            - description: String
-            - duration: int
-            - urgencyStatus: UrgencyStatus
-            - greenSpace: GreenSpaceDto
-            - startingDate: LocalDate
-            - progressStatus: ProgressStatus
-            + AgendaEntryDto(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpaceDto, startingDate: LocalDate, progressStatus: ProgressStatus)
-            + getTitle(): String
-            + getDescription(): String
-            + getDuration(): int
-            + getUrgencyStatus(): UrgencyStatus
-            + getGreenSpace(): GreenSpaceDto
-            + getStartingDate(): LocalDate
-            + getProgressStatus(): ProgressStatus
-        }
-
-         class ToDoEntryDto {
-            - title: String
-            - description: String
-            - duration: int
-            - greenSpace: GreenSpaceDto
-            + ToDoEntryDto(title: String, description: String, duration: int, greenSpace: GreenSpaceDto)
-            + getTitle(): String
-            + getDescription(): String
-            + getDuration(): int
-            + getGreenSpace(): GreenSpaceDto
-         }
-    }
 
     package MODEL {
         class AgendaEntry {
@@ -88,8 +52,50 @@ package DOMAIN {
             + setStartingDate(date: LocalDate): void
             + getUrgencyStatus(): UrgencyStatus
         }
+
+         class ToDoEntry{
+            - title: String
+            - description: String
+            - duration: int
+            - greenSpace: GreenSpace
+         }
     }
 }
+ package DTO {
+        class ToDoEntryDto {
+           - title: String
+           - description: String
+           - duration: int
+           - greenSpace: GreenSpaceDto
+           - urgencyStatus: UrgencyStatus
+           + ToDoEntryDto(title: String, description: String, duration: int, urgencyStatus: UrgencyStatus, greenSpace: GreenSpaceDto)
+           + getTitle(): String
+           + getDescription(): String
+           + getDuration(): int
+           + getUrgencyStatus(): UrgencyStatus
+           + getGreenSpace(): GreenSpaceDto
+           + setDescription(desription: String): void
+           + setDuration(duration: int): void
+           + setGreenSpace(greenSpace: GreenSpaceDto): void
+           + setTitle(title: String): void
+           + setUrgencyStatus(urgencyStatus: UrgencyStatus): void
+         }
+
+         class ToDoEntryMapper {
+            + toDto(toDoEntry: ToDoEntry): ToDoEntryDto
+            + toDomain(toDoEntryDto: ToDoEntryDto): ToDoEntry
+            + toDtoList(toDoEntries: List<ToDoEntry>): List<ToDoEntryDto>
+
+         }
+ }
+
+  package EXTERNAL{
+     class ApplicationSession{
+             +getInstance : ApplicationSession
+             +getSortAlgorithmClassName : String
+             +getCurrentSession : UserSession
+     }
+  }
 
 AddAgendaEntryUI ..> AddAgendaEntryController
 AddAgendaEntryController ..> Repositories
@@ -97,9 +103,12 @@ Repositories --> Repositories: instance
 AddAgendaEntryController ..> EntryRepository
 Repositories --> EntryRepository
 EntryRepository --> "*" AgendaEntry
-AgendaEntryMapper ..> AgendaEntryDto
-AgendaEntryMapper ..> AgendaEntry
-AgendaEntryMapper ..> ToDoEntryDto
+AgendaEntry -> ToDoEntry
+ToDoEntryMapper ..> ToDoEntryDto
+ToDoEntryMapper ..> ToDoEntry
+EntryRepository --> ToDoEntry
+AddAgendaEntryController ..> ApplicationSession : getCurrentSession
+
 
 
 

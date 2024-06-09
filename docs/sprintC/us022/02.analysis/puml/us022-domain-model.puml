@@ -13,7 +13,7 @@ hide methods
 
 
 class AgendaEntry {
-    estimatedDate
+    startingDate
     progressStatus
 
 }

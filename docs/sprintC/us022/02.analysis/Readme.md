@@ -1,4 +1,4 @@
-# US006 - Register a Vehicle 
+# US022 - Add a new entry in the Agenda
 
 ## 2. Analysis
 
@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-- All dates used (acquisition date and registration date) are in day/month/year format.
+- All dates used (starting date) are in day/month/year format.

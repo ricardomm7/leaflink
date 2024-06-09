@@ -1,11 +1,11 @@
-# US021 - Add a new toDoEntry to the To-Do List
+# US021 - Add a new entry to the To-Do List
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Green Space Maneger (GSM), I want to add a new toDoEntry to the To-Do List.
+As a Green Space Maneger (GSM), I want to add a new entry to the To-Do List.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -23,8 +23,8 @@ As a Green Space Maneger (GSM), I want to add a new toDoEntry to the To-Do List.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The new toDoEntry must be associated with a green space managed by the GSM.
-* **AC2:** The green space for the new toDoEntry should be chosen from a list presented to the GSM.
+* **AC1:** The new entry must be associated with a green space managed by the GSM.
+* **AC2:** The green space for the new entry should be chosen from a list presented to the GSM.
 
 ### 1.4. Found out Dependencies
 

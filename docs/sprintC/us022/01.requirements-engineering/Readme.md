@@ -1,39 +1,38 @@
-# US022 - Add a new toDoEntry in the Agenda
+# US022 - Add a new entry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Green Space Manager (GSM), I want to add a new toDoEntry in the Agenda.
-
+As a Green Space Manager (GSM), I want to add a new entry in the Agenda.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
-> The person who adds the entries in the Agenda is the GSM, and the toDoEntry is saved in the system. 
-> The new toDoEntry must have an associated green space managed by the GSM.
-> The new toDoEntry must already exist in the To-Do list.
+> The person who adds the entries in the Agenda is the GSM, and the entry is saved in the system. 
+> The new entry must have an associated green space managed by the GSM.
+> The new entry must already exist in the To-Do list.
  
 **From the client clarifications:**
 
-> **Question:**  When a new toDoEntry is added to the Agenda, the progressStatus of that task will be, by default, set to "planned"?
+> **Question:**  When a new entry is added to the Agenda, the progress status of that task will be, by default, set to "planned"?
 > 
 > **Answer:** Correct.
 > 
-> **Question:** When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/information does he need to input when planning?
+> **Question:** When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/ information does he need to input when planning?
 >
 > **Answer:** The starting date for the task. Later the GSM will be able to add the Team and vehicles (if required).
 > 
-> **Question:** We know that an Agenda toDoEntry has a target date, but is this target date supposed to be inputted upon transferring a task from the to-do list to the agenda, or is it supposed to be inputted upon creating the task in the to-do list?
+> **Question:** We know that an Agenda entry has a target date, but is this target date supposed to be inputted upon transferring a task from the to-do list to the agenda, or is it supposed to be inputted upon creating the task in the to-do list?
 >
 > **Answer:** To-do list entries doesn't have dates!
 > 
-> **Question:** Can I add an toDoEntry that has a time period that already has an existing toDoEntry in the Agenda?
+> **Question:** Can I add an entry that has a time period that already has an existing entry in the Agenda?
 >
 > **Answer:** Yes, because there are many parks to manage and different tasks can be executed at same time in the same park.
 > 
-> **Question:** When we are registering an toDoEntry to the agenda, are the three inputs (selecting an existing task from the to-do list, starting date, and finishing date) sufficient?
+> **Question:** When we are registering an entry to the agenda, are the three inputs (selecting an existing task from the to-do list, starting date, and finishing date) sufficient?
 >
 > **Answer:** The starting date will be enough because the task already has the predicted duration.
 > 
@@ -48,21 +47,13 @@ As a Green Space Manager (GSM), I want to add a new toDoEntry in the Agenda.
 > **Question:** Should the team be generated like in the us05 or should each element be selected manually?
 >
 > **Answer:** There is only one US that allows to create teams, as you mentioned, the US05.
-> 
-> **Question:**
->
-> **Answer:**
-> 
-> **Question:**
->
-> **Answer:**
 
 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The new toDoEntry must be associated with a green space managed by the GSM.
-* **AC2:** The new toDoEntry must exist in the To-Do list.
+* **AC1:** The new entry must be associated with a green space managed by the GSM.
+* **AC2:** The new entry must exist in the To-Do list.
 * **AC3:** The system should validate that all required attributes are filled correctly.
 
 ### 1.4. Found out Dependencies
@@ -77,8 +68,8 @@ As a Green Space Manager (GSM), I want to add a new toDoEntry in the Agenda.
     * Starting date of the task
 	
 * Selected data:
-    * Green Space (from a list of green spaces managed by the GSM)
-    * Task on the To-Do List
+    * Entry in the To-Do List
+    * Progress status
 
 **Output Data:**
 

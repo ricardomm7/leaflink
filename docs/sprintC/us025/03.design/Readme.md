@@ -11,6 +11,8 @@ _**Note that SSD - Alternative One is adopted.**_
 |:---------------|:--------------------------------------------------------------|:----------------------------|:------------------------------|
 | Step 1         | ... interacting with the actor?                               | CancelAgendaEntryUI         | Pure Fabrication.             |
 |                | ... coordinating the US?                                      | CancelAgendaEntryController | Controller.                   |
+|                | ... knowing the user of the system?                           | UserSession                 | Information Expert.           |
+|                | ... transforming the domain objects to DTO?                   | AgendaEntryMapper           | Low coupling                  |
 | Step 2         | ... requesting the data?                                      | CancelAgendaEntryUI         | Pure Fabrication.             |
 | Step 3         | ... receiving the data?                                       | CancelAgendaEntryUI         | Pure Fabrication.             |
 |                | ... getting entry repository?                                 | Repositories                | Information Expert.           |
@@ -30,8 +32,8 @@ _**Note that SSD - Alternative One is adopted.**_
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Entry
-* Agenda
+* agendaEntry
+* agendaEntryDto
 
 
 Other software classes (i.e. Pure Fabrication) identified: 
@@ -42,6 +44,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 * EntryRepository
 * TeamRepository
 * NotificationService
+* AgendaEntryMapper
 
 
 ## 3.2. Sequence Diagram (SD)

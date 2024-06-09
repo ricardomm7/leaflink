@@ -12,7 +12,7 @@ participant ":System" as System
 
 activate GSM
 
-    GSM -> System : Request to add a new task in the Agenda
+    GSM -> System : Request to add a new entry in the Agenda
     activate System
 
         System --> GSM : shows the To-do List and requests to select an entry
@@ -25,14 +25,14 @@ activate GSM
         System --> GSM : requests a starting date for the selected entry
     deactivate System
 
-    GSM -> System : types date
+    GSM -> System : selects date
 
     activate System
 
-        System --> GSM : requests to select the urgency status of the selected entry
+        System --> GSM : requests to select the progress status of the selected entry
     deactivate System
 
-    GSM -> System : selects urgency status
+    GSM -> System : selects progress status
 
     activate System
 

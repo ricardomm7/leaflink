@@ -36,8 +36,8 @@ software development process (requirements, analysis, design, testing and code).
 | US018/UC018 | [Place signs to evacuate to an Meeting Point.](../../us018/Readme.md)                                                                        |
 | US019/UC019 | [Conclude about the worst-case time complexity of the procedures developed in US13, US17, and US18.](../../us019/Readme.md)                  |
 | US020/UC020 | [Register a green space and its respective area.](../../us020/Readme.md)                                                                     |
-| US021/UC021 | [Add a new toDoEntry to the To-Do List.](../../us021/Readme.md)                                                                              |
-| US022/UC022 | [Add a new toDoEntry in the Agenda.](../../us022/Readme.md)                                                                                  |
+| US021/UC021 | [Add a new entry to the To-Do List.](../../us021/Readme.md)                                                                                  |
+| US022/UC022 | [Add a new entry in the Agenda.](../../us022/Readme.md)                                                                                      |
 | US023/UC023 | [Assign a Team to an toDoEntry in the Agenda.](../../us023/Readme.md)                                                                        |
 | US024/UC024 | [Postpone an agendaEntry in the Agenda to a future date.](../../us024/Readme.md)                                                             |
 | US025/UC025 | [Cancel an toDoEntry in the Agenda.](../../us025/Readme.md)                                                                                  |

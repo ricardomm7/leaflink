@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-- All dates used (estimated date) are in day/month/year format.
+- All dates used (starting date) are in day/month/year format.
