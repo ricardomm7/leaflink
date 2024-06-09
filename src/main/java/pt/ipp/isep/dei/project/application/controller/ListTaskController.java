@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.project.application.controller;
 
+import pt.ipp.isep.dei.project.application.session.UserSession;
 import pt.ipp.isep.dei.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.project.domain.Collaborator;
-import pt.ipp.isep.dei.project.domain.ProgressStatus;
 import pt.ipp.isep.dei.project.domain.Team;
 import pt.ipp.isep.dei.project.dto.AgendaEntryDto;
 import pt.ipp.isep.dei.project.mappers.AgendaEntryMapper;
@@ -75,9 +75,19 @@ public class ListTaskController {
      * @param collaborator  the collaborator
      * @return the dates list
      */
-    public List<AgendaEntryDto> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Collaborator collaborator) {
+    public List<AgendaEntryDto> getDatesList(LocalDate beginningDate, LocalDate endDate, Collaborator collaborator) {
         Team team = getTeamTroughCLB(collaborator);
-        List<AgendaEntry> entries = entryRepository.getDatesList(beginningDate, endDate, status, team);
+        List<AgendaEntry> entries = entryRepository.getDatesList(beginningDate, endDate, team);
         return AgendaEntryMapper.toDtoList(entries);
+    }
+
+    /**
+     * Gets agenda entries.
+     *
+     * @param session the session
+     * @return the agenda entries
+     */
+    public List<AgendaEntryDto> getAgendaEntries(UserSession session) {
+        return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntriesAssignedToCollaborator(session));
     }
 }

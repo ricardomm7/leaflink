@@ -69,4 +69,11 @@ public class Skill implements Serializable {
     public String getDesignation() {
         return designation;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        Skill skill = (Skill) o;
+        return skill.getDesignation().equalsIgnoreCase(designation);
+    }
 }

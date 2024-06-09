@@ -173,17 +173,17 @@ public class EntryRepository implements Serializable {
      *
      * @param beginningDate the beginning date
      * @param endDate       the end date
-     * @param status        the status
      * @param team          the team
      * @return the dates list
      */
-    public List<AgendaEntry> getDatesList(LocalDate beginningDate, LocalDate endDate, ProgressStatus status, Team team) {
-        List<AgendaEntry> fullList = getAgendaEntryList();
-
+    public List<AgendaEntry> getDatesList(LocalDate beginningDate, LocalDate endDate, Team team) {
         List<AgendaEntry> teamEntries = new ArrayList<>();
-        for (AgendaEntry entry : fullList) {
-            if (entry.getAssignedTeam().equals(team)) {
-                teamEntries.add(entry);
+        for (AgendaEntry entry : agendaEntryList) {
+            try {
+                if (entry.getAssignedTeam().getCollaborators().get(0).getTaxpayerNumber() == team.getCollaborators().get(0).getTaxpayerNumber()) {
+                    teamEntries.add(entry);
+                }
+            } catch (Exception ignored) {
             }
         }
 
