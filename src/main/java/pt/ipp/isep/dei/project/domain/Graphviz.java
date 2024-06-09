@@ -63,9 +63,9 @@ public abstract class Graphviz {
      * Executes the Graphviz tool to generate an image from a list of routes using Dijkstra's algorithm.
      * This method creates a DOT file representing the graph and runs the Graphviz tool to generate an SVG image.
      *
-     * @param allRoutes     the list of all routes in the graph.
-     * @param shortestPath  the list of routes representing the shortest path.
-     * @param filename      the name of the output file (without extension).
+     * @param allRoutes    the list of all routes in the graph.
+     * @param shortestPath the list of routes representing the shortest path.
+     * @param filename     the name of the output file (without extension).
      */
     public static void executeDijkra(List<Route> allRoutes, List<Route> shortestPath, String filename) {
         try {
@@ -84,8 +84,8 @@ public abstract class Graphviz {
      * Writes the graph in DOT format to a temporary file for Dijkstra's algorithm.
      * This method creates a DOT file representing the graph and the shortest path using Dijkstra's algorithm.
      *
-     * @param allRoutes     the list of all routes in the graph.
-     * @param shortestPath  the list of routes representing the shortest path.
+     * @param allRoutes    the list of all routes in the graph.
+     * @param shortestPath the list of routes representing the shortest path.
      * @throws IOException if an I/O error occurs.
      */
     private static void writeGraphvizDotFileDij(List<Route> allRoutes, List<Route> shortestPath) throws IOException {

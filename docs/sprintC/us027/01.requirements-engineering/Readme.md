@@ -10,7 +10,7 @@ As a GSM, I need to list all green spaces managed by me.
 
 **From the specifications document:**
 
->  The list must be organized by size in descending order. There should be at least two algorithms for organizing the list.
+> There should be at least two algorithms for organizing the list.
  
 **From the client clarifications:**
 
@@ -20,8 +20,7 @@ As a GSM, I need to list all green spaces managed by me.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The list of green spaces must be sorted by size in descending order. The sorting algorithm to be used by the application must be defined through a configuration file. At least two sorting algorithms should be available.
-* **AC2:** If there are no parks registered to form the list, the program should warn the user.
+* **AC1:** The sorting algorithm to be used by the application must be defined through a configuration file. At least two sorting algorithms should be available.
 
 ### 1.4. Found out Dependencies
 
