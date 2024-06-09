@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import pt.ipp.isep.dei.project.Main;
-import pt.ipp.isep.dei.project.application.controller.AddAgendaEntryController;
 import pt.ipp.isep.dei.project.application.controller.ListTaskController;
 import pt.ipp.isep.dei.project.application.controller.RecordEntryController;
 import pt.ipp.isep.dei.project.application.session.ApplicationSession;
@@ -24,14 +23,13 @@ import java.util.stream.Collectors;
 
 public class TasksGUI {
 
-    private final AddAgendaEntryController addAgendaEntryController = new AddAgendaEntryController();
     private final RecordEntryController recordEntryController = new RecordEntryController();
     private final ListTaskController listTaskController = new ListTaskController();
     private final UserSession session = ApplicationSession.getInstance().getCurrentSession();
+    private List<AgendaEntryDto> allAgendaEntry;
+
     @FXML
     private ListView<String> agendaListView;
-    @FXML
-    private List<AgendaEntryDto> allAgendaEntry;
     @FXML
     private Label titleLabelA;
     @FXML
@@ -63,12 +61,15 @@ public class TasksGUI {
 
     @FXML
     void SerchAgendaEntryHandle(ActionEvent event) {
-        //Não dá!!
         LocalDate startDate = startDateDateP.getValue();
         LocalDate endDate = endDateDateP.getValue();
 
         if (startDate != null && endDate != null && !startDate.isAfter(endDate)) {
-            List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(startDate, endDate, listTaskController.getCollaboratorTroughEmail(session.getUserEmail()));
+            List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(
+                    startDate,
+                    endDate,
+                    listTaskController.getCollaboratorTroughEmail(session.getUserEmail())
+            );
 
             if (agendaEntries.isEmpty()) {
                 ShowError.showAlert("Search Agenda Entry", "No entries found for the given date range.", null);
@@ -81,14 +82,13 @@ public class TasksGUI {
         }
     }
 
-
     @FXML
     void CompleteAgendaEntryHandle(ActionEvent event) {
         String selectedAgendaEntry = agendaListView.getSelectionModel().getSelectedItem();
         if (selectedAgendaEntry == null) {
             ShowError.showAlert("Complete Agenda Entry", "No entry selected to complete.", null);
         } else {
-            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry, session);
+            AgendaEntryDto agendaEntryDto = getAgendaEntry(selectedAgendaEntry);
 
             recordEntryController.recordEntryCompletion(agendaEntryDto, true);
 
@@ -97,7 +97,6 @@ public class TasksGUI {
     }
 
     private void updateWithDates(List<AgendaEntryDto> a) {
-
         List<String> agendaEntryList = a.stream()
                 .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s | Progress Status: %s",
                         entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
@@ -107,53 +106,9 @@ public class TasksGUI {
                                 "No vehicles assigned", entry.getProgressStatus()))
                 .collect(Collectors.toList());
         ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
+        agendaListView.getItems().clear();
         agendaListView.setItems(observableList);
-
-        agendaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-            @Override
-            public ListCell<String> call(ListView<String> listView) {
-                return new ListCell<String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty || item == null) {
-                            setText(null);
-                            setStyle(null);
-                        } else {
-                            setText(item);
-                            AgendaEntryDto agendaEntry = allAgendaEntry.stream()
-                                    .filter(entry -> item.contains(entry.getTitle()) && item.contains(entry.getGreenSpace().getName()))
-                                    .findFirst().orElse(null);
-
-                            if (agendaEntry != null) {
-                                if (agendaEntry.getProgressStatus() == ProgressStatus.CANCELLED) {
-                                    setStyle("-fx-text-fill: black;");
-                                } else {
-                                    switch (agendaEntry.getUrgencyStatus()) {
-                                        case HIGH:
-                                            setStyle("-fx-text-fill: red;");
-                                            break;
-                                        case MEDIUM:
-                                            setStyle("-fx-text-fill: orange;");
-                                            break;
-                                        case LOW:
-                                            setStyle("-fx-text-fill: green;");
-                                            break;
-                                        default:
-                                            setStyle("-fx-text-fill: black;");
-                                            break;
-                                    }
-                                }
-                            } else {
-                                setStyle("-fx-text-fill: black;");
-                            }
-                        }
-                    }
-                };
-            }
-        });
     }
-
 
     private void updateAgendaEntryList() {
         allAgendaEntry = listTaskController.getAgendaEntries(session);
@@ -168,7 +123,9 @@ public class TasksGUI {
                 .collect(Collectors.toList());
         ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
         agendaListView.setItems(observableList);
+    }
 
+    private void setupCellFactory() {
         agendaListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> listView) {
@@ -214,7 +171,6 @@ public class TasksGUI {
         });
     }
 
-
     @FXML
     void tasksBtnActionHandle(ActionEvent event) {
         try {
@@ -228,9 +184,10 @@ public class TasksGUI {
     void initialize() {
         // Inicialização das caixas de detalhes e botões
         AgendaDetailsVBox.setVisible(false);
-        CompleteAgendaEntryBtn.setDisable(false);
-        searchBtn.setDisable(false);  // Inicialmente desabilitado
+        CompleteAgendaEntryBtn.setDisable(true);
+        searchBtn.setDisable(true);  // Inicialmente desabilitado
         updateAgendaEntryList();
+        setupCellFactory(); // Configura a CellFactory apenas uma vez durante a inicialização
 
         // Listener para seleção de itens na lista de Agenda
         agendaListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -244,9 +201,6 @@ public class TasksGUI {
             }
         });
 
-        // Recarregar entradas de agenda ao inicializar
-        reloadAgendaEntries();
-
         if (listTaskController.getTeamTroughCLB(listTaskController.getCollaboratorTroughEmail(session.getUserEmail())) != null) {
             startDateDateP.setDisable(false);
             endDateDateP.setDisable(false);
@@ -257,8 +211,6 @@ public class TasksGUI {
         // Listeners para habilitar o botão de busca
         startDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
         endDateDateP.valueProperty().addListener((observable, oldValue, newValue) -> checkDatesAndEnableSearch());
-        reloadAgendaEntries();
-
     }
 
     private void checkDatesAndEnableSearch() {
@@ -269,23 +221,17 @@ public class TasksGUI {
         }
     }
 
-
-    private void reloadAgendaEntries() {
-        allAgendaEntry = listTaskController.getAgendaEntries(session);
-        updateAgendaEntryList();
-    }
-
     private void showAgendaEntryDetails(String string) {
-        AgendaEntryDto entry = getAgendaEntry(string, session);
+        AgendaEntryDto entry = getAgendaEntry(string);
 
         if (entry != null) {
-                titleLabelA.setText(entry.getTitle());
-                descriptionLabelA.setText(entry.getDescription());
-                durationLabelA.setText(entry.getDuration() + "h");
-                urgencyLabelA.setText(entry.getUrgencyStatus().toString());
-                greenSpaceLabelA.setText(entry.getGreenSpace().getName());
-                startingDateLabelA.setText(entry.getStartingDate().toString());
-                progressStatusLabelA.setText(entry.getProgressStatus().toString());
+            titleLabelA.setText(entry.getTitle());
+            descriptionLabelA.setText(entry.getDescription());
+            durationLabelA.setText(entry.getDuration() + "h");
+            urgencyLabelA.setText(entry.getUrgencyStatus().toString());
+            greenSpaceLabelA.setText(entry.getGreenSpace().getName());
+            startingDateLabelA.setText(entry.getStartingDate().toString());
+            progressStatusLabelA.setText(entry.getProgressStatus().toString());
 
             if (entry.getAssignedTeam() == null) {
                 teamLabelA.setText("No team assigned");
@@ -308,22 +254,18 @@ public class TasksGUI {
         }
     }
 
-    private AgendaEntryDto getAgendaEntry(String string, UserSession GSM) {
+    private AgendaEntryDto getAgendaEntry(String string) {
         String[] splittedString = string.split(" \\| ");
         String title = splittedString[1].split(": ")[1];
         String date = splittedString[0].split(": ")[1];
         String status = splittedString[5].split(": ")[1];
         LocalDate dateLocal = LocalDate.parse(date);
-        for (AgendaEntryDto entry : addAgendaEntryController.getAgendaEntries(GSM)) {
+        for (AgendaEntryDto entry : allAgendaEntry) {
             if (entry.getTitle().equalsIgnoreCase(title) && entry.getStartingDate().isEqual(dateLocal) && entry.getProgressStatus().toString().equals(status)) {
                 return entry;
             }
         }
 
         return null;
-
     }
-
-
-
 }

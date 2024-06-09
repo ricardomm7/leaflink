@@ -64,5 +64,4 @@ public class AddAgendaEntryController {
     public List<AgendaEntryDto> getAgendaEntries(UserSession GSM) {
         return AgendaEntryMapper.toDtoList(entryRepository.getAgendaEntryListByGSM(GSM.getUserEmail()));
     }
-
 }
