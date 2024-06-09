@@ -20,7 +20,7 @@ class ListTaskController {
     + getDatesList(LocalDate beginningDate, LocalDate endDate, Collaborator collaborator) : List<AgendaEntryDto>
     + getAgendaEntries(UserSession session) : List<AgendaEntryDto>
 }
-
+}
 
 package DOMAIN {
 package REPOSITORY {

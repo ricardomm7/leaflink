@@ -9,13 +9,12 @@ autonumber
 
 actor "GSM" as GSM
 participant ":ListTaskSpaceUI" as UI
-participant ":istTaskController" as CTRL
+participant ":ListTaskController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
 participant "entryRepository\n:EntryRepository" as EntryRep
 participant ":ToDoEntryMapper" as ToDoEntryMapper
-
 participant "AgendaEntry" as Entry
 participant "greenSpaceMapper\n:GreenSpaceMapper" as GreenSpaceMapper
 participant "greenSpaceDto\n:GreenSpaceDto" as GreenSpaceDTO
