@@ -20,6 +20,11 @@ public class WaterIrrigationController {
         executeSingle(filepath);
     }
 
+    /**
+     * Executes the water irrigation process for a single CSV file.
+     *
+     * @param caminhoFile the file path of the CSV file to be processed
+     */
     private void executeSingle(String caminhoFile) {
         // Creates an instance of ExternalCSV with a given file name
         ExternalCSV ex = new ExternalCSV(caminhoFile);

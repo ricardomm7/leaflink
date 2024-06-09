@@ -365,6 +365,11 @@ public class Vehicle implements Serializable {
         return VIN.equals(vehicle.getVIN());
     }
 
+    /**
+     * Returns a hash code value for the Vehicle object based on its VIN.
+     *
+     * @return An integer hash code value for the Vehicle object.
+     */
     @Override
     public int hashCode() {
         return VIN.hashCode();

@@ -122,6 +122,13 @@ public class GreenSpace implements Serializable {
         return manager;
     }
 
+    /**
+     * Checks if this GreenSpace object is equal to another object.
+     * Two GreenSpace objects are considered equal if they have the same name, type, area, manager, and address.
+     *
+     * @param o the object to compare this GreenSpace with.
+     * @return true if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -134,6 +141,11 @@ public class GreenSpace implements Serializable {
                 address.equals(that.getAddress());
     }
 
+    /**
+     * Computes the hash code for this GreenSpace object.
+     *
+     * @return the hash code value for this GreenSpace object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name, type, area, manager, address);

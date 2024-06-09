@@ -103,6 +103,14 @@ public class Address implements Serializable {
         return true;
     }
 
+    /**
+     * Compares this address to the specified object.
+     * The result is true if and only if the argument is not null and is an Address object
+     * that represents the same address, city, and zip code as this object.
+     *
+     * @param o the object to compare this Address against
+     * @return true if the given object represents an Address equivalent to this address, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

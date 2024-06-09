@@ -103,6 +103,12 @@ public class GreenSpaceDto implements Serializable {
         return zipCode;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,11 +117,21 @@ public class GreenSpaceDto implements Serializable {
         return Double.compare(area, that.area) == 0 && Objects.equals(name, that.name) && type == that.type && Objects.equals(manager, that.manager) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(zipCode, that.zipCode);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name, type, area, manager, address, city, zipCode);
     }
 
+    /**
+     * Returns a string representation of the GreenSpaceDto object.
+     *
+     * @return A string representation of the GreenSpaceDto object.
+     */
     @Override
     public String toString() {
         return "GreenSpaceDto{" +

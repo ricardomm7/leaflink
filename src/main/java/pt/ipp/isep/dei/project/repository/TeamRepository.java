@@ -23,9 +23,9 @@ public class TeamRepository implements Serializable {
 
 
     /**
-     * Add team.
+     * Adds a new team to the repository.
      *
-     * @param team the team
+     * @param team the team to add
      */
     public void addTeam(Team team) {
         teamList.add(team);
@@ -33,15 +33,19 @@ public class TeamRepository implements Serializable {
 
 
     /**
-     * Gets team list.
+     * Retrieves the list of all teams in the repository.
      *
-     * @return the team list
+     * @return the list of all teams
      */
     public List<Team> getTeamList() {
         return teamList;
     }
 
-
+    /**
+     * Retrieves the list of available teams.
+     *
+     * @return the list of available teams
+     */
     public List<Team> getAvailableTeamList() {
         List<Team> availableTeam = new ArrayList<>();
         for (Team team : teamList) {
@@ -54,7 +58,7 @@ public class TeamRepository implements Serializable {
 
 
     /**
-     * Remove.
+     * Removes a team from the repository by its index.
      *
      * @param selectedIndex the selected index
      */
@@ -62,7 +66,12 @@ public class TeamRepository implements Serializable {
         teamList.remove(selectedIndex);
     }
 
-
+    /**
+     * Sets the availability status of a team.
+     *
+     * @param team the team to set availability for
+     * @param flag the availability status (true if available, false otherwise)
+     */
     public void setTeamAvailable(Team team, Boolean flag) {
         for (Team team1 : teamList) {
             if (team.getCollaborators().equals(team1.getCollaborators()) && team.getSkills().equals(team1.getSkills()) && team.getMaxTeamSize() == team1.getMaxTeamSize() && team.getMinTeamSize() == team1.getMinTeamSize()) {

@@ -123,15 +123,31 @@ public class ExternalCSV {
         return lineCount;
     }
 
+    /**
+     * Constructor to initialize the CSV file path and points file path.
+     *
+     * @param CSVFilePath    the path to the CSV file
+     * @param pointsFilePath the path to the points file
+     */
     public ExternalCSV(String CSVFilePath, String pointsFilePath) {
         this.CSVFilepath = CSVFilePath;
         this.PointsFilePath = pointsFilePath;
     }
 
+    /**
+     * Retrieves a list of all points.
+     *
+     * @return a list of all points
+     */
     public List<Point> getAllPoints() {
         return allPoints;
     }
 
+    /**
+     * Reads routes from a matrix and point names file.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     public void readRoutesFromMatrixAndNames() throws IOException {
         List<Point> points = readPoints(this.PointsFilePath);
         double[][] costMatrix = readCostMatrix(this.CSVFilepath, points.size());
@@ -188,6 +204,11 @@ public class ExternalCSV {
         return costMatrix;
     }
 
+    /**
+     * Exports routes calculated using Dijkstra's algorithm to a CSV file.
+     *
+     * @param allShortestPaths a list of all shortest paths
+     */
     public static void exportRoutesDijsktraToCSV(List<List<Route>> allShortestPaths) {
         try (FileWriter writer = new FileWriter("goOut/evac/outCSVRoutes.csv")) {
             writer.append("Path").append(";").append("Cost").append("\n");

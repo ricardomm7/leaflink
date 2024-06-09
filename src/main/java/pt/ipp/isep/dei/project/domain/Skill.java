@@ -70,6 +70,13 @@ public class Skill implements Serializable {
         return designation;
     }
 
+    /**
+     * Checks if this Skill object is equal to another object.
+     * Two Skill objects are considered equal if they have the same designation, regardless of case.
+     *
+     * @param o the object to compare with.
+     * @return true if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

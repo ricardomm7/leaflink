@@ -234,6 +234,12 @@ public class AgendaEntryDto implements Serializable {
         this.urgencyStatus = urgencyStatus;
     }
 
+    /**
+     * Returns a string representation of the AgendaEntryDto object.
+     * This representation includes the title and description of the agenda entry.
+     *
+     * @return A string representation of the AgendaEntryDto object.
+     */
     @Override
     public String toString() {
         return this.title + " " + description;

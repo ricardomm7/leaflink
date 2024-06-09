@@ -48,6 +48,11 @@ public class Repositories implements Serializable {
         return instance;
     }
 
+    /**
+     * Sets the singleton instance of Repositories to a new instance.
+     *
+     * @param newInstance the new instance of Repositories.
+     */
     public static void setInstance(Repositories newInstance) {
         instance = newInstance;
 

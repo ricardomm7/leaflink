@@ -29,11 +29,22 @@ public class SkillDto implements Serializable {
         return designation;
     }
 
+    /**
+     * Returns a string representation of the SkillDto object.
+     *
+     * @return A string representation of the SkillDto object.
+     */
     @Override
     public String toString() {
         return "Skill designation= " + designation;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,6 +53,11 @@ public class SkillDto implements Serializable {
         return (designation.equals(skillDto.designation));
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(designation);

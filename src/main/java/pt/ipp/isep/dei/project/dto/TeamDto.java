@@ -45,6 +45,15 @@ public class TeamDto implements Serializable {
         this.maxTeamSize = maxTeamSize;
     }
 
+    /**
+     * Constructs a new TeamDto object with the provided data.
+     *
+     * @param skills        the list of skills required for the team
+     * @param collaborators the list of collaborators in the team
+     * @param minTeamSize   the minimum size of the team
+     * @param maxTeamSize   the maximum size of the team
+     * @param flag          the availability status of the team
+     */
     public TeamDto(List<SkillDto> skills, List<CollaboratorDto> collaborators, int minTeamSize, int maxTeamSize, boolean flag) {
         this.isAvailable = flag;
         this.skills = skills;
@@ -101,18 +110,30 @@ public class TeamDto implements Serializable {
                 .collect(Collectors.joining(", "));
     }
 
-    public void setCollaboratorsDtoList(List<CollaboratorDto> dtoList) {
-        this.collaborator = dtoList;
-    }
-
+    /**
+     * Sets the list of skills required for the team.
+     *
+     * @param skills the list of skills to be set
+     */
     public void setSkills(List<SkillDto> skills) {
         this.skills = skills;
     }
 
+    /**
+     * Gets the availability status of the team.
+     *
+     * @return the availability status of the team
+     */
     public boolean getAvailable() {
         return isAvailable;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,6 +146,11 @@ public class TeamDto implements Serializable {
                 (collaborator == team.collaborator);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(skills, minTeamSize, maxTeamSize, collaborator, isAvailable);

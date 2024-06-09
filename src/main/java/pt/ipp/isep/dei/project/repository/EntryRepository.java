@@ -259,6 +259,12 @@ public class EntryRepository implements Serializable {
         toDoEntryList.removeIf(ToDoEntry -> ToDoEntry.getTitle().equals(title) && ToDoEntry.getGreenSpace().getName().equals(greenSpace));
     }
 
+    /**
+     * Updates the assigned team of an AgendaEntry.
+     *
+     * @param agendaEntry the AgendaEntry to update.
+     * @param team        the new team to assign.
+     */
     public void updateTeamAgendaEntry(AgendaEntry agendaEntry, Team team) {
         for (AgendaEntry entry : agendaEntryList) {
             if (entry.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && entry.getDescription().equalsIgnoreCase(agendaEntry.getDescription()) && entry.getStartingDate().equals(agendaEntry.getStartingDate())) {
@@ -267,6 +273,12 @@ public class EntryRepository implements Serializable {
         }
     }
 
+    /**
+     * Cancels an AgendaEntry by setting its progress status to "CANCELLED".
+     *
+     * @param agendaEntry the AgendaEntry to cancel.
+     * @return true if the entry is successfully cancelled, false otherwise.
+     */
     public boolean cancelAgendaEntry(AgendaEntry agendaEntry) {
         for (AgendaEntry entry : agendaEntryList) {
             if (entry.getTitle().equalsIgnoreCase(agendaEntry.getTitle()) && entry.getDescription().equalsIgnoreCase(agendaEntry.getDescription()) && entry.getStartingDate().equals(agendaEntry.getStartingDate()) &&
@@ -278,6 +290,12 @@ public class EntryRepository implements Serializable {
         return false;
     }
 
+    /**
+     * Retrieves a list of AgendaEntries assigned to a specific collaborator.
+     *
+     * @param collaborator the UserSession of the collaborator.
+     * @return a list of AgendaEntry objects assigned to the collaborator.
+     */
     public List<AgendaEntry> getAgendaEntriesAssignedToCollaborator(UserSession collaborator) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
         for (AgendaEntry entry : agendaEntryList) {

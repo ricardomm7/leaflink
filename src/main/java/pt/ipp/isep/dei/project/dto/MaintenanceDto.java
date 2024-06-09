@@ -53,6 +53,12 @@ public class MaintenanceDto implements Serializable {
         return vehiclePlate;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,6 +69,11 @@ public class MaintenanceDto implements Serializable {
                 Objects.equals(date, that.date);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(vehiclePlate, date, km);

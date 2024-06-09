@@ -24,6 +24,12 @@ public class RunTestsController {
         Gnuplot.execute();
     }
 
+    /**
+     * Executes the tests on multiple CSV files, recording execution times for each.
+     *
+     * @param caminhosFile the list of CSV file paths (without the ".csv" extension)
+     * @throws FileNotFoundException if any of the CSV files cannot be found
+     */
     private void executeMultiple(List<String> caminhosFile) throws FileNotFoundException {
 
         // Initializes a 2D array to store execution times for each file

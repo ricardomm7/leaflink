@@ -60,6 +60,11 @@ public class Route {
         return route.cost == cost && route.getEndPoint().getID().equals(endPoint.getID()) && route.getStartPoint().getID().equals(startPoint.getID());
     }
 
+    /**
+     * Computes the hash code for this Route object.
+     *
+     * @return the hash code value for this Route object.
+     */
     @Override
     public int hashCode() {
         int result = startPoint.hashCode();

@@ -50,6 +50,13 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         this.progressStatus = PLANNED;
     }
 
+    /**
+     * Constructs a new AgendaEntry by copying an existing ToDoEntry and setting a new date and progress status.
+     *
+     * @param agendaEntry the existing ToDoEntry to copy.
+     * @param newDate     the new starting date for the copied AgendaEntry.
+     * @param PLANNED     the new progress status for the copied AgendaEntry.
+     */
     public AgendaEntry(ToDoEntry agendaEntry, LocalDate newDate, ProgressStatus PLANNED) {
         super(agendaEntry.getTitle(), agendaEntry.getDescription(), agendaEntry.getDuration(), agendaEntry.getUrgencyStatus(), agendaEntry.getGreenSpace());
         this.startingDate = newDate;
@@ -150,7 +157,14 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         }
     }
 
-
+    /**
+     * Compares this agenda entry to the specified object.
+     * The result is true if and only if the argument is not null and is an AgendaEntry object
+     * that represents the same starting date, progress status, assigned team, and assigned vehicles as this object.
+     *
+     * @param o the object to compare this AgendaEntry against.
+     * @return true if the given object represents an AgendaEntry equivalent to this agenda entry, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -165,6 +179,12 @@ public class AgendaEntry extends ToDoEntry implements Serializable {
         return assignedVehicles.equals(that.assignedVehicles);
     }
 
+    /**
+     * Returns a hash code value for the agenda entry.
+     * This method is supported for the benefit of hash tables such as those provided by HashMap.
+     *
+     * @return a hash code value for this object.
+     */
     @Override
     public int hashCode() {
         int result = super.hashCode();

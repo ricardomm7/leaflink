@@ -58,8 +58,14 @@ public class CancelAgendaEntryController {
         return flag;
     }
 
+    /**
+     * Cancels the given agenda entry.
+     *
+     * @param agendaEntryDto the agenda entry to be cancelled
+     * @return true if the agenda entry was successfully cancelled, false otherwise
+     */
     public boolean cancelAgendaEntry(AgendaEntryDto agendaEntryDto) {
-        if (entryRepository != null) { // Verifica se entryRepository não é nulo antes de usá-lo
+        if (entryRepository != null) {
             AgendaEntry agendaEntry = AgendaEntryMapper.toDomain(agendaEntryDto);
             if (agendaEntry.getAssignedTeam() != null) {
                 NotificationService.notifyTeamCancel(agendaEntry.getAssignedTeam().getCollaborators(), agendaEntry);
@@ -67,7 +73,7 @@ public class CancelAgendaEntryController {
             vehicleRepository.setVehicleAvailable(agendaEntry.getAssignedVehicles(), true);
             return entryRepository.cancelAgendaEntry(agendaEntry);
         } else {
-            return false; // Retorna false se entryRepository for nulo
+            return false;
         }
     }
 }

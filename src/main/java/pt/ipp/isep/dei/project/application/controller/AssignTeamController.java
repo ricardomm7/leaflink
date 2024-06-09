@@ -72,6 +72,12 @@ public class AssignTeamController {
 
     }
 
+    /**
+     * Sets the availability of a team.
+     *
+     * @param selectedTeam the TeamDto representing the selected team.
+     * @param flag the boolean flag indicating the availability status.
+     */
     public void setTeamAvailable(TeamDto selectedTeam, boolean flag) {
         Team team = TeamMapper.toDomain(selectedTeam);
         teamRepository.setTeamAvailable(team, flag);

@@ -7,6 +7,9 @@ import java.io.Serializable;
  */
 public enum UrgencyStatus implements Serializable {
 
+    /**
+     * High urgency status.
+     */
     HIGH {
         // Override toString method to return a more readable representation
         @Override
@@ -14,6 +17,10 @@ public enum UrgencyStatus implements Serializable {
             return "High";
         }
     },
+
+    /**
+     * Medium urgency status.
+     */
     MEDIUM {
         // Override toString method to return a more readable representation
         @Override
@@ -21,6 +28,10 @@ public enum UrgencyStatus implements Serializable {
             return "Medium";
         }
     },
+
+    /**
+     * Low urgency status.
+     */
     LOW {
         // Override toString method to return a more readable representation
         @Override

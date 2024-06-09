@@ -152,6 +152,15 @@ public class VehicleDto implements Serializable {
         this.maintenanceFrequency = maintenanceFrequency;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     * This method checks if the provided object is an instance of VehicleDto
+     * and compares their VINs for equality.
+     *
+     * @param o the reference object with which to compare.
+     * @return {@code true} if this object is the same as the obj
+     * argument; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -160,11 +169,24 @@ public class VehicleDto implements Serializable {
         return VIN.equals(vehicleDto.VIN);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     * This method returns the hash code of the VIN attribute,
+     * which is used in conjunction with the equals method.
+     *
+     * @return a hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return VIN.hashCode();
     }
 
+    /**
+     * Returns a string representation of the vehicle.
+     * The string contains the vehicle plate and brand separated by a pipe character.
+     *
+     * @return a string representation of the vehicle.
+     */
     @Override
     public String toString() {
         return vehiclePlate + " | " + brand;

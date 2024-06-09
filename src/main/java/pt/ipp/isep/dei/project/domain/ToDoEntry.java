@@ -149,6 +149,12 @@ public class ToDoEntry implements Serializable {
         }
     }
 
+    /**
+     * Compares this ToDoEntry to another object for equality.
+     *
+     * @param o The object to compare with.
+     * @return true if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -160,11 +166,21 @@ public class ToDoEntry implements Serializable {
                 urgencyStatus == toDoEntry.urgencyStatus;
     }
 
+    /**
+     * Generates a hash code for this ToDoEntry.
+     *
+     * @return The hash code value for this ToDoEntry.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(greenSpace, description, urgencyStatus, duration);
     }
 
+    /**
+     * Returns a string representation of this ToDoEntry.
+     *
+     * @return A string representation of this ToDoEntry.
+     */
     @Override
     public String toString() {
         return "ToDoEntry{" +

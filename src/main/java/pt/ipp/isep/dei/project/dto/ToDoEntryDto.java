@@ -140,6 +140,11 @@ public class ToDoEntryDto {
                 urgencyStatus == toDoEntry.urgencyStatus;
     }
 
+    /**
+     * Generates a string representation of the to-do entry.
+     *
+     * @return A string representing the to-do entry.
+     */
     public String toString() {
         return String.format("Title: %s | Duration: %dh | Green Space: %s", title, duration, greenSpace.getName());
     }
