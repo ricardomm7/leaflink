@@ -11,8 +11,7 @@ As a Collaborator, I want to record the completion of a task.
 
 **From the specifications document:**
 
->  To record the completion of a task (agendaEntry), it is necessary to ensure that the task exists in both the Agenda and the To-Do List. 
-> The task(agendaEntry) should be marked as completed once the completion is recorded.
+>  To record the completion of a task (agendaEntry), it is necessary to ensure that the team assigned to the task(agendaEntry) has the collaborator. 
 
 **From the client clarifications:**
 
@@ -41,14 +40,15 @@ As a Collaborator, I want to record the completion of a task.
 > **Answer:** Yes.
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The task must exist in both the Agenda and the To-Do List before recording completion.
-* **AC2:** The system should change the progress status in Agenda to "COMPLETED".
+* **AC1:** The system should change the progress status in Agenda to "COMPLETED".
+* **AC2:** The assigned Team and assigned Vehicles should change to available, in order to be assigned to future tasks
 
 
 ### 1.4. Found out Dependencies
 
-* US21: Adding a new toDoEntry in task List
 * US22: Adding a new agendaEntry in the Agenda
+* US23: Assign a team to an agendaEntry in Agenda
+* US26: Assign one or more vehicles to an agendaEntry i Agenda
 
 ### 1.5 Input and Output Data
 

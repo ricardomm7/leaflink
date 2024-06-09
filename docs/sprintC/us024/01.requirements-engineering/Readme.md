@@ -10,8 +10,9 @@
 
 **From the specifications document:**
 
-> The Agenda is made up of entries that relate to a task (which was previously in the To-Do List), the team that will 
-> carry out the task, the vehicles/equipment assigned to the task, expected duration, and the progressStatus (Planned, Postponed, Canceled, Done).
+> The Agenda is made up of agendaEntries that relate to a toDoEntries (which was previously in the To-Do List), the team that will 
+> carry out the task(agendaEntry), the vehicles/equipment assigned to the agendaEntry, expected duration, and the progress status (Planned, Postponed, Canceled, Done).
+> When an agendaEntry is marked as potponned, the agendaEntry's progress status should be updated to "Postponed" and also its starting date.
 
 **From the client clarifications:**
 
@@ -29,17 +30,16 @@
 
 > **Question:** Can a collaborator mark a task as "done" only if it is in the "planned" status?
 > 
-> **Answer:** It depends in the status set your team decide to have/use. But if you consider only status refered in the text and in the forum my answer would be, yes, just the "Planned" status can be changed to "Done".
+> **Answer:** It depends on the status set your team decide to have/use. But if you consider only status refered in the text and in the forum my answer would be, yes, just the "Planned" status can be changed to "Done".
 
 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The toDoEntry must exist in the Agenda
-* **AC2:** The new date must be after that the previous date.
-* **AC3:** The postponement action should update the agendaEntry’s progressStatus to “Postponed”.
-* **AC4:** The system should notify the team assigned to the task about the postponement.
-* **AC5:** The system should generate a new agendaEntry with the new date and the Progress as "PLANNED".
+* **AC1:** The new date must be after that the previous date.
+* **AC2:** The postponement action should update the agendaEntry’s progressStatus to “Postponed”.
+* **AC3:** The system should notify the team assigned to the task about the postponement.
+* **AC4:** The system should generate a new agendaEntry with the new date and the Progress as "PLANNED".
 
 ### 1.4. Found out Dependencies
 

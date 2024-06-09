@@ -1,11 +1,11 @@
-# US025 - Cancel an entry in the Agenda
+# US025 - Cancel an agendaEntry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
+As a Green Space Manager (GSM), I want to cancel an agendaEntry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -45,8 +45,8 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
 
 ### 1.4. Found out Dependencies
 
-* US022 - Add a new entry in the Agenda: An entry must exist in the agenda first in order to be cancelled.
-* US023 - Assign a Team to an Entry in the Agenda: Team members need to be notified upon task cancellation.
+* US022 - Add a new agendaEntry in the Agenda: An entry must exist in the agenda first in order to be cancelled.
+* US023 - Assign a Team to an agendaEntry in the Agenda: Team members need to be notified upon task cancellation.
 
 ### 1.5 Input and Output Data
 
@@ -56,7 +56,7 @@ As a Green Space Manager (GSM), I want to cancel an entry in the Agenda.
     * None
 	
 * Selected data:
-    * Task on the Agenda
+    * agendaEntry
 
 **Output Data:**
 

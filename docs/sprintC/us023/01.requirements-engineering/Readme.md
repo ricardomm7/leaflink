@@ -1,11 +1,11 @@
-# US023 - Assign a Team to an toDoEntry in the Agenda
+# US023 - Assign a Team to an agendaEntry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a GSM, I want to assign a Team to an toDoEntry in the Agenda.
+As a GSM, I want to assign a Team to an agendaEntry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
