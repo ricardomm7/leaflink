@@ -28,7 +28,7 @@ As a Green Space Manager (GSM), I want to cancel an agendaEntry in the Agenda.
 >
 > **Answer:** Yes
 
-> **Question:** Does the task associated with the Agenda toDoEntry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
+> **Question:** Does the task associated with the Agenda to-do entry in which this happens remain in the to-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
 >
 > **Answer:** I suppose when a task goes to the Agenda, it leaves the To-Do list but maybe a different flow could be considered.
 
@@ -40,7 +40,7 @@ As a Green Space Manager (GSM), I want to cancel an agendaEntry in the Agenda.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The entry must exist in the Agenda
-* **AC1:** A canceled task should not be deleted but rather change its state to "canceled."
+* **AC1:** A canceled task should not be deleted but rather change its progress state to "canceled."
 * **AC2:** The system should notify all team members assigned to the task about the cancellation.
 
 ### 1.4. Found out Dependencies
