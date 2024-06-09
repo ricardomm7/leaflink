@@ -23,24 +23,6 @@ As a GSM, I want to assign a Team to an toDoEntry in the Agenda.
 >
 > **Answer:** No.
 
-> **Question:** 
->
-> **Answer:** 
-
-> **Question:** 
->
-> **Answer:** 
-
-> **Question:** 
->
-> **Answer:** 
-
-> **Question:** 
-> 
-> **Answer:** 
-
-
-
 ### 1.3. Acceptance Criteria
 
 * **AC1:** A message must be sent to all team members informing them about the assignment.
