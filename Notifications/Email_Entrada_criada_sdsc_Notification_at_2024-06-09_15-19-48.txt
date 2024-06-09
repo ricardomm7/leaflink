@@ -1,0 +1,12 @@
+Entrada criada: sdsc
+Caro Collaborador Teste,
+
+Esta é uma notificação sobre a atribuição de uma entrada na agenda.
+
+Entrada: sdsc
+Parque: sds
+Data: 2024-06-18
+Por favor, tome nota desta atribuição e ajuste os seus planos conforme necessário.
+
+Atenciosamente,
+Equipe de Gestão de Parques

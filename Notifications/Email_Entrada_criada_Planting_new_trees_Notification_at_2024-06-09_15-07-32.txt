@@ -1,0 +1,12 @@
+Entrada criada: Planting new trees
+Caro Collaborador Teste,
+
+Esta é uma notificação sobre a atribuição de uma entrada na agenda.
+
+Entrada: Planting new trees
+Parque: Community Garden
+Data: 2025-06-10
+Por favor, tome nota desta atribuição e ajuste os seus planos conforme necessário.
+
+Atenciosamente,
+Equipe de Gestão de Parques

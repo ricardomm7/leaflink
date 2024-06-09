@@ -75,7 +75,7 @@ public class TasksGUI {
                 ShowError.showAlert("Search Agenda Entry", "No entries found for the given date range.", null);
             } else {
                 // Atualiza a lista de entradas de agenda
-                updateWithDates(agendaEntries);
+                updateWithDates();
             }
         } else {
             ShowError.showAlert("Search Agenda Entry", "Please select both start and end dates.", null);
@@ -96,7 +96,10 @@ public class TasksGUI {
         }
     }
 
-    private void updateWithDates(List<AgendaEntryDto> a) {
+    private void updateWithDates() {
+        //List<AgendaEntryDto> agendaEntries = listTaskController.getDatesList(startDate, endDate, collaborator);
+        List<AgendaEntryDto> a = listTaskController.getDatesList(startDateDateP.getValue(), endDateDateP.getValue(), listTaskController.getCollaboratorTroughEmail(session.getUserEmail()));
+
         List<String> agendaEntryList = a.stream()
                 .map(entry -> String.format("Starting Date: %s | Title: %s | Green Space: %s | Team: %s | Vehicles: %s | Progress Status: %s",
                         entry.getStartingDate(), entry.getTitle(), entry.getGreenSpace().getName(),
@@ -105,8 +108,8 @@ public class TasksGUI {
                                 entry.getAssignedVehicles().stream().map(VehicleDto::getVehiclePlate).collect(Collectors.joining(", ")) :
                                 "No vehicles assigned", entry.getProgressStatus()))
                 .collect(Collectors.toList());
-        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
         agendaListView.getItems().clear();
+        ObservableList<String> observableList = FXCollections.observableArrayList(agendaEntryList);
         agendaListView.setItems(observableList);
     }
 
@@ -219,6 +222,7 @@ public class TasksGUI {
         } else {
             searchBtn.setDisable(true);
         }
+
     }
 
     private void showAgendaEntryDetails(String string) {
