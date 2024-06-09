@@ -15,10 +15,10 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "teamRepository:\nTeamRepository" as TeamRepository
 participant "entryRepository\n:EntryRepository" as EntryRepo
-participant ":NotificationService" as NotificationService
 participant ":AgendaEntryMapper" as AgendaEntryMapper
-participant "agendaEntryDto\n:AgendaEntryDto" as AgendaEntryDto
+participant ":NotificationService" as NotificationService
 participant "agendaEntry\n:AgendaEntry" as AgendaEntry
+participant ":ToDoEntryMapper" as ToDoEntryMapper
 participant ":TeamMapper" as teamMapper
 participant "teamDto:\nTeamDto" as teamDto
 
@@ -33,13 +33,19 @@ activate GSM
                     CTRL -> RepositorySingleton : getInstance()
                     activate RepositorySingleton
 
-                        RepositorySingleton --> CTRL : repositories
+                        RepositorySingleton --> CTRL : instance
                     deactivate RepositorySingleton
 
                     CTRL -> PLAT : getEntryRepository()
                     activate PLAT
 
-                        PLAT --> CTRL : entryRepository
+                        PLAT --> CTRL : registerToDoEntryRepository
+                    deactivate PLAT
+
+                    CTRL -> PLAT : getTeamRepository()
+                    activate PLAT
+
+                    PLAT --> CTRL : teamRepository
                     deactivate PLAT
 
                      deactivate CTRL
@@ -48,41 +54,40 @@ activate GSM
         UI -> CTRL: getAgendaEntryList(GSM)
                 activate CTRL
 
-                    CTRL -> EntryRepo: getAgendaEntryListByGSM(GSM)
+                    CTRL -> EntryRepo: getAgendaEntryList(GSM)
                     activate EntryRepo
 
-                    EntryRepo --> CTRL: agendaEntryList
+                    EntryRepo --> CTRL: agendaEntries
                     deactivate EntryRepo
 
-                    CTRL -> AgendaEntryMapper : toDto(agendaEntry)
-                    deactivate CTRL
-                    activate AgendaEntryMapper
+                    CTRL -> ToDoEntryMapper : toDtoList(toDoEntryList)
+                                activate ToDoEntryMapper
 
-                    loop
-                        AgendaEntryMapper -> AgendaEntryDto** : create
-                        activate AgendaEntryDto
+                                loop
 
-                        AgendaEntryDto --> AgendaEntryMapper : agendaEntryDto
-                        deactivate AgendaEntryDto
-                    end
+                                    ToDoEntryMapper -> ToDoEntryDto** : create
+                                    activate ToDoEntryDto
 
-                    AgendaEntryMapper --> CTRL : agendaEntryDtoList
-                    deactivate AgendaEntryMapper
-                    activate CTRL
+                                    ToDoEntryDto --> ToDoEntryMapper : toDoEntryListDTO
+                                    deactivate ToDoEntryDto
+                                end
 
+                                ToDoEntryMapper --> CTRL : toDoEntryDTO
+                                deactivate ToDoEntryMapper
 
-                CTRL --> UI : agendaEntryDtoList
-                deactivate CTRL
+                                CTRL --> UI : toDoEntryDtoList
+                            deactivate CTRL
+
                 deactivate UI
 
-        UI -> CTRL : getTeamsList()
+        UI -> CTRL : getTeamList()
                 activate UI
                 activate CTRL
 
-                CTRL -> TeamRepository : getTeamsList()
+                CTRL -> TeamRepository : getTeamList()
                 activate TeamRepository
 
-                TeamRepository -> CTRL : teamsList
+                TeamRepository -> CTRL : availableTeam
                 deactivate TeamRepository
 
                 CTRL -> teamMapper: toDtoList(teamList)
@@ -100,23 +105,23 @@ activate GSM
                     end loop
 
 
-                teamMapper --> CTRL: teamDtoList
+                teamMapper --> CTRL: teamList
                 deactivate teamMapper
                 activate CTRL
 
-                CTRL -> UI : teamsList
+                CTRL -> UI : teamList
                 deactivate CTRL
 
-        UI --> GSM : shows teams and asks to select one
+        UI --> GSM : shows the entries in the agenda and asks to select one
         deactivate UI
 
-    GSM -> UI : selects team
+    GSM -> UI : sselects the entry
     activate UI
 
-    UI --> GSM : shows the entries in the agenda and asks to select one
+    UI --> GSM : shows teams and asks to select one
     deactivate UI
 
-    GSM -> UI: select the entry
+    GSM -> UI: selects the team
     activate UI
 
     UI --> GSM : shows all data and requests confirmation
@@ -125,50 +130,60 @@ activate GSM
     GSM -> UI: confirms
     activate UI
 
-        UI -> CTRL : assignTeamToEntry(agendaEntryDto, teamDto)
+        UI -> CTRL : updateEntryWithTeam(agendaEntryDto, teamDtoList)
                 deactivate UI
                 activate CTRL
 
+                    CTRL -> teamMapper : toDomain(teamDtoList)
+                                deactivate CTRL
+                                activate teamMapper
 
-                    CTRL -> EntryRepo : updateAgendaEntryTeam(agendaEntryDto, teamDto)
-                    deactivate CTRL
-                    activate EntryRepo
+                                    teamMapper -> Team** : create
+                                    activate Team
 
-                    EntryRepo -> AgendaEntryMapper : toDomain(agendaEntryDto)
-                    activate AgendaEntryMapper
+                                    Team --> teamMapper : team
+                                    deactivate Team
 
-                        AgendaEntryMapper -> AgendaEntry** : create
-                        activate AgendaEntry
+                                teamMapper --> CTRL : team
+                                deactivate teamMapper
+                                activate CTRL
 
-                        AgendaEntry --> AgendaEntryMapper : agendaEntry
-                        deactivate AgendaEntry
+                    CTRL -> AgendaEntryMapper : toDomain(agendaEntryDto)
+                                deactivate CTRL
+                                activate AgendaEntryMapper
 
-                    AgendaEntryMapper --> EntryRepo : agendaEntry
-                    deactivate AgendaEntryMapper
+                                    AgendaEntryMapper -> AgendaEntry** : create
+                                    activate AgendaEntry
 
-                        EntryRepo -> EntryRepo : updateEntryTeam(agendaEntry, Team)
+                                    AgendaEntry --> AgendaEntryMapper : agendaEntry
+                                    deactivate AgendaEntry
+
+                                AgendaEntryMapper --> CTRL : agendaEntry
+                                deactivate AgendaEntryMapper
+
+                        activate CTRL
+
+                        CTRL -> EntryRepo : updateTeamAgendaEntry(agendaEntry, Team)
+                        deactivate CTRL
+                        activate EntryRepo
+
+
 
                     EntryRepo --> CTRL : success
                     deactivate EntryRepo
                     activate CTRL
 
-        CTRL -> NotificationService : notifyTeam(agendaEntry, NEW)
+        CTRL -> NotificationService : notifyTeam(collaboratorsList ,agendaEntry)
                     deactivate CTRL
                     activate NotificationService
 
-                        NotificationService -> NotificationService : getTeamByEntry(agendaEntry)
+                        NotificationService -> NotificationService : buildEmailBody(collaboratorsList,agendaEntry)
                         activate NotificationService
 
-                        NotificationService --> NotificationService : team
+                        NotificationService --> NotificationService : email
                         deactivate NotificationService
 
-                        NotificationService -> NotificationService : getCollaboratorsList(team)
-                        activate NotificationService
-
-                        NotificationService --> NotificationService : collaboratorsList
-                        deactivate NotificationService
-
-                        NotificationService -> NotificationService : notifyTeam(collaboratorsList, agendaEntry, Date)
+                        NotificationService -> NotificationService : writeNotification(collaboratorsList, subject, email, agendaEntry)
                         activate NotificationService
 
                         NotificationService --> NotificationService : success

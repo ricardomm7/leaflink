@@ -15,17 +15,18 @@ activate GSM
     GSM -> System : asks to assign a Team to an entry in the Agenda
     activate System
 
-        System --> GSM : shows teams and asks to select one
+        System --> GSM : shows the entries in the agenda and asks to select one
+
     deactivate System
 
-    GSM -> System : selects team
+    GSM -> System : selects the entry
 
     activate System
 
-        System --> GSM : shows the entries in the agenda and asks to select one
+        System --> GSM : shows teams and asks to select one
     deactivate System
 
-    GSM -> System : select the entry
+    GSM -> System : selects the team
     activate System
 
         System --> GSM : shows all data and requests confirmation
