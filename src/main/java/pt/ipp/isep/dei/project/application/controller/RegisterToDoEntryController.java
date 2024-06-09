@@ -92,7 +92,9 @@ public class RegisterToDoEntryController {
     public List<ToDoEntryDto> getToDoEntry() {
         List<ToDoEntryDto> listToReturn = new ArrayList<>();
         for (ToDoEntry entry : entryRepository.getToDoEntryList()) {
-            listToReturn.add(ToDoEntryMapper.toDto(entry));
+            if (entry.getGreenSpace().getManager().equalsIgnoreCase(ApplicationSession.getInstance().getCurrentSession().getUserEmail())) {
+                listToReturn.add(ToDoEntryMapper.toDto(entry));
+            }
         }
         return listToReturn;
     }
