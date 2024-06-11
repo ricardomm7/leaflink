@@ -77,6 +77,28 @@ public class Bootstrap implements Runnable {
 
         // Example 3
         vehicleRepository.registerVehicle(new VehicleDto("AIU1qasw23edfr45t", "Volkswagen", "Golf", VehicleType.CAR, LocalDate.of(2000, 10, 22), "9012EF", 1400.0, 2100.0, 60000, LocalDate.of(2010, 10, 1), 12000));
+
+        // Example 4
+        vehicleRepository.registerVehicle(new VehicleDto("VIN90876543211234", "Honda", "Civic", VehicleType.CAR, LocalDate.of(2018, 5, 20), "78EF78", 1600.0, 2200.0, 30000, LocalDate.of(2023, 5, 20), 12000));
+
+        // Example 5
+        vehicleRepository.registerVehicle(new VehicleDto("VIN45678901234567", "Nissan", "Leaf", VehicleType.CAR, LocalDate.of(2019, 8, 14), "34GH34", 1300.0, 1700.0, 20000, LocalDate.of(2023, 8, 14), 9000));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VIN34567890123456", "Chevrolet", "Silverado", VehicleType.TRUCK, LocalDate.of(2010, 3, 18), "45IJ45", 2500.0, 3000.0, 40000, LocalDate.of(2024, 3, 18), 15000));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VINVAN34567890123", "Renault", "Kangoo", VehicleType.VAN, LocalDate.of(2018, 3, 18), "15EF15", 1500.0, 2000.0, 45000, LocalDate.of(2023, 6, 11), 11000));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VINPKT67890123456", "Ford", "Ranger", VehicleType.PICKUP_TRUCK, LocalDate.of(2011, 12, 1), "18KL18", 2500.0, 3500.0, 15000, LocalDate.of(2023, 9, 10), 8000));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VINTRC78901234567", "John Deere", "5075E", VehicleType.TRACTOR, LocalDate.of(2017, 6, 5), "19MN19", 2800.0, 4000.0, 20000, LocalDate.of(2023, 10, 5), 10000));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VINATV89012345678", "Polaris", "Sportsman 450", VehicleType.ATV, LocalDate.of(2019, 4, 20), "20OP20", 500.0, 700.0, 8000, LocalDate.of(2023, 11, 25), 4000));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VINGTC90123456789", "Kubota", "BX1880", VehicleType.GARDEN_TRACTOR, LocalDate.of(2019, 11, 10), "21QR21", 1000.0, 1500.0, 5000, LocalDate.of(2023, 12, 15), 2500));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VINLMN01234567890", "Husqvarna", "LC221RH", VehicleType.LAWN_MOWER, LocalDate.of(2012, 1, 30), "22ST22", 200.0, 300.0, 200, LocalDate.of(2024, 1, 20), 100));
+
+        vehicleRepository.registerVehicle(new VehicleDto("VINUTV12345678901", "Gator", "XUV835M", VehicleType.UTILITY_VEHICLE, LocalDate.of(2017, 7, 7), "23UV23", 800.0, 1200.0, 7000, LocalDate.of(2024, 2, 25), 3500));
     }
 
     /**
@@ -86,20 +108,35 @@ public class Bootstrap implements Runnable {
         try {
             MaintenanceRepository maintenanceRepository = Repositories.getInstance().getMaintenanceRepository();
 
-            // Example 1: Maintenance for Ford Transit
             maintenanceRepository.createMaintenance(new MaintenanceDto("12AB12", LocalDate.of(2021, 6, 10), 25000));
 
-            // Example 2: Maintenance for Utility Truck
             maintenanceRepository.createMaintenance(new MaintenanceDto("56CD56", LocalDate.of(2021, 6, 15), 6500));
 
-            // Example 3: Maintenance for Ford F-250
             maintenanceRepository.createMaintenance(new MaintenanceDto("9012EF", LocalDate.of(2021, 6, 20), 12500));
 
-            // Example 4: Maintenance for Isuzu NQR
             maintenanceRepository.createMaintenance(new MaintenanceDto("23GH12", LocalDate.of(2021, 6, 25), 11000));
 
-            // Example 5: Maintenance for Mitsubishi Fuso Canter
             maintenanceRepository.createMaintenance(new MaintenanceDto("67IJ76", LocalDate.of(2021, 7, 1), 19000));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("78EF78", LocalDate.of(2022, 7, 5), 10000));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("34GH34", LocalDate.of(2023, 1, 10), 15000));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("45IJ45", LocalDate.of(2023, 12, 20), 20000));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("15EF15", LocalDate.of(2023, 8, 20), 47000));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("18KL18", LocalDate.of(2023, 11, 5), 16000));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("19MN19", LocalDate.of(2023, 12, 10), 21000));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("20OP20", LocalDate.of(2024, 1, 15), 8500));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("21QR21", LocalDate.of(2024, 2, 20), 5500));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("22ST22", LocalDate.of(2024, 3, 25), 300));
+
+            maintenanceRepository.createMaintenance(new MaintenanceDto("23UV23", LocalDate.of(2024, 4, 30), 7500));
         } catch (Exception e) {
             ShowError.showAlert("Maintenance", e.getMessage(), "Error");
         }
@@ -111,12 +148,9 @@ public class Bootstrap implements Runnable {
     private void addEntries() {
         EntryRepository entryRepository = Repositories.getInstance().getEntryRepository();
         try {
-            entryRepository.createNewToDoEntry(new ToDoEntryDto("Prunning trees Teste", "maasdasdchines required", 2, UrgencyStatus.LOW, new GreenSpaceDto("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, "admin@this.app", "address", "city", "8888-000")));
-            //entryRepository.createNewToDoEntry(new ToDoEntry("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpace("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, "b@b.com", new Address("123 Main St", "Metropolis", "1234-005"))));
-            //entryRepository.createNewToDoEntry(new ToDoEntry("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpace("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, "c@c.com", new Address("456 Elm St", "Cityville", "5432-001"))));
-            //entryRepository.createNewToDoEntry(new ToDoEntry("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpace("Community Garden", GreenSpaceType.GARDEN, 100, "d@d.com", new Address("789 Oak St", "Townsville", "6789-000"))));
-            //entryRepository.createNewToDoEntry(new ToDoEntry("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpace("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, "e@e.com", new Address("101 Pine St", "Villageville", "1357-009"))));
-            //entryRepository.createNewToDoEntry(new ToDoEntry("Trimming bushes", "hedge trimmer needed", 1, UrgencyStatus.HIGH, new GreenSpace("Riverside Park", GreenSpaceType.MEDIUM_SIZED_PARK, 400, "f@f.com", new Address("202 Cedar St", "Riverdale", "9753-001"))));
+            entryRepository.createNewToDoEntry(new ToDoEntryDto("Prunning trees Teste", "maasdasdchines required", 2, UrgencyStatus.LOW, new GreenSpaceDto("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, "gsm@this.app", "address", "city", "8888-000")));
+            entryRepository.createNewToDoEntry(new ToDoEntryDto("Planting bushes", "bushes and tools needed", 3, UrgencyStatus.MEDIUM, new GreenSpaceDto("City Garden", GreenSpaceType.GARDEN, 1200, "gsm@this.app", "Boulevard St.", "Green City", "1122-334")));
+            entryRepository.createNewToDoEntry(new ToDoEntryDto("Fertilizing soil", "fertilizers required", 1, UrgencyStatus.HIGH, new GreenSpaceDto("Community Park", GreenSpaceType.LARGE_SIZED_PARK, 5000, "gsm@this.app", "Community Ave.", "Metro Town", "2233-445")));
         } catch (Exception e) {
             ShowError.showAlert("Add entries", e.getMessage(), "Error");
         }
@@ -125,11 +159,13 @@ public class Bootstrap implements Runnable {
     private void addAgendaEntries() {
         EntryRepository agendaEntryRepository = Repositories.getInstance().getEntryRepository();
 
-        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Prunning trees", "machines required", 2, UrgencyStatus.LOW, new GreenSpace("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, "admin@this.app", new Address("address", "city", "8888-000"))), LocalDate.of(2025, 6, 10), ProgressStatus.POSTPONED));
-        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpace("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, "admin@this.app", new Address("123 Main St", "Metropolis", "1234-005"))), LocalDate.of(2025, 6, 10), ProgressStatus.POSTPONED));
-        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpace("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, "admin@this.app", new Address("456 Elm St", "Cityville", "5432-001"))), LocalDate.of(2025, 6, 10), ProgressStatus.POSTPONED));
-        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpace("Community Garden", GreenSpaceType.GARDEN, 100, "admin@this.app", new Address("789 Oak St", "Townsville", "6789-000"))), LocalDate.of(2025, 6, 10), ProgressStatus.POSTPONED));
-        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpace("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, "admin@this.app", new Address("101 Pine St", "Villageville", "1357-009"))), LocalDate.of(2025, 6, 10), ProgressStatus.POSTPONED));
+        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Prunning trees", "machines required", 2, UrgencyStatus.LOW, new GreenSpace("Alamenda", GreenSpaceType.MEDIUM_SIZED_PARK, 342, "gsm@this.app", new Address("address", "city", "8888-000"))), LocalDate.of(2025, 6, 10), ProgressStatus.PLANNED));
+        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Watering flowers", "automatic irrigation system needed", 1, UrgencyStatus.HIGH, new GreenSpace("Botanical Garden", GreenSpaceType.LARGE_SIZED_PARK, 500, "gsm@this.app", new Address("123 Main St", "Metropolis", "1234-005"))), LocalDate.of(2025, 6, 10), ProgressStatus.PLANNED));
+        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Picking up litter", "trash bags and gloves required", 3, UrgencyStatus.MEDIUM, new GreenSpace("Central Park", GreenSpaceType.LARGE_SIZED_PARK, 843, "gsm@this.app", new Address("456 Elm St", "Cityville", "5432-001"))), LocalDate.of(2025, 6, 10), ProgressStatus.PLANNED));
+        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Planting new trees", "saplings and shovels needed", 2, UrgencyStatus.LOW, new GreenSpace("Community Garden", GreenSpaceType.GARDEN, 100, "gsm@this.app", new Address("789 Oak St", "Townsville", "6789-000"))), LocalDate.of(2025, 6, 10), ProgressStatus.PLANNED));
+        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpace("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, "gsm@this.app", new Address("101 Pine St", "Villageville", "1357-009"))), LocalDate.of(2025, 6, 10), ProgressStatus.PLANNED));
+        agendaEntryRepository.addAgendaEntry(new AgendaEntry(new ToDoEntry("Mowing the lawn", "lawnmower and trimmer required", 2, UrgencyStatus.MEDIUM, new GreenSpace("City Park", GreenSpaceType.MEDIUM_SIZED_PARK, 250, "admin@this.app", new Address("101 Pine St", "Villageville", "1357-009"))), LocalDate.of(2024, 7, 10), ProgressStatus.PLANNED));
+
     }
 
     /**
@@ -163,6 +199,16 @@ public class Bootstrap implements Runnable {
             skillRepository.createSkill(new SkillDto("Safety Procedures for Green Space Maintenance"));
 
             skillRepository.createSkill(new SkillDto("Seasonal Planting and Maintenance"));
+
+            skillRepository.createSkill(new SkillDto("Herbicide Application"));
+
+            skillRepository.createSkill(new SkillDto("Basic Carpentry"));
+
+            skillRepository.createSkill(new SkillDto("Landscape Design"));
+
+            skillRepository.createSkill(new SkillDto("Greenhouse Management"));
+
+            skillRepository.createSkill(new SkillDto("Water Feature Installation and Maintenance"));
         } catch (Exception e) {
             ShowError.showAlert("Skill", e.getMessage(), "Error");
         }
@@ -194,6 +240,16 @@ public class Bootstrap implements Runnable {
             jobRepository.createJob(new JobDto("Plumber"));
 
             jobRepository.createJob(new JobDto("Machine Operator"));
+
+            jobRepository.createJob(new JobDto("Horticulturist"));
+
+            jobRepository.createJob(new JobDto("Groundskeeper"));
+
+            jobRepository.createJob(new JobDto("Garden Designer"));
+
+            jobRepository.createJob(new JobDto("Landscape Architect"));
+
+            jobRepository.createJob(new JobDto("Nursery Manager"));
         } catch (Exception e) {
             ShowError.showAlert("Job", e.getMessage(), "Duplicate");
         }
@@ -207,39 +263,41 @@ public class Bootstrap implements Runnable {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
         try {
             // Example 1
-            collaboratorRepository.create(new CollaboratorDto("Bob Smith", LocalDate.of(2000, 9, 30), 987654321,
-                    123456789, "bob.smith@example.com", "5678 Oak Street", "6789-100",
+            collaboratorRepository.create(new CollaboratorDto("Joao Teixeira", LocalDate.of(2000, 9, 30), 987654321,
+                    123456789, "joao.teixeira@this.app", "5678 Oak Street", "6789-100",
                     "Shelbyville", DocumentType.PASSPORT, "CD2345678", LocalDate.of(2021, 9, 30),
                     JobMapper.toDomain(jobRepository.getJobList().get(0))));
 
             // Example 2
-            collaboratorRepository.create(new CollaboratorDto("Alice Johnson", LocalDate.of(2000, 9, 30), 123456789,
-                    987654321, "alice.johnson@example.com", "1234 Elm Street", "1234-125",
+            collaboratorRepository.create(new CollaboratorDto("Berto Teixeira", LocalDate.of(2000, 9, 30), 123456789,
+                    987654321, "berto.teixeira@this.app", "1234 Elm Street", "1234-125",
                     "Springfield", DocumentType.PASSPORT, "AB1234567", LocalDate.of(2021, 9, 30),
                     JobMapper.toDomain(jobRepository.getJobList().get(1))));
 
             // Example 3
-            collaboratorRepository.create(new CollaboratorDto("Charlie Brown", LocalDate.of(2000, 9, 30), 234567891,
-                    876543219, "charlie.brown@example.com", "3456 Maple Street", "2345-226",
+            collaboratorRepository.create(new CollaboratorDto("Ricardo Teixeira", LocalDate.of(2000, 9, 30), 234567891,
+                    876543219, "ricardo.teixeira@this.app", "3456 Maple Street", "2345-226",
                     "Centerville", DocumentType.PASSPORT, "EF3456789", LocalDate.of(2021, 9, 30),
                     JobMapper.toDomain(jobRepository.getJobList().get(2))));
 
             // Example 4
-            collaboratorRepository.create(new CollaboratorDto("Diana Prince", LocalDate.of(2000, 9, 30), 345678912,
-                    765432198, "diana.prince@example.com", "4567 Birch Street", "3456-987",
+            collaboratorRepository.create(new CollaboratorDto("Paulo Teixeira", LocalDate.of(2000, 9, 30), 345678912,
+                    765432198, "paulo.teixeira@this.app", "4567 Birch Street", "3456-987",
                     "Metro City", DocumentType.PASSPORT, "GH4567890", LocalDate.of(2021, 9, 30),
                     JobMapper.toDomain(jobRepository.getJobList().get(3))));
 
             // Example 5
-            collaboratorRepository.create(new CollaboratorDto("Edward Scissorhands", LocalDate.of(2000, 9, 30), 456789123,
-                    654321987, "edward.scissorhands@example.com", "5678 Pine Street", "4567-908",
+            collaboratorRepository.create(new CollaboratorDto("Nelo Teixeira", LocalDate.of(2000, 9, 30), 456789123,
+                    654321987, "nelo.teixeira@this.app", "5678 Pine Street", "4567-908",
                     "Suburbia", DocumentType.PASSPORT, "IJ5678901", LocalDate.of(2021, 9, 30),
                     JobMapper.toDomain(jobRepository.getJobList().get(4))));
 
-            collaboratorRepository.create(new CollaboratorDto("Collaborador Teste", LocalDate.of(2000, 9, 30), 916789123,
-                    104321987, "collaborator@this.app", "5678 Pine Street", "4567-908",
-                    "Suburbia", DocumentType.PASSPORT, "IP5678901", LocalDate.of(2021, 9, 30),
-                    JobMapper.toDomain(jobRepository.getJobList().get(4))));
+            // Example 6
+            collaboratorRepository.create(new CollaboratorDto("Jose Teixeira", LocalDate.of(1985, 4, 15), 567890123,
+                    234567890, "jose.teixeira@this.app", "123 Green Road", "4567-123", "Greenfield",
+                    DocumentType.PASSPORT, "LM5678901", LocalDate.of(2021, 10, 30),
+                    JobMapper.toDomain(jobRepository.getJobList().get(5))));
+
 
         } catch (
                 Exception e) {
@@ -313,15 +371,28 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_GSM);
 
         /**
+         * Adds a user with the "Software Quality Assessment Team Manager" role.
+         */
+        authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@this.app", "qam",
+                AuthenticationController.ROLE_QAM);
+
+        /**
          * Adds a user with the "Collaborator" role.
          */
         authenticationRepository.addUserWithRole("Collaborator", "collaborator@this.app", "collab",
                 AuthenticationController.ROLE_COLLAB);
 
-        /**
-         * Adds a user with the "Software Quality Assessment Team Manager" role.
-         */
-        authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@this.app", "qam",
-                AuthenticationController.ROLE_QAM);
+        authenticationRepository.addUserWithRole("João Teixeira", "joao.teixeira@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
+        authenticationRepository.addUserWithRole("Ricardo Teixeira", "ricardo.teixeira@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
+        authenticationRepository.addUserWithRole("Paulo Teixeira", "paulo.teixeira@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
+        authenticationRepository.addUserWithRole("Nelo Teixeira", "nelo.teixeira@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
+        authenticationRepository.addUserWithRole("José Teixeira", "jose.teixeira@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
+        authenticationRepository.addUserWithRole("Berto Teixeira", "berto.teixeira@this.app", "collab",
+                AuthenticationController.ROLE_COLLAB);
     }
 }
